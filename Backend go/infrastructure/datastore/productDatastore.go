@@ -56,3 +56,27 @@ func (d *ProductDatastore) CreateProduct(product *entity.Product) error {
 	return nil
 
 }
+
+// select. Eu chamo o ponteiro de d (productDatastore) e retorno um slice de produto + um erro
+func (d *ProductDatastore) SelectAllProducts() ([]*entity.Product, error) {
+	query := `SELECT id, ProductName, ProductPrice, ProductCodBar, ProductGroup, ProductSubGroup, ProductStock FROM products`
+
+	rows, err := d.Conn.Query(context.Background(), query)
+	if err != nil {
+		return nil, fmt.Errorf("erro ao consultar produtos: %w", err)
+	}
+	defer rows.Close()
+
+	var products []*entity.Product
+
+	for rows.Next() {
+		var p entity.Product
+		err := rows.Scan(&p.Id, &p.ProductName, &p.ProductPrice, &p.ProductCodBar, &p.ProductGroup, &p.ProductSubGroup, &p.ProductStock)
+		if err != nil {
+			return nil, fmt.Errorf("erro ao ler linha do produto: %w", err)
+		}
+		products = append(products, &p)
+	}
+
+	return products, nil
+}

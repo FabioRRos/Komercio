@@ -10,26 +10,27 @@ import (
 )
 
 func main() {
-	// 1. Cria a conexão com o banco
+	// Esse cara instancia a conexão do banco
 	db := datastore.NewProductDataStore()
 	defer db.Close()
 
-	// 2. Cria o Repository
+	// Esse maluco instancia o repositório
 	productRepo := repository.NewProductRepository(db)
 
-	// 3. Cria o Service
+	// Cria o service
 	productService := service.NewProductService(productRepo)
 
-	// 4. Cria o produto
+	// Simula entrada do Json do produto
 	produto := entity.Product{
-		ProductName:     "Batata Frita",
-		ProductPrice:    10,
-		ProductCodBar:   "",
+		ProductName:     "Pastel",
+		ProductPrice:    15,
+		ProductCodBar:   "102030",
 		ProductGroup:    "Comida",
 		ProductSubGroup: "Fritura",
 		ProductStock:    20,
 	}
 
+	//Inicia o processo de cadastro chamando o Service
 	err := productService.CreateProduct(&produto)
 	if err != nil {
 		fmt.Println("Erro:", err)
@@ -37,4 +38,15 @@ func main() {
 	}
 
 	fmt.Println("Produto cadastrado com sucesso!")
+
+	//Esse aqui inicia o processo que realiza o select dos produtos
+	listaProduto, err := productService.SelectAllProducts()
+
+	if err != nil {
+		fmt.Println("Tive dificuldades em buscar a lista")
+	}
+
+	for _, k := range listaProduto {
+		fmt.Println(k.Id, "-", k.ProductName)
+	}
 }

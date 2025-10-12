@@ -9,6 +9,7 @@ import (
 
 type ProductRepository interface {
 	Create(ctx context.Context, product *entity.Product) error
+	SelectAllProducts(ctx context.Context) ([]*entity.Product, error)
 }
 
 type productRepository struct {
@@ -23,4 +24,8 @@ func NewProductRepository(ds *datastore.ProductDatastore) ProductRepository {
 
 func (r *productRepository) Create(ctx context.Context, product *entity.Product) error {
 	return r.datastore.CreateProduct(product)
+}
+
+func (r *productRepository) SelectAllProducts(ctx context.Context) ([]*entity.Product, error) {
+	return r.datastore.SelectAllProducts()
 }

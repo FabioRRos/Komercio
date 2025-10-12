@@ -7,6 +7,7 @@ import (
 
 type ProductService interface {
 	CreateProduct(product *entity.Product) error
+	SelectAllProducts() ([]*entity.Product, error)
 }
 
 type productService struct {
@@ -28,4 +29,8 @@ func (s *productService) CreateProduct(product *entity.Product) error {
 	}
 	// Passou todas as validações → salva no banco
 	return s.repo.Create(nil, product) // <- ponteiro
+}
+
+func (s *productService) SelectAllProducts() ([]*entity.Product, error) {
+	return s.repo.SelectAllProducts(nil) // passa o contexto se quiser
 }
