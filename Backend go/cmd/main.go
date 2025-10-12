@@ -20,33 +20,46 @@ func main() {
 	// Cria o service
 	productService := service.NewProductService(productRepo)
 
-	// Simula entrada do Json do produto
-	produto := entity.Product{
-		ProductName:     "Pastel",
-		ProductPrice:    15,
-		ProductCodBar:   "102030",
-		ProductGroup:    "Comida",
-		ProductSubGroup: "Fritura",
-		ProductStock:    20,
-	}
+	var opcao int
 
-	//Inicia o processo de cadastro chamando o Service
-	err := productService.CreateProduct(&produto)
-	if err != nil {
-		fmt.Println("Erro:", err)
-		return
-	}
+	fmt.Println("Para cadastrar, digite 1")
+	fmt.Println("Para consultar, digite 2")
+	fmt.Scan(&opcao)
 
-	fmt.Println("Produto cadastrado com sucesso!")
+	if opcao == 1 {
 
-	//Esse aqui inicia o processo que realiza o select dos produtos
-	listaProduto, err := productService.SelectAllProducts()
+		// Simula entrada do Json do produto
+		produto := entity.Product{
+			ProductName:     "Coca cola zero",
+			ProductPrice:    12,
+			ProductCodBar:   "102060",
+			ProductGroup:    "Bebida",
+			ProductSubGroup: "Refrigerante",
+			ProductStock:    4,
+			ProductStatus:   false,
+		}
 
-	if err != nil {
-		fmt.Println("Tive dificuldades em buscar a lista")
-	}
+		//Inicia o processo de cadastro chamando o Service
+		err := productService.CreateProduct(&produto)
+		if err != nil {
+			fmt.Println("Erro:", err)
+			return
+		}
 
-	for _, k := range listaProduto {
-		fmt.Println(k.Id, "-", k.ProductName)
+		fmt.Println("Produto cadastrado com sucesso!")
+	} else if opcao == 2 {
+
+		//Esse aqui inicia o processo que realiza o select dos produtos
+		listaProduto, err := productService.SelectAllProducts()
+
+		if err != nil {
+			fmt.Println("Tive dificuldades em buscar a lista")
+		}
+
+		for _, k := range listaProduto {
+			fmt.Println(k.Id, "-", k.ProductName)
+		}
+	} else {
+		fmt.Println("Opcao invalida")
 	}
 }

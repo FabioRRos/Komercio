@@ -44,10 +44,10 @@ func (d *ProductDatastore) Close() {
 func (d *ProductDatastore) CreateProduct(product *entity.Product) error {
 	query := `
 		INSERT INTO products 
-		(ProductName, ProductPrice, ProductCodBar, ProductGroup, ProductSubGroup, ProductStock)
-		VALUES ($1, $2, $3, $4, $5, $6)`
+		(ProductName, ProductPrice, ProductCodBar, ProductGroup, ProductSubGroup, ProductStock, status)
+		VALUES ($1, $2, $3, $4, $5, $6, $7)`
 
-	_, err := d.Conn.Exec(context.Background(), query, product.ProductName, product.ProductPrice, product.ProductCodBar, product.ProductGroup, product.ProductSubGroup, product.ProductStock)
+	_, err := d.Conn.Exec(context.Background(), query, product.ProductName, product.ProductPrice, product.ProductCodBar, product.ProductGroup, product.ProductSubGroup, product.ProductStock, product.ProductStatus)
 
 	if err != nil {
 		return fmt.Errorf("erro ao inserir produto: %w", err)
@@ -59,7 +59,7 @@ func (d *ProductDatastore) CreateProduct(product *entity.Product) error {
 
 // select. Eu chamo o ponteiro de d (productDatastore) e retorno um slice de produto + um erro
 func (d *ProductDatastore) SelectAllProducts() ([]*entity.Product, error) {
-	query := `SELECT id, ProductName, ProductPrice, ProductCodBar, ProductGroup, ProductSubGroup, ProductStock FROM products`
+	query := `SELECT id, ProductName, ProductPrice, ProductCodBar, ProductGroup, ProductSubGroup, status, ProductStock FROM products`
 
 	rows, err := d.Conn.Query(context.Background(), query)
 	if err != nil {
@@ -71,7 +71,16 @@ func (d *ProductDatastore) SelectAllProducts() ([]*entity.Product, error) {
 
 	for rows.Next() {
 		var p entity.Product
-		err := rows.Scan(&p.Id, &p.ProductName, &p.ProductPrice, &p.ProductCodBar, &p.ProductGroup, &p.ProductSubGroup, &p.ProductStock)
+		err := rows.Scan(
+			&p.Id,
+			&p.ProductName,
+			&p.ProductPrice,
+			&p.ProductCodBar,
+			&p.ProductGroup,
+			&p.ProductSubGroup,
+			&p.ProductStatus, // ← corrigido
+			&p.ProductStock,
+		)
 		if err != nil {
 			return nil, fmt.Errorf("erro ao ler linha do produto: %w", err)
 		}

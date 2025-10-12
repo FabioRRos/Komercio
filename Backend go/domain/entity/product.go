@@ -10,6 +10,7 @@ type Product struct {
 	ProductGroup    string
 	ProductSubGroup string
 	ProductStock    int
+	ProductStatus   bool
 }
 
 func ProductValidation(product Product) error {

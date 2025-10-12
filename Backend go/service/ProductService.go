@@ -32,5 +32,18 @@ func (s *productService) CreateProduct(product *entity.Product) error {
 }
 
 func (s *productService) SelectAllProducts() ([]*entity.Product, error) {
-	return s.repo.SelectAllProducts(nil) // passa o contexto se quiser
+
+	products, err := s.repo.SelectAllProducts(nil)
+	if err != nil {
+		return nil, err
+	}
+
+	activeProducts := products[:0]
+	for _, p := range products {
+		if p.ProductStatus {
+			activeProducts = append(activeProducts, p)
+		}
+	}
+
+	return activeProducts, nil
 }
