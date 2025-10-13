@@ -8,6 +8,9 @@ import (
 type ProductService interface {
 	CreateProduct(product *entity.Product) error
 	SelectAllProducts() ([]*entity.Product, error)
+	SelectProductById(id int) (*entity.Product, error)
+	UpdateProduct(product *entity.Product) (*entity.Product, error)
+	DeactivateProduct(id int) error
 }
 
 type productService struct {
@@ -27,8 +30,8 @@ func (s *productService) CreateProduct(product *entity.Product) error {
 	if err != nil {
 		return err
 	}
-	// Passou todas as validações → salva no banco
-	return s.repo.Create(nil, product) // <- ponteiro
+	// Passou todas as validações -> salva no banco
+	return s.repo.Create(nil, product)
 }
 
 func (s *productService) SelectAllProducts() ([]*entity.Product, error) {
@@ -46,4 +49,36 @@ func (s *productService) SelectAllProducts() ([]*entity.Product, error) {
 	}
 
 	return activeProducts, nil
+}
+
+func (s *productService) SelectProductById(id int) (*entity.Product, error) {
+	produc, err := s.repo.SelectProductById(nil, id)
+
+	if err != nil {
+		return nil, err
+
+	}
+
+	return produc, nil
+}
+
+func (s *productService) UpdateProduct(product *entity.Product) (*entity.Product, error) {
+
+	err := entity.ProductValidation(*product)
+	if err != nil {
+		return nil, err
+	}
+	// Passou todas as validações -> salva no banco
+
+	produc, err := s.repo.UpdateProduct(nil, product)
+
+	if err != nil {
+		return nil, err
+	}
+	return produc, nil
+}
+
+func (s *productService) DeactivateProduct(id int) error {
+	return s.repo.DeactivateProduct(nil, id)
+
 }

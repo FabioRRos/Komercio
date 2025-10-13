@@ -89,3 +89,99 @@ func (d *ProductDatastore) SelectAllProducts() ([]*entity.Product, error) {
 
 	return products, nil
 }
+
+// select. Eu chamo o ponteiro de d (productDatastore) e retorno um slice de produto + um erro
+func (d *ProductDatastore) SelectProductById(id int) (*entity.Product, error) {
+	query := `
+		SELECT 
+			id, ProductName, ProductPrice, ProductCodBar, 
+			ProductGroup, ProductSubGroup, status, ProductStock 
+		FROM products 
+		WHERE id = $1
+	`
+
+	var p entity.Product
+
+	err := d.Conn.QueryRow(context.Background(), query, id).Scan(
+		&p.Id,
+		&p.ProductName,
+		&p.ProductPrice,
+		&p.ProductCodBar,
+		&p.ProductGroup,
+		&p.ProductSubGroup,
+		&p.ProductStatus,
+		&p.ProductStock,
+	)
+
+	if err != nil {
+		// caso o produto não exista
+		if err == pgx.ErrNoRows {
+			return nil, fmt.Errorf("produto com id %d não encontrado", id)
+		}
+		// outro erro qualquer (banco, conexão, etc.)
+		return nil, fmt.Errorf("erro ao buscar produto: %w", err)
+	}
+
+	return &p, nil
+}
+
+func (d *ProductDatastore) UpdateProduct(product *entity.Product) (*entity.Product, error) {
+	query := `
+		UPDATE products SET
+			productname = $2,
+			productprice = $3,
+			productgroup = $4,
+			productsubgroup = $5,
+			productstock = $6,
+			status = $7
+		WHERE id = $1
+		RETURNING id, productname, productprice, productcodbar, 
+		          productgroup, productsubgroup, status, productstock
+	`
+
+	var p entity.Product
+
+	err := d.Conn.QueryRow(context.Background(), query,
+		product.Id,
+		product.ProductName,
+		product.ProductPrice,
+		product.ProductGroup,
+		product.ProductSubGroup,
+		product.ProductStock,
+		product.ProductStatus,
+	).Scan(
+		&p.Id,
+		&p.ProductName,
+		&p.ProductPrice,
+		&p.ProductCodBar,
+		&p.ProductGroup,
+		&p.ProductSubGroup,
+		&p.ProductStatus,
+		&p.ProductStock,
+	)
+
+	if err != nil {
+		if err == pgx.ErrNoRows {
+			return nil, fmt.Errorf("produto com id %d não encontrado", product.Id)
+		}
+		return nil, fmt.Errorf("erro ao atualizar produto: %w", err)
+	}
+
+	return &p, nil
+}
+
+func (d *ProductDatastore) DeactivateProduct(id int) error {
+	query := `
+		UPDATE products
+		SET status = false
+		WHERE id = $1
+	`
+
+	_, err := d.Conn.Exec(context.Background(), query, id)
+	if err != nil {
+		return fmt.Errorf("erro ao desativar produto com id %d: %w", id, err)
+	}
+
+	return nil
+
+}
