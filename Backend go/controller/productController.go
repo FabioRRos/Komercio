@@ -4,8 +4,8 @@ import (
 	"net/http"
 	"strconv"
 
-	service "github.com/fabioros/Komercio/Service"
 	"github.com/fabioros/Komercio/domain/entity"
+	service "github.com/fabioros/Komercio/service"
 
 	"github.com/gin-gonic/gin"
 )
@@ -44,7 +44,6 @@ func (c *ProductController) GetProductById(ctx *gin.Context) {
 		ctx.JSON(http.StatusNotFound, gin.H{"error": err.Error()})
 		return
 	}
-
 	ctx.JSON(http.StatusOK, product)
 }
 
@@ -90,6 +89,7 @@ func (c *ProductController) UpdateProduct(ctx *gin.Context) {
 	ctx.JSON(http.StatusOK, updated)
 }
 
+// #### Na vdd ele não deleta o protudo, apenas deixa desabilitado no banco ####
 // DELETE /products/:id
 func (c *ProductController) DeactivateProduct(ctx *gin.Context) {
 	idParam := ctx.Param("id")

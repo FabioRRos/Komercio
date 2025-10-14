@@ -78,7 +78,7 @@ func (d *ProductDatastore) SelectAllProducts() ([]*entity.Product, error) {
 			&p.ProductCodBar,
 			&p.ProductGroup,
 			&p.ProductSubGroup,
-			&p.ProductStatus, // ← corrigido
+			&p.ProductStatus,
 			&p.ProductStock,
 		)
 		if err != nil {

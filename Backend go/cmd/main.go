@@ -1,10 +1,10 @@
 package main
 
 import (
-	service "github.com/fabioros/Komercio/Service"
 	"github.com/fabioros/Komercio/controller"
 	"github.com/fabioros/Komercio/domain/repository"
 	"github.com/fabioros/Komercio/infrastructure/datastore"
+	service "github.com/fabioros/Komercio/service"
 	"github.com/gin-gonic/gin"
 )
 
@@ -13,26 +13,40 @@ func main() {
 	server := gin.Default()
 
 	// faz a conexão com o banco
-	db := datastore.NewProductDataStore()
-	defer db.Close()
+	dbProduct := datastore.NewProductDataStore()
+	dbCustomer := datastore.NewCustomerDataStore()
+	defer dbProduct.Close()
 
 	// faz a injeção das dependências
-	productRepo := repository.NewProductRepository(db)
+	productRepo := repository.NewProductRepository(dbProduct)
 	productService := service.NewProductService(productRepo)
 	productController := controller.NewProductController(productService)
+
+	customerRepo := repository.NewCustomerRepository(dbCustomer)
+	customerService := service.NewCustomerService(customerRepo)
+	customerController := controller.NewCustomerController(customerService)
 
 	// Rota pra testar (Ping pong)
 	server.GET("/ping", func(ctx *gin.Context) {
 		ctx.JSON(200, gin.H{"message": "pong"})
 	})
 
-	// Rotas das APIS
+	// Rotas das APIS Product
 	server.GET("/products", productController.GetAllProducts)
 	server.GET("/products/:id", productController.GetProductById)
 	server.POST("/products", productController.CreateProduct)
 	server.PUT("/products/:id", productController.UpdateProduct)
 	server.DELETE("/products/:id", productController.DeactivateProduct)
 
+	// Rotas das APIS de Customer
+	customerRoutes := server.Group("/customer") // Outra forma de se fazer. Ai não precisa ficar colocando o prefixo todas as vezes
+	{
+		customerRoutes.POST("", customerController.CreateCustomer)
+		customerRoutes.GET("", customerController.GetAllCustomers)
+		customerRoutes.GET("/:id", customerController.GetCustomerById)
+		customerRoutes.PUT("/:id", customerController.UpdateCustomer)
+		customerRoutes.DELETE("/:id", customerController.DeactivateCustomer)
+	}
 	// Starta o servidor na porta 8000
 	server.Run(":8000")
 
