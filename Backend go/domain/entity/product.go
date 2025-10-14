@@ -3,26 +3,22 @@ package entity
 import "fmt"
 
 type Product struct {
-	Id              int
-	ProductName     string
-	ProductPrice    float32
-	ProductCodBar   string
-	ProductGroup    string
-	ProductSubGroup string
-	ProductStock    int
-	ProductStatus   bool
+	Id              int     `json:"id"`
+	ProductName     string  `json:"product_name"`
+	ProductPrice    float32 `json:"product_price"`
+	ProductCodBar   string  `json:"product_codbar"`
+	ProductGroup    string  `json:"product_group"`
+	ProductSubGroup string  `json:"product_subgroup"`
+	ProductStock    int     `json:"product_stock"`
+	ProductStatus   bool    `json:"product_status"`
 }
 
+// Validação simples para uso antes de salvar
 func ProductValidation(product Product) error {
-
-	if product.ProductPrice <= 0 {
-		return fmt.Errorf("O preço não pode ser negativo ou zero")
-	}
-	if product.ProductCodBar == "" {
-		return fmt.Errorf("Código de barras é obrigatório")
-	}
-	if product.ProductStock < 0 {
-		return fmt.Errorf("Estoque não pode ser negativo")
+	if product.ProductPrice <= 0 ||
+		product.ProductCodBar == "" ||
+		product.ProductStock < 0 {
+		return fmt.Errorf("parâmetros inválidos para o produto")
 	}
 	return nil
 }

@@ -44,7 +44,7 @@ func (d *ProductDatastore) Close() {
 func (d *ProductDatastore) CreateProduct(product *entity.Product) error {
 	query := `
 		INSERT INTO products 
-		(ProductName, ProductPrice, ProductCodBar, ProductGroup, ProductSubGroup, ProductStock, status)
+		(productname, productprice, productcodbar, productgroup, productsubgroup, productstock, status)
 		VALUES ($1, $2, $3, $4, $5, $6, $7)`
 
 	_, err := d.Conn.Exec(context.Background(), query, product.ProductName, product.ProductPrice, product.ProductCodBar, product.ProductGroup, product.ProductSubGroup, product.ProductStock, product.ProductStatus)

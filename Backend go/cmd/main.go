@@ -1,26 +1,44 @@
 package main
 
 import (
-	"fmt"
-
-	"github.com/fabioros/Komercio/domain/entity"
+	service "github.com/fabioros/Komercio/Service"
+	"github.com/fabioros/Komercio/controller"
 	"github.com/fabioros/Komercio/domain/repository"
 	"github.com/fabioros/Komercio/infrastructure/datastore"
-	"github.com/fabioros/Komercio/service"
+	"github.com/gin-gonic/gin"
 )
 
 func main() {
-	// Esse cara instancia a conexão do banco
+	// inicia o pacote do gin
+	server := gin.Default()
+
+	// faz a conexão com o banco
 	db := datastore.NewProductDataStore()
 	defer db.Close()
 
-	// Esse maluco instancia o repositório
+	// faz a injeção das dependências
 	productRepo := repository.NewProductRepository(db)
-
-	// Cria o service
 	productService := service.NewProductService(productRepo)
+	productController := controller.NewProductController(productService)
 
-	var opcao int
+	// Rota pra testar (Ping pong)
+	server.GET("/ping", func(ctx *gin.Context) {
+		ctx.JSON(200, gin.H{"message": "pong"})
+	})
+
+	// Rotas das APIS
+	server.GET("/products", productController.GetAllProducts)
+	server.GET("/products/:id", productController.GetProductById)
+	server.POST("/products", productController.CreateProduct)
+	server.PUT("/products/:id", productController.UpdateProduct)
+	server.DELETE("/products/:id", productController.DeactivateProduct)
+
+	// Starta o servidor na porta 8000
+	server.Run(":8000")
+
+	//Minha antiga validação manual
+
+	/*var opcao int
 
 	fmt.Println("Para cadastrar, digite 1")
 	fmt.Println("Para consultar, digite 2")
@@ -188,5 +206,7 @@ func main() {
 	default:
 		fmt.Println("Opcao invalida")
 	}
+	*/
 
+	server.Run(":8000")
 }

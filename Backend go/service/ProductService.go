@@ -1,16 +1,19 @@
 package service
 
 import (
+	"context"
+	"errors"
+
 	"github.com/fabioros/Komercio/domain/entity"
 	"github.com/fabioros/Komercio/domain/repository"
 )
 
 type ProductService interface {
-	CreateProduct(product *entity.Product) error
-	SelectAllProducts() ([]*entity.Product, error)
-	SelectProductById(id int) (*entity.Product, error)
-	UpdateProduct(product *entity.Product) (*entity.Product, error)
-	DeactivateProduct(id int) error
+	CreateProduct(ctx context.Context, product *entity.Product) error
+	SelectAllProducts(ctx context.Context) ([]*entity.Product, error)
+	SelectProductById(ctx context.Context, id int) (*entity.Product, error)
+	UpdateProduct(ctx context.Context, product *entity.Product) (*entity.Product, error)
+	DeactivateProduct(ctx context.Context, id int) error
 }
 
 type productService struct {
@@ -18,30 +21,29 @@ type productService struct {
 }
 
 func NewProductService(repo repository.ProductRepository) ProductService {
-	return &productService{
-		repo: repo,
-	}
+	return &productService{repo: repo}
 }
 
-func (s *productService) CreateProduct(product *entity.Product) error {
-
-	err := entity.ProductValidation(*product)
-
-	if err != nil {
-		return err
+func (s *productService) CreateProduct(ctx context.Context, product *entity.Product) error {
+	if product == nil {
+		return errors.New("produto não pode ser nulo")
 	}
-	// Passou todas as validações -> salva no banco
-	return s.repo.Create(nil, product)
+
+	if err := entity.ProductValidation(*product); err != nil {
+		return errors.New("parâmetros inválidos")
+	}
+
+	return s.repo.Create(ctx, product)
 }
 
-func (s *productService) SelectAllProducts() ([]*entity.Product, error) {
-
-	products, err := s.repo.SelectAllProducts(nil)
+func (s *productService) SelectAllProducts(ctx context.Context) ([]*entity.Product, error) {
+	products, err := s.repo.SelectAllProducts(ctx)
 	if err != nil {
 		return nil, err
 	}
 
-	activeProducts := products[:0]
+	// Filtra apenas produtos ativos
+	var activeProducts []*entity.Product
 	for _, p := range products {
 		if p.ProductStatus {
 			activeProducts = append(activeProducts, p)
@@ -51,34 +53,39 @@ func (s *productService) SelectAllProducts() ([]*entity.Product, error) {
 	return activeProducts, nil
 }
 
-func (s *productService) SelectProductById(id int) (*entity.Product, error) {
-	produc, err := s.repo.SelectProductById(nil, id)
-
-	if err != nil {
-		return nil, err
-
+func (s *productService) SelectProductById(ctx context.Context, id int) (*entity.Product, error) {
+	if id <= 0 {
+		return nil, errors.New("id inválido")
 	}
 
-	return produc, nil
+	product, err := s.repo.SelectProductById(ctx, id)
+	if err != nil {
+		return nil, err
+	}
+
+	return product, nil
 }
 
-func (s *productService) UpdateProduct(product *entity.Product) (*entity.Product, error) {
+func (s *productService) UpdateProduct(ctx context.Context, product *entity.Product) (*entity.Product, error) {
+	if product == nil || product.Id <= 0 {
+		return nil, errors.New("produto inválido para atualização")
+	}
 
-	err := entity.ProductValidation(*product)
+	if err := entity.ProductValidation(*product); err != nil {
+		return nil, errors.New("parâmetros inválidos")
+	}
+
+	updated, err := s.repo.UpdateProduct(ctx, product)
 	if err != nil {
 		return nil, err
 	}
-	// Passou todas as validações -> salva no banco
 
-	produc, err := s.repo.UpdateProduct(nil, product)
-
-	if err != nil {
-		return nil, err
-	}
-	return produc, nil
+	return updated, nil
 }
 
-func (s *productService) DeactivateProduct(id int) error {
-	return s.repo.DeactivateProduct(nil, id)
-
+func (s *productService) DeactivateProduct(ctx context.Context, id int) error {
+	if id <= 0 {
+		return errors.New("id inválido")
+	}
+	return s.repo.DeactivateProduct(ctx, id)
 }
