@@ -5,7 +5,7 @@ import (
 	"strconv"
 
 	"github.com/fabioros/Komercio/domain/entity"
-	service "github.com/fabioros/Komercio/service"
+	"github.com/fabioros/Komercio/service"
 	"github.com/gin-gonic/gin"
 )
 

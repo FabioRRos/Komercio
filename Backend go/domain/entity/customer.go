@@ -1,6 +1,10 @@
 package entity
 
-import "fmt"
+import (
+	"fmt"
+	"strings"
+	"unicode"
+)
 
 type Customer struct {
 	CustomerID           int    `json:"customer_id"`           // ID do cliente
@@ -20,7 +24,7 @@ type Customer struct {
 	CustomerStatus       bool   `json:"customer_status"`       // Status (ativo = true, bloqueado = false)
 }
 
-func CustomerValidation(customer Customer) error {
+func CustomerValidation(customer *Customer) error {
 
 	switch {
 	case customer.CustomerFirstName == "":
@@ -28,7 +32,18 @@ func CustomerValidation(customer Customer) error {
 	case customer.CustomerDocument == "":
 		return fmt.Errorf("O CPF/CNPJ não pode estar em branco")
 	default:
-		return nil
+		{
+			var sb strings.Builder
+			for _, r := range customer.CustomerDocument {
+
+				if unicode.IsDigit(r) {
+					sb.WriteRune(r)
+				}
+			}
+			customer.CustomerDocument = sb.String()
+
+			return nil
+		}
 	}
 
 }

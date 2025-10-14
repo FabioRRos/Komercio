@@ -29,7 +29,7 @@ func (s *customerService) CreateCustomer(ctx context.Context, customer *entity.C
 		return errors.New("Cliente não pode ser nulo")
 	}
 
-	err := entity.CustomerValidation(*customer)
+	err := entity.CustomerValidation(customer)
 
 	if err != nil {
 		return err
@@ -73,7 +73,7 @@ func (s *customerService) UpdateCustomer(ctx context.Context, customer *entity.C
 		return nil, errors.New("cliente inválido para atualização")
 	}
 
-	if err := entity.CustomerValidation(*customer); err != nil {
+	if err := entity.CustomerValidation(customer); err != nil {
 		return nil, errors.New("parâmetros inválidos")
 	}
 
