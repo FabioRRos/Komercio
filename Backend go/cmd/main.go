@@ -4,50 +4,44 @@ import (
 	"github.com/fabioros/Komercio/controller"
 	"github.com/fabioros/Komercio/domain/repository"
 	"github.com/fabioros/Komercio/infrastructure/datastore"
+	"github.com/fabioros/Komercio/routes"
 	service "github.com/fabioros/Komercio/service"
 	"github.com/gin-gonic/gin"
 )
 
 func main() {
-	// inicia o pacote do gin
+
 	server := gin.Default()
 
-	// faz a conexão com o banco
 	dbProduct := datastore.NewProductDataStore()
-	dbCustomer := datastore.NewCustomerDataStore()
 	defer dbProduct.Close()
+	dbCustomer := datastore.NewCustomerDataStore()
+	defer dbCustomer.Close()
+	dbEmployee := datastore.NewEmployeesDataStore()
+	defer dbEmployee.Close()
 
-	// faz a injeção das dependências
-	productRepo := repository.NewProductRepository(dbProduct)
-	productService := service.NewProductService(productRepo)
-	productController := controller.NewProductController(productService)
+	productController := controller.NewProductController(
+		service.NewProductService(
+			repository.NewProductRepository(dbProduct)),
+	)
 
-	customerRepo := repository.NewCustomerRepository(dbCustomer)
-	customerService := service.NewCustomerService(customerRepo)
-	customerController := controller.NewCustomerController(customerService)
+	customerController := controller.NewCustomerController(
+		service.NewCustomerService(
+			repository.NewCustomerRepository(dbCustomer)),
+	)
 
-	// Rota pra testar (Ping pong)
-	server.GET("/ping", func(ctx *gin.Context) {
-		ctx.JSON(200, gin.H{"message": "pong"})
-	})
+	employeeController := controller.NewEmployeerController(
+		service.NewEmployeeService(
+			repository.NewEmployeesRepository(dbEmployee)),
+	)
 
-	// Rotas das APIS Product
-	server.GET("/products", productController.GetAllProducts)
-	server.GET("/products/:id", productController.GetProductById)
-	server.POST("/products", productController.CreateProduct)
-	server.PUT("/products/:id", productController.UpdateProduct)
-	server.DELETE("/products/:id", productController.DeactivateProduct)
+	// Rotas
+	server.GET("/ping", func(ctx *gin.Context) { ctx.JSON(200, gin.H{"message": "pong"}) })
 
-	// Rotas das APIS de Customer
-	customerRoutes := server.Group("/customer") // Outra forma de se fazer. Ai não precisa ficar colocando o prefixo todas as vezes
-	{
-		customerRoutes.POST("", customerController.CreateCustomer)
-		customerRoutes.GET("", customerController.GetAllCustomers)
-		customerRoutes.GET("/:id", customerController.GetCustomerById)
-		customerRoutes.PUT("/:id", customerController.UpdateCustomer)
-		customerRoutes.DELETE("/:id", customerController.DeactivateCustomer)
-	}
-	// Starta o servidor na porta 8000
+	routes.RegisterProductRoutes(server, productController)
+	routes.RegisterCustomerRoutes(server, customerController)
+	routes.RegisterEmployeeRoutes(server, employeeController)
+
 	server.Run(":8000")
 
 	//Minha antiga validação manual
@@ -223,4 +217,5 @@ func main() {
 	*/
 
 	server.Run(":8000")
+
 }
