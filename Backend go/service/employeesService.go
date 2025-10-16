@@ -34,7 +34,9 @@ func (s *employeeService) CreateEmployee(ctx context.Context, employee *entity.E
 		return err
 	}
 
-	entity.CreateLogin(employee)
+	if err := entity.CreateLogin(employee); err != nil {
+		return err
+	}
 
 	return s.repo.Create(ctx, employee)
 }

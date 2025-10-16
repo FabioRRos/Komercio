@@ -1,0 +1,14 @@
+C:\Projeto Komercial\Komercio\Front C#\Komercio\bin\Debug\Komercio.exe.config
+C:\Projeto Komercial\Komercio\Front C#\Komercio\bin\Debug\Komercio.exe
+C:\Projeto Komercial\Komercio\Front C#\Komercio\bin\Debug\Komercio.pdb
+C:\Projeto Komercial\Komercio\Front C#\Komercio\obj\Debug\Komercio.csproj.AssemblyReference.cache
+C:\Projeto Komercial\Komercio\Front C#\Komercio\obj\Debug\Komercio.Home.resources
+C:\Projeto Komercial\Komercio\Front C#\Komercio\obj\Debug\Komercio.Properties.Resources.resources
+C:\Projeto Komercial\Komercio\Front C#\Komercio\obj\Debug\Komercio.UI.Forms.fmCreateEmployee.resources
+C:\Projeto Komercial\Komercio\Front C#\Komercio\obj\Debug\Komercio.csproj.GenerateResource.cache
+C:\Projeto Komercial\Komercio\Front C#\Komercio\obj\Debug\Komercio.csproj.CoreCompileInputs.cache
+C:\Projeto Komercial\Komercio\Front C#\Komercio\obj\Debug\Komercio.exe
+C:\Projeto Komercial\Komercio\Front C#\Komercio\obj\Debug\Komercio.pdb
+C:\Projeto Komercial\Komercio\Front C#\Komercio\bin\Debug\Newtonsoft.Json.dll
+C:\Projeto Komercial\Komercio\Front C#\Komercio\bin\Debug\Newtonsoft.Json.xml
+C:\Projeto Komercial\Komercio\Front C#\Komercio\obj\Debug\Komercio.csproj.Up2Date
