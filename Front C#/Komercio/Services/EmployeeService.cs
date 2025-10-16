@@ -8,15 +8,14 @@ using MeuProjetoWinForms.Models;
 namespace MeuProjetoWinForms.Services
 {
     public class EmployeeService
+
     {
+
         private readonly HttpClient _httpClient;
 
-        public EmployeeService(string baseUrl)
+        public EmployeeService(HttpClient httpClient)
         {
-            _httpClient = new HttpClient
-            {
-                BaseAddress = new Uri(baseUrl) // ex: "http://localhost:8000/"
-            };
+            _httpClient = httpClient;
         }
 
         // Cria um novo funcionário

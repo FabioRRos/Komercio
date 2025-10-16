@@ -15,12 +15,15 @@ namespace Komercio.UI.Forms
 {
     public partial class fmCreateEmployee : Form
     {
-        public fmCreateEmployee()
+        private readonly EmployeeService _employeeService;
+        public fmCreateEmployee(EmployeeService service)
         {
             InitializeComponent();
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.MinimizeBox = true;
+
+            _employeeService = service;
 
 
 
@@ -88,8 +91,7 @@ namespace Komercio.UI.Forms
 
             try
             {
-                var service = new EmployeeService("http://localhost:8000/");
-                bool success = await service.CreateEmployeeAsync(employee);
+                bool success = await _employeeService.CreateEmployeeAsync(employee);
 
                 if (success)
                 {
