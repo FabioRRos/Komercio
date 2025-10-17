@@ -183,6 +183,10 @@ namespace Komercio.UI.Forms
             await Task.Delay(2000);
             mtbEmployeePassword.PasswordChar = '•';
         }
+
+
+
+        
     }
 
 }

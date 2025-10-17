@@ -30,7 +30,7 @@ func (s *employeeService) CreateEmployee(ctx context.Context, employee *entity.E
 		return errors.New("funcionário não pode ser nulo")
 	}
 
-	if err := entity.ValidatePassword(employee); err != nil {
+	if err := entity.ValidatePassword(employee.EmployeePassword); err != nil {
 		return err
 	}
 
@@ -57,7 +57,7 @@ func (s *employeeService) UpdateEmployeePassword(ctx context.Context, login, new
 		return errors.New("login ou senha inválidos")
 	}
 
-	if err := entity.ChangePassword(newPassword); err != nil {
+	if err := entity.ValidatePassword(newPassword); err != nil {
 		return err
 	}
 

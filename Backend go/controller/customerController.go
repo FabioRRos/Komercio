@@ -23,6 +23,7 @@ func NewCustomerController(customerService service.CustomerService) *CustomerCon
 
 func (c *CustomerController) CreateCustomer(ctx *gin.Context) {
 	var customer entity.Customer
+
 	if err := ctx.ShouldBindJSON(&customer); err != nil {
 		ctx.JSON(http.StatusBadRequest, gin.H{"error": "Parâmetros inválidos"})
 		return

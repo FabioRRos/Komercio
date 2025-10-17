@@ -1,4 +1,6 @@
-﻿using Komercio.UI.Forms;
+﻿using Komercio.Services;
+using Komercio.UI.Forms;
+using Komercio.UI.Forms.Customer;
 using Komercio.UI.Forms.Employee;
 using MeuProjetoWinForms.Services;
 using System;
@@ -16,11 +18,13 @@ namespace Komercio
     public partial class Home : Form
     {
         private readonly EmployeeService _employeeService;
+        private readonly CustomerService _customerService;
 
-        public Home(EmployeeService service)
+        public Home(EmployeeService empliyeeService, CustomerService customerService)
         {
             InitializeComponent();
-            _employeeService = service;
+            _employeeService = empliyeeService;
+            _customerService = customerService;
         }
 
         private void novoFuncionárioToolStripMenuItem_Click(object sender, EventArgs e)
@@ -38,6 +42,18 @@ namespace Komercio
         {
             fmChangePasswordEmployeer changePasswordEmployeer = new fmChangePasswordEmployeer(_employeeService);
             changePasswordEmployeer.ShowDialog();
+        }
+
+        private void cadastroToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            fmCreateCustomer createCustomer = new fmCreateCustomer(_customerService);
+            createCustomer.ShowDialog();
+        }
+
+        private void alterarToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            fmChangeCustomer changeCustomer = new fmChangeCustomer(_customerService);
+            changeCustomer.ShowDialog();
         }
     }
 }

@@ -29,19 +29,10 @@ func CreateLogin(employee *Employees) error {
 	return nil
 }
 
-func ValidatePassword(employee *Employees) error {
-
-	if len(employee.EmployeePassword) < 8 {
-		return fmt.Errorf("O tamanho minimo de caracteres é 8")
-	}
-
-	return nil
-}
-
-func ChangePassword(password string) error {
+func ValidatePassword(password string) error {
 
 	if len(password) < 8 {
-		return fmt.Errorf("O tamanho minimo de caracteres é 8")
+		return fmt.Errorf("A senha precisa ter no minimo 8 caracteres")
 	}
 
 	return nil

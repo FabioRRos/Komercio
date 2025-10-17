@@ -1,9 +1,10 @@
+using MeuProjetoWinForms.Models;
+using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
-using Newtonsoft.Json;
-using MeuProjetoWinForms.Models;
 
 namespace MeuProjetoWinForms.Services
 {
@@ -43,7 +44,14 @@ namespace MeuProjetoWinForms.Services
 
             var resultJson = await response.Content.ReadAsStringAsync();
             var result = JsonConvert.DeserializeObject<LoginResponse>(resultJson);
-            return result?.Success ?? false;
+            if (result == null)
+            {
+                return false;
+            }
+            else
+            {
+                return result.Success;
+            }
         }
 
         // Atualizar senha
@@ -73,6 +81,30 @@ namespace MeuProjetoWinForms.Services
         {
             var response = await _httpClient.DeleteAsync($"employees/{login}");
             return response.IsSuccessStatusCode;
+        }
+
+
+        // GET /employees/names - Retorna lista de nomes de funcionários ativos
+        public async Task<List<string>> GetActiveEmployeeNamesAsync()
+        {
+            var response = await _httpClient.GetAsync("employees/names"); // Rota correta
+
+            if (!response.IsSuccessStatusCode)
+            {
+                return new List<string>();
+            }
+
+            var resultJson = await response.Content.ReadAsStringAsync();
+
+            // Salva a resposta JSON em um arquivo
+            var names = JsonConvert.DeserializeObject<List<string>>(resultJson);
+
+            if (names == null)
+            {
+                return new List<string>();
+            }
+
+            return names;
         }
 
         // DTO interno para resposta de login

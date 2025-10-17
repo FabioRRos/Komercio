@@ -59,10 +59,24 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Models\CustomerDTO.cs" />
     <Compile Include="Models\EmployeeDto.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\CustomerService.cs" />
     <Compile Include="Services\EmployeeService.cs" />
+    <Compile Include="UI\Forms\Customer\fmChangeCustomer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Forms\Customer\fmChangeCustomer.Designer.cs">
+      <DependentUpon>fmChangeCustomer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Forms\Customer\fmCreateCustomer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Forms\Customer\fmCreateCustomer.Designer.cs">
+      <DependentUpon>fmCreateCustomer.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\Forms\Employee\CreateEmployee.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -87,6 +101,12 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="UI\Forms\Customer\fmChangeCustomer.resx">
+      <DependentUpon>fmChangeCustomer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Forms\Customer\fmCreateCustomer.resx">
+      <DependentUpon>fmCreateCustomer.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\Forms\Employee\CreateEmployee.resx">
       <DependentUpon>CreateEmployee.cs</DependentUpon>
     </EmbeddedResource>

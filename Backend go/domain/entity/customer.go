@@ -29,6 +29,8 @@ func CustomerValidation(customer *Customer) error {
 	switch {
 	case customer.CustomerFirstName == "":
 		return fmt.Errorf("O nome não pode estar em branco")
+	case customer.CustomerLastName == "":
+		return fmt.Errorf("O sobrenome não pode estar em branco")
 	case customer.CustomerDocument == "":
 		return fmt.Errorf("O CPF/CNPJ não pode estar em branco")
 	default:
@@ -45,5 +47,4 @@ func CustomerValidation(customer *Customer) error {
 			return nil
 		}
 	}
-
 }
