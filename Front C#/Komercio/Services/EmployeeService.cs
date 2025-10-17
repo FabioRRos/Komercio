@@ -13,9 +13,12 @@ namespace MeuProjetoWinForms.Services
 
         private readonly HttpClient _httpClient;
 
-        public EmployeeService(HttpClient httpClient)
+        public EmployeeService(string baseUrl)
         {
-            _httpClient = httpClient;
+            _httpClient = new HttpClient
+            {
+                BaseAddress = new Uri(baseUrl)
+            };
         }
 
         // Cria um novo funcionário

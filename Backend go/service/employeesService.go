@@ -57,6 +57,10 @@ func (s *employeeService) UpdateEmployeePassword(ctx context.Context, login, new
 		return errors.New("login ou senha inválidos")
 	}
 
+	if err := entity.ChangePassword(newPassword); err != nil {
+		return err
+	}
+
 	return s.repo.UpdateEmployeePassword(ctx, login, newPassword)
 }
 

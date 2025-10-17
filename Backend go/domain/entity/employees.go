@@ -37,3 +37,12 @@ func ValidatePassword(employee *Employees) error {
 
 	return nil
 }
+
+func ChangePassword(password string) error {
+
+	if len(password) < 8 {
+		return fmt.Errorf("O tamanho minimo de caracteres é 8")
+	}
+
+	return nil
+}

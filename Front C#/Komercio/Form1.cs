@@ -1,4 +1,5 @@
 ﻿using Komercio.UI.Forms;
+using Komercio.UI.Forms.Employee;
 using MeuProjetoWinForms.Services;
 using System;
 using System.Collections.Generic;
@@ -26,6 +27,17 @@ namespace Komercio
         {
             fmCreateEmployee newEmployee = new fmCreateEmployee(_employeeService);
             newEmployee.ShowDialog();
+        }
+
+        private void Home_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void alterarSenhaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            fmChangePasswordEmployeer changePasswordEmployeer = new fmChangePasswordEmployeer(_employeeService);
+            changePasswordEmployeer.ShowDialog();
         }
     }
 }

@@ -31,9 +31,9 @@ namespace Komercio.UI.Forms
 
         private async void btnSeePassword_Click(object sender, EventArgs e)
         {
-            tbEmployeePassword.PasswordChar = '\0';
+            mtbEmployeePassword.PasswordChar = '\0';
             await Task.Delay(2000);
-            tbEmployeePassword.PasswordChar = '•';
+            mtbEmployeePassword.PasswordChar = '•';
         }
 
         private void fmCreateEmployee_Load(object sender, EventArgs e)
@@ -44,26 +44,26 @@ namespace Komercio.UI.Forms
 
         private void InitializeItens()
         {
-            tbEmployeeName.Enabled = false;
-            tbEmployeePassword.Enabled = false;
-            btnSaveNewEmployee.Enabled = false;
-            btnSeePassword.Enabled = false;
-            btnNewEmployee.Enabled = true;
+            mtbEmployeeName.Enabled = false;
+            mtbEmployeePassword.Enabled = false;
+            mbtnSaveNewEmployee.Enabled = false;
+            mbtnSeePassword.Enabled = false;
+            mbtnNewEmployee.Enabled = true;
             //clear fields
-            tbEmployeeName.Text = "";
-            tbEmployeePassword.Text = "";
+            mtbEmployeeName.Text = "";
+            mtbEmployeePassword.Text = "";
         }
 
         private void NewEmployee_Click()
         {
-            tbEmployeeName.Enabled = true;
-            tbEmployeePassword.Enabled = true;
-            btnSaveNewEmployee.Enabled = true;
-            btnSeePassword.Enabled = true;
-            btnNewEmployee.Enabled = false;
+            mtbEmployeeName.Enabled = true;
+            mtbEmployeePassword.Enabled = true;
+            mbtnSaveNewEmployee.Enabled = true;
+            mbtnSeePassword.Enabled = true;
+            mbtnNewEmployee.Enabled = false;
 
         
-            btnNewEmployee.Focus();
+            mbtnNewEmployee.Focus();
         }
 
         private void btnNewEmployee_Click(object sender, EventArgs e)
@@ -78,15 +78,15 @@ namespace Komercio.UI.Forms
             if (!isValid)
                 return;
 
-            var nameParts = tbEmployeeName.Text.Split(' ');
+            var nameParts = mtbEmployeeName.Text.Split(' ');
             string firstName = nameParts[0].ToLower();
             string lastName = nameParts[nameParts.Length - 1].ToLower();
 
             var employee = new EmployeeDto
             {
-                EmployeeFullName = tbEmployeeName.Text,
+                EmployeeFullName = mtbEmployeeName.Text,
                 EmployeeLogin = $"{firstName}.{lastName}",
-                EmployeePassword = tbEmployeePassword.Text
+                EmployeePassword = mtbEmployeePassword.Text
             };
 
             try
@@ -117,19 +117,71 @@ namespace Komercio.UI.Forms
 
         private bool ValidateFields()
         {
-            if (string.IsNullOrEmpty(tbEmployeeName.Text))
+            if (string.IsNullOrEmpty(mtbEmployeeName.Text))
             {
                 MessageBox.Show("O campo Nome do Funcionário é obrigatório.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                tbEmployeeName.Focus();
+                mtbEmployeeName.Focus();
                 return false;
             }
-            if (string.IsNullOrEmpty(tbEmployeePassword.Text))
+            if (string.IsNullOrEmpty(mtbEmployeePassword.Text))
             {
                 MessageBox.Show("O campo Senha do Funcionário é obrigatório.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                tbEmployeePassword.Focus();
+                mtbEmployeePassword.Focus();
                 return false;
             }
             return true;
+        }
+
+        private void mbtnNewEmployee_Click(object sender, EventArgs e)
+        {
+            NewEmployee_Click();
+        }
+
+        private async void mbtnSaveNewEmployee_Click(object sender, EventArgs e)
+        {
+            bool isValid = ValidateFields();
+            if (!isValid)
+                return;
+
+            var nameParts = mtbEmployeeName.Text.Split(' ');
+            string firstName = nameParts[0].ToLower();
+            string lastName = nameParts[nameParts.Length - 1].ToLower();
+
+            var employee = new EmployeeDto
+            {
+                EmployeeFullName = mtbEmployeeName.Text,
+                EmployeeLogin = $"{firstName}.{lastName}",
+                EmployeePassword = mtbEmployeePassword.Text
+            };
+
+            try
+            {
+                bool success = await _employeeService.CreateEmployeeAsync(employee);
+
+                if (success)
+                {
+                    MessageBox.Show("Funcionário cadastrado com sucesso!",
+                                    "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    InitializeItens();
+                }
+                else
+                {
+                    MessageBox.Show("Erro ao cadastrar funcionário!",
+                                    "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ocorreu um erro: {ex.Message}",
+                                "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private async void mbtnSeePassword_Click(object sender, EventArgs e)
+        {
+            mtbEmployeePassword.PasswordChar = '\0';
+            await Task.Delay(2000);
+            mtbEmployeePassword.PasswordChar = '•';
         }
     }
 
