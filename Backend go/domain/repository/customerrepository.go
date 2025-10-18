@@ -13,6 +13,7 @@ type CustomerRepository interface {
 	SelectCustomerById(ctx context.Context, id int) (*entity.Customer, error)
 	UpdateCustomer(ctx context.Context, customer *entity.Customer) (*entity.Customer, error)
 	DeactivateCustomer(ctx context.Context, id int) error
+	SelectCustomerByName(ctx context.Context, name string) ([]*entity.Customer, error)
 }
 
 type customerRepository struct {
@@ -43,4 +44,8 @@ func (r *customerRepository) UpdateCustomer(ctx context.Context, customer *entit
 
 func (r *customerRepository) DeactivateCustomer(ctx context.Context, id int) error {
 	return r.datastore.DeactivateCustomer(id)
+}
+
+func (r *customerRepository) SelectCustomerByName(ctx context.Context, name string) ([]*entity.Customer, error) {
+	return r.datastore.SelectCustomerByName(name)
 }

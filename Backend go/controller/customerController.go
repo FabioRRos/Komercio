@@ -64,6 +64,30 @@ func (c *CustomerController) GetCustomerById(ctx *gin.Context) {
 	ctx.JSON(http.StatusOK, customer)
 }
 
+// GET / Customer / name
+
+func (c *CustomerController) GetCustomerByName(ctx *gin.Context) {
+	name := ctx.Param("name")
+
+	if name == "" {
+		ctx.JSON(http.StatusBadRequest, gin.H{"error": "Parâmetro 'name' é obrigatório"})
+		return
+	}
+
+	customer, err := c.service.SelectCustomerByName(ctx, name)
+	if err != nil {
+		ctx.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		return
+	}
+
+	if customer == nil {
+		ctx.JSON(http.StatusNotFound, gin.H{"message": "Cliente não encontrado"})
+		return
+	}
+
+	ctx.JSON(http.StatusOK, customer)
+}
+
 // PUT /customers/:id
 func (c *CustomerController) UpdateCustomer(ctx *gin.Context) {
 	var customer entity.Customer

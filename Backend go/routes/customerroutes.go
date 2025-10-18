@@ -10,8 +10,13 @@ func RegisterCustomerRoutes(server *gin.Engine, customerController *controller.C
 	{
 		customerRoutes.POST("", customerController.CreateCustomer)
 		customerRoutes.GET("", customerController.GetAllCustomers)
+
+		customerRoutes.GET("/name/:name", customerController.GetCustomerByName)
+
 		customerRoutes.GET("/:id", customerController.GetCustomerById)
+
 		customerRoutes.PUT("/:id", customerController.UpdateCustomer)
 		customerRoutes.DELETE("/:id", customerController.DeactivateCustomer)
+
 	}
 }

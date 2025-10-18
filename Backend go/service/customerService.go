@@ -14,6 +14,7 @@ type CustomerService interface {
 	SelectCustomerById(ctx context.Context, id int) (*entity.Customer, error)
 	UpdateCustomer(ctx context.Context, customer *entity.Customer) (*entity.Customer, error)
 	DeactivateCustomer(ctx context.Context, id int) error
+	SelectCustomerByName(ctx context.Context, name string) ([]*entity.Customer, error)
 }
 
 type customerService struct {
@@ -90,4 +91,21 @@ func (s *customerService) DeactivateCustomer(ctx context.Context, id int) error 
 		return errors.New("id inválido")
 	}
 	return s.repo.DeactivateCustomer(ctx, id)
+}
+
+func (s *customerService) SelectCustomerByName(ctx context.Context, name string) ([]*entity.Customer, error) {
+
+	customers, err := s.repo.SelectCustomerByName(ctx, name)
+	if err != nil {
+		return nil, err
+	}
+
+	var activeCustomers []*entity.Customer
+	for _, c := range customers {
+		if c.CustomerStatus {
+			activeCustomers = append(activeCustomers, c)
+		}
+	}
+
+	return activeCustomers, nil
 }

@@ -290,3 +290,61 @@ func (d *CustomerDatastore) DeactivateCustomer(id int) error {
 
 	return nil
 }
+
+func (d *CustomerDatastore) SelectCustomerByName(name string) ([]*entity.Customer, error) {
+	query := `
+		SELECT
+			CustomerId,
+			CustomerFirstName,
+			CustomerLastName,
+			CustomerDocument,
+			CustomerPhone,
+			CustomerMobile,
+			CustomerAddressLine,
+			CustomerZipCode,
+			CustomerNeighborhood,
+			CustomerCity,
+			CustomerState,
+			CustomerCountry,
+			CustomerEmail,
+			CustomerAccountID,
+			CustomerStatus
+		FROM Customers
+		WHERE CustomerFirstName ILIKE $1
+	`
+
+	rows, err := d.Conn.Query(context.Background(), query, "%"+name+"%")
+	if err != nil {
+		return nil, fmt.Errorf("erro ao consultar clientes: %w", err)
+	}
+	defer rows.Close()
+
+	var customers []*entity.Customer
+
+	for rows.Next() {
+		var c entity.Customer
+		err := rows.Scan(
+			&c.CustomerID,
+			&c.CustomerFirstName,
+			&c.CustomerLastName,
+			&c.CustomerDocument,
+			&c.CustomerPhone,
+			&c.CustomerMobile,
+			&c.CustomerAddressLine,
+			&c.CustomerZipCode,
+			&c.CustomerNeighborhood,
+			&c.CustomerCity,
+			&c.CustomerState,
+			&c.CustomerCountry,
+			&c.CustomerEmail,
+			&c.CustomerAccountID,
+			&c.CustomerStatus,
+		)
+		if err != nil {
+			return nil, fmt.Errorf("erro ao ler linha do cliente: %w", err)
+		}
+		customers = append(customers, &c)
+	}
+
+	return customers, nil
+}
