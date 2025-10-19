@@ -15,7 +15,7 @@ type Product struct {
 
 // Validação simples para uso antes de salvar
 func ProductValidation(product Product) error {
-	if product.ProductPrice <= 0 ||
+	if product.ProductPrice < 0 ||
 		product.ProductCodBar == "" ||
 		product.ProductStock < 0 {
 		return fmt.Errorf("parâmetros inválidos para o produto")
