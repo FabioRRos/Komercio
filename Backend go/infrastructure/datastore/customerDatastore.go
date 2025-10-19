@@ -87,28 +87,12 @@ func (d *CustomerDatastore) CreateCustomer(customer *entity.Customer) error {
 
 func (d *CustomerDatastore) SelectAllCustomers() ([]*entity.Customer, error) {
 	query := `
-		SELECT
-			CustomerId,
-			CustomerFirstName,
-			CustomerLastName,
-			CustomerDocument,
-			CustomerPhone,
-			CustomerMobile,
-			CustomerAddressLine,
-			CustomerZipCode,
-			CustomerNeighborhood,
-			CustomerCity,
-			CustomerState,
-			CustomerCountry,
-			CustomerEmail,
-			CustomerAccountID,
-			CustomerStatus
-		FROM Customers
+		SELECT * FROM Customers
 	`
 
 	rows, err := d.Conn.Query(context.Background(), query)
 	if err != nil {
-		return nil, fmt.Errorf("erro ao consultar clientes: %w", err)
+		return nil, fmt.Errorf("erro ao consultar todos os clientes: %w", err)
 	}
 	defer rows.Close()
 
@@ -292,6 +276,7 @@ func (d *CustomerDatastore) DeactivateCustomer(id int) error {
 }
 
 func (d *CustomerDatastore) SelectCustomerByName(name string) ([]*entity.Customer, error) {
+
 	query := `
 		SELECT
 			CustomerId,

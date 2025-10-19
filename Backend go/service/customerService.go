@@ -54,6 +54,7 @@ func (s *customerService) SelectAllCustomers(ctx context.Context) ([]*entity.Cus
 	}
 
 	return activeCustomers, nil
+
 }
 
 func (s *customerService) SelectCustomerById(ctx context.Context, id int) (*entity.Customer, error) {
@@ -100,12 +101,16 @@ func (s *customerService) SelectCustomerByName(ctx context.Context, name string)
 		return nil, err
 	}
 
-	var activeCustomers []*entity.Customer
-	for _, c := range customers {
-		if c.CustomerStatus {
-			activeCustomers = append(activeCustomers, c)
-		}
-	}
+	//Aqui eu filtrava por ativo ou não. Como estou utilizando isso para alterar o cadastro, então eu vou liberar até pensar no que fazer.
 
-	return activeCustomers, nil
+	//var activeCustomers []*entity.Customer
+	//for _, c := range customers {
+	//	if c.CustomerStatus {
+	//		activeCustomers = append(activeCustomers, c)
+	//	}
+	//}
+
+	//return atctiveCustomers,nil
+
+	return customers, nil
 }

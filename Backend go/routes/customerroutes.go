@@ -17,6 +17,5 @@ func RegisterCustomerRoutes(server *gin.Engine, customerController *controller.C
 
 		customerRoutes.PUT("/:id", customerController.UpdateCustomer)
 		customerRoutes.DELETE("/:id", customerController.DeactivateCustomer)
-
 	}
 }
