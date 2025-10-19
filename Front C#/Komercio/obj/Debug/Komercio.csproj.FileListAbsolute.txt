@@ -17,3 +17,4 @@ C:\Projeto Komercial\Komercio\Front C#\Komercio\bin\Debug\MaterialSkin.dll
 C:\Projeto Komercial\Komercio\Front C#\Komercio\obj\Debug\Komercio.UI.Forms.Employee.fmChangePasswordEmployeer.resources
 C:\Projeto Komercial\Komercio\Front C#\Komercio\obj\Debug\Komercio.UI.Forms.Customer.fmCreateCustomer.resources
 C:\Projeto Komercial\Komercio\Front C#\Komercio\obj\Debug\Komercio.UI.Forms.Customer.fmChangeCustomer.resources
+C:\Projeto Komercial\Komercio\Front C#\Komercio\obj\Debug\Komercio.UI.Forms.Product.fmCreateProduct.resources

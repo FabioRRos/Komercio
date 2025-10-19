@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(fmChangeCustomer));
             this.mbtSaveCustomer = new MaterialSkin.Controls.MaterialButton();
             this.mbtChangeCustomer = new MaterialSkin.Controls.MaterialButton();
             this.mtbCustomerEmail = new MaterialSkin.Controls.MaterialTextBox2();
@@ -464,9 +465,12 @@
             // 
             // dgvCustomerList
             // 
+            this.dgvCustomerList.AllowUserToAddRows = false;
+            this.dgvCustomerList.AllowUserToDeleteRows = false;
             this.dgvCustomerList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvCustomerList.Location = new System.Drawing.Point(11, 74);
             this.dgvCustomerList.Name = "dgvCustomerList";
+            this.dgvCustomerList.ReadOnly = true;
             this.dgvCustomerList.Size = new System.Drawing.Size(344, 102);
             this.dgvCustomerList.TabIndex = 28;
             this.dgvCustomerList.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCustomerList_CellContentClick);
@@ -596,8 +600,9 @@
             this.Controls.Add(this.mtbCustomerDocument);
             this.Controls.Add(this.mtbCustomerLastName);
             this.Controls.Add(this.mtbCustomerFirstName);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "fmChangeCustomer";
-            this.Text = "fmChangeCustomer";
+            this.Text = "Alterar cliente";
             this.Load += new System.EventHandler(this.fmChangeCustomer_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvCustomerList)).EndInit();
             this.ResumeLayout(false);

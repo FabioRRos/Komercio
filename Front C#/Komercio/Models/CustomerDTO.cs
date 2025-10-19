@@ -37,11 +37,20 @@ namespace Komercio.Models
 
             CustomerDto customer = new CustomerDto();
 
+            bool status = customerin.customer_status;
 
-            customer.customer_id = customerin.customer_id;
+            if (status == false)
+            {
+                customer.customer_status = false;
+            }
+            if (status == true)
+            {
+                customer.customer_status = true;
+            }
+
             customer.customer_account_id = customerin.customer_account_id;
 
-
+            customer.customer_id = customerin.customer_id;
 
 
             if (customerin.customer_first_name == "" || customerin.customer_first_name == "Nome")
@@ -158,13 +167,13 @@ namespace Komercio.Models
             }
 
 
-            if (customerin.customer_state == "" || customer.customer_state == "Estado")
+            if (customerin.customer_state == "" || customerin.customer_state == "Estado")
             {
                 customer.customer_state = "";
             }
             else
             {
-                customer.customer_state = customer.customer_state;
+                customer.customer_state = customerin.customer_state;
             }
 
 

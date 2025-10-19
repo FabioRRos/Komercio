@@ -2,6 +2,7 @@
 using Komercio.UI.Forms;
 using Komercio.UI.Forms.Customer;
 using Komercio.UI.Forms.Employee;
+using Komercio.UI.Forms.Product;
 using MeuProjetoWinForms.Services;
 using System;
 using System.Collections.Generic;
@@ -19,12 +20,17 @@ namespace Komercio
     {
         private readonly EmployeeService _employeeService;
         private readonly CustomerService _customerService;
+        private readonly ProductService _productService;
 
-        public Home(EmployeeService empliyeeService, CustomerService customerService)
+
+        public Home(EmployeeService empliyeeService, CustomerService customerService, ProductService productService )
         {
             InitializeComponent();
             _employeeService = empliyeeService;
             _customerService = customerService;
+            _productService = productService;
+
+
         }
 
         private void novoFuncionárioToolStripMenuItem_Click(object sender, EventArgs e)
@@ -54,6 +60,17 @@ namespace Komercio
         {
             fmChangeCustomer changeCustomer = new fmChangeCustomer(_customerService);
             changeCustomer.ShowDialog();
+        }
+
+        private void novoProdutoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void manualToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            fmCreateProduct createProduct = new fmCreateProduct(_productService);
+            createProduct.ShowDialog();
         }
     }
 }

@@ -19,16 +19,17 @@ namespace Komercio
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+            //Base URL da API
+            string apiBaseUrl = "http://localhost:8000/";
 
             // Cria a instância do serviço da API
-            var employeeService = new EmployeeService("http://localhost:8000/");
-            // Passa o serviço para os forms que precisarem
+            var employeeService = new EmployeeService(apiBaseUrl);       
+            var customerService = new CustomerService(apiBaseUrl);
+            var customerProduct = new ProductService(apiBaseUrl);
+
+
             // aqui estou aplicando a injeção de dependência manualmente
-            
-
-            var customerService = new CustomerService("http://localhost:8000/");
-
-            Application.Run(new Home(employeeService, customerService));
+            Application.Run(new Home(employeeService, customerService, customerProduct));
 
 
         }

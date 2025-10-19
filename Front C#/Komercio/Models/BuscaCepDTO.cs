@@ -1,0 +1,34 @@
+﻿using Estoque.Entities.Services;
+using Komercio.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Net.Http;
+using System.Runtime.InteropServices.WindowsRuntime;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Estoque.Entities
+{
+    internal class RetornaCEPEntitie
+    {
+        public string Cep { get; set; }
+        public string Logradouro { get; set; }
+        public string Complemento { get; set; }
+        public string Unidade { get; set; }
+        public string Bairro { get; set; }
+        public string Localidade { get; set; }
+        public string Uf { get; set; }
+        public string Estado { get; set; }
+        public string Regiao { get; set; }
+        public string Ibge { get; set; }
+        public string Gia { get; set; }
+        public string Ddd { get; set; }
+        public string Siafi { get; set; }
+        public string Erro { get; set; }
+
+    }
+
+}
+
+

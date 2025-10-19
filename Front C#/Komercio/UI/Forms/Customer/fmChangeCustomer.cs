@@ -1,4 +1,6 @@
-﻿using Komercio.Models;
+﻿using Estoque.Entities;
+using Estoque.Entities.Services;
+using Komercio.Models;
 using Komercio.Services;
 using System;
 using System.Collections.Generic;
@@ -146,7 +148,11 @@ namespace Komercio.UI.Forms.Customer
             mtbCustomerCountry.Text = customer.customer_country;
             mtbCustomerEmail.Text = customer.customer_email;
            
-            mcbActive.Checked = customer.customer_status;
+
+            if (customer.customer_status == true)
+            {
+                mcbActive.Checked = true;
+            }else mcbActive.Checked = false;
             
 
         }
@@ -302,7 +308,37 @@ namespace Komercio.UI.Forms.Customer
             {
                 mtbCustomerZipcode.Text = "CEP";
             }
+
+
+            CustomerZipcodeForAdress();
+
         }
+
+
+        public async void CustomerZipcodeForAdress()
+        {
+            var zipCode = mtbCustomerZipcode.Text
+                .Replace("-", "")
+                .Replace(" ", "");
+
+
+            RetornaCEPServices retornaCEP = new RetornaCEPServices();
+
+            RetornaCEPEntitie retornaCEPEntitie = new RetornaCEPEntitie();
+
+            retornaCEPEntitie = await retornaCEP.RetornaCEPAsync(zipCode);
+
+            if (retornaCEPEntitie != null)
+            {
+                mtbCustomerAdress.Text = retornaCEPEntitie.Logradouro;
+                mtbCustomerNeighborhood.Text = retornaCEPEntitie.Bairro;
+                mtbCustomerCity.Text = retornaCEPEntitie.Localidade;
+                mtbCustomerState.Text = retornaCEPEntitie.Uf;
+                mtbCustomerCountry.Text = "Brasil";
+            }
+        }
+
+
 
         private void mtbCustomerAdress_Enter(object sender, EventArgs e)
         {

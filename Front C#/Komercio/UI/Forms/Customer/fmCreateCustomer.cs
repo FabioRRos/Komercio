@@ -1,4 +1,6 @@
-﻿using Komercio.Models;
+﻿using Estoque.Entities;
+using Estoque.Entities.Services;
+using Komercio.Models;
 using Komercio.Services;
 using MeuProjetoWinForms.Services;
 using System;
@@ -324,9 +326,37 @@ namespace Komercio.UI.Forms.Customer
                 string zipcode = mtbCustomerZipcode.Text;
                 zipcode = Convert.ToUInt64(zipcode).ToString(@"00000\-000");
                 mtbCustomerZipcode.Text = zipcode.ToString();
+
+                CustomerZipcodeForAdress();
+
                 return;
             }
 
+        }
+
+
+        // Aqui preenchemos o endereço automaticamente ao inserir o CEP
+
+        public async void CustomerZipcodeForAdress()
+        {
+            var zipCode = mtbCustomerZipcode.Text
+                .Replace("-", "")
+                .Replace(" ", "");
+
+            RetornaCEPServices retornaCEP = new RetornaCEPServices();
+
+            RetornaCEPEntitie retornaCEPEntitie = new RetornaCEPEntitie();
+
+            retornaCEPEntitie = await retornaCEP.RetornaCEPAsync(zipCode);
+
+            if (retornaCEPEntitie != null)
+            {
+                mtbCustomerAdress.Text = retornaCEPEntitie.Logradouro;
+                mtbCustomerNeighborhood.Text = retornaCEPEntitie.Bairro;
+                mtbCustomerCity.Text = retornaCEPEntitie.Localidade;
+                mtbCustomerState.Text = retornaCEPEntitie.Uf;
+                mtbCustomerCountry.Text = "Brasil";
+            }
         }
 
         private void mtbCustomerAdress_Leave_1(object sender, EventArgs e)
