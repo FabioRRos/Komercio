@@ -76,8 +76,51 @@ namespace Komercio.Services
             }
 
             var resultJson = await response.Content.ReadAsStringAsync();
-            return JsonConvert.DeserializeObject<CustomerDto>(resultJson);
+
+           
+           var  customers =  JsonConvert.DeserializeObject<CustomerDto>(resultJson);
+
+            if (customers == null)
+            {
+                return new CustomerDto();
+            }
+
+            return customers;
+
+
+
         }
+
+
+        // GET /customer/name/{name}
+        // Retorna clientes com nome parcial ou completo (case-insensitive)
+        public async Task<List<CustomerDto>> GetCustomersByNameAsync(string name)
+        {
+            var response = await _httpClient.GetAsync($"customer/name/{name}");
+
+            if (!response.IsSuccessStatusCode)
+            {
+                return new List<CustomerDto>();
+            }
+
+            var resultJson = await response.Content.ReadAsStringAsync();
+            var customers = JsonConvert.DeserializeObject<List<CustomerDto>>(resultJson);
+
+
+            if (customers == null)
+            { 
+                return new List<CustomerDto>();
+            }
+            else
+            {
+                return customers;
+            }
+
+               // return customers ?? new List<CustomerDto>();
+        }
+
+
+
 
         // PUT /customer/:id
         // Atualiza um cliente existente

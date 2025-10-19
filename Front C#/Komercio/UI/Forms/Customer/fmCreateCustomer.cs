@@ -422,6 +422,11 @@ namespace Komercio.UI.Forms.Customer
 
             CustomerDto customer = CustomerDto.NormalizeCustomer(customertemp);
 
+            if (customer == null)
+            {
+                return;
+            }
+
             try
             {
                 bool success = await _customerService.CreateCustomerAsync(customer);
@@ -429,7 +434,7 @@ namespace Komercio.UI.Forms.Customer
 
                 if (success)
                 {
-                    MessageBox.Show("Funcionário cadastrado com sucesso!",
+                    MessageBox.Show("Cliente cadastrado com sucesso!",
                                     "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     InitializationTextBox();
                     clearFields();
@@ -437,7 +442,7 @@ namespace Komercio.UI.Forms.Customer
                 }
                 else
                 {
-                    MessageBox.Show("Erro ao cadastrar funcionário!",
+                    MessageBox.Show("Erro ao cadastrar o cliente!",
                                     "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }

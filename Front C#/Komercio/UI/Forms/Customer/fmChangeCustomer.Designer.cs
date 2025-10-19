@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.mbtSaveCustomer = new MaterialSkin.Controls.MaterialButton();
-            this.mbtNewCustomer = new MaterialSkin.Controls.MaterialButton();
+            this.mbtChangeCustomer = new MaterialSkin.Controls.MaterialButton();
             this.mtbCustomerEmail = new MaterialSkin.Controls.MaterialTextBox2();
             this.mtbCustomerCountry = new MaterialSkin.Controls.MaterialTextBox2();
             this.mtbCustomerState = new MaterialSkin.Controls.MaterialTextBox2();
@@ -43,8 +43,10 @@
             this.mtbCustomerLastName = new MaterialSkin.Controls.MaterialTextBox2();
             this.mtbCustomerFirstName = new MaterialSkin.Controls.MaterialTextBox2();
             this.dgvCustomerList = new System.Windows.Forms.DataGridView();
-            this.mtbSearchLastName = new MaterialSkin.Controls.MaterialTextBox2();
             this.mtbSeachName = new MaterialSkin.Controls.MaterialTextBox2();
+            this.mcbActive = new MaterialSkin.Controls.MaterialCheckbox();
+            this.materialButton1 = new MaterialSkin.Controls.MaterialButton();
+            this.mtbCustomerId = new MaterialSkin.Controls.MaterialTextBox2();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCustomerList)).BeginInit();
             this.SuspendLayout();
             // 
@@ -55,7 +57,7 @@
             this.mbtSaveCustomer.Depth = 0;
             this.mbtSaveCustomer.HighEmphasis = true;
             this.mbtSaveCustomer.Icon = null;
-            this.mbtSaveCustomer.Location = new System.Drawing.Point(564, 383);
+            this.mbtSaveCustomer.Location = new System.Drawing.Point(141, 248);
             this.mbtSaveCustomer.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.mbtSaveCustomer.MouseState = MaterialSkin.MouseState.HOVER;
             this.mbtSaveCustomer.Name = "mbtSaveCustomer";
@@ -66,26 +68,27 @@
             this.mbtSaveCustomer.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
             this.mbtSaveCustomer.UseAccentColor = false;
             this.mbtSaveCustomer.UseVisualStyleBackColor = true;
+            this.mbtSaveCustomer.Click += new System.EventHandler(this.mbtSaveCustomer_Click);
             // 
-            // mbtNewCustomer
+            // mbtChangeCustomer
             // 
-            this.mbtNewCustomer.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.mbtNewCustomer.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
-            this.mbtNewCustomer.Depth = 0;
-            this.mbtNewCustomer.HighEmphasis = true;
-            this.mbtNewCustomer.Icon = null;
-            this.mbtNewCustomer.Location = new System.Drawing.Point(492, 383);
-            this.mbtNewCustomer.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.mbtNewCustomer.MouseState = MaterialSkin.MouseState.HOVER;
-            this.mbtNewCustomer.Name = "mbtNewCustomer";
-            this.mbtNewCustomer.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.mbtNewCustomer.Size = new System.Drawing.Size(64, 36);
-            this.mbtNewCustomer.TabIndex = 26;
-            this.mbtNewCustomer.Text = "Novo";
-            this.mbtNewCustomer.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
-            this.mbtNewCustomer.UseAccentColor = false;
-            this.mbtNewCustomer.UseVisualStyleBackColor = true;
-            this.mbtNewCustomer.Click += new System.EventHandler(this.mbtNewCustomer_Click);
+            this.mbtChangeCustomer.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.mbtChangeCustomer.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.mbtChangeCustomer.Depth = 0;
+            this.mbtChangeCustomer.HighEmphasis = true;
+            this.mbtChangeCustomer.Icon = null;
+            this.mbtChangeCustomer.Location = new System.Drawing.Point(13, 248);
+            this.mbtChangeCustomer.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.mbtChangeCustomer.MouseState = MaterialSkin.MouseState.HOVER;
+            this.mbtChangeCustomer.Name = "mbtChangeCustomer";
+            this.mbtChangeCustomer.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.mbtChangeCustomer.Size = new System.Drawing.Size(84, 36);
+            this.mbtChangeCustomer.TabIndex = 26;
+            this.mbtChangeCustomer.Text = "Alterar";
+            this.mbtChangeCustomer.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+            this.mbtChangeCustomer.UseAccentColor = false;
+            this.mbtChangeCustomer.UseVisualStyleBackColor = true;
+            this.mbtChangeCustomer.Click += new System.EventHandler(this.mbtNewCustomer_Click);
             // 
             // mtbCustomerEmail
             // 
@@ -96,7 +99,7 @@
             this.mtbCustomerEmail.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.mtbCustomerEmail.HideSelection = true;
             this.mtbCustomerEmail.LeadingIcon = null;
-            this.mtbCustomerEmail.Location = new System.Drawing.Point(661, 301);
+            this.mtbCustomerEmail.Location = new System.Drawing.Point(629, 290);
             this.mtbCustomerEmail.MaxLength = 32767;
             this.mtbCustomerEmail.MouseState = MaterialSkin.MouseState.OUT;
             this.mtbCustomerEmail.Name = "mtbCustomerEmail";
@@ -127,7 +130,7 @@
             this.mtbCustomerCountry.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.mtbCustomerCountry.HideSelection = true;
             this.mtbCustomerCountry.LeadingIcon = null;
-            this.mtbCustomerCountry.Location = new System.Drawing.Point(661, 247);
+            this.mtbCustomerCountry.Location = new System.Drawing.Point(629, 236);
             this.mtbCustomerCountry.MaxLength = 32767;
             this.mtbCustomerCountry.MouseState = MaterialSkin.MouseState.OUT;
             this.mtbCustomerCountry.Name = "mtbCustomerCountry";
@@ -158,7 +161,7 @@
             this.mtbCustomerState.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.mtbCustomerState.HideSelection = true;
             this.mtbCustomerState.LeadingIcon = null;
-            this.mtbCustomerState.Location = new System.Drawing.Point(661, 193);
+            this.mtbCustomerState.Location = new System.Drawing.Point(629, 182);
             this.mtbCustomerState.MaxLength = 32767;
             this.mtbCustomerState.MouseState = MaterialSkin.MouseState.OUT;
             this.mtbCustomerState.Name = "mtbCustomerState";
@@ -189,7 +192,7 @@
             this.mtbCustomerCity.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.mtbCustomerCity.HideSelection = true;
             this.mtbCustomerCity.LeadingIcon = null;
-            this.mtbCustomerCity.Location = new System.Drawing.Point(661, 139);
+            this.mtbCustomerCity.Location = new System.Drawing.Point(629, 128);
             this.mtbCustomerCity.MaxLength = 32767;
             this.mtbCustomerCity.MouseState = MaterialSkin.MouseState.OUT;
             this.mtbCustomerCity.Name = "mtbCustomerCity";
@@ -220,7 +223,7 @@
             this.mtbCustomerNeighborhood.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.mtbCustomerNeighborhood.HideSelection = true;
             this.mtbCustomerNeighborhood.LeadingIcon = null;
-            this.mtbCustomerNeighborhood.Location = new System.Drawing.Point(661, 85);
+            this.mtbCustomerNeighborhood.Location = new System.Drawing.Point(629, 74);
             this.mtbCustomerNeighborhood.MaxLength = 32767;
             this.mtbCustomerNeighborhood.MouseState = MaterialSkin.MouseState.OUT;
             this.mtbCustomerNeighborhood.Name = "mtbCustomerNeighborhood";
@@ -251,7 +254,7 @@
             this.mtbCustomerAdress.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.mtbCustomerAdress.HideSelection = true;
             this.mtbCustomerAdress.LeadingIcon = null;
-            this.mtbCustomerAdress.Location = new System.Drawing.Point(661, 31);
+            this.mtbCustomerAdress.Location = new System.Drawing.Point(629, 20);
             this.mtbCustomerAdress.MaxLength = 32767;
             this.mtbCustomerAdress.MouseState = MaterialSkin.MouseState.OUT;
             this.mtbCustomerAdress.Name = "mtbCustomerAdress";
@@ -282,7 +285,7 @@
             this.mtbCustomerZipcode.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.mtbCustomerZipcode.HideSelection = true;
             this.mtbCustomerZipcode.LeadingIcon = null;
-            this.mtbCustomerZipcode.Location = new System.Drawing.Point(399, 301);
+            this.mtbCustomerZipcode.Location = new System.Drawing.Point(367, 290);
             this.mtbCustomerZipcode.MaxLength = 32767;
             this.mtbCustomerZipcode.MouseState = MaterialSkin.MouseState.OUT;
             this.mtbCustomerZipcode.Name = "mtbCustomerZipcode";
@@ -313,7 +316,7 @@
             this.mtbCustomerMobile.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.mtbCustomerMobile.HideSelection = true;
             this.mtbCustomerMobile.LeadingIcon = null;
-            this.mtbCustomerMobile.Location = new System.Drawing.Point(399, 247);
+            this.mtbCustomerMobile.Location = new System.Drawing.Point(367, 236);
             this.mtbCustomerMobile.MaxLength = 32767;
             this.mtbCustomerMobile.MouseState = MaterialSkin.MouseState.OUT;
             this.mtbCustomerMobile.Name = "mtbCustomerMobile";
@@ -344,7 +347,7 @@
             this.mtbCustomerPhone.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.mtbCustomerPhone.HideSelection = true;
             this.mtbCustomerPhone.LeadingIcon = null;
-            this.mtbCustomerPhone.Location = new System.Drawing.Point(399, 193);
+            this.mtbCustomerPhone.Location = new System.Drawing.Point(367, 182);
             this.mtbCustomerPhone.MaxLength = 32767;
             this.mtbCustomerPhone.MouseState = MaterialSkin.MouseState.OUT;
             this.mtbCustomerPhone.Name = "mtbCustomerPhone";
@@ -375,7 +378,7 @@
             this.mtbCustomerDocument.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.mtbCustomerDocument.HideSelection = true;
             this.mtbCustomerDocument.LeadingIcon = null;
-            this.mtbCustomerDocument.Location = new System.Drawing.Point(399, 139);
+            this.mtbCustomerDocument.Location = new System.Drawing.Point(367, 128);
             this.mtbCustomerDocument.MaxLength = 32767;
             this.mtbCustomerDocument.MouseState = MaterialSkin.MouseState.OUT;
             this.mtbCustomerDocument.Name = "mtbCustomerDocument";
@@ -406,7 +409,7 @@
             this.mtbCustomerLastName.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.mtbCustomerLastName.HideSelection = true;
             this.mtbCustomerLastName.LeadingIcon = null;
-            this.mtbCustomerLastName.Location = new System.Drawing.Point(399, 85);
+            this.mtbCustomerLastName.Location = new System.Drawing.Point(367, 74);
             this.mtbCustomerLastName.MaxLength = 32767;
             this.mtbCustomerLastName.MouseState = MaterialSkin.MouseState.OUT;
             this.mtbCustomerLastName.Name = "mtbCustomerLastName";
@@ -437,7 +440,7 @@
             this.mtbCustomerFirstName.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.mtbCustomerFirstName.HideSelection = true;
             this.mtbCustomerFirstName.LeadingIcon = null;
-            this.mtbCustomerFirstName.Location = new System.Drawing.Point(399, 31);
+            this.mtbCustomerFirstName.Location = new System.Drawing.Point(367, 20);
             this.mtbCustomerFirstName.MaxLength = 32767;
             this.mtbCustomerFirstName.MouseState = MaterialSkin.MouseState.OUT;
             this.mtbCustomerFirstName.Name = "mtbCustomerFirstName";
@@ -462,42 +465,12 @@
             // dgvCustomerList
             // 
             this.dgvCustomerList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvCustomerList.Location = new System.Drawing.Point(12, 139);
+            this.dgvCustomerList.Location = new System.Drawing.Point(11, 74);
             this.dgvCustomerList.Name = "dgvCustomerList";
             this.dgvCustomerList.Size = new System.Drawing.Size(344, 102);
             this.dgvCustomerList.TabIndex = 28;
-            // 
-            // mtbSearchLastName
-            // 
-            this.mtbSearchLastName.AnimateReadOnly = false;
-            this.mtbSearchLastName.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.mtbSearchLastName.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
-            this.mtbSearchLastName.Depth = 0;
-            this.mtbSearchLastName.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.mtbSearchLastName.HideSelection = true;
-            this.mtbSearchLastName.LeadingIcon = null;
-            this.mtbSearchLastName.Location = new System.Drawing.Point(167, 61);
-            this.mtbSearchLastName.MaxLength = 32767;
-            this.mtbSearchLastName.MouseState = MaterialSkin.MouseState.OUT;
-            this.mtbSearchLastName.Name = "mtbSearchLastName";
-            this.mtbSearchLastName.PasswordChar = '\0';
-            this.mtbSearchLastName.PrefixSuffixText = null;
-            this.mtbSearchLastName.ReadOnly = false;
-            this.mtbSearchLastName.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.mtbSearchLastName.SelectedText = "";
-            this.mtbSearchLastName.SelectionLength = 0;
-            this.mtbSearchLastName.SelectionStart = 0;
-            this.mtbSearchLastName.ShortcutsEnabled = true;
-            this.mtbSearchLastName.Size = new System.Drawing.Size(189, 48);
-            this.mtbSearchLastName.TabIndex = 30;
-            this.mtbSearchLastName.TabStop = false;
-            this.mtbSearchLastName.Text = "Sobrenome";
-            this.mtbSearchLastName.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
-            this.mtbSearchLastName.TrailingIcon = null;
-            this.mtbSearchLastName.UseSystemPasswordChar = false;
-            this.mtbSearchLastName.Click += new System.EventHandler(this.materialTextBox21_Click);
-            this.mtbSearchLastName.Enter += new System.EventHandler(this.mtbSearchLastName_Enter);
-            this.mtbSearchLastName.Leave += new System.EventHandler(this.mtbSearchLastName_Leave);
+            this.dgvCustomerList.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCustomerList_CellContentClick);
+            this.dgvCustomerList.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCustomerList_CellDoubleClick);
             // 
             // mtbSeachName
             // 
@@ -508,7 +481,7 @@
             this.mtbSeachName.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.mtbSeachName.HideSelection = true;
             this.mtbSeachName.LeadingIcon = null;
-            this.mtbSeachName.Location = new System.Drawing.Point(12, 61);
+            this.mtbSeachName.Location = new System.Drawing.Point(12, 20);
             this.mtbSeachName.MaxLength = 32767;
             this.mtbSeachName.MouseState = MaterialSkin.MouseState.OUT;
             this.mtbSeachName.Name = "mtbSeachName";
@@ -520,27 +493,97 @@
             this.mtbSeachName.SelectionLength = 0;
             this.mtbSeachName.SelectionStart = 0;
             this.mtbSeachName.ShortcutsEnabled = true;
-            this.mtbSeachName.Size = new System.Drawing.Size(139, 48);
+            this.mtbSeachName.Size = new System.Drawing.Size(344, 48);
             this.mtbSeachName.TabIndex = 29;
             this.mtbSeachName.TabStop = false;
-            this.mtbSeachName.Text = "Nome";
+            this.mtbSeachName.Text = "Buscar Cliente";
             this.mtbSeachName.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.mtbSeachName.TrailingIcon = null;
             this.mtbSeachName.UseSystemPasswordChar = false;
             this.mtbSeachName.Click += new System.EventHandler(this.materialTextBox22_Click);
             this.mtbSeachName.Enter += new System.EventHandler(this.mtbSeachName_Enter);
             this.mtbSeachName.Leave += new System.EventHandler(this.mtbSeachName_Leave);
+            this.mtbSeachName.TextChanged += new System.EventHandler(this.mtbSeachName_TextChanged);
+            // 
+            // mcbActive
+            // 
+            this.mcbActive.AutoSize = true;
+            this.mcbActive.Depth = 0;
+            this.mcbActive.Location = new System.Drawing.Point(12, 193);
+            this.mcbActive.Margin = new System.Windows.Forms.Padding(0);
+            this.mcbActive.MouseLocation = new System.Drawing.Point(-1, -1);
+            this.mcbActive.MouseState = MaterialSkin.MouseState.HOVER;
+            this.mcbActive.Name = "mcbActive";
+            this.mcbActive.ReadOnly = false;
+            this.mcbActive.Ripple = true;
+            this.mcbActive.Size = new System.Drawing.Size(122, 37);
+            this.mcbActive.TabIndex = 30;
+            this.mcbActive.Text = "Cliente ativo";
+            this.mcbActive.UseVisualStyleBackColor = true;
+            this.mcbActive.CheckedChanged += new System.EventHandler(this.mcbActive_CheckedChanged);
+            // 
+            // materialButton1
+            // 
+            this.materialButton1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.materialButton1.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.materialButton1.Depth = 0;
+            this.materialButton1.HighEmphasis = true;
+            this.materialButton1.Icon = null;
+            this.materialButton1.Location = new System.Drawing.Point(260, 248);
+            this.materialButton1.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.materialButton1.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialButton1.Name = "materialButton1";
+            this.materialButton1.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.materialButton1.Size = new System.Drawing.Size(96, 36);
+            this.materialButton1.TabIndex = 31;
+            this.materialButton1.Text = "Cancelar";
+            this.materialButton1.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+            this.materialButton1.UseAccentColor = false;
+            this.materialButton1.UseVisualStyleBackColor = true;
+            this.materialButton1.Click += new System.EventHandler(this.materialButton1_Click);
+            // 
+            // mtbCustomerId
+            // 
+            this.mtbCustomerId.AnimateReadOnly = false;
+            this.mtbCustomerId.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.mtbCustomerId.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
+            this.mtbCustomerId.Depth = 0;
+            this.mtbCustomerId.Enabled = false;
+            this.mtbCustomerId.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.mtbCustomerId.HideSelection = true;
+            this.mtbCustomerId.LeadingIcon = null;
+            this.mtbCustomerId.Location = new System.Drawing.Point(163, 182);
+            this.mtbCustomerId.MaxLength = 32767;
+            this.mtbCustomerId.MouseState = MaterialSkin.MouseState.OUT;
+            this.mtbCustomerId.Name = "mtbCustomerId";
+            this.mtbCustomerId.PasswordChar = '\0';
+            this.mtbCustomerId.PrefixSuffixText = null;
+            this.mtbCustomerId.ReadOnly = false;
+            this.mtbCustomerId.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.mtbCustomerId.SelectedText = "";
+            this.mtbCustomerId.SelectionLength = 0;
+            this.mtbCustomerId.SelectionStart = 0;
+            this.mtbCustomerId.ShortcutsEnabled = true;
+            this.mtbCustomerId.Size = new System.Drawing.Size(192, 48);
+            this.mtbCustomerId.TabIndex = 32;
+            this.mtbCustomerId.TabStop = false;
+            this.mtbCustomerId.Text = "Id Cliente";
+            this.mtbCustomerId.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.mtbCustomerId.TrailingIcon = null;
+            this.mtbCustomerId.UseSystemPasswordChar = false;
             // 
             // fmChangeCustomer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(957, 450);
-            this.Controls.Add(this.mtbSearchLastName);
+            this.ClientSize = new System.Drawing.Size(890, 346);
+            this.Controls.Add(this.mtbCustomerId);
+            this.Controls.Add(this.materialButton1);
+            this.Controls.Add(this.mcbActive);
             this.Controls.Add(this.mtbSeachName);
             this.Controls.Add(this.dgvCustomerList);
             this.Controls.Add(this.mbtSaveCustomer);
-            this.Controls.Add(this.mbtNewCustomer);
+            this.Controls.Add(this.mbtChangeCustomer);
             this.Controls.Add(this.mtbCustomerEmail);
             this.Controls.Add(this.mtbCustomerCountry);
             this.Controls.Add(this.mtbCustomerState);
@@ -565,7 +608,7 @@
         #endregion
 
         private MaterialSkin.Controls.MaterialButton mbtSaveCustomer;
-        private MaterialSkin.Controls.MaterialButton mbtNewCustomer;
+        private MaterialSkin.Controls.MaterialButton mbtChangeCustomer;
         private MaterialSkin.Controls.MaterialTextBox2 mtbCustomerEmail;
         private MaterialSkin.Controls.MaterialTextBox2 mtbCustomerCountry;
         private MaterialSkin.Controls.MaterialTextBox2 mtbCustomerState;
@@ -579,7 +622,9 @@
         private MaterialSkin.Controls.MaterialTextBox2 mtbCustomerLastName;
         private MaterialSkin.Controls.MaterialTextBox2 mtbCustomerFirstName;
         private System.Windows.Forms.DataGridView dgvCustomerList;
-        private MaterialSkin.Controls.MaterialTextBox2 mtbSearchLastName;
         private MaterialSkin.Controls.MaterialTextBox2 mtbSeachName;
+        private MaterialSkin.Controls.MaterialCheckbox mcbActive;
+        private MaterialSkin.Controls.MaterialButton materialButton1;
+        private MaterialSkin.Controls.MaterialTextBox2 mtbCustomerId;
     }
 }

@@ -12,6 +12,7 @@ using System.Windows.Forms;
 
 namespace Komercio.UI.Forms.Customer
 {
+
     public partial class fmChangeCustomer : Form
     {
         private readonly CustomerService _customerService;
@@ -20,7 +21,7 @@ namespace Komercio.UI.Forms.Customer
         {
             _customerService = service;
             InitializeComponent();
-           // InitializationTextBox();
+           InitializationTextBox();
             LoadDataGridView();
             
         }
@@ -40,28 +41,49 @@ namespace Komercio.UI.Forms.Customer
             mtbCustomerState.Enabled = false;
             mtbCustomerEmail.Enabled = false;
             mbtSaveCustomer.Enabled = false;
-            mbtNewCustomer.Enabled = true;
+            mbtChangeCustomer.Enabled = true;
+            mcbActive.Enabled = false;
 
         }
 
         private void mbtNewCustomer_Click(object sender, EventArgs e)
         {
+            if (mtbCustomerDocument.Text == "CPF")
+            {
+                MessageBox.Show("Selecione o cliente antes de realizar a alteração!!", "ATENÇÃO", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+                return;
+            }
+            mtbCustomerFirstName.Enabled = false;
+            mtbCustomerLastName.Enabled = false;
+            mtbCustomerDocument.Enabled = false;
+            mtbCustomerPhone.Enabled = true;
+            mtbCustomerMobile.Enabled = true;
+            mtbCustomerZipcode.Enabled = true;
+            mtbCustomerAdress.Enabled = true;
+            mtbCustomerNeighborhood.Enabled = true;
+            mtbCustomerCity.Enabled = true;
+            mtbCustomerCountry.Enabled = true;
+            mtbCustomerState.Enabled = true;
+            mtbCustomerEmail.Enabled = true;
+            mbtSaveCustomer.Enabled = true;
+            mbtChangeCustomer.Enabled = false;
+            mcbActive.Enabled = true;
 
         }
 
         private void fmChangeCustomer_Load(object sender, EventArgs e)
         {
-
+            this.FormBorderStyle = FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
+            this.MinimizeBox = true;
         }
 
-        private async void LoadDataGridView()
+        public async void AttDataGridView(List<CustomerDto> customersList)
         {
             try
             {
-                // 1️⃣ Busca os clientes do serviço
-                var customersList = await _customerService.GetAllCustomersAsync();
-
-                await Task.Delay(50);
+                
 
                 dgvCustomerList.DataSource = customersList;
                 dgvCustomerList.Columns["customer_id"].HeaderText = "ID";
@@ -90,6 +112,46 @@ namespace Komercio.UI.Forms.Customer
                                 "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+        private async void LoadDataGridView()
+        {
+            var customersList = await _customerService.GetAllCustomersAsync();
+
+            
+            await Task.Delay(50);
+            AttDataGridView(customersList);
+        }
+        public static CustomerDto customer = new CustomerDto();
+
+        private async void LoadCustomer(string customerId)
+        {
+            customer = await _customerService.GetCustomerByIdAsync(int.Parse(customerId));
+
+            if (customer == null)
+            {
+                MessageBox.Show("Tive dificuldades de localizar, tente novamente");
+                return;
+            }
+            mtbCustomerId.Text = customerId;
+            mtbCustomerFirstName.Text = customer.customer_first_name;
+            mtbCustomerLastName.Text = customer.customer_last_name;
+            mtbCustomerDocument.Text = customer.customer_document;
+            mtbCustomerPhone.Text = customer.customer_phone;
+            mtbCustomerMobile.Text = customer.customer_mobile;
+            mtbCustomerZipcode.Text = customer.customer_zip_code;
+            mtbCustomerAdress.Text = customer.customer_address_line;
+            mtbCustomerNeighborhood.Text = customer.customer_neighborhood;
+            mtbCustomerCity.Text = customer.customer_city;
+            mtbCustomerState.Text = customer.customer_state;
+            mtbCustomerCountry.Text = customer.customer_country;
+            mtbCustomerEmail.Text = customer.customer_email;
+           
+            mcbActive.Checked = customer.customer_status;
+            
+
+        }
+
+
 
         private void materialTextBox22_Click(object sender, EventArgs e)
         {
@@ -339,7 +401,7 @@ namespace Komercio.UI.Forms.Customer
 
         private void mtbSeachName_Enter(object sender, EventArgs e)
         {
-            if (mtbSeachName.Text == "Nome")
+            if (mtbSeachName.Text == "Buscar Cliente")
             {
                 mtbSeachName.Text = "";
             }
@@ -349,24 +411,123 @@ namespace Komercio.UI.Forms.Customer
         {
             if (mtbSeachName.Text == "")
             {
-                mtbSeachName.Text = "Nome";
+                mtbSeachName.Text = "Buscar Cliente";               
             }
         }
 
         private void mtbSearchLastName_Enter(object sender, EventArgs e)
         {
-            if (mtbSearchLastName.Text == "Sobrenome")
-            {
-                mtbSearchLastName.Text = "";
-            }
+
         }
 
         private void mtbSearchLastName_Leave(object sender, EventArgs e)
         {
-            if (mtbSearchLastName.Text == "")
+
+        }
+
+        private async void mtbSeachName_TextChanged(object sender, EventArgs e)
+        {
+            var texto = mtbSeachName.Text; 
+            
+           if (texto =="" || texto == "Buscar Cliente")
             {
-                mtbSearchLastName.Text = "Sobrenome";
+                LoadDataGridView();
+                return;
             }
+
+            var customersList = await _customerService.GetCustomersByNameAsync(texto);
+            await Task.Delay(50);
+            AttDataGridView(customersList);
+        }
+
+        private void dgvCustomerList_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void mcbActive_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void materialButton1_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void dgvCustomerList_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            var idCustomer = dgvCustomerList.Rows[e.RowIndex].Cells["customer_id"].Value.ToString();
+
+            LoadCustomer(idCustomer);
+        }
+
+        private async void mbtSaveCustomer_Click(object sender, EventArgs e)
+        {
+
+            bool status;
+
+            if(mcbActive.Checked == true)
+            {
+                status = true;
+            }
+            else
+            {
+                status = false;
+            }            
+
+                CustomerDto customertemp = new CustomerDto
+                {
+                    customer_id = int.Parse(mtbCustomerId.Text),
+                    customer_first_name = mtbCustomerFirstName.Text,
+                    customer_last_name = mtbCustomerLastName.Text,
+                    customer_document = mtbCustomerDocument.Text,
+                    customer_phone = mtbCustomerPhone.Text,
+                    customer_mobile = mtbCustomerMobile.Text,
+                    customer_zip_code = mtbCustomerZipcode.Text,
+                    customer_address_line = mtbCustomerAdress.Text,
+                    customer_neighborhood = mtbCustomerNeighborhood.Text,
+                    customer_city = mtbCustomerCity.Text,
+                    customer_state = mtbCustomerState.Text,
+                    customer_country = mtbCustomerCountry.Text,
+                    customer_email = mtbCustomerEmail.Text,
+                    customer_status = status,
+                    customer_account_id = customer.customer_account_id
+                };
+
+            CustomerDto  customerNormalized = CustomerDto.NormalizeCustomer(customertemp);
+
+            if (customerNormalized == null)
+            {
+                return;
+            }
+
+            try
+            {
+                bool success = await _customerService.UpdateCustomerAsync(customerNormalized);
+
+
+                if (success)
+                {
+                    MessageBox.Show("Cliente atualizado com sucesso!",
+                                    "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    InitializationTextBox();                   
+                    return;
+                }
+                else
+                {
+                    MessageBox.Show("Erro ao atualizar o cliente!",
+                                    "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ocorreu um erro: {ex.Message}",
+                                "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            return;
         }
     }
 

@@ -38,12 +38,16 @@ namespace Komercio.Models
             CustomerDto customer = new CustomerDto();
 
 
+            customer.customer_id = customerin.customer_id;
+            customer.customer_account_id = customerin.customer_account_id;
 
 
-            if (customerin.customer_first_name == "")
+
+
+            if (customerin.customer_first_name == "" || customerin.customer_first_name == "Nome")
             {
                 MessageBox.Show("O campo 'Nome' é obrigatório.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
+                return null;
             }
             else
             {
@@ -52,7 +56,7 @@ namespace Komercio.Models
 
 
 
-            if (customerin.customer_last_name == "")
+            if (customerin.customer_last_name == "" || customerin.customer_last_name == "Sobrenome")
             {
                 MessageBox.Show("O campo 'Sobrenome' é obrigatório.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return null;
@@ -65,7 +69,7 @@ namespace Komercio.Models
 
 
 
-            if (customerin.customer_document == "")
+            if (customerin.customer_document == "" || customerin.customer_document =="CPF")
             {
                 MessageBox.Show("O campo 'Documento' é obrigatório.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return null;
