@@ -14,6 +14,7 @@ type ProductService interface {
 	SelectProductById(ctx context.Context, id int) (*entity.Product, error)
 	UpdateProduct(ctx context.Context, product *entity.Product) (*entity.Product, error)
 	DeactivateProduct(ctx context.Context, id int) error
+	UpdateProductInputStock(ctx context.Context, productId int, productStock int) (*entity.Product, error)
 }
 
 type productService struct {
@@ -81,6 +82,15 @@ func (s *productService) UpdateProduct(ctx context.Context, product *entity.Prod
 	}
 
 	return updated, nil
+}
+
+func (s *productService) UpdateProductInputStock(ctx context.Context, productId int, productStock int) (*entity.Product, error) {
+	update, err := s.repo.UpdateProductInputStock(ctx, productId, productStock)
+	if err != nil {
+		return nil, err
+	}
+
+	return update, nil
 }
 
 func (s *productService) DeactivateProduct(ctx context.Context, id int) error {

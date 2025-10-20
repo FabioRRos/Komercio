@@ -89,6 +89,35 @@ func (c *ProductController) UpdateProduct(ctx *gin.Context) {
 	ctx.JSON(http.StatusOK, updated)
 }
 
+type StockUpdateRequest struct {
+	ProductStock int `json:"product_stock"`
+}
+
+// put /updateStock/:id
+func (c *ProductController) UpdateProductInputStock(ctx *gin.Context) {
+	var productStock StockUpdateRequest
+	if err := ctx.ShouldBindJSON(&productStock); err != nil {
+		ctx.JSON(http.StatusBadRequest, gin.H{"error": "Parâmetros inválidos"})
+		return
+	}
+
+	idParam := ctx.Param("id")
+	id, err := strconv.Atoi(idParam)
+
+	if err != nil {
+		ctx.JSON(http.StatusBadRequest, gin.H{"error": "ID inválido"})
+		return
+	}
+
+	updated, err := c.service.UpdateProductInputStock(ctx, id, productStock.ProductStock)
+	if err != nil {
+		ctx.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+	}
+
+	ctx.JSON(http.StatusOK, updated)
+
+}
+
 // #### Na vdd ele não deleta o protudo, apenas deixa desabilitado no banco ####
 // DELETE /products/:id
 func (c *ProductController) DeactivateProduct(ctx *gin.Context) {

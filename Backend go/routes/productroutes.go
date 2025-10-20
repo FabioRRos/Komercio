@@ -10,5 +10,6 @@ func RegisterProductRoutes(server *gin.Engine, productController *controller.Pro
 	server.GET("/products/:id", productController.GetProductById)
 	server.POST("/products", productController.CreateProduct)
 	server.PUT("/products/:id", productController.UpdateProduct)
+	server.PUT("/products/updateStock/:id", productController.UpdateProductInputStock)
 	server.DELETE("/products/:id", productController.DeactivateProduct)
 }

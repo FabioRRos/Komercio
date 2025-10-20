@@ -185,3 +185,38 @@ func (d *ProductDatastore) DeactivateProduct(id int) error {
 	return nil
 
 }
+
+func (d *ProductDatastore) UpdateProductInputStock(ProductId int, ProductStock int) (*entity.Product, error) {
+	query := `
+	UPDATE products SET
+		productstock = productstock + $2
+	WHERE id = $1
+	RETURNING id, productname, productprice, productcodbar, 
+	          productgroup, productsubgroup, status, productstock
+`
+
+	var p entity.Product
+
+	err := d.Conn.QueryRow(context.Background(), query,
+		ProductId,
+		ProductStock,
+	).Scan(
+		&p.Id,
+		&p.ProductName,
+		&p.ProductPrice,
+		&p.ProductCodBar,
+		&p.ProductGroup,
+		&p.ProductSubGroup,
+		&p.ProductStatus,
+		&p.ProductStock,
+	)
+
+	if err != nil {
+		if err == pgx.ErrNoRows {
+			return nil, fmt.Errorf("produto com id %d não encontrado", ProductId)
+		}
+		return nil, fmt.Errorf("erro ao atualizar o estoque do produto: %w", err)
+	}
+
+	return &p, nil
+}
