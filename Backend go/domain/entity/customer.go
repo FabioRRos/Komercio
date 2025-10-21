@@ -33,6 +33,8 @@ func CustomerValidation(customer *Customer) error {
 		return fmt.Errorf("O sobrenome não pode estar em branco")
 	case customer.CustomerDocument == "":
 		return fmt.Errorf("O CPF/CNPJ não pode estar em branco")
+	case !ValidateDocumentNumber(customer.CustomerDocument):
+		return fmt.Errorf("CPF ou CNPJ invalido")
 	default:
 		{
 			var sb strings.Builder

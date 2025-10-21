@@ -459,7 +459,7 @@ namespace Komercio.UI.Forms.Customer
 
             try
             {
-                bool success = await _customerService.CreateCustomerAsync(customer);
+                (bool success, string Message) = await _customerService.CreateCustomerAsync(customer);
 
 
                 if (success)
@@ -472,7 +472,7 @@ namespace Komercio.UI.Forms.Customer
                 }
                 else
                 {
-                    MessageBox.Show("Erro ao cadastrar o cliente!",
+                    MessageBox.Show(Message,
                                     "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }

@@ -34,7 +34,7 @@ func (c *CustomerController) CreateCustomer(ctx *gin.Context) {
 		return
 	}
 
-	ctx.JSON(http.StatusCreated, gin.H{"Message": "Produto criado com sucesso"})
+	ctx.JSON(http.StatusCreated, gin.H{"Message": "Cliente cadastrado com sucesso"})
 }
 
 // GET /customers

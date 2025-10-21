@@ -26,14 +26,15 @@ namespace Komercio.Services
 
         // POST /customer
         // Cria um novo cliente
-        public async Task<bool> CreateCustomerAsync(CustomerDto customer)
+        public async Task<(bool Success, string Message)> CreateCustomerAsync(CustomerDto customer)
         {
             var json = JsonConvert.SerializeObject(customer);
             var content = new StringContent(json, Encoding.UTF8, "application/json");
 
-            // Rota: /customer
             var response = await _httpClient.PostAsync("customer", content);
-            return response.IsSuccessStatusCode;
+
+            var message = await response.Content.ReadAsStringAsync();
+            return (response.IsSuccessStatusCode, message);
         }
 
 
