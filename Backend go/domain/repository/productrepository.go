@@ -13,7 +13,7 @@ type ProductRepository interface {
 	SelectProductById(ctx context.Context, id int) (*entity.Product, error)
 	UpdateProduct(ctx context.Context, product *entity.Product) (*entity.Product, error)
 	DeactivateProduct(ctx context.Context, id int) error
-	UpdateProductInputStock(ctx context.Context, productId int, productStock int) (*entity.Product, error)
+	UpdateProductInputStock(ctx context.Context, productcodbar string, productStock int) (*entity.Product, error)
 }
 
 type productRepository struct {
@@ -42,8 +42,8 @@ func (r *productRepository) UpdateProduct(ctx context.Context, product *entity.P
 	return r.datastore.UpdateProduct(product)
 }
 
-func (r *productRepository) UpdateProductInputStock(ctx context.Context, productId int, productStock int) (*entity.Product, error) {
-	return r.datastore.UpdateProductInputStock(productId, productStock)
+func (r *productRepository) UpdateProductInputStock(ctx context.Context, productcodbar string, productStock int) (*entity.Product, error) {
+	return r.datastore.UpdateProductInputStock(productcodbar, productStock)
 }
 
 func (r *productRepository) DeactivateProduct(ctx context.Context, id int) error {

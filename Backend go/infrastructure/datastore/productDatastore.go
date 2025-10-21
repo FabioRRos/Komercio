@@ -186,11 +186,11 @@ func (d *ProductDatastore) DeactivateProduct(id int) error {
 
 }
 
-func (d *ProductDatastore) UpdateProductInputStock(ProductId int, ProductStock int) (*entity.Product, error) {
+func (d *ProductDatastore) UpdateProductInputStock(productcodbar string, ProductStock int) (*entity.Product, error) {
 	query := `
 	UPDATE products SET
 		productstock = productstock + $2
-	WHERE id = $1
+	WHERE productcodbar = $1
 	RETURNING id, productname, productprice, productcodbar, 
 	          productgroup, productsubgroup, status, productstock
 `
@@ -198,7 +198,7 @@ func (d *ProductDatastore) UpdateProductInputStock(ProductId int, ProductStock i
 	var p entity.Product
 
 	err := d.Conn.QueryRow(context.Background(), query,
-		ProductId,
+		productcodbar,
 		ProductStock,
 	).Scan(
 		&p.Id,
@@ -213,7 +213,7 @@ func (d *ProductDatastore) UpdateProductInputStock(ProductId int, ProductStock i
 
 	if err != nil {
 		if err == pgx.ErrNoRows {
-			return nil, fmt.Errorf("produto com id %d não encontrado", ProductId)
+			return nil, fmt.Errorf("produto com id %d não encontrado", productcodbar)
 		}
 		return nil, fmt.Errorf("erro ao atualizar o estoque do produto: %w", err)
 	}

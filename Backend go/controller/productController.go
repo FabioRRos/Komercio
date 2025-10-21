@@ -93,7 +93,7 @@ type StockUpdateRequest struct {
 	ProductStock int `json:"product_stock"`
 }
 
-// put /updateStock/:id
+// put /updateStock/:productcodbar
 func (c *ProductController) UpdateProductInputStock(ctx *gin.Context) {
 	var productStock StockUpdateRequest
 	if err := ctx.ShouldBindJSON(&productStock); err != nil {
@@ -101,15 +101,10 @@ func (c *ProductController) UpdateProductInputStock(ctx *gin.Context) {
 		return
 	}
 
-	idParam := ctx.Param("id")
-	id, err := strconv.Atoi(idParam)
+	idParam := ctx.Param("productcodbar")
+	productcodbar := idParam
 
-	if err != nil {
-		ctx.JSON(http.StatusBadRequest, gin.H{"error": "ID inválido"})
-		return
-	}
-
-	updated, err := c.service.UpdateProductInputStock(ctx, id, productStock.ProductStock)
+	updated, err := c.service.UpdateProductInputStock(ctx, productcodbar, productStock.ProductStock)
 	if err != nil {
 		ctx.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 	}
