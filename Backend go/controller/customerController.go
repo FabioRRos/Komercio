@@ -88,6 +88,28 @@ func (c *CustomerController) GetCustomerByName(ctx *gin.Context) {
 	ctx.JSON(http.StatusOK, customer)
 }
 
+// GET / ValidationDocumentNumber / doc
+
+func (c *CustomerController) GetValidateDocumentNumber(ctx *gin.Context) {
+	doc := ctx.Param("doc")
+
+	if len(doc) != 11 && len(doc) != 14 {
+		ctx.JSON(http.StatusBadRequest, gin.H{"error": "Parâmetros inválidos"})
+		return
+
+	}
+
+	statusReturn := c.service.ValidateDocument(doc)
+
+	if statusReturn != nil {
+		ctx.JSON(http.StatusOK, false)
+	} else {
+		ctx.JSON(http.StatusOK, true)
+
+	}
+
+}
+
 // PUT /customers/:id
 func (c *CustomerController) UpdateCustomer(ctx *gin.Context) {
 	var customer entity.Customer

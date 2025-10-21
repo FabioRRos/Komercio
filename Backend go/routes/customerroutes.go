@@ -12,6 +12,7 @@ func RegisterCustomerRoutes(server *gin.Engine, customerController *controller.C
 		customerRoutes.GET("", customerController.GetAllCustomers)
 
 		customerRoutes.GET("/name/:name", customerController.GetCustomerByName)
+		customerRoutes.GET("/ValidationDocumentNumber/:doc", customerController.GetValidateDocumentNumber)
 
 		customerRoutes.GET("/:id", customerController.GetCustomerById)
 

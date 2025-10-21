@@ -34,6 +34,10 @@ func (s *productService) CreateProduct(ctx context.Context, product *entity.Prod
 		return errors.New("parâmetros inválidos")
 	}
 
+	if product.ProductCodBar == "" {
+		product.ProductCodBar = entity.CreateCodbar()
+	}
+
 	return s.repo.Create(ctx, product)
 }
 

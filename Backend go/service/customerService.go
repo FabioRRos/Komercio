@@ -15,6 +15,7 @@ type CustomerService interface {
 	UpdateCustomer(ctx context.Context, customer *entity.Customer) (*entity.Customer, error)
 	DeactivateCustomer(ctx context.Context, id int) error
 	SelectCustomerByName(ctx context.Context, name string) ([]*entity.Customer, error)
+	ValidateDocument(doc string) error
 }
 
 type customerService struct {
@@ -113,4 +114,16 @@ func (s *customerService) SelectCustomerByName(ctx context.Context, name string)
 	//return atctiveCustomers,nil
 
 	return customers, nil
+}
+
+func (dc *customerService) ValidateDocument(doc string) error {
+
+	validationStatus := entity.ValidateDocumentNumber(doc)
+
+	if validationStatus {
+		return nil
+	} else {
+		return errors.New("CPF ou CNPJ Invalido")
+	}
+
 }

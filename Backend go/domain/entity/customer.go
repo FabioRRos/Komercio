@@ -48,3 +48,67 @@ func CustomerValidation(customer *Customer) error {
 		}
 	}
 }
+
+func ValidateDocumentNumber(doc string) bool {
+
+	numDigitos := len(doc)
+
+	if numDigitos == 11 {
+
+		soma := 0
+		for i := 0; i < 9; i++ {
+			soma += int(doc[i]-'0') * (10 - i)
+		}
+
+		resto := soma % 11
+		digito1 := 0
+		if resto >= 2 {
+			digito1 = 11 - resto
+		}
+
+		soma = 0
+		for i := 0; i < 10; i++ {
+			soma += int(doc[i]-'0') * (11 - i)
+		}
+
+		resto = soma % 11
+		digito2 := 0
+		if resto >= 2 {
+			digito2 = 11 - resto
+		}
+
+		return int(doc[9]-'0') == digito1 && int(doc[10]-'0') == digito2
+
+	} else if numDigitos == 14 {
+		// peso para os dois digitos
+		peso1 := []int{5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2}
+		peso2 := []int{6, 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2}
+
+		// primeiro digito
+		soma := 0
+		for i := 0; i < 12; i++ {
+			soma += int(doc[i]-'0') * peso1[i]
+		}
+		resto := soma % 11
+		digito1 := 0
+		if resto >= 2 {
+			digito1 = 11 - resto
+		}
+
+		// Segundo digito
+		soma = 0
+		for i := 0; i < 13; i++ {
+			soma += int(doc[i]-'0') * peso2[i]
+		}
+		resto = soma % 11
+		digito2 := 0
+		if resto >= 2 {
+			digito2 = 11 - resto
+		}
+
+		return int(doc[12]-'0') == digito1 && int(doc[13]-'0') == digito2
+
+	} else {
+		return false
+	}
+}
