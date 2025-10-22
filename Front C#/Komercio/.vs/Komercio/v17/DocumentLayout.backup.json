@@ -3,20 +3,32 @@
   "WorkspaceRootPath": "C:\\Projeto Komercial\\Komercio\\Front C#\\Komercio\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{44D56DD6-A48F-48C7-9DB4-CD3BA6950EF2}|Komercio.csproj|c:\\projeto komercial\\komercio\\front c#\\komercio\\ui\\forms\\customer\\fmcreatecustomer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{44D56DD6-A48F-48C7-9DB4-CD3BA6950EF2}|Komercio.csproj|solutionrelative:ui\\forms\\customer\\fmcreatecustomer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{44D56DD6-A48F-48C7-9DB4-CD3BA6950EF2}|Komercio.csproj|c:\\projeto komercial\\komercio\\front c#\\komercio\\ui\\forms\\product\\fmimputproduct.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{44D56DD6-A48F-48C7-9DB4-CD3BA6950EF2}|Komercio.csproj|solutionrelative:ui\\forms\\product\\fmimputproduct.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{44D56DD6-A48F-48C7-9DB4-CD3BA6950EF2}|Komercio.csproj|c:\\projeto komercial\\komercio\\front c#\\komercio\\ui\\forms\\product\\fmcreateproduct.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{44D56DD6-A48F-48C7-9DB4-CD3BA6950EF2}|Komercio.csproj|solutionrelative:ui\\forms\\product\\fmcreateproduct.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{44D56DD6-A48F-48C7-9DB4-CD3BA6950EF2}|Komercio.csproj|c:\\projeto komercial\\komercio\\front c#\\komercio\\ui\\forms\\product\\fmimputproduct.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{44D56DD6-A48F-48C7-9DB4-CD3BA6950EF2}|Komercio.csproj|solutionrelative:ui\\forms\\product\\fmimputproduct.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{44D56DD6-A48F-48C7-9DB4-CD3BA6950EF2}|Komercio.csproj|c:\\projeto komercial\\komercio\\front c#\\komercio\\ui\\forms\\product\\fmcreateproduct.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{44D56DD6-A48F-48C7-9DB4-CD3BA6950EF2}|Komercio.csproj|solutionrelative:ui\\forms\\product\\fmcreateproduct.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+      "AbsoluteMoniker": "D:0:0:{44D56DD6-A48F-48C7-9DB4-CD3BA6950EF2}|Komercio.csproj|c:\\projeto komercial\\komercio\\front c#\\komercio\\ui\\forms\\customer\\fmchangecustomer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{44D56DD6-A48F-48C7-9DB4-CD3BA6950EF2}|Komercio.csproj|solutionrelative:ui\\forms\\customer\\fmchangecustomer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{44D56DD6-A48F-48C7-9DB4-CD3BA6950EF2}|Komercio.csproj|c:\\projeto komercial\\komercio\\front c#\\komercio\\services\\customerservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{44D56DD6-A48F-48C7-9DB4-CD3BA6950EF2}|Komercio.csproj|solutionrelative:services\\customerservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{44D56DD6-A48F-48C7-9DB4-CD3BA6950EF2}|Komercio.csproj|c:\\projeto komercial\\komercio\\front c#\\komercio\\ui\\forms\\customer\\fmchangecustomer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{44D56DD6-A48F-48C7-9DB4-CD3BA6950EF2}|Komercio.csproj|solutionrelative:ui\\forms\\customer\\fmchangecustomer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{44D56DD6-A48F-48C7-9DB4-CD3BA6950EF2}|Komercio.csproj|C:\\Projeto Komercial\\Komercio\\Front C#\\Komercio\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{44D56DD6-A48F-48C7-9DB4-CD3BA6950EF2}|Komercio.csproj|solutionrelative:form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{44D56DD6-A48F-48C7-9DB4-CD3BA6950EF2}|Komercio.csproj|C:\\Projeto Komercial\\Komercio\\Front C#\\Komercio\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{44D56DD6-A48F-48C7-9DB4-CD3BA6950EF2}|Komercio.csproj|solutionrelative:form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{44D56DD6-A48F-48C7-9DB4-CD3BA6950EF2}|Komercio.csproj|c:\\projeto komercial\\komercio\\front c#\\komercio\\ui\\forms\\product\\fmimputproduct.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{44D56DD6-A48F-48C7-9DB4-CD3BA6950EF2}|Komercio.csproj|solutionrelative:ui\\forms\\product\\fmimputproduct.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -26,7 +38,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 141,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 8,
           "Children": [
             {
               "$type": "Bookmark",
@@ -38,54 +50,91 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "fmCreateCustomer.cs",
-              "DocumentMoniker": "C:\\Projeto Komercial\\Komercio\\Front C#\\Komercio\\UI\\Forms\\Customer\\fmCreateCustomer.cs",
-              "RelativeDocumentMoniker": "UI\\Forms\\Customer\\fmCreateCustomer.cs",
-              "ToolTip": "C:\\Projeto Komercial\\Komercio\\Front C#\\Komercio\\UI\\Forms\\Customer\\fmCreateCustomer.cs",
-              "RelativeToolTip": "UI\\Forms\\Customer\\fmCreateCustomer.cs",
-              "ViewState": "AgIAAMcBAAAAAAAAAAAAANoBAAArAAAAAAAAAA==",
+              "DocumentIndex": 2,
+              "Title": "fmChangeCustomer.cs",
+              "DocumentMoniker": "C:\\Projeto Komercial\\Komercio\\Front C#\\Komercio\\UI\\Forms\\Customer\\fmChangeCustomer.cs",
+              "RelativeDocumentMoniker": "UI\\Forms\\Customer\\fmChangeCustomer.cs",
+              "ToolTip": "C:\\Projeto Komercial\\Komercio\\Front C#\\Komercio\\UI\\Forms\\Customer\\fmChangeCustomer.cs",
+              "RelativeToolTip": "UI\\Forms\\Customer\\fmChangeCustomer.cs",
+              "ViewState": "AgIAADwAAAAAAAAAAIAwwE4AAAAKAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-21T20:32:56.438Z",
+              "WhenOpened": "2025-10-22T00:48:08.898Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "fmChangeCustomer.cs [Design]",
+              "DocumentMoniker": "C:\\Projeto Komercial\\Komercio\\Front C#\\Komercio\\UI\\Forms\\Customer\\fmChangeCustomer.cs",
+              "RelativeDocumentMoniker": "UI\\Forms\\Customer\\fmChangeCustomer.cs",
+              "ToolTip": "C:\\Projeto Komercial\\Komercio\\Front C#\\Komercio\\UI\\Forms\\Customer\\fmChangeCustomer.cs [Design]",
+              "RelativeToolTip": "UI\\Forms\\Customer\\fmChangeCustomer.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-22T00:48:07.802Z",
+              "EditorCaption": " [Design]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "fmImputProduct.Designer.cs",
+              "DocumentMoniker": "C:\\Projeto Komercial\\Komercio\\Front C#\\Komercio\\UI\\Forms\\Product\\fmImputProduct.Designer.cs",
+              "RelativeDocumentMoniker": "UI\\Forms\\Product\\fmImputProduct.Designer.cs",
+              "ToolTip": "C:\\Projeto Komercial\\Komercio\\Front C#\\Komercio\\UI\\Forms\\Product\\fmImputProduct.Designer.cs",
+              "RelativeToolTip": "UI\\Forms\\Product\\fmImputProduct.Designer.cs",
+              "ViewState": "AgIAADoAAAAAAAAAAAAowEgAAABCAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-22T00:35:30.194Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Form1.cs",
+              "DocumentMoniker": "C:\\Projeto Komercial\\Komercio\\Front C#\\Komercio\\Form1.cs",
+              "RelativeDocumentMoniker": "Form1.cs",
+              "ToolTip": "C:\\Projeto Komercial\\Komercio\\Front C#\\Komercio\\Form1.cs",
+              "RelativeToolTip": "Form1.cs",
+              "ViewState": "AgIAAEEAAAAAAAAAAAAAAFIAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-21T23:33:06.302Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Form1.cs [Design]",
+              "DocumentMoniker": "C:\\Projeto Komercial\\Komercio\\Front C#\\Komercio\\Form1.cs",
+              "RelativeDocumentMoniker": "Form1.cs",
+              "ToolTip": "C:\\Projeto Komercial\\Komercio\\Front C#\\Komercio\\Form1.cs [Design]",
+              "RelativeToolTip": "Form1.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-21T23:32:54.218Z",
+              "EditorCaption": " [Design]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "fmImputProduct.cs",
+              "DocumentMoniker": "C:\\Projeto Komercial\\Komercio\\Front C#\\Komercio\\UI\\Forms\\Product\\fmImputProduct.cs",
+              "RelativeDocumentMoniker": "UI\\Forms\\Product\\fmImputProduct.cs",
+              "ToolTip": "C:\\Projeto Komercial\\Komercio\\Front C#\\Komercio\\UI\\Forms\\Product\\fmImputProduct.cs",
+              "RelativeToolTip": "UI\\Forms\\Product\\fmImputProduct.cs",
+              "ViewState": "AgIAAFEAAAAAAAAAAIAwwGQAAAAWAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-21T23:27:34.593Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "fmCreateProduct.cs",
-              "DocumentMoniker": "C:\\Projeto Komercial\\Komercio\\Front C#\\Komercio\\UI\\Forms\\Product\\fmCreateProduct.cs",
-              "RelativeDocumentMoniker": "UI\\Forms\\Product\\fmCreateProduct.cs",
-              "ToolTip": "C:\\Projeto Komercial\\Komercio\\Front C#\\Komercio\\UI\\Forms\\Product\\fmCreateProduct.cs*",
-              "RelativeToolTip": "UI\\Forms\\Product\\fmCreateProduct.cs*",
-              "ViewState": "AgIAALkAAAAAAAAAAIAwwMYAAAAAAAAAAAAAAA==",
+              "Title": "fmImputProduct.cs [Design]",
+              "DocumentMoniker": "C:\\Projeto Komercial\\Komercio\\Front C#\\Komercio\\UI\\Forms\\Product\\fmImputProduct.cs",
+              "RelativeDocumentMoniker": "UI\\Forms\\Product\\fmImputProduct.cs",
+              "ToolTip": "C:\\Projeto Komercial\\Komercio\\Front C#\\Komercio\\UI\\Forms\\Product\\fmImputProduct.cs [Design]",
+              "RelativeToolTip": "UI\\Forms\\Product\\fmImputProduct.cs [Design]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-21T20:30:44.043Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "fmCreateProduct.cs [Design]",
-              "DocumentMoniker": "C:\\Projeto Komercial\\Komercio\\Front C#\\Komercio\\UI\\Forms\\Product\\fmCreateProduct.cs",
-              "RelativeDocumentMoniker": "UI\\Forms\\Product\\fmCreateProduct.cs",
-              "ToolTip": "C:\\Projeto Komercial\\Komercio\\Front C#\\Komercio\\UI\\Forms\\Product\\fmCreateProduct.cs [Design]*",
-              "RelativeToolTip": "UI\\Forms\\Product\\fmCreateProduct.cs [Design]*",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-21T20:30:41.294Z",
+              "WhenOpened": "2025-10-22T00:12:40.102Z",
               "EditorCaption": " [Design]"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "CustomerService.cs",
-              "DocumentMoniker": "C:\\Projeto Komercial\\Komercio\\Front C#\\Komercio\\Services\\CustomerService.cs",
-              "RelativeDocumentMoniker": "Services\\CustomerService.cs",
-              "ToolTip": "C:\\Projeto Komercial\\Komercio\\Front C#\\Komercio\\Services\\CustomerService.cs",
-              "RelativeToolTip": "Services\\CustomerService.cs",
-              "ViewState": "AgIAABMAAAAAAAAAAAAgwCcAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-21T20:28:59.973Z",
-              "EditorCaption": ""
             }
           ]
         }

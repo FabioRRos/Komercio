@@ -6,6 +6,8 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using System.Diagnostics;
+using System.ComponentModel;
+using System.Windows.Forms.VisualStyles;
 
 
 namespace Komercio.Services
@@ -30,9 +32,7 @@ namespace Komercio.Services
         {
             var json = JsonConvert.SerializeObject(customer);
             var content = new StringContent(json, Encoding.UTF8, "application/json");
-
             var response = await _httpClient.PostAsync("customer", content);
-
             var message = await response.Content.ReadAsStringAsync();
             return (response.IsSuccessStatusCode, message);
         }
@@ -45,24 +45,42 @@ namespace Komercio.Services
         public async Task<List<CustomerDto>> GetAllCustomersAsync()
         {
             var response = await _httpClient.GetAsync("customer");
-
             if (!response.IsSuccessStatusCode)
             {
                 return new List<CustomerDto>();
             }
-
             var resultJson = await response.Content.ReadAsStringAsync();
-
             var customers = JsonConvert.DeserializeObject<List<CustomerDto>>(resultJson);
 
-            // Retorno simples (explícito para evitar 'null')
+            // Retorno simples para evitar 'nil'
             if (customers == null)
             {
                 return new List<CustomerDto>();
             }
-
             return customers;
         }
+
+        public async Task<bool> GetValidationCustomerDocument(string document)
+        {
+            try
+            {
+                var response = await _httpClient.GetAsync($"customer/ValidationDocumentNumber/{document}");
+
+                if (!response.IsSuccessStatusCode)
+                    return false;
+
+                var resultJson = await response.Content.ReadAsStringAsync();
+                return JsonConvert.DeserializeObject<bool>(resultJson);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Erro ao validar documento: {ex.Message}");
+                return false;
+            }
+        }
+
+
+
 
         // GET /customer/:id
         // Busca um cliente pelo ID
@@ -87,9 +105,6 @@ namespace Komercio.Services
             }
 
             return customers;
-
-
-
         }
 
 

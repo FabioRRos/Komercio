@@ -59,6 +59,31 @@ namespace Komercio.Services
             }
         }
 
+        public async Task<ProductDTO> PutProductInStock(string barcode, int newStock)
+        {
+            // Monta o corpo JSON
+            var content = new StringContent(
+                JsonConvert.SerializeObject(new { product_stock = newStock }),
+                Encoding.UTF8,
+                "application/json"
+            );
+
+            // Faz a chamada PUT para a rota correta
+            var response = await _httpClient.PutAsync($"products/updateStock/{barcode}", content);
+
+            if (response.IsSuccessStatusCode)
+            {
+                var responseContent = await response.Content.ReadAsStringAsync();
+                var product = JsonConvert.DeserializeObject<ProductDTO>(responseContent);
+                return product;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+
 
     }
 }

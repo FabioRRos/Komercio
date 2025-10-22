@@ -7,12 +7,14 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web.UI.Design;
 using System.Windows.Forms;
+using System.Windows.Forms.VisualStyles;
 using System.Xml.Linq;
 
 namespace Komercio.UI.Forms.Customer
@@ -118,13 +120,31 @@ namespace Komercio.UI.Forms.Customer
             }
         }
 
-        private void mtbCustomerDocument_Leave(object sender, EventArgs e)
+        private  async void mtbCustomerDocument_Leave(object sender, EventArgs e)
         {
             if (mtbCustomerDocument.Text == "")
             {
                 mtbCustomerDocument.Text = "CPF";
                 return;
             }
+
+            try
+            {
+                bool isValid = await _customerService.GetValidationCustomerDocument(mtbCustomerDocument.Text);
+
+                if (isValid == false)
+                {
+                    MessageBox.Show("CPF ou CNPJ inválido!", "Validação", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    mtbCustomerDocument.Text = "CPF";
+
+                    return;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Erro ao validar documento: {ex.Message}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
 
             if (mtbCustomerDocument.Text.Length == 11)
             {
@@ -150,10 +170,15 @@ namespace Komercio.UI.Forms.Customer
             }
 
 
-
-
-
         }
+
+
+        public async Task<bool> ValidationDocumentAsync(string document)
+        {
+            bool isValid = await _customerService.GetValidationCustomerDocument(document);
+            return isValid;
+        }
+
 
         private void mtbCustomerPhone_Enter(object sender, EventArgs e)
         {

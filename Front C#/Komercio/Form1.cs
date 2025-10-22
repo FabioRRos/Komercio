@@ -72,5 +72,11 @@ namespace Komercio
             fmCreateProduct createProduct = new fmCreateProduct(_productService);
             createProduct.ShowDialog();
         }
+
+        private void entradaEstoqueToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            fmImputProduct imputProduct = new fmImputProduct(_productService);
+            imputProduct.ShowDialog();
+        }
     }
 }

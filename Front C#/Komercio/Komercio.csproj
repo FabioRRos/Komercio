@@ -99,6 +99,12 @@
     <Compile Include="UI\Forms\Product\fmCreateProduct.Designer.cs">
       <DependentUpon>fmCreateProduct.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\Forms\Product\fmImputProduct.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Forms\Product\fmImputProduct.Designer.cs">
+      <DependentUpon>fmImputProduct.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
@@ -125,6 +131,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Forms\Product\fmCreateProduct.resx">
       <DependentUpon>fmCreateProduct.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Forms\Product\fmImputProduct.resx">
+      <DependentUpon>fmImputProduct.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="packages\MaterialSkin.2.2.3.1\.signature.p7s" />
