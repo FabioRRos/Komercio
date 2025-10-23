@@ -33,13 +33,13 @@
             this.mtbStock = new MaterialSkin.Controls.MaterialTextBox2();
             this.materialLabel1 = new MaterialSkin.Controls.MaterialLabel();
             this.materialLabel2 = new MaterialSkin.Controls.MaterialLabel();
-            this.materialLabel3 = new MaterialSkin.Controls.MaterialLabel();
-            this.materialLabel4 = new MaterialSkin.Controls.MaterialLabel();
             this.msOptionsInput = new MaterialSkin.Controls.MaterialSwitch();
             this.mbtSave = new MaterialSkin.Controls.MaterialButton();
-            this.dgUpdateList = new System.Windows.Forms.DataGridView();
             this.materialLabel5 = new MaterialSkin.Controls.MaterialLabel();
-            ((System.ComponentModel.ISupportInitialize)(this.dgUpdateList)).BeginInit();
+            this.mlvInput = new MaterialSkin.Controls.MaterialListView();
+            this.QTD = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.Produto = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.SuspendLayout();
             // 
             // mtbCodBar
@@ -49,7 +49,9 @@
             this.mtbCodBar.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
             this.mtbCodBar.Depth = 0;
             this.mtbCodBar.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.mtbCodBar.HelperText = "Automárico só com o leitor";
             this.mtbCodBar.HideSelection = true;
+            this.mtbCodBar.Hint = "Código de barras";
             this.mtbCodBar.LeadingIcon = null;
             this.mtbCodBar.Location = new System.Drawing.Point(23, 40);
             this.mtbCodBar.MaxLength = 32767;
@@ -63,13 +65,13 @@
             this.mtbCodBar.SelectionLength = 0;
             this.mtbCodBar.SelectionStart = 0;
             this.mtbCodBar.ShortcutsEnabled = true;
-            this.mtbCodBar.Size = new System.Drawing.Size(250, 48);
+            this.mtbCodBar.ShowAssistiveText = true;
+            this.mtbCodBar.Size = new System.Drawing.Size(250, 64);
             this.mtbCodBar.TabIndex = 0;
             this.mtbCodBar.TabStop = false;
             this.mtbCodBar.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.mtbCodBar.TrailingIcon = null;
             this.mtbCodBar.UseSystemPasswordChar = false;
-            this.mtbCodBar.Enter += new System.EventHandler(this.mtbCodBar_Enter);
             this.mtbCodBar.TextChanged += new System.EventHandler(this.mtbCodBar_TextChanged);
             // 
             // mtbStock
@@ -81,6 +83,7 @@
             this.mtbStock.Enabled = false;
             this.mtbStock.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.mtbStock.HideSelection = true;
+            this.mtbStock.Hint = "Quantidade";
             this.mtbStock.LeadingIcon = null;
             this.mtbStock.Location = new System.Drawing.Point(23, 113);
             this.mtbStock.MaxLength = 32767;
@@ -97,6 +100,7 @@
             this.mtbStock.Size = new System.Drawing.Size(250, 48);
             this.mtbStock.TabIndex = 3;
             this.mtbStock.TabStop = false;
+            this.mtbStock.Text = "1";
             this.mtbStock.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.mtbStock.TrailingIcon = null;
             this.mtbStock.UseSystemPasswordChar = false;
@@ -126,32 +130,6 @@
             this.materialLabel2.Size = new System.Drawing.Size(75, 17);
             this.materialLabel2.TabIndex = 6;
             this.materialLabel2.Text = "Automatico";
-            // 
-            // materialLabel3
-            // 
-            this.materialLabel3.AutoSize = true;
-            this.materialLabel3.Depth = 0;
-            this.materialLabel3.Font = new System.Drawing.Font("Roboto Medium", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
-            this.materialLabel3.FontType = MaterialSkin.MaterialSkinManager.fontType.Subtitle2;
-            this.materialLabel3.Location = new System.Drawing.Point(20, 18);
-            this.materialLabel3.MouseState = MaterialSkin.MouseState.HOVER;
-            this.materialLabel3.Name = "materialLabel3";
-            this.materialLabel3.Size = new System.Drawing.Size(109, 17);
-            this.materialLabel3.TabIndex = 7;
-            this.materialLabel3.Text = "Código de barras";
-            // 
-            // materialLabel4
-            // 
-            this.materialLabel4.AutoSize = true;
-            this.materialLabel4.Depth = 0;
-            this.materialLabel4.Font = new System.Drawing.Font("Roboto Medium", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
-            this.materialLabel4.FontType = MaterialSkin.MaterialSkinManager.fontType.Subtitle2;
-            this.materialLabel4.Location = new System.Drawing.Point(20, 93);
-            this.materialLabel4.MouseState = MaterialSkin.MouseState.HOVER;
-            this.materialLabel4.Name = "materialLabel4";
-            this.materialLabel4.Size = new System.Drawing.Size(76, 17);
-            this.materialLabel4.TabIndex = 8;
-            this.materialLabel4.Text = "Quantidade";
             // 
             // msOptionsInput
             // 
@@ -191,41 +169,64 @@
             this.mbtSave.UseVisualStyleBackColor = true;
             this.mbtSave.Click += new System.EventHandler(this.mbtSave_Click);
             // 
-            // dgUpdateList
-            // 
-            this.dgUpdateList.AllowUserToAddRows = false;
-            this.dgUpdateList.AllowUserToDeleteRows = false;
-            this.dgUpdateList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgUpdateList.Location = new System.Drawing.Point(308, 40);
-            this.dgUpdateList.Name = "dgUpdateList";
-            this.dgUpdateList.ReadOnly = true;
-            this.dgUpdateList.Size = new System.Drawing.Size(170, 240);
-            this.dgUpdateList.TabIndex = 11;
-            // 
             // materialLabel5
             // 
             this.materialLabel5.AutoSize = true;
             this.materialLabel5.Depth = 0;
             this.materialLabel5.Font = new System.Drawing.Font("Roboto Medium", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
             this.materialLabel5.FontType = MaterialSkin.MaterialSkinManager.fontType.Subtitle2;
-            this.materialLabel5.Location = new System.Drawing.Point(305, 18);
+            this.materialLabel5.Location = new System.Drawing.Point(420, 9);
             this.materialLabel5.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel5.Name = "materialLabel5";
             this.materialLabel5.Size = new System.Drawing.Size(58, 17);
             this.materialLabel5.TabIndex = 12;
             this.materialLabel5.Text = "Entradas";
             // 
+            // mlvInput
+            // 
+            this.mlvInput.AutoSizeTable = false;
+            this.mlvInput.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.mlvInput.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.mlvInput.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.QTD,
+            this.Produto,
+            this.columnHeader1});
+            this.mlvInput.Depth = 0;
+            this.mlvInput.FullRowSelect = true;
+            this.mlvInput.HideSelection = false;
+            this.mlvInput.Location = new System.Drawing.Point(308, 38);
+            this.mlvInput.MinimumSize = new System.Drawing.Size(200, 100);
+            this.mlvInput.MouseLocation = new System.Drawing.Point(-1, -1);
+            this.mlvInput.MouseState = MaterialSkin.MouseState.OUT;
+            this.mlvInput.Name = "mlvInput";
+            this.mlvInput.OwnerDraw = true;
+            this.mlvInput.Size = new System.Drawing.Size(298, 240);
+            this.mlvInput.TabIndex = 13;
+            this.mlvInput.UseCompatibleStateImageBehavior = false;
+            this.mlvInput.View = System.Windows.Forms.View.Details;
+            // 
+            // QTD
+            // 
+            this.QTD.Text = "QTD";
+            // 
+            // Produto
+            // 
+            this.Produto.Text = "Produto";
+            this.Produto.Width = 150;
+            // 
+            // columnHeader1
+            // 
+            this.columnHeader1.Text = "";
+            // 
             // fmImputProduct
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(489, 294);
+            this.ClientSize = new System.Drawing.Size(613, 294);
+            this.Controls.Add(this.mlvInput);
             this.Controls.Add(this.materialLabel5);
-            this.Controls.Add(this.dgUpdateList);
             this.Controls.Add(this.mbtSave);
             this.Controls.Add(this.msOptionsInput);
-            this.Controls.Add(this.materialLabel4);
-            this.Controls.Add(this.materialLabel3);
             this.Controls.Add(this.materialLabel2);
             this.Controls.Add(this.materialLabel1);
             this.Controls.Add(this.mtbStock);
@@ -235,7 +236,6 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Entrada estoque";
             this.Load += new System.EventHandler(this.fmImputProduct_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.dgUpdateList)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -247,11 +247,12 @@
         private MaterialSkin.Controls.MaterialTextBox2 mtbStock;
         private MaterialSkin.Controls.MaterialLabel materialLabel1;
         private MaterialSkin.Controls.MaterialLabel materialLabel2;
-        private MaterialSkin.Controls.MaterialLabel materialLabel3;
-        private MaterialSkin.Controls.MaterialLabel materialLabel4;
         private MaterialSkin.Controls.MaterialSwitch msOptionsInput;
         private MaterialSkin.Controls.MaterialButton mbtSave;
-        private System.Windows.Forms.DataGridView dgUpdateList;
         private MaterialSkin.Controls.MaterialLabel materialLabel5;
+        private MaterialSkin.Controls.MaterialListView mlvInput;
+        private System.Windows.Forms.ColumnHeader QTD;
+        private System.Windows.Forms.ColumnHeader Produto;
+        private System.Windows.Forms.ColumnHeader columnHeader1;
     }
 }

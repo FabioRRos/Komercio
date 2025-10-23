@@ -36,9 +36,7 @@ namespace Komercio.Models
         {
 
             CustomerDto customer = new CustomerDto();
-
             bool status = customerin.customer_status;
-
             if (status == false)
             {
                 customer.customer_status = false;
@@ -49,11 +47,10 @@ namespace Komercio.Models
             }
 
             customer.customer_account_id = customerin.customer_account_id;
-
             customer.customer_id = customerin.customer_id;
 
 
-            if (customerin.customer_first_name == "" || customerin.customer_first_name == "Nome")
+            if (customerin.customer_first_name == "")
             {
                 MessageBox.Show("O campo 'Nome' é obrigatório.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return null;
@@ -65,7 +62,7 @@ namespace Komercio.Models
 
 
 
-            if (customerin.customer_last_name == "" || customerin.customer_last_name == "Sobrenome")
+            if (customerin.customer_last_name == "")
             {
                 MessageBox.Show("O campo 'Sobrenome' é obrigatório.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return null;
@@ -76,9 +73,7 @@ namespace Komercio.Models
                 customer.customer_last_name = customerin.customer_last_name.Trim();
             }
 
-
-
-            if (customerin.customer_document == "" || customerin.customer_document =="CPF")
+            if (customerin.customer_document == "")
             {
                 MessageBox.Show("O campo 'Documento' é obrigatório.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return null;
@@ -92,111 +87,29 @@ namespace Komercio.Models
                     .Replace("/", "")
                     .Replace(" ", "");
             }
-
-
-
-            if (customerin.customer_phone == "" || customerin.customer_phone == "Telefone Fixo")
-            {
-                customer.customer_phone = "";
-
-            }
-            else
-            {
                 customer.customer_phone = customerin.customer_phone
                     .Replace("(", "")
                     .Replace(")", "")
                     .Replace("-", "")
-                    .Replace(" ", "");
-            }
+                    .Replace(" ", "");        
 
-            if (customerin.customer_mobile == "" || customerin.customer_mobile == "Celular")
-            {
-                customer.customer_phone = "";
-
-            }
-            else
-            {
                 customer.customer_mobile = customerin.customer_mobile
                     .Replace("(", "")
                     .Replace(")", "")
                     .Replace("-", "")
                     .Replace(" ", "");
-            }
-
-            if (customerin.customer_zip_code == "" || customerin.customer_zip_code == "CEP")
-            {
-                customer.customer_zip_code = "";
-            }
-            else
-            {
+                       
                 customer.customer_zip_code = customerin.customer_zip_code
                     .Replace("-", "")
                     .Replace(" ", "");
 
-            }
-
-
-            if (customerin.customer_address_line == "" || customerin.customer_address_line == "Endereço")
-
-            {
-                customer.customer_address_line = "";
-            }
-            else
-            {
-                customer.customer_address_line = customerin.customer_address_line;
-            }
-
-
-            if (customerin.customer_neighborhood == "" || customerin.customer_neighborhood == "Bairro")
-            {
-                customer.customer_neighborhood = "";
-            }
-            else
-            {
-                customer.customer_neighborhood = customerin.customer_neighborhood;
-            }
-
-
-            if (customerin.customer_city == "" || customerin.customer_city == "Cidade")
-            {
-                customer.customer_city = "";
-            }
-            else
-            {
-                customer.customer_city = customerin.customer_city;
-            }
-
-
-            if (customerin.customer_state == "" || customerin.customer_state == "Estado")
-            {
-                customer.customer_state = "";
-            }
-            else
-            {
-                customer.customer_state = customerin.customer_state;
-            }
-
-
-            if (customerin.customer_country == "" || customerin.customer_country == "País")
-            {
-                customer.customer_country = "";
-            }
-            else
-            {
-                customer.customer_country = customerin.customer_country;
-            }
-
-
-            if (customerin.customer_email == "" || customerin.customer_email == "E-mail")
-            {
-                customer.customer_email = "";
-            }
-            else
-            {
-                customer.customer_email = customerin.customer_email;
-            }
-
-
+            customer.customer_address_line = customerin.customer_address_line; 
+            customer.customer_neighborhood = customerin.customer_neighborhood;
+            customer.customer_city = customerin.customer_city;
+            customer.customer_state = customerin.customer_state;
+            customer.customer_country = customerin.customer_country;
+            customer.customer_email = customerin.customer_email;
+           
             return customer;
 
         }

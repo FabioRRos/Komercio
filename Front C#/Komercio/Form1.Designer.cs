@@ -40,6 +40,8 @@
             this.novoProdutoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.manualToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.entradaEstoqueToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.vendasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.novaVendaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -78,7 +80,8 @@
             this.arquivoToolStripMenuItem,
             this.funcionáriosToolStripMenuItem,
             this.clienteToolStripMenuItem,
-            this.produtosToolStripMenuItem});
+            this.produtosToolStripMenuItem,
+            this.vendasToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(800, 24);
@@ -122,23 +125,38 @@
             this.novoProdutoToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.manualToolStripMenuItem});
             this.novoProdutoToolStripMenuItem.Name = "novoProdutoToolStripMenuItem";
-            this.novoProdutoToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.novoProdutoToolStripMenuItem.Size = new System.Drawing.Size(159, 22);
             this.novoProdutoToolStripMenuItem.Text = "Cadastrar";
             this.novoProdutoToolStripMenuItem.Click += new System.EventHandler(this.novoProdutoToolStripMenuItem_Click);
             // 
             // manualToolStripMenuItem
             // 
             this.manualToolStripMenuItem.Name = "manualToolStripMenuItem";
-            this.manualToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.manualToolStripMenuItem.Size = new System.Drawing.Size(114, 22);
             this.manualToolStripMenuItem.Text = "Manual";
             this.manualToolStripMenuItem.Click += new System.EventHandler(this.manualToolStripMenuItem_Click);
             // 
             // entradaEstoqueToolStripMenuItem
             // 
             this.entradaEstoqueToolStripMenuItem.Name = "entradaEstoqueToolStripMenuItem";
-            this.entradaEstoqueToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.entradaEstoqueToolStripMenuItem.Size = new System.Drawing.Size(159, 22);
             this.entradaEstoqueToolStripMenuItem.Text = "Entrada estoque";
             this.entradaEstoqueToolStripMenuItem.Click += new System.EventHandler(this.entradaEstoqueToolStripMenuItem_Click);
+            // 
+            // vendasToolStripMenuItem
+            // 
+            this.vendasToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.novaVendaToolStripMenuItem});
+            this.vendasToolStripMenuItem.Name = "vendasToolStripMenuItem";
+            this.vendasToolStripMenuItem.Size = new System.Drawing.Size(56, 20);
+            this.vendasToolStripMenuItem.Text = "Vendas";
+            // 
+            // novaVendaToolStripMenuItem
+            // 
+            this.novaVendaToolStripMenuItem.Name = "novaVendaToolStripMenuItem";
+            this.novaVendaToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.novaVendaToolStripMenuItem.Text = "Nova venda";
+            this.novaVendaToolStripMenuItem.Click += new System.EventHandler(this.novaVendaToolStripMenuItem_Click);
             // 
             // Home
             // 
@@ -173,6 +191,8 @@
         private System.Windows.Forms.ToolStripMenuItem novoProdutoToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem manualToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem entradaEstoqueToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem vendasToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem novaVendaToolStripMenuItem;
     }
 }
 

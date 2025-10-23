@@ -1,5 +1,6 @@
 ﻿using Komercio.Models;
 using Komercio.Services;
+using MaterialSkin.Controls;
 using System;
 using System.CodeDom.Compiler;
 using System.Collections.Generic;
@@ -22,7 +23,6 @@ namespace Komercio.UI.Forms.Product
             InitializeComponent();
             _productService = productService;
         }
-        private BindingList<ProductDTO> productListUpdateStock = new BindingList<ProductDTO>();
         private void msOptionsInput_CheckedChanged(object sender, EventArgs e)
         {
             if (msOptionsInput.Checked == false)
@@ -39,11 +39,6 @@ namespace Komercio.UI.Forms.Product
             }
         }
 
-        private void mtbCodBar_Enter(object sender, EventArgs e)
-        {
-
-        }
-
         private async void mtbCodBar_TextChanged(object sender, EventArgs e)
         {
             if (msOptionsInput.Checked == true)
@@ -55,58 +50,65 @@ namespace Komercio.UI.Forms.Product
                 try
                 {
                     var temp = await _productService.PutProductInStock(mtbCodBar.Text, 1);
-                    productListUpdateStock.Add(temp);
+
+                    if (temp == null)
+                    {                   
+                        mtbCodBar.Text = "";
+                        return;
+                    }
+                    else
+                    {
+                        mlvInput.Items.Add(1 + " -  " +  temp.productName.PadRight(200));
+                       
+                    }
                     await Task.Delay(500);
                     mtbCodBar.Text = "";
-                    UpdateDataGrid();
                     return;
-
                 }
                 catch
                 {
 
                 }
-
             }
-
-        }
-
-
-        private void UpdateDataGrid()
-        {
-
-            dgUpdateList.DataSource = productListUpdateStock;
-            dgUpdateList.Columns["idProduct"].Visible = false;
-            dgUpdateList.Columns["productPrice"].Visible = false;
-            dgUpdateList.Columns["productCodBar"].Visible = false;
-            dgUpdateList.Columns["productGroup"].Visible = false;
-            dgUpdateList.Columns["productSubgroup"].Visible = false;
-            dgUpdateList.Columns["productStock"].Visible = false;
-            dgUpdateList.Columns["productStatus"].Visible = false;
-            dgUpdateList.Columns["productName"].HeaderText = "Produto";
-            dgUpdateList.Columns["productName"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-
-            dgUpdateList.AllowUserToAddRows = false;
         }
 
         private void fmImputProduct_Load(object sender, EventArgs e)
         {
-
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.MinimizeBox = true;
-
         }
 
         private async void mbtSave_Click(object sender, EventArgs e)
         {
             var stockToAdd = int.Parse(mtbStock.Text);
+
+            if (mtbCodBar.Text == "")
+            {
+                MessageBox.Show("O código de barras não pode estar vazio.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            if (stockToAdd <= 0)
+            {
+                MessageBox.Show("O estoque a ser adicionado deve ser maior que zero.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
             var temp = await _productService.PutProductInStock(mtbCodBar.Text, stockToAdd);
-            productListUpdateStock.Add(temp);
-            await Task.Delay(500);
-            mtbCodBar.Text = "";
-            UpdateDataGrid();
-            return;
+
+            if (temp == null)
+            {
+                MessageBox.Show("Produto não encontrado!", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                mtbCodBar.Text = "";
+                return;
+            }
+            else
+            {
+                mlvInput.Items.Add(stockToAdd + " -  " + temp.productName);
+
+            }
+           return;
         }
     }
 }

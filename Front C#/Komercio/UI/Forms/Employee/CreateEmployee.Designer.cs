@@ -29,32 +29,13 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(fmCreateEmployee));
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
             this.mtbEmployeeName = new MaterialSkin.Controls.MaterialTextBox2();
             this.mtbEmployeePassword = new MaterialSkin.Controls.MaterialTextBox2();
             this.mbtnNewEmployee = new MaterialSkin.Controls.MaterialButton();
             this.mbtnSaveNewEmployee = new MaterialSkin.Controls.MaterialButton();
             this.mbtnSeePassword = new MaterialSkin.Controls.MaterialButton();
+            this.mtbEmployeePassword1 = new MaterialSkin.Controls.MaterialTextBox2();
             this.SuspendLayout();
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(34, 26);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(81, 13);
-            this.label1.TabIndex = 2;
-            this.label1.Text = "Nome completo";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(34, 106);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(38, 13);
-            this.label2.TabIndex = 3;
-            this.label2.Text = "Senha";
             // 
             // mtbEmployeeName
             // 
@@ -65,8 +46,9 @@
             this.mtbEmployeeName.Enabled = false;
             this.mtbEmployeeName.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.mtbEmployeeName.HideSelection = true;
+            this.mtbEmployeeName.Hint = "Nome completo";
             this.mtbEmployeeName.LeadingIcon = null;
-            this.mtbEmployeeName.Location = new System.Drawing.Point(37, 42);
+            this.mtbEmployeeName.Location = new System.Drawing.Point(37, 29);
             this.mtbEmployeeName.MaxLength = 32767;
             this.mtbEmployeeName.MouseState = MaterialSkin.MouseState.OUT;
             this.mtbEmployeeName.Name = "mtbEmployeeName";
@@ -79,7 +61,7 @@
             this.mtbEmployeeName.SelectionStart = 0;
             this.mtbEmployeeName.ShortcutsEnabled = true;
             this.mtbEmployeeName.Size = new System.Drawing.Size(214, 48);
-            this.mtbEmployeeName.TabIndex = 7;
+            this.mtbEmployeeName.TabIndex = 1;
             this.mtbEmployeeName.TabStop = false;
             this.mtbEmployeeName.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.mtbEmployeeName.TrailingIcon = null;
@@ -87,15 +69,17 @@
             // 
             // mtbEmployeePassword
             // 
-            this.mtbEmployeePassword.AnimateReadOnly = false;
+            this.mtbEmployeePassword.AnimateReadOnly = true;
             this.mtbEmployeePassword.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.mtbEmployeePassword.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
             this.mtbEmployeePassword.Depth = 0;
             this.mtbEmployeePassword.Enabled = false;
             this.mtbEmployeePassword.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.mtbEmployeePassword.HelperText = "Digite a senha";
             this.mtbEmployeePassword.HideSelection = true;
+            this.mtbEmployeePassword.Hint = "Senha";
             this.mtbEmployeePassword.LeadingIcon = null;
-            this.mtbEmployeePassword.Location = new System.Drawing.Point(37, 122);
+            this.mtbEmployeePassword.Location = new System.Drawing.Point(37, 93);
             this.mtbEmployeePassword.MaxLength = 32767;
             this.mtbEmployeePassword.MouseState = MaterialSkin.MouseState.OUT;
             this.mtbEmployeePassword.Name = "mtbEmployeePassword";
@@ -107,8 +91,9 @@
             this.mtbEmployeePassword.SelectionLength = 0;
             this.mtbEmployeePassword.SelectionStart = 0;
             this.mtbEmployeePassword.ShortcutsEnabled = true;
-            this.mtbEmployeePassword.Size = new System.Drawing.Size(143, 48);
-            this.mtbEmployeePassword.TabIndex = 8;
+            this.mtbEmployeePassword.ShowAssistiveText = true;
+            this.mtbEmployeePassword.Size = new System.Drawing.Size(143, 64);
+            this.mtbEmployeePassword.TabIndex = 2;
             this.mtbEmployeePassword.TabStop = false;
             this.mtbEmployeePassword.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.mtbEmployeePassword.TrailingIcon = null;
@@ -121,13 +106,13 @@
             this.mbtnNewEmployee.Depth = 0;
             this.mbtnNewEmployee.HighEmphasis = true;
             this.mbtnNewEmployee.Icon = null;
-            this.mbtnNewEmployee.Location = new System.Drawing.Point(37, 194);
+            this.mbtnNewEmployee.Location = new System.Drawing.Point(37, 234);
             this.mbtnNewEmployee.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.mbtnNewEmployee.MouseState = MaterialSkin.MouseState.HOVER;
             this.mbtnNewEmployee.Name = "mbtnNewEmployee";
             this.mbtnNewEmployee.NoAccentTextColor = System.Drawing.Color.Empty;
             this.mbtnNewEmployee.Size = new System.Drawing.Size(64, 36);
-            this.mbtnNewEmployee.TabIndex = 9;
+            this.mbtnNewEmployee.TabIndex = 0;
             this.mbtnNewEmployee.Text = "Novo";
             this.mbtnNewEmployee.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
             this.mbtnNewEmployee.UseAccentColor = false;
@@ -141,13 +126,13 @@
             this.mbtnSaveNewEmployee.Depth = 0;
             this.mbtnSaveNewEmployee.HighEmphasis = true;
             this.mbtnSaveNewEmployee.Icon = null;
-            this.mbtnSaveNewEmployee.Location = new System.Drawing.Point(175, 194);
+            this.mbtnSaveNewEmployee.Location = new System.Drawing.Point(175, 234);
             this.mbtnSaveNewEmployee.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.mbtnSaveNewEmployee.MouseState = MaterialSkin.MouseState.HOVER;
             this.mbtnSaveNewEmployee.Name = "mbtnSaveNewEmployee";
             this.mbtnSaveNewEmployee.NoAccentTextColor = System.Drawing.Color.Empty;
             this.mbtnSaveNewEmployee.Size = new System.Drawing.Size(76, 36);
-            this.mbtnSaveNewEmployee.TabIndex = 10;
+            this.mbtnSaveNewEmployee.TabIndex = 5;
             this.mbtnSaveNewEmployee.Text = "Salvar";
             this.mbtnSaveNewEmployee.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
             this.mbtnSaveNewEmployee.UseAccentColor = false;
@@ -161,31 +146,62 @@
             this.mbtnSeePassword.Depth = 0;
             this.mbtnSeePassword.HighEmphasis = true;
             this.mbtnSeePassword.Icon = null;
-            this.mbtnSeePassword.Location = new System.Drawing.Point(187, 134);
+            this.mbtnSeePassword.Location = new System.Drawing.Point(187, 177);
             this.mbtnSeePassword.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.mbtnSeePassword.MouseState = MaterialSkin.MouseState.HOVER;
             this.mbtnSeePassword.Name = "mbtnSeePassword";
             this.mbtnSeePassword.NoAccentTextColor = System.Drawing.Color.Empty;
             this.mbtnSeePassword.Size = new System.Drawing.Size(64, 36);
-            this.mbtnSeePassword.TabIndex = 11;
+            this.mbtnSeePassword.TabIndex = 4;
             this.mbtnSeePassword.Text = "Ver";
             this.mbtnSeePassword.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
             this.mbtnSeePassword.UseAccentColor = false;
             this.mbtnSeePassword.UseVisualStyleBackColor = true;
             this.mbtnSeePassword.Click += new System.EventHandler(this.mbtnSeePassword_Click);
             // 
+            // mtbEmployeePassword1
+            // 
+            this.mtbEmployeePassword1.AnimateReadOnly = true;
+            this.mtbEmployeePassword1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.mtbEmployeePassword1.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
+            this.mtbEmployeePassword1.Depth = 0;
+            this.mtbEmployeePassword1.Enabled = false;
+            this.mtbEmployeePassword1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.mtbEmployeePassword1.HelperText = "Digite novamente";
+            this.mtbEmployeePassword1.HideSelection = true;
+            this.mtbEmployeePassword1.Hint = "Senha";
+            this.mtbEmployeePassword1.LeadingIcon = null;
+            this.mtbEmployeePassword1.Location = new System.Drawing.Point(37, 163);
+            this.mtbEmployeePassword1.MaxLength = 32767;
+            this.mtbEmployeePassword1.MouseState = MaterialSkin.MouseState.OUT;
+            this.mtbEmployeePassword1.Name = "mtbEmployeePassword1";
+            this.mtbEmployeePassword1.PasswordChar = '•';
+            this.mtbEmployeePassword1.PrefixSuffixText = null;
+            this.mtbEmployeePassword1.ReadOnly = false;
+            this.mtbEmployeePassword1.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.mtbEmployeePassword1.SelectedText = "";
+            this.mtbEmployeePassword1.SelectionLength = 0;
+            this.mtbEmployeePassword1.SelectionStart = 0;
+            this.mtbEmployeePassword1.ShortcutsEnabled = true;
+            this.mtbEmployeePassword1.ShowAssistiveText = true;
+            this.mtbEmployeePassword1.Size = new System.Drawing.Size(143, 64);
+            this.mtbEmployeePassword1.TabIndex = 3;
+            this.mtbEmployeePassword1.TabStop = false;
+            this.mtbEmployeePassword1.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.mtbEmployeePassword1.TrailingIcon = null;
+            this.mtbEmployeePassword1.UseSystemPasswordChar = false;
+            // 
             // fmCreateEmployee
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(284, 261);
+            this.ClientSize = new System.Drawing.Size(284, 308);
+            this.Controls.Add(this.mtbEmployeePassword1);
             this.Controls.Add(this.mbtnSeePassword);
             this.Controls.Add(this.mbtnSaveNewEmployee);
             this.Controls.Add(this.mbtnNewEmployee);
             this.Controls.Add(this.mtbEmployeePassword);
             this.Controls.Add(this.mtbEmployeeName);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "fmCreateEmployee";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -197,12 +213,11 @@
         }
 
         #endregion
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
         private MaterialSkin.Controls.MaterialTextBox2 mtbEmployeeName;
         private MaterialSkin.Controls.MaterialTextBox2 mtbEmployeePassword;
         private MaterialSkin.Controls.MaterialButton mbtnNewEmployee;
         private MaterialSkin.Controls.MaterialButton mbtnSaveNewEmployee;
         private MaterialSkin.Controls.MaterialButton mbtnSeePassword;
+        private MaterialSkin.Controls.MaterialTextBox2 mtbEmployeePassword1;
     }
 }

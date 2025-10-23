@@ -62,57 +62,21 @@ namespace Komercio.UI.Forms.Product
             mbtNewProduct.Enabled = false;
         }
 
-
-        private void mtbGrupo_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void mtbSubGrupo_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void mtbProductStock_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void fmCreateProduct_Load(object sender, EventArgs e)
         {
 
         }
 
-        private void mtbProductName_Enter(object sender, EventArgs e)
-        {
-            if (mtbProductName.Text == "Nome")
-            {
-                mtbProductName.Text = "";
-            }
-        }
+     
 
-        private void mtbProductName_Leave(object sender, EventArgs e)
-        {
-            if (mtbProductName.Text == "")
-            {
-                mtbProductName.Text = "Nome";
-            }
-        }
-
-        private void mtbProductPrice_Enter(object sender, EventArgs e)
-        {
-            if (mtbProductPrice.Text == "Preço")
-            {
-                mtbProductPrice.Text = "";
-            }
-        }
-
+       
         private void mtbProductPrice_Leave(object sender, EventArgs e)
         {
             if (mtbProductPrice.Text == "")
             {
-                mtbProductPrice.Text = "Preço";
+                               return;
             }
+
             // Vou tratar erros de entrada não numérica.
             try
             {
@@ -122,73 +86,10 @@ namespace Komercio.UI.Forms.Product
             catch
             {
                 MessageBox.Show("Preço inválido!", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                mtbProductPrice.Text = "Preço";
+                mtbProductPrice.Text = "";
             }
         }
 
-        private void mtbProductCodeBar_Enter(object sender, EventArgs e)
-        {
-            if (mtbProductCodeBar.Text == "Código de barras")
-            {
-                mtbProductCodeBar.Text = "";
-            }
-        }
-
-        private void mtbProductCodeBar_Leave(object sender, EventArgs e)
-        {
-            if (mtbProductCodeBar.Text == "")
-            {
-                mtbProductCodeBar.Text = "Código de barras";
-            }
-        }
-
-        private void mtbGrupo_Enter(object sender, EventArgs e)
-        {
-            if (mtbGrupo.Text == "Grupo")
-            {
-                mtbGrupo.Text = "";
-            }
-        }
-
-        private void mtbGrupo_Leave(object sender, EventArgs e)
-        {
-            if (mtbGrupo.Text == "")
-            {
-                mtbGrupo.Text = "Grupo";
-            }
-        }
-
-        private void mtbSubGrupo_Enter(object sender, EventArgs e)
-        {
-            if (mtbSubGrupo.Text == "Subgrupo")
-            {
-                mtbSubGrupo.Text = "";
-            }
-        }
-
-        private void mtbSubGrupo_Leave(object sender, EventArgs e)
-        {
-            if (mtbSubGrupo.Text == "")
-            {
-                mtbSubGrupo.Text = "Subgrupo";
-            }
-        }
-
-        private void mtbProductStock_Enter(object sender, EventArgs e)
-        {
-            if (mtbProductStock.Text == "Quantidade")
-            {
-                mtbProductStock.Text = "";
-            }
-        }
-
-        private void mtbProductStock_Leave(object sender, EventArgs e)
-        {
-            if (mtbProductStock.Text == "")
-            {
-                mtbProductStock.Text = "Quantidade";
-            }
-        }
 
         private void mbtNewProduct_Click(object sender, EventArgs e)
         {
@@ -284,12 +185,12 @@ namespace Komercio.UI.Forms.Product
 
         private void ComponentsClear()
         {
-            mtbProductName.Text = "Nome";
-            mtbProductPrice.Text = "Preço";
-            mtbProductCodeBar.Text = "Código de barras";
-            mtbGrupo.Text = "Grupo";
-            mtbSubGrupo.Text = "Subgrupo";
-            mtbProductStock.Text = "Quantidade";
+            mtbProductName.Text = "";
+            mtbProductPrice.Text = "";
+            mtbProductCodeBar.Text = "";
+            mtbGrupo.Text = "";
+            mtbSubGrupo.Text = "";
+            mtbProductStock.Text = "";
             msProductStatus.Checked = true;
         }
     }

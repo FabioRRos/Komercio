@@ -3,6 +3,7 @@ using Komercio.UI.Forms;
 using Komercio.UI.Forms.Customer;
 using Komercio.UI.Forms.Employee;
 using Komercio.UI.Forms.Product;
+using Komercio.UI.Forms.Sales;
 using MeuProjetoWinForms.Services;
 using System;
 using System.Collections.Generic;
@@ -77,6 +78,12 @@ namespace Komercio
         {
             fmImputProduct imputProduct = new fmImputProduct(_productService);
             imputProduct.ShowDialog();
+        }
+
+        private void novaVendaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            fmSalesProduct salesProduct = new fmSalesProduct();
+            salesProduct.ShowDialog();
         }
     }
 }

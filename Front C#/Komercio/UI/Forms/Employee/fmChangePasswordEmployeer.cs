@@ -27,7 +27,7 @@ namespace Komercio.UI.Forms.Employee
         private async void materialButton1_Click(object sender, EventArgs e)
         {
          
-            if (mtbLoginEmployeer.Text == "Login" || mtbPasswordEmployeer.Text == "Senha")
+            if (mtbLoginEmployeer.Text == "" || mtbPasswordEmployeer.Text == "")
             {
                 MessageBox.Show("Preencha todos os campos", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
@@ -68,94 +68,9 @@ namespace Komercio.UI.Forms.Employee
                                 "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
-
-
-
-
-
-
         }
 
-        private void mtbLoginEmployeer_Enter(object sender, EventArgs e)
-        {
-            if (mtbLoginEmployeer.Text == "Login")
-            {
-                mtbLoginEmployeer.Text = "";
-            }
-        }
 
-        private void mtbLoginEmployeer_Leave(object sender, EventArgs e)
-        {
-            if (mtbLoginEmployeer.Text == "")
-            {
-                mtbLoginEmployeer.Text = "Login";
-
-            }
-        }
-
-        private void mtbPasswordEmployeer_Enter(object sender, EventArgs e)
-        {
-            if (mtbPasswordEmployeer.Text == "Senha")
-            {
-                mtbPasswordEmployeer.Text = "";
-                mtbPasswordEmployeer.UseSystemPasswordChar = true;
-            }
-        }
-
-        private void mtbPasswordEmployeer_Leave(object sender, EventArgs e)
-        {
-            if (mtbPasswordEmployeer.Text == "")
-            {
-                mtbPasswordEmployeer.Text = "Senha";
-                mtbPasswordEmployeer.UseSystemPasswordChar = false;
-            }
-        }
-
-        private void mbtNewPasswordEmployeer1_Enter(object sender, EventArgs e)
-        {
-            if (mbtNewPasswordEmployeer1.Text == "Nova senha")
-            {
-                mbtNewPasswordEmployeer1.Text = "";
-                mbtNewPasswordEmployeer1.UseSystemPasswordChar = true;
-
-            }
-
-        }
-
-        private void mbtNewPasswordEmployeer1_Leave(object sender, EventArgs e)
-        {
-            if (mbtNewPasswordEmployeer1.Text == "")
-            {
-                mbtNewPasswordEmployeer1.Text = "Nova senha";
-                mbtNewPasswordEmployeer1.UseSystemPasswordChar = false;
-
-            }
-        }
-
-        private void mbtNewPasswordEmployeer2_Enter(object sender, EventArgs e)
-        {
-            if (mbtNewPasswordEmployeer2.Text == "Confirmar nova senha")
-            {
-                mbtNewPasswordEmployeer2.Text = "";
-                mbtNewPasswordEmployeer2.UseSystemPasswordChar = true;
-            }
-        
-        }
-
-        private void mbtNewPasswordEmployeer2_Leave(object sender, EventArgs e)
-        {
-            if (mbtNewPasswordEmployeer2.Text == "")
-            {
-                mbtNewPasswordEmployeer2.Text = "Confirmar nova senha";
-                mbtNewPasswordEmployeer2.UseSystemPasswordChar = false;
-
-            }
-        }
-
-        private void mtbPasswordEmployeer_Click(object sender, EventArgs e)
-        {
-
-        }
 
         private void fmChangePasswordEmployeer_Load(object sender, EventArgs e)
         {
@@ -209,6 +124,25 @@ namespace Komercio.UI.Forms.Employee
                 MessageBox.Show($"Ocorreu um erro: {ex.Message}",
                                 "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+
+        }
+
+        private async void mbtVisiblePassword_Click(object sender, EventArgs e)
+        {
+            mtbPasswordEmployeer.PasswordChar = '\0';           
+            await Task.Delay(2000);
+            mtbPasswordEmployeer.PasswordChar = '•';
+            
+        }
+
+        private async void materialButton1_Click_1(object sender, EventArgs e)
+        {
+
+            mbtNewPasswordEmployeer1.PasswordChar = '\0';
+            mbtNewPasswordEmployeer2.PasswordChar = '\0';
+            await Task.Delay(2000);
+            mbtNewPasswordEmployeer1.PasswordChar = '•';
+            mbtNewPasswordEmployeer2.PasswordChar = '•';
 
         }
     }
