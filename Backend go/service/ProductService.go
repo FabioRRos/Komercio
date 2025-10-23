@@ -12,6 +12,7 @@ type ProductService interface {
 	CreateProduct(ctx context.Context, product *entity.Product) error
 	SelectAllProducts(ctx context.Context) ([]*entity.Product, error)
 	SelectProductById(ctx context.Context, id int) (*entity.Product, error)
+	SelectProductByCodBar(ctx context.Context, productcodbar string) (*entity.Product, error)
 	UpdateProduct(ctx context.Context, product *entity.Product) (*entity.Product, error)
 	DeactivateProduct(ctx context.Context, id int) error
 	UpdateProductInputStock(ctx context.Context, productcodbar string, productStock int) (*entity.Product, error)
@@ -64,6 +65,19 @@ func (s *productService) SelectProductById(ctx context.Context, id int) (*entity
 	}
 
 	product, err := s.repo.SelectProductById(ctx, id)
+	if err != nil {
+		return nil, err
+	}
+
+	return product, nil
+}
+
+func (s *productService) SelectProductByCodBar(ctx context.Context, ProductcodBar string) (*entity.Product, error) {
+	if ProductcodBar == "" {
+		return nil, errors.New("Codigo de barras inválido")
+	}
+
+	product, err := s.repo.SelectProductByCodBar(ctx, ProductcodBar)
 	if err != nil {
 		return nil, err
 	}
