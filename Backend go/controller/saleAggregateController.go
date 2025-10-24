@@ -1,0 +1,41 @@
+package controller
+
+import (
+	"net/http"
+
+	"github.com/fabioros/Komercio/domain/entity"
+	"github.com/fabioros/Komercio/service"
+	"github.com/gin-gonic/gin"
+)
+
+type FullSaleController struct {
+	service service.FullSaleService
+}
+
+// Construtor
+func NewFullSaleController(fullSaleService service.FullSaleService) *FullSaleController {
+	return &FullSaleController{
+		service: fullSaleService,
+	}
+}
+
+// PUT /sales/fullsale
+func (c *FullSaleController) CreateFullSale(ctx *gin.Context) {
+	var saleAggregate entity.SaleAggregate
+
+	// 1️⃣ Faz o bind do JSON recebido
+	if err := ctx.ShouldBindJSON(&saleAggregate); err != nil {
+		ctx.JSON(http.StatusBadRequest, gin.H{"error": "Parâmetros inválidos ou JSON mal formatado"})
+		return
+	}
+
+	// 2️⃣ Chama o service para processar tudo
+	err := c.service.ProcessFullSale(ctx.Request.Context(), &saleAggregate)
+	if err != nil {
+		ctx.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		return
+	}
+
+	// 3️⃣ Retorna sucesso
+	ctx.JSON(http.StatusOK, gin.H{"message": "Venda completa registrada com sucesso"})
+}
