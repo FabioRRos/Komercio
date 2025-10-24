@@ -11,6 +11,6 @@ type Sales struct {
 	SalesDate      time.Time `json:"sale_date"`
 	SalesHour      string    `json:"sale_time"`
 	PaymentMethod  string    `json:"payment_method"`
-	SellerId       int       `json:"saller_id"`
-	SaleNotes      string    `json:"sale_note"`
+	SellerId       int       `json:"seller_id"`
+	SaleNotes      string    `json:"sale_notes"`
 }

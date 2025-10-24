@@ -21,7 +21,7 @@ func NewSalesService(repo repository.SalesRepository) SalesService {
 }
 
 func (s *salesService) CreateNewSale(ctx context.Context, sale *entity.Sales) (int, error) {
-	if sale != nil {
+	if sale == nil {
 		return 0, errors.New("Venda não pode ser nula")
 	}
 

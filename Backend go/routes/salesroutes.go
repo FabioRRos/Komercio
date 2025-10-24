@@ -8,6 +8,6 @@ import (
 func RegisterSaleRoutes(server *gin.Engine, salesController *controller.SalesController) {
 	salesRouts := server.Group("/sales")
 	{
-		salesRouts.GET("/sales/newsales/:sale", salesController.CreateNewSale)
+		salesRouts.POST("/newsales", salesController.CreateNewSale)
 	}
 }

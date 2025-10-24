@@ -19,6 +19,15 @@ func main() {
 	defer dbCustomer.Close()
 	dbEmployee := datastore.NewEmployeesDataStore()
 	defer dbEmployee.Close()
+	dbSales := datastore.NewSalesDataStore()
+	defer dbSales.Close()
+	dbproductGroupe := datastore.NewProductGroupDataStore()
+	defer dbproductGroupe.Close()
+	dbproductSubgroup := datastore.NewProductSubgroupDatastore()
+	defer dbproductSubgroup.Close()
+
+	//#####################################################
+	//Injeção de dependências
 
 	productController := controller.NewProductController(
 		service.NewProductService(
@@ -35,12 +44,29 @@ func main() {
 			repository.NewEmployeesRepository(dbEmployee)),
 	)
 
+	salesController := controller.NewSalesController(
+		service.NewSalesService(
+			repository.NewSalesRepository(dbSales)),
+	)
+	productGroupController := controller.NewProductGroupController(
+		service.NewProductGroupService(
+			repository.NewProductGroupRepository(dbproductGroupe)),
+	)
+
+	productSubgroupController := controller.NewProductSubgroupController(
+		service.NewProductSubgroupService(
+			repository.NewProductSubgroupRepository(dbproductSubgroup)),
+	)
+
 	// Rotas
 	server.GET("/ping", func(ctx *gin.Context) { ctx.JSON(200, gin.H{"message": "pong"}) })
 
 	routes.RegisterProductRoutes(server, productController)
 	routes.RegisterCustomerRoutes(server, customerController)
 	routes.RegisterEmployeeRoutes(server, employeeController)
+	routes.RegisterSaleRoutes(server, salesController)
+	routes.RegisterProductGroupRoutes(server, productGroupController)
+	routes.RegisterProductSubgroupRoutes(server, productSubgroupController)
 
 	server.Run(":8000")
 

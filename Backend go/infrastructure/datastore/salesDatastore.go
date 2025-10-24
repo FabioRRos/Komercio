@@ -35,24 +35,25 @@ func (d *SalesDatastore) Close() {
 func (d *SalesDatastore) NewSale(sales *entity.Sales) (int, error) {
 
 	query := `
-		insert into sales(
-		sale_id,
-		customer_id,
-		total_amount,
-		discount_amount,
-		final_amount,
-		sale_date,
-		sale_time,
-		payment_method,
-		saller_id,
-		sale_note
-		)VALUES($1, $2, $3, $4, $5, $6, $7, $8 ,$9 ,$10)	
-	`
+    INSERT INTO sales (
+        customer_id,
+        total_amount,
+        discount_amount,
+        final_amount,
+        sale_date,
+        sale_time,
+        payment_method,
+        seller_id,
+        sale_notes
+    )
+    VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
+    RETURNING sale_id
+`
 
-	rows, err := d.Conn.Query(
+	var saleID int
+	err := d.Conn.QueryRow(
 		context.Background(),
 		query,
-		sales.SalesId,
 		sales.CustomerId,
 		sales.TotalAmount,
 		sales.DiscountAmount,
@@ -62,22 +63,12 @@ func (d *SalesDatastore) NewSale(sales *entity.Sales) (int, error) {
 		sales.PaymentMethod,
 		sales.SellerId,
 		sales.SaleNotes,
-	)
+	).Scan(&saleID)
 
 	if err != nil {
 		return 0, fmt.Errorf("erro ao inserir a venda: %w", err)
 	}
-	defer rows.Close()
 
-	var SalesId int
-
-	err = rows.Scan(
-		&SalesId,
-	)
-
-	if err != nil {
-		return 0, fmt.Errorf("erro ao ler a linha da venda: %w", err)
-	}
-	return SalesId, nil
+	return saleID, nil
 
 }

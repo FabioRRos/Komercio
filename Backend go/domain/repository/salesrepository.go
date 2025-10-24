@@ -16,8 +16,8 @@ type salesRepository struct {
 }
 
 // ################################################# SalesRepository da interface
-func NewSalesDataStore(ds *datastore.SalesDatastore) SalesRepository {
-	return &salesRepository{ // salesRepository da struct
+func NewSalesRepository(ds *datastore.SalesDatastore) SalesRepository {
+	return &salesRepository{
 		datastore: ds,
 	}
 }
