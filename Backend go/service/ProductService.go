@@ -3,9 +3,11 @@ package service
 import (
 	"context"
 	"errors"
+	"fmt"
 
 	"github.com/fabioros/Komercio/domain/entity"
 	"github.com/fabioros/Komercio/domain/repository"
+	"github.com/jackc/pgx/v5"
 )
 
 type ProductService interface {
@@ -16,6 +18,7 @@ type ProductService interface {
 	UpdateProduct(ctx context.Context, product *entity.Product) (*entity.Product, error)
 	DeactivateProduct(ctx context.Context, id int) error
 	UpdateProductInputStock(ctx context.Context, productcodbar string, productStock int) (*entity.Product, error)
+	UpdateProductOutputStockTX(ctx context.Context, tx pgx.Tx, productcodbar string, productStock int) error
 }
 
 type productService struct {
@@ -116,4 +119,18 @@ func (s *productService) DeactivateProduct(ctx context.Context, id int) error {
 		return errors.New("id inválido")
 	}
 	return s.repo.DeactivateProduct(ctx, id)
+}
+
+func (s *productService) UpdateProductOutputStockTX(ctx context.Context, tx pgx.Tx, productcodbar string, productStock int) error {
+
+	if productcodbar == "" {
+		return errors.New("código de barras inválido")
+	}
+
+	if productStock <= 0 {
+
+		return errors.New(fmt.Errorf("Quantidade em estoque inválida %v", productStock).Error())
+	}
+
+	return s.repo.UpdateProductOutputStockTX(ctx, tx, productcodbar, productStock)
 }

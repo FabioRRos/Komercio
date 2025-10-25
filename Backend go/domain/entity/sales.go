@@ -1,6 +1,9 @@
 package entity
 
-import "time"
+import (
+	"fmt"
+	"time"
+)
 
 type Sales struct {
 	SalesId        int       `json:"sale_id"`
@@ -13,4 +16,12 @@ type Sales struct {
 	PaymentMethod  string    `json:"payment_method"`
 	SellerId       int       `json:"seller_id"`
 	SaleNotes      string    `json:"sale_notes"`
+}
+
+func ValidateSale(sale *Sales) error {
+	if sale.TotalAmount-sale.DiscountAmount != sale.FinalAmount {
+		return fmt.Errorf("o valor final da venda está incorreto, verifique os valores informados")
+	}
+
+	return nil
 }

@@ -70,9 +70,16 @@ func main() {
 			repository.NewSaleItemsRepository(saleItemsDatastore)),
 	)
 
-	fullSaleService := service.NewFullSaleService(service.NewSalesService(repository.NewSalesRepository(dbSales)),
-		service.NewSaleItemsService(repository.NewSaleItemsRepository(saleItemsDatastore)),
-		service.NewCashmovementService(repository.NewCashmovementsRepository(cashmovementDatastore)))
+	fullSaleService := service.NewFullSaleService(
+		service.NewSalesService(
+			repository.NewSalesRepository(dbSales)),
+		service.NewSaleItemsService(
+			repository.NewSaleItemsRepository(saleItemsDatastore)),
+		service.NewCashmovementService(
+			repository.NewCashmovementsRepository(cashmovementDatastore)),
+		service.NewProductService(
+			repository.NewProductRepository(dbProduct)),
+	)
 
 	fullSaleController := controller.NewFullSaleController(fullSaleService)
 

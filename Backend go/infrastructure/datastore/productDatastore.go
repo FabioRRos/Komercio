@@ -255,3 +255,38 @@ func (d *ProductDatastore) UpdateProductInputStock(productcodbar string, Product
 
 	return &p, nil
 }
+
+func (d *ProductDatastore) UpdateProductOutputStockTX(ctx context.Context, tx pgx.Tx, productcodbar string, ProductStock int) error {
+	query := `
+	UPDATE products SET
+		productstock = productstock - $2
+	WHERE productcodbar = $1
+	RETURNING id, productname, productprice, productcodbar, 
+	          productgroup, productsubgroup, status, productstock
+`
+
+	var p entity.Product
+
+	err := tx.QueryRow(ctx, query,
+		productcodbar,
+		ProductStock,
+	).Scan(
+		&p.Id,
+		&p.ProductName,
+		&p.ProductPrice,
+		&p.ProductCodBar,
+		&p.ProductGroup,
+		&p.ProductSubGroup,
+		&p.ProductStatus,
+		&p.ProductStock,
+	)
+
+	if err != nil {
+		if err == pgx.ErrNoRows {
+			return fmt.Errorf("produto com id %d não encontrado", productcodbar)
+		}
+		return fmt.Errorf("erro ao atualizar o estoque do produto: %w", err)
+	}
+
+	return nil
+}
