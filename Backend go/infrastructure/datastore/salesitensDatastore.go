@@ -33,7 +33,7 @@ func (d *SaleItemsDatastore) Close() {
 	}
 }
 
-// Inserir novo item de venda
+// ################################################# Inserir item de venda (sem transação)
 func (d *SaleItemsDatastore) CreateSaleItem(ctx context.Context, item *entity.SalesItens) error {
 	query := `
 		INSERT INTO sale_items (
@@ -56,7 +56,6 @@ func (d *SaleItemsDatastore) CreateSaleItem(ctx context.Context, item *entity.Sa
 		item.Quantity,
 		item.Total,
 	)
-
 	if err != nil {
 		return fmt.Errorf("erro ao inserir item da venda: %w", err)
 	}
@@ -64,7 +63,37 @@ func (d *SaleItemsDatastore) CreateSaleItem(ctx context.Context, item *entity.Sa
 	return nil
 }
 
-// Buscar todos os itens de venda
+// ################################################# Inserir item de venda (dentro de uma transação)
+func (d *SaleItemsDatastore) CreateSaleItemTx(ctx context.Context, tx pgx.Tx, item *entity.SalesItens) error {
+	query := `
+		INSERT INTO sale_items (
+			sale_id,
+			product_id,
+			product_name,
+			barcode,
+			unit_price,
+			quantity,
+			total
+		) VALUES ($1, $2, $3, $4, $5, $6, $7)
+	`
+
+	_, err := tx.Exec(ctx, query,
+		item.SaleId,
+		item.ProductId,
+		item.ProductName,
+		item.Barcode,
+		item.UnitPrice,
+		item.Quantity,
+		item.Total,
+	)
+	if err != nil {
+		return fmt.Errorf("erro ao inserir item da venda (Tx): %w", err)
+	}
+
+	return nil
+}
+
+// ################################################# Buscar todos os itens de venda
 func (d *SaleItemsDatastore) GetAllSaleItems(ctx context.Context) ([]*entity.SalesItens, error) {
 	query := `SELECT sale_item_id, sale_id, product_id, product_name, barcode, unit_price, quantity, total FROM sale_items`
 
@@ -97,7 +126,7 @@ func (d *SaleItemsDatastore) GetAllSaleItems(ctx context.Context) ([]*entity.Sal
 	return items, nil
 }
 
-// Buscar itens de venda por ID de venda
+// ################################################# Buscar itens de venda por ID de venda
 func (d *SaleItemsDatastore) GetItemsBySaleId(ctx context.Context, saleId int) ([]*entity.SalesItens, error) {
 	query := `
 		SELECT sale_item_id, sale_id, product_id, product_name, barcode, unit_price, quantity, total

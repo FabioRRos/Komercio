@@ -70,6 +70,12 @@ func main() {
 			repository.NewSaleItemsRepository(saleItemsDatastore)),
 	)
 
+	fullSaleService := service.NewFullSaleService(service.NewSalesService(repository.NewSalesRepository(dbSales)),
+		service.NewSaleItemsService(repository.NewSaleItemsRepository(saleItemsDatastore)),
+		service.NewCashmovementService(repository.NewCashmovementsRepository(cashmovementDatastore)))
+
+	fullSaleController := controller.NewFullSaleController(fullSaleService)
+
 	// Rotas
 	server.GET("/ping", func(ctx *gin.Context) { ctx.JSON(200, gin.H{"message": "pong"}) })
 
@@ -81,6 +87,7 @@ func main() {
 	routes.RegisterProductSubgroupRoutes(server, productSubgroupController)
 	routes.CashmovementRoutes(server, cashmovementController)
 	routes.RegisterSaleItemsRoutes(server, salesitensController)
+	routes.RegisterFullSaleRoutes(server, fullSaleController)
 
 	server.Run(":8000")
 

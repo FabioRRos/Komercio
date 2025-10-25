@@ -5,9 +5,11 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func RegisterFullSaleRoutes(server *gin.Engine, salesController *controller.SalesController) {
-	//	fullSaleRoutes := server.Group("/sales")
+// Aqui registramos as rotas relacionadas à venda completa (FullSale)
+func RegisterFullSaleRoutes(server *gin.Engine, fullSaleController *controller.FullSaleController) {
+	fullSaleRoutes := server.Group("/sales")
 	{
-		//fullSaleRoutes.PUT("/fullsale", salesController.CreateFullSale)
+		// POST /sales/fullsale → cria uma venda completa (venda + itens + movimentação de caixa)
+		fullSaleRoutes.POST("/fullsale", fullSaleController.CreateFullSale)
 	}
 }

@@ -19,7 +19,7 @@ func NewFullSaleController(fullSaleService service.FullSaleService) *FullSaleCon
 	}
 }
 
-// PUT /sales/fullsale
+// POST /sales/fullsale
 func (c *FullSaleController) CreateFullSale(ctx *gin.Context) {
 	var saleAggregate entity.SaleAggregate
 
@@ -30,12 +30,16 @@ func (c *FullSaleController) CreateFullSale(ctx *gin.Context) {
 	}
 
 	// 2️⃣ Chama o service para processar tudo
-	err := c.service.ProcessFullSale(ctx.Request.Context(), &saleAggregate)
+	// Aqui usamos o contexto do request HTTPcle
+	saleID, err := c.service.CreateFullSale(ctx.Request.Context(), &saleAggregate)
 	if err != nil {
 		ctx.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
 	}
 
 	// 3️⃣ Retorna sucesso
-	ctx.JSON(http.StatusOK, gin.H{"message": "Venda completa registrada com sucesso"})
+	ctx.JSON(http.StatusOK, gin.H{
+		"message": "Venda completa registrada com sucesso",
+		"sale_id": saleID,
+	})
 }
