@@ -10,7 +10,7 @@ namespace Komercio.Models
 {
     public class ProductDTO
     {
-        [JsonProperty("id_product")]
+        [JsonProperty("id")]
         public int idProduct { get; set; }
 
         [JsonProperty("product_name")]

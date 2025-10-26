@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Komercio.Models
 {
-    internal class SalesDTO
+    public class SalesDTO
     {
     
         public class SalesDto

@@ -22,14 +22,18 @@ namespace Komercio
         private readonly EmployeeService _employeeService;
         private readonly CustomerService _customerService;
         private readonly ProductService _productService;
+        private readonly ProductGroupService _productGroupService;
+        private readonly ProductSubgroupService _productSubgroupService;
 
 
-        public Home(EmployeeService empliyeeService, CustomerService customerService, ProductService productService )
+        public Home(EmployeeService empliyeeService, CustomerService customerService, ProductService productService, ProductGroupService productGroupService, ProductSubgroupService productSubgroupService)
         {
             InitializeComponent();
             _employeeService = empliyeeService;
             _customerService = customerService;
             _productService = productService;
+            _productGroupService = productGroupService;
+            _productSubgroupService =  productSubgroupService;
 
 
         }
@@ -82,7 +86,7 @@ namespace Komercio
 
         private void novaVendaToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            fmSalesProduct salesProduct = new fmSalesProduct();
+            fmSalesProduct salesProduct = new fmSalesProduct(_productService, _productGroupService, _productSubgroupService);
             salesProduct.ShowDialog();
         }
     }
