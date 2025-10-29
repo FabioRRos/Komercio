@@ -23,13 +23,15 @@ namespace Komercio
             string apiBaseUrl = "http://localhost:8000/";
 
             // Cria a instância do serviço da API
-            var employeeService = new EmployeeService(apiBaseUrl);       
+            var employeeService = new EmployeeService(apiBaseUrl);
             var customerService = new CustomerService(apiBaseUrl);
-            var customerProduct = new ProductService(apiBaseUrl);
+            var productService = new ProductService(apiBaseUrl);
+            var productgroupService = new ProductGroupService(apiBaseUrl);
+            var productrsuggroupService = new ProductSubgroupService(apiBaseUrl);
 
 
             // aqui estou aplicando a injeção de dependência manualmente
-            Application.Run(new Home(employeeService, customerService, customerProduct));
+            Application.Run(new Home(employeeService, customerService, productService, productgroupService, productrsuggroupService));
 
 
         }

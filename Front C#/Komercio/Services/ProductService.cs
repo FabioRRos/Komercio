@@ -59,6 +59,85 @@ namespace Komercio.Services
             }
         }
 
+        public async Task<ProductDTO> PutProductInStock(string barcode, int newStock)
+        {
+            // Monta o corpo JSON
+            var content = new StringContent(
+                JsonConvert.SerializeObject(new { product_stock = newStock }),
+                Encoding.UTF8,
+                "application/json"
+            );
+
+            // Faz a chamada PUT para a rota correta
+            var response = await _httpClient.PutAsync($"products/updateStock/{barcode}", content);
+
+            if (response.IsSuccessStatusCode)
+            {
+                var responseContent = await response.Content.ReadAsStringAsync();
+                var product = JsonConvert.DeserializeObject<ProductDTO>(responseContent);
+                return product;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        public async Task<List<ProductDTO>> GetProductInStockAsync()
+        {
+            // Retorna todos os produtos (pretendo salvar em um txt futuramente para garantir utilização offline)
+
+            var response = await _httpClient.GetAsync("products");
+                {
+                if (!response.IsSuccessStatusCode)
+                {
+                    return new List<ProductDTO>();
+
+                }
+
+
+                var returnJSON = await response.Content.ReadAsStringAsync();
+                var products = JsonConvert.DeserializeObject<List<ProductDTO>>(returnJSON);
+
+
+                // retorno simples para evitar "NULL"
+
+                if (products ==null)
+                {
+                    return new List<ProductDTO>();
+                }
+
+                return products;
+            }
+        }
+
+
+
+        public async Task <ProductDTO> GetProductByCodbad(string barcode)
+        {
+            var response = await _httpClient.GetAsync($"products/codbar/{barcode}");
+
+
+            if (!response.IsSuccessStatusCode) {
+                return new ProductDTO();
+            }
+
+            var returnJSON = await response.Content.ReadAsStringAsync();
+            var products = JsonConvert.DeserializeObject<ProductDTO>(returnJSON);
+
+
+            // retorno simples para evitar "NULL"
+
+            if (products == null)
+            {
+                return new ProductDTO();
+            }
+
+            return products;
+
+
+        }
+
 
     }
 }

@@ -48,10 +48,12 @@ namespace Komercio.UI.Forms
             mtbEmployeePassword.Enabled = false;
             mbtnSaveNewEmployee.Enabled = false;
             mbtnSeePassword.Enabled = false;
+            mtbEmployeePassword1.Enabled = false;
             mbtnNewEmployee.Enabled = true;
             //clear fields
             mtbEmployeeName.Text = "";
             mtbEmployeePassword.Text = "";
+            mtbEmployeePassword1.Text = "";
         }
 
         private void NewEmployee_Click()
@@ -60,6 +62,7 @@ namespace Komercio.UI.Forms
             mtbEmployeePassword.Enabled = true;
             mbtnSaveNewEmployee.Enabled = true;
             mbtnSeePassword.Enabled = true;
+            mtbEmployeePassword1.Enabled = true;
             mbtnNewEmployee.Enabled = false;
 
         
@@ -129,6 +132,13 @@ namespace Komercio.UI.Forms
                 mtbEmployeePassword.Focus();
                 return false;
             }
+
+            if (mtbEmployeePassword.Text != mtbEmployeePassword1.Text)
+            {
+                MessageBox.Show("As senhas não coincidem.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                mtbEmployeePassword1.Focus();
+                return false;
+            }
             return true;
         }
 
@@ -180,8 +190,10 @@ namespace Komercio.UI.Forms
         private async void mbtnSeePassword_Click(object sender, EventArgs e)
         {
             mtbEmployeePassword.PasswordChar = '\0';
+            mtbEmployeePassword1.PasswordChar = '\0';
             await Task.Delay(2000);
             mtbEmployeePassword.PasswordChar = '•';
+            mtbEmployeePassword1.PasswordChar = '•';
         }
 
 

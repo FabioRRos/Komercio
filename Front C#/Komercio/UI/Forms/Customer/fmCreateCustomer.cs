@@ -7,12 +7,14 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web.UI.Design;
 using System.Windows.Forms;
+using System.Windows.Forms.VisualStyles;
 using System.Xml.Linq;
 
 namespace Komercio.UI.Forms.Customer
@@ -30,15 +32,6 @@ namespace Komercio.UI.Forms.Customer
             this.MinimizeBox = true;
         }
 
-        private void materialCard1_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void fmCreateCustomer_Load(object sender, EventArgs e)
-        {
-
-        }
 
         private void InitializationTextBox()
         {
@@ -78,53 +71,28 @@ namespace Komercio.UI.Forms.Customer
             
         }
 
-        private void mtbCustomerFirstName_Enter(object sender, EventArgs e)
+        private  async void mtbCustomerDocument_Leave(object sender, EventArgs e)
         {
-            if (mtbCustomerFirstName.Text == "Nome")
-            {
-                mtbCustomerFirstName.Text = "";
-            }
-        }
 
-        private void mtbCustomerFirstName_Leave(object sender, EventArgs e)
-        {
-            if (mtbCustomerFirstName.Text == "")
-            {
-                mtbCustomerFirstName.Text = "Nome";
-            }
-        }
 
-        private void mtbCustomerLastName_Enter(object sender, EventArgs e)
-        {
-            if (mtbCustomerLastName.Text == "Sobrenome")
+           /* try // Fiz merda na validação
             {
-                mtbCustomerLastName.Text = "";
-            }
-        }
 
-        private void mtbCustomerLastName_Leave(object sender, EventArgs e)
-        {
-            if (mtbCustomerLastName.Text == "")
-            {
-                mtbCustomerLastName.Text = "Sobrenome";
-            }
-        }
+              var  (customer, isValid) = await _customerService.GetValidationCustomerDocument(mtbCustomerDocument.Text);
 
-        private void mtbCustomerDocument_Enter(object sender, EventArgs e)
-        {
-            if (mtbCustomerDocument.Text == "CPF")
-            {
-                mtbCustomerDocument.Text = "";
-            }
-        }
+                if (isValid == false)
+                {
+                    MessageBox.Show("CPF ou CNPJ inválido!", "Validação", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    mtbCustomerDocument.Text = "";
 
-        private void mtbCustomerDocument_Leave(object sender, EventArgs e)
-        {
-            if (mtbCustomerDocument.Text == "")
-            {
-                mtbCustomerDocument.Text = "CPF";
-                return;
+                    return;
+                }
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Erro ao validar documento: {ex.Message}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }*/
+
 
             if (mtbCustomerDocument.Text.Length == 11)
             {
@@ -145,29 +113,31 @@ namespace Komercio.UI.Forms.Customer
             if (mtbCustomerDocument.Text.Length != 14 && mtbCustomerDocument.Text.Length != 11)
             {
                 MessageBox.Show("Documento inválido! Insira um CPF ou CNPJ válido.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                mtbCustomerDocument.Text = "CPF";
+                mtbCustomerDocument.Text = "";
                 return;
             }
 
 
-
-
-
         }
+
+
+        public async Task<bool> ValidationDocumentAsync(string document)
+        {
+           var  (customer, isValid) =  await _customerService.GetValidationCustomerDocument(document);
+            return isValid;
+        }
+
 
         private void mtbCustomerPhone_Enter(object sender, EventArgs e)
         {
-            if (mtbCustomerPhone.Text == "Telefone Fixo")
-            {
-                mtbCustomerPhone.Text = "";
-            }
+         
         }
 
         private void mtbCustomerPhone_Leave(object sender, EventArgs e)
         {
             if (mtbCustomerPhone.Text == "" || mtbCustomerPhone.Text.Length!=10)
             {
-                mtbCustomerPhone.Text = "Telefone Fixo";
+                mtbCustomerPhone.Text = "";
             }
 
             if (mtbCustomerPhone.Text.Length == 10)
@@ -179,19 +149,13 @@ namespace Komercio.UI.Forms.Customer
             }
         }
 
-        private void mtbCustomerMobile_Enter(object sender, EventArgs e)
-        {
-            if (mtbCustomerMobile.Text == "Celular")
-            {
-                mtbCustomerMobile.Text = "";
-            }
-        }
+
 
         private void mtbCustomerMobile_Leave(object sender, EventArgs e)
         {
             if (mtbCustomerMobile.Text == "" || mtbCustomerMobile.Text.Length !=11)
             {
-                mtbCustomerMobile.Text = "Celular";
+                mtbCustomerMobile.Text = "";
                 return;
             }
 
@@ -204,121 +168,11 @@ namespace Komercio.UI.Forms.Customer
             }
         }
 
-        private void mtbCustomerZipcode_Enter(object sender, EventArgs e)
-        {
-            if (mtbCustomerZipcode.Text == "CEP")
-            {
-                mtbCustomerZipcode.Text = "";
-            }
-        }
-        private void mtbCustomerZipcode_Leave(object sender, EventArgs e)
-        {
-            if (mtbCustomerZipcode.Text == "")
-            {
-                mtbCustomerZipcode.Text = "CEP";
-            }
-        }
-
-        private void mtbCustomerAdress_Enter(object sender, EventArgs e)
-        {
-            if (mtbCustomerAdress.Text == "Endereço")
-            {
-                mtbCustomerAdress.Text = "";
-            }
-        }
-        private void mtbCustomerAdress_Leave(object sender, EventArgs e)
-        {
-            if (mtbCustomerAdress.Text == "")
-            {
-                mtbCustomerAdress.Text = "Endereço";
-            }
-        }
-
-        private void mtbCustomerNeighborhood_Enter(object sender, EventArgs e)
-        {
-            if (mtbCustomerNeighborhood.Text == "Bairro")
-            {
-                mtbCustomerNeighborhood.Text = "";
-            }
-        }
-        private void mtbCustomerNeighborhood_Leave(object sender, EventArgs e)
-        {
-            if (mtbCustomerNeighborhood.Text == "")
-            {
-                mtbCustomerNeighborhood.Text = "Bairro";
-            }
-        }
-
-        private void mtbCustomerCity_Enter(object sender, EventArgs e)
-        {
-            if (mtbCustomerCity.Text == "Cidade")
-            {
-                mtbCustomerCity.Text = "";
-            }
-        }
-
-        private void mtbCustomerCity_Leave(object sender, EventArgs e)
-        {
-            if (mtbCustomerCity.Text == "")
-            {
-                mtbCustomerCity.Text = "Cidade";
-            }
-        }
-
-        private void mtbCustomerState_Enter(object sender, EventArgs e)
-        {
-            if (mtbCustomerState.Text == "Estado")
-            {
-                mtbCustomerState.Text = "";
-            }
-        }
-        private void mtbCustomerState_Leave(object sender, EventArgs e)
-        {
-            if (mtbCustomerState.Text == "")
-            {
-                mtbCustomerState.Text = "Estado";
-            }
-        }
-
-        private void mtbCustomerCountry_Enter(object sender, EventArgs e)
-        {
-            if (mtbCustomerCountry.Text == "País")
-            {
-                mtbCustomerCountry.Text = "";
-            }
-        }
-
-        private void mtbCustomerCountry_Leave(object sender, EventArgs e)
-        {
-            if (mtbCustomerCountry.Text == "")
-            {
-                mtbCustomerCountry.Text = "País";
-            }
-        }
-
-        private void mtbCustomerEmail_Enter(object sender, EventArgs e)
-        {
-            if (mtbCustomerEmail.Text == "E-mail")
-            {
-                mtbCustomerEmail.Text = "";
-            }
-        }
-
-        private void mtbCustomerEmail_Leave(object sender, EventArgs e)
-        {
-            if (mtbCustomerEmail.Text == "")
-            {
-                mtbCustomerEmail.Text = "E-mail";
-            }
-
-
-        }
-
         private void mtbCustomerZipcode_Leave_1(object sender, EventArgs e)
         {
             if (mtbCustomerZipcode.Text == "" || mtbCustomerZipcode.Text.Length != 8)
             {
-                mtbCustomerZipcode.Text = "CEP";
+                mtbCustomerZipcode.Text = "";
             }
 
             if (mtbCustomerZipcode.Text.Length == 8)
@@ -357,72 +211,6 @@ namespace Komercio.UI.Forms.Customer
                 mtbCustomerState.Text = retornaCEPEntitie.Uf;
                 mtbCustomerCountry.Text = "Brasil";
             }
-        }
-
-        private void mtbCustomerAdress_Leave_1(object sender, EventArgs e)
-        {
-            if (mtbCustomerAdress.Text == "")
-            {
-                mtbCustomerAdress.Text = "Endereço";
-            }
-
-        }
-
-        private void mtbCustomerNeighborhood_Leave_1(object sender, EventArgs e)
-        {
-            if (mtbCustomerNeighborhood.Text == "")
-            {
-                mtbCustomerNeighborhood.Text = "Bairro";
-            }
-        }
-
-        private void mtbCustomerCity_Leave_1(object sender, EventArgs e)
-        {
-            if (mtbCustomerCity.Text == "")
-            {
-                mtbCustomerCity.Text = "Cidade";
-            }
-
-        }
-
-        private void mtbCustomerState_Leave_1(object sender, EventArgs e)
-        {
-            if (mtbCustomerState.Text == "")
-            {
-                mtbCustomerState.Text = "Estado";
-            }
-        }
-
-        private void mtbCustomerCountry_Leave_1(object sender, EventArgs e)
-        {
-            if (mtbCustomerCountry.Text == "")
-            {
-                mtbCustomerCountry.Text = "País";
-            }
-        }
-
-        private void mtbCustomerEmail_Leave_1(object sender, EventArgs e)
-        {
-            if (mtbCustomerEmail.Text == "")
-            {
-                mtbCustomerEmail.Text = "E-mail";
-            }
-
-        }
-
-        private void materialMaskedTextBox1_Click(object sender, EventArgs e)
-        {
-     
-        }
-
-        private void materialMaskedTextBox1_Leave(object sender, EventArgs e)
-        {
-
-        }
-
-        private void mtbCustomerMobile_Click(object sender, EventArgs e)
-        {
-           
         }
 
         private void mbtNewCustomer_Click(object sender, EventArgs e)
@@ -489,21 +277,24 @@ namespace Komercio.UI.Forms.Customer
 
       private void clearFields()
         {
-            mtbCustomerFirstName.Text = "Nome";
-            mtbCustomerLastName.Text = "Sobrenome";
-            mtbCustomerDocument.Text = "CPF";
-            mtbCustomerPhone.Text = "Telefone Fixo";
-            mtbCustomerMobile.Text = "Celular";
-            mtbCustomerZipcode.Text = "CEP";
-            mtbCustomerAdress.Text = "Endereço";
-            mtbCustomerNeighborhood.Text = "Bairro";
-            mtbCustomerCity.Text = "Cidade";
-            mtbCustomerCountry.Text = "País";
-            mtbCustomerState.Text = "Estado";
-            mtbCustomerEmail.Text = "E-mail";
+            mtbCustomerFirstName.Text = "";
+            mtbCustomerLastName.Text = "";
+            mtbCustomerDocument.Text = "";
+            mtbCustomerPhone.Text = "";
+            mtbCustomerMobile.Text = "";
+            mtbCustomerZipcode.Text = "";
+            mtbCustomerAdress.Text = "";
+            mtbCustomerNeighborhood.Text = "";
+            mtbCustomerCity.Text = "";
+            mtbCustomerCountry.Text = "";
+            mtbCustomerState.Text = "";
+            mtbCustomerEmail.Text = "";
         }
 
+        private void fmCreateCustomer_Load(object sender, EventArgs e)
+        {
 
+        }
     }
 }
 

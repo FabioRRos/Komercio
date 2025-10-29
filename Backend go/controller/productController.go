@@ -47,6 +47,24 @@ func (c *ProductController) GetProductById(ctx *gin.Context) {
 	ctx.JSON(http.StatusOK, product)
 }
 
+// GET /products/getbycodbar/:codbar
+func (c *ProductController) GetProductByCodbar(ctx *gin.Context) {
+	productCodBar := ctx.Param("productcodbar")
+
+	if productCodBar == "" {
+		ctx.JSON(http.StatusBadRequest, gin.H{"error": "Código de barras não informado"})
+		return
+	}
+
+	product, err := c.service.SelectProductByCodBar(ctx, productCodBar)
+	if err != nil {
+		ctx.JSON(http.StatusNotFound, gin.H{"error": err.Error()})
+		return
+	}
+
+	ctx.JSON(http.StatusOK, product)
+}
+
 // POST /products
 func (c *ProductController) CreateProduct(ctx *gin.Context) {
 	var product entity.Product
@@ -96,6 +114,7 @@ type StockUpdateRequest struct {
 // put /updateStock/:productcodbar
 func (c *ProductController) UpdateProductInputStock(ctx *gin.Context) {
 	var productStock StockUpdateRequest
+
 	if err := ctx.ShouldBindJSON(&productStock); err != nil {
 		ctx.JSON(http.StatusBadRequest, gin.H{"error": "Parâmetros inválidos"})
 		return

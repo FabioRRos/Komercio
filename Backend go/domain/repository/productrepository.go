@@ -3,6 +3,8 @@ package repository
 import (
 	"context"
 
+	"github.com/jackc/pgx/v5"
+
 	"github.com/fabioros/Komercio/domain/entity"
 	"github.com/fabioros/Komercio/infrastructure/datastore"
 )
@@ -14,6 +16,8 @@ type ProductRepository interface {
 	UpdateProduct(ctx context.Context, product *entity.Product) (*entity.Product, error)
 	DeactivateProduct(ctx context.Context, id int) error
 	UpdateProductInputStock(ctx context.Context, productcodbar string, productStock int) (*entity.Product, error)
+	UpdateProductOutputStockTX(ctx context.Context, tx pgx.Tx, productcodbar string, productStock int) error
+	SelectProductByCodBar(ctx context.Context, productcodbar string) (*entity.Product, error)
 }
 
 type productRepository struct {
@@ -38,6 +42,10 @@ func (r *productRepository) SelectProductById(ctx context.Context, id int) (*ent
 	return r.datastore.SelectProductById(id)
 }
 
+func (r *productRepository) SelectProductByCodBar(ctx context.Context, productcodbar string) (*entity.Product, error) {
+	return r.datastore.SelectProductByCodBar(productcodbar)
+}
+
 func (r *productRepository) UpdateProduct(ctx context.Context, product *entity.Product) (*entity.Product, error) {
 	return r.datastore.UpdateProduct(product)
 }
@@ -48,4 +56,8 @@ func (r *productRepository) UpdateProductInputStock(ctx context.Context, product
 
 func (r *productRepository) DeactivateProduct(ctx context.Context, id int) error {
 	return r.datastore.DeactivateProduct(id)
+}
+
+func (r *productRepository) UpdateProductOutputStockTX(ctx context.Context, tx pgx.Tx, productcodbar string, productStock int) error {
+	return r.datastore.UpdateProductOutputStockTX(ctx, tx, productcodbar, productStock)
 }

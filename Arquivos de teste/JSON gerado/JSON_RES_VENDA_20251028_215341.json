@@ -1,0 +1,58 @@
+﻿{
+  "sale": {
+    "SaleId": 0,
+    "customer_id": 0,
+    "total_amount": 0.0,
+    "discount_amount": 0.0,
+    "final_amount": 0.0,
+    "sale_date": "0001-01-01T00:00:00",
+    "sale_time": null,
+    "payment_method": null,
+    "seller_id": 0,
+    "sale_notes": null
+  },
+  "items": [
+    {
+      "product_id": 0,
+      "product_name": "Cabo Lightning iPhone Original Style",
+      "barcode": "789000027",
+      "unit_price": 39.9,
+      "quantity": 1,
+      "total": 39.9
+    },
+    {
+      "product_id": 0,
+      "product_name": "TV Box MXQ Pro 5G",
+      "barcode": "789000032",
+      "unit_price": 229.9,
+      "quantity": 1,
+      "total": 229.9
+    },
+    {
+      "product_id": 0,
+      "product_name": "Power Bank 10.000mAh",
+      "barcode": "789000029",
+      "unit_price": 119.9,
+      "quantity": 1,
+      "total": 119.9
+    },
+    {
+      "product_id": 0,
+      "product_name": "Slime Glitter Azul",
+      "barcode": "789000042",
+      "unit_price": 13.9,
+      "quantity": 12,
+      "total": 166.799988
+    }
+  ],
+  "cash_movement": {
+    "movement_id": 0,
+    "sale_id": 0,
+    "movement_type": "Entrada",
+    "description": null,
+    "amount": 556.5,
+    "payment_method": "Dinheiro",
+    "movement_datetime": "2025-10-28T21:53:41.1326243-03:00",
+    "seller_id": 1
+  }
+}

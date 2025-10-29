@@ -125,6 +125,41 @@ func (d *ProductDatastore) SelectProductById(id int) (*entity.Product, error) {
 	return &p, nil
 }
 
+// select. Eu chamo o ponteiro de d (productDatastore) e retorno um slice de produto + um erro
+func (d *ProductDatastore) SelectProductByCodBar(productCodBar string) (*entity.Product, error) {
+	query := `
+		SELECT 
+			id, ProductName, ProductPrice, ProductCodBar, 
+			ProductGroup, ProductSubGroup, status, ProductStock 
+		FROM products 
+		WHERE ProductCodBar = $1
+	`
+
+	var p entity.Product
+
+	err := d.Conn.QueryRow(context.Background(), query, productCodBar).Scan(
+		&p.Id,
+		&p.ProductName,
+		&p.ProductPrice,
+		&p.ProductCodBar,
+		&p.ProductGroup,
+		&p.ProductSubGroup,
+		&p.ProductStatus,
+		&p.ProductStock,
+	)
+
+	if err != nil {
+		// caso o produto não exista
+		if err == pgx.ErrNoRows {
+			return nil, fmt.Errorf("produto com id %d não encontrado", productCodBar)
+		}
+		// outro erro qualquer (banco, conexão, etc.)
+		return nil, fmt.Errorf("erro ao buscar produto: %w", err)
+	}
+
+	return &p, nil
+}
+
 func (d *ProductDatastore) UpdateProduct(product *entity.Product) (*entity.Product, error) {
 	query := `
 		UPDATE products SET
@@ -219,4 +254,39 @@ func (d *ProductDatastore) UpdateProductInputStock(productcodbar string, Product
 	}
 
 	return &p, nil
+}
+
+func (d *ProductDatastore) UpdateProductOutputStockTX(ctx context.Context, tx pgx.Tx, productcodbar string, ProductStock int) error {
+	query := `
+	UPDATE products SET
+		productstock = productstock - $2
+	WHERE productcodbar = $1
+	RETURNING id, productname, productprice, productcodbar, 
+	          productgroup, productsubgroup, status, productstock
+`
+
+	var p entity.Product
+
+	err := tx.QueryRow(ctx, query,
+		productcodbar,
+		ProductStock,
+	).Scan(
+		&p.Id,
+		&p.ProductName,
+		&p.ProductPrice,
+		&p.ProductCodBar,
+		&p.ProductGroup,
+		&p.ProductSubGroup,
+		&p.ProductStatus,
+		&p.ProductStock,
+	)
+
+	if err != nil {
+		if err == pgx.ErrNoRows {
+			return fmt.Errorf("produto com id %d não encontrado", productcodbar)
+		}
+		return fmt.Errorf("erro ao atualizar o estoque do produto: %w", err)
+	}
+
+	return nil
 }

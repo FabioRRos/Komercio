@@ -2,9 +2,8 @@ package entity
 
 import (
 	"fmt"
-	"strconv"
-
 	"math/rand"
+	"strconv"
 	"time"
 )
 

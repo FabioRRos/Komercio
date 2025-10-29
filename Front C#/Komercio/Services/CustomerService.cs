@@ -6,6 +6,8 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using System.Diagnostics;
+using System.ComponentModel;
+using System.Windows.Forms.VisualStyles;
 
 
 namespace Komercio.Services
@@ -30,9 +32,7 @@ namespace Komercio.Services
         {
             var json = JsonConvert.SerializeObject(customer);
             var content = new StringContent(json, Encoding.UTF8, "application/json");
-
             var response = await _httpClient.PostAsync("customer", content);
-
             var message = await response.Content.ReadAsStringAsync();
             return (response.IsSuccessStatusCode, message);
         }
@@ -45,24 +45,53 @@ namespace Komercio.Services
         public async Task<List<CustomerDto>> GetAllCustomersAsync()
         {
             var response = await _httpClient.GetAsync("customer");
-
             if (!response.IsSuccessStatusCode)
             {
                 return new List<CustomerDto>();
             }
-
             var resultJson = await response.Content.ReadAsStringAsync();
-
             var customers = JsonConvert.DeserializeObject<List<CustomerDto>>(resultJson);
 
-            // Retorno simples (explícito para evitar 'null')
+            // Retorno simples para evitar 'nil'
             if (customers == null)
             {
                 return new List<CustomerDto>();
             }
-
             return customers;
         }
+
+        public async Task<(CustomerDto customer, bool encontrado)> GetValidationCustomerDocument(string document)
+        {
+            try
+            {
+                var response = await _httpClient.GetAsync($"customer/ValidationDocumentNumber/{document}");
+
+                // Se a API retornou 404 ou erro similar
+                if (!response.IsSuccessStatusCode)
+                    return (new CustomerDto(), false);
+
+                var resultJson = await response.Content.ReadAsStringAsync();
+
+                // Desserializa o JSON do cliente
+                var customer = JsonConvert.DeserializeObject<CustomerDto>(resultJson);
+
+                // Se veio nulo, retorna falso
+                if (customer == null)
+                    return (new CustomerDto(), false);
+
+                // Cliente encontrado
+                return (customer, true);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Erro ao validar documento: {ex.Message}");
+                return (new CustomerDto(), false);
+            }
+        }
+
+
+
+
 
         // GET /customer/:id
         // Busca um cliente pelo ID
@@ -87,9 +116,6 @@ namespace Komercio.Services
             }
 
             return customers;
-
-
-
         }
 
 
