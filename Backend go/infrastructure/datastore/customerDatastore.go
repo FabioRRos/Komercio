@@ -333,3 +333,32 @@ func (d *CustomerDatastore) SelectCustomerByName(name string) ([]*entity.Custome
 
 	return customers, nil
 }
+
+func (d *CustomerDatastore) ValidateDocument(doc string) (*entity.Customer, error) {
+
+	query := `
+		SELECT
+			CustomerId,
+			CustomerFirstName,
+			CustomerLastName,
+			CustomerDocument
+		FROM Customers
+		WHERE CustomerDocument =  $1
+	`
+	var c entity.Customer
+
+	err := d.Conn.QueryRow(context.Background(), query, doc).Scan(
+		&c.CustomerID,
+		&c.CustomerFirstName,
+		&c.CustomerLastName,
+		&c.CustomerDocument)
+
+	if err != nil {
+		if err == pgx.ErrNoRows {
+			return nil, fmt.Errorf("cliente com documento %d não encontrado", c.CustomerID)
+		}
+		return nil, fmt.Errorf("erro ao buscar cliente: %w", err)
+	}
+
+	return &c, nil
+}

@@ -14,6 +14,7 @@ type CustomerRepository interface {
 	UpdateCustomer(ctx context.Context, customer *entity.Customer) (*entity.Customer, error)
 	DeactivateCustomer(ctx context.Context, id int) error
 	SelectCustomerByName(ctx context.Context, name string) ([]*entity.Customer, error)
+	ValidateDocument(ctx context.Context, doc string) (*entity.Customer, error)
 }
 
 type customerRepository struct {
@@ -48,4 +49,8 @@ func (r *customerRepository) DeactivateCustomer(ctx context.Context, id int) err
 
 func (r *customerRepository) SelectCustomerByName(ctx context.Context, name string) ([]*entity.Customer, error) {
 	return r.datastore.SelectCustomerByName(name)
+}
+
+func (r *customerRepository) ValidateDocument(ctx context.Context, doc string) (*entity.Customer, error) {
+	return r.datastore.ValidateDocument(doc)
 }

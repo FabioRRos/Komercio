@@ -3,6 +3,7 @@ package service
 import (
 	"context"
 	"errors"
+	"fmt"
 
 	"github.com/fabioros/Komercio/domain/entity"
 	"github.com/fabioros/Komercio/domain/repository"
@@ -15,7 +16,7 @@ type CustomerService interface {
 	UpdateCustomer(ctx context.Context, customer *entity.Customer) (*entity.Customer, error)
 	DeactivateCustomer(ctx context.Context, id int) error
 	SelectCustomerByName(ctx context.Context, name string) ([]*entity.Customer, error)
-	ValidateDocument(doc string) error
+	ValidateDocument(ctx context.Context, doc string) (*entity.Customer, error)
 }
 
 type customerService struct {
@@ -116,14 +117,18 @@ func (s *customerService) SelectCustomerByName(ctx context.Context, name string)
 	return customers, nil
 }
 
-func (dc *customerService) ValidateDocument(doc string) error {
+func (dc *customerService) ValidateDocument(ctx context.Context, doc string) (*entity.Customer, error) {
 
 	validationStatus := entity.ValidateDocumentNumber(doc)
 
-	if validationStatus {
-		return nil
-	} else {
-		return errors.New("CPF ou CNPJ Invalido")
+	if !validationStatus {
+		return nil, errors.New("CPF ou CNPJ Invalido")
 	}
 
+	customer, err := dc.repo.ValidateDocument(ctx, doc)
+
+	if err != nil {
+		return nil, fmt.Errorf("Cliente não localizado %v", err)
+	}
+	return customer, nil
 }

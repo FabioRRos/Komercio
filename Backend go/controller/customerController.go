@@ -99,14 +99,14 @@ func (c *CustomerController) GetValidateDocumentNumber(ctx *gin.Context) {
 
 	}
 
-	statusReturn := c.service.ValidateDocument(doc)
+	customer, err := c.service.ValidateDocument(ctx, doc)
 
-	if statusReturn != nil {
-		ctx.JSON(http.StatusOK, false)
-	} else {
-		ctx.JSON(http.StatusOK, true)
-
+	if err != nil {
+		ctx.JSON(http.StatusNotFound, gin.H{"message": "Cliente não encontrado"})
+		return
 	}
+
+	ctx.JSON(http.StatusOK, customer)
 
 }
 
