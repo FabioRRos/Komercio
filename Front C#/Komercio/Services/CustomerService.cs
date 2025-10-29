@@ -60,24 +60,35 @@ namespace Komercio.Services
             return customers;
         }
 
-        public async Task<bool> GetValidationCustomerDocument(string document)
+        public async Task<(CustomerDto customer, bool encontrado)> GetValidationCustomerDocument(string document)
         {
             try
             {
                 var response = await _httpClient.GetAsync($"customer/ValidationDocumentNumber/{document}");
 
+                // Se a API retornou 404 ou erro similar
                 if (!response.IsSuccessStatusCode)
-                    return false;
+                    return (new CustomerDto(), false);
 
                 var resultJson = await response.Content.ReadAsStringAsync();
-                return JsonConvert.DeserializeObject<bool>(resultJson);
+
+                // Desserializa o JSON do cliente
+                var customer = JsonConvert.DeserializeObject<CustomerDto>(resultJson);
+
+                // Se veio nulo, retorna falso
+                if (customer == null)
+                    return (new CustomerDto(), false);
+
+                // Cliente encontrado
+                return (customer, true);
             }
             catch (Exception ex)
             {
                 Console.WriteLine($"Erro ao validar documento: {ex.Message}");
-                return false;
+                return (new CustomerDto(), false);
             }
         }
+
 
 
 

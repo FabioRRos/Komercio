@@ -20,7 +20,9 @@ namespace Komercio.Models
         public int customer_account_id { get; set; } = 0;
         public bool customer_status { get; set; } = true;
 
-        public CustomerDto() { }
+        public CustomerDto() 
+        { 
+        }
 
         public CustomerDto(string firstName, string lastName, string document)
         {

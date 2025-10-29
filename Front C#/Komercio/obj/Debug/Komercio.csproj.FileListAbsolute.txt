@@ -20,3 +20,4 @@ C:\Projeto Komercial\Komercio\Front C#\Komercio\obj\Debug\Komercio.UI.Forms.Cust
 C:\Projeto Komercial\Komercio\Front C#\Komercio\obj\Debug\Komercio.UI.Forms.Product.fmCreateProduct.resources
 C:\Projeto Komercial\Komercio\Front C#\Komercio\obj\Debug\Komercio.UI.Forms.Product.fmImputProduct.resources
 C:\Projeto Komercial\Komercio\Front C#\Komercio\obj\Debug\Komercio.UI.Forms.Sales.fmSalesProduct.resources
+C:\Projeto Komercial\Komercio\Front C#\Komercio\obj\Debug\Komercio.UI.Forms.Sales.fmSalePaymant.resources

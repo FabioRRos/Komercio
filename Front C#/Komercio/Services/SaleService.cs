@@ -22,6 +22,12 @@ namespace Komercio.Services
         //LISTA DE PRODUTOS EM ESTOQUE. AQUI POSSO MANIPULAR O ESTOQUE QUANDO FOR PRO CARRINHO.
         public List<ProductDTO> listaDeprodutosPraUtilizarNoForm = new List<ProductDTO>();
 
+
+        // dicionário para não perder tempo com foreach
+        private Dictionary<string, ProductDTO> produtosPorCodigo = new Dictionary<string, ProductDTO>();
+
+        private float some = 0;
+
         public async Task loaddbListaproduto(ProductService productService)
         {
             listaDeprodutosPraUtilizarNoForm = await productService.GetProductInStockAsync();
@@ -40,13 +46,23 @@ namespace Komercio.Services
                     }
                 }
             }
+
+            // peenche o dicionário
+            produtosPorCodigo.Clear();
+            foreach (ProductDTO produto in listaDeprodutosPraUtilizarNoForm)
+            {
+                if (!produtosPorCodigo.ContainsKey(produto.productCodbar))
+                {
+                    produtosPorCodigo.Add(produto.productCodbar, produto);
+                }
+            }
         }
 
 
 
         public ProductDTO buscaprodutonalista(string cod)
         {
-            foreach (ProductDTO product in listaDeprodutosPraUtilizarNoForm)
+            /*foreach (ProductDTO product in listaDeprodutosPraUtilizarNoForm)
             {
                 if (product.productCodbar.Contains(cod))
                 {
@@ -55,7 +71,17 @@ namespace Komercio.Services
 
             }
             
-            return null;
+            return null;*/
+
+
+            ProductDTO produtoEncontrado = null;
+
+            if (produtosPorCodigo.ContainsKey(cod))
+            {
+                produtoEncontrado = produtosPorCodigo[cod];
+            }
+
+            return produtoEncontrado;
 
         }
 
@@ -64,18 +90,67 @@ namespace Komercio.Services
 
             _productCar.Add(sale);
 
-
+            /*
             foreach (ProductDTO product in listaDeprodutosPraUtilizarNoForm)
             {
                 if (product.productCodbar.Contains(sale.Barcode))
                 {
                     product.productStock -= sale.Quantity;
                 }
+            }*/
+
+
+            ProductDTO produto = buscaprodutonalista(sale.Barcode);
+            if (produto != null)
+            {
+                produto.productStock = produto.productStock - sale.Quantity;
+                some += sale.UnitPrice * sale.Quantity;
             }
-
-
         }
 
+        public bool RemoveItemCar(string codbar)
+        {
+            SalesItensDTO item = null;
+
+            foreach (SalesItensDTO p in _productCar)
+            {
+                if (p.Barcode == codbar)
+                {
+                    item = p;
+                    break;
+                }
+            }
+
+            if (item != null)
+            {
+                ProductDTO produto = buscaprodutonalista(codbar);
+                if (produto != null)
+                {
+                    produto.productStock += item.Quantity;
+                }
+
+                _productCar.Remove(item);
+
+                some -= item.UnitPrice*item.Quantity ;
+                return true;
+
+            }
+
+            return false;
+        }
+
+
+        public float SomeAllItens()
+        {
+            return some;
+        }
+
+
+
+        public BindingList<SalesItensDTO> ReturnDTO()
+        {
+            return _productCar;
+        }
 
     }
 }

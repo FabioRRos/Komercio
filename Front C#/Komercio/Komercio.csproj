@@ -77,6 +77,7 @@
     <Compile Include="Services\ProductGroupService.cs" />
     <Compile Include="Services\ProductService.cs" />
     <Compile Include="Services\ProductSubgroupService.cs" />
+    <Compile Include="Services\SaleFinalizerService.cs" />
     <Compile Include="Services\SaleService.cs" />
     <Compile Include="Services\teste.cs" />
     <Compile Include="UI\Forms\Customer\fmChangeCustomer.cs">
@@ -115,6 +116,12 @@
     <Compile Include="UI\Forms\Product\fmImputProduct.Designer.cs">
       <DependentUpon>fmImputProduct.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\Forms\Sales\fmSalePaymant.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Forms\Sales\fmSalePaymant.Designer.cs">
+      <DependentUpon>fmSalePaymant.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\Forms\Sales\fmSalesProduct.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -151,6 +158,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Forms\Product\fmImputProduct.resx">
       <DependentUpon>fmImputProduct.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Forms\Sales\fmSalePaymant.resx">
+      <DependentUpon>fmSalePaymant.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Forms\Sales\fmSalesProduct.resx">
       <DependentUpon>fmSalesProduct.cs</DependentUpon>

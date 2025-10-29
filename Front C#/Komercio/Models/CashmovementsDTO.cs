@@ -7,15 +7,16 @@ using System.Threading.Tasks;
 
 namespace Komercio.Models
 {
-    internal class CashmovementsDTO
+    public class CashovementsDTO
     {
-        public class CashMovementsDTO
-        {
-            [JsonProperty("movement_id")]
-            public int movementId { get; set; }
 
-            [JsonProperty("sale_id")]
-            public int saleId { get; set; }
+
+
+        [JsonIgnore]
+        public int movementId { get; set; }
+
+        [JsonIgnore]
+        public int saleId { get; set; }
 
             [JsonProperty("movement_type")]
             public string movementType { get; set; }
@@ -34,7 +35,7 @@ namespace Komercio.Models
 
             [JsonProperty("seller_id")]
             public int sellerId { get; set; }
-        }
+        
 
     }
 }

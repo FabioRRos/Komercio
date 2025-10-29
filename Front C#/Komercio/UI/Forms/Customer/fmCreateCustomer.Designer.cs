@@ -76,7 +76,6 @@
             this.mtbCustomerFirstName.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.mtbCustomerFirstName.TrailingIcon = null;
             this.mtbCustomerFirstName.UseSystemPasswordChar = false;
-
             // 
             // mtbCustomerLastName
             // 
@@ -109,7 +108,6 @@
             this.mtbCustomerLastName.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.mtbCustomerLastName.TrailingIcon = null;
             this.mtbCustomerLastName.UseSystemPasswordChar = false;
-
             // 
             // mtbCustomerDocument
             // 
@@ -476,6 +474,7 @@
             this.Name = "fmCreateCustomer";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Novo cliente";
+            this.Load += new System.EventHandler(this.fmCreateCustomer_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

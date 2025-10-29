@@ -75,9 +75,10 @@ namespace Komercio.UI.Forms.Customer
         {
 
 
-            try
+           /* try // Fiz merda na validação
             {
-                bool isValid = await _customerService.GetValidationCustomerDocument(mtbCustomerDocument.Text);
+
+              var  (customer, isValid) = await _customerService.GetValidationCustomerDocument(mtbCustomerDocument.Text);
 
                 if (isValid == false)
                 {
@@ -90,7 +91,7 @@ namespace Komercio.UI.Forms.Customer
             catch (Exception ex)
             {
                 MessageBox.Show($"Erro ao validar documento: {ex.Message}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            }*/
 
 
             if (mtbCustomerDocument.Text.Length == 11)
@@ -122,7 +123,7 @@ namespace Komercio.UI.Forms.Customer
 
         public async Task<bool> ValidationDocumentAsync(string document)
         {
-            bool isValid = await _customerService.GetValidationCustomerDocument(document);
+           var  (customer, isValid) =  await _customerService.GetValidationCustomerDocument(document);
             return isValid;
         }
 
@@ -290,7 +291,10 @@ namespace Komercio.UI.Forms.Customer
             mtbCustomerEmail.Text = "";
         }
 
+        private void fmCreateCustomer_Load(object sender, EventArgs e)
+        {
 
+        }
     }
 }
 

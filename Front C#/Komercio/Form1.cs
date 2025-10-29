@@ -84,10 +84,12 @@ namespace Komercio
             imputProduct.ShowDialog();
         }
 
-        private void novaVendaToolStripMenuItem_Click(object sender, EventArgs e)
+        private async void novaVendaToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            fmSalesProduct salesProduct = new fmSalesProduct(_productService, _productGroupService, _productSubgroupService);
+            fmSalesProduct salesProduct = new fmSalesProduct(_productService, _productGroupService, _productSubgroupService, _customerService);
             salesProduct.ShowDialog();
         }
+
+
     }
 }
