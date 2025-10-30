@@ -60,13 +60,28 @@ func (c *EmployeerController) Login(ctx *gin.Context) {
 	ctx.JSON(http.StatusOK, gin.H{"success": true})
 }
 
+type NameAndID struct {
+	ID   int    `json:"id"`
+	Name string `json:"name"`
+}
+
 func (c *EmployeerController) GetActiveEmployeeNames(ctx *gin.Context) {
-	names, err := c.service.GetActiveEmployeeNames(context.Background())
+	var retorno []NameAndID
+
+	ids, names, err := c.service.GetActiveEmployeeNames(context.Background())
 	if err != nil {
 		ctx.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
 	}
-	ctx.JSON(http.StatusOK, names)
+
+	for i := range ids {
+		retorno = append(retorno, NameAndID{
+			ID:   ids[i],
+			Name: names[i],
+		})
+	}
+
+	ctx.JSON(http.StatusOK, retorno)
 }
 
 type UpdatePasswordRequest struct {

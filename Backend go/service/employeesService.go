@@ -11,7 +11,7 @@ import (
 type EmployeeService interface {
 	CreateEmployee(ctx context.Context, employee *entity.Employees) error
 	ValidateLogin(ctx context.Context, login, password string) (bool, error)
-	GetActiveEmployeeNames(ctx context.Context) ([]string, error)
+	GetActiveEmployeeNames(ctx context.Context) ([]int, []string, error)
 	UpdateEmployeePassword(ctx context.Context, login, newPassword string) error
 	UpdateEmployeeName(ctx context.Context, login, newName string) error
 	DeactivateEmployee(ctx context.Context, login string) error
@@ -48,7 +48,7 @@ func (s *employeeService) ValidateLogin(ctx context.Context, login, password str
 	return s.repo.ValidateLogin(ctx, login, password)
 }
 
-func (s *employeeService) GetActiveEmployeeNames(ctx context.Context) ([]string, error) {
+func (s *employeeService) GetActiveEmployeeNames(ctx context.Context) ([]int, []string, error) {
 	return s.repo.SelectActiveEmployeeNames(ctx)
 }
 
