@@ -29,7 +29,8 @@ func main() {
 	defer cashmovementDatastore.Close()
 	saleItemsDatastore := datastore.NewSaleItemsDatastore()
 	defer saleItemsDatastore.Close()
-
+	reportDatastore := datastore.NewConReportDataStore()
+	defer reportDatastore.Close()
 	//#####################################################
 	//Injeção de dependências
 
@@ -81,6 +82,11 @@ func main() {
 			repository.NewProductRepository(dbProduct)),
 	)
 
+	reportController := controller.NewReportController(
+		service.NewSaleReportService(
+			repository.NewReportRepository(reportDatastore)),
+	)
+
 	fullSaleController := controller.NewFullSaleController(fullSaleService)
 
 	// Rotas
@@ -95,6 +101,7 @@ func main() {
 	routes.CashmovementRoutes(server, cashmovementController)
 	routes.RegisterSaleItemsRoutes(server, salesitensController)
 	routes.RegisterFullSaleRoutes(server, fullSaleController)
+	routes.ReportProductRoutes(server, reportController)
 
 	server.Run(":8000")
 
