@@ -1,8 +1,12 @@
 ﻿using Komercio.Models;
 using Komercio.Services;
+using MeuProjetoWinForms.Models;
+using MeuProjetoWinForms.Services;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Drawing;
+using System.Net.Http;
 using System.Windows.Forms;
 using static Komercio.Models.SalesDTO;
 
@@ -14,8 +18,8 @@ namespace Komercio.UI.Forms.Sales
         private readonly CustomerService _customerService;
         private readonly SaleService _saleService;
         private readonly BindingList<SalesItensDTO> _itensVenda;
-
-
+        private readonly EmployeeService _employeeService;
+        private readonly HttpClient _httpClient;
 
 
         public float total = 0;
@@ -26,13 +30,15 @@ namespace Komercio.UI.Forms.Sales
         private float valorRecebido = 0f;
         private float troco = 0f;
         private CustomerDto _custmerDTO = new CustomerDto();
+        private List<EmployeeDto> employeerList = new List<EmployeeDto>();
 
-        public fmSalePaymant(CustomerService customerService, SaleService saleService, BindingList<SalesItensDTO> itensVenda, float totalVenda)
+        public fmSalePaymant(EmployeeService employeeService, CustomerService customerService, SaleService saleService, BindingList<SalesItensDTO> itensVenda, float totalVenda, HttpClient baseUrl)
         {
-
+            _httpClient = baseUrl;
             _customerService = customerService;
             _saleService = saleService;
             _itensVenda = itensVenda;
+            _employeeService = employeeService;
             InitializeComponent();
             total = totalVenda;
 
@@ -43,18 +49,12 @@ namespace Komercio.UI.Forms.Sales
         {
             Inicio();
 
-            // Teste simples: exibe a quantidade de itens recebidos
-            MessageBox.Show("Itens recebidos: " + _itensVenda.Count.ToString(),
-                            "Debug", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-
-
-
-
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.MinimizeBox = true;
-           
+            EmployeerList();
+
+
         }
 
         // Inicializa valores padrão
@@ -64,6 +64,7 @@ namespace Komercio.UI.Forms.Sales
             mtbAddValue.Text = 0f.ToString("C2");
             mtbDesc.Text = 0f.ToString("C2");
             mtbTroco.Text = "R$ 0,00";
+            mtbValorRecebido.Text = total.ToString("C2");
             mlbTotal.Text = total.ToString("C2");
         }
 
@@ -144,6 +145,15 @@ namespace Komercio.UI.Forms.Sales
             buttonschangecolor();
             formaPagamento = "Dinheiro";
             mtbcash.UseAccentColor = true;
+            string texto = mtbValorRecebido.Text.Replace("R$", "").Replace(",", "").Replace(".", "").TrimStart('0');
+
+            if (texto.Length == 0)
+                texto = "0";
+
+            float valor = float.Parse(texto) / 100;
+            troco = valor - total;
+
+            mtbTroco.Text = troco.ToString("C2");
         }
 
         private void mtbcardcred_Click(object sender, EventArgs e)
@@ -229,7 +239,7 @@ namespace Komercio.UI.Forms.Sales
 
         // Valor recebido e cálculo do troco
         private void mtbValorRecebido_Leave(object sender, EventArgs e)
-        {
+        {/*
             valorRecebido = ConverterTextoParaFloat(mtbValorRecebido.Text);
             FormatarCampoMonetario(mtbValorRecebido);
             if (mtbValorRecebido.Text == "R$ 0,00")
@@ -254,7 +264,8 @@ namespace Komercio.UI.Forms.Sales
                 {
                     mtbTroco.Text = "R$ 0,00";
                 }
-            }
+                */
+          //  }
         }
 
         // Busca cliente
@@ -311,7 +322,7 @@ namespace Komercio.UI.Forms.Sales
 
         private void mtbDesc_Leave_1(object sender, EventArgs e)
         {
-            if (mtbDesc.Text == "")
+          /*  if (mtbDesc.Text == "")
             {
                 mtbDesc.Text = 0f.ToString("C2");
                 return;
@@ -328,13 +339,14 @@ namespace Komercio.UI.Forms.Sales
 
 
             mtbDesc.Text = temp.ToString("C2");
+          
 
-            AtualizarTotal();
+            AtualizarTotal();*/
         }
 
         private void mtbAddValue_Leave_1(object sender, EventArgs e)
         {
-
+/*
             if (mtbAddValue.Text == "")
             {
                 mtbAddValue.Text = 0f.ToString("C2");
@@ -352,7 +364,7 @@ namespace Komercio.UI.Forms.Sales
 
 
             mtbAddValue.Text = temp.ToString("C2");
-            AtualizarTotal();
+            AtualizarTotal(); */
         }
 
 
@@ -370,29 +382,15 @@ namespace Komercio.UI.Forms.Sales
             mtbAddValue.Enabled = false;
         }
 
-        private void mtbFunc_Leave(object sender, EventArgs e)
-        {
-            if (mtbFunc.Text != "")
-            {
-               // mtbDoccument.Enabled = true;
-                SearchCustomer(mtbDoccument.Text.Replace(".", "").Replace("-", ""));
 
-            }
-        }
 
-        private void mtbDoccument_TextChanged(object sender, EventArgs e)
-        {
-
-        }
 
         private void mtbDoccument_Leave(object sender, EventArgs e)
         {
-            if (mtbFunc.Text != "")
-            {
-               // mtbDoccument.Enabled = true;
-                SearchCustomer(mtbDoccument.Text.Replace(".", "").Replace("-", ""));
+          
+               // SearchCustomer(mtbDoccument.Text.Replace(".", "").Replace("-", ""));
 
-            }
+            
         }
 
         private void mbtConfirm_Click(object sender, EventArgs e)
@@ -409,7 +407,14 @@ namespace Komercio.UI.Forms.Sales
                 return;
             }
 
-            
+            if (string.IsNullOrEmpty(mtbFunc.Text))
+            {
+                MessageBox.Show("Selecione o funcionário responsavel pela venda", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            int func = BuscaIdEmployeer();
+
             // Cria a venda pronta
             var venda = CriarObjetoVenda(new List<SalesItensDTO>(_itensVenda), _custmerDTO);
 
@@ -425,19 +430,13 @@ namespace Komercio.UI.Forms.Sales
             MessageBox.Show("Venda salva como venda.json", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
 
-            SaleFinalizerService finalizer = new SaleFinalizerService(_customerService, _saleService, _itensVenda);
+            SaleFinalizerService finalizer = new SaleFinalizerService(_customerService, _saleService, _itensVenda, _httpClient);
 
 
-            finalizer.MontarVenda(venda, _itensVenda, formaPagamento, 1);
+            finalizer.MontarVenda(venda, _itensVenda, formaPagamento, func);
 
             MessageBox.Show("Venda formalizada e arquivo JSON gerado com sucesso!",
                             "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-
-
-
-
-
 
             //  o form atual
             this.Close();
@@ -450,7 +449,108 @@ namespace Komercio.UI.Forms.Sales
 
         }
 
+        private void mtbDesc_TextChanged(object sender, EventArgs e)
+        {
+            string texto = mtbDesc.Text.Replace("R$", "").Replace(",", "").Replace(".", "").TrimStart('0');
 
+            if (texto.Length == 0)
+                texto = "0";
+
+            decimal valor = Convert.ToDecimal(texto) / 100;
+            mtbDesc.Text = string.Format(System.Globalization.CultureInfo.GetCultureInfo("pt-BR"), "{0:C2}", valor);
+            mtbDesc.SelectionStart = mtbDesc.Text.Length;
+            AtualizarTotal();
+
+            // retorno = regrasFechamentoVendas.RetornaValorComDesconto(valor);
+            // lbTotalFinal.Text = retorno.ToString("C2")
+        }
+
+        private void mtbAddValue_TextChanged(object sender, EventArgs e)
+        {
+            string texto = mtbAddValue.Text.Replace("R$", "").Replace(",", "").Replace(".", "").TrimStart('0');
+
+            if (texto.Length == 0)
+                texto = "0";
+
+            decimal valor = Convert.ToDecimal(texto) / 100;
+            mtbAddValue.Text = string.Format(System.Globalization.CultureInfo.GetCultureInfo("pt-BR"), "{0:C2}", valor);
+            mtbAddValue.SelectionStart = mtbAddValue.Text.Length;
+
+            AtualizarTotal();
+
+        }
+
+        private void mtbValorRecebido_TextChanged(object sender, EventArgs e)
+        {
+            string texto = mtbValorRecebido.Text.Replace("R$", "").Replace(",", "").Replace(".", "").TrimStart('0');
+
+            if (texto.Length == 0)
+                texto = "0";
+
+            float valor = float.Parse(texto) / 100;
+            mtbValorRecebido.Text = string.Format(System.Globalization.CultureInfo.GetCultureInfo("pt-BR"), "{0:C2}", valor);
+            mtbValorRecebido.SelectionStart = mtbValorRecebido.Text.Length;
+
+            if (mtbValorRecebido.Text == "R$ 0,00")
+            {
+                LiberaCamposDeValores();
+            }
+
+            else
+            {
+             //   BloqueiaCamposDeValores();
+                mtbFunc.Enabled = true;
+
+                FormatarCampoMonetario(mtbValorRecebido);
+                
+
+                if (formaPagamento == "Dinheiro" && valor > total)
+                {
+                    troco = valor - total;
+                    mtbTroco.Text = troco.ToString("C2");
+
+                }
+                else
+                {
+                    mtbTroco.Text = "R$ 0,00";
+                }
+            }
+        }
+
+        private void mtbDoccument_TextChanged(object sender, EventArgs e)
+        {
+            SearchCustomer(mtbDoccument.Text.Replace(".", "").Replace("-", ""));
+        }
+
+
+        private async void EmployeerList()
+        {
+            employeerList = await _employeeService.GetActiveEmployeeNamesAsync();
+
+
+            foreach (var employee in employeerList)
+            {
+            mtbFunc.Items.Add(employee.EmployeeFullName);
+
+            }
+        }
+    private int BuscaIdEmployeer()
+        {
+            var name = mtbFunc.SelectedItem.ToString();
+
+            foreach (var employee in employeerList)
+            {
+                if (employee.EmployeeFullName == name)
+                {
+                    return employee.Id;
+                }
+            }
+
+            return 0;
+        }
 
     }
+
+
+
 }

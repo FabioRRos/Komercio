@@ -97,7 +97,7 @@
             this.mtbProductPrice.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.mtbProductPrice.TrailingIcon = null;
             this.mtbProductPrice.UseSystemPasswordChar = false;
-            this.mtbProductPrice.Leave += new System.EventHandler(this.mtbProductPrice_Leave);
+            this.mtbProductPrice.TextChanged += new System.EventHandler(this.mtbProductPrice_TextChanged);
             // 
             // mtbProductCodeBar
             // 
@@ -290,7 +290,6 @@
             this.Name = "fmCreateProduct";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Cadastro produtos - Manual";
-            this.Load += new System.EventHandler(this.fmCreateProduct_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

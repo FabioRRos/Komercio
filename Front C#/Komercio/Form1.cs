@@ -11,6 +11,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -24,9 +25,13 @@ namespace Komercio
         private readonly ProductService _productService;
         private readonly ProductGroupService _productGroupService;
         private readonly ProductSubgroupService _productSubgroupService;
+        private readonly SaleFinalizerService _saleFinalizerService;
+        private readonly HttpClient _httpClient;
 
 
-        public Home(EmployeeService empliyeeService, CustomerService customerService, ProductService productService, ProductGroupService productGroupService, ProductSubgroupService productSubgroupService)
+
+
+        public Home(EmployeeService empliyeeService, CustomerService customerService, ProductService productService, ProductGroupService productGroupService, ProductSubgroupService productSubgroupService , string baseUrl)
         {
             InitializeComponent();
             _employeeService = empliyeeService;
@@ -34,6 +39,11 @@ namespace Komercio
             _productService = productService;
             _productGroupService = productGroupService;
             _productSubgroupService =  productSubgroupService;
+
+            _httpClient = new HttpClient
+            {
+                BaseAddress = new Uri(baseUrl)
+            };
 
 
         }
@@ -86,7 +96,7 @@ namespace Komercio
 
         private async void novaVendaToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            fmSalesProduct salesProduct = new fmSalesProduct(_productService, _productGroupService, _productSubgroupService, _customerService);
+            fmSalesProduct salesProduct = new fmSalesProduct(_employeeService,_productService, _productGroupService, _productSubgroupService, _customerService, _httpClient);
             salesProduct.ShowDialog();
         }
 

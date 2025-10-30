@@ -62,33 +62,10 @@ namespace Komercio.UI.Forms.Product
             mbtNewProduct.Enabled = false;
         }
 
-        private void fmCreateProduct_Load(object sender, EventArgs e)
-        {
-
-        }
-
+   
      
 
-       
-        private void mtbProductPrice_Leave(object sender, EventArgs e)
-        {
-            if (mtbProductPrice.Text == "")
-            {
-                               return;
-            }
-
-            // Vou tratar erros de entrada não numérica.
-            try
-            {
-
-                mtbProductPrice.Text = string.Format("{0:N2}", Convert.ToDecimal(mtbProductPrice.Text));
-            }
-            catch
-            {
-                MessageBox.Show("Preço inválido!", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                mtbProductPrice.Text = "";
-            }
-        }
+  
 
 
         private void mbtNewProduct_Click(object sender, EventArgs e)
@@ -180,7 +157,9 @@ namespace Komercio.UI.Forms.Product
                 return;
             }
 
-            
+            this.DialogResult = DialogResult.OK;
+
+
         }
 
         private void ComponentsClear()
@@ -192,6 +171,26 @@ namespace Komercio.UI.Forms.Product
             mtbSubGrupo.Text = "";
             mtbProductStock.Text = "";
             msProductStatus.Checked = true;
+        }
+
+        private void mtbProductPrice_TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                string texto = mtbProductPrice.Text.Replace("R$", "").Replace(",", "").Replace(".", "").TrimStart('0');
+
+                if (texto.Length == 0)
+                    texto = "0";
+
+                decimal valor = Convert.ToDecimal(texto) / 100;
+                mtbProductPrice.Text = string.Format(System.Globalization.CultureInfo.GetCultureInfo("pt-BR"), "{0:C2}", valor);
+                mtbProductPrice.SelectionStart = mtbProductPrice.Text.Length;
+            }
+            catch {
+                MessageBox.Show("Formato de entrada invalido!!", "ATENÇÃO", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                mtbProductPrice.Text = string.Empty;
+                return;
+            };
         }
     }
 }

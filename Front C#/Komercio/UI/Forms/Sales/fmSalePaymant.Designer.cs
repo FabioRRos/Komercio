@@ -57,19 +57,13 @@
             this.mtbFunc.Hint = "FUNCIONÁRIO";
             this.mtbFunc.IntegralHeight = false;
             this.mtbFunc.ItemHeight = 43;
-            this.mtbFunc.Items.AddRange(new object[] {
-            "Caixa",
-            "Aline",
-            "Afonso",
-            "Doninho"});
-            this.mtbFunc.Location = new System.Drawing.Point(365, 233);
+            this.mtbFunc.Location = new System.Drawing.Point(365, 224);
             this.mtbFunc.MaxDropDownItems = 4;
             this.mtbFunc.MouseState = MaterialSkin.MouseState.OUT;
             this.mtbFunc.Name = "mtbFunc";
             this.mtbFunc.Size = new System.Drawing.Size(294, 49);
             this.mtbFunc.StartIndex = 0;
             this.mtbFunc.TabIndex = 17;
-            this.mtbFunc.Leave += new System.EventHandler(this.mtbFunc_Leave);
             // 
             // mbtCancel
             // 
@@ -179,6 +173,7 @@
             this.mtbValorRecebido.TrailingIcon = null;
             this.mtbValorRecebido.UseSystemPasswordChar = false;
             this.mtbValorRecebido.Leave += new System.EventHandler(this.mtbValorRecebido_Leave);
+            this.mtbValorRecebido.TextChanged += new System.EventHandler(this.mtbValorRecebido_TextChanged);
             // 
             // mtbTroco
             // 
@@ -186,18 +181,17 @@
             this.mtbTroco.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.mtbTroco.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
             this.mtbTroco.Depth = 0;
-            this.mtbTroco.Enabled = false;
             this.mtbTroco.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.mtbTroco.HideSelection = true;
             this.mtbTroco.Hint = "TROCO";
             this.mtbTroco.LeadingIcon = null;
-            this.mtbTroco.Location = new System.Drawing.Point(365, 176);
+            this.mtbTroco.Location = new System.Drawing.Point(365, 171);
             this.mtbTroco.MaxLength = 32767;
             this.mtbTroco.MouseState = MaterialSkin.MouseState.OUT;
             this.mtbTroco.Name = "mtbTroco";
             this.mtbTroco.PasswordChar = '\0';
             this.mtbTroco.PrefixSuffixText = null;
-            this.mtbTroco.ReadOnly = true;
+            this.mtbTroco.ReadOnly = false;
             this.mtbTroco.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.mtbTroco.SelectedText = "";
             this.mtbTroco.SelectionLength = 0;
@@ -317,6 +311,7 @@
             this.mtbDesc.TrailingIcon = null;
             this.mtbDesc.UseSystemPasswordChar = false;
             this.mtbDesc.Leave += new System.EventHandler(this.mtbDesc_Leave_1);
+            this.mtbDesc.TextChanged += new System.EventHandler(this.mtbDesc_TextChanged);
             // 
             // mtbAddValue
             // 
@@ -347,6 +342,7 @@
             this.mtbAddValue.TrailingIcon = null;
             this.mtbAddValue.UseSystemPasswordChar = false;
             this.mtbAddValue.Leave += new System.EventHandler(this.mtbAddValue_Leave_1);
+            this.mtbAddValue.TextChanged += new System.EventHandler(this.mtbAddValue_TextChanged);
             // 
             // mtbcardcred
             // 
@@ -481,22 +477,24 @@
             this.mtbDoccument.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
             this.mtbDoccument.Depth = 0;
             this.mtbDoccument.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.mtbDoccument.HelperText = "F4 - Novo cliente | F5 - Alterar cliente";
             this.mtbDoccument.HideSelection = true;
             this.mtbDoccument.Hint = "CPF/CNPJ CLIENTE";
             this.mtbDoccument.LeadingIcon = null;
-            this.mtbDoccument.Location = new System.Drawing.Point(365, 291);
+            this.mtbDoccument.Location = new System.Drawing.Point(365, 279);
             this.mtbDoccument.MaxLength = 32767;
             this.mtbDoccument.MouseState = MaterialSkin.MouseState.OUT;
             this.mtbDoccument.Name = "mtbDoccument";
             this.mtbDoccument.PasswordChar = '\0';
             this.mtbDoccument.PrefixSuffixText = null;
-            this.mtbDoccument.ReadOnly = true;
+            this.mtbDoccument.ReadOnly = false;
             this.mtbDoccument.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.mtbDoccument.SelectedText = "";
             this.mtbDoccument.SelectionLength = 0;
             this.mtbDoccument.SelectionStart = 0;
             this.mtbDoccument.ShortcutsEnabled = true;
-            this.mtbDoccument.Size = new System.Drawing.Size(294, 48);
+            this.mtbDoccument.ShowAssistiveText = true;
+            this.mtbDoccument.Size = new System.Drawing.Size(294, 64);
             this.mtbDoccument.TabIndex = 20;
             this.mtbDoccument.TabStop = false;
             this.mtbDoccument.Text = "111.111.111-11";
@@ -512,7 +510,6 @@
             this.mtbFirstAndLastName.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.mtbFirstAndLastName.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
             this.mtbFirstAndLastName.Depth = 0;
-            this.mtbFirstAndLastName.Enabled = false;
             this.mtbFirstAndLastName.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.mtbFirstAndLastName.HideSelection = true;
             this.mtbFirstAndLastName.Hint = "CLIENTE";

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Komercio.Models
 {
-    internal class SaleAggregateDTO
+     public class SaleAggregateDTO
     {
         public SaleAggregateDTO(SalesDTO sales, List<SalesItensDTO> salesItens, CashovementsDTO cashmovements)
         {

@@ -1,11 +1,11 @@
 {
-  "customer_id": 1,
-  "total_amount": 188.4,
+  "customer_id": 0,
+  "total_amount": 19.9,
   "discount_amount": 0.0,
-  "final_amount": 188.4,
-  "sale_date": "2025-10-28T22:28:49.535357-03:00",
-  "sale_time": "22:28:49",
-  "payment_method": "Dinheiro",
+  "final_amount": 19.9,
+  "sale_date": "2025-10-29T22:14:54.5889534-03:00",
+  "sale_time": "22:14:54",
+  "payment_method": "Débito",
   "seller_id": 0,
-  "sale_notes": "sadasdada"
+  "sale_notes": "Teste do customer balcão"
 }
