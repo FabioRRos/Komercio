@@ -42,6 +42,7 @@
             this.entradaEstoqueToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.vendasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.novaVendaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.materialButton1 = new MaterialSkin.Controls.MaterialButton();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -158,11 +159,32 @@
             this.novaVendaToolStripMenuItem.Text = "Nova venda";
             this.novaVendaToolStripMenuItem.Click += new System.EventHandler(this.novaVendaToolStripMenuItem_Click);
             // 
+            // materialButton1
+            // 
+            this.materialButton1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.materialButton1.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.materialButton1.Depth = 0;
+            this.materialButton1.HighEmphasis = true;
+            this.materialButton1.Icon = null;
+            this.materialButton1.Location = new System.Drawing.Point(106, 123);
+            this.materialButton1.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.materialButton1.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialButton1.Name = "materialButton1";
+            this.materialButton1.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.materialButton1.Size = new System.Drawing.Size(158, 36);
+            this.materialButton1.TabIndex = 1;
+            this.materialButton1.Text = "materialButton1";
+            this.materialButton1.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+            this.materialButton1.UseAccentColor = false;
+            this.materialButton1.UseVisualStyleBackColor = true;
+            this.materialButton1.Click += new System.EventHandler(this.materialButton1_Click);
+            // 
             // Home
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.materialButton1);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Home";
@@ -193,6 +215,7 @@
         private System.Windows.Forms.ToolStripMenuItem entradaEstoqueToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem vendasToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem novaVendaToolStripMenuItem;
+        private MaterialSkin.Controls.MaterialButton materialButton1;
     }
 }
 

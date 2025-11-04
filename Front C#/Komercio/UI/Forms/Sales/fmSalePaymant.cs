@@ -1,5 +1,7 @@
 ﻿using Komercio.Models;
 using Komercio.Services;
+using Komercio.UI.Forms.Customer;
+using Komercio.UI.Forms.Product;
 using MeuProjetoWinForms.Models;
 using MeuProjetoWinForms.Services;
 using System;
@@ -48,7 +50,7 @@ namespace Komercio.UI.Forms.Sales
         private void fmSalePaymant_Load(object sender, EventArgs e)
         {
             Inicio();
-
+            this.KeyPreview = true;
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.MinimizeBox = true;
@@ -427,7 +429,7 @@ namespace Komercio.UI.Forms.Sales
             string json = Newtonsoft.Json.JsonConvert.SerializeObject(venda, Newtonsoft.Json.Formatting.Indented);
             System.IO.File.WriteAllText("venda.json", json);
 
-            MessageBox.Show("Venda salva como venda.json", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+           // MessageBox.Show("Venda salva como venda.json", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
 
             SaleFinalizerService finalizer = new SaleFinalizerService(_customerService, _saleService, _itensVenda, _httpClient);
@@ -435,8 +437,8 @@ namespace Komercio.UI.Forms.Sales
 
             finalizer.MontarVenda(venda, _itensVenda, formaPagamento, func);
 
-            MessageBox.Show("Venda formalizada e arquivo JSON gerado com sucesso!",
-                            "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        //    MessageBox.Show("Venda formalizada e arquivo JSON gerado com sucesso!",
+                        //    "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
             //  o form atual
             this.Close();
@@ -549,6 +551,37 @@ namespace Komercio.UI.Forms.Sales
             return 0;
         }
 
+        private void fmSalePaymant_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.F4)
+            {
+                fmCreateCustomer createCustomer = new fmCreateCustomer(_customerService);
+                createCustomer.ShowDialog();
+
+            }
+
+            if (e.KeyCode == Keys.F5)
+            {
+                fmChangeCustomer changeCustomer = new fmChangeCustomer(_customerService);
+                changeCustomer.ShowDialog();
+               
+            }
+
+            if (e.KeyCode == Keys.Escape) {
+           DialogResult yes =  MessageBox.Show("Deseja realmente sair?","Cancelar venda?",MessageBoxButtons.YesNo,MessageBoxIcon.Question);
+
+                if (yes == DialogResult.Yes)
+                {
+                    this.Close();
+                    Owner.Close();
+                }
+                else
+                {
+                    return;
+                }
+            }
+
+        }
     }
 
 

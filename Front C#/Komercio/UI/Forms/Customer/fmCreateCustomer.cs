@@ -71,7 +71,7 @@ namespace Komercio.UI.Forms.Customer
             
         }
 
-        private  async void mtbCustomerDocument_Leave(object sender, EventArgs e)
+        private   void mtbCustomerDocument_Leave(object sender, EventArgs e)
         {
 
 

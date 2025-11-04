@@ -25,8 +25,9 @@ namespace Komercio.UI.Forms.Sales
         private readonly SaleService _saleService;
         private readonly CustomerService _customerService;
         private readonly EmployeeService _employeeService;
+        private readonly ProductDescriptionService _productDescriptionService;
 
-        public fmSalesProduct(EmployeeService employeeService, ProductService productService, ProductGroupService productGroupService, ProductSubgroupService productSubgroupService, CustomerService customerService, HttpClient baseUrl)
+        public fmSalesProduct(EmployeeService employeeService, ProductService productService, ProductGroupService productGroupService, ProductSubgroupService productSubgroupService, CustomerService customerService, ProductDescriptionService productDescriptionService, HttpClient baseUrl)
         {
             InitializeComponent();
 
@@ -37,6 +38,7 @@ namespace Komercio.UI.Forms.Sales
             _customerService = customerService;
             _employeeService = employeeService;
             _httpClient = baseUrl;
+            _productDescriptionService = productDescriptionService;
 
         }
 
@@ -47,6 +49,9 @@ namespace Komercio.UI.Forms.Sales
             ConfigurarDataGridViews();
             ClearAllComponents();
             this.KeyPreview = true;
+            this.FormBorderStyle = FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
+            this.MinimizeBox = true;
         }
 
 //aqui é pra deixar o forms bonito
@@ -435,7 +440,7 @@ namespace Komercio.UI.Forms.Sales
         {
             if(e.KeyCode == Keys.F4)
             {
-                fmCreateProduct createProduct = new fmCreateProduct(_productService);
+                fmCreateProduct createProduct = new fmCreateProduct(_productService, _productDescriptionService);
                 createProduct.ShowDialog();
                 loaddbListaproduto();
             }

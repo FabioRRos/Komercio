@@ -14,8 +14,8 @@ namespace Estoque.Entities.Services
         {
             try
             {
-                HttpClient httoClient = new HttpClient();
-                var response = await httoClient.GetAsync($"https://viacep.com.br/ws/{cep}/json/");
+                HttpClient httpClient = new HttpClient();
+                var response = await httpClient.GetAsync($"https://viacep.com.br/ws/{cep}/json/");
 
                 var jsonString = await response.Content.ReadAsStringAsync();
                 var jsoObject = JsonConvert.DeserializeObject<RetornaCEPEntitie>(jsonString);

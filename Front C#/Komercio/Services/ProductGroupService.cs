@@ -13,7 +13,7 @@ namespace Komercio.Services
     {
         private readonly HttpClient _httpClient;
 
-        public ProductGroupService(string baseUrl)
+            public ProductGroupService(string baseUrl)
         {
             _httpClient = new HttpClient
             {

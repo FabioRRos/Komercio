@@ -1,0 +1,28 @@
+trigger:
+  - main
+
+pool:
+  vmImage: "ubuntu-latest"
+
+variables:
+  GO_VERSION: "1.23.x"
+  OUTPUT_NAME: "komercio-api"
+
+steps:
+  - task: GoTool@0
+    inputs:
+      version: "$(GO_VERSION)"
+    displayName: "Instalar Go"
+
+  - script: |
+      echo "Verificando dependências..."
+      go mod tidy
+
+      echo "Construindo binário..."
+      cd cmd
+      go build -o $(OUTPUT_NAME) main.go
+    displayName: "Build Backend Komercio"
+
+  - publish: cmd/$(OUTPUT_NAME)
+    artifact: drop
+    displayName: "Publicar binário compilado"

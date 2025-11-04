@@ -31,11 +31,12 @@ namespace Komercio
             var productService = new ProductService(apiBaseUrl);
             var productgroupService = new ProductGroupService(apiBaseUrl);
             var productrsuggroupService = new ProductSubgroupService(apiBaseUrl);
+            var productDescriptionService = new ProductDescriptionService(apiBaseUrl);
 
 
 
             // aqui estou aplicando a injeção de dependência manualmente
-            Application.Run(new Home(employeeService, customerService, productService, productgroupService, productrsuggroupService, apiBaseUrl));
+            Application.Run(new Home(employeeService, customerService, productService, productgroupService, productrsuggroupService, productDescriptionService, apiBaseUrl));
 
 
         }

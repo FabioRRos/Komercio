@@ -81,7 +81,7 @@ namespace Komercio.UI.Forms.Customer
             this.MinimizeBox = true;
         }
 
-        public async void AttDataGridView(List<CustomerDto> customersList)
+        public  void AttDataGridView(List<CustomerDto> customersList)
         {
             try
             {

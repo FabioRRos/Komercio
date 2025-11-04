@@ -9,6 +9,7 @@ import (
 
 type ReportRepository interface {
 	SelectSaleReport(ctx context.Context) ([]*entity.Salereport, error)
+	SelectSaleReportById(ctx context.Context, id int) (*entity.Salereport, error)
 }
 
 type reportRepository struct {
@@ -23,4 +24,8 @@ func NewReportRepository(ds *datastore.ReportDatastore) ReportRepository {
 
 func (r *reportRepository) SelectSaleReport(ctx context.Context) ([]*entity.Salereport, error) {
 	return r.datastore.SelectSalesReport()
+}
+
+func (r *reportRepository) SelectSaleReportById(ctx context.Context, id int) (*entity.Salereport, error) {
+	return r.datastore.SelectSalesReportbyId(id)
 }

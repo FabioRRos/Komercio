@@ -23,7 +23,6 @@ namespace Komercio.Services
 
         private readonly CustomerService _customerService;
         private readonly SaleService _saleService;
-        private readonly BindingList<SalesItensDTO> _itensVenda;
 
         //Fabio do futuro, aqui eu faço a injeção da URL da API
         // Se o sabeFinalizerService vier com uma variavel nula, eu atribuo a que declarei acima
@@ -165,7 +164,7 @@ namespace Komercio.Services
              }
              catch (Exception ex)
              {
-           //      MessageBox.Show(ex.Message);
+                 MessageBox.Show(ex.Message);
              }
 
 
@@ -180,22 +179,40 @@ namespace Komercio.Services
             var content = new StringContent(json, Encoding.UTF8, "application/json");
             var response = await _httpClient.PostAsync("sales/fullsale", content);
 
+            if (!response.IsSuccessStatusCode)
+                {
+                    MessageBox.Show("Não foi possível salvar a venda. tente novamente");
+                    return true;
+                }
 
-                
-               
 
 
-            if (response.IsSuccessStatusCode)
-            {
-                MessageBox.Show("BOM");
-                return true;
-            }
+            var body = await response.Content.ReadAsStringAsync();
+            var result = JsonConvert.DeserializeObject<SaleResponseDTO>(body);
 
-            MessageBox.Show("RUIM");
+            int saleId = result.SaleId;
+
+            CupomService cupom = new CupomService();
+
+            var cupomRetorno = await cupom.CupomSale(saleId);
+
+            cupom.GenerateReceiptText(cupomRetorno);
+
+
+            MessageBox.Show("Venda registrada com sucesso!", "SUCESSO!", MessageBoxButtons.OK, MessageBoxIcon.Information);
             return true;
+        }
+        public class SaleResponseDTO
+        {
+            [JsonProperty("message")]
+            public string Message { get; set; }
+
+            [JsonProperty("sale_id")]
+            public int SaleId { get; set; }
         }
 
     }
+
 }
 
 

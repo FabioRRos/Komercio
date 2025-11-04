@@ -25,13 +25,13 @@ namespace Komercio
         private readonly ProductService _productService;
         private readonly ProductGroupService _productGroupService;
         private readonly ProductSubgroupService _productSubgroupService;
-        private readonly SaleFinalizerService _saleFinalizerService;
         private readonly HttpClient _httpClient;
+        private readonly ProductDescriptionService _productDescriptionService;
 
 
 
 
-        public Home(EmployeeService empliyeeService, CustomerService customerService, ProductService productService, ProductGroupService productGroupService, ProductSubgroupService productSubgroupService , string baseUrl)
+        public Home(EmployeeService empliyeeService, CustomerService customerService, ProductService productService, ProductGroupService productGroupService, ProductSubgroupService productSubgroupService , ProductDescriptionService productDescriptionService,  string baseUrl)
         {
             InitializeComponent();
             _employeeService = empliyeeService;
@@ -39,6 +39,7 @@ namespace Komercio
             _productService = productService;
             _productGroupService = productGroupService;
             _productSubgroupService =  productSubgroupService;
+            _productDescriptionService = productDescriptionService;
 
             _httpClient = new HttpClient
             {
@@ -84,7 +85,7 @@ namespace Komercio
 
         private void manualToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            fmCreateProduct createProduct = new fmCreateProduct(_productService);
+            fmCreateProduct createProduct = new fmCreateProduct(_productService, _productDescriptionService);
             createProduct.ShowDialog();
         }
 
@@ -94,12 +95,17 @@ namespace Komercio
             imputProduct.ShowDialog();
         }
 
-        private async void novaVendaToolStripMenuItem_Click(object sender, EventArgs e)
+        private void novaVendaToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            fmSalesProduct salesProduct = new fmSalesProduct(_employeeService,_productService, _productGroupService, _productSubgroupService, _customerService, _httpClient);
+            fmSalesProduct salesProduct = new fmSalesProduct(_employeeService,_productService, _productGroupService, _productSubgroupService, _customerService, _productDescriptionService, _httpClient);
             salesProduct.ShowDialog();
         }
 
+        private void materialButton1_Click(object sender, EventArgs e)
+        {
+            fmCreateGroupAndSubgroup grpupandsubgroup = new fmCreateGroupAndSubgroup();
 
+            grpupandsubgroup.ShowDialog();
+        }
     }
 }
