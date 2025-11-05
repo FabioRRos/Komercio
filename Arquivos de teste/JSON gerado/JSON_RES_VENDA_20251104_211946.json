@@ -1,0 +1,47 @@
+﻿{
+  "sale": {
+    "customer_id": 3,
+    "total_amount": 751.8,
+    "discount_amount": 50.0,
+    "final_amount": 701.8,
+    "sale_date": "2025-11-04T21:19:45.838706-03:00",
+    "sale_time": "21:19:45",
+    "payment_method": "Débito",
+    "seller_id": 1,
+    "sale_notes": "Desconto aprovado pelo doni"
+  },
+  "items": [
+    {
+      "product_id": 17,
+      "product_name": "Capa Couro Carteira + Vermelho iPhone 11",
+      "barcode": "789000017",
+      "unit_price": 54.9,
+      "quantity": 1,
+      "total": 54.9
+    },
+    {
+      "product_id": 6,
+      "product_name": "Pelicula Cerâmica Fosca de Privacidade Samsung S22",
+      "barcode": "789000006",
+      "unit_price": 27.9,
+      "quantity": 19,
+      "total": 530.1
+    },
+    {
+      "product_id": 42,
+      "product_name": "Slime Glitter Azul",
+      "barcode": "789000042",
+      "unit_price": 13.9,
+      "quantity": 12,
+      "total": 166.799988
+    }
+  ],
+  "cash_movement": {
+    "movement_type": "Entrada",
+    "description": null,
+    "amount": 701.8,
+    "payment_method": "Débito",
+    "movement_datetime": "2025-11-04T21:19:46.8625664-03:00",
+    "seller_id": 1
+  }
+}

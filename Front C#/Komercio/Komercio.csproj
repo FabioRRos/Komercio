@@ -82,6 +82,7 @@
     <Compile Include="Services\BuscaCEPService.cs" />
     <Compile Include="Services\CupomService.cs" />
     <Compile Include="Services\CustomerService.cs" />
+    <Compile Include="Services\DoccumentValidationService.cs" />
     <Compile Include="Services\EmployeeService.cs" />
     <Compile Include="Services\ProductDescriptionService.cs" />
     <Compile Include="Services\ProductGroupService.cs" />

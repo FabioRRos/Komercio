@@ -273,24 +273,85 @@ namespace Komercio.UI.Forms.Sales
         // Busca cliente
         public async void SearchCustomer(string doccument)
         {
-            var (customer, ok) = await _customerService.GetValidationCustomerDocument(doccument);
-            if (ok)
+            DoccumentValidationService validation = new DoccumentValidationService(doccument);
+
+
+            var numDoc = doccument.Length;
+
+            switch (numDoc)
             {
-                mtbFirstAndLastName.Text = customer.customer_first_name + " " + customer.customer_last_name;
-                _custmerDTO.customer_id = customer.customer_id;
+                case 11:
+                    {
+                        var validate = validation.ValidarCPF(doccument);
 
+                        if (!validate)
+                        {
+                            DialogResult mensagem = MessageBox.Show("CPF invalido. \nSeria CNPJ?", "CNPJ?", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
+                            if (mensagem == DialogResult.No)
+                            {
+                                mtbDoccument.Text = string.Empty;
+                                mtbFirstAndLastName.Text = string.Empty ;
+                                return;
+                            }
+                            return;
+                        }
+                    }
+                    ; break;
+                case 14:
+                    {
+                        var validate = validation.ValidarCNPJ(doccument);
 
+                        if (!validate)
+                        {
+                            DialogResult mensagem = MessageBox.Show("CNPJ invalido. \nTente novamente", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            mtbDoccument.Text = string.Empty;
+                            mtbFirstAndLastName.Text = string.Empty;
+
+                            return;
+                        }
+                    }
+                    break;
+                default:
+                    {
+                        mtbFirstAndLastName.Text = string.Empty;
+
+                        return;
+                    }
             }
-            else
-            {
-                mtbFirstAndLastName.Text = "";
-            }
 
 
 
-            
+
+                    var (customer, ok) = await _customerService.GetValidationCustomerDocument(doccument);
+                    if (ok)
+                    {
+                        mtbFirstAndLastName.Text = customer.customer_first_name + " " + customer.customer_last_name;
+                        _custmerDTO.customer_id = customer.customer_id;
+
+
+
+                    }
+                    else
+                    {
+                        DialogResult cadastro =  MessageBox.Show("Cliente não localizado, Gostaria de realizar o cadastro?","Não localizado",MessageBoxButtons.YesNo, MessageBoxIcon.Error);
+                        
+                        if (cadastro == DialogResult.Yes)
+                            {
+                                fmCreateCustomer createCustomer = new fmCreateCustomer(_customerService);
+                                createCustomer.ShowDialog();
+                            }
+                
+                        mtbFirstAndLastName.Text = "";
+                
+                    }           
         }
+
+
+
+
+
+
 
         // Monta objeto pronto pra enviar pro service
         private SalesDTO CriarObjetoVenda(List<SalesItensDTO> itens, CustomerDto cliente)
@@ -580,6 +641,11 @@ namespace Komercio.UI.Forms.Sales
                     return;
                 }
             }
+
+        }
+
+        private void mtbDesc_Click(object sender, EventArgs e)
+        {
 
         }
     }

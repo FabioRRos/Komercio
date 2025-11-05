@@ -1,11 +1,11 @@
 {
-  "customer_id": 1,
-  "total_amount": 89.7000046,
-  "discount_amount": 20.0,
-  "final_amount": 69.7000046,
-  "sale_date": "2025-11-03T23:18:35.7575717-03:00",
-  "sale_time": "23:18:35",
-  "payment_method": "Dinheiro",
+  "customer_id": 3,
+  "total_amount": 751.8,
+  "discount_amount": 50.0,
+  "final_amount": 701.8,
+  "sale_date": "2025-11-04T21:19:45.838706-03:00",
+  "sale_time": "21:19:45",
+  "payment_method": "Débito",
   "seller_id": 0,
-  "sale_notes": "Teste com sucesso!"
+  "sale_notes": "Desconto aprovado pelo doni"
 }

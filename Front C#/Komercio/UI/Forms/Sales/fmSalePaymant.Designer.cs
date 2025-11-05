@@ -181,6 +181,7 @@
             this.mtbTroco.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.mtbTroco.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
             this.mtbTroco.Depth = 0;
+            this.mtbTroco.Enabled = false;
             this.mtbTroco.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.mtbTroco.HideSelection = true;
             this.mtbTroco.Hint = "TROCO";
@@ -311,6 +312,7 @@
             this.mtbDesc.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.mtbDesc.TrailingIcon = null;
             this.mtbDesc.UseSystemPasswordChar = false;
+            this.mtbDesc.Click += new System.EventHandler(this.mtbDesc_Click);
             this.mtbDesc.Leave += new System.EventHandler(this.mtbDesc_Leave_1);
             this.mtbDesc.TextChanged += new System.EventHandler(this.mtbDesc_TextChanged);
             // 
@@ -533,6 +535,7 @@
             this.mtbFirstAndLastName.ShortcutsEnabled = true;
             this.mtbFirstAndLastName.Size = new System.Drawing.Size(294, 48);
             this.mtbFirstAndLastName.TabIndex = 21;
+            this.mtbFirstAndLastName.TabStop = false;
             this.mtbFirstAndLastName.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.mtbFirstAndLastName.TrailingIcon = null;
             this.mtbFirstAndLastName.UseSystemPasswordChar = false;
