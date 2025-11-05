@@ -104,6 +104,12 @@
     <Compile Include="UI\Forms\Customer\fmCreateCustomer.Designer.cs">
       <DependentUpon>fmCreateCustomer.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\Forms\Dump\fmSalesDump.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Forms\Dump\fmSalesDump.Designer.cs">
+      <DependentUpon>fmSalesDump.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\Forms\Employee\CreateEmployee.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -164,6 +170,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Forms\Customer\fmCreateCustomer.resx">
       <DependentUpon>fmCreateCustomer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Forms\Dump\fmSalesDump.resx">
+      <DependentUpon>fmSalesDump.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Forms\Employee\CreateEmployee.resx">
       <DependentUpon>CreateEmployee.cs</DependentUpon>
@@ -233,8 +242,6 @@
     <None Include="Properties\Resources\Carrinho.png" />
     <None Include="Properties\Resources\komercio.ico" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="UI\Forms\Dump\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
