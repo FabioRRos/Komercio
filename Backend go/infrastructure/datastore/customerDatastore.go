@@ -180,6 +180,8 @@ func (d *CustomerDatastore) SelectCustomerById(id int) (*entity.Customer, error)
 	return &c, nil
 }
 
+//Querie melhorada
+
 func (d *CustomerDatastore) UpdateCustomer(customer *entity.Customer) (*entity.Customer, error) {
 	query := `
 		UPDATE Customers SET

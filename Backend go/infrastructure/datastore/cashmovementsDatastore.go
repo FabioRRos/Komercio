@@ -50,7 +50,7 @@ func (d *CashmovementsDatastore) Close() {
 // o EXEC precisa receber o contexto + query + parâmetros
 // Trato possiveis erros e depois, por fim, retorno nulo sem erro (se for o caso)
 func (d *CashmovementsDatastore) CreateNewCashmovement(ctx context.Context, cashmovements *entity.Cashmovements) error {
-
+	//Querie melhorada
 	query := `insert into cash_movements (
 				sale_id,
 				movement_type,
@@ -80,6 +80,7 @@ func (d *CashmovementsDatastore) CreateNewCashmovement(ctx context.Context, cash
 // Essa função é igual à anterior, mas usa tx.Exec() em vez de d.Conn.Exec().
 // Assim, ela faz parte da mesma transação do processo de venda.
 func (d *CashmovementsDatastore) CreateNewCashmovementTx(ctx context.Context, tx pgx.Tx, cashmovements *entity.Cashmovements) error {
+	//Querie melhorada
 
 	query := `insert into cash_movements (
 				sale_id,

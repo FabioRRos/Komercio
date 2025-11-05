@@ -30,9 +30,11 @@ func (d *ReportDatastore) Close() {
 	}
 }
 
+//Querie melhorada
+
 func (d *ReportDatastore) SelectSalesReport() ([]*entity.Salereport, error) {
 	query := `
-	SELECT 
+SELECT
     s.sale_id,
     CONCAT(c.customerfirstname, ' ', c.customerlastname) AS customer_name,
     c.customerdocument AS customer_document,
@@ -44,10 +46,11 @@ func (d *ReportDatastore) SelectSalesReport() ([]*entity.Salereport, error) {
     s.sale_time,
     s.payment_method,
     s.sale_notes
-	FROM sales s
-	LEFT JOIN customers c ON s.customer_id = c.customerid
-	LEFT JOIN employees e ON s.seller_id = e.employeeid
-	ORDER BY s.sale_id asc`
+FROM sales AS s
+LEFT JOIN customers AS c ON c.customerid = s.customer_id
+LEFT JOIN employees AS e ON e.employeeid = s.seller_id
+ORDER BY s.sale_id ASC;
+`
 
 	rows, err := d.Conn.Query(context.Background(), query)
 
