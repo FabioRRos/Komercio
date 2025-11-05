@@ -31,6 +31,7 @@ func (d *ReportDatastore) Close() {
 }
 
 //Querie melhorada
+//Verificar depois a utilização de todas as tabelas.
 
 func (d *ReportDatastore) SelectSalesReport() ([]*entity.Salereport, error) {
 	query := `
