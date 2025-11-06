@@ -9,17 +9,14 @@ namespace Komercio.Services
 {
     public class ReportService
     {
-        private readonly HttpClient _httpClient;
+
 
         public ReportService()
         {
-            _httpClient = new HttpClient
-            {
-                BaseAddress = new Uri("http://localhost:8000/")
-            };
+
         }
 
-        public async Task<List<SaleReportDTO>> ReturnDumpSale()
+        public async Task<List<SaleReportDTO>> ReturnDumpSale(HttpClient _httpClient)
         {
             try
             {

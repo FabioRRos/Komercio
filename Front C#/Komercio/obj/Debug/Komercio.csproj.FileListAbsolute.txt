@@ -24,3 +24,4 @@ C:\Projeto Komercial\Komercio\Front C#\Komercio\obj\Debug\Komercio.UI.Forms.Sale
 C:\Projeto Komercial\Komercio\Front C#\Komercio\bin\Debug\System.Configuration.ConfigurationManager.dll
 C:\Projeto Komercial\Komercio\Front C#\Komercio\bin\Debug\System.Configuration.ConfigurationManager.xml
 C:\Projeto Komercial\Komercio\Front C#\Komercio\obj\Debug\Komercio.UI.Forms.Product.fmCreateGroupAndSubgroup.resources
+C:\Projeto Komercial\Komercio\Front C#\Komercio\obj\Debug\Komercio.UI.Forms.Dump.fmSalesDump.resources

@@ -1,6 +1,7 @@
 ﻿using Komercio.Services;
 using Komercio.UI.Forms;
 using Komercio.UI.Forms.Customer;
+using Komercio.UI.Forms.Dump;
 using Komercio.UI.Forms.Employee;
 using Komercio.UI.Forms.Product;
 using Komercio.UI.Forms.Sales;
@@ -103,9 +104,9 @@ namespace Komercio
 
         private void materialButton1_Click(object sender, EventArgs e)
         {
-            fmCreateGroupAndSubgroup grpupandsubgroup = new fmCreateGroupAndSubgroup();
+            fmSalesDump saleDump = new fmSalesDump(_httpClient);
 
-            grpupandsubgroup.ShowDialog();
+            saleDump.ShowDialog();
         }
     }
 }
