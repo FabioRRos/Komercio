@@ -37,6 +37,8 @@
             this.materialLabel1 = new MaterialSkin.Controls.MaterialLabel();
             this.materialLabel2 = new MaterialSkin.Controls.MaterialLabel();
             this.materialLabel3 = new MaterialSkin.Controls.MaterialLabel();
+            this.mcbSallerName = new MaterialSkin.Controls.MaterialComboBox();
+            this.mtbLimparVendedor = new MaterialSkin.Controls.MaterialButton();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSalesDump)).BeginInit();
             this.SuspendLayout();
             // 
@@ -166,7 +168,7 @@
             this.mtbTotalPeriodo.HideSelection = true;
             this.mtbTotalPeriodo.Hint = "Total vendido no periodo";
             this.mtbTotalPeriodo.LeadingIcon = null;
-            this.mtbTotalPeriodo.Location = new System.Drawing.Point(396, 42);
+            this.mtbTotalPeriodo.Location = new System.Drawing.Point(359, 42);
             this.mtbTotalPeriodo.MaxLength = 32767;
             this.mtbTotalPeriodo.MouseState = MaterialSkin.MouseState.OUT;
             this.mtbTotalPeriodo.Name = "mtbTotalPeriodo";
@@ -216,18 +218,66 @@
             this.materialLabel3.AutoSize = true;
             this.materialLabel3.Depth = 0;
             this.materialLabel3.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.materialLabel3.Location = new System.Drawing.Point(393, 20);
+            this.materialLabel3.Location = new System.Drawing.Point(356, 20);
             this.materialLabel3.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel3.Name = "materialLabel3";
             this.materialLabel3.Size = new System.Drawing.Size(177, 19);
             this.materialLabel3.TabIndex = 8;
             this.materialLabel3.Text = "Total vendido no periodo";
             // 
+            // mcbSallerName
+            // 
+            this.mcbSallerName.AutoResize = false;
+            this.mcbSallerName.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.mcbSallerName.Depth = 0;
+            this.mcbSallerName.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
+            this.mcbSallerName.DropDownHeight = 118;
+            this.mcbSallerName.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.mcbSallerName.DropDownWidth = 121;
+            this.mcbSallerName.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
+            this.mcbSallerName.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.mcbSallerName.FormattingEnabled = true;
+            this.mcbSallerName.Hint = "Vendedor";
+            this.mcbSallerName.IntegralHeight = false;
+            this.mcbSallerName.ItemHeight = 29;
+            this.mcbSallerName.Location = new System.Drawing.Point(613, 42);
+            this.mcbSallerName.MaxDropDownItems = 4;
+            this.mcbSallerName.MouseState = MaterialSkin.MouseState.OUT;
+            this.mcbSallerName.Name = "mcbSallerName";
+            this.mcbSallerName.Size = new System.Drawing.Size(208, 35);
+            this.mcbSallerName.StartIndex = 0;
+            this.mcbSallerName.TabIndex = 9;
+            this.mcbSallerName.UseTallSize = false;
+            this.mcbSallerName.TextChanged += new System.EventHandler(this.mcbSallerName_TextChanged);
+            // 
+            // mtbLimparVendedor
+            // 
+            this.mtbLimparVendedor.AutoSize = false;
+            this.mtbLimparVendedor.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.mtbLimparVendedor.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.mtbLimparVendedor.Depth = 0;
+            this.mtbLimparVendedor.HighEmphasis = true;
+            this.mtbLimparVendedor.Icon = null;
+            this.mtbLimparVendedor.Location = new System.Drawing.Point(651, 86);
+            this.mtbLimparVendedor.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.mtbLimparVendedor.MouseState = MaterialSkin.MouseState.HOVER;
+            this.mtbLimparVendedor.Name = "mtbLimparVendedor";
+            this.mtbLimparVendedor.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.mtbLimparVendedor.Size = new System.Drawing.Size(145, 36);
+            this.mtbLimparVendedor.TabIndex = 10;
+            this.mtbLimparVendedor.Text = "Limpar vendedor";
+            this.mtbLimparVendedor.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+            this.mtbLimparVendedor.UseAccentColor = false;
+            this.mtbLimparVendedor.UseVisualStyleBackColor = true;
+            this.mtbLimparVendedor.Click += new System.EventHandler(this.mtbLimparVendedor_Click);
+            // 
             // fmSalesDump
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(832, 450);
+            this.Controls.Add(this.mtbLimparVendedor);
+            this.Controls.Add(this.mcbSallerName);
             this.Controls.Add(this.materialLabel3);
             this.Controls.Add(this.materialLabel2);
             this.Controls.Add(this.materialLabel1);
@@ -258,5 +308,7 @@
         private MaterialSkin.Controls.MaterialLabel materialLabel1;
         private MaterialSkin.Controls.MaterialLabel materialLabel2;
         private MaterialSkin.Controls.MaterialLabel materialLabel3;
+        private MaterialSkin.Controls.MaterialComboBox mcbSallerName;
+        private MaterialSkin.Controls.MaterialButton mtbLimparVendedor;
     }
 }

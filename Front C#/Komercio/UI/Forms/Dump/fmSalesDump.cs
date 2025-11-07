@@ -17,7 +17,12 @@ namespace Komercio.UI.Forms.Dump
     {
         private readonly HttpClient _httpClient;
         private readonly ReportService _reportService;
+        //Lista que vem da API
         private List<SaleReportDTO> reportDTO = new List<SaleReportDTO>();
+        //Lista filtrada
+        private List<SaleReportDTO> reportFiltro = new List<SaleReportDTO>();
+        //controle para saber se o filtro está ativo ou não
+        bool filtroactive = false;
 
         public fmSalesDump(HttpClient baseUrl)
         {
@@ -48,6 +53,7 @@ namespace Komercio.UI.Forms.Dump
             DataGridColumns();
             StatusInicialComponentes();
             TotalVendaPeriodo(reportDTO);
+            Vendedores();
         }
 
         public void StatusInicialComponentes()
@@ -161,6 +167,7 @@ namespace Komercio.UI.Forms.Dump
         private void mbtFiltarData_Click(object sender, EventArgs e)
         {
             FiltroData();
+            filtroactive = true;
         }
 
 
@@ -170,7 +177,6 @@ namespace Komercio.UI.Forms.Dump
             DateTime dataInicial = DateTime.Parse(mtbDataInicial.Text);
             DateTime dataFinal = DateTime.Parse(mtbDataFinal.Text);
 
-            List<SaleReportDTO> reportFiltro = new List<SaleReportDTO>();
 
 
         foreach (SaleReportDTO sale in reportDTO)
@@ -192,9 +198,83 @@ namespace Komercio.UI.Forms.Dump
 
         private void mbtLimparFiltro_Click(object sender, EventArgs e)
         {
+            filtroactive = false;
             LoadDGVReport();
             StatusInicialComponentes();
+
         }
 
+        List<string> vendedorList = new List<string>();
+
+        private void Vendedores()
+        {
+            
+            foreach (SaleReportDTO sale in reportDTO)
+            {
+
+               
+                    if (!vendedorList.Contains(sale.SallerName))
+                    {
+                    vendedorList.Add(sale.SallerName);
+                    mcbSallerName.Items.Add(sale.SallerName);
+                }
+            }
+
+            
+        }
+
+
+        private void FiltroPorVendedores()
+        {
+            var lista = new List<SaleReportDTO>();
+            switch (filtroactive)
+            {
+                case true:
+                    {
+                        foreach (SaleReportDTO sale in reportFiltro)
+                        {
+                            DateTime dataInicial = DateTime.Parse(mtbDataInicial.Text);
+                            DateTime dataFinal = DateTime.Parse(mtbDataFinal.Text);
+                            if (sale.SallerName == mcbSallerName.Text && sale.SaleDate >= dataInicial && sale.SaleDate <= dataFinal)
+                            {
+                                lista.Add(sale);
+                            }
+                        }
+                    }break;
+                case false:
+                    {
+                        foreach (SaleReportDTO sale in reportDTO)
+                        {
+                            if (sale.SallerName == mcbSallerName.Text)
+                            {
+                                lista.Add(sale);
+
+                            }
+                        }
+                    }break;
+
+                default: return;
+            }
+
+
+            dgvSalesDump.DataSource = lista;
+            TotalVendaPeriodo(lista);
+        }
+
+        private void mcbSallerName_TextChanged(object sender, EventArgs e)
+        {
+            if (mcbSallerName.SelectedIndex == -1)
+            {
+                FiltroData();
+                // LoadDGVReport();
+                return;
+            }
+            FiltroPorVendedores();
+        }
+
+        private void mtbLimparVendedor_Click(object sender, EventArgs e)
+        {
+            mcbSallerName.SelectedIndex = -1;
+        }
     }
 }
