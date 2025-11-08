@@ -111,6 +111,34 @@ namespace Komercio.Services
             }
         }
 
+        public async Task<List<ProductNotificationSettingsDTO>> GetProductNotificationSettingAsync()
+        {
+            // Retorna todos os produtos (pretendo salvar em um txt futuramente para garantir utilização offline)
+
+            var response = await _httpClient.GetAsync("products/notification");
+            {
+                if (!response.IsSuccessStatusCode)
+                {
+                    return new List<ProductNotificationSettingsDTO>();
+
+                }
+
+
+                var returnJSON = await response.Content.ReadAsStringAsync();
+                var products = JsonConvert.DeserializeObject<List<ProductNotificationSettingsDTO>>(returnJSON);
+
+
+                // retorno simples para evitar "NULL"
+
+                if (products == null)
+                {
+                    return new List<ProductNotificationSettingsDTO>();
+                }
+
+                return products;
+            }
+        }
+
 
 
         public async Task <ProductDTO> GetProductByCodbad(string barcode)

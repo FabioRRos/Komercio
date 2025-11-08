@@ -25,8 +25,6 @@ namespace Komercio.Services
         private readonly SaleService _saleService;
 
         //Fabio do futuro, aqui eu faço a injeção da URL da API
-        // Se o sabeFinalizerService vier com uma variavel nula, eu atribuo a que declarei acima
-        //Se não for nula, eu utilizo a que recebi.
         //Parecido com o que fiz nos formulários mas aqui eu vou receber do antigo formulário, então dou prioridade a ela
         public SaleFinalizerService(CustomerService customerService, SaleService saleService, BindingList<SalesItensDTO> itensVenda, HttpClient baseUrl)
         {

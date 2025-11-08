@@ -8,6 +8,7 @@ using System.Drawing;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -66,6 +67,7 @@ namespace Komercio.UI.Forms.Dump
 
         public void TotalVendaPeriodo(List<SaleReportDTO> list)
         {
+            
             float total = 0;
             foreach (var report in list) 
             {
@@ -168,20 +170,22 @@ namespace Komercio.UI.Forms.Dump
         {
             FiltroData();
             filtroactive = true;
+            
         }
 
 
         private void FiltroData()
         {
 
+
             DateTime dataInicial = DateTime.Parse(mtbDataInicial.Text);
             DateTime dataFinal = DateTime.Parse(mtbDataFinal.Text);
 
+            reportFiltro.Clear();
 
-
-        foreach (SaleReportDTO sale in reportDTO)
+            foreach (SaleReportDTO sale in reportDTO)
             {
-
+               
                 if (sale.SaleDate >= dataInicial && sale.SaleDate  <= dataFinal)
                 {
                 reportFiltro.Add(sale);
