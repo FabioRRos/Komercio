@@ -29,7 +29,7 @@ func NewFullSaleService(
 }
 
 // Estrutura que implementa a interface
-// Agora o FullSaleService utiliza o serviõ de repositório de outras rotas.
+// Agora o FullSaleService utiliza o serviço de repositório de outras rotas.
 
 type fullSaleService struct {
 	salesService        SalesService

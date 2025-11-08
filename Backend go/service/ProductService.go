@@ -19,6 +19,7 @@ type ProductService interface {
 	DeactivateProduct(ctx context.Context, id int) error
 	UpdateProductInputStock(ctx context.Context, productcodbar string, productStock int) (*entity.Product, error)
 	UpdateProductOutputStockTX(ctx context.Context, tx pgx.Tx, productcodbar string, productStock int) error
+	SelectProductSettings(ctx context.Context) ([]*entity.ProductNotification, error)
 }
 
 type productService struct {
@@ -60,6 +61,17 @@ func (s *productService) SelectAllProducts(ctx context.Context) ([]*entity.Produ
 	}
 
 	return activeProducts, nil
+}
+
+func (s *productService) SelectProductSettings(ctx context.Context) ([]*entity.ProductNotification, error) {
+	products, err := s.repo.SelectProductSettings(ctx)
+
+	if err != nil {
+		return nil, err
+	}
+
+	return products, nil
+
 }
 
 func (s *productService) SelectProductById(ctx context.Context, id int) (*entity.Product, error) {

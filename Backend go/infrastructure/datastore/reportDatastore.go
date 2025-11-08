@@ -39,7 +39,7 @@ SELECT
     s.sale_id,
     CONCAT(c.customerfirstname, ' ', c.customerlastname) AS customer_name,
     c.customerdocument AS customer_document,
-    e.employeefullname AS seller_name,
+    e.employeelogin AS seller_name,
     s.total_amount,
     s.discount_amount,
     s.final_amount,
