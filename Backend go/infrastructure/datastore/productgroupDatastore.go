@@ -14,13 +14,17 @@ type ProductGroupDatastore struct {
 }
 
 func NewProductGroupDataStore() *ProductGroupDatastore {
-	//connStr := "postgresql://postgres:postgres@68.211.176.125:5432/komercio?sslmode=disable"
+	//connStrProd := "postgresql://postgres:postgres@68.211.176.125:5432/komercio?sslmode=disable"
+	connStr := "postgresql://postgres:postgres@localhost:5432/komercio?sslmode=disable"
 
-	connStr := "postgres://komercio:komercio@localhost:5432/komercio?sslmode=disable"
+	//connStr := "postgresql://postgres:postgres@localhost:5432/komercio?sslmode=disable"
+	//connStr := "postgres://komercio:komercio@localhost:5432/komercio?sslmode=disable"
 	conn, err := pgx.Connect(context.Background(), connStr)
 
 	if err != nil {
-		log.Fatalf("Erro ao conectar ao banco: %v", err)
+
+		log.Fatalf("Erro na conexão: %v", err)
+
 	}
 
 	return &ProductGroupDatastore{Conn: conn}

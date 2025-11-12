@@ -19,13 +19,17 @@ type CashmovementsDatastore struct {
 // Por fim, eu trato o erro e se tudo der certo, retorno o ponteiro de datastore
 // context é quem gerencia timeout e cancelamentos no GO.
 func NewCashmovementsDatastore() *CashmovementsDatastore {
-	//connStr := "postgresql://postgres:postgres@68.211.176.125:5432/komercio?sslmode=disable"
+	//connStrProd := "postgresql://postgres:postgres@68.211.176.125:5432/komercio?sslmode=disable"
+	connStr := "postgresql://postgres:postgres@localhost:5432/komercio?sslmode=disable"
 
-	connStr := "postgres://komercio:komercio@localhost:5432/komercio?sslmode=disable"
+	//connStr := "postgresql://postgres:postgres@localhost:5432/komercio?sslmode=disable"
+	//connStr := "postgres://komercio:komercio@localhost:5432/komercio?sslmode=disable"
 	conn, err := pgx.Connect(context.Background(), connStr)
 
 	if err != nil {
+
 		log.Fatalf("Erro na conexão: %v", err)
+
 	}
 
 	return &CashmovementsDatastore{Conn: conn}

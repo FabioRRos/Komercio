@@ -1,11 +1,54 @@
 --
+-- PostgreSQL database cluster dump
+--
+
+-- Started on 2025-11-10 08:22:11
+
+SET default_transaction_read_only = off;
+
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+
+--
+-- Roles
+--
+
+CREATE ROLE komercio;
+ALTER ROLE komercio WITH SUPERUSER NOINHERIT NOCREATEROLE NOCREATEDB LOGIN NOREPLICATION NOBYPASSRLS PASSWORD 'SCRAM-SHA-256$4096:2yBCxRyVNiK7QFl+w3JpiA==$BleWbiHNti7ToeUxxUC7CueRSW2XDlRYPhSg+EGeX3c=:OmPgFbeHzhZB6LV4IsyvvPG8E3XqulDfyvZwE+2cgHk=';
+CREATE ROLE postgres;
+ALTER ROLE postgres WITH SUPERUSER INHERIT CREATEROLE CREATEDB LOGIN REPLICATION BYPASSRLS PASSWORD 'SCRAM-SHA-256$4096:JP7havLdrRVprrJBYt6W4A==$wQGLojqMdRQxzb5STSIdivzdT2F2T9AM/kazqzgZmDw=:J69CfmvzKl/cjkjLvAklB7zK6HqjrEBHskL/F1UbUWw=';
+CREATE ROLE "r.minhava";
+ALTER ROLE "r.minhava" WITH SUPERUSER INHERIT CREATEROLE CREATEDB LOGIN REPLICATION BYPASSRLS PASSWORD 'SCRAM-SHA-256$4096:4Nmxv1kvN4ZVpSCYJhbD8Q==$ECldB1/D5XlEWC8GK6PWgWw5YQpxXAllDxnXd3+1aYA=:OHTIENjRr+AgyWeSsW124OKRc+Z8UfopDDWuB4XBhoE=';
+
+--
+-- User Configurations
+--
+
+
+
+
+
+
+
+
+--
+-- Databases
+--
+
+--
+-- Database "template1" dump
+--
+
+\connect template1
+
+--
 -- PostgreSQL database dump
 --
 
 -- Dumped from database version 16.9
 -- Dumped by pg_dump version 16.9
 
--- Started on 2025-11-03 20:41:51
+-- Started on 2025-11-10 08:22:12
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -17,6 +60,78 @@ SET check_function_bodies = false;
 SET xmloption = content;
 SET client_min_messages = warning;
 SET row_security = off;
+
+-- Completed on 2025-11-10 08:22:12
+
+--
+-- PostgreSQL database dump complete
+--
+
+--
+-- Database "komercio" dump
+--
+
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 16.9
+-- Dumped by pg_dump version 16.9
+
+-- Started on 2025-11-10 08:22:12
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET xmloption = content;
+SET client_min_messages = warning;
+SET row_security = off;
+
+--
+-- TOC entry 4987 (class 1262 OID 16397)
+-- Name: komercio; Type: DATABASE; Schema: -; Owner: postgres
+--
+
+CREATE DATABASE komercio WITH TEMPLATE = template0 ENCODING = 'UTF8' LOCALE_PROVIDER = libc LOCALE = 'Portuguese_Brazil.1252';
+
+
+ALTER DATABASE komercio OWNER TO postgres;
+
+\connect komercio
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET xmloption = content;
+SET client_min_messages = warning;
+SET row_security = off;
+
+--
+-- TOC entry 233 (class 1255 OID 33122)
+-- Name: trg_ins_product_stock_settings(); Type: FUNCTION; Schema: public; Owner: postgres
+--
+
+CREATE FUNCTION public.trg_ins_product_stock_settings() RETURNS trigger
+    LANGUAGE plpgsql
+    AS $$
+BEGIN
+  INSERT INTO product_stock_settings (product_id)
+  VALUES (NEW.id);  -- usa o ID recém-criado em products
+
+  RETURN NULL; -- em AFTER, o retorno é ignorado
+END;
+$$;
+
+
+ALTER FUNCTION public.trg_ins_product_stock_settings() OWNER TO postgres;
 
 SET default_tablespace = '';
 
@@ -59,7 +174,7 @@ CREATE SEQUENCE public.cash_movements_movement_id_seq
 ALTER SEQUENCE public.cash_movements_movement_id_seq OWNER TO postgres;
 
 --
--- TOC entry 4973 (class 0 OID 0)
+-- TOC entry 4988 (class 0 OID 0)
 -- Dependencies: 229
 -- Name: cash_movements_movement_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
@@ -110,7 +225,7 @@ CREATE SEQUENCE public.customers_customerid_seq
 ALTER SEQUENCE public.customers_customerid_seq OWNER TO postgres;
 
 --
--- TOC entry 4974 (class 0 OID 0)
+-- TOC entry 4989 (class 0 OID 0)
 -- Dependencies: 217
 -- Name: customers_customerid_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
@@ -151,7 +266,7 @@ CREATE SEQUENCE public.employees_employeeid_seq
 ALTER SEQUENCE public.employees_employeeid_seq OWNER TO postgres;
 
 --
--- TOC entry 4975 (class 0 OID 0)
+-- TOC entry 4990 (class 0 OID 0)
 -- Dependencies: 219
 -- Name: employees_employeeid_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
@@ -189,12 +304,52 @@ CREATE SEQUENCE public.product_group_group_id_seq
 ALTER SEQUENCE public.product_group_group_id_seq OWNER TO postgres;
 
 --
--- TOC entry 4976 (class 0 OID 0)
+-- TOC entry 4991 (class 0 OID 0)
 -- Dependencies: 225
 -- Name: product_group_group_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
 
 ALTER SEQUENCE public.product_group_group_id_seq OWNED BY public.product_group.group_id;
+
+
+--
+-- TOC entry 232 (class 1259 OID 33114)
+-- Name: product_stock_settings; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.product_stock_settings (
+    id integer NOT NULL,
+    product_id integer NOT NULL,
+    min_stock integer DEFAULT 0 NOT NULL,
+    notify_enabled boolean DEFAULT false NOT NULL
+);
+
+
+ALTER TABLE public.product_stock_settings OWNER TO postgres;
+
+--
+-- TOC entry 231 (class 1259 OID 33113)
+-- Name: product_stock_settings_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.product_stock_settings_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public.product_stock_settings_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 4992 (class 0 OID 0)
+-- Dependencies: 231
+-- Name: product_stock_settings_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.product_stock_settings_id_seq OWNED BY public.product_stock_settings.id;
 
 
 --
@@ -227,7 +382,7 @@ CREATE SEQUENCE public.product_subgroup_subgroup_id_seq
 ALTER SEQUENCE public.product_subgroup_subgroup_id_seq OWNER TO postgres;
 
 --
--- TOC entry 4977 (class 0 OID 0)
+-- TOC entry 4993 (class 0 OID 0)
 -- Dependencies: 223
 -- Name: product_subgroup_subgroup_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
@@ -271,7 +426,7 @@ CREATE SEQUENCE public.products_id_seq
 ALTER SEQUENCE public.products_id_seq OWNER TO postgres;
 
 --
--- TOC entry 4978 (class 0 OID 0)
+-- TOC entry 4994 (class 0 OID 0)
 -- Dependencies: 215
 -- Name: products_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
@@ -316,7 +471,7 @@ CREATE SEQUENCE public.sale_items_sale_item_id_seq
 ALTER SEQUENCE public.sale_items_sale_item_id_seq OWNER TO postgres;
 
 --
--- TOC entry 4979 (class 0 OID 0)
+-- TOC entry 4995 (class 0 OID 0)
 -- Dependencies: 227
 -- Name: sale_items_sale_item_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
@@ -362,7 +517,7 @@ CREATE SEQUENCE public.sales_sale_id_seq
 ALTER SEQUENCE public.sales_sale_id_seq OWNER TO postgres;
 
 --
--- TOC entry 4980 (class 0 OID 0)
+-- TOC entry 4996 (class 0 OID 0)
 -- Dependencies: 221
 -- Name: sales_sale_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
@@ -371,7 +526,7 @@ ALTER SEQUENCE public.sales_sale_id_seq OWNED BY public.sales.sale_id;
 
 
 --
--- TOC entry 4785 (class 2604 OID 32845)
+-- TOC entry 4791 (class 2604 OID 32845)
 -- Name: cash_movements movement_id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -379,7 +534,7 @@ ALTER TABLE ONLY public.cash_movements ALTER COLUMN movement_id SET DEFAULT next
 
 
 --
--- TOC entry 4773 (class 2604 OID 24580)
+-- TOC entry 4779 (class 2604 OID 24580)
 -- Name: customers customerid; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -387,7 +542,7 @@ ALTER TABLE ONLY public.customers ALTER COLUMN customerid SET DEFAULT nextval('p
 
 
 --
--- TOC entry 4776 (class 2604 OID 32772)
+-- TOC entry 4782 (class 2604 OID 32772)
 -- Name: employees employeeid; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -395,7 +550,7 @@ ALTER TABLE ONLY public.employees ALTER COLUMN employeeid SET DEFAULT nextval('p
 
 
 --
--- TOC entry 4783 (class 2604 OID 32830)
+-- TOC entry 4789 (class 2604 OID 32830)
 -- Name: product_group group_id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -403,7 +558,15 @@ ALTER TABLE ONLY public.product_group ALTER COLUMN group_id SET DEFAULT nextval(
 
 
 --
--- TOC entry 4782 (class 2604 OID 32823)
+-- TOC entry 4793 (class 2604 OID 33117)
+-- Name: product_stock_settings id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.product_stock_settings ALTER COLUMN id SET DEFAULT nextval('public.product_stock_settings_id_seq'::regclass);
+
+
+--
+-- TOC entry 4788 (class 2604 OID 32823)
 -- Name: product_subgroup subgroup_id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -411,7 +574,7 @@ ALTER TABLE ONLY public.product_subgroup ALTER COLUMN subgroup_id SET DEFAULT ne
 
 
 --
--- TOC entry 4770 (class 2604 OID 16412)
+-- TOC entry 4776 (class 2604 OID 16412)
 -- Name: products id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -419,7 +582,7 @@ ALTER TABLE ONLY public.products ALTER COLUMN id SET DEFAULT nextval('public.pro
 
 
 --
--- TOC entry 4784 (class 2604 OID 32837)
+-- TOC entry 4790 (class 2604 OID 32837)
 -- Name: sale_items sale_item_id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -427,7 +590,7 @@ ALTER TABLE ONLY public.sale_items ALTER COLUMN sale_item_id SET DEFAULT nextval
 
 
 --
--- TOC entry 4778 (class 2604 OID 32811)
+-- TOC entry 4784 (class 2604 OID 32811)
 -- Name: sales sale_id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -435,7 +598,7 @@ ALTER TABLE ONLY public.sales ALTER COLUMN sale_id SET DEFAULT nextval('public.s
 
 
 --
--- TOC entry 4967 (class 0 OID 32842)
+-- TOC entry 4979 (class 0 OID 32842)
 -- Dependencies: 230
 -- Data for Name: cash_movements; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -467,11 +630,13 @@ COPY public.cash_movements (movement_id, sale_id, movement_type, description, am
 24	25	Entrada		19.90	Dinheiro	2025-11-02 17:49:08.106156	1
 25	26	Entrada		1466.90	Dinheiro	2025-11-02 17:53:16.400379	2
 26	27	Entrada		1084.70	Dinheiro	2025-11-02 18:01:10.256908	3
+27	28	Entrada		154.80	Dinheiro	2025-11-04 21:18:20.538145	2
+28	29	Entrada		701.80	Débito	2025-11-04 21:19:46.871638	1
 \.
 
 
 --
--- TOC entry 4955 (class 0 OID 24577)
+-- TOC entry 4967 (class 0 OID 24577)
 -- Dependencies: 218
 -- Data for Name: customers; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -479,11 +644,12 @@ COPY public.cash_movements (movement_id, sale_id, movement_type, description, am
 COPY public.customers (customerid, customerfirstname, customerlastname, customerdocument, customerphone, customermobile, customeraddressline, customerzipcode, customerneighborhood, customercity, customerstate, customercountry, customeremail, customeraccountid, customerstatus) FROM stdin;
 1	Cliente	Balcão	11111111111										0	t
 2	Fabio	Ricardo Ros	41915422817	1435721633	14997724891	Rua Licinio José da Silva 50	16600264	Vila Ortiz	Pirajuí	SP	Brasil	fabiorros@gmail.com.br	0	t
+3	Aline	Fernanda Ulian	44644644838		14997724891	Rua Licinio José da Silva 50	16600264	Vila Ortiz	Pirajuí	SP	Brasil		0	t
 \.
 
 
 --
--- TOC entry 4957 (class 0 OID 32769)
+-- TOC entry 4969 (class 0 OID 32769)
 -- Dependencies: 220
 -- Data for Name: employees; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -496,7 +662,7 @@ COPY public.employees (employeeid, employeefullname, employeelogin, employeepass
 
 
 --
--- TOC entry 4963 (class 0 OID 32827)
+-- TOC entry 4975 (class 0 OID 32827)
 -- Dependencies: 226
 -- Data for Name: product_group; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -516,7 +682,66 @@ COPY public.product_group (group_id, group_name) FROM stdin;
 
 
 --
--- TOC entry 4961 (class 0 OID 32820)
+-- TOC entry 4981 (class 0 OID 33114)
+-- Dependencies: 232
+-- Data for Name: product_stock_settings; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.product_stock_settings (id, product_id, min_stock, notify_enabled) FROM stdin;
+1	50	0	f
+2	51	0	f
+3	1	0	f
+4	2	0	f
+5	3	0	f
+6	4	0	f
+7	5	0	f
+8	6	0	f
+9	7	0	f
+10	8	0	f
+11	9	0	f
+12	10	0	f
+13	11	0	f
+14	12	0	f
+15	13	0	f
+16	14	0	f
+17	15	0	f
+18	16	0	f
+19	17	0	f
+20	18	0	f
+21	19	0	f
+22	20	0	f
+23	21	0	f
+24	22	0	f
+25	23	0	f
+26	24	0	f
+27	25	0	f
+28	26	0	f
+29	27	0	f
+30	28	0	f
+31	29	0	f
+32	30	0	f
+33	31	0	f
+34	32	0	f
+35	33	0	f
+36	34	0	f
+37	35	0	f
+38	36	0	f
+39	37	0	f
+40	38	0	f
+41	39	0	f
+42	40	0	f
+43	41	0	f
+44	42	0	f
+45	43	0	f
+46	44	0	f
+47	45	0	f
+48	46	0	f
+49	47	0	f
+\.
+
+
+--
+-- TOC entry 4973 (class 0 OID 32820)
 -- Dependencies: 224
 -- Data for Name: product_subgroup; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -559,7 +784,7 @@ COPY public.product_subgroup (subgroup_id, subgroup_name) FROM stdin;
 
 
 --
--- TOC entry 4953 (class 0 OID 16409)
+-- TOC entry 4965 (class 0 OID 16409)
 -- Dependencies: 216
 -- Data for Name: products; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -567,7 +792,6 @@ COPY public.product_subgroup (subgroup_id, subgroup_name) FROM stdin;
 COPY public.products (id, productname, productprice, productcodbar, productgroup, productsubgroup, productstock, status) FROM stdin;
 3	Pelicula Gel Brilhante Motorola G60	15.9	789000003	Pelicula Gel	Brilhante	30	t
 5	Pelicula Cerâmica Brilhante de Privacidade iPhone 13	25.9	789000005	Pelicula Cerâmica	Brilhante de Privacidade	25	t
-6	Pelicula Cerâmica Fosca de Privacidade Samsung S22	27.9	789000006	Pelicula Cerâmica	Fosca de Privacidade	20	t
 7	Capa Silicone Transparente iPhone 11	24.9	789000007	Capa Silicone	Transparente	60	t
 8	Capa Silicone Preta Samsung A23	24.9	789000008	Capa Silicone	Preta	45	t
 11	Capa Silicone Anti Impacto + Transparente Samsung A32	29.9	789000011	Capa Silicone	Anti Impacto + Transparente	40	t
@@ -579,12 +803,11 @@ COPY public.products (id, productname, productprice, productcodbar, productgroup
 37	Slime Neon Pote 250g	12.9	789000037	Brinquedos	Slime	45	t
 38	Pipa Pequena com Linha	9.9	789000038	Brinquedos	Pipas	60	t
 40	Carrinho Controle Remoto Infantil	89.9	789000040	Brinquedos	Carrinhos	10	t
-42	Slime Glitter Azul	13.9	789000042	Brinquedos	Slime	40	t
+42	Slime Glitter Azul	13.9	789000042	Brinquedos	Slime	28	t
 24	Cabo P2 Macho-Macho 1,5m	19.9	789000024	Acessórios de Som	Cabos P2	59	t
 15	Capa Couro Preto iPhone 13	49.9	789000015	Capa Couro	Couro Preto	17	t
 44	Carrinho Hot Wheels Genérico	11.9	789000044	Brinquedos	Carrinhos	79	t
 29	Power Bank 10.000mAh	119.9	789000029	Acessórios de Celular	Power Bank	9	t
-17	Capa Couro Carteira + Vermelho iPhone 11	54.9	789000017	Capa Couro	Carteira + Vermelho	1	t
 20	Fone de Ouvido Bluetooth JBL Style	59.9	789000020	Acessórios de Som	Fones de Ouvido	20	t
 12	Capa Acrílico Transparente iPhone 14	32.9	789000012	Capa Acrílico	Transparente	30	t
 32	TV Box MXQ Pro 5G	229.9	789000032	TV Box e Streaming	TV Box	0	t
@@ -599,7 +822,8 @@ COPY public.products (id, productname, productprice, productcodbar, productgroup
 46	Mouse logitech	50	160885108	Periféricos	Mouse	1	t
 33	Chromecast 4ª Geração	349.9	789000033	TV Box e Streaming	Chromecast	1	t
 16	Capa Couro Carteira + Preto Samsung A54	54.9	789000016	Capa Couro	Carteira + Preto	2	t
-19	Caixa Bluetooth RGB Speaker	129.9	789000019	Acessórios de Som	Caixas Bluetooth	5	t
+50	Xiaomi 9t pro	2100	32244000	Celular	Xiaomi	10	t
+51	Xiaomi 9t lite	1800	616463145	Brinquedos	Brinquedos	40	t
 18	Caixa Bluetooth Mini Portátil	89.9	789000018	Acessórios de Som	Caixas Bluetooth	18	t
 41	Boneca Mini Fashion	29.9	789000041	Brinquedos	Bonecos	0	t
 34	Cabo HDMI 2.0 2m	39.9	789000034	TV Box e Streaming	Cabo HDMI	23	t
@@ -611,12 +835,15 @@ COPY public.products (id, productname, productprice, productcodbar, productgroup
 36	Boneco Mini Vingadores	24.9	789000036	Brinquedos	Bonecos	36	t
 39	Mini Bola Antiestresse	7.9	789000039	Brinquedos	Slime	28	t
 2	Pelicula Vidro Fosca Samsung A32	17.9	789000002	Pelicula Vidro	Fosca	18	t
-9	Capa Silicone Vermelha Xiaomi Note 12	24.9	789000009	Capa Silicone	Vermelha	37	t
+19	Caixa Bluetooth RGB Speaker	129.9	789000019	Acessórios de Som	Caixas Bluetooth	4	t
+9	Capa Silicone Vermelha Xiaomi Note 12	24.9	789000009	Capa Silicone	Vermelha	36	t
+17	Capa Couro Carteira + Vermelho iPhone 11	54.9	789000017	Capa Couro	Carteira + Vermelho	0	t
+6	Pelicula Cerâmica Fosca de Privacidade Samsung S22	27.9	789000006	Pelicula Cerâmica	Fosca de Privacidade	1	t
 \.
 
 
 --
--- TOC entry 4965 (class 0 OID 32834)
+-- TOC entry 4977 (class 0 OID 32834)
 -- Dependencies: 228
 -- Data for Name: sale_items; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -674,11 +901,16 @@ COPY public.sale_items (sale_item_id, sale_id, product_id, product_name, barcode
 50	27	30	Anel de Suporte Dourado	789000030	19.90	1	19.90
 51	27	30	Anel de Suporte Dourado	789000030	19.90	34	676.60
 52	27	41	Boneca Mini Fashion	789000041	29.90	18	538.20
+53	28	19	Caixa Bluetooth RGB Speaker	789000019	129.90	1	129.90
+54	28	9	Capa Silicone Vermelha Xiaomi Note 12	789000009	24.90	1	24.90
+55	29	17	Capa Couro Carteira + Vermelho iPhone 11	789000017	54.90	1	54.90
+56	29	6	Pelicula Cerâmica Fosca de Privacidade Samsung S22	789000006	27.90	19	530.10
+57	29	42	Slime Glitter Azul	789000042	13.90	12	166.80
 \.
 
 
 --
--- TOC entry 4959 (class 0 OID 32808)
+-- TOC entry 4971 (class 0 OID 32808)
 -- Dependencies: 222
 -- Data for Name: sales; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -710,29 +942,31 @@ COPY public.sales (sale_id, customer_id, total_amount, discount_amount, final_am
 25	1	19.90	0.00	19.90	2025-11-02	17:49:08	Dinheiro	1	
 26	2	1766.90	300.00	1466.90	2025-11-02	17:53:16	Dinheiro	2	Desconto aprovado
 27	2	1234.70	150.00	1084.70	2025-11-02	18:01:10	Dinheiro	3	Aprovado pela barbara
+28	2	154.80	0.00	154.80	2025-11-04	21:18:20	Dinheiro	2	teste
+29	3	751.80	50.00	701.80	2025-11-04	21:19:46	Débito	1	Desconto aprovado pelo doni
 \.
 
 
 --
--- TOC entry 4981 (class 0 OID 0)
+-- TOC entry 4997 (class 0 OID 0)
 -- Dependencies: 229
 -- Name: cash_movements_movement_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.cash_movements_movement_id_seq', 26, true);
+SELECT pg_catalog.setval('public.cash_movements_movement_id_seq', 28, true);
 
 
 --
--- TOC entry 4982 (class 0 OID 0)
+-- TOC entry 4998 (class 0 OID 0)
 -- Dependencies: 217
 -- Name: customers_customerid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.customers_customerid_seq', 2, true);
+SELECT pg_catalog.setval('public.customers_customerid_seq', 4, true);
 
 
 --
--- TOC entry 4983 (class 0 OID 0)
+-- TOC entry 4999 (class 0 OID 0)
 -- Dependencies: 219
 -- Name: employees_employeeid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
@@ -741,7 +975,7 @@ SELECT pg_catalog.setval('public.employees_employeeid_seq', 3, true);
 
 
 --
--- TOC entry 4984 (class 0 OID 0)
+-- TOC entry 5000 (class 0 OID 0)
 -- Dependencies: 225
 -- Name: product_group_group_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
@@ -750,7 +984,16 @@ SELECT pg_catalog.setval('public.product_group_group_id_seq', 10, true);
 
 
 --
--- TOC entry 4985 (class 0 OID 0)
+-- TOC entry 5001 (class 0 OID 0)
+-- Dependencies: 231
+-- Name: product_stock_settings_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.product_stock_settings_id_seq', 49, true);
+
+
+--
+-- TOC entry 5002 (class 0 OID 0)
 -- Dependencies: 223
 -- Name: product_subgroup_subgroup_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
@@ -759,34 +1002,34 @@ SELECT pg_catalog.setval('public.product_subgroup_subgroup_id_seq', 33, true);
 
 
 --
--- TOC entry 4986 (class 0 OID 0)
+-- TOC entry 5003 (class 0 OID 0)
 -- Dependencies: 215
 -- Name: products_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.products_id_seq', 47, true);
+SELECT pg_catalog.setval('public.products_id_seq', 51, true);
 
 
 --
--- TOC entry 4987 (class 0 OID 0)
+-- TOC entry 5004 (class 0 OID 0)
 -- Dependencies: 227
 -- Name: sale_items_sale_item_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.sale_items_sale_item_id_seq', 52, true);
+SELECT pg_catalog.setval('public.sale_items_sale_item_id_seq', 57, true);
 
 
 --
--- TOC entry 4988 (class 0 OID 0)
+-- TOC entry 5005 (class 0 OID 0)
 -- Dependencies: 221
 -- Name: sales_sale_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.sales_sale_id_seq', 27, true);
+SELECT pg_catalog.setval('public.sales_sale_id_seq', 29, true);
 
 
 --
--- TOC entry 4808 (class 2606 OID 32851)
+-- TOC entry 4817 (class 2606 OID 32851)
 -- Name: cash_movements cash_movements_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -795,7 +1038,7 @@ ALTER TABLE ONLY public.cash_movements
 
 
 --
--- TOC entry 4792 (class 2606 OID 24588)
+-- TOC entry 4801 (class 2606 OID 24588)
 -- Name: customers customers_customerdocument_key; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -804,7 +1047,7 @@ ALTER TABLE ONLY public.customers
 
 
 --
--- TOC entry 4794 (class 2606 OID 24586)
+-- TOC entry 4803 (class 2606 OID 24586)
 -- Name: customers customers_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -813,7 +1056,7 @@ ALTER TABLE ONLY public.customers
 
 
 --
--- TOC entry 4796 (class 2606 OID 32776)
+-- TOC entry 4805 (class 2606 OID 32776)
 -- Name: employees employees_employeelogin_key; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -822,7 +1065,7 @@ ALTER TABLE ONLY public.employees
 
 
 --
--- TOC entry 4798 (class 2606 OID 32774)
+-- TOC entry 4807 (class 2606 OID 32774)
 -- Name: employees employees_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -831,7 +1074,7 @@ ALTER TABLE ONLY public.employees
 
 
 --
--- TOC entry 4804 (class 2606 OID 32832)
+-- TOC entry 4813 (class 2606 OID 32832)
 -- Name: product_group product_group_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -840,7 +1083,16 @@ ALTER TABLE ONLY public.product_group
 
 
 --
--- TOC entry 4802 (class 2606 OID 32825)
+-- TOC entry 4819 (class 2606 OID 33121)
+-- Name: product_stock_settings product_stock_settings_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.product_stock_settings
+    ADD CONSTRAINT product_stock_settings_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 4811 (class 2606 OID 32825)
 -- Name: product_subgroup product_subgroup_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -849,7 +1101,7 @@ ALTER TABLE ONLY public.product_subgroup
 
 
 --
--- TOC entry 4790 (class 2606 OID 16417)
+-- TOC entry 4799 (class 2606 OID 16417)
 -- Name: products products_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -858,7 +1110,7 @@ ALTER TABLE ONLY public.products
 
 
 --
--- TOC entry 4806 (class 2606 OID 32840)
+-- TOC entry 4815 (class 2606 OID 32840)
 -- Name: sale_items sale_items_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -867,7 +1119,7 @@ ALTER TABLE ONLY public.sale_items
 
 
 --
--- TOC entry 4800 (class 2606 OID 32818)
+-- TOC entry 4809 (class 2606 OID 32818)
 -- Name: sales sales_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -875,9 +1127,155 @@ ALTER TABLE ONLY public.sales
     ADD CONSTRAINT sales_pkey PRIMARY KEY (sale_id);
 
 
--- Completed on 2025-11-03 20:41:51
+--
+-- TOC entry 4820 (class 2620 OID 33123)
+-- Name: products ins_product_stock_settings; Type: TRIGGER; Schema: public; Owner: postgres
+--
+
+CREATE TRIGGER ins_product_stock_settings AFTER INSERT ON public.products FOR EACH ROW EXECUTE FUNCTION public.trg_ins_product_stock_settings();
+
+
+-- Completed on 2025-11-10 08:22:12
 
 --
 -- PostgreSQL database dump complete
+--
+
+--
+-- Database "postgres" dump
+--
+
+\connect postgres
+
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 16.9
+-- Dumped by pg_dump version 16.9
+
+-- Started on 2025-11-10 08:22:12
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET xmloption = content;
+SET client_min_messages = warning;
+SET row_security = off;
+
+--
+-- TOC entry 2 (class 3079 OID 16384)
+-- Name: adminpack; Type: EXTENSION; Schema: -; Owner: -
+--
+
+CREATE EXTENSION IF NOT EXISTS adminpack WITH SCHEMA pg_catalog;
+
+
+--
+-- TOC entry 4890 (class 0 OID 0)
+-- Dependencies: 2
+-- Name: EXTENSION adminpack; Type: COMMENT; Schema: -; Owner: 
+--
+
+COMMENT ON EXTENSION adminpack IS 'administrative functions for PostgreSQL';
+
+
+SET default_tablespace = '';
+
+SET default_table_access_method = heap;
+
+--
+-- TOC entry 217 (class 1259 OID 16399)
+-- Name: products; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.products (
+    id integer NOT NULL,
+    productname character varying(255) NOT NULL,
+    productprice real NOT NULL,
+    productcodbar character varying(50),
+    productgroup character varying(100),
+    productsubgroup character varying(100),
+    productstock integer DEFAULT 0
+);
+
+
+ALTER TABLE public.products OWNER TO postgres;
+
+--
+-- TOC entry 216 (class 1259 OID 16398)
+-- Name: products_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.products_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public.products_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 4891 (class 0 OID 0)
+-- Dependencies: 216
+-- Name: products_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.products_id_seq OWNED BY public.products.id;
+
+
+--
+-- TOC entry 4736 (class 2604 OID 16402)
+-- Name: products id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.products ALTER COLUMN id SET DEFAULT nextval('public.products_id_seq'::regclass);
+
+
+--
+-- TOC entry 4884 (class 0 OID 16399)
+-- Dependencies: 217
+-- Data for Name: products; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.products (id, productname, productprice, productcodbar, productgroup, productsubgroup, productstock) FROM stdin;
+\.
+
+
+--
+-- TOC entry 4892 (class 0 OID 0)
+-- Dependencies: 216
+-- Name: products_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.products_id_seq', 1, false);
+
+
+--
+-- TOC entry 4739 (class 2606 OID 16407)
+-- Name: products products_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.products
+    ADD CONSTRAINT products_pkey PRIMARY KEY (id);
+
+
+-- Completed on 2025-11-10 08:22:13
+
+--
+-- PostgreSQL database dump complete
+--
+
+-- Completed on 2025-11-10 08:22:13
+
+--
+-- PostgreSQL database cluster dump complete
 --
 
