@@ -14,11 +14,17 @@ type EmployeesDatastore struct {
 }
 
 func NewEmployeesDataStore() *EmployeesDatastore {
-	connStr := "postgres://komercio:komercio@localhost:5432/komercio?sslmode=disable"
+	//connStrProd := "postgresql://postgres:postgres@68.211.176.125:5432/komercio?sslmode=disable"
+	connStr := "postgresql://postgres:postgres@localhost:5432/komercio?sslmode=disable"
 
+	//connStr := "postgresql://postgres:postgres@localhost:5432/komercio?sslmode=disable"
+	//connStr := "postgres://komercio:komercio@localhost:5432/komercio?sslmode=disable"
 	conn, err := pgx.Connect(context.Background(), connStr)
+
 	if err != nil {
-		log.Fatalf("Erro ao conectar ao banco: %v", err)
+
+		log.Fatalf("Erro na conexão: %v", err)
+
 	}
 	return &EmployeesDatastore{Conn: conn}
 }
@@ -71,29 +77,32 @@ func (d *EmployeesDatastore) ValidateLogin(login, password string) (bool, error)
 	}
 	return true, nil
 }
-
-func (d *EmployeesDatastore) SelectActiveEmployeeNames() ([]string, error) {
+func (d *EmployeesDatastore) SelectActiveEmployeeNames() ([]int, []string, error) {
 	query := `
-		SELECT EmployeeFullName
+		SELECT EmployeeID, EmployeeFullName
 		FROM employees
 		WHERE EmployeeStatus = true
 	`
 	rows, err := d.Conn.Query(context.Background(), query)
 	if err != nil {
-		return nil, fmt.Errorf("erro ao consultar funcionários ativos: %w", err)
+		return nil, nil, fmt.Errorf("erro ao consultar funcionários ativos: %w", err)
 	}
 	defer rows.Close()
 
+	var ids []int
 	var names []string
+
 	for rows.Next() {
+		var id int
 		var name string
-		if err := rows.Scan(&name); err != nil {
-			return nil, fmt.Errorf("erro ao ler linha do funcionário: %w", err)
+		if err := rows.Scan(&id, &name); err != nil {
+			return nil, nil, fmt.Errorf("erro ao ler funcionário: %w", err)
 		}
+		ids = append(ids, id)
 		names = append(names, name)
 	}
 
-	return names, nil
+	return ids, names, nil
 }
 
 func (d *EmployeesDatastore) UpdateEmployeePassword(login, newPassword string) error {

@@ -1,6 +1,7 @@
 ﻿using Komercio.Services;
 using Komercio.UI.Forms;
 using Komercio.UI.Forms.Customer;
+using Komercio.UI.Forms.Dump;
 using Komercio.UI.Forms.Employee;
 using Komercio.UI.Forms.Product;
 using Komercio.UI.Forms.Sales;
@@ -11,6 +12,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -24,9 +26,13 @@ namespace Komercio
         private readonly ProductService _productService;
         private readonly ProductGroupService _productGroupService;
         private readonly ProductSubgroupService _productSubgroupService;
+        private readonly HttpClient _httpClient;
+        private readonly ProductDescriptionService _productDescriptionService;
 
 
-        public Home(EmployeeService empliyeeService, CustomerService customerService, ProductService productService, ProductGroupService productGroupService, ProductSubgroupService productSubgroupService)
+
+
+        public Home(EmployeeService empliyeeService, CustomerService customerService, ProductService productService, ProductGroupService productGroupService, ProductSubgroupService productSubgroupService , ProductDescriptionService productDescriptionService,  string baseUrl)
         {
             InitializeComponent();
             _employeeService = empliyeeService;
@@ -34,6 +40,12 @@ namespace Komercio
             _productService = productService;
             _productGroupService = productGroupService;
             _productSubgroupService =  productSubgroupService;
+            _productDescriptionService = productDescriptionService;
+
+            _httpClient = new HttpClient
+            {
+                BaseAddress = new Uri(baseUrl)
+            };
 
 
         }
@@ -74,7 +86,7 @@ namespace Komercio
 
         private void manualToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            fmCreateProduct createProduct = new fmCreateProduct(_productService);
+            fmCreateProduct createProduct = new fmCreateProduct(_productService, _productDescriptionService);
             createProduct.ShowDialog();
         }
 
@@ -84,12 +96,24 @@ namespace Komercio
             imputProduct.ShowDialog();
         }
 
-        private async void novaVendaToolStripMenuItem_Click(object sender, EventArgs e)
+        private void novaVendaToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            fmSalesProduct salesProduct = new fmSalesProduct(_productService, _productGroupService, _productSubgroupService, _customerService);
+            fmSalesProduct salesProduct = new fmSalesProduct(_employeeService,_productService, _productGroupService, _productSubgroupService, _customerService, _productDescriptionService, _httpClient);
             salesProduct.ShowDialog();
         }
 
+        private void materialButton1_Click(object sender, EventArgs e)
+        {
+            fmProductSettings productSettingos = new fmProductSettings(_productService);
 
+            productSettingos.ShowDialog();
+        }
+
+        private void vendaPorPeriodoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            fmSalesDump saleDump = new fmSalesDump(_httpClient);
+
+            saleDump.ShowDialog();
+        }
     }
 }

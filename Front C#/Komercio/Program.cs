@@ -6,6 +6,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Configuration;
+
 
 namespace Komercio
 {
@@ -20,7 +22,8 @@ namespace Komercio
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             //Base URL da API
-            string apiBaseUrl = "http://localhost:8000/";
+            string apiBaseUrl = ConfigurationManager.AppSettings["ApiBaseUrl"];
+
 
             // Cria a instância do serviço da API
             var employeeService = new EmployeeService(apiBaseUrl);
@@ -28,10 +31,12 @@ namespace Komercio
             var productService = new ProductService(apiBaseUrl);
             var productgroupService = new ProductGroupService(apiBaseUrl);
             var productrsuggroupService = new ProductSubgroupService(apiBaseUrl);
+            var productDescriptionService = new ProductDescriptionService(apiBaseUrl);
+
 
 
             // aqui estou aplicando a injeção de dependência manualmente
-            Application.Run(new Home(employeeService, customerService, productService, productgroupService, productrsuggroupService));
+            Application.Run(new Home(employeeService, customerService, productService, productgroupService, productrsuggroupService, productDescriptionService, apiBaseUrl));
 
 
         }

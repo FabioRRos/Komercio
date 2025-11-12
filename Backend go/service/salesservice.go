@@ -44,5 +44,9 @@ func (s *salesService) CreateNewSaleTx(ctx context.Context, tx pgx.Tx, sale *ent
 		return 0, errors.New("venda não pode ser nula")
 	}
 
+	if sale.CustomerId == 0 {
+		sale.CustomerId = 1
+	}
+
 	return s.repo.CreateNewSaleTx(ctx, tx, sale)
 }

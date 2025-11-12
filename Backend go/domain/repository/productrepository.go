@@ -18,6 +18,7 @@ type ProductRepository interface {
 	UpdateProductInputStock(ctx context.Context, productcodbar string, productStock int) (*entity.Product, error)
 	UpdateProductOutputStockTX(ctx context.Context, tx pgx.Tx, productcodbar string, productStock int) error
 	SelectProductByCodBar(ctx context.Context, productcodbar string) (*entity.Product, error)
+	SelectProductSettings(ctx context.Context) ([]*entity.ProductNotification, error)
 }
 
 type productRepository struct {
@@ -60,4 +61,8 @@ func (r *productRepository) DeactivateProduct(ctx context.Context, id int) error
 
 func (r *productRepository) UpdateProductOutputStockTX(ctx context.Context, tx pgx.Tx, productcodbar string, productStock int) error {
 	return r.datastore.UpdateProductOutputStockTX(ctx, tx, productcodbar, productStock)
+}
+
+func (r *productRepository) SelectProductSettings(ctx context.Context) ([]*entity.ProductNotification, error) {
+	return r.datastore.SelectProductSettings()
 }

@@ -30,6 +30,16 @@ func (c *ProductController) GetAllProducts(ctx *gin.Context) {
 	ctx.JSON(http.StatusOK, products)
 }
 
+// rota GET da configuração de notificação
+func (c *ProductController) GetAllProductsSettings(ctx *gin.Context) {
+	products, err := c.service.SelectProductSettings(ctx)
+	if err != nil {
+		ctx.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		return
+	}
+	ctx.JSON(200, products)
+}
+
 // GET /products/:id
 func (c *ProductController) GetProductById(ctx *gin.Context) {
 	idParam := ctx.Param("id")

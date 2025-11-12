@@ -29,7 +29,7 @@ func NewFullSaleService(
 }
 
 // Estrutura que implementa a interface
-// Agora o FullSaleService utiliza o serviõ de repositório de outras rotas.
+// Agora o FullSaleService utiliza o serviço de repositório de outras rotas.
 
 type fullSaleService struct {
 	salesService        SalesService
@@ -53,7 +53,7 @@ func (s *fullSaleService) CreateFullSale(ctx context.Context, salesAggregate *en
 	}
 	defer tx.Rollback(ctx) // rollback automático se algo der errado
 
-	// 2Cria a venda principal
+	// Cria a venda principal
 	sale := salesAggregate.Sale
 	sale.SalesDate = now
 	sale.SalesHour = now.Format("15:04:05")
@@ -63,7 +63,7 @@ func (s *fullSaleService) CreateFullSale(ctx context.Context, salesAggregate *en
 		return 0, fmt.Errorf("erro ao criar venda: %w", err)
 	}
 
-	// 3Insere os itens da venda
+	// Insere os itens da venda
 	for _, item := range salesAggregate.Items {
 		saleItem := entity.SalesItens{
 			SaleId:      saleID,

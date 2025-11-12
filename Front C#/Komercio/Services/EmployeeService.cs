@@ -11,6 +11,11 @@ namespace MeuProjetoWinForms.Services
     public class EmployeeService
 
     {
+        public class EmployeeName
+        {
+            public int Id { get; set; }
+            public string Name { get; set; } = string.Empty;
+        }
 
         private readonly HttpClient _httpClient;
 
@@ -85,27 +90,47 @@ namespace MeuProjetoWinForms.Services
 
 
         // GET /employees/names - Retorna lista de nomes de funcionários ativos
-        public async Task<List<string>> GetActiveEmployeeNamesAsync()
+        public async Task<List<EmployeeDto>> GetActiveEmployeeNamesAsync()
         {
-            var response = await _httpClient.GetAsync("employees/names"); // Rota correta
+            var response = await _httpClient.GetAsync("employees/names");
 
             if (!response.IsSuccessStatusCode)
             {
-                return new List<string>();
+                return new List<EmployeeDto>();
             }
 
-            var resultJson = await response.Content.ReadAsStringAsync();
+            var json = await response.Content.ReadAsStringAsync();
 
-            // Salva a resposta JSON em um arquivo
-            var names = JsonConvert.DeserializeObject<List<string>>(resultJson);
-
-            if (names == null)
+            if (string.IsNullOrWhiteSpace(json))
             {
-                return new List<string>();
+                return new List<EmployeeDto>();
             }
 
-            return names;
+            var employees = JsonConvert.DeserializeObject<List<EmployeeName>>(json);
+
+            
+            var activeEmployees = new List<EmployeeDto>();
+
+            foreach (var employee in employees)
+            {
+                var temp = new EmployeeDto();
+                temp.EmployeeFullName = employee.Name;
+                temp.Id = employee.Id;
+                activeEmployees.Add(temp);
+            }
+
+
+            if (employees != null)
+            {
+                return activeEmployees;
+            }
+            else
+            {
+                return new List<EmployeeDto>();
+            }
         }
+
+
 
         // DTO interno para resposta de login
         private class LoginResponse

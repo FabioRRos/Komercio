@@ -29,6 +29,8 @@ func main() {
 	defer cashmovementDatastore.Close()
 	saleItemsDatastore := datastore.NewSaleItemsDatastore()
 	defer saleItemsDatastore.Close()
+	reportDatastore := datastore.NewConReportDataStore()
+	defer reportDatastore.Close()
 
 	//#####################################################
 	//Injeção de dependências
@@ -81,7 +83,30 @@ func main() {
 			repository.NewProductRepository(dbProduct)),
 	)
 
+	listProductDescription := service.NewProductDescriptionService(
+		service.NewProductService(
+			repository.NewProductRepository(dbProduct)),
+		service.NewProductGroupService(
+			repository.NewProductGroupRepository(dbproductGroupe)),
+		service.NewProductSubgroupService(
+			repository.NewProductSubgroupRepository(dbproductSubgroup)),
+	)
+
+	reportController := controller.NewReportController(
+		service.NewSaleReportService(
+			repository.NewReportRepository(reportDatastore)),
+	)
+
+	cupomCoontroller := controller.NewCupomController(
+		service.NewCupomService(service.NewSaleReportService(
+			repository.NewReportRepository(reportDatastore)),
+			service.NewSaleItemsService(
+				repository.NewSaleItemsRepository(saleItemsDatastore)),
+		),
+	)
+
 	fullSaleController := controller.NewFullSaleController(fullSaleService)
+	fullListProductDescription := controller.NewProductDescriptionController(listProductDescription)
 
 	// Rotas
 	server.GET("/ping", func(ctx *gin.Context) { ctx.JSON(200, gin.H{"message": "pong"}) })
@@ -95,8 +120,11 @@ func main() {
 	routes.CashmovementRoutes(server, cashmovementController)
 	routes.RegisterSaleItemsRoutes(server, salesitensController)
 	routes.RegisterFullSaleRoutes(server, fullSaleController)
+	routes.ReportProductRoutes(server, reportController)
+	routes.ProductDescriptionList(server, fullListProductDescription)
+	routes.CupomRoute(server, cupomCoontroller)
 
-	server.Run(":8000")
+	server.Run("0.0.0.0:8000")
 
 	//Minha antiga validação manual
 

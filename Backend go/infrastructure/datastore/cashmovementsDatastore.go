@@ -19,12 +19,17 @@ type CashmovementsDatastore struct {
 // Por fim, eu trato o erro e se tudo der certo, retorno o ponteiro de datastore
 // context é quem gerencia timeout e cancelamentos no GO.
 func NewCashmovementsDatastore() *CashmovementsDatastore {
-	connStr := "postgres://komercio:komercio@localhost:5432/komercio?sslmode=disable"
+	//connStrProd := "postgresql://postgres:postgres@68.211.176.125:5432/komercio?sslmode=disable"
+	connStr := "postgresql://postgres:postgres@localhost:5432/komercio?sslmode=disable"
 
+	//connStr := "postgresql://postgres:postgres@localhost:5432/komercio?sslmode=disable"
+	//connStr := "postgres://komercio:komercio@localhost:5432/komercio?sslmode=disable"
 	conn, err := pgx.Connect(context.Background(), connStr)
 
 	if err != nil {
+
 		log.Fatalf("Erro na conexão: %v", err)
+
 	}
 
 	return &CashmovementsDatastore{Conn: conn}
@@ -49,7 +54,7 @@ func (d *CashmovementsDatastore) Close() {
 // o EXEC precisa receber o contexto + query + parâmetros
 // Trato possiveis erros e depois, por fim, retorno nulo sem erro (se for o caso)
 func (d *CashmovementsDatastore) CreateNewCashmovement(ctx context.Context, cashmovements *entity.Cashmovements) error {
-
+	//Querie melhorada
 	query := `insert into cash_movements (
 				sale_id,
 				movement_type,
@@ -79,6 +84,7 @@ func (d *CashmovementsDatastore) CreateNewCashmovement(ctx context.Context, cash
 // Essa função é igual à anterior, mas usa tx.Exec() em vez de d.Conn.Exec().
 // Assim, ela faz parte da mesma transação do processo de venda.
 func (d *CashmovementsDatastore) CreateNewCashmovementTx(ctx context.Context, tx pgx.Tx, cashmovements *entity.Cashmovements) error {
+	//Querie melhorada
 
 	query := `insert into cash_movements (
 				sale_id,

@@ -10,7 +10,7 @@ import (
 type EmployeesRepository interface {
 	Create(ctx context.Context, employees *entity.Employees) error
 	ValidateLogin(ctx context.Context, login, password string) (bool, error)
-	SelectActiveEmployeeNames(ctx context.Context) ([]string, error)
+	SelectActiveEmployeeNames(ctx context.Context) ([]int, []string, error)
 	UpdateEmployeePassword(ctx context.Context, login, newPassword string) error
 	UpdateEmployeeName(ctx context.Context, login, newName string) error
 	DeactivateEmployee(ctx context.Context, login string) error
@@ -34,7 +34,7 @@ func (r *employeesRepository) ValidateLogin(ctx context.Context, login, password
 	return r.datastore.ValidateLogin(login, password)
 }
 
-func (r *employeesRepository) SelectActiveEmployeeNames(ctx context.Context) ([]string, error) {
+func (r *employeesRepository) SelectActiveEmployeeNames(ctx context.Context) ([]int, []string, error) {
 	return r.datastore.SelectActiveEmployeeNames()
 }
 

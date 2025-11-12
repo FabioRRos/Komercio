@@ -57,19 +57,13 @@
             this.mtbFunc.Hint = "FUNCIONÁRIO";
             this.mtbFunc.IntegralHeight = false;
             this.mtbFunc.ItemHeight = 43;
-            this.mtbFunc.Items.AddRange(new object[] {
-            "Caixa",
-            "Aline",
-            "Afonso",
-            "Doninho"});
-            this.mtbFunc.Location = new System.Drawing.Point(365, 233);
+            this.mtbFunc.Location = new System.Drawing.Point(365, 224);
             this.mtbFunc.MaxDropDownItems = 4;
             this.mtbFunc.MouseState = MaterialSkin.MouseState.OUT;
             this.mtbFunc.Name = "mtbFunc";
             this.mtbFunc.Size = new System.Drawing.Size(294, 49);
             this.mtbFunc.StartIndex = 0;
-            this.mtbFunc.TabIndex = 17;
-            this.mtbFunc.Leave += new System.EventHandler(this.mtbFunc_Leave);
+            this.mtbFunc.TabIndex = 5;
             // 
             // mbtCancel
             // 
@@ -84,7 +78,7 @@
             this.mbtCancel.Name = "mbtCancel";
             this.mbtCancel.NoAccentTextColor = System.Drawing.Color.Empty;
             this.mbtCancel.Size = new System.Drawing.Size(96, 36);
-            this.mbtCancel.TabIndex = 9;
+            this.mbtCancel.TabIndex = 8;
             this.mbtCancel.Text = "CANCELAR";
             this.mbtCancel.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
             this.mbtCancel.UseAccentColor = false;
@@ -103,7 +97,7 @@
             this.mbtConfirm.Name = "mbtConfirm";
             this.mbtConfirm.NoAccentTextColor = System.Drawing.Color.Empty;
             this.mbtConfirm.Size = new System.Drawing.Size(105, 36);
-            this.mbtConfirm.TabIndex = 10;
+            this.mbtConfirm.TabIndex = 7;
             this.mbtConfirm.Text = "CONFIRMAR";
             this.mbtConfirm.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
             this.mbtConfirm.UseAccentColor = false;
@@ -173,12 +167,13 @@
             this.mtbValorRecebido.SelectionStart = 0;
             this.mtbValorRecebido.ShortcutsEnabled = true;
             this.mtbValorRecebido.Size = new System.Drawing.Size(294, 48);
-            this.mtbValorRecebido.TabIndex = 15;
+            this.mtbValorRecebido.TabIndex = 4;
             this.mtbValorRecebido.TabStop = false;
             this.mtbValorRecebido.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.mtbValorRecebido.TrailingIcon = null;
             this.mtbValorRecebido.UseSystemPasswordChar = false;
             this.mtbValorRecebido.Leave += new System.EventHandler(this.mtbValorRecebido_Leave);
+            this.mtbValorRecebido.TextChanged += new System.EventHandler(this.mtbValorRecebido_TextChanged);
             // 
             // mtbTroco
             // 
@@ -191,13 +186,13 @@
             this.mtbTroco.HideSelection = true;
             this.mtbTroco.Hint = "TROCO";
             this.mtbTroco.LeadingIcon = null;
-            this.mtbTroco.Location = new System.Drawing.Point(365, 176);
+            this.mtbTroco.Location = new System.Drawing.Point(365, 171);
             this.mtbTroco.MaxLength = 32767;
             this.mtbTroco.MouseState = MaterialSkin.MouseState.OUT;
             this.mtbTroco.Name = "mtbTroco";
             this.mtbTroco.PasswordChar = '\0';
             this.mtbTroco.PrefixSuffixText = null;
-            this.mtbTroco.ReadOnly = true;
+            this.mtbTroco.ReadOnly = false;
             this.mtbTroco.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.mtbTroco.SelectedText = "";
             this.mtbTroco.SelectionLength = 0;
@@ -235,7 +230,7 @@
             this.gbValues.Location = new System.Drawing.Point(9, 0);
             this.gbValues.Name = "gbValues";
             this.gbValues.Size = new System.Drawing.Size(308, 341);
-            this.gbValues.TabIndex = 19;
+            this.gbValues.TabIndex = 0;
             this.gbValues.TabStop = false;
             // 
             // mtbcash
@@ -253,6 +248,7 @@
             this.mtbcash.NoAccentTextColor = System.Drawing.Color.Empty;
             this.mtbcash.Size = new System.Drawing.Size(75, 36);
             this.mtbcash.TabIndex = 28;
+            this.mtbcash.TabStop = false;
             this.mtbcash.Text = "DINHEIRO";
             this.mtbcash.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
             this.mtbcash.UseAccentColor = false;
@@ -282,7 +278,7 @@
             this.mtbSubTotal.SelectionStart = 0;
             this.mtbSubTotal.ShortcutsEnabled = true;
             this.mtbSubTotal.Size = new System.Drawing.Size(294, 48);
-            this.mtbSubTotal.TabIndex = 19;
+            this.mtbSubTotal.TabIndex = 0;
             this.mtbSubTotal.TabStop = false;
             this.mtbSubTotal.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.mtbSubTotal.TrailingIcon = null;
@@ -311,12 +307,14 @@
             this.mtbDesc.SelectionStart = 0;
             this.mtbDesc.ShortcutsEnabled = true;
             this.mtbDesc.Size = new System.Drawing.Size(294, 48);
-            this.mtbDesc.TabIndex = 20;
+            this.mtbDesc.TabIndex = 1;
             this.mtbDesc.TabStop = false;
             this.mtbDesc.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.mtbDesc.TrailingIcon = null;
             this.mtbDesc.UseSystemPasswordChar = false;
+            this.mtbDesc.Click += new System.EventHandler(this.mtbDesc_Click);
             this.mtbDesc.Leave += new System.EventHandler(this.mtbDesc_Leave_1);
+            this.mtbDesc.TextChanged += new System.EventHandler(this.mtbDesc_TextChanged);
             // 
             // mtbAddValue
             // 
@@ -341,12 +339,13 @@
             this.mtbAddValue.SelectionStart = 0;
             this.mtbAddValue.ShortcutsEnabled = true;
             this.mtbAddValue.Size = new System.Drawing.Size(294, 48);
-            this.mtbAddValue.TabIndex = 21;
+            this.mtbAddValue.TabIndex = 2;
             this.mtbAddValue.TabStop = false;
             this.mtbAddValue.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.mtbAddValue.TrailingIcon = null;
             this.mtbAddValue.UseSystemPasswordChar = false;
             this.mtbAddValue.Leave += new System.EventHandler(this.mtbAddValue_Leave_1);
+            this.mtbAddValue.TextChanged += new System.EventHandler(this.mtbAddValue_TextChanged);
             // 
             // mtbcardcred
             // 
@@ -362,6 +361,7 @@
             this.mtbcardcred.NoAccentTextColor = System.Drawing.Color.Empty;
             this.mtbcardcred.Size = new System.Drawing.Size(82, 36);
             this.mtbcardcred.TabIndex = 22;
+            this.mtbcardcred.TabStop = false;
             this.mtbcardcred.Text = "CRÉDITO";
             this.mtbcardcred.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
             this.mtbcardcred.UseAccentColor = false;
@@ -381,6 +381,7 @@
             this.mbtCarddeb.NoAccentTextColor = System.Drawing.Color.Empty;
             this.mbtCarddeb.Size = new System.Drawing.Size(72, 36);
             this.mbtCarddeb.TabIndex = 23;
+            this.mbtCarddeb.TabStop = false;
             this.mbtCarddeb.Text = "DÉBITO";
             this.mbtCarddeb.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
             this.mbtCarddeb.UseAccentColor = false;
@@ -401,6 +402,7 @@
             this.mbtPix.NoAccentTextColor = System.Drawing.Color.Empty;
             this.mbtPix.Size = new System.Drawing.Size(75, 36);
             this.mbtPix.TabIndex = 24;
+            this.mbtPix.TabStop = false;
             this.mbtPix.Text = "PIX";
             this.mbtPix.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
             this.mbtPix.UseAccentColor = false;
@@ -421,6 +423,7 @@
             this.mbtCheque.NoAccentTextColor = System.Drawing.Color.Empty;
             this.mbtCheque.Size = new System.Drawing.Size(82, 36);
             this.mbtCheque.TabIndex = 25;
+            this.mbtCheque.TabStop = false;
             this.mbtCheque.Text = "CHEQUE";
             this.mbtCheque.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
             this.mbtCheque.UseAccentColor = false;
@@ -440,6 +443,7 @@
             this.mbtAccount.NoAccentTextColor = System.Drawing.Color.Empty;
             this.mbtAccount.Size = new System.Drawing.Size(70, 36);
             this.mbtAccount.TabIndex = 26;
+            this.mbtAccount.TabStop = false;
             this.mbtAccount.Text = "CONTA";
             this.mbtAccount.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
             this.mbtAccount.UseAccentColor = false;
@@ -468,7 +472,7 @@
             this.mtbObservacao.SelectionStart = 0;
             this.mtbObservacao.ShortcutsEnabled = true;
             this.mtbObservacao.Size = new System.Drawing.Size(294, 48);
-            this.mtbObservacao.TabIndex = 27;
+            this.mtbObservacao.TabIndex = 3;
             this.mtbObservacao.TabStop = false;
             this.mtbObservacao.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.mtbObservacao.TrailingIcon = null;
@@ -481,25 +485,26 @@
             this.mtbDoccument.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
             this.mtbDoccument.Depth = 0;
             this.mtbDoccument.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.mtbDoccument.HelperText = "F4 - Novo cliente | F5 - Alterar cliente";
             this.mtbDoccument.HideSelection = true;
             this.mtbDoccument.Hint = "CPF/CNPJ CLIENTE";
             this.mtbDoccument.LeadingIcon = null;
-            this.mtbDoccument.Location = new System.Drawing.Point(365, 291);
+            this.mtbDoccument.Location = new System.Drawing.Point(365, 279);
             this.mtbDoccument.MaxLength = 32767;
             this.mtbDoccument.MouseState = MaterialSkin.MouseState.OUT;
             this.mtbDoccument.Name = "mtbDoccument";
             this.mtbDoccument.PasswordChar = '\0';
             this.mtbDoccument.PrefixSuffixText = null;
-            this.mtbDoccument.ReadOnly = true;
+            this.mtbDoccument.ReadOnly = false;
             this.mtbDoccument.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.mtbDoccument.SelectedText = "";
             this.mtbDoccument.SelectionLength = 0;
             this.mtbDoccument.SelectionStart = 0;
             this.mtbDoccument.ShortcutsEnabled = true;
-            this.mtbDoccument.Size = new System.Drawing.Size(294, 48);
-            this.mtbDoccument.TabIndex = 20;
+            this.mtbDoccument.ShowAssistiveText = true;
+            this.mtbDoccument.Size = new System.Drawing.Size(294, 64);
+            this.mtbDoccument.TabIndex = 6;
             this.mtbDoccument.TabStop = false;
-            this.mtbDoccument.Text = "111.111.111-11";
             this.mtbDoccument.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.mtbDoccument.TrailingIcon = null;
             this.mtbDoccument.UseSystemPasswordChar = false;
@@ -512,7 +517,6 @@
             this.mtbFirstAndLastName.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.mtbFirstAndLastName.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
             this.mtbFirstAndLastName.Depth = 0;
-            this.mtbFirstAndLastName.Enabled = false;
             this.mtbFirstAndLastName.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.mtbFirstAndLastName.HideSelection = true;
             this.mtbFirstAndLastName.Hint = "CLIENTE";
@@ -554,6 +558,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Pagamento da Venda";
             this.Load += new System.EventHandler(this.fmSalePaymant_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.fmSalePaymant_KeyDown);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.gbValues.ResumeLayout(false);
             this.gbValues.PerformLayout();

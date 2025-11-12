@@ -47,6 +47,8 @@
             this.mbtremove = new MaterialSkin.Controls.MaterialButton();
             this.mswAutoInput = new MaterialSkin.Controls.MaterialSwitch();
             this.mtbPayment = new MaterialSkin.Controls.MaterialButton();
+            this.materialLabel1 = new MaterialSkin.Controls.MaterialLabel();
+            this.materialLabel2 = new MaterialSkin.Controls.MaterialLabel();
             this.mepSearchProduct.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dbListaproduto)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -162,7 +164,7 @@
             this.mtbBarCode.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
             this.mtbBarCode.Depth = 0;
             this.mtbBarCode.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.mtbBarCode.HelperText = "Código de barras";
+            this.mtbBarCode.HelperText = " F4 cadastrar";
             this.mtbBarCode.HideSelection = true;
             this.mtbBarCode.Hint = "Código de Barras";
             this.mtbBarCode.LeadingIcon = null;
@@ -254,6 +256,7 @@
             this.mtbQuantity.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
             this.mtbQuantity.Depth = 0;
             this.mtbQuantity.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.mtbQuantity.HelperText = "F5 Entrada Estoque";
             this.mtbQuantity.HideSelection = true;
             this.mtbQuantity.Hint = "Quantidade";
             this.mtbQuantity.LeadingIcon = null;
@@ -462,7 +465,7 @@
             this.mtbPayment.Depth = 0;
             this.mtbPayment.HighEmphasis = true;
             this.mtbPayment.Icon = null;
-            this.mtbPayment.Location = new System.Drawing.Point(530, 574);
+            this.mtbPayment.Location = new System.Drawing.Point(560, 574);
             this.mtbPayment.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.mtbPayment.MouseState = MaterialSkin.MouseState.HOVER;
             this.mtbPayment.Name = "mtbPayment";
@@ -475,11 +478,37 @@
             this.mtbPayment.UseVisualStyleBackColor = true;
             this.mtbPayment.Click += new System.EventHandler(this.mtbPayment_Click);
             // 
+            // materialLabel1
+            // 
+            this.materialLabel1.AutoSize = true;
+            this.materialLabel1.Depth = 0;
+            this.materialLabel1.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.materialLabel1.Location = new System.Drawing.Point(370, 580);
+            this.materialLabel1.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialLabel1.Name = "materialLabel1";
+            this.materialLabel1.Size = new System.Drawing.Size(159, 19);
+            this.materialLabel1.TabIndex = 23;
+            this.materialLabel1.Text = "F4 - Cadastrar produto";
+            // 
+            // materialLabel2
+            // 
+            this.materialLabel2.AutoSize = true;
+            this.materialLabel2.Depth = 0;
+            this.materialLabel2.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.materialLabel2.Location = new System.Drawing.Point(370, 599);
+            this.materialLabel2.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialLabel2.Name = "materialLabel2";
+            this.materialLabel2.Size = new System.Drawing.Size(176, 19);
+            this.materialLabel2.TabIndex = 24;
+            this.materialLabel2.Text = "F5 - Entrada em estoque ";
+            // 
             // fmSalesProduct
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(698, 636);
+            this.Controls.Add(this.materialLabel2);
+            this.Controls.Add(this.materialLabel1);
             this.Controls.Add(this.mtbPayment);
             this.Controls.Add(this.mepSearchProduct);
             this.Controls.Add(this.mswAutoInput);
@@ -500,6 +529,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Nova venda";
             this.Load += new System.EventHandler(this.fmSalesProduct_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.fmSalesProduct_KeyDown);
             this.mepSearchProduct.ResumeLayout(false);
             this.mepSearchProduct.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dbListaproduto)).EndInit();
@@ -529,5 +559,7 @@
         private MaterialSkin.Controls.MaterialButton mbtremove;
         private MaterialSkin.Controls.MaterialSwitch mswAutoInput;
         private MaterialSkin.Controls.MaterialButton mtbPayment;
+        private MaterialSkin.Controls.MaterialLabel materialLabel1;
+        private MaterialSkin.Controls.MaterialLabel materialLabel2;
     }
 }

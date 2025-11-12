@@ -1,0 +1,61 @@
+trigger:
+  - main
+
+pool:
+  vmImage: "ubuntu-latest"
+
+variables:
+  GO_VERSION: "1.25.x"
+  OUTPUT_NAME: "komercio-api"
+  DEPLOY_PATH: "/home/Komercioplus/backend-go"
+  REMOTE_USER: "Komercioplus"
+  REMOTE_HOST: "68.211.176.125"
+
+steps:
+  # ---- Instalar Go ----
+  - task: GoTool@0
+    inputs:
+      version: "$(GO_VERSION)"
+    displayName: "Instalar Go"
+
+  # ---- Build do binário ----
+  - script: |
+      echo "Verificando dependências..."
+      go mod tidy
+
+      echo "Construindo binário..."
+      cd cmd
+      go build -o $(OUTPUT_NAME) main.go
+    displayName: "Build Backend Komercio"
+
+  # ---- Publicar artefato ----
+  - publish: cmd/$(OUTPUT_NAME)
+    artifact: drop
+    displayName: "Publicar binário compilado"
+
+  # ---- Deploy completo via SSH (upload + restart + healthcheck) ----
+  - task: SSH@0
+    inputs:
+      sshEndpoint: "Komercio-API-VM" # nome da conexão SSH configurada em Service connections
+      runOptions: "inline"
+      inline: |
+        echo "=== Iniciando deploy Komercio ==="
+
+        echo "Copiando novo binário..."
+        scp -o StrictHostKeyChecking=no cmd/$(OUTPUT_NAME) $(REMOTE_USER)@$(REMOTE_HOST):$(DEPLOY_PATH)/$(OUTPUT_NAME)
+
+        echo "Ajustando permissões..."
+        chmod +x $(DEPLOY_PATH)/$(OUTPUT_NAME)
+
+        echo "Recarregando daemon e reiniciando serviço..."
+        sudo systemctl daemon-reload
+        sudo systemctl restart komercio
+
+        echo "Verificando status do serviço..."
+        sudo systemctl status komercio --no-pager
+
+        echo "Testando endpoint /ping..."
+        curl -f http://localhost:8000/ping || (echo '❌ Falha no healthcheck /ping' && exit 1)
+
+        echo "✅ Deploy concluído com sucesso!"
+    displayName: "Deploy e restart Komercio API via SSH"

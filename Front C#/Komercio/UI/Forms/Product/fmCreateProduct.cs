@@ -17,10 +17,12 @@ namespace Komercio.UI.Forms.Product
     public partial class fmCreateProduct : Form
     {
         private readonly ProductService _productService;
+        private readonly ProductDescriptionService _productDescriptionService;
     
-        public fmCreateProduct(ProductService productService)
+        public fmCreateProduct(ProductService productService, ProductDescriptionService productAndGroupAndSubgroup)
         {
             _productService = productService;
+            _productDescriptionService = productAndGroupAndSubgroup;
             InitializeComponent();
             ComponentsInitialize();
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
@@ -34,8 +36,8 @@ namespace Komercio.UI.Forms.Product
             mtbProductName.Enabled = false;
             mtbProductPrice.Enabled = false;
             mtbProductCodeBar.Enabled = false;
-            mtbGrupo.Enabled = false;
-            mtbSubGrupo.Enabled = false;
+            mcbGroup.Enabled = false;
+            mcbSubGroup.Enabled = false;
             mtbProductStock.Enabled = false;
             msProductStatus.Enabled = false;
             mbtSaveProduct.Enabled = false;
@@ -51,8 +53,8 @@ namespace Komercio.UI.Forms.Product
             mtbProductName.Enabled = true;
             mtbProductPrice.Enabled = true;
             mtbProductCodeBar.Enabled = true;
-            mtbGrupo.Enabled = true;
-            mtbSubGrupo.Enabled = true;
+            mcbGroup.Enabled = true;
+            mcbSubGroup.Enabled = true;
             mtbProductStock.Enabled = true;
             msProductStatus.Enabled = true;
             mbtSaveProduct.Enabled = true;
@@ -61,35 +63,6 @@ namespace Komercio.UI.Forms.Product
 
             mbtNewProduct.Enabled = false;
         }
-
-        private void fmCreateProduct_Load(object sender, EventArgs e)
-        {
-
-        }
-
-     
-
-       
-        private void mtbProductPrice_Leave(object sender, EventArgs e)
-        {
-            if (mtbProductPrice.Text == "")
-            {
-                               return;
-            }
-
-            // Vou tratar erros de entrada não numérica.
-            try
-            {
-
-                mtbProductPrice.Text = string.Format("{0:N2}", Convert.ToDecimal(mtbProductPrice.Text));
-            }
-            catch
-            {
-                MessageBox.Show("Preço inválido!", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                mtbProductPrice.Text = "";
-            }
-        }
-
 
         private void mbtNewProduct_Click(object sender, EventArgs e)
         {
@@ -102,6 +75,7 @@ namespace Komercio.UI.Forms.Product
         {
 
             var returnSatus = await _productService.CreateProductAsync(product);
+
  
             if (returnSatus)
             {
@@ -126,7 +100,7 @@ namespace Komercio.UI.Forms.Product
            product.productName = mtbProductName.Text;
             try
             { 
-                product.productPrice = float.Parse(mtbProductPrice.Text); 
+                product.productPrice = float.Parse(mtbProductPrice.Text.Replace("R$","")); 
                 if (product.productPrice < 0) 
                 {
                     MessageBox.Show("Preço inválido!", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -139,8 +113,8 @@ namespace Komercio.UI.Forms.Product
                 return;
             }
             product.productCodbar = mtbProductCodeBar.Text;
-            product.productGroup = mtbGrupo.Text;
-            product.productSubgroup = mtbSubGrupo.Text;
+            product.productGroup = mcbGroup.SelectedItem.ToString();
+            product.productSubgroup = mcbGroup.SelectedItem.ToString();
 
             try
             {
@@ -180,7 +154,9 @@ namespace Komercio.UI.Forms.Product
                 return;
             }
 
-            
+            this.DialogResult = DialogResult.OK;
+
+
         }
 
         private void ComponentsClear()
@@ -188,10 +164,63 @@ namespace Komercio.UI.Forms.Product
             mtbProductName.Text = "";
             mtbProductPrice.Text = "";
             mtbProductCodeBar.Text = "";
-            mtbGrupo.Text = "";
-            mtbSubGrupo.Text = "";
+            mcbGroup.SelectedIndex = 0;
+            mcbSubGroup.SelectedIndex = 0;
             mtbProductStock.Text = "";
             msProductStatus.Checked = true;
+        }
+
+        private void mtbProductPrice_TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                string texto = mtbProductPrice.Text.Replace("R$", "").Replace(",", "").Replace(".", "").TrimStart('0');
+
+                if (texto.Length == 0)
+                    texto = "0";
+
+                decimal valor = Convert.ToDecimal(texto) / 100;
+                mtbProductPrice.Text = string.Format(System.Globalization.CultureInfo.GetCultureInfo("pt-BR"), "{0:C2}", valor);
+                mtbProductPrice.SelectionStart = mtbProductPrice.Text.Length;
+            }
+            catch {
+                MessageBox.Show("Formato de entrada invalido!!", "ATENÇÃO", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                mtbProductPrice.Text = string.Empty;
+                return;
+            };
+        }
+
+        private void fmCreateProduct_Load(object sender, EventArgs e)
+        {
+            LoadListGroupAndSubgroup();
+        }
+
+
+        public async  void LoadListGroupAndSubgroup()
+        {
+            var response = await _productDescriptionService.GetProductDescriptionAsync();
+
+
+            ProductDescriptionDTO description = new ProductDescriptionDTO();
+
+            description.Product = response.Product;
+            description.Group = response.Group.OrderBy(p => p.ProductgroupName).ToList() ;
+            description.Subgroup = response.Subgroup.OrderBy(p => p.ProductsubgroupName).ToList() ;
+
+
+            
+            
+
+            foreach (ProductgroupDTO group in description.Group)
+            {
+                mcbGroup.Items.Add(group.ProductgroupName);
+
+            }
+
+            foreach (ProductSubgroupDTO subgroup in description.Subgroup)
+            {
+                mcbSubGroup.Items.Add(subgroup.ProductsubgroupName);
+            }
         }
     }
 }

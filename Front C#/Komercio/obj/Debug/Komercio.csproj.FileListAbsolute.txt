@@ -21,3 +21,8 @@ C:\Projeto Komercial\Komercio\Front C#\Komercio\obj\Debug\Komercio.UI.Forms.Prod
 C:\Projeto Komercial\Komercio\Front C#\Komercio\obj\Debug\Komercio.UI.Forms.Product.fmImputProduct.resources
 C:\Projeto Komercial\Komercio\Front C#\Komercio\obj\Debug\Komercio.UI.Forms.Sales.fmSalesProduct.resources
 C:\Projeto Komercial\Komercio\Front C#\Komercio\obj\Debug\Komercio.UI.Forms.Sales.fmSalePaymant.resources
+C:\Projeto Komercial\Komercio\Front C#\Komercio\bin\Debug\System.Configuration.ConfigurationManager.dll
+C:\Projeto Komercial\Komercio\Front C#\Komercio\bin\Debug\System.Configuration.ConfigurationManager.xml
+C:\Projeto Komercial\Komercio\Front C#\Komercio\obj\Debug\Komercio.UI.Forms.Product.fmCreateGroupAndSubgroup.resources
+C:\Projeto Komercial\Komercio\Front C#\Komercio\obj\Debug\Komercio.UI.Forms.Dump.fmSalesDump.resources
+C:\Projeto Komercial\Komercio\Front C#\Komercio\obj\Debug\Komercio.UI.Forms.Product.fmProductSettings.resources

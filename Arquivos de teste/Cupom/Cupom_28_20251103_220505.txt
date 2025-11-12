@@ -1,0 +1,25 @@
+﻿        *** KOMERCIO ***
+          CUPOM NÃO FISCAL
+--------------------------------------
+VENDA Nº: 28
+CLIENTE: Fabio Ricardo Ros
+CPF: 41915422817
+VENDEDOR: Aline Fernanda Ulian
+PAGAMENTO: Dinheiro
+DATA: 03/11/2025
+--------------------------------------
+QTD  DESCRIÇÃO                VALOR
+--------------------------------------
+1   Capa Acrílico Colorida R$ 34,90
+1   Capa Silicone Anti Imp R$ 29,90
+1   Fone de Ouvido Bluetoo R$ 59,90
+30  Pipa Pequena com Linha R$ 297,00
+--------------------------------------
+TOTAL BRUTO:    R$ 421,70
+DESCONTO:         R$ 0,00
+TOTAL FINAL:    R$ 421,70
+--------------------------------------
+OBS: Teste
+--------------------------------------
+    OBRIGADO PELA PREFERÊNCIA!
+         VOLTE SEMPRE :)

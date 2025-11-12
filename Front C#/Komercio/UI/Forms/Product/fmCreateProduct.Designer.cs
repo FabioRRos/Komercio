@@ -32,12 +32,12 @@
             this.mtbProductName = new MaterialSkin.Controls.MaterialTextBox2();
             this.mtbProductPrice = new MaterialSkin.Controls.MaterialTextBox2();
             this.mtbProductCodeBar = new MaterialSkin.Controls.MaterialTextBox2();
-            this.mtbGrupo = new MaterialSkin.Controls.MaterialTextBox2();
-            this.mtbSubGrupo = new MaterialSkin.Controls.MaterialTextBox2();
             this.msProductStatus = new MaterialSkin.Controls.MaterialSwitch();
             this.mbtNewProduct = new MaterialSkin.Controls.MaterialButton();
             this.mbtSaveProduct = new MaterialSkin.Controls.MaterialButton();
             this.mtbProductStock = new MaterialSkin.Controls.MaterialTextBox2();
+            this.mcbGroup = new MaterialSkin.Controls.MaterialComboBox();
+            this.mcbSubGroup = new MaterialSkin.Controls.MaterialComboBox();
             this.SuspendLayout();
             // 
             // mtbProductName
@@ -97,7 +97,7 @@
             this.mtbProductPrice.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.mtbProductPrice.TrailingIcon = null;
             this.mtbProductPrice.UseSystemPasswordChar = false;
-            this.mtbProductPrice.Leave += new System.EventHandler(this.mtbProductPrice_Leave);
+            this.mtbProductPrice.TextChanged += new System.EventHandler(this.mtbProductPrice_TextChanged);
             // 
             // mtbProductCodeBar
             // 
@@ -127,64 +127,6 @@
             this.mtbProductCodeBar.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.mtbProductCodeBar.TrailingIcon = null;
             this.mtbProductCodeBar.UseSystemPasswordChar = false;
-            // 
-            // mtbGrupo
-            // 
-            this.mtbGrupo.AnimateReadOnly = false;
-            this.mtbGrupo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.mtbGrupo.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
-            this.mtbGrupo.Depth = 0;
-            this.mtbGrupo.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.mtbGrupo.HideSelection = true;
-            this.mtbGrupo.Hint = "Grupo do produto";
-            this.mtbGrupo.LeadingIcon = null;
-            this.mtbGrupo.Location = new System.Drawing.Point(12, 178);
-            this.mtbGrupo.MaxLength = 32767;
-            this.mtbGrupo.MouseState = MaterialSkin.MouseState.OUT;
-            this.mtbGrupo.Name = "mtbGrupo";
-            this.mtbGrupo.PasswordChar = '\0';
-            this.mtbGrupo.PrefixSuffixText = null;
-            this.mtbGrupo.ReadOnly = false;
-            this.mtbGrupo.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.mtbGrupo.SelectedText = "";
-            this.mtbGrupo.SelectionLength = 0;
-            this.mtbGrupo.SelectionStart = 0;
-            this.mtbGrupo.ShortcutsEnabled = true;
-            this.mtbGrupo.Size = new System.Drawing.Size(250, 48);
-            this.mtbGrupo.TabIndex = 3;
-            this.mtbGrupo.TabStop = false;
-            this.mtbGrupo.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
-            this.mtbGrupo.TrailingIcon = null;
-            this.mtbGrupo.UseSystemPasswordChar = false;
-            // 
-            // mtbSubGrupo
-            // 
-            this.mtbSubGrupo.AnimateReadOnly = false;
-            this.mtbSubGrupo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.mtbSubGrupo.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
-            this.mtbSubGrupo.Depth = 0;
-            this.mtbSubGrupo.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.mtbSubGrupo.HideSelection = true;
-            this.mtbSubGrupo.Hint = "Subgrupo do produto";
-            this.mtbSubGrupo.LeadingIcon = null;
-            this.mtbSubGrupo.Location = new System.Drawing.Point(312, 16);
-            this.mtbSubGrupo.MaxLength = 32767;
-            this.mtbSubGrupo.MouseState = MaterialSkin.MouseState.OUT;
-            this.mtbSubGrupo.Name = "mtbSubGrupo";
-            this.mtbSubGrupo.PasswordChar = '\0';
-            this.mtbSubGrupo.PrefixSuffixText = null;
-            this.mtbSubGrupo.ReadOnly = false;
-            this.mtbSubGrupo.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.mtbSubGrupo.SelectedText = "";
-            this.mtbSubGrupo.SelectionLength = 0;
-            this.mtbSubGrupo.SelectionStart = 0;
-            this.mtbSubGrupo.ShortcutsEnabled = true;
-            this.mtbSubGrupo.Size = new System.Drawing.Size(188, 48);
-            this.mtbSubGrupo.TabIndex = 4;
-            this.mtbSubGrupo.TabStop = false;
-            this.mtbSubGrupo.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
-            this.mtbSubGrupo.TrailingIcon = null;
-            this.mtbSubGrupo.UseSystemPasswordChar = false;
             // 
             // msProductStatus
             // 
@@ -265,24 +207,70 @@
             this.mtbProductStock.SelectionLength = 0;
             this.mtbProductStock.SelectionStart = 0;
             this.mtbProductStock.ShortcutsEnabled = true;
-            this.mtbProductStock.Size = new System.Drawing.Size(188, 48);
+            this.mtbProductStock.Size = new System.Drawing.Size(197, 48);
             this.mtbProductStock.TabIndex = 5;
             this.mtbProductStock.TabStop = false;
             this.mtbProductStock.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.mtbProductStock.TrailingIcon = null;
             this.mtbProductStock.UseSystemPasswordChar = false;
             // 
+            // mcbGroup
+            // 
+            this.mcbGroup.AutoResize = false;
+            this.mcbGroup.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.mcbGroup.Depth = 0;
+            this.mcbGroup.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
+            this.mcbGroup.DropDownHeight = 174;
+            this.mcbGroup.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.mcbGroup.DropDownWidth = 121;
+            this.mcbGroup.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
+            this.mcbGroup.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.mcbGroup.FormattingEnabled = true;
+            this.mcbGroup.Hint = "Grupo do produto";
+            this.mcbGroup.IntegralHeight = false;
+            this.mcbGroup.ItemHeight = 43;
+            this.mcbGroup.Location = new System.Drawing.Point(12, 177);
+            this.mcbGroup.MaxDropDownItems = 4;
+            this.mcbGroup.MouseState = MaterialSkin.MouseState.OUT;
+            this.mcbGroup.Name = "mcbGroup";
+            this.mcbGroup.Size = new System.Drawing.Size(250, 49);
+            this.mcbGroup.StartIndex = 0;
+            this.mcbGroup.TabIndex = 3;
+            // 
+            // mcbSubGroup
+            // 
+            this.mcbSubGroup.AutoResize = false;
+            this.mcbSubGroup.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.mcbSubGroup.Depth = 0;
+            this.mcbSubGroup.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
+            this.mcbSubGroup.DropDownHeight = 174;
+            this.mcbSubGroup.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.mcbSubGroup.DropDownWidth = 121;
+            this.mcbSubGroup.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
+            this.mcbSubGroup.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.mcbSubGroup.FormattingEnabled = true;
+            this.mcbSubGroup.Hint = "Subgrupo do produto";
+            this.mcbSubGroup.IntegralHeight = false;
+            this.mcbSubGroup.ItemHeight = 43;
+            this.mcbSubGroup.Location = new System.Drawing.Point(312, 16);
+            this.mcbSubGroup.MaxDropDownItems = 4;
+            this.mcbSubGroup.MouseState = MaterialSkin.MouseState.OUT;
+            this.mcbSubGroup.Name = "mcbSubGroup";
+            this.mcbSubGroup.Size = new System.Drawing.Size(197, 49);
+            this.mcbSubGroup.StartIndex = 0;
+            this.mcbSubGroup.TabIndex = 4;
+            // 
             // fmCreateProduct
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(538, 244);
+            this.ClientSize = new System.Drawing.Size(538, 240);
+            this.Controls.Add(this.mcbSubGroup);
+            this.Controls.Add(this.mcbGroup);
             this.Controls.Add(this.mtbProductStock);
             this.Controls.Add(this.mbtSaveProduct);
             this.Controls.Add(this.mbtNewProduct);
             this.Controls.Add(this.msProductStatus);
-            this.Controls.Add(this.mtbSubGrupo);
-            this.Controls.Add(this.mtbGrupo);
             this.Controls.Add(this.mtbProductCodeBar);
             this.Controls.Add(this.mtbProductPrice);
             this.Controls.Add(this.mtbProductName);
@@ -301,11 +289,11 @@
         private MaterialSkin.Controls.MaterialTextBox2 mtbProductName;
         private MaterialSkin.Controls.MaterialTextBox2 mtbProductPrice;
         private MaterialSkin.Controls.MaterialTextBox2 mtbProductCodeBar;
-        private MaterialSkin.Controls.MaterialTextBox2 mtbGrupo;
-        private MaterialSkin.Controls.MaterialTextBox2 mtbSubGrupo;
         private MaterialSkin.Controls.MaterialSwitch msProductStatus;
         private MaterialSkin.Controls.MaterialButton mbtNewProduct;
         private MaterialSkin.Controls.MaterialButton mbtSaveProduct;
         private MaterialSkin.Controls.MaterialTextBox2 mtbProductStock;
+        private MaterialSkin.Controls.MaterialComboBox mcbGroup;
+        private MaterialSkin.Controls.MaterialComboBox mcbSubGroup;
     }
 }

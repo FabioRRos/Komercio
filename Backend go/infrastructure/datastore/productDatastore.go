@@ -17,12 +17,17 @@ type ProductDatastore struct {
 //Será o cara repsonsavel por criar uma nova instância de productDataStore e conectar ao banco
 
 func NewProductDataStore() *ProductDatastore {
-	connStr := "postgres://komercio:komercio@localhost:5432/komercio?sslmode=disable"
+	//connStrProd := "postgresql://postgres:postgres@68.211.176.125:5432/komercio?sslmode=disable"
+	connStr := "postgresql://postgres:postgres@localhost:5432/komercio?sslmode=disable"
 
+	//connStr := "postgresql://postgres:postgres@localhost:5432/komercio?sslmode=disable"
+	//connStr := "postgres://komercio:komercio@localhost:5432/komercio?sslmode=disable"
 	conn, err := pgx.Connect(context.Background(), connStr)
 
 	if err != nil {
-		log.Fatalf("Erro ao conectar ao banco: %v", err)
+
+		log.Fatalf("Erro na conexão: %v", err)
+
 	}
 
 	//fmt.Println("Conectado ao banco de dados com sucesso!")
@@ -289,4 +294,40 @@ func (d *ProductDatastore) UpdateProductOutputStockTX(ctx context.Context, tx pg
 	}
 
 	return nil
+}
+
+func (d *ProductDatastore) SelectProductSettings() ([]*entity.ProductNotification, error) {
+	query := `
+		select 
+		p.id ,p.productname, p.productstock,pss.notify_enabled 
+		from 
+			product_stock_settings pss
+		join 
+			products p 
+		on 
+			pss.product_id = p.id`
+
+	rows, err := d.Conn.Query(context.Background(), query)
+	if err != nil {
+		return nil, fmt.Errorf("erro ao consultar produtos: %w", err)
+	}
+	defer rows.Close()
+
+	var products []*entity.ProductNotification
+
+	for rows.Next() {
+		var p entity.ProductNotification
+		err := rows.Scan(
+			&p.Id_productNotification,
+			&p.Productname,
+			&p.Productstock,
+			&p.Notify_enabled,
+		)
+		if err != nil {
+			return nil, fmt.Errorf("erro ao ler linha do produto: %w", err)
+		}
+		products = append(products, &p)
+	}
+
+	return products, nil
 }

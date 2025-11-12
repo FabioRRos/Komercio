@@ -1,0 +1,47 @@
+﻿{
+  "sale": {
+    "customer_id": 2,
+    "total_amount": 67.7000046,
+    "discount_amount": 0.0,
+    "final_amount": 67.7000046,
+    "sale_date": "2025-11-03T23:08:35.0978897-03:00",
+    "sale_time": "23:08:35",
+    "payment_method": "Dinheiro",
+    "seller_id": 3,
+    "sale_notes": "Teste"
+  },
+  "items": [
+    {
+      "product_id": 30,
+      "product_name": "Anel de Suporte Dourado",
+      "barcode": "789000030",
+      "unit_price": 19.9,
+      "quantity": 1,
+      "total": 19.9
+    },
+    {
+      "product_id": 13,
+      "product_name": "Capa Acrílico Fumê Samsung A54",
+      "barcode": "789000013",
+      "unit_price": 32.9,
+      "quantity": 1,
+      "total": 32.9
+    },
+    {
+      "product_id": 35,
+      "product_name": "Carrinho Fricção Pequeno",
+      "barcode": "789000035",
+      "unit_price": 14.9,
+      "quantity": 1,
+      "total": 14.9
+    }
+  ],
+  "cash_movement": {
+    "movement_type": "Entrada",
+    "description": null,
+    "amount": 67.7000046,
+    "payment_method": "Dinheiro",
+    "movement_datetime": "2025-11-03T23:08:36.7722738-03:00",
+    "seller_id": 3
+  }
+}

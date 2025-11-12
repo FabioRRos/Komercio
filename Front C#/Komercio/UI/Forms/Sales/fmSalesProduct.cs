@@ -1,23 +1,33 @@
 ﻿using Komercio.Models;
 using Komercio.Services;
+using Komercio.UI.Forms.Product;
+using MeuProjetoWinForms.Services;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
+using System.Net.Http;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Komercio.UI.Forms.Sales
 {
     public partial class fmSalesProduct : Form
+
     {
+        private readonly HttpClient _httpClient;
+
+
+
         private readonly ProductService _productService;
         private readonly ProductGroupService _productGroupService;
         private readonly ProductSubgroupService _productSubgroupService;
         private readonly SaleService _saleService;
         private readonly CustomerService _customerService;
+        private readonly EmployeeService _employeeService;
+        private readonly ProductDescriptionService _productDescriptionService;
 
-        public fmSalesProduct(ProductService productService, ProductGroupService productGroupService, ProductSubgroupService productSubgroupService, CustomerService customerService)
+        public fmSalesProduct(EmployeeService employeeService, ProductService productService, ProductGroupService productGroupService, ProductSubgroupService productSubgroupService, CustomerService customerService, ProductDescriptionService productDescriptionService, HttpClient baseUrl)
         {
             InitializeComponent();
 
@@ -26,6 +36,10 @@ namespace Komercio.UI.Forms.Sales
             _productSubgroupService = productSubgroupService;
             _saleService = new SaleService();
             _customerService = customerService;
+            _employeeService = employeeService;
+            _httpClient = baseUrl;
+            _productDescriptionService = productDescriptionService;
+
         }
 
 
@@ -34,6 +48,10 @@ namespace Komercio.UI.Forms.Sales
             await loaddbListaproduto();
             ConfigurarDataGridViews();
             ClearAllComponents();
+            this.KeyPreview = true;
+            this.FormBorderStyle = FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
+            this.MinimizeBox = true;
         }
 
 //aqui é pra deixar o forms bonito
@@ -178,7 +196,7 @@ namespace Komercio.UI.Forms.Sales
                 mtbQuantity.HelperText = "Verificar estoque";
                 MessageBox.Show("Estoque insuficiente. Dê entrada antes de continuar.",
     "Sem estoque", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-
+                mtbBarCode.Text = string.Empty;
                 return;
             }
 
@@ -248,10 +266,19 @@ namespace Komercio.UI.Forms.Sales
         {
             if (mtbBarCode.Text == "")
             {
-                MessageBox.Show("Nenhum produto selecionado.",
-    "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
                 return;
             }
+
+            int stock = int.Parse(mtbStock.Text);
+
+
+            if (stock <= 0)
+            {
+                mtbBarCode.Text = string.Empty;
+                return;
+            }
+
 
             SalesItensDTO item = new SalesItensDTO();
 
@@ -286,6 +313,10 @@ namespace Komercio.UI.Forms.Sales
 //add carrinho
         private void mtbAddCar_Click(object sender, EventArgs e)
         {
+            if (mtbStock.Text == "0")
+            {
+                return;
+            }
             newIten();
         }
 
@@ -395,7 +426,7 @@ namespace Komercio.UI.Forms.Sales
             }
 
             // Instancia o formulário de pagamento, passando as dependências
-            fmSalePaymant formPagamento = new fmSalePaymant(_customerService, _saleService, _saleService._productCar, totalVenda);
+            fmSalePaymant formPagamento = new fmSalePaymant(_employeeService,_customerService, _saleService, _saleService._productCar, totalVenda, _httpClient);
 
             // Exibe como diálogo (bloqueia até fechar)
             formPagamento.Owner = this;
@@ -405,5 +436,21 @@ namespace Komercio.UI.Forms.Sales
             // (caso o pagamento tenha sido concluído)
         }
 
+        private async void fmSalesProduct_KeyDown(object sender, KeyEventArgs e)
+        {
+            if(e.KeyCode == Keys.F4)
+            {
+                fmCreateProduct createProduct = new fmCreateProduct(_productService, _productDescriptionService);
+                createProduct.ShowDialog();
+                loaddbListaproduto();
+            }
+
+            if (e.KeyCode == Keys.F5)
+            {
+                fmImputProduct inputProduct = new fmImputProduct(_productService);
+                inputProduct.ShowDialog();
+                loaddbListaproduto();
+            }
+        }
     }
 }

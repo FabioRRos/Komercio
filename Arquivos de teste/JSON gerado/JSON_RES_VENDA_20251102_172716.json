@@ -1,0 +1,31 @@
+﻿{
+  "sale": {
+    "customer_id": 0,
+    "total_amount": 29.9,
+    "discount_amount": 0.0,
+    "final_amount": 29.9,
+    "sale_date": "2025-11-02T17:27:14.5716775-03:00",
+    "sale_time": "17:27:14",
+    "payment_method": "Dinheiro",
+    "seller_id": 3,
+    "sale_notes": ""
+  },
+  "items": [
+    {
+      "product_id": 41,
+      "product_name": "Boneca Mini Fashion",
+      "barcode": "789000041",
+      "unit_price": 29.9,
+      "quantity": 1,
+      "total": 29.9
+    }
+  ],
+  "cash_movement": {
+    "movement_type": "Entrada",
+    "description": null,
+    "amount": 29.9,
+    "payment_method": "Dinheiro",
+    "movement_datetime": "2025-11-02T17:27:16.6718561-03:00",
+    "seller_id": 3
+  }
+}
