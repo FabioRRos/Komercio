@@ -7,6 +7,7 @@ pool:
 variables:
   GO_VERSION: "1.25.x"
   OUTPUT_NAME: "komercio-api"
+<<<<<<< HEAD
   DEPLOY_PATH: "/home/Komercioplus/backend-go"
   REMOTE_USER: "Komercioplus"
   REMOTE_HOST: "68.211.176.125"
@@ -59,3 +60,101 @@ steps:
 
         echo "✅ Deploy concluído com sucesso!"
     displayName: "Deploy e restart Komercio API via SSH"
+=======
+  DEPLOY_PATH: "/home/FabioRos/komercio/releases/$(Build.BuildId)"
+  SERVICE_NAME: "komercio"
+  REMOTE_USER: "FabioRos"
+  REMOTE_HOST: "68.211.176.125"
+
+stages:
+  # =======================================================
+  # STAGE 1 - BUILD
+  # =======================================================
+  - stage: Build
+    displayName: " Compilar Backend Komercio"
+    jobs:
+      - job: BuildJob
+        displayName: "Compilar e publicar artefato"
+        steps:
+          - task: GoTool@0
+            inputs:
+              version: "$(GO_VERSION)"
+            displayName: "Instalar Go $(GO_VERSION)"
+
+          - script: |
+              echo " Instalando dependências..."
+              go mod tidy
+
+              echo " Compilando binário..."
+              cd cmd
+              go build -o komercio-api main.go
+
+              echo " Binário gerado em cmd/"
+              ls -lh komercio-api
+            displayName: "Compilar binário Go"
+
+          - task: PublishPipelineArtifact@1
+            inputs:
+              targetPath: "cmd/komercio-api"
+              artifact: "drop"
+              publishLocation: "pipeline"
+            displayName: " Publicar artefato para deploy"
+
+  # =======================================================
+  #  STAGE 2 - DEPLOY
+  # =======================================================
+  - stage: Deploy
+    displayName: " Deploy Komercio API"
+    dependsOn: Build
+    jobs:
+      - job: DeployJob
+        displayName: "Enviar e iniciar API na VM"
+        steps:
+          - task: DownloadPipelineArtifact@2
+            inputs:
+              artifactName: "drop"
+              targetPath: "$(Pipeline.Workspace)/drop"
+            displayName: " Baixar binário compilado"
+
+          - script: |
+              echo " Verificando artefato baixado..."
+              ls -lh $(Pipeline.Workspace)/drop
+            displayName: "Verificar artefato"
+
+          # Copiar binário via SSH
+          - task: CopyFilesOverSSH@0
+            inputs:
+              sshEndpoint: "Komercio-API-VM"
+              sourceFolder: "$(Pipeline.Workspace)/drop"
+              contents: "komercio-api"
+              targetFolder: "$(DEPLOY_PATH)"
+            displayName: " Enviar binário para VM"
+
+          # Tornar executável e iniciar
+          - task: SSH@0
+            inputs:
+              sshEndpoint: "Komercio-API-VM"
+              runOptions: "inline"
+              inline: |
+                echo "=========================================="
+                echo " Iniciando processo de deploy remoto"
+                echo "==========================================" 
+
+                cd $(DEPLOY_PATH)
+
+                echo " Ajustando permissões..."
+                chmod +x komercio-api
+
+                echo " Parando instância anterior (se existir)..."
+                pkill -f komercio-api || echo "Nenhum processo anterior."
+
+                echo " Iniciando API em background..."
+                nohup ./komercio-api > api.log 2>&1 &
+
+                sleep 3
+                echo " Verificando processo..."
+                ps aux | grep komercio-api | grep -v grep || (echo " API não iniciou!" && exit 1)
+
+                echo " API executando com sucesso!"
+            displayName: "Iniciar API remotamente"
+>>>>>>> 1544677 (Ajuste na pipeline)
