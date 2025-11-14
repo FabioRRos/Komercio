@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(fmSalesDump));
             this.dgvSalesDump = new System.Windows.Forms.DataGridView();
             this.mtbDataInicial = new MaterialSkin.Controls.MaterialTextBox2();
             this.mtbDataFinal = new MaterialSkin.Controls.MaterialTextBox2();
@@ -287,9 +288,10 @@
             this.Controls.Add(this.mtbDataFinal);
             this.Controls.Add(this.mtbDataInicial);
             this.Controls.Add(this.dgvSalesDump);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "fmSalesDump";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "fmSalesDump";
+            this.Text = "Relatório de vendas por periodo";
             this.Load += new System.EventHandler(this.fmSalesDump_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvSalesDump)).EndInit();
             this.ResumeLayout(false);

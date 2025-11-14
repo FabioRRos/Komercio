@@ -1,0 +1,23 @@
+﻿--------------------------------------
+** Doninho Acessorio **
+          CUPOM NÃO FISCAL
+--------------------------------------
+VENDA Nº: 31
+CLIENTE: Cliente Balcão
+CPF: 11111111111
+VENDEDOR: Fabio Ricardo Ros
+PAGAMENTO: Dinheiro
+DATA: 13/11/2025
+--------------------------------------
+QTD  DESCRIÇÃO                VALOR
+--------------------------------------
+1   Anel de Suporte Dourad R$ 19,90
+--------------------------------------
+TOTAL BRUTO:     R$ 19,90
+DESCONTO:         R$ 0,00
+TOTAL FINAL:     R$ 19,90
+--------------------------------------
+OBS: 
+--------------------------------------
+    OBRIGADO PELA PREFERÊNCIA!
+         VOLTE SEMPRE :)

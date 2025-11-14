@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(fmProductSettings));
             this.tpStockNotification = new System.Windows.Forms.TabPage();
             this.dgwNotStick = new System.Windows.Forms.DataGridView();
             this.tbControlProductSettings = new System.Windows.Forms.TabControl();
@@ -59,6 +60,7 @@
             this.dgwNotStick.Size = new System.Drawing.Size(478, 354);
             this.dgwNotStick.TabIndex = 0;
             this.dgwNotStick.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgwNotStick_CellEndEdit);
+            this.dgwNotStick.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgwNotStick_CellValueChanged);
             this.dgwNotStick.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.dgwNotStick_EditingControlShowing);
             // 
             // tbControlProductSettings
@@ -88,6 +90,7 @@
             this.mbtnSalvar.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
             this.mbtnSalvar.UseAccentColor = false;
             this.mbtnSalvar.UseVisualStyleBackColor = true;
+            this.mbtnSalvar.Click += new System.EventHandler(this.mbtnSalvar_Click);
             // 
             // fmProductSettings
             // 
@@ -96,8 +99,10 @@
             this.ClientSize = new System.Drawing.Size(510, 440);
             this.Controls.Add(this.mbtnSalvar);
             this.Controls.Add(this.tbControlProductSettings);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "fmProductSettings";
-            this.Text = "fmProductSettings";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "Habilitar notificações";
             this.Load += new System.EventHandler(this.fmProductSettings_Load);
             this.tpStockNotification.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgwNotStick)).EndInit();

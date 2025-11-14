@@ -42,9 +42,12 @@
             this.entradaEstoqueToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.vendasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.novaVendaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.materialButton1 = new MaterialSkin.Controls.MaterialButton();
             this.relatóriosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.vendaPorPeriodoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.materialButton1 = new MaterialSkin.Controls.MaterialButton();
+            this.configuraçõesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.notificaçõesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.estoqueBaixoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -85,7 +88,8 @@
             this.clienteToolStripMenuItem,
             this.produtosToolStripMenuItem,
             this.vendasToolStripMenuItem,
-            this.relatóriosToolStripMenuItem});
+            this.relatóriosToolStripMenuItem,
+            this.configuraçõesToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(800, 24);
@@ -158,9 +162,24 @@
             // novaVendaToolStripMenuItem
             // 
             this.novaVendaToolStripMenuItem.Name = "novaVendaToolStripMenuItem";
-            this.novaVendaToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.novaVendaToolStripMenuItem.Size = new System.Drawing.Size(137, 22);
             this.novaVendaToolStripMenuItem.Text = "Nova venda";
             this.novaVendaToolStripMenuItem.Click += new System.EventHandler(this.novaVendaToolStripMenuItem_Click);
+            // 
+            // relatóriosToolStripMenuItem
+            // 
+            this.relatóriosToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.vendaPorPeriodoToolStripMenuItem});
+            this.relatóriosToolStripMenuItem.Name = "relatóriosToolStripMenuItem";
+            this.relatóriosToolStripMenuItem.Size = new System.Drawing.Size(71, 20);
+            this.relatóriosToolStripMenuItem.Text = "Relatórios";
+            // 
+            // vendaPorPeriodoToolStripMenuItem
+            // 
+            this.vendaPorPeriodoToolStripMenuItem.Name = "vendaPorPeriodoToolStripMenuItem";
+            this.vendaPorPeriodoToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
+            this.vendaPorPeriodoToolStripMenuItem.Text = "Venda por periodo";
+            this.vendaPorPeriodoToolStripMenuItem.Click += new System.EventHandler(this.vendaPorPeriodoToolStripMenuItem_Click);
             // 
             // materialButton1
             // 
@@ -182,20 +201,28 @@
             this.materialButton1.UseVisualStyleBackColor = true;
             this.materialButton1.Click += new System.EventHandler(this.materialButton1_Click);
             // 
-            // relatóriosToolStripMenuItem
+            // configuraçõesToolStripMenuItem
             // 
-            this.relatóriosToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.vendaPorPeriodoToolStripMenuItem});
-            this.relatóriosToolStripMenuItem.Name = "relatóriosToolStripMenuItem";
-            this.relatóriosToolStripMenuItem.Size = new System.Drawing.Size(71, 20);
-            this.relatóriosToolStripMenuItem.Text = "Relatórios";
+            this.configuraçõesToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.notificaçõesToolStripMenuItem});
+            this.configuraçõesToolStripMenuItem.Name = "configuraçõesToolStripMenuItem";
+            this.configuraçõesToolStripMenuItem.Size = new System.Drawing.Size(96, 20);
+            this.configuraçõesToolStripMenuItem.Text = "Configurações";
             // 
-            // vendaPorPeriodoToolStripMenuItem
+            // notificaçõesToolStripMenuItem
             // 
-            this.vendaPorPeriodoToolStripMenuItem.Name = "vendaPorPeriodoToolStripMenuItem";
-            this.vendaPorPeriodoToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.vendaPorPeriodoToolStripMenuItem.Text = "Venda por periodo";
-            this.vendaPorPeriodoToolStripMenuItem.Click += new System.EventHandler(this.vendaPorPeriodoToolStripMenuItem_Click);
+            this.notificaçõesToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.estoqueBaixoToolStripMenuItem});
+            this.notificaçõesToolStripMenuItem.Name = "notificaçõesToolStripMenuItem";
+            this.notificaçõesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.notificaçõesToolStripMenuItem.Text = "Notificações";
+            // 
+            // estoqueBaixoToolStripMenuItem
+            // 
+            this.estoqueBaixoToolStripMenuItem.Name = "estoqueBaixoToolStripMenuItem";
+            this.estoqueBaixoToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.estoqueBaixoToolStripMenuItem.Text = "Estoque baixo";
+            this.estoqueBaixoToolStripMenuItem.Click += new System.EventHandler(this.estoqueBaixoToolStripMenuItem_Click);
             // 
             // Home
             // 
@@ -236,6 +263,9 @@
         private MaterialSkin.Controls.MaterialButton materialButton1;
         private System.Windows.Forms.ToolStripMenuItem relatóriosToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem vendaPorPeriodoToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem configuraçõesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem notificaçõesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem estoqueBaixoToolStripMenuItem;
     }
 }
 

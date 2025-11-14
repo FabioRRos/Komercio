@@ -104,16 +104,21 @@ namespace Komercio
 
         private void materialButton1_Click(object sender, EventArgs e)
         {
-            fmProductSettings productSettingos = new fmProductSettings(_productService);
 
-            productSettingos.ShowDialog();
         }
 
         private void vendaPorPeriodoToolStripMenuItem_Click(object sender, EventArgs e)
         {
             fmSalesDump saleDump = new fmSalesDump(_httpClient);
-
             saleDump.ShowDialog();
         }
+
+        private void estoqueBaixoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            fmProductSettings productSettingos = new fmProductSettings(_productService);
+            productSettingos.ShowDialog();
+        }
+
+
     }
 }

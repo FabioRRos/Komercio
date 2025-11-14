@@ -2,11 +2,13 @@
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Drawing;
 using System.Drawing.Printing;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -16,6 +18,13 @@ namespace Komercio.Services
     {
         private readonly HttpClient _httpClient;
         private string _receiptText = string.Empty;
+        readonly string  Printer = ConfigurationManager.AppSettings["Printer"];
+        readonly string nomeFantasia = ConfigurationManager.AppSettings["NomeFantasia"];
+        readonly string razaoSocial  = ConfigurationManager.AppSettings["RazaoSocial"];
+        readonly string cNPJ         = ConfigurationManager.AppSettings["CNPJ"];
+        readonly string endereco     = ConfigurationManager.AppSettings["Endereco"];
+        readonly string cidade       = ConfigurationManager.AppSettings["Cidade"];
+        readonly string contato      = ConfigurationManager.AppSettings["Contato"];
 
         public CupomService()
         {
@@ -66,9 +75,15 @@ namespace Komercio.Services
         {
             var sale = cupom.SaleReport;
             var sb = new StringBuilder();
-
-            sb.AppendLine("        *** KOMERCIO ***");
-            sb.AppendLine("          CUPOM NÃO FISCAL");
+            sb.AppendLine("--------------------------------------");
+            sb.AppendLine($"     *** {nomeFantasia} ***");
+            sb.AppendLine("          CUPOM NAO FISCAL");
+            sb.AppendLine("--------------------------------------");
+            sb.AppendLine($"RAZAO SOCIAL: {razaoSocial}");
+            sb.AppendLine($"CNPJ: {cNPJ}");
+            sb.AppendLine($"ENDERECO:{endereco}");
+            sb.AppendLine($"{cidade}");
+            sb.AppendLine($"FONE/WHATSAPP:{contato}");
             sb.AppendLine("--------------------------------------");
             sb.AppendLine($"VENDA Nº: {sale.SaleId}");
             sb.AppendLine($"CLIENTE: {sale.CustomerName}");
@@ -77,7 +92,7 @@ namespace Komercio.Services
             sb.AppendLine($"PAGAMENTO: {sale.PaymantMethod}");
             sb.AppendLine($"DATA: {sale.SaleDate:dd/MM/yyyy}");
             sb.AppendLine("--------------------------------------");
-            sb.AppendLine("QTD  DESCRIÇÃO                VALOR");
+            sb.AppendLine("QTD  DESCRICAO                VALOR");
             sb.AppendLine("--------------------------------------");
 
             if (cupom.SaleItens != null)
@@ -123,7 +138,7 @@ namespace Komercio.Services
 
             
             _receiptText = textoFinal;
-            PrintCupom("CutePDF Writer"); 
+            PrintCupom(Printer); 
 
             return textoFinal;
         }

@@ -83,6 +83,26 @@ namespace Komercio.Services
             }
         }
 
+        public async Task<bool> PutProductNotification(List<ProductNotificationSettingsDTO> productList)
+        {
+            if (productList == null || productList.Count == 0)
+                return false;
+
+            var json = JsonConvert.SerializeObject(productList);
+
+            var content = new StringContent(json, Encoding.UTF8, "application/json");
+
+            var response = await _httpClient.PutAsync("products/notification", content);
+
+            if (!response.IsSuccessStatusCode)
+            {
+                Console.WriteLine($"Erro ao atualizar notificações (HTTP {response.StatusCode})");
+                return false;
+            }
+
+            return true;
+        }
+
         public async Task<List<ProductDTO>> GetProductInStockAsync()
         {
             // Retorna todos os produtos (pretendo salvar em um txt futuramente para garantir utilização offline)

@@ -1,0 +1,23 @@
+﻿--------------------------------------
+      *** Doninho Acessorio ***
+          CUPOM NÃO FISCAL
+--------------------------------------
+VENDA Nº: 34
+CLIENTE: Cliente Balcão
+CPF: 11111111111
+VENDEDOR: Fabio Ricardo Ros
+PAGAMENTO: PIX
+DATA: 13/11/2025
+--------------------------------------
+QTD  DESCRIÇÃO                VALOR
+--------------------------------------
+1   Capa Acrílico Colorida R$ 34,90
+--------------------------------------
+TOTAL BRUTO:     R$ 34,90
+DESCONTO:         R$ 0,00
+TOTAL FINAL:     R$ 34,90
+--------------------------------------
+OBS: 
+--------------------------------------
+    OBRIGADO PELA PREFERÊNCIA!
+         VOLTE SEMPRE :)

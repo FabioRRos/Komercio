@@ -20,6 +20,7 @@ type ProductService interface {
 	UpdateProductInputStock(ctx context.Context, productcodbar string, productStock int) (*entity.Product, error)
 	UpdateProductOutputStockTX(ctx context.Context, tx pgx.Tx, productcodbar string, productStock int) error
 	SelectProductSettings(ctx context.Context) ([]*entity.ProductNotification, error)
+	UpdateProductNotification(ctx context.Context, productList []*entity.ProductNotification) error
 }
 
 type productService struct {
@@ -145,4 +146,28 @@ func (s *productService) UpdateProductOutputStockTX(ctx context.Context, tx pgx.
 	}
 
 	return s.repo.UpdateProductOutputStockTX(ctx, tx, productcodbar, productStock)
+}
+
+func (s *productService) UpdateProductNotification(ctx context.Context, productList []*entity.ProductNotification) error {
+
+	if len(productList) == 0 {
+		return fmt.Errorf("lista de produtos vazia")
+	}
+
+	for _, k := range productList {
+
+		if k.Id_productNotification <= 0 {
+			return fmt.Errorf("id inválido %d para o produto %s",
+				k.Id_productNotification,
+				k.Productname,
+			)
+		}
+
+		if k.Productstock < 0 {
+			return fmt.Errorf("estoque mínimo negativo (%d) no produto %s",
+				k.Productstock, k.Productname)
+		}
+	}
+
+	return s.repo.UpdateProductNotification(ctx, productList)
 }

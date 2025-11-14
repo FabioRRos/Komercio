@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.LinkLabel;
 
 namespace Komercio.UI.Forms.Product
 {
@@ -16,6 +17,8 @@ namespace Komercio.UI.Forms.Product
     {
 
         private readonly ProductService _productService;
+        List<ProductNotificationSettingsDTO> productListChenged = new List<ProductNotificationSettingsDTO>();
+
 
 
         public fmProductSettings(ProductService productService)
@@ -28,6 +31,9 @@ namespace Komercio.UI.Forms.Product
         private void fmProductSettings_Load(object sender, EventArgs e)
         {
             LoadDGProductSettings();
+            this.FormBorderStyle = FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
+            this.MinimizeBox = true;
 
 
         }
@@ -90,6 +96,56 @@ namespace Komercio.UI.Forms.Product
             {
                 e.Handled = true; // bloqueia o caractere
             }
+        }
+
+        private void dgwNotStick_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
+            {
+                DataGridViewCell cell = dgwNotStick.Rows[e.RowIndex].Cells[e.ColumnIndex];
+                ProductNotificationSettingsDTO prodChenged = new ProductNotificationSettingsDTO();
+
+                foreach (var item in productListChenged)
+                {
+                    int idcontrole = Convert.ToInt32(dgwNotStick.Rows[e.RowIndex].Cells["Id_productNotification"].Value);
+                    if (idcontrole == item.Id_productNotification)
+                    {
+                        item.Productstock = Convert.ToInt32(dgwNotStick.Rows[e.RowIndex].Cells["Productstock"].Value);
+                        item.Notify_enabled = Convert.ToBoolean(dgwNotStick.Rows[e.RowIndex].Cells["Notify_enabled"].Value);
+                        return;
+                    }
+                }
+
+                prodChenged.Productname = dgwNotStick.Rows[e.RowIndex].Cells["Productname"].Value.ToString();
+                prodChenged.Id_productNotification = Convert.ToInt32(dgwNotStick.Rows[e.RowIndex].Cells["Id_productNotification"].Value);
+                prodChenged.Productstock = Convert.ToInt32(dgwNotStick.Rows[e.RowIndex].Cells["Productstock"].Value);
+                prodChenged.Notify_enabled = Convert.ToBoolean(dgwNotStick.Rows[e.RowIndex].Cells["Notify_enabled"].Value);
+
+                productListChenged.Add(prodChenged);
+            }
+        }
+
+        private async void mbtnSalvar_Click(object sender, EventArgs e)
+        {
+            SaveChanges();
+        }
+
+        public async void SaveChanges()
+        {
+
+
+            bool retorno = await _productService.PutProductNotification(productListChenged);
+
+            if (retorno)
+            {
+                MessageBox.Show("Configurações salva com sucesso!", "Sucesso!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                MessageBox.Show("Alguma coisa deu errado.... Tente novamente mais tarde!", "Estranho...", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+            }
+            this.Close();
         }
     }
 }

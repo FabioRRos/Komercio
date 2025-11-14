@@ -159,3 +159,27 @@ func (c *ProductController) DeactivateProduct(ctx *gin.Context) {
 
 	ctx.JSON(http.StatusOK, gin.H{"message": "Produto desativado com sucesso"})
 }
+
+//PUT lista de produtos para notificar baixa estoque
+
+func (c *ProductController) UpdateProductNotification(ctx *gin.Context) {
+	var productList []*entity.ProductNotification
+
+	if err := ctx.ShouldBindJSON(&productList); err != nil {
+		ctx.JSON(400, gin.H{
+			"error": "JSON inválido: " + err.Error(),
+		})
+		return
+	}
+
+	if err := c.service.UpdateProductNotification(ctx, productList); err != nil {
+		ctx.JSON(500, gin.H{
+			"error": err.Error(),
+		})
+		return
+	}
+
+	ctx.JSON(200, gin.H{
+		"message": "Notificações atualizadas com sucesso!",
+	})
+}

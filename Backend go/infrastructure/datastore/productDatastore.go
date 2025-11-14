@@ -299,7 +299,7 @@ func (d *ProductDatastore) UpdateProductOutputStockTX(ctx context.Context, tx pg
 func (d *ProductDatastore) SelectProductSettings() ([]*entity.ProductNotification, error) {
 	query := `
 		select 
-		p.id ,p.productname, p.productstock,pss.notify_enabled 
+		p.id ,p.productname, pss.min_stock,pss.notify_enabled 
 		from 
 			product_stock_settings pss
 		join 
@@ -330,4 +330,34 @@ func (d *ProductDatastore) SelectProductSettings() ([]*entity.ProductNotificatio
 	}
 
 	return products, nil
+}
+
+func (d *ProductDatastore) UpdateProductNotification(ctx context.Context, productList []*entity.ProductNotification) error {
+
+	query := `
+        UPDATE product_stock_settings
+        SET min_stock = $1,
+            notify_enabled = $2
+        WHERE product_id = $3
+    `
+
+	for _, k := range productList {
+
+		cmdTag, err := d.Conn.Exec(ctx, query,
+			k.Productstock,
+			k.Notify_enabled,
+			k.Id_productNotification,
+		)
+
+		if err != nil {
+			return fmt.Errorf("erro ao atualizar o produto %s: %v", k.Productname, err)
+		}
+
+		// valida se realmente alterou algo
+		if cmdTag.RowsAffected() == 0 {
+			return fmt.Errorf("nenhuma linha afetada ao atualizar o produto %s", k.Productname)
+		}
+	}
+
+	return nil
 }
