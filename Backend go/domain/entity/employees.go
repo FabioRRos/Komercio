@@ -7,10 +7,10 @@ import (
 )
 
 type Employees struct {
-	EmployeeID       int    `Json:employees_id`
-	EmployeeFullName string `Json:employees_name`
-	EmployeeLogin    string `Json:employees_login`
-	EmployeePassword string `Json:employees_password`
+	EmployeeID       int    `Json:"employees_id"`
+	EmployeeFullName string `Json:"employees_name"`
+	EmployeeLogin    string `Json:"employees_login"`
+	EmployeePassword string `Json:"employees_password"`
 }
 
 func CreateLogin(employee *Employees) error {

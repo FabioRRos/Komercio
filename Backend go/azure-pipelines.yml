@@ -55,7 +55,7 @@ stages:
               sshEndpoint: "Komercio-API-VM"
               sourceFolder: "$(Pipeline.Workspace)/drop"
               contents: "komercio-api"
-              targetFolder: "$(DEPLOY_PATH)"
+              targetFolder: "/home/azureuser/komercio/app"
               cleanTargetFolder: false
 
           # REINICIAR API E VALIDAR

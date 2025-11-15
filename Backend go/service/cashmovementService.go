@@ -14,7 +14,7 @@ type CashmovementService interface {
 	CreateCashmovement(ctx context.Context, cashmovements *entity.Cashmovements) error
 	SelectCashmovement(ctx context.Context) ([]*entity.Cashmovements, error)
 
-	// 🔹 Novo método com suporte a transação
+	//  Novo método com suporte a transação
 	// Serve para criar movimentação de caixa dentro de uma transação de venda.
 	CreateCashmovementTx(ctx context.Context, tx pgx.Tx, cashmovements *entity.Cashmovements) error
 }

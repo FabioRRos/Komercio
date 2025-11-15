@@ -19,12 +19,14 @@ func NewFullSaleService(
 	saleItemsService SaleItemsService,
 	cashmovementService CashmovementService,
 	product ProductService,
+	transation CustomertransactionService,
 ) FullSaleService {
 	return &fullSaleService{
 		salesService:        salesService,
 		saleItemsService:    saleItemsService,
 		cashMovementService: cashmovementService,
 		product:             product,
+		transation:          transation,
 	}
 }
 
@@ -36,6 +38,7 @@ type fullSaleService struct {
 	saleItemsService    SaleItemsService
 	cashMovementService CashmovementService
 	product             ProductService
+	transation          CustomertransactionService
 }
 
 func (s *fullSaleService) CreateFullSale(ctx context.Context, salesAggregate *entity.SaleAggregate) (int, error) {
@@ -107,6 +110,23 @@ func (s *fullSaleService) CreateFullSale(ctx context.Context, salesAggregate *en
 			return 0, fmt.Errorf("erro ao baixar estoque dos produtos vendidos: %w", err)
 		}
 	}
+
+	newTransation := entity.CustomerTransaction{
+		Sale_id:           saleID,
+		Customer_id:       sale.CustomerId,
+		Origin_type:       "Entrada",
+		Transaction_value: cashMovement.Cashmovementsamount,
+		Transaction_date:  cashMovement.Cashmovementsdatetime,
+		Obs:               sale.SaleNotes,
+		Seller:            cashMovement.SellerId,
+		Type_payment:      cashMovement.Cashmovementspaymentmethod,
+	}
+
+	if err := s.transation.CreateTransactionTX(ctx, tx, &newTransation); err != nil {
+		return 0, fmt.Errorf("erro ao tentar salvar transição na conta\nErro: %w", err)
+	}
+
+	//
 
 	//Se tudo deu certo, confirma a transação
 	if err := tx.Commit(ctx); err != nil {

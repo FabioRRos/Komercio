@@ -31,6 +31,7 @@ func main() {
 	defer saleItemsDatastore.Close()
 	reportDatastore := datastore.NewConReportDataStore()
 	defer reportDatastore.Close()
+	transationDatastore := datastore.NewCustomertransactionDatastore()
 
 	//#####################################################
 	//Injeção de dependências
@@ -81,6 +82,8 @@ func main() {
 			repository.NewCashmovementsRepository(cashmovementDatastore)),
 		service.NewProductService(
 			repository.NewProductRepository(dbProduct)),
+		service.NewCashmovementsService(
+			repository.NewCustomertransactionRepository(transationDatastore)),
 	)
 
 	listProductDescription := service.NewProductDescriptionService(

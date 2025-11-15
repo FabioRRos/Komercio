@@ -15,11 +15,7 @@ type SalesDatastore struct {
 
 // ################################################# Construtor
 func NewSalesDataStore() *SalesDatastore {
-	//connStrProd := "postgresql://postgres:postgres@68.211.176.125:5432/komercio?sslmode=disable"
 	connStr := "postgresql://postgres:postgres@localhost:5432/komercio?sslmode=disable"
-
-	//connStr := "postgresql://postgres:postgres@localhost:5432/komercio?sslmode=disable"
-	//connStr := "postgres://komercio:komercio@localhost:5432/komercio?sslmode=disable"
 	conn, err := pgx.Connect(context.Background(), connStr)
 
 	if err != nil {
