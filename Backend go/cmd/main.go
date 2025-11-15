@@ -72,6 +72,10 @@ func main() {
 		service.NewSaleItemsService(
 			repository.NewSaleItemsRepository(saleItemsDatastore)),
 	)
+	transationController := controller.NewCustomerTransactioController(
+		service.NewCustomertransactionService(
+			repository.NewCustomertransactionRepository(transationDatastore)),
+	)
 
 	fullSaleService := service.NewFullSaleService(
 		service.NewSalesService(
@@ -82,7 +86,7 @@ func main() {
 			repository.NewCashmovementsRepository(cashmovementDatastore)),
 		service.NewProductService(
 			repository.NewProductRepository(dbProduct)),
-		service.NewCashmovementsService(
+		service.NewCustomertransactionService(
 			repository.NewCustomertransactionRepository(transationDatastore)),
 	)
 
@@ -126,6 +130,7 @@ func main() {
 	routes.ReportProductRoutes(server, reportController)
 	routes.ProductDescriptionList(server, fullListProductDescription)
 	routes.CupomRoute(server, cupomCoontroller)
+	routes.CustomertransactionControllerRoutes(server, transationController)
 
 	server.Run("0.0.0.0:8000")
 

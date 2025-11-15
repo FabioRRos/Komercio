@@ -54,7 +54,7 @@ func (d *CustomertransactionDatastore) CreateTransactionTX(ctx context.Context, 
 	)
 
 	if err != nil {
-		return fmt.Errorf("erro ao inserir movimentação do caixa (Tx): %w", err)
+		return fmt.Errorf("DT - erro ao inserir movimentação do caixa (Tx): %w", err)
 
 	}
 	return nil
@@ -67,7 +67,7 @@ func (d *CustomertransactionDatastore) GETTransaction(ctx context.Context) ([]*e
 	rows, err := d.Conn.Query(context.Background(), query)
 
 	if err != nil {
-		return nil, fmt.Errorf("erro ao consultar transações: %w", err)
+		return nil, fmt.Errorf("DT1 - erro ao consultar transações: %w", err)
 	}
 	defer rows.Close()
 
@@ -76,18 +76,18 @@ func (d *CustomertransactionDatastore) GETTransaction(ctx context.Context) ([]*e
 	for rows.Next() {
 		var transaction entity.CustomerTransaction
 		err := rows.Scan(
-			transaction.Id_transaction,
-			transaction.Sale_id,     // id da venda OU do pagamento (serve para os dois)
-			transaction.Customer_id, // id do cliente
-			transaction.Origin_type, // tipo. Entrada, saida
-			transaction.Transaction_value,
-			transaction.Transaction_date,
-			transaction.Obs,
-			transaction.Seller,
-			transaction.Type_payment,
+			&transaction.Id_transaction,
+			&transaction.Sale_id,     // id da venda OU do pagamento (serve para os dois)
+			&transaction.Customer_id, // id do cliente
+			&transaction.Origin_type, // tipo. Entrada, saida
+			&transaction.Transaction_value,
+			&transaction.Transaction_date,
+			&transaction.Obs,
+			&transaction.Seller,
+			&transaction.Type_payment,
 		)
 		if err != nil {
-			return nil, fmt.Errorf("erro ao ler linha da transação: %w", err)
+			return nil, fmt.Errorf("DT2 - erro ao ler linha da transação: %w", err)
 		}
 		transactions = append(transactions, &transaction)
 	}
@@ -110,15 +110,15 @@ func (d *CustomertransactionDatastore) GETTransactionById(ctx context.Context, i
 	for rows.Next() {
 		var transaction entity.CustomerTransaction
 		err := rows.Scan(
-			transaction.Id_transaction,
-			transaction.Sale_id,     // id da venda OU do pagamento (serve para os dois)
-			transaction.Customer_id, // id do cliente
-			transaction.Origin_type, // tipo. Entrada, saida
-			transaction.Transaction_value,
-			transaction.Transaction_date,
-			transaction.Obs,
-			transaction.Seller,
-			transaction.Type_payment,
+			&transaction.Id_transaction,
+			&transaction.Sale_id,     // id da venda OU do pagamento (serve para os dois)
+			&transaction.Customer_id, // id do cliente
+			&transaction.Origin_type, // tipo. Entrada, saida
+			&transaction.Transaction_value,
+			&transaction.Transaction_date,
+			&transaction.Obs,
+			&transaction.Seller,
+			&transaction.Type_payment,
 		)
 		if err != nil {
 			return nil, fmt.Errorf("erro ao ler linha da transação: %w", err)
