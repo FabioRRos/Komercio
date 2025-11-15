@@ -8,4 +8,5 @@ import (
 func CustomertransactionControllerRoutes(server *gin.Engine, transation *controller.CustomerTransactionController) {
 	server.GET("/transaction", transation.GETTransaction)
 	server.GET("/transaction/:id", transation.GETTransactionById)
+	server.POST("/transaction", transation.CreateTransaction)
 }

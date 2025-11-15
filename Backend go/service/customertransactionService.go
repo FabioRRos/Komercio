@@ -11,6 +11,7 @@ import (
 
 type CustomertransactionService interface {
 	CreateTransactionTX(ctx context.Context, tx pgx.Tx, transaction *entity.CustomerTransaction) error
+	CreateTransaction(ctx context.Context, transaction *entity.CustomerTransaction) error
 	GETTransaction(ctx context.Context) ([]*entity.CustomerTransaction, error)
 	GETTransactionById(ctx context.Context, idtransaction int) ([]*entity.CustomerTransaction, error)
 }
@@ -29,6 +30,20 @@ func (s *customertransactionService) CreateTransactionTX(ctx context.Context, tx
 		return fmt.Errorf("Transação não pode ser nula")
 	}
 	return s.repo.CreateTransactionTX(ctx, tx, transaction)
+}
+func (s *customertransactionService) CreateTransaction(ctx context.Context, transaction *entity.CustomerTransaction) error {
+
+	if transaction == nil {
+		return fmt.Errorf("Transação não pode ser nula")
+	}
+
+	err := entity.TransactionValidation(transaction)
+
+	if err != nil {
+		return err
+	}
+	transaction.Origin_type = "Pagamento"
+	return s.repo.CreateTransaction(ctx, transaction)
 }
 
 func (s *customertransactionService) GETTransaction(ctx context.Context) ([]*entity.CustomerTransaction, error) {

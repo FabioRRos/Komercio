@@ -114,7 +114,7 @@ func (s *fullSaleService) CreateFullSale(ctx context.Context, salesAggregate *en
 	newTransation := entity.CustomerTransaction{
 		Sale_id:           saleID,
 		Customer_id:       sale.CustomerId,
-		Origin_type:       "Entrada",
+		Origin_type:       "Venda", // Sempre será entrada
 		Transaction_value: cashMovement.Cashmovementsamount,
 		Transaction_date:  cashMovement.Cashmovementsdatetime,
 		Obs:               sale.SaleNotes,

@@ -3,6 +3,7 @@ package controller
 import (
 	"strconv"
 
+	"github.com/fabioros/Komercio/domain/entity"
 	"github.com/fabioros/Komercio/service"
 	"github.com/gin-gonic/gin"
 )
@@ -45,4 +46,23 @@ func (c *CustomerTransactionController) GETTransactionById(ctx *gin.Context) {
 		return
 	}
 	ctx.JSON(200, customerTransactions)
+}
+
+//PUT
+
+func (c *CustomerTransactionController) CreateTransaction(ctx *gin.Context) {
+	var payment entity.CustomerTransaction
+
+	if err := ctx.ShouldBindJSON(&payment); err != nil {
+		ctx.JSON(400, gin.H{"error": "Parâmetros inválidos"})
+		return
+	}
+
+	if err := c.customertransaction.CreateTransaction(ctx, &payment); err != nil {
+		ctx.JSON(500, gin.H{"error": "Estou com dificuldades de salvar. Tente novamente mais tarde."})
+		return
+	}
+
+	ctx.JSON(200, "Sucesso!")
+
 }
