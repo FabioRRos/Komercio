@@ -3,6 +3,7 @@ package service
 import (
 	"context"
 	"fmt"
+	"strconv"
 	"time"
 
 	"github.com/fabioros/Komercio/domain/entity"
@@ -111,19 +112,22 @@ func (s *fullSaleService) CreateFullSale(ctx context.Context, salesAggregate *en
 		}
 	}
 
-	newTransation := entity.CustomerTransaction{
-		Sale_id:           saleID,
-		Customer_id:       sale.CustomerId,
-		Origin_type:       "Venda", // Sempre será entrada
-		Transaction_value: cashMovement.Cashmovementsamount,
-		Transaction_date:  cashMovement.Cashmovementsdatetime,
-		Obs:               sale.SaleNotes,
-		Seller:            cashMovement.SellerId,
-		Type_payment:      cashMovement.Cashmovementspaymentmethod,
-	}
+	//Aqui será a entrada do carrinho se a venda for feita com pagamento na conta.
 
-	if err := s.transation.CreateTransactionTX(ctx, tx, &newTransation); err != nil {
-		return 0, fmt.Errorf("erro ao tentar salvar transição na conta\nErro: %w", err)
+	if salesAggregate.Sale.PaymentMethod == "Conta" {
+		newTransation := entity.CustomerTransaction{
+			Sale_id:           saleID,
+			Customer_id:       sale.CustomerId,
+			Origin_type:       "Venda", // Sempre será entrada
+			Transaction_value: cashMovement.Cashmovementsamount,
+			Transaction_date:  cashMovement.Cashmovementsdatetime,
+			Obs:               sale.SaleNotes,
+			Seller:            strconv.Itoa(cashMovement.SellerId),
+			Type_payment:      cashMovement.Cashmovementspaymentmethod,
+		}
+		if err := s.transation.CreateTransactionTX(ctx, tx, &newTransation); err != nil {
+			return 0, fmt.Errorf("erro ao tentar salvar transição na conta\nErro: %w", err)
+		}
 	}
 
 	//

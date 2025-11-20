@@ -2,6 +2,7 @@ package entity
 
 import (
 	"fmt"
+	"strconv"
 	"time"
 )
 
@@ -13,14 +14,14 @@ type CustomerTransaction struct {
 	Transaction_value float32   `json:"transaction_value"`
 	Transaction_date  time.Time `json:"transaction_date"`
 	Obs               string    `json:"obs"`
-	Seller            int       `json:"seller"`
+	Seller            string    `json:"seller"`
 	Type_payment      string    `json:"type_payment"`
 }
 
 func TransactionValidation(transaction *CustomerTransaction) error {
 
 	// Sale_id deve existir
-	if transaction.Sale_id <= 0 {
+	if transaction.Sale_id < 0 {
 		return fmt.Errorf("sale_id inválido")
 	}
 
@@ -40,7 +41,10 @@ func TransactionValidation(transaction *CustomerTransaction) error {
 	}
 
 	// seller id deve existir
-	if transaction.Seller <= 0 {
+	if transaction.Seller == "" {
+		return fmt.Errorf("seller inválido")
+	}
+	if _, err := strconv.Atoi(transaction.Seller); err != nil {
 		return fmt.Errorf("seller inválido")
 	}
 

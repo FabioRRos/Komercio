@@ -28,8 +28,6 @@ func ProductValidation(product Product) error {
 	return nil
 }
 
-// Preciso criar uma validação de codigo de barras. Se já houver não posso cadastrar
-
 // Aqui também eu preciso criar um codigo de barras. Preciso pensar como fazer um caso o produto não tenhoa código de barras
 
 func CreateCodbar() string {

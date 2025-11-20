@@ -2,6 +2,7 @@ package service
 
 import (
 	"context"
+	"fmt"
 
 	"github.com/fabioros/Komercio/domain/entity"
 )
@@ -28,12 +29,12 @@ type cupomService struct {
 func (s *cupomService) GetCupom(ctx context.Context, id int) (*entity.CupomDTO, error) {
 	saleReport, err := s.saleReport.SelectSalesReportbyId(ctx, id)
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("SelectSalesReportById", err)
 	}
 
 	saleItens, err := s.saleItemsService.GetItemsBySaleId(ctx, id)
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("GetItemsBySaleId", err)
 	}
 
 	cupom := &entity.CupomDTO{

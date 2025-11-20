@@ -4,6 +4,7 @@ import (
 	"context"
 	"fmt"
 	"log"
+	"strconv"
 
 	"github.com/fabioros/Komercio/domain/entity"
 	"github.com/jackc/pgx/v5"
@@ -42,6 +43,7 @@ func (d *CustomertransactionDatastore) CreateTransactionTX(ctx context.Context, 
 	type_payment
 	)VALUES($1,$2,$3,$4,$5,$6,$7,$8)`
 
+	id, _ := strconv.Atoi(transaction.Seller)
 	_, err := tx.Exec(ctx, query,
 		transaction.Sale_id,     // id da venda OU do pagamento (serve para os dois)
 		transaction.Customer_id, // id do cliente
@@ -49,7 +51,7 @@ func (d *CustomertransactionDatastore) CreateTransactionTX(ctx context.Context, 
 		transaction.Transaction_value,
 		transaction.Transaction_date,
 		transaction.Obs,
-		transaction.Seller,
+		id, //ESTE CAMPO É INTEIRO NO BANCO
 		transaction.Type_payment,
 	)
 
@@ -71,7 +73,7 @@ func (d *CustomertransactionDatastore) CreateTransaction(ctx context.Context, tr
 	seller,
 	type_payment
 	)VALUES($1,$2,$3,$4,$5,$6,$7,$8)`
-
+	id, _ := strconv.Atoi(transaction.Seller)
 	_, err := d.Conn.Exec(ctx, query,
 		transaction.Sale_id,     // id da venda OU do pagamento (serve para os dois)
 		transaction.Customer_id, // id do cliente
@@ -79,7 +81,7 @@ func (d *CustomertransactionDatastore) CreateTransaction(ctx context.Context, tr
 		transaction.Transaction_value,
 		transaction.Transaction_date,
 		transaction.Obs,
-		transaction.Seller,
+		id, //ESTE CAMPO É INTEIRO NO BANCO
 		transaction.Type_payment,
 	)
 
@@ -126,7 +128,20 @@ func (d *CustomertransactionDatastore) GETTransaction(ctx context.Context) ([]*e
 
 func (d *CustomertransactionDatastore) GETTransactionById(ctx context.Context, idtransaction int) ([]*entity.CustomerTransaction, error) {
 
-	query := `select * from customer_transactions where customer_id = $1`
+	query := `SELECT 
+    ct.id_transaction,
+    ct.sale_id,
+    ct.customer_id,
+    ct.origin_type,
+    ct.transaction_value,
+    ct.transaction_date,
+    ct.obs,
+    e.employeelogin,
+    ct.type_payment
+FROM customer_transactions ct
+LEFT JOIN employees e 
+    ON e.employeeid   = ct.seller
+WHERE ct.customer_id = $1`
 
 	rows, err := d.Conn.Query(context.Background(), query, idtransaction)
 

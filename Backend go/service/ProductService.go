@@ -37,7 +37,16 @@ func (s *productService) CreateProduct(ctx context.Context, product *entity.Prod
 	}
 
 	if err := entity.ProductValidation(*product); err != nil {
-		return errors.New("parâmetros inválidos")
+		return err
+	}
+
+	codreturnet, err := s.repo.SelectProductByCodBar(ctx, product.ProductCodBar)
+
+	if err == nil {
+		return fmt.Errorf(
+			"O código de barras já está atribuído ao produto '%s'. Informe outro ou deixe em branco para criarmos um novo.",
+			codreturnet.ProductName,
+		)
 	}
 
 	if product.ProductCodBar == "" {

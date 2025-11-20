@@ -1,7 +1,9 @@
 package controller
 
 import (
+	"fmt"
 	"strconv"
+	"time"
 
 	"github.com/fabioros/Komercio/domain/entity"
 	"github.com/fabioros/Komercio/service"
@@ -52,6 +54,7 @@ func (c *CustomerTransactionController) GETTransactionById(ctx *gin.Context) {
 
 func (c *CustomerTransactionController) CreateTransaction(ctx *gin.Context) {
 	var payment entity.CustomerTransaction
+	payment.Transaction_date = time.Time{}
 
 	if err := ctx.ShouldBindJSON(&payment); err != nil {
 		ctx.JSON(400, gin.H{"error": "Parâmetros inválidos"})
@@ -59,7 +62,8 @@ func (c *CustomerTransactionController) CreateTransaction(ctx *gin.Context) {
 	}
 
 	if err := c.customertransaction.CreateTransaction(ctx, &payment); err != nil {
-		ctx.JSON(500, gin.H{"error": "Estou com dificuldades de salvar. Tente novamente mais tarde."})
+		errReturnet := fmt.Errorf("Estou com dificuldades de salvar. Tente novamente mais tarde. %w", err)
+		ctx.JSON(500, gin.H{"error": errReturnet.Error()})
 		return
 	}
 
