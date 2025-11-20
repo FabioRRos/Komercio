@@ -19,6 +19,7 @@ namespace Komercio.UI.Forms.Customer
     {
         private readonly CustomerService _customerService;
 
+
         public fmChangeCustomer(CustomerService service)
         {
             _customerService = service;

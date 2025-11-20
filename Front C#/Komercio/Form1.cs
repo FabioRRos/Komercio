@@ -5,6 +5,7 @@ using Komercio.UI.Forms.Dump;
 using Komercio.UI.Forms.Employee;
 using Komercio.UI.Forms.Product;
 using Komercio.UI.Forms.Sales;
+using Komercio.UI.Forms.Transactions;
 using MeuProjetoWinForms.Services;
 using System;
 using System.Collections.Generic;
@@ -28,11 +29,9 @@ namespace Komercio
         private readonly ProductSubgroupService _productSubgroupService;
         private readonly HttpClient _httpClient;
         private readonly ProductDescriptionService _productDescriptionService;
+        private readonly CustomerTransactionService _customerTransactionService;
 
-
-
-
-        public Home(EmployeeService empliyeeService, CustomerService customerService, ProductService productService, ProductGroupService productGroupService, ProductSubgroupService productSubgroupService , ProductDescriptionService productDescriptionService,  string baseUrl)
+        public Home(EmployeeService empliyeeService, CustomerService customerService, ProductService productService, ProductGroupService productGroupService, ProductSubgroupService productSubgroupService , ProductDescriptionService productDescriptionService, CustomerTransactionService customerTransactionService, string baseUrl)
         {
             InitializeComponent();
             _employeeService = empliyeeService;
@@ -41,6 +40,7 @@ namespace Komercio
             _productGroupService = productGroupService;
             _productSubgroupService =  productSubgroupService;
             _productDescriptionService = productDescriptionService;
+            _customerTransactionService = customerTransactionService;
 
             _httpClient = new HttpClient
             {
@@ -104,7 +104,8 @@ namespace Komercio
 
         private void materialButton1_Click(object sender, EventArgs e)
         {
-
+            fmCustomerTransactions customerTransactions = new fmCustomerTransactions(_customerService, _customerTransactionService, _employeeService);
+            customerTransactions.ShowDialog();
         }
 
         private void vendaPorPeriodoToolStripMenuItem_Click(object sender, EventArgs e)
@@ -119,6 +120,10 @@ namespace Komercio
             productSettingos.ShowDialog();
         }
 
-
+        private void loteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            btnImportStock newProductLote = new btnImportStock(_productService);
+            newProductLote.ShowDialog();
+        }
     }
 }

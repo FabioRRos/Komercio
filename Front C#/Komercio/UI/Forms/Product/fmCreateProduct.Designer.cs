@@ -234,7 +234,7 @@
             this.mcbGroup.MouseState = MaterialSkin.MouseState.OUT;
             this.mcbGroup.Name = "mcbGroup";
             this.mcbGroup.Size = new System.Drawing.Size(250, 49);
-            this.mcbGroup.StartIndex = 0;
+//this.mcbGroup.StartIndex = 0;
             this.mcbGroup.TabIndex = 3;
             // 
             // mcbSubGroup

@@ -73,6 +73,16 @@ namespace Komercio.Properties {
         /// <summary>
         ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap icone_de_l_argent_symbole_png_rose {
+            get {
+                object obj = ResourceManager.GetObject("icone-de-l-argent-symbole-png-rose", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap komercio {
             get {
                 object obj = ResourceManager.GetObject("komercio", resourceCulture);

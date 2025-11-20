@@ -10,7 +10,9 @@ using System.Linq;
 using System.Net.Http;
 using System.Reflection;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace Komercio.Services
 {
@@ -18,28 +20,46 @@ namespace Komercio.Services
     {
         private readonly HttpClient _httpClient;
         private string _receiptText = string.Empty;
-        readonly string  Printer = ConfigurationManager.AppSettings["Printer"];
+        readonly string Printer = ConfigurationManager.AppSettings["Printer"];
         readonly string nomeFantasia = ConfigurationManager.AppSettings["NomeFantasia"];
-        readonly string razaoSocial  = ConfigurationManager.AppSettings["RazaoSocial"];
-        readonly string cNPJ         = ConfigurationManager.AppSettings["CNPJ"];
-        readonly string endereco     = ConfigurationManager.AppSettings["Endereco"];
-        readonly string cidade       = ConfigurationManager.AppSettings["Cidade"];
-        readonly string contato      = ConfigurationManager.AppSettings["Contato"];
+        readonly string razaoSocial = ConfigurationManager.AppSettings["RazaoSocial"];
+        readonly string cNPJ = ConfigurationManager.AppSettings["CNPJ"];
+        readonly string endereco = ConfigurationManager.AppSettings["Endereco"];
+        readonly string cidade = ConfigurationManager.AppSettings["Cidade"];
+        readonly string contato = ConfigurationManager.AppSettings["Contato"];
 
-        public CupomService()
+        public CupomService(HttpClient baseUrl)
         {
-            _httpClient = new HttpClient
-            {
-                BaseAddress = new Uri("http://localhost:8000/")
-            };
+            _httpClient = baseUrl;
         }
 
         public async Task<CupomDTO> CupomSale(int id)
         {
+           var  response = await _httpClient.GetAsync($"/Cupom/{id}");
+            for (int tentativas = 0; tentativas < 3; tentativas++)
+            {
+                try
+                {
+                    response = await _httpClient.GetAsync($"/Cupom/{id}");
+
+                    if (response.IsSuccessStatusCode)
+                    {
+                        break; 
+                    }
+                }
+                catch
+                {
+                    MessageBox.Show("ERRO DE REDE, NÃO CONSEGUI RETORNO", "ERR001");
+                }
+
+                var json = await response.Content.ReadAsStringAsync();
+                MessageBox.Show(json);
+                await Task.Delay(500); 
+            }
+
             try
             {
-                var response = await _httpClient.GetAsync($"/Cupom/{id}");
-
+               
                 if (!response.IsSuccessStatusCode)
                 {
                     Console.WriteLine($"Erro ao consultar cupom (Status: {response.StatusCode})");
@@ -95,6 +115,9 @@ namespace Komercio.Services
             sb.AppendLine("QTD  DESCRICAO                VALOR");
             sb.AppendLine("--------------------------------------");
 
+
+
+
             if (cupom.SaleItens != null)
             {
                 foreach (var item in cupom.SaleItens)
@@ -136,9 +159,9 @@ namespace Komercio.Services
                 Console.WriteLine($"Erro ao salvar o cupom: {ex.Message}");
             }
 
-            
+
             _receiptText = textoFinal;
-            PrintCupom(Printer); 
+            //PrintCupom(Printer);
 
             return textoFinal;
         }
@@ -149,10 +172,10 @@ namespace Komercio.Services
             {
                 PrintDocument pd = new PrintDocument();
 
-       
+
                 pd.PrinterSettings.PrinterName = printerName;
 
-               
+
                 PaperSize paper = new PaperSize("Cupom80mm", 300, 600);
                 pd.DefaultPageSettings.PaperSize = paper;
 

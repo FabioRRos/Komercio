@@ -1,0 +1,55 @@
+﻿{
+  "sale": {
+    "customer_id": 2,
+    "total_amount": 113.700005,
+    "discount_amount": 0.0,
+    "final_amount": 113.700005,
+    "sale_date": "2025-11-15T10:50:50.6320767-03:00",
+    "sale_time": "10:50:50",
+    "payment_method": "Conta",
+    "seller_id": 2,
+    "sale_notes": "Teste de nova venda!"
+  },
+  "items": [
+    {
+      "product_id": 13,
+      "product_name": "Capa Acrílico Fumê Samsung A54",
+      "barcode": "789000013",
+      "unit_price": 32.9,
+      "quantity": 1,
+      "total": 32.9
+    },
+    {
+      "product_id": 35,
+      "product_name": "Carrinho Fricção Pequeno",
+      "barcode": "789000035",
+      "unit_price": 14.9,
+      "quantity": 1,
+      "total": 14.9
+    },
+    {
+      "product_id": 46,
+      "product_name": "Mouse logitech",
+      "barcode": "160885108",
+      "unit_price": 50.0,
+      "quantity": 1,
+      "total": 50.0
+    },
+    {
+      "product_id": 4,
+      "product_name": "Pelicula Gel Fosca Xiaomi Redmi 10",
+      "barcode": "789000004",
+      "unit_price": 15.9,
+      "quantity": 1,
+      "total": 15.9
+    }
+  ],
+  "cash_movement": {
+    "movement_type": "Entrada",
+    "description": null,
+    "amount": 113.700005,
+    "payment_method": "Conta",
+    "movement_datetime": "2025-11-15T10:50:51.6942695-03:00",
+    "seller_id": 2
+  }
+}

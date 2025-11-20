@@ -39,6 +39,7 @@
             this.mtbObservacao = new MaterialSkin.Controls.MaterialTextBox2();
             this.mtbDoccument = new MaterialSkin.Controls.MaterialTextBox2();
             this.mtbFirstAndLastName = new MaterialSkin.Controls.MaterialTextBox2();
+            this.printCupom = new System.Drawing.Printing.PrintDocument();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.gbValues.SuspendLayout();
             this.SuspendLayout();
@@ -81,7 +82,7 @@
             this.mbtCancel.TabIndex = 8;
             this.mbtCancel.Text = "CANCELAR";
             this.mbtCancel.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
-            this.mbtCancel.UseAccentColor = false;
+            this.mbtCancel.UseAccentColor = true;
             this.mbtCancel.Click += new System.EventHandler(this.mbtCancel_Click);
             // 
             // mbtConfirm
@@ -312,7 +313,6 @@
             this.mtbDesc.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.mtbDesc.TrailingIcon = null;
             this.mtbDesc.UseSystemPasswordChar = false;
-            this.mtbDesc.Click += new System.EventHandler(this.mtbDesc_Click);
             this.mtbDesc.Leave += new System.EventHandler(this.mtbDesc_Leave_1);
             this.mtbDesc.TextChanged += new System.EventHandler(this.mtbDesc_TextChanged);
             // 
@@ -540,6 +540,10 @@
             this.mtbFirstAndLastName.TrailingIcon = null;
             this.mtbFirstAndLastName.UseSystemPasswordChar = false;
             // 
+            // printCupom
+            // 
+            this.printCupom.PrintPage += new System.Drawing.Printing.PrintPageEventHandler(this.printCupom_PrintPage);
+            // 
             // fmSalePaymant
             // 
             this.ClientSize = new System.Drawing.Size(684, 410);
@@ -590,5 +594,6 @@
         private MaterialSkin.Controls.MaterialTextBox2 mtbObservacao;
         private MaterialSkin.Controls.MaterialTextBox2 mtbDoccument;
         private MaterialSkin.Controls.MaterialTextBox2 mtbFirstAndLastName;
+        private System.Drawing.Printing.PrintDocument printCupom;
     }
 }

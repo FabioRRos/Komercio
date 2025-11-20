@@ -42,6 +42,12 @@ namespace Komercio.UI.Forms.Product
             msProductStatus.Enabled = false;
             mbtSaveProduct.Enabled = false;
 
+            mtbProductName.Text= string.Empty;
+            mtbProductPrice.Text = string.Empty;
+            mtbProductCodeBar.Text = string.Empty;
+            mtbProductStock.Text = string.Empty;
+
+
             //Habilitado apenas o botão para novo produto.
 
             mbtNewProduct.Enabled = true;
@@ -76,18 +82,13 @@ namespace Komercio.UI.Forms.Product
 
             var returnSatus = await _productService.CreateProductAsync(product);
 
- 
-            if (returnSatus)
-            {
-                MessageBox.Show("Produto criado com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-               // return true;
-            }
-            else
+        
+            if (!returnSatus)
             {
                 MessageBox.Show("Erro ao criar produto!", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
-               // return false;
+
             }
+
 
         }
 
@@ -145,8 +146,8 @@ namespace Komercio.UI.Forms.Product
             try
             {
                 CreateProductAsync(product);
-                ComponentsInitialize();
-                ComponentsClear();
+               
+                
             }
 
             catch
@@ -154,7 +155,13 @@ namespace Komercio.UI.Forms.Product
                 return;
             }
 
-            this.DialogResult = DialogResult.OK;
+            //  this.DialogResult = DialogResult.OK;
+            ComponentsInitialize();
+            ComponentsClear();
+            mcbGroup.SelectedItem = null;
+            mcbGroup.Text = string.Empty;
+            mcbSubGroup.SelectedItem = null;
+            mcbSubGroup.Text = string.Empty;
 
 
         }

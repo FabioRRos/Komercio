@@ -98,7 +98,7 @@ namespace Komercio.Services
 
         //Agora vou montar o SaleFInalizerService para depois gerar o JSON
 
-        public void MontarVenda(
+        public async  Task<string> MontarVenda(
     SalesDTO venda,                  // agora recebe a venda criada no form
     BindingList<SalesItensDTO> itens,
     string metodoPagamento,
@@ -141,20 +141,30 @@ namespace Komercio.Services
 
             //  Agora o aggregate recebe o cabeçalho real da venda
             SaleAggregateDTO vendaAggregate = new SaleAggregateDTO(salesHeader, itensLista, cash);
+            string cupomForPrint = "";
+            bool retorno = false;
+            try
+            {
+            //cria o cupom
+             (retorno, cupomForPrint) = await CreateSaleAsync(vendaAggregate);
 
-            var retorno = CreateSaleAsync(vendaAggregate);
+            }
+            catch
+            {
+                MessageBox.Show("Não consegui criar o cupom - SALE FINALIZER SERVICE");
+            }
 
             // Geração do JSON e salvamento
              try
              {
                  string conteudoJson = JsonConvert.SerializeObject(vendaAggregate, Formatting.Indented);
 
-                 string diretorio = @"C:\Projeto Komercial\Komercio\Arquivos de teste\JSON gerado";
-                 Directory.CreateDirectory(diretorio);
+                string diretorio = @"C:\Projeto Komercial\Komercio\JSON gerado";
+                Directory.CreateDirectory(diretorio);
 
-                 string nomeArquivo = "JSON_RES_VENDA_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".json";
+                string nomeArquivo = "JSON_RES_VENDA_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".json";
 
-                 string caminhoCompleto = Path.Combine(diretorio, nomeArquivo);
+                string caminhoCompleto = Path.Combine(diretorio, nomeArquivo);
 
                  File.WriteAllText(caminhoCompleto, conteudoJson, Encoding.UTF8);
 
@@ -165,13 +175,13 @@ namespace Komercio.Services
                  MessageBox.Show(ex.Message);
              }
 
-
+            return cupomForPrint;
 
         }
 
 
 
-        public async Task<bool> CreateSaleAsync(SaleAggregateDTO saleAggregateDTO)
+        public async Task<(bool Success, string CupomText)> CreateSaleAsync(SaleAggregateDTO saleAggregateDTO)
         {
             var json = JsonConvert.SerializeObject(saleAggregateDTO);
             var content = new StringContent(json, Encoding.UTF8, "application/json");
@@ -180,7 +190,7 @@ namespace Komercio.Services
             if (!response.IsSuccessStatusCode)
                 {
                     MessageBox.Show("Não foi possível salvar a venda. tente novamente");
-                    return true;
+                    return (false,"");
                 }
 
 
@@ -190,15 +200,23 @@ namespace Komercio.Services
 
             int saleId = result.SaleId;
 
-            CupomService cupom = new CupomService();
+            CupomService cupom = new CupomService(_httpClient);
 
             var cupomRetorno = await cupom.CupomSale(saleId);
+            string cupomForPrint = "";
+            try
+            {
 
-            cupom.GenerateReceiptText(cupomRetorno);
-
+            cupomForPrint =  cupom.GenerateReceiptText(cupomRetorno);
+            }
+            catch
+            {
+                MessageBox.Show("Não consegui gerar a variavel para impressão saleFinalizer | Função create");
+                return (false, "");
+            }
 
             MessageBox.Show("Venda registrada com sucesso!", "SUCESSO!", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            return true;
+            return (true, cupomForPrint);
         }
         public class SaleResponseDTO
         {

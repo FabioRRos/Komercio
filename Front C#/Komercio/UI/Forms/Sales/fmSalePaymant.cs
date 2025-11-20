@@ -8,7 +8,9 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
+using System.Drawing.Printing;
 using System.Net.Http;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using static Komercio.Models.SalesDTO;
 
@@ -34,6 +36,9 @@ namespace Komercio.UI.Forms.Sales
         private CustomerDto _custmerDTO = new CustomerDto();
         private List<EmployeeDto> employeerList = new List<EmployeeDto>();
 
+
+        private string _cupomText;
+
         public fmSalePaymant(EmployeeService employeeService, CustomerService customerService, SaleService saleService, BindingList<SalesItensDTO> itensVenda, float totalVenda, HttpClient baseUrl)
         {
             _httpClient = baseUrl;
@@ -49,14 +54,13 @@ namespace Komercio.UI.Forms.Sales
 
         private void fmSalePaymant_Load(object sender, EventArgs e)
         {
-            Inicio();
             this.KeyPreview = true;
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.MinimizeBox = true;
             EmployeerList();
-
-
+            printCupom.PrintPage += printCupom_PrintPage;
+            Inicio();
         }
 
         // Inicializa valores padrão
@@ -68,6 +72,7 @@ namespace Komercio.UI.Forms.Sales
             mtbTroco.Text = "R$ 0,00";
             mtbValorRecebido.Text = total.ToString("C2");
             mlbTotal.Text = total.ToString("C2");
+
         }
 
         // Atualiza total com base em desconto e acréscimo
@@ -328,9 +333,6 @@ namespace Komercio.UI.Forms.Sales
                     {
                         mtbFirstAndLastName.Text = customer.customer_first_name + " " + customer.customer_last_name;
                         _custmerDTO.customer_id = customer.customer_id;
-
-
-
                     }
                     else
                     {
@@ -343,7 +345,6 @@ namespace Komercio.UI.Forms.Sales
                             }
                 
                         mtbFirstAndLastName.Text = "";
-                
                     }           
         }
 
@@ -456,61 +457,7 @@ namespace Komercio.UI.Forms.Sales
             
         }
 
-        private void mbtConfirm_Click(object sender, EventArgs e)
-        {
-            if (_itensVenda == null || _itensVenda.Count == 0)
-            {
-                MessageBox.Show("Nenhum item na venda.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
 
-            if (string.IsNullOrEmpty(formaPagamento))
-            {
-                MessageBox.Show("Selecione a forma de pagamento.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
-            if (string.IsNullOrEmpty(mtbFunc.Text))
-            {
-                MessageBox.Show("Selecione o funcionário responsavel pela venda", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
-            int func = BuscaIdEmployeer();
-
-            // Cria a venda pronta
-            var venda = CriarObjetoVenda(new List<SalesItensDTO>(_itensVenda), _custmerDTO);
-
-            // Mostra resumo rápido
-            string resumo = $"Total: {total:C2}\nRecebido: {valorRecebido:C2}\nTroco: {troco:C2}\nForma: {formaPagamento}";
-            if (MessageBox.Show(resumo, "Confirmar venda?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
-                return;
-
-            // Salva JSON pra validação
-            string json = Newtonsoft.Json.JsonConvert.SerializeObject(venda, Newtonsoft.Json.Formatting.Indented);
-            System.IO.File.WriteAllText("venda.json", json);
-
-           // MessageBox.Show("Venda salva como venda.json", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-
-            SaleFinalizerService finalizer = new SaleFinalizerService(_customerService, _saleService, _itensVenda, _httpClient);
-
-
-            finalizer.MontarVenda(venda, _itensVenda, formaPagamento, func);
-
-        //    MessageBox.Show("Venda formalizada e arquivo JSON gerado com sucesso!",
-                        //    "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-            //  o form atual
-            this.Close();
-
-            if (this.Owner != null)
-            {
-                this.Owner.Close();
-            }
-
-
-        }
 
         private void mtbDesc_TextChanged(object sender, EventArgs e)
         {
@@ -644,9 +591,96 @@ namespace Komercio.UI.Forms.Sales
 
         }
 
-        private void mtbDesc_Click(object sender, EventArgs e)
+
+        private void printCupom_PrintPage(object sender, PrintPageEventArgs e)
         {
 
+            Font fonte = new Font("Consolas", 8);
+            float y = 0;
+            float margem = 5;
+            float alturaLinha = fonte.GetHeight(e.Graphics);
+
+            // evita erros
+            if (string.IsNullOrWhiteSpace(_cupomText))
+                return;
+
+            string[] linhas = _cupomText.Split('\n');
+
+            foreach (var linha in linhas)
+            {
+                e.Graphics.DrawString(linha, fonte, Brushes.Black, margem, y);
+                y += alturaLinha;
+            }
+
+        }
+
+        private async void mbtConfirm_Click(object sender, EventArgs e)
+        {
+            if (_itensVenda == null || _itensVenda.Count == 0)
+            {
+                MessageBox.Show("Nenhum item na venda.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (string.IsNullOrEmpty(formaPagamento))
+            {
+                MessageBox.Show("Selecione a forma de pagamento.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+
+            if (string.IsNullOrEmpty(mtbFunc.Text))
+            {
+                MessageBox.Show("Selecione o funcionário responsavel pela venda", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            if (formaPagamento == "Conta" && _custmerDTO.customer_id == 0)
+            {
+                MessageBox.Show("Para salvar na conta, identifique o cliente!", "Identifique o cliente!!!!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            int func = BuscaIdEmployeer();
+
+            // Cria a venda pronta
+            var venda = CriarObjetoVenda(new List<SalesItensDTO>(_itensVenda), _custmerDTO);
+
+            // Mostra resumo rápido
+            string resumo = $"Total: {total:C2}\nRecebido: {valorRecebido:C2}\nTroco: {troco:C2}\nForma: {formaPagamento}";
+            if (MessageBox.Show(resumo, "Confirmar venda?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
+                return;
+
+            // Salva JSON pra validação
+            string json = Newtonsoft.Json.JsonConvert.SerializeObject(venda, Newtonsoft.Json.Formatting.Indented);
+            System.IO.File.WriteAllText("venda.json", json);
+
+            // MessageBox.Show("Venda salva como venda.json", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+
+            SaleFinalizerService finalizer = new SaleFinalizerService(_customerService, _saleService, _itensVenda, _httpClient);
+
+            try
+            {
+            var cupom = await finalizer.MontarVenda(venda, _itensVenda, formaPagamento, func);
+            _cupomText = cupom;
+
+            printCupom.Print();
+            //    MessageBox.Show("Venda formalizada e arquivo JSON gerado com sucesso!",
+            //    "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+            //  o form atual
+            this.Close();
+
+            }
+            catch
+            {
+                MessageBox.Show("Não consegui imprimir - fmSalePayment");
+            }
+
+            if (this.Owner != null)
+            {
+                this.Owner.Close();
+            }
         }
     }
 

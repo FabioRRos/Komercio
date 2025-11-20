@@ -1,6 +1,7 @@
 ﻿using Komercio.Models;
 using MeuProjetoWinForms.Models;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
@@ -42,12 +43,15 @@ namespace Komercio.Services
 
                 try
                 {
-                    // Tenta desserializar o JSON de erro
-                    var errorObj = JsonConvert.DeserializeObject<dynamic>(responseContent);
-                    string errorMessage = errorObj?.error ?? "Erro desconhecido";
+                    var jsonError = JObject.Parse(responseContent);
 
-                    // Exibe o MessageBox com a mensagem de erro
-                    MessageBox.Show(errorMessage, "Erro ao criar produto", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    string errorMessage = jsonError["error"]?.ToString();
+
+                    if (string.IsNullOrWhiteSpace(errorMessage))
+                        errorMessage = "Erro desconhecido";
+
+                    MessageBox.Show(errorMessage, "Erro ao criar produto",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 catch
                 {
@@ -158,8 +162,6 @@ namespace Komercio.Services
                 return products;
             }
         }
-
-
 
         public async Task <ProductDTO> GetProductByCodbad(string barcode)
         {

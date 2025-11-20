@@ -46,6 +46,7 @@
     </Reference>
     <Reference Include="System.Core" />
     <Reference Include="System.Design" />
+    <Reference Include="System.DirectoryServices" />
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -68,12 +69,14 @@
     <Compile Include="Models\CashmovementsDTO.cs" />
     <Compile Include="Models\CupomDTO.cs" />
     <Compile Include="Models\CustomerDTO.cs" />
+    <Compile Include="Models\CustomerTransactionsDTO.cs" />
     <Compile Include="Models\EmployeeDto.cs" />
     <Compile Include="Models\ProductDescriptionDTO.cs" />
     <Compile Include="Models\ProductDTO.cs" />
     <Compile Include="Models\ProductgroupDTO.cs" />
     <Compile Include="Models\ProductNotificationSettingsDTO.cs" />
     <Compile Include="Models\ProductSubgroupDTO.cs" />
+    <Compile Include="Models\RawPrinterHelper.cs" />
     <Compile Include="Models\SaleAggregateDTO.cs" />
     <Compile Include="Models\SaleReportDTO.cs" />
     <Compile Include="Models\SalesDTO.cs" />
@@ -83,6 +86,7 @@
     <Compile Include="Services\BuscaCEPService.cs" />
     <Compile Include="Services\CupomService.cs" />
     <Compile Include="Services\CustomerService.cs" />
+    <Compile Include="Services\CustomerTransactionService.cs" />
     <Compile Include="Services\DoccumentValidationService.cs" />
     <Compile Include="Services\EmployeeService.cs" />
     <Compile Include="Services\ProductDescriptionService.cs" />
@@ -141,6 +145,12 @@
     <Compile Include="UI\Forms\Product\fmImputProduct.Designer.cs">
       <DependentUpon>fmImputProduct.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\Forms\Product\fmNewProductLote.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Forms\Product\fmNewProductLote.Designer.cs">
+      <DependentUpon>fmNewProductLote.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\Forms\Product\fmProductSettings.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -158,6 +168,12 @@
     </Compile>
     <Compile Include="UI\Forms\Sales\fmSalesProduct.Designer.cs">
       <DependentUpon>fmSalesProduct.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Forms\Transactions\fmCustomerTransactions.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Forms\Transactions\fmCustomerTransactions.Designer.cs">
+      <DependentUpon>fmCustomerTransactions.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
@@ -196,6 +212,9 @@
     <EmbeddedResource Include="UI\Forms\Product\fmImputProduct.resx">
       <DependentUpon>fmImputProduct.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UI\Forms\Product\fmNewProductLote.resx">
+      <DependentUpon>fmNewProductLote.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\Forms\Product\fmProductSettings.resx">
       <DependentUpon>fmProductSettings.cs</DependentUpon>
     </EmbeddedResource>
@@ -204,6 +223,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Forms\Sales\fmSalesProduct.resx">
       <DependentUpon>fmSalesProduct.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Forms\Transactions\fmCustomerTransactions.resx">
+      <DependentUpon>fmCustomerTransactions.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="packages\MaterialSkin.2.2.3.1\.signature.p7s" />
@@ -249,6 +271,7 @@
     <Content Include="packages\Newtonsoft.Json.13.0.4\lib\netstandard2.0\Newtonsoft.Json.dll" />
     <Content Include="packages\Newtonsoft.Json.13.0.4\lib\netstandard2.0\Newtonsoft.Json.xml" />
     <Content Include="packages\Newtonsoft.Json.13.0.4\packageIcon.png" />
+    <None Include="Properties\Resources\icone-de-l-argent-symbole-png-rose.png" />
     <None Include="Properties\Resources\Carrinho.png" />
     <None Include="Properties\Resources\komercio.ico" />
   </ItemGroup>
