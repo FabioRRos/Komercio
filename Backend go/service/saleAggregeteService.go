@@ -21,6 +21,7 @@ func NewFullSaleService(
 	cashmovementService CashmovementService,
 	product ProductService,
 	transation CustomertransactionService,
+	caixaService CaixaService,
 ) FullSaleService {
 	return &fullSaleService{
 		salesService:        salesService,
@@ -28,6 +29,7 @@ func NewFullSaleService(
 		cashMovementService: cashmovementService,
 		product:             product,
 		transation:          transation,
+		caixaService:        caixaService,
 	}
 }
 
@@ -40,6 +42,7 @@ type fullSaleService struct {
 	cashMovementService CashmovementService
 	product             ProductService
 	transation          CustomertransactionService
+	caixaService        CaixaService
 }
 
 func (s *fullSaleService) CreateFullSale(ctx context.Context, salesAggregate *entity.SaleAggregate) (int, error) {
@@ -130,7 +133,21 @@ func (s *fullSaleService) CreateFullSale(ctx context.Context, salesAggregate *en
 		}
 	}
 
-	//
+	if salesAggregate.Sale.PaymentMethod == "Dinheiro" {
+		// Atualiza o caixa
+		caixaChange := entity.Caixa{
+			ValueChanged: cashMovement.Cashmovementsamount,
+			ChangeType:   "entrada",
+			ChangeOrigin: "venda",
+			ChangeDate:   now,
+			VendedorID:   cashMovement.SellerId,
+			Status:       true,
+			Observations: fmt.Sprintf("Venda ID %d", saleID),
+		}
+		if err := s.caixaService.CaixaChangeTX(ctx, tx, &caixaChange); err != nil {
+			return 0, fmt.Errorf("erro ao atualizar o caixa: %w", err)
+		}
+	}
 
 	//Se tudo deu certo, confirma a transação
 	if err := tx.Commit(ctx); err != nil {
