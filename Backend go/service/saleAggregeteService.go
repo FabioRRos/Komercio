@@ -115,7 +115,7 @@ func (s *fullSaleService) CreateFullSale(ctx context.Context, salesAggregate *en
 		}
 	}
 
-	//Aqui será a entrada do carrinho se a venda for feita com pagamento na conta.
+	//Aqui será a entrada dda caderneta se a venda for feita com pagamento na conta.
 
 	if salesAggregate.Sale.PaymentMethod == "Conta" {
 		newTransation := entity.CustomerTransaction{
@@ -132,7 +132,7 @@ func (s *fullSaleService) CreateFullSale(ctx context.Context, salesAggregate *en
 			return 0, fmt.Errorf("erro ao tentar salvar transição na conta\nErro: %w", err)
 		}
 	}
-
+	//caixa local (dinheir)
 	if salesAggregate.Sale.PaymentMethod == "Dinheiro" {
 		// Atualiza o caixa
 		caixaChange := entity.Caixa{
