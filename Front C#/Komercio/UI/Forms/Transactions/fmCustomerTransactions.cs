@@ -60,6 +60,7 @@ namespace Komercio.UI.Forms.Transactions
             dgvCustomerList.BackgroundColor = Color.White;
             dgvItensVenda.BackgroundColor = Color.White;
 
+
         }
 
 
@@ -235,7 +236,9 @@ namespace Komercio.UI.Forms.Transactions
             }
 
             LoadSaleitensByTransactionId(id);
-}
+
+
+        }
 
         public void CalcDebito()
         {
@@ -293,6 +296,7 @@ namespace Komercio.UI.Forms.Transactions
             assetsBotoes();
             formaPagamento = string.Empty;
             mtbTroco.Text = 0.ToString("C2");
+
         }
         private bool excecaoPagamentoDinheiro()
         {
@@ -306,6 +310,7 @@ namespace Komercio.UI.Forms.Transactions
                 formaPagamento = string.Empty;
                 return false;
             }
+
 
             return true;
         }
@@ -385,12 +390,15 @@ namespace Komercio.UI.Forms.Transactions
                 if (float.Parse(mtbPaymentValue.Text.Replace("R$", "").Trim()) < totalDebito)
                 {
                     mtbTroco.Text =0.ToString("C2");
-                    return;
+                   
                 }
+                else
+                {
                 var dindim = (float.Parse(mtbPaymentValue.Text.Replace("R$", "").Trim()) - totalDebito).ToString("C2");
-
-
                 mtbTroco.Text = dindim;
+
+
+                }
                 assetsBotoes();
                 mtbDinheiro.UseAccentColor = true;
             }
@@ -466,8 +474,9 @@ namespace Komercio.UI.Forms.Transactions
                        mtbOBS.Clear();
                        mtbFunc.Text = string.Empty;
                        mtbTroco.Clear();
-                       formaPagamento = string.Empty;
-                        ReloadForm();
+                  
+                        formaPagamento = string.Empty;
+                       ReloadForm();
                    }
                    else
                    {
@@ -494,6 +503,11 @@ namespace Komercio.UI.Forms.Transactions
             {
                 e.Handled = true;
             }
+        }
+
+        private void mtbTroco_KeyPress(object sender, KeyPressEventArgs e)
+        {
+      
         }
     }
 }

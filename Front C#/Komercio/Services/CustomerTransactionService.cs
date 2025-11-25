@@ -64,8 +64,11 @@ namespace Komercio.Services
         public async Task<bool> PostCustomerTransactionAsync(CustomerTransactionsDTO transaction)
         {
             var json = Newtonsoft.Json.JsonConvert.SerializeObject(transaction);
+
             var content = new StringContent(json, Encoding.UTF8, "application/json");
+
             var response = await _httpClient.PostAsync("transaction", content);
+
             // vou salvar o Json para ver se ta tudo ok
 
             System.IO.File.WriteAllText("transaction.json", json);
