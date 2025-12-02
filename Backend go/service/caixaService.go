@@ -11,7 +11,7 @@ import (
 type CaixaService interface {
 	CaixaChangeTX(ctx context.Context, tx pgx.Tx, caixa *entity.Caixa) error
 	CaixaChange(ctx context.Context, caixa *entity.Caixa) error
-	GetCaixa(ctx context.Context) (*entity.Caixa, error)
+	GetCaixa(ctx context.Context) ([]*entity.Caixa, error)
 }
 
 type caixaService struct {
@@ -31,13 +31,20 @@ func (s *caixaService) CaixaChangeTX(ctx context.Context, tx pgx.Tx, caixa *enti
 }
 
 func (s *caixaService) CaixaChange(ctx context.Context, caixa *entity.Caixa) error {
-	err := s.repo.CaixaChange(ctx, caixa)
+
+	err := entity.ValidaCampos(caixa)
+
+	if err != nil {
+		return err
+	}
+
+	err = s.repo.CaixaChange(ctx, caixa)
 	if err != nil {
 		return err
 	}
 	return nil
 }
 
-func (s *caixaService) GetCaixa(ctx context.Context) (*entity.Caixa, error) {
+func (s *caixaService) GetCaixa(ctx context.Context) ([]*entity.Caixa, error) {
 	return s.repo.GetCaixa(ctx)
 }

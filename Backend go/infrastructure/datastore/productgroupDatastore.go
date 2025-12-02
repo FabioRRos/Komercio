@@ -32,7 +32,7 @@ func (d *ProductGroupDatastore) Close() {
 	}
 }
 
-// CREATE (PUT)
+// CREATE (POST)
 func (d *ProductGroupDatastore) CreateProducGroup(productGroup *entity.ProductGroup) error {
 	query := `INSERT INTO product_group
 	(group_id, group_name) Values ($1, $2)`

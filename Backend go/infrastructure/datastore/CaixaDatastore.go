@@ -2,6 +2,7 @@ package datastore
 
 import (
 	"context"
+	"fmt"
 	"log"
 
 	"github.com/fabioros/Komercio/domain/entity"
@@ -56,7 +57,7 @@ func (d *CaixaDatastore) CaixaChangeTX(ctx context.Context, tx pgx.Tx, caixa *en
 		caixa.Observations,
 	)
 	if err != nil {
-		return err
+		return fmt.Errorf("Não consegui seguir %w", err)
 	}
 
 	return nil
@@ -98,23 +99,34 @@ func (d *CaixaDatastore) CaixaChange(ctx context.Context, caixa *entity.Caixa) e
 }
 
 // GET geral
-func (d *CaixaDatastore) GetCaixa(ctx context.Context) (*entity.Caixa, error) {
-	query := `SELECT * FROM caixa`
-	row := d.Conn.QueryRow(ctx, query)
+func (d *CaixaDatastore) GetCaixa(ctx context.Context) ([]*entity.Caixa, error) {
+	query := `select * from caixa c where DATE(change_date ) = current_date`
+	row, err := d.Conn.Query(ctx, query)
 
-	var caixa entity.Caixa
-	err := row.Scan(
-		&caixa.IDTransiction,
-		&caixa.ValueChanged,
-		&caixa.ChangeType,
-		&caixa.ChangeOrigin,
-		&caixa.ChangeDate,
-		&caixa.VendedorID,
-		&caixa.Status,
-		&caixa.Observations,
-	)
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("Erro ao buscar as alterações no caixa: %w", err)
 	}
-	return &caixa, nil
+	defer row.Close()
+
+	var caixaReturn []*entity.Caixa
+	for row.Next() {
+		var caixa entity.Caixa
+
+		err = row.Scan(
+			&caixa.IDTransiction,
+			&caixa.ValueChanged,
+			&caixa.ChangeType,
+			&caixa.ChangeOrigin,
+			&caixa.ChangeDate,
+			&caixa.VendedorID,
+			&caixa.Status,
+			&caixa.Observations,
+		)
+		if err != nil {
+			return nil, err
+		}
+		caixaReturn = append(caixaReturn, &caixa)
+
+	}
+	return caixaReturn, nil
 }

@@ -6,6 +6,7 @@ import (
 
 	"github.com/fabioros/Komercio/domain/entity"
 	"github.com/fabioros/Komercio/domain/repository"
+
 	"github.com/jackc/pgx/v5"
 )
 
@@ -18,10 +19,17 @@ type CustomertransactionService interface {
 
 type customertransactionService struct {
 	repo repository.CustomertransactionRepository
+	cash repository.CashmovementRepository
 }
 
-func NewCustomertransactionService(repo repository.CustomertransactionRepository) CustomertransactionService {
-	return &customertransactionService{repo: repo}
+func NewCustomertransactionService(
+	repo repository.CustomertransactionRepository,
+	cash repository.CashmovementRepository,
+) CustomertransactionService {
+	return &customertransactionService{
+		repo: repo,
+		cash: cash,
+	}
 }
 
 func (s *customertransactionService) CreateTransactionTX(ctx context.Context, tx pgx.Tx, transaction *entity.CustomerTransaction) error {
@@ -29,8 +37,12 @@ func (s *customertransactionService) CreateTransactionTX(ctx context.Context, tx
 	if transaction == nil {
 		return fmt.Errorf("Transação não pode ser nula")
 	}
+
 	return s.repo.CreateTransactionTX(ctx, tx, transaction)
 }
+
+/// Aqui temos a criação do evento de pagamento da conta
+
 func (s *customertransactionService) CreateTransaction(ctx context.Context, transaction *entity.CustomerTransaction) error {
 
 	if transaction == nil {
@@ -43,6 +55,20 @@ func (s *customertransactionService) CreateTransaction(ctx context.Context, tran
 		return err
 	}
 	transaction.Origin_type = "Pagamento"
+
+	cashMovement := entity.Cashmovements{
+		SalesId:                    transaction.Sale_id,
+		Cashmovementstype:          "Entrada",
+		Cashmovementsdescription:   transaction.Obs,
+		Cashmovementsamount:        transaction.Transaction_value,
+		Cashmovementspaymentmethod: transaction.Type_payment,
+		Cashmovementsdatetime:      transaction.Transaction_date,
+		SellerId:                   0,
+	}
+	err = s.cash.CreateCashmovement(ctx, &cashMovement)
+	if err != nil {
+		return err
+	}
 	return s.repo.CreateTransaction(ctx, transaction)
 }
 
