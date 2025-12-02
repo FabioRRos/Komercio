@@ -1,4 +1,5 @@
-﻿using Komercio.Services;
+﻿using Komercio.Models;
+using Komercio.Services;
 using Komercio.UI.Forms;
 using Komercio.UI.Forms.Customer;
 using Komercio.UI.Forms.Dump;
@@ -30,8 +31,10 @@ namespace Komercio
         private readonly HttpClient _httpClient;
         private readonly ProductDescriptionService _productDescriptionService;
         private readonly CustomerTransactionService _customerTransactionService;
+        private readonly CaixaService _caixaService;
+        private readonly CashmovementsService _cashmovementsService;
 
-        public Home(EmployeeService empliyeeService, CustomerService customerService, ProductService productService, ProductGroupService productGroupService, ProductSubgroupService productSubgroupService , ProductDescriptionService productDescriptionService, CustomerTransactionService customerTransactionService, string baseUrl)
+        public Home(EmployeeService empliyeeService, CustomerService customerService, ProductService productService, ProductGroupService productGroupService, ProductSubgroupService productSubgroupService , ProductDescriptionService productDescriptionService, CustomerTransactionService customerTransactionService,CaixaService caixaService,CashmovementsService cashMovement, string baseUrl)
         {
             InitializeComponent();
             _employeeService = empliyeeService;
@@ -41,6 +44,8 @@ namespace Komercio
             _productSubgroupService =  productSubgroupService;
             _productDescriptionService = productDescriptionService;
             _customerTransactionService = customerTransactionService;
+            _caixaService = caixaService;
+            _cashmovementsService = cashMovement;
 
             _httpClient = new HttpClient
             {
@@ -58,6 +63,31 @@ namespace Komercio
 
         private void Home_Load(object sender, EventArgs e)
         {
+            StatusCaixa();
+        }
+        //DTO para status Caixa:
+        private List<CaixaDTO> caixaDTO = new List<CaixaDTO>();
+
+        private async void StatusCaixa()
+        {
+            caixaDTO = await _caixaService.GetCaixaTransactionsAsync();
+
+            if (caixaDTO[0].ChangeOrigin == null)
+            {
+                MessageBox.Show("Tive dificuldades em carregar, tente novamente mais tarde");
+            }
+
+            switch (caixaDTO[caixaDTO.Count-1].Status)
+            {
+                case true:
+                    { mlbStatusCaixa.Text = "Aberto"; break; }
+                case false:
+                    { mlbStatusCaixa.Text = "Fechado"; break; }
+                default:
+                    { mlbStatusCaixa.Text = "Tente novamente"; break; }
+
+            }
+
 
         }
 
@@ -104,8 +134,12 @@ namespace Komercio
 
         private void materialButton1_Click(object sender, EventArgs e)
         {
-            fmCustomerTransactions customerTransactions = new fmCustomerTransactions(_customerService, _customerTransactionService, _employeeService);
-            customerTransactions.ShowDialog();
+            var caixa = new frmCaixa(_caixaService, _cashmovementsService, caixaDTO);
+           var retorno =  caixa.ShowDialog();
+
+            if (retorno == DialogResult.OK) {
+                StatusCaixa();
+            }
         }
 
         private void vendaPorPeriodoToolStripMenuItem_Click(object sender, EventArgs e)
@@ -124,6 +158,12 @@ namespace Komercio
         {
             btnImportStock newProductLote = new btnImportStock(_productService);
             newProductLote.ShowDialog();
+        }
+
+        private void cadernetaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            fmCustomerTransactions customerTransactions = new fmCustomerTransactions(_customerService, _customerTransactionService, _employeeService);
+            customerTransactions.ShowDialog();
         }
     }
 }

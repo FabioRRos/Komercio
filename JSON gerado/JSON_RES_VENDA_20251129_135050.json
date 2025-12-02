@@ -1,0 +1,39 @@
+﻿{
+  "sale": {
+    "customer_id": 3,
+    "total_amount": 119.8,
+    "discount_amount": 10.0,
+    "final_amount": 109.8,
+    "sale_date": "2025-11-29T13:50:47.8615887-03:00",
+    "sale_time": "13:50:47",
+    "payment_method": "Conta",
+    "seller_id": 3,
+    "sale_notes": "Teste de vendas"
+  },
+  "items": [
+    {
+      "product_id": 10,
+      "product_name": "Capa Silicone Anti Impacto + Preta iPhone 13",
+      "barcode": "789000010",
+      "unit_price": 29.9,
+      "quantity": 1,
+      "total": 29.9
+    },
+    {
+      "product_id": 40,
+      "product_name": "Carrinho Controle Remoto Infantil",
+      "barcode": "789000040",
+      "unit_price": 89.9,
+      "quantity": 1,
+      "total": 89.9
+    }
+  ],
+  "cash_movement": {
+    "movement_type": "Entrada",
+    "description": null,
+    "amount": 109.8,
+    "payment_method": "Conta",
+    "movement_datetime": "2025-11-29T13:50:48.9409174-03:00",
+    "seller_id": 3
+  }
+}

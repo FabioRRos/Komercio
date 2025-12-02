@@ -24,7 +24,16 @@ namespace Komercio.Services
         //get
         public async Task<List<CaixaDTO>> GetCaixaTransactionsAsync()
         {
-            var response = await _httpClient.GetAsync("Caixa");
+            HttpResponseMessage response;
+            try
+            {
+             response = await _httpClient.GetAsync("Caixa");
+
+            }
+            catch
+            {
+                return new List<CaixaDTO>();
+            }
             if (!response.IsSuccessStatusCode)
             {
                 throw new Exception($"Erro ao obter transações do caixa: {response.StatusCode}");
@@ -42,11 +51,11 @@ namespace Komercio.Services
 
     //put
 
-    public async Task<bool> UpdateCaixaTransactionAsync(int id, CaixaDTO caixaDTO)
+    public async Task<bool> UpdateCaixaTransactionAsync(CaixaDTO caixaDTO)
         {
             var jsonContent = Newtonsoft.Json.JsonConvert.SerializeObject(caixaDTO);
             var content = new StringContent(jsonContent, Encoding.UTF8, "application/json");
-            var response = await _httpClient.PutAsync($"Caixa/{id}", content);
+            var response = await _httpClient.PostAsync($"Caixa/", content);
             return response.IsSuccessStatusCode;
         }
 

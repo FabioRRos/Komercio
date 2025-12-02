@@ -23,11 +23,11 @@ namespace Komercio.UI.Forms.Customer
         public fmChangeCustomer(CustomerService service)
         {
             _customerService = service;
+
             InitializeComponent();
-           InitializationTextBox();
-            LoadDataGridView();
-            
+
         }
+
 
         private void InitializationTextBox()
         {
@@ -80,6 +80,16 @@ namespace Komercio.UI.Forms.Customer
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.MinimizeBox = true;
+            
+            InitializationTextBox();
+            LoadDataGridView();
+        }
+
+        private void ReloadForm()
+        {
+            this.Controls.Clear();
+            this.InitializeComponent();
+            this.fmChangeCustomer_Load(null, null);
         }
 
         public  void AttDataGridView(List<CustomerDto> customersList)
@@ -270,8 +280,10 @@ namespace Komercio.UI.Forms.Customer
 
         private void materialButton1_Click(object sender, EventArgs e)
         {
-            this.Close();
+            ReloadForm();
         }
+
+
 
         private void dgvCustomerList_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {

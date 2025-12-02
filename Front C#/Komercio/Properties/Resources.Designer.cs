@@ -83,9 +83,39 @@ namespace Komercio.Properties {
         /// <summary>
         ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap icone_de_l_argent_symbole_png_rose1 {
+            get {
+                object obj = ResourceManager.GetObject("icone-de-l-argent-symbole-png-rose1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icone_de_l_argent_symbole_png_rose2 {
+            get {
+                object obj = ResourceManager.GetObject("icone-de-l-argent-symbole-png-rose2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap komercio {
             get {
                 object obj = ResourceManager.GetObject("komercio", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap png_clipart_binoculars_binoculars_logo_monochrome_removebg_preview {
+            get {
+                object obj = ResourceManager.GetObject("png-clipart-binoculars-binoculars-logo-monochrome-removebg-preview", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

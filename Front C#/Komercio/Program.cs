@@ -1,12 +1,13 @@
-﻿using Komercio.Services;
+﻿using Komercio.Models;
+using Komercio.Services;
 using Komercio.UI.Forms;
 using MeuProjetoWinForms.Services;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Configuration;
 
 
 namespace Komercio
@@ -33,11 +34,13 @@ namespace Komercio
             var productrsuggroupService = new ProductSubgroupService(apiBaseUrl);
             var productDescriptionService = new ProductDescriptionService(apiBaseUrl);
             var customerTransactionService = new CustomerTransactionService(apiBaseUrl);
+            var caixaService = new CaixaService(apiBaseUrl);
+            var cashMovement = new CashmovementsService(apiBaseUrl);
 
 
 
             // aqui estou aplicando a injeção de dependência manualmente
-            Application.Run(new Home(employeeService, customerService, productService, productgroupService, productrsuggroupService, productDescriptionService, customerTransactionService, apiBaseUrl));
+            Application.Run(new Home(employeeService, customerService, productService, productgroupService, productrsuggroupService, productDescriptionService, customerTransactionService, caixaService, cashMovement, apiBaseUrl));
 
 
         }

@@ -73,6 +73,14 @@ namespace Komercio.UI.Forms.Sales
             mtbValorRecebido.Text = total.ToString("C2");
             mlbTotal.Text = total.ToString("C2");
 
+
+            mtbSubTotal.Hint = "SUBTOTAL";
+            mtbAddValue.Hint = "ACRÉSCIMO";
+            mtbDesc.Hint = "DESCONTO";
+            mtbTroco.Hint = "TROCO";
+            mtbValorRecebido.Hint = "VALOR RECEBIDO";
+            
+
         }
 
         // Atualiza total com base em desconto e acréscimo

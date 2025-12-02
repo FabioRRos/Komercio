@@ -208,7 +208,7 @@
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Image = global::Komercio.Properties.Resources.Carrinho;
+            this.pictureBox1.Image = global::Komercio.Properties.Resources.icone_de_l_argent_symbole_png_rose1;
             this.pictureBox1.Location = new System.Drawing.Point(365, 37);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(54, 54);

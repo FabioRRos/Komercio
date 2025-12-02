@@ -9,9 +9,6 @@ namespace Komercio.Models
 {
     public class CashovementsDTO
     {
-
-
-
         [JsonIgnore]
         public int movementId { get; set; }
 
@@ -35,7 +32,5 @@ namespace Komercio.Models
 
             [JsonProperty("seller_id")]
             public int sellerId { get; set; }
-        
-
     }
 }
