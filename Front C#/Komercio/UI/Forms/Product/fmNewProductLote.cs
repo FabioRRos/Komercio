@@ -112,18 +112,41 @@ namespace Komercio.UI.Forms.Product
 
             }
 
-            MessageBox.Show(error + "produtos tiveram erro de importação. Favor verificar a lista e tentar novamente.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            if (error == 0)
+            {
+                MessageBox.Show("Todos os produtos imporatdos com sucesso!", "Sucesso.", MessageBoxButtons.OK, MessageBoxIcon.Information);
+       
+            }
+            else
+            {
+                MessageBox.Show(error + "produtos tiveram erro de importação. Favor verificar a lista e tentar novamente.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+            }
 
             materialButton1.Enabled = false;
             mtbDirectorySearcher.Enabled = true;
             dgwImportList.DataSource = null;
+
+            ReloadForm();
         }
+        private void ReloadForm()
+        {
+            this.Controls.Clear();
+            this.InitializeComponent();
+            this.btnImportStock_Load(null, null);
+        }
+
 
         private async void CreateProductAsync(ProductDTO product)
         {
 
             await _productService.CreateProductAsync(product);
 
+
+        }
+
+        private void btnImportStock_Load(object sender, EventArgs e)
+        {
 
         }
     }

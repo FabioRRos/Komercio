@@ -1,6 +1,7 @@
 ﻿using Komercio.Models;
 using Komercio.Services;
 using Komercio.UI.Forms;
+using Komercio.UI.Forms.Caixa;
 using Komercio.UI.Forms.Customer;
 using Komercio.UI.Forms.Dump;
 using Komercio.UI.Forms.Employee;
@@ -33,6 +34,9 @@ namespace Komercio
         private readonly CustomerTransactionService _customerTransactionService;
         private readonly CaixaService _caixaService;
         private readonly CashmovementsService _cashmovementsService;
+        
+        //Status do caixa 
+        internal bool caixaStatus;
 
         public Home(EmployeeService empliyeeService, CustomerService customerService, ProductService productService, ProductGroupService productGroupService, ProductSubgroupService productSubgroupService , ProductDescriptionService productDescriptionService, CustomerTransactionService customerTransactionService,CaixaService caixaService,CashmovementsService cashMovement, string baseUrl)
         {
@@ -72,22 +76,56 @@ namespace Komercio
         {
             caixaDTO = await _caixaService.GetCaixaTransactionsAsync();
 
+            if (caixaDTO.Count <= 0)
+            {
+                MessageBox.Show("É necessário realizar a abertura do caixa!!");
+                mlbStatusCaixa.Text = "Fechado";
+                caixaStatus = false;
+                return;
+
+            }
+
             if (caixaDTO[0].ChangeOrigin == null)
             {
                 MessageBox.Show("Tive dificuldades em carregar, tente novamente mais tarde");
             }
+            
+                switch (caixaDTO[caixaDTO.Count - 1].Status)
+                {
+                    case true:
+                        {
+                        mlbStatusCaixa.Text = "Aberto";
+                        caixaStatus = caixaDTO[caixaDTO.Count - 1].Status;
+                        }
+                    break;
+ 
+                    case false:
+                        {
+                        mlbStatusCaixa.Text = "Fechado";
+                        caixaStatus = caixaDTO[caixaDTO.Count - 1].Status;
+                    }
+                    break;
+                    default:
+                    {
+                        mlbStatusCaixa.Text = "Tente novamente";
+                        caixaStatus = false;
 
-            switch (caixaDTO[caixaDTO.Count-1].Status)
-            {
-                case true:
-                    { mlbStatusCaixa.Text = "Aberto"; break; }
-                case false:
-                    { mlbStatusCaixa.Text = "Fechado"; break; }
-                default:
-                    { mlbStatusCaixa.Text = "Tente novamente"; break; }
+                    }
+                    break;
 
-            }
 
+                }
+        
+
+
+        }
+
+        private void CaixaFechadoOptions()
+        {
+
+        }
+        private void CaixaAbertoOptions()
+        {
 
         }
 
@@ -128,16 +166,17 @@ namespace Komercio
 
         private void novaVendaToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            fmSalesProduct salesProduct = new fmSalesProduct(_employeeService,_productService, _productGroupService, _productSubgroupService, _customerService, _productDescriptionService, _httpClient);
-            salesProduct.ShowDialog();
+            Vendas();
         }
 
         private void materialButton1_Click(object sender, EventArgs e)
         {
-            var caixa = new frmCaixa(_caixaService, _cashmovementsService, caixaDTO);
-           var retorno =  caixa.ShowDialog();
+            frmLogin login = new frmLogin(_employeeService);
+            var retorno =  login.ShowDialog();
 
-            if (retorno == DialogResult.OK) {
+
+            if (retorno == DialogResult.OK)
+            {
                 StatusCaixa();
             }
         }
@@ -162,8 +201,90 @@ namespace Komercio
 
         private void cadernetaToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            fmCustomerTransactions customerTransactions = new fmCustomerTransactions(_customerService, _customerTransactionService, _employeeService);
-            customerTransactions.ShowDialog();
+            Caderneta();
+        }
+
+        private void fechamentoDoCaixaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FechamentoDoCaixa();
+
+        }
+
+        private void aberturaDoCaixaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            AberturaDoCaixa();
+        }
+
+
+
+
+
+
+        //##########################################
+
+        private void AberturaDoCaixa()
+        {
+            if (caixaStatus)
+            {
+                MessageBox.Show("O caixa já está aberto!", "Ops...", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+            else if (!caixaStatus)
+            {
+                var caixa = new fmAberturaCaixa(_caixaService, _employeeService);
+                var retorno = caixa.ShowDialog();
+
+                if (retorno == DialogResult.OK)
+                {
+                    StatusCaixa();
+                }
+            }
+        }
+
+        private void FechamentoDoCaixa()
+        {
+            if (!caixaStatus)
+            {
+                MessageBox.Show("O caixa já está Fechado!", "Ops...", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+            else if (caixaStatus)
+            {
+                var caixa = new frmFechamentoCaixa(_caixaService, _cashmovementsService, caixaDTO,_employeeService);
+                var retorno = caixa.ShowDialog();
+
+                if (retorno == DialogResult.OK)
+                {
+                    StatusCaixa();
+                }
+            }
+        }
+
+
+        private void Vendas()
+        {
+            if (caixaStatus)
+            {
+                fmSalesProduct salesProduct = new fmSalesProduct(_employeeService, _productService, _productGroupService, _productSubgroupService, _customerService, _productDescriptionService, _httpClient);
+                salesProduct.ShowDialog();
+            }
+            else
+            {
+                MessageBox.Show("Para realizar uma venda é necessário primeiro abrir o caixa","ATENÇÃO!!",MessageBoxButtons.OK,MessageBoxIcon.Warning);
+            }
+        }
+
+        private void Caderneta()
+        {
+            if (caixaStatus)
+            {
+                fmCustomerTransactions customerTransactions = new fmCustomerTransactions(_customerService, _customerTransactionService, _employeeService);
+                customerTransactions.ShowDialog();
+            }
+            else
+            {
+                MessageBox.Show("Para realizar uma venda é necessário primeiro abrir o caixa", "ATENÇÃO!!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
         }
     }
 }

@@ -47,15 +47,17 @@ namespace Komercio.Services
             return transactions;
         }
     
-
-
     //put
-
     public async Task<bool> UpdateCaixaTransactionAsync(CaixaDTO caixaDTO)
         {
             var jsonContent = Newtonsoft.Json.JsonConvert.SerializeObject(caixaDTO);
             var content = new StringContent(jsonContent, Encoding.UTF8, "application/json");
             var response = await _httpClient.PostAsync($"Caixa/", content);
+
+            if (!response.IsSuccessStatusCode)
+            {
+                throw new Exception($"Erro ao atualizar as transações do caixa: {response.StatusCode}");
+            }
             return response.IsSuccessStatusCode;
         }
 

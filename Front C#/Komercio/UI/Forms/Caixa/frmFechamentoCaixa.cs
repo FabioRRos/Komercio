@@ -1,5 +1,6 @@
 ﻿using Komercio.Models;
 using Komercio.Services;
+using MeuProjetoWinForms.Services;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -14,10 +15,11 @@ using System.Windows.Forms;
 
 namespace Komercio.UI.Forms
 {
-    public partial class frmCaixa : Form
+    public partial class frmFechamentoCaixa : Form
     {
         private CaixaService _caixaService;
         private CashmovementsService _cashmovementsService;
+        private EmployeeService _employeeService;
 
         //objetos e variaveis utilizadas em todo o código
         private List<CaixaDTO> _caixaDTO = new List<CaixaDTO>();
@@ -42,22 +44,43 @@ namespace Komercio.UI.Forms
 
 
 
-        public frmCaixa(CaixaService caixaService, CashmovementsService cashMovement, List<CaixaDTO> caixa)
+        public frmFechamentoCaixa(CaixaService caixaService, CashmovementsService cashMovement, List<CaixaDTO> caixa, EmployeeService employeeService)
         {
             _caixaService = caixaService;
             _caixaDTO = caixa;
             _cashmovementsService = cashMovement;
+            _employeeService = employeeService;
             InitializeComponent();
         }
 
         private void frmCaixa_Load(object sender, EventArgs e)
         {
+            this.FormBorderStyle = FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
+            this.MinimizeBox = true;
             CarregaLista();
-            loadMTB();   
-
-
+            loadMTB();
+            ValidationLogin();
         }
 
+        private void ValidationLogin()
+        {
+            using (frmLogin login = new frmLogin(_employeeService))
+            {
+                var retorno = login.ShowDialog();
+
+                if (retorno == DialogResult.OK)
+                {
+                    fechamento.VendedorID = login.employeersId;
+                }
+                else
+                {
+                    MessageBox.Show("ACESSO NEGADO", "ATENÇÃO", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                    this.Close();
+                }
+            }
+        }
+        
         private void loadMTB()
         {
             mtbDinheiro.Text = 0.ToString();
@@ -110,7 +133,7 @@ namespace Komercio.UI.Forms
                             valoresFechamento.Credito += moviment.amount;
                         }
                         break;
-                    case "Pix":
+                    case "PIX":
                         {
                             valoresFechamento.Pix += moviment.amount;
                         }
@@ -396,7 +419,6 @@ namespace Komercio.UI.Forms
             fechamento.ValueChanged = valoresFechamento.Restante;
             fechamento.ChangeType = "retirada";
             fechamento.ChangeOrigin = "Fechamento";
-            fechamento.VendedorID = 1;
             fechamento.ChangeDate = DateTime.Now;
             fechamento.Status = false;
             fechamento.Observations = "Fechamento do caixa pelo funcionário 1";
@@ -405,37 +427,37 @@ namespace Komercio.UI.Forms
             
         }
 
-        private bool ValidaValores()
+        private bool ValidaValores() 
         {
             try {
-                if (float.Parse(mtbDinheiro.Text.Replace("R$","")) != valoresFechamento.Dinheiro) 
+                if (float.Parse(mtbDinheiro.Text.Replace("R$","")) != (float)Math.Round((decimal)valoresFechamento.Dinheiro, 2))
                 {
                     MessageBox.Show("O valor em Dineiro informado não bate com o valor em sistema.");
                     return false;
                 }
 
-                if (float.Parse(mtbDebito.Text.Replace("R$", "")) != valoresFechamento.Debito)
+                if (float.Parse(mtbDebito.Text.Replace("R$", "")) != (float)Math.Round((decimal)valoresFechamento.Debito, 2))
                     {
                         MessageBox.Show("O valor em Débito informado não bate com o valor em sistema.");
                     return false;
                 }
-                if (float.Parse(mtbCredito.Text.Replace("R$", ""))!= valoresFechamento.Credito) 
+                if (float.Parse(mtbCredito.Text.Replace("R$", ""))!= (float)Math.Round((decimal)valoresFechamento.Credito, 2)) 
                     {
                         MessageBox.Show("O valor em Crédito informado não bate com o valor em sistema.");
                     return false;
                 }
-                if (float.Parse(mtbPix.Text.Replace("R$", "")) != valoresFechamento.Pix)
+                if (float.Parse(mtbPix.Text.Replace("R$", "")) != (float)Math.Round((decimal)valoresFechamento.Pix, 2))
                     {
                         MessageBox.Show("O valor em PIX informado não bate com o valor em sistema.");
                     return false;
                 }
                 
-                 if (float.Parse(mtbConta.Text.Replace("R$", ""))!= valoresFechamento.Conta) 
+                 if (float.Parse(mtbConta.Text.Replace("R$", ""))!= (float)Math.Round((decimal)valoresFechamento.Conta, 2)) 
                     {
                         MessageBox.Show("O valor em Conta informado não bate com o valor em sistema.");
                     return false;
                 }
-                if (float.Parse(mtbSangria.Text.Replace("R$", ""))!= valoresFechamento.Sangria) 
+                if (float.Parse(mtbSangria.Text.Replace("R$", ""))!= (float)Math.Round((decimal)valoresFechamento.Sangria, 2)) 
                     { 
                         
                         MessageBox.Show("O valor da sangria informado não bate com o valor em sistema.");

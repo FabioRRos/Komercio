@@ -49,8 +49,11 @@
             this.configuraçõesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.notificaçõesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.estoqueBaixoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.caixaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.fechamentoDoCaixaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.materialButton1 = new MaterialSkin.Controls.MaterialButton();
             this.mlbStatusCaixa = new MaterialSkin.Controls.MaterialLabel();
+            this.aberturaDoCaixaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -92,7 +95,8 @@
             this.produtosToolStripMenuItem,
             this.vendasToolStripMenuItem,
             this.relatóriosToolStripMenuItem,
-            this.configuraçõesToolStripMenuItem});
+            this.configuraçõesToolStripMenuItem,
+            this.caixaToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(800, 24);
@@ -223,6 +227,22 @@
             this.estoqueBaixoToolStripMenuItem.Text = "Estoque baixo";
             this.estoqueBaixoToolStripMenuItem.Click += new System.EventHandler(this.estoqueBaixoToolStripMenuItem_Click);
             // 
+            // caixaToolStripMenuItem
+            // 
+            this.caixaToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.aberturaDoCaixaToolStripMenuItem,
+            this.fechamentoDoCaixaToolStripMenuItem});
+            this.caixaToolStripMenuItem.Name = "caixaToolStripMenuItem";
+            this.caixaToolStripMenuItem.Size = new System.Drawing.Size(47, 20);
+            this.caixaToolStripMenuItem.Text = "Caixa";
+            // 
+            // fechamentoDoCaixaToolStripMenuItem
+            // 
+            this.fechamentoDoCaixaToolStripMenuItem.Name = "fechamentoDoCaixaToolStripMenuItem";
+            this.fechamentoDoCaixaToolStripMenuItem.Size = new System.Drawing.Size(186, 22);
+            this.fechamentoDoCaixaToolStripMenuItem.Text = "Fechamento do caixa";
+            this.fechamentoDoCaixaToolStripMenuItem.Click += new System.EventHandler(this.fechamentoDoCaixaToolStripMenuItem_Click);
+            // 
             // materialButton1
             // 
             this.materialButton1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
@@ -255,6 +275,13 @@
             this.mlbStatusCaixa.Size = new System.Drawing.Size(169, 29);
             this.mlbStatusCaixa.TabIndex = 2;
             this.mlbStatusCaixa.Text = "mlbStatusCaixa";
+            // 
+            // aberturaDoCaixaToolStripMenuItem
+            // 
+            this.aberturaDoCaixaToolStripMenuItem.Name = "aberturaDoCaixaToolStripMenuItem";
+            this.aberturaDoCaixaToolStripMenuItem.Size = new System.Drawing.Size(186, 22);
+            this.aberturaDoCaixaToolStripMenuItem.Text = "Abertura do caixa";
+            this.aberturaDoCaixaToolStripMenuItem.Click += new System.EventHandler(this.aberturaDoCaixaToolStripMenuItem_Click);
             // 
             // Home
             // 
@@ -302,6 +329,9 @@
         private System.Windows.Forms.ToolStripMenuItem loteToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem cadernetaToolStripMenuItem;
         private MaterialSkin.Controls.MaterialLabel mlbStatusCaixa;
+        private System.Windows.Forms.ToolStripMenuItem caixaToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem fechamentoDoCaixaToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem aberturaDoCaixaToolStripMenuItem;
     }
 }
 

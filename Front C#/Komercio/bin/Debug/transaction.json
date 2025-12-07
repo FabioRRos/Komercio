@@ -1,1 +1,1 @@
-{"id_transaction":0,"sale_id":0,"customer_id":3,"origin_type":"Pagamento","transaction_value":10.0,"transaction_date":"2025-11-29T13:51:26.4924937-03:00","obs":"","seller":"1","type_payment":"Dinheiro"}
+{"id_transaction":0,"sale_id":0,"customer_id":2,"origin_type":"Pagamento","transaction_value":4.0,"transaction_date":"2025-12-07T11:53:50.2010133-03:00","obs":"Pix maquinha doninho","seller":"3","type_payment":"PIX"}

@@ -1,6 +1,6 @@
 ﻿namespace Komercio.UI.Forms
 {
-    partial class frmCaixa
+    partial class frmFechamentoCaixa
     {
         /// <summary>
         /// Required designer variable.
@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmFechamentoCaixa));
             this.mtbDinheiro = new MaterialSkin.Controls.MaterialTextBox2();
             this.mtbDebito = new MaterialSkin.Controls.MaterialTextBox2();
             this.mtbCredito = new MaterialSkin.Controls.MaterialTextBox2();
@@ -283,7 +284,7 @@
             this.materialButton1.UseVisualStyleBackColor = true;
             this.materialButton1.Click += new System.EventHandler(this.materialButton1_Click);
             // 
-            // frmCaixa
+            // frmFechamentoCaixa
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -297,8 +298,9 @@
             this.Controls.Add(this.mtbCredito);
             this.Controls.Add(this.mtbDebito);
             this.Controls.Add(this.mtbDinheiro);
-            this.Name = "frmCaixa";
-            this.Text = "frmCaixa";
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Name = "frmFechamentoCaixa";
+            this.Text = "Fechamento de caixa";
             this.Load += new System.EventHandler(this.frmCaixa_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

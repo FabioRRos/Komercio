@@ -100,6 +100,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "btnImportStock";
             this.Text = "Cadastro em lote";
+            this.Load += new System.EventHandler(this.btnImportStock_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgwImportList)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

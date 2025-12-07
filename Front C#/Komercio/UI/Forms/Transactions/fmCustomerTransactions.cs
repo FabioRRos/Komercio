@@ -68,7 +68,24 @@ namespace Komercio.UI.Forms.Transactions
         {
             
             _customer = await _customerService.GetAllCustomersAsync();
-            _customer.RemoveAt(0); // remove o cliente balcão
+
+            int id = 0;
+
+            foreach (var customer in _customer)
+            {
+                if (customer.customer_id == 1)
+                {
+                    break;
+                }
+                else if (customer.customer_id != 1) 
+                {
+                    id++;
+                }
+
+            }
+
+             _customer.RemoveAt(id); // remove o cliente balcão 
+
             dgvCustomerList.DataSource = _customer;
             DesignerDataGrid();
         }
