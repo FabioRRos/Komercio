@@ -14,12 +14,19 @@ type CaixaService interface {
 	GetCaixa(ctx context.Context) ([]*entity.Caixa, error)
 }
 
-type caixaService struct {
-	repo repository.CaixaRepository
+func NewCaixaService(
+	repo repository.CaixaRepository,
+	cashmovementService CashmovementService,
+) CaixaService {
+	return &caixaService{
+		repo:                repo,
+		cashMovementService: cashmovementService,
+	}
 }
 
-func NewCaixaService(repo repository.CaixaRepository) CaixaService {
-	return &caixaService{repo: repo}
+type caixaService struct {
+	repo                repository.CaixaRepository
+	cashMovementService CashmovementService
 }
 
 func (s *caixaService) CaixaChangeTX(ctx context.Context, tx pgx.Tx, caixa *entity.Caixa) error {
@@ -42,9 +49,25 @@ func (s *caixaService) CaixaChange(ctx context.Context, caixa *entity.Caixa) err
 	if err != nil {
 		return err
 	}
+
+	if caixa.ChangeOrigin == "Sangria" {
+
+		var cash entity.Cashmovements
+		cash.SalesId = 0
+		cash.Cashmovementstype = caixa.ChangeType
+		cash.Cashmovementsdescription = caixa.Observations
+		cash.Cashmovementsamount = caixa.ValueChanged
+		cash.Cashmovementspaymentmethod = caixa.ChangeOrigin
+		cash.Cashmovementsdatetime = caixa.ChangeDate
+		cash.SalesId = caixa.VendedorID
+
+		err = s.cashMovementService.CreateCashmovement(ctx, &cash)
+	}
+
 	return nil
 }
 
 func (s *caixaService) GetCaixa(ctx context.Context) ([]*entity.Caixa, error) {
+
 	return s.repo.GetCaixa(ctx)
 }
