@@ -27,12 +27,19 @@ namespace Komercio.UI.Forms
 
         private void frmLogin_Load(object sender, EventArgs e)
         {
+            this.KeyPreview = true;
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.MinimizeBox = true;
         }
 
         private async void materialButton1_Click(object sender, EventArgs e)
+        {
+
+            ValidarLogin();
+
+        }
+        private async void ValidarLogin()
         {
             if (mtbLoginEmployeer.Text == "" || mtbPasswordEmployeer.Text == "")
             {
@@ -41,7 +48,7 @@ namespace Komercio.UI.Forms
             }
 
             //Iniciando a validação de login e senha
-           
+
             employee.EmployeeLogin = mtbLoginEmployeer.Text;
             employee.EmployeePassword = mtbPasswordEmployeer.Text;
 
@@ -68,8 +75,6 @@ namespace Komercio.UI.Forms
                 MessageBox.Show($"Ocorreu um erro: {ex.Message}",
                                 "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-
-
         }
 
         private void mtbPasswordEmployeer_TextChanged(object sender, EventArgs e)
@@ -123,6 +128,14 @@ namespace Komercio.UI.Forms
             string resultado = primeiraLetra + "." + ultimaPalavra;
 
             return resultado;
+        }
+
+        private void frmLogin_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                ValidarLogin();
+            }
         }
     }
 }

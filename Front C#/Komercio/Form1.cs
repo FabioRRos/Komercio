@@ -171,14 +171,9 @@ namespace Komercio
 
         private void materialButton1_Click(object sender, EventArgs e)
         {
-            frmLogin login = new frmLogin(_employeeService);
-            var retorno =  login.ShowDialog();
-
-
-            if (retorno == DialogResult.OK)
-            {
-                StatusCaixa();
-            }
+    
+                Sangria();
+           
         }
 
         private void vendaPorPeriodoToolStripMenuItem_Click(object sender, EventArgs e)
@@ -283,7 +278,23 @@ namespace Komercio
             }
             else
             {
-                MessageBox.Show("Para realizar uma venda é necessário primeiro abrir o caixa", "ATENÇÃO!!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Para acessar a caderneta é necessário primeiro abrir o caixa", "ATENÇÃO!!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
+
+        private void Sangria()
+        {
+            if (caixaStatus)
+            {
+
+                frmSangria sangria = new frmSangria(_caixaService, _employeeService);
+                sangria.ShowDialog();
+            }
+            else
+            {
+                MessageBox.Show("Para realizar a sangria é necessário primeiro abrir o caixa", "ATENÇÃO!!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
             }
         }
     }

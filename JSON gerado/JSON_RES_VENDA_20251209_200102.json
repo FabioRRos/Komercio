@@ -1,0 +1,63 @@
+﻿{
+  "sale": {
+    "customer_id": 0,
+    "total_amount": 229.930008,
+    "discount_amount": 29.93,
+    "final_amount": 200.0,
+    "sale_date": "2025-12-09T20:01:00.7484519-03:00",
+    "sale_time": "20:01:00",
+    "payment_method": "Dinheiro",
+    "seller_id": 3,
+    "sale_notes": ""
+  },
+  "items": [
+    {
+      "product_id": 38,
+      "product_name": "Pipa Pequena com Linha",
+      "barcode": "789000038",
+      "unit_price": 9.9,
+      "quantity": 1,
+      "total": 9.9
+    },
+    {
+      "product_id": 44,
+      "product_name": "Carrinho Hot Wheels Genérico",
+      "barcode": "789000044",
+      "unit_price": 11.9,
+      "quantity": 1,
+      "total": 11.9
+    },
+    {
+      "product_id": 14,
+      "product_name": "Capa Acrílico Colorida Motorola Edge 30",
+      "barcode": "789000014",
+      "unit_price": 34.9,
+      "quantity": 1,
+      "total": 34.9
+    },
+    {
+      "product_id": 25,
+      "product_name": "Carregador Turbo 20W Universal",
+      "barcode": "789000025",
+      "unit_price": 49.9,
+      "quantity": 1,
+      "total": 49.9
+    },
+    {
+      "product_id": 59,
+      "product_name": "Corrente de ouro",
+      "barcode": "791904226",
+      "unit_price": 123.33,
+      "quantity": 1,
+      "total": 123.33
+    }
+  ],
+  "cash_movement": {
+    "movement_type": "Entrada",
+    "description": null,
+    "amount": 200.0,
+    "payment_method": "Dinheiro",
+    "movement_datetime": "2025-12-09T20:01:01.5342071-03:00",
+    "seller_id": 3
+  }
+}

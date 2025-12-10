@@ -111,6 +111,12 @@
     <Compile Include="UI\Forms\Caixa\fmAberturaCaixa.Designer.cs">
       <DependentUpon>fmAberturaCaixa.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\Forms\Caixa\frmSangria.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Forms\Caixa\frmSangria.Designer.cs">
+      <DependentUpon>frmSangria.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\Forms\Customer\fmChangeCustomer.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -211,6 +217,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Forms\Caixa\fmAberturaCaixa.resx">
       <DependentUpon>fmAberturaCaixa.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Forms\Caixa\frmSangria.resx">
+      <DependentUpon>frmSangria.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Forms\Customer\fmChangeCustomer.resx">
       <DependentUpon>fmChangeCustomer.cs</DependentUpon>

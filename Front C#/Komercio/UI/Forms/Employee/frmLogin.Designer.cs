@@ -150,6 +150,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "LOGIN";
             this.Load += new System.EventHandler(this.frmLogin_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.frmLogin_KeyDown);
             this.ResumeLayout(false);
             this.PerformLayout();
 

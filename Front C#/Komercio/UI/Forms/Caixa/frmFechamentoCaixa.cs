@@ -41,6 +41,7 @@ namespace Komercio.UI.Forms
         readonly string endereco = ConfigurationManager.AppSettings["Endereco"];
         readonly string cidade = ConfigurationManager.AppSettings["Cidade"];
         readonly string contato = ConfigurationManager.AppSettings["Contato"];
+        readonly string funcionarioNome;
 
 
 
@@ -55,12 +56,13 @@ namespace Komercio.UI.Forms
 
         private void frmCaixa_Load(object sender, EventArgs e)
         {
+            ValidationLogin();
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.MinimizeBox = true;
             CarregaLista();
             loadMTB();
-            ValidationLogin();
+            
         }
 
         private void ValidationLogin()
@@ -397,6 +399,8 @@ namespace Komercio.UI.Forms
                 return;
             FechamentoCaixa();
 
+            // imprimir o cupom com o valor alterado pela diferença de dinheiro no caixa.
+
         }
 
         private async void FechamentoCaixa()
@@ -421,7 +425,15 @@ namespace Komercio.UI.Forms
             fechamento.ChangeOrigin = "Fechamento";
             fechamento.ChangeDate = DateTime.Now;
             fechamento.Status = false;
-            fechamento.Observations = "Fechamento do caixa pelo funcionário 1";
+            if (mcbJustDif.Checked == true)
+            {
+                var valorCaixaDinheiro = valoresFechamento.Dinheiro - float.Parse(mtbDinheiro.Text.Replace("R$", ""));
+                fechamento.Observations = mtbJustificativa.Text + $" - Diferença em caixa é de: {valorCaixaDinheiro.ToString("C2")}";
+            }
+            else
+            {
+                fechamento.Observations = "Caixa fechado sem alterações.";
+            }
 
             return fechamento;
             
@@ -429,11 +441,24 @@ namespace Komercio.UI.Forms
 
         private bool ValidaValores() 
         {
+
             try {
                 if (float.Parse(mtbDinheiro.Text.Replace("R$","")) != (float)Math.Round((decimal)valoresFechamento.Dinheiro, 2))
                 {
-                    MessageBox.Show("O valor em Dineiro informado não bate com o valor em sistema.");
-                    return false;
+                    if (mcbJustDif.Checked == true)
+                    {
+                        if (mtbJustificativa.Text == "")
+                        {
+                            MessageBox.Show("É necessário justificar as diferenças no caixa!!!");
+                            return false;
+                        }
+                    }
+                    else
+                    {
+
+                        MessageBox.Show("O valor em Dineiro informado não bate com o valor em sistema.");
+                        return false;
+                    }
                 }
 
                 if (float.Parse(mtbDebito.Text.Replace("R$", "")) != (float)Math.Round((decimal)valoresFechamento.Debito, 2))
@@ -463,6 +488,7 @@ namespace Komercio.UI.Forms
                         MessageBox.Show("O valor da sangria informado não bate com o valor em sistema.");
                     return false;
                 }
+
             }
 
             catch
@@ -472,6 +498,18 @@ namespace Komercio.UI.Forms
             }
 
             return true;
+        }
+
+        private void mcbJustDif_CheckedChanged(object sender, EventArgs e)
+        {
+            if (mcbJustDif.Checked)
+            {
+                mtbJustificativa.Enabled = true;
+            }
+            else
+            {
+                mtbJustificativa.Enabled = false;
+            }
         }
     }
 }

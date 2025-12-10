@@ -38,6 +38,8 @@
             this.mtbSangria = new MaterialSkin.Controls.MaterialTextBox2();
             this.rtbCupon = new System.Windows.Forms.RichTextBox();
             this.materialButton1 = new MaterialSkin.Controls.MaterialButton();
+            this.mtbJustificativa = new MaterialSkin.Controls.MaterialTextBox2();
+            this.mcbJustDif = new MaterialSkin.Controls.MaterialCheckbox();
             this.SuspendLayout();
             // 
             // mtbDinheiro
@@ -202,17 +204,18 @@
             // 
             // mbtFechar
             // 
+            this.mbtFechar.AutoSize = false;
             this.mbtFechar.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.mbtFechar.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
             this.mbtFechar.Depth = 0;
             this.mbtFechar.HighEmphasis = true;
             this.mbtFechar.Icon = null;
-            this.mbtFechar.Location = new System.Drawing.Point(382, 406);
+            this.mbtFechar.Location = new System.Drawing.Point(450, 370);
             this.mbtFechar.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.mbtFechar.MouseState = MaterialSkin.MouseState.HOVER;
             this.mbtFechar.Name = "mbtFechar";
             this.mbtFechar.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.mbtFechar.Size = new System.Drawing.Size(123, 36);
+            this.mbtFechar.Size = new System.Drawing.Size(119, 36);
             this.mbtFechar.TabIndex = 8;
             this.mbtFechar.Text = "Fechar Caixa";
             this.mbtFechar.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
@@ -256,27 +259,28 @@
             // 
             this.rtbCupon.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.rtbCupon.Font = new System.Drawing.Font("Times New Roman", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.rtbCupon.Location = new System.Drawing.Point(311, 17);
+            this.rtbCupon.Location = new System.Drawing.Point(279, 17);
             this.rtbCupon.Name = "rtbCupon";
             this.rtbCupon.ReadOnly = true;
-            this.rtbCupon.Size = new System.Drawing.Size(248, 344);
+            this.rtbCupon.Size = new System.Drawing.Size(290, 344);
             this.rtbCupon.TabIndex = 9;
             this.rtbCupon.Text = "";
             this.rtbCupon.TextChanged += new System.EventHandler(this.rtbCupon_TextChanged);
             // 
             // materialButton1
             // 
+            this.materialButton1.AutoSize = false;
             this.materialButton1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.materialButton1.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
             this.materialButton1.Depth = 0;
             this.materialButton1.HighEmphasis = true;
             this.materialButton1.Icon = null;
-            this.materialButton1.Location = new System.Drawing.Point(367, 366);
+            this.materialButton1.Location = new System.Drawing.Point(280, 371);
             this.materialButton1.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.materialButton1.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialButton1.Name = "materialButton1";
             this.materialButton1.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.materialButton1.Size = new System.Drawing.Size(158, 36);
+            this.materialButton1.Size = new System.Drawing.Size(147, 36);
             this.materialButton1.TabIndex = 7;
             this.materialButton1.Text = "Visualizar cupom";
             this.materialButton1.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
@@ -284,11 +288,62 @@
             this.materialButton1.UseVisualStyleBackColor = true;
             this.materialButton1.Click += new System.EventHandler(this.materialButton1_Click);
             // 
+            // mtbJustificativa
+            // 
+            this.mtbJustificativa.AnimateReadOnly = false;
+            this.mtbJustificativa.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.mtbJustificativa.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
+            this.mtbJustificativa.Depth = 0;
+            this.mtbJustificativa.Enabled = false;
+            this.mtbJustificativa.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.mtbJustificativa.HelperText = "Motivo da diferença.";
+            this.mtbJustificativa.HideSelection = true;
+            this.mtbJustificativa.Hint = "Justificativa";
+            this.mtbJustificativa.LeadingIcon = null;
+            this.mtbJustificativa.Location = new System.Drawing.Point(23, 441);
+            this.mtbJustificativa.MaxLength = 32767;
+            this.mtbJustificativa.MouseState = MaterialSkin.MouseState.OUT;
+            this.mtbJustificativa.Name = "mtbJustificativa";
+            this.mtbJustificativa.PasswordChar = '\0';
+            this.mtbJustificativa.PrefixSuffixText = null;
+            this.mtbJustificativa.ReadOnly = false;
+            this.mtbJustificativa.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.mtbJustificativa.SelectedText = "";
+            this.mtbJustificativa.SelectionLength = 0;
+            this.mtbJustificativa.SelectionStart = 0;
+            this.mtbJustificativa.ShortcutsEnabled = true;
+            this.mtbJustificativa.ShowAssistiveText = true;
+            this.mtbJustificativa.Size = new System.Drawing.Size(250, 64);
+            this.mtbJustificativa.TabIndex = 10;
+            this.mtbJustificativa.TabStop = false;
+            this.mtbJustificativa.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.mtbJustificativa.TrailingIcon = null;
+            this.mtbJustificativa.UseSystemPasswordChar = false;
+            // 
+            // mcbJustDif
+            // 
+            this.mcbJustDif.AutoSize = true;
+            this.mcbJustDif.Depth = 0;
+            this.mcbJustDif.Location = new System.Drawing.Point(297, 441);
+            this.mcbJustDif.Margin = new System.Windows.Forms.Padding(0);
+            this.mcbJustDif.MouseLocation = new System.Drawing.Point(-1, -1);
+            this.mcbJustDif.MouseState = MaterialSkin.MouseState.HOVER;
+            this.mcbJustDif.Name = "mcbJustDif";
+            this.mcbJustDif.ReadOnly = false;
+            this.mcbJustDif.Ripple = true;
+            this.mcbJustDif.Size = new System.Drawing.Size(176, 37);
+            this.mcbJustDif.TabIndex = 11;
+            this.mcbJustDif.Text = "Justificar diferença.";
+            this.mcbJustDif.UseVisualStyleBackColor = true;
+            this.mcbJustDif.CheckedChanged += new System.EventHandler(this.mcbJustDif_CheckedChanged);
+            // 
             // frmFechamentoCaixa
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(581, 450);
+            this.ClientSize = new System.Drawing.Size(581, 506);
+            this.Controls.Add(this.mcbJustDif);
+            this.Controls.Add(this.mtbJustificativa);
             this.Controls.Add(this.materialButton1);
             this.Controls.Add(this.rtbCupon);
             this.Controls.Add(this.mtbSangria);
@@ -300,6 +355,7 @@
             this.Controls.Add(this.mtbDinheiro);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmFechamentoCaixa";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Fechamento de caixa";
             this.Load += new System.EventHandler(this.frmCaixa_Load);
             this.ResumeLayout(false);
@@ -317,5 +373,7 @@
         private MaterialSkin.Controls.MaterialTextBox2 mtbSangria;
         private System.Windows.Forms.RichTextBox rtbCupon;
         private MaterialSkin.Controls.MaterialButton materialButton1;
+        private MaterialSkin.Controls.MaterialTextBox2 mtbJustificativa;
+        private MaterialSkin.Controls.MaterialCheckbox mcbJustDif;
     }
 }

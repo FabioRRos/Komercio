@@ -50,10 +50,10 @@
             this.notificaçõesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.estoqueBaixoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.caixaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.aberturaDoCaixaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.fechamentoDoCaixaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.materialButton1 = new MaterialSkin.Controls.MaterialButton();
             this.mlbStatusCaixa = new MaterialSkin.Controls.MaterialLabel();
-            this.aberturaDoCaixaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -74,15 +74,16 @@
             // 
             // novoFuncionárioToolStripMenuItem
             // 
+            this.novoFuncionárioToolStripMenuItem.Image = global::Komercio.Properties.Resources.komercio;
             this.novoFuncionárioToolStripMenuItem.Name = "novoFuncionárioToolStripMenuItem";
-            this.novoFuncionárioToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
+            this.novoFuncionárioToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.novoFuncionárioToolStripMenuItem.Text = "Novo Funcionário";
             this.novoFuncionárioToolStripMenuItem.Click += new System.EventHandler(this.novoFuncionárioToolStripMenuItem_Click);
             // 
             // alterarSenhaToolStripMenuItem
             // 
             this.alterarSenhaToolStripMenuItem.Name = "alterarSenhaToolStripMenuItem";
-            this.alterarSenhaToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
+            this.alterarSenhaToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.alterarSenhaToolStripMenuItem.Text = "Alterar senha";
             this.alterarSenhaToolStripMenuItem.Click += new System.EventHandler(this.alterarSenhaToolStripMenuItem_Click);
             // 
@@ -236,6 +237,13 @@
             this.caixaToolStripMenuItem.Size = new System.Drawing.Size(47, 20);
             this.caixaToolStripMenuItem.Text = "Caixa";
             // 
+            // aberturaDoCaixaToolStripMenuItem
+            // 
+            this.aberturaDoCaixaToolStripMenuItem.Name = "aberturaDoCaixaToolStripMenuItem";
+            this.aberturaDoCaixaToolStripMenuItem.Size = new System.Drawing.Size(186, 22);
+            this.aberturaDoCaixaToolStripMenuItem.Text = "Abertura do caixa";
+            this.aberturaDoCaixaToolStripMenuItem.Click += new System.EventHandler(this.aberturaDoCaixaToolStripMenuItem_Click);
+            // 
             // fechamentoDoCaixaToolStripMenuItem
             // 
             this.fechamentoDoCaixaToolStripMenuItem.Name = "fechamentoDoCaixaToolStripMenuItem";
@@ -275,13 +283,6 @@
             this.mlbStatusCaixa.Size = new System.Drawing.Size(169, 29);
             this.mlbStatusCaixa.TabIndex = 2;
             this.mlbStatusCaixa.Text = "mlbStatusCaixa";
-            // 
-            // aberturaDoCaixaToolStripMenuItem
-            // 
-            this.aberturaDoCaixaToolStripMenuItem.Name = "aberturaDoCaixaToolStripMenuItem";
-            this.aberturaDoCaixaToolStripMenuItem.Size = new System.Drawing.Size(186, 22);
-            this.aberturaDoCaixaToolStripMenuItem.Text = "Abertura do caixa";
-            this.aberturaDoCaixaToolStripMenuItem.Click += new System.EventHandler(this.aberturaDoCaixaToolStripMenuItem_Click);
             // 
             // Home
             // 
