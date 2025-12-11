@@ -136,6 +136,12 @@ namespace Komercio.UI.Forms
             {
                 ValidarLogin();
             }
+            if (e.KeyCode == Keys.Escape)
+            {
+                Close();
+            }
         }
+
+       
     }
 }

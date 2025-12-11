@@ -24,6 +24,7 @@ namespace Komercio.UI.Forms.Sales
         private readonly BindingList<SalesItensDTO> _itensVenda;
         private readonly EmployeeService _employeeService;
         private readonly HttpClient _httpClient;
+        private readonly CupomService _cupomService;
 
 
         public float total = 0;
@@ -39,8 +40,10 @@ namespace Komercio.UI.Forms.Sales
 
         private string _cupomText;
 
-        public fmSalePaymant(EmployeeService employeeService, CustomerService customerService, SaleService saleService, BindingList<SalesItensDTO> itensVenda, float totalVenda, HttpClient baseUrl)
+        public fmSalePaymant(EmployeeService employeeService, CustomerService customerService, SaleService saleService, BindingList<SalesItensDTO> itensVenda, float totalVenda,CupomService cupomService, HttpClient baseUrl)
         {
+            var handler = new HttpClientHandler();
+            handler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => true;
             _httpClient = baseUrl;
             _customerService = customerService;
             _saleService = saleService;
@@ -48,6 +51,7 @@ namespace Komercio.UI.Forms.Sales
             _employeeService = employeeService;
             InitializeComponent();
             total = totalVenda;
+            _cupomService = cupomService;
 
 
         }
@@ -665,7 +669,7 @@ namespace Komercio.UI.Forms.Sales
             // MessageBox.Show("Venda salva como venda.json", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
 
-            SaleFinalizerService finalizer = new SaleFinalizerService(_customerService, _saleService, _itensVenda, _httpClient);
+            SaleFinalizerService finalizer = new SaleFinalizerService(_customerService, _saleService, _itensVenda, _cupomService, _httpClient);
 
             try
             {

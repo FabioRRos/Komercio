@@ -2,11 +2,12 @@
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Configuration;
+using System.Diagnostics;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
-using System.Diagnostics;
-using System.ComponentModel;
 using System.Windows.Forms.VisualStyles;
 
 
@@ -16,14 +17,20 @@ namespace Komercio.Services
     public class CustomerService
     {
         private readonly HttpClient _httpClient;
+        internal readonly string key = ConfigurationManager.AppSettings["ChavePrivada"];
+
 
         // O construtor recebe a URL base via Injeção de Dependência manual.
         public CustomerService(string baseUrl)
         {
-            _httpClient = new HttpClient
+            var handler = new HttpClientHandler();
+            handler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => true;
+            _httpClient = new HttpClient(handler)
             {
                 BaseAddress = new Uri(baseUrl)
             };
+            _httpClient.DefaultRequestHeaders.Add("X-Token-Secreto", $"{key}");
+
         }
 
         // POST /customer

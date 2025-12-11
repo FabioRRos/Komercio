@@ -26,8 +26,9 @@ namespace Komercio.UI.Forms.Sales
         private readonly CustomerService _customerService;
         private readonly EmployeeService _employeeService;
         private readonly ProductDescriptionService _productDescriptionService;
+        private readonly CupomService _cupomService;
 
-        public fmSalesProduct(EmployeeService employeeService, ProductService productService, ProductGroupService productGroupService, ProductSubgroupService productSubgroupService, CustomerService customerService, ProductDescriptionService productDescriptionService, HttpClient baseUrl)
+        public fmSalesProduct(EmployeeService employeeService, ProductService productService, ProductGroupService productGroupService, ProductSubgroupService productSubgroupService, CustomerService customerService, ProductDescriptionService productDescriptionService,CupomService cupomService, string baseUrl)
         {
             InitializeComponent();
 
@@ -37,8 +38,14 @@ namespace Komercio.UI.Forms.Sales
             _saleService = new SaleService();
             _customerService = customerService;
             _employeeService = employeeService;
-            _httpClient = baseUrl;
+            var handler = new HttpClientHandler();
+            handler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => true;
+            _httpClient = new HttpClient(handler)
+            {
+                BaseAddress = new Uri(baseUrl)
+            };
             _productDescriptionService = productDescriptionService;
+            _cupomService = cupomService;
 
         }
 
@@ -426,7 +433,7 @@ namespace Komercio.UI.Forms.Sales
             }
 
             // Instancia o formulário de pagamento, passando as dependências
-            fmSalePaymant formPagamento = new fmSalePaymant(_employeeService,_customerService, _saleService, _saleService._productCar, totalVenda, _httpClient);
+            fmSalePaymant formPagamento = new fmSalePaymant(_employeeService,_customerService, _saleService, _saleService._productCar, totalVenda, _cupomService, _httpClient);
 
             // Exibe como diálogo (bloqueia até fechar)
             formPagamento.Owner = this;

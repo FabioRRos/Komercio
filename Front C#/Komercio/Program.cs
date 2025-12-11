@@ -36,11 +36,13 @@ namespace Komercio
             var customerTransactionService = new CustomerTransactionService(apiBaseUrl);
             var caixaService = new CaixaService(apiBaseUrl);
             var cashMovement = new CashmovementsService(apiBaseUrl);
+            var cupomService = new CupomService(apiBaseUrl);
+
 
 
 
             // aqui estou aplicando a injeção de dependência manualmente
-            Application.Run(new Home(employeeService, customerService, productService, productgroupService, productrsuggroupService, productDescriptionService, customerTransactionService, caixaService, cashMovement, apiBaseUrl));
+            Application.Run(new Home(employeeService, customerService, productService, productgroupService, productrsuggroupService, productDescriptionService, customerTransactionService, caixaService, cashMovement, cupomService, apiBaseUrl));
 
 
         }

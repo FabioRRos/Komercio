@@ -25,9 +25,14 @@ namespace Komercio.UI.Forms.Dump
         //controle para saber se o filtro está ativo ou não
         bool filtroactive = false;
 
-        public fmSalesDump(HttpClient baseUrl)
+        public fmSalesDump(string baseUrl)
         {
-            _httpClient = baseUrl;
+            var handler = new HttpClientHandler();
+            handler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => true;
+            _httpClient = new HttpClient(handler)
+            {
+                BaseAddress = new Uri(baseUrl)
+            };
             _reportService = new ReportService();
 
             InitializeComponent();

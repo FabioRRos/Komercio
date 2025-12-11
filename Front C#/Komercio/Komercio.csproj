@@ -189,6 +189,12 @@
     <Compile Include="UI\Forms\Product\fmProductSettings.Designer.cs">
       <DependentUpon>fmProductSettings.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\Forms\Product\frmDescarte.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Forms\Product\frmDescarte.Designer.cs">
+      <DependentUpon>frmDescarte.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\Forms\Sales\fmSalePaymant.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -256,6 +262,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Forms\Product\fmProductSettings.resx">
       <DependentUpon>fmProductSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Forms\Product\frmDescarte.resx">
+      <DependentUpon>frmDescarte.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Forms\Sales\fmSalePaymant.resx">
       <DependentUpon>fmSalePaymant.cs</DependentUpon>

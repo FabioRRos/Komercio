@@ -29,16 +29,17 @@ namespace Komercio
         private readonly ProductService _productService;
         private readonly ProductGroupService _productGroupService;
         private readonly ProductSubgroupService _productSubgroupService;
-        private readonly HttpClient _httpClient;
+        private readonly string _httpClient;
         private readonly ProductDescriptionService _productDescriptionService;
         private readonly CustomerTransactionService _customerTransactionService;
         private readonly CaixaService _caixaService;
         private readonly CashmovementsService _cashmovementsService;
-        
+        private readonly CupomService _cupomService;
+
         //Status do caixa 
         internal bool caixaStatus;
 
-        public Home(EmployeeService empliyeeService, CustomerService customerService, ProductService productService, ProductGroupService productGroupService, ProductSubgroupService productSubgroupService , ProductDescriptionService productDescriptionService, CustomerTransactionService customerTransactionService,CaixaService caixaService,CashmovementsService cashMovement, string baseUrl)
+        public Home(EmployeeService empliyeeService, CustomerService customerService, ProductService productService, ProductGroupService productGroupService, ProductSubgroupService productSubgroupService , ProductDescriptionService productDescriptionService, CustomerTransactionService customerTransactionService,CaixaService caixaService,CashmovementsService cashMovement,CupomService cupomService, string baseUrl)
         {
             InitializeComponent();
             _employeeService = empliyeeService;
@@ -50,19 +51,17 @@ namespace Komercio
             _customerTransactionService = customerTransactionService;
             _caixaService = caixaService;
             _cashmovementsService = cashMovement;
+            _cupomService = cupomService;
 
-            _httpClient = new HttpClient
-            {
-                BaseAddress = new Uri(baseUrl)
-            };
+            _httpClient = baseUrl;
 
 
         }
 
         private void novoFuncionárioToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            fmCreateEmployee newEmployee = new fmCreateEmployee(_employeeService);
-            newEmployee.ShowDialog();
+            MessageBox.Show("Função desativada temporariamente!!","ATENÇÃO",MessageBoxButtons.OK,MessageBoxIcon.Warning);
+            //CadastrarFuncionario();
         }
 
         private void Home_Load(object sender, EventArgs e)
@@ -81,6 +80,9 @@ namespace Komercio
                 MessageBox.Show("É necessário realizar a abertura do caixa!!");
                 mlbStatusCaixaa.Text = "Fechado";
                 caixaStatus = false;
+                mbtAbrirCaixa.UseAccentColor = false;
+                mtbFecharCaixa.UseAccentColor = true;
+                mbtSangria.UseAccentColor = true;
                 return;
 
             }
@@ -96,6 +98,10 @@ namespace Komercio
                         {
                         mlbStatusCaixaa.Text = "Aberto";
                         caixaStatus = caixaDTO[caixaDTO.Count - 1].Status;
+                        mbtAbrirCaixa.UseAccentColor = true;
+                        mtbFecharCaixa.UseAccentColor = false;
+                        mbtSangria.UseAccentColor = false;
+
                         }
                     break;
  
@@ -103,12 +109,16 @@ namespace Komercio
                         {
                         mlbStatusCaixaa.Text = "Fechado";
                         caixaStatus = caixaDTO[caixaDTO.Count - 1].Status;
+                        mbtAbrirCaixa.UseAccentColor = false;
+                        mtbFecharCaixa.UseAccentColor = true;
+                        mbtSangria.UseAccentColor = true;
                     }
                     break;
                     default:
                     {
                         mlbStatusCaixaa.Text = "Tente novamente";
                         caixaStatus = false;
+
 
                     }
                     break;
@@ -131,20 +141,17 @@ namespace Komercio
 
         private void alterarSenhaToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            fmChangePasswordEmployeer changePasswordEmployeer = new fmChangePasswordEmployeer(_employeeService);
-            changePasswordEmployeer.ShowDialog();
+            AlterarSenhaFuncionario();
         }
 
         private void cadastroToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            fmCreateCustomer createCustomer = new fmCreateCustomer(_customerService);
-            createCustomer.ShowDialog();
+            CadastrarClientes();
         }
 
         private void alterarToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            fmChangeCustomer changeCustomer = new fmChangeCustomer(_customerService);
-            changeCustomer.ShowDialog();
+            AlterarCliente();
         }
 
         private void novoProdutoToolStripMenuItem_Click(object sender, EventArgs e)
@@ -154,14 +161,12 @@ namespace Komercio
 
         private void manualToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            fmCreateProduct createProduct = new fmCreateProduct(_productService, _productDescriptionService);
-            createProduct.ShowDialog();
+            CadastrarProdutoManual();
         }
 
         private void entradaEstoqueToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            fmImputProduct imputProduct = new fmImputProduct(_productService);
-            imputProduct.ShowDialog();
+            EntradaEstoque();
         }
 
         private void novaVendaToolStripMenuItem_Click(object sender, EventArgs e)
@@ -184,8 +189,8 @@ namespace Komercio
 
         private void estoqueBaixoToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            fmProductSettings productSettingos = new fmProductSettings(_productService);
-            productSettingos.ShowDialog();
+            MessageBox.Show("Função desativada temporariamente!!", "ATENÇÃO", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            //ConfigurarBaixaEstoque();
         }
 
         private void loteToolStripMenuItem_Click(object sender, EventArgs e)
@@ -211,11 +216,21 @@ namespace Komercio
         }
 
 
+        private void sangriaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Sangria();
+        }
+
+        private void descarteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DescartarProdutos();
+        }
 
 
 
-
-        //##########################################
+        /// <summary>
+        /// Menus de abertura, fechamento e sangria
+        /// </summary>
 
         private void AberturaDoCaixa()
         {
@@ -260,7 +275,7 @@ namespace Komercio
         {
             if (caixaStatus)
             {
-                fmSalesProduct salesProduct = new fmSalesProduct(_employeeService, _productService, _productGroupService, _productSubgroupService, _customerService, _productDescriptionService, _httpClient);
+                fmSalesProduct salesProduct = new fmSalesProduct(_employeeService, _productService, _productGroupService, _productSubgroupService, _customerService, _productDescriptionService, _cupomService, _httpClient);
                 salesProduct.ShowDialog();
             }
             else
@@ -298,9 +313,115 @@ namespace Komercio
             }
         }
 
-        private void sangriaToolStripMenuItem_Click(object sender, EventArgs e)
+
+        private void CadastrarClientes()
+        {
+            fmCreateCustomer createCustomer = new fmCreateCustomer(_customerService);
+            createCustomer.ShowDialog();
+        }
+
+
+        private void EntradaEstoque()
+        {
+            fmImputProduct imputProduct = new fmImputProduct(_productService);
+            imputProduct.ShowDialog();
+        }
+
+        private void CadastrarProdutoManual()
+        {
+            fmCreateProduct createProduct = new fmCreateProduct(_productService, _productDescriptionService);
+            createProduct.ShowDialog();
+        }
+
+        private void AlterarCliente()
+        {
+            fmChangeCustomer changeCustomer = new fmChangeCustomer(_customerService);
+            changeCustomer.ShowDialog();
+        }
+
+        private void AlterarSenhaFuncionario()
+        {
+            fmChangePasswordEmployeer changePasswordEmployeer = new fmChangePasswordEmployeer(_employeeService);
+            changePasswordEmployeer.ShowDialog();
+        }
+
+        private void CadastrarFuncionario()
+        {
+            fmCreateEmployee newEmployee = new fmCreateEmployee(_employeeService);
+            newEmployee.ShowDialog();
+        }
+
+
+        private void ConfigurarBaixaEstoque()
+        {
+            fmProductSettings productSettingos = new fmProductSettings(_productService);
+            productSettingos.ShowDialog();
+        }
+
+
+        private void DescartarProdutos()
+        {
+            frmDescarte descarteProduto = new frmDescarte(_productService);
+            descarteProduto.ShowDialog();
+        }
+
+
+
+        /// <summary>
+        /// BOTÕES FORM PRINCIPAL
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void mbtSangria_Click(object sender, EventArgs e)
         {
             Sangria();
         }
+
+        private void mtbFecharCaixa_Click(object sender, EventArgs e)
+        {
+            FechamentoDoCaixa();
+        }
+
+        private void mbtAbrirCaixa_Click(object sender, EventArgs e)
+        {
+            AberturaDoCaixa();
+        }
+
+        private void materialButton4_Click(object sender, EventArgs e)
+        {
+            Vendas();
+        }
+
+        private void materialButton5_Click(object sender, EventArgs e)
+        {
+            Caderneta();
+        }
+
+        private void materialButton6_Click(object sender, EventArgs e)
+        {
+            CadastrarClientes();
+        }
+
+        private void materialButton7_Click(object sender, EventArgs e)
+        {
+            EntradaEstoque();
+        }
+
+        private void materialButton8_Click(object sender, EventArgs e)
+        {
+            CadastrarProdutoManual();
+        }
+
+        private void materialButton9_Click(object sender, EventArgs e)
+        {
+            AlterarCliente();
+        }
+
+        private void materialButton10_Click(object sender, EventArgs e)
+        {
+            AlterarSenhaFuncionario();
+        }
+
+
     }
 }

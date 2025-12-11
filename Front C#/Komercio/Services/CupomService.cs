@@ -27,10 +27,19 @@ namespace Komercio.Services
         readonly string endereco = ConfigurationManager.AppSettings["Endereco"];
         readonly string cidade = ConfigurationManager.AppSettings["Cidade"];
         readonly string contato = ConfigurationManager.AppSettings["Contato"];
+        internal readonly string key = ConfigurationManager.AppSettings["ChavePrivada"];
 
-        public CupomService(HttpClient baseUrl)
+
+        public CupomService(string baseUrl)
         {
-            _httpClient = baseUrl;
+            var handler = new HttpClientHandler();
+            handler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => true;
+            _httpClient = new HttpClient(handler)
+            {
+                BaseAddress = new Uri(baseUrl)
+            };
+            _httpClient.DefaultRequestHeaders.Add("X-Token-Secreto", $"{key}");
+
         }
 
         public async Task<CupomDTO> CupomSale(int id)

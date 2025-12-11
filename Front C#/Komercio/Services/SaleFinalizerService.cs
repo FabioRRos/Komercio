@@ -3,6 +3,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Configuration;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
@@ -23,15 +24,22 @@ namespace Komercio.Services
 
         private readonly CustomerService _customerService;
         private readonly SaleService _saleService;
+        private readonly CupomService _cupomService;
+        internal readonly string key = ConfigurationManager.AppSettings["ChavePrivada"];
+
 
         //Fabio do futuro, aqui eu faço a injeção da URL da API
         //Parecido com o que fiz nos formulários mas aqui eu vou receber do antigo formulário, então dou prioridade a ela
-        public SaleFinalizerService(CustomerService customerService, SaleService saleService, BindingList<SalesItensDTO> itensVenda, HttpClient baseUrl)
+        public SaleFinalizerService(CustomerService customerService, SaleService saleService, BindingList<SalesItensDTO> itensVenda,CupomService cupomService, HttpClient baseUrl)
         {
             _customerService = customerService;
             _saleService = saleService;
+            var handler = new HttpClientHandler();
+            handler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => true;
             _httpClient = baseUrl;
+            _httpClient.DefaultRequestHeaders.Add("X-Token-Secreto", $"{key}");
 
+            _cupomService = cupomService;
 
         }
 
@@ -200,14 +208,13 @@ namespace Komercio.Services
 
             int saleId = result.SaleId;
 
-            CupomService cupom = new CupomService(_httpClient);
 
-            var cupomRetorno = await cupom.CupomSale(saleId);
+            var cupomRetorno = await _cupomService.CupomSale(saleId);
             string cupomForPrint = "";
             try
             {
 
-            cupomForPrint =  cupom.GenerateReceiptText(cupomRetorno);
+            cupomForPrint = _cupomService.GenerateReceiptText(cupomRetorno);
             }
             catch
             {
