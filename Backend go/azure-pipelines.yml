@@ -70,6 +70,6 @@ stages:
                 sleep 3
 
                 echo "Testando..."
-                curl -sf http://localhost/ping \
+                curl -sf -k -o /dev/null https://localhost:8443/ping \
                   && echo "✓ Healthcheck OK!" \
                   || (echo "❌ API não respondeu" && exit 1)
