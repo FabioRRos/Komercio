@@ -79,7 +79,7 @@ namespace Komercio
             if (caixaDTO.Count <= 0)
             {
                 MessageBox.Show("É necessário realizar a abertura do caixa!!");
-                mlbStatusCaixa.Text = "Fechado";
+                mlbStatusCaixaa.Text = "Fechado";
                 caixaStatus = false;
                 return;
 
@@ -94,20 +94,20 @@ namespace Komercio
                 {
                     case true:
                         {
-                        mlbStatusCaixa.Text = "Aberto";
+                        mlbStatusCaixaa.Text = "Aberto";
                         caixaStatus = caixaDTO[caixaDTO.Count - 1].Status;
                         }
                     break;
  
                     case false:
                         {
-                        mlbStatusCaixa.Text = "Fechado";
+                        mlbStatusCaixaa.Text = "Fechado";
                         caixaStatus = caixaDTO[caixaDTO.Count - 1].Status;
                     }
                     break;
                     default:
                     {
-                        mlbStatusCaixa.Text = "Tente novamente";
+                        mlbStatusCaixaa.Text = "Tente novamente";
                         caixaStatus = false;
 
                     }
@@ -172,7 +172,7 @@ namespace Komercio
         private void materialButton1_Click(object sender, EventArgs e)
         {
     
-                Sangria();
+                
            
         }
 
@@ -296,6 +296,11 @@ namespace Komercio
                 MessageBox.Show("Para realizar a sangria é necessário primeiro abrir o caixa", "ATENÇÃO!!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
             }
+        }
+
+        private void sangriaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Sangria();
         }
     }
 }
