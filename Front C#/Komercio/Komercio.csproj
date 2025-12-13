@@ -71,6 +71,7 @@
     <Compile Include="Models\CupomDTO.cs" />
     <Compile Include="Models\CustomerDTO.cs" />
     <Compile Include="Models\CustomerTransactionsDTO.cs" />
+    <Compile Include="Models\DescarteProdutoDTO.cs" />
     <Compile Include="Models\EmployeeDto.cs" />
     <Compile Include="Models\ProductDescriptionDTO.cs" />
     <Compile Include="Models\ProductDTO.cs" />
@@ -195,6 +196,12 @@
     <Compile Include="UI\Forms\Product\frmDescarte.Designer.cs">
       <DependentUpon>frmDescarte.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\Forms\Product\frmProductVisualize.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Forms\Product\frmProductVisualize.Designer.cs">
+      <DependentUpon>frmProductVisualize.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\Forms\Sales\fmSalePaymant.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -265,6 +272,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Forms\Product\frmDescarte.resx">
       <DependentUpon>frmDescarte.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Forms\Product\frmProductVisualize.resx">
+      <DependentUpon>frmProductVisualize.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Forms\Sales\fmSalePaymant.resx">
       <DependentUpon>fmSalePaymant.cs</DependentUpon>

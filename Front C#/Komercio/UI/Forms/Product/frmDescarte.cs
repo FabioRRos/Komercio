@@ -1,4 +1,6 @@
-﻿using Komercio.Services;
+﻿using Komercio.Models;
+using Komercio.Services;
+using MeuProjetoWinForms.Services;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -14,18 +16,23 @@ namespace Komercio.UI.Forms.Product
     public partial class frmDescarte : Form
     {
         private readonly ProductService _productService;
+        private readonly EmployeeService _employeeService;
+        private DescarteProdutoDTO descarteProdutoDTO = new DescarteProdutoDTO();
 
-        public frmDescarte(ProductService productService)
+        public frmDescarte(ProductService productService, EmployeeService employeeService)
         {
             InitializeComponent();
+            _employeeService = employeeService;
             _productService = productService;
+            this.FormBorderStyle = FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
+            this.MinimizeBox = true;
         }
 
         private void frmDescarte_Load(object sender, EventArgs e)
         {
-            this.FormBorderStyle = FormBorderStyle.FixedSingle;
-            this.MaximizeBox = false;
-            this.MinimizeBox = true;
+    
+            ValidationLogin();
         }
 
         private void mbtSalvar_Click(object sender, EventArgs e)
@@ -42,6 +49,8 @@ namespace Komercio.UI.Forms.Product
                 return;
             }
 
+            descarteProdutoDTO.CodBarProduto = mtbCodBarras.Text;
+            descarteProdutoDTO.Justificativa = mtbJustificativa.Text;
 
             UpdateProduct();
             this.Close();
@@ -50,12 +59,30 @@ namespace Komercio.UI.Forms.Product
 
         private async void UpdateProduct()
         {
-            var temp = await _productService.PutProductInStock(mtbCodBarras.Text, 1);
+            var temp = await _productService.PutDescarteProduto(descarteProdutoDTO);
 
 
-            if (temp != null)
+            if (temp != false)
             {
                 MessageBox.Show("Produto atualizado com sucesso");
+            }
+        }
+
+        private void ValidationLogin()
+        {
+            using (frmLogin login = new frmLogin(_employeeService))
+            {
+                var retorno = login.ShowDialog();
+
+                if (retorno == DialogResult.OK)
+                {
+                    descarteProdutoDTO.Id_funcionario = login.employeersId;
+                }
+                else
+                {
+                    MessageBox.Show("ACESSO NEGADO", "ATENÇÃO", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                    this.Close();
+                }
             }
         }
     }

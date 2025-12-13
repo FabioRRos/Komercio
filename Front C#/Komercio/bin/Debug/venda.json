@@ -1,11 +1,11 @@
 {
-  "customer_id": 0,
-  "total_amount": 54.9,
+  "customer_id": 3,
+  "total_amount": 615.9,
   "discount_amount": 0.0,
-  "final_amount": 54.9,
-  "sale_date": "2025-12-11T19:15:01.6220482-03:00",
-  "sale_time": "19:15:01",
-  "payment_method": "Débito",
+  "final_amount": 615.9,
+  "sale_date": "2025-12-13T11:55:20.2870176-03:00",
+  "sale_time": "11:55:20",
+  "payment_method": "Conta",
   "seller_id": 0,
-  "sale_notes": ""
+  "sale_notes": "Cuidado por quê é caloteira"
 }

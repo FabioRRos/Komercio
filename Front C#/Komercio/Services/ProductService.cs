@@ -70,6 +70,47 @@ namespace Komercio.Services
             }
         }
 
+
+
+        public async Task<bool> PutDescarteProduto(DescarteProdutoDTO descarteProdutoDTO)
+        {
+            var json = JsonConvert.SerializeObject(descarteProdutoDTO);
+
+            var content = new StringContent(json, Encoding.UTF8, "application/json");
+
+            // Faz a chamada GET para a rota correta
+            var response = await _httpClient.PostAsync($"products/updateDescarte/", content);
+
+            if (response.IsSuccessStatusCode)
+            {
+                return true;
+            }
+            else
+            {
+                var responseContent = await response.Content.ReadAsStringAsync();
+
+                try
+                {
+                    var jsonError = JObject.Parse(responseContent);
+
+                    string errorMessage = jsonError["error"]?.ToString();
+
+                    if (string.IsNullOrWhiteSpace(errorMessage))
+                        errorMessage = "Erro desconhecido";
+
+                    MessageBox.Show(errorMessage, "Erro ao criar produto",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                catch
+                {
+                    // Se não conseguir desserializar, mostra o conteúdo bruto
+                    MessageBox.Show(responseContent, "Erro ao criar produto", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+
+                return false;
+            }
+        }
+
         public async Task<ProductDTO> PutProductInStock(string barcode, int newStock)
         {
             // Monta o corpo JSON
@@ -93,6 +134,11 @@ namespace Komercio.Services
                 return null;
             }
         }
+
+
+
+
+
 
         public async Task<bool> PutProductNotification(List<ProductNotificationSettingsDTO> productList)
         {

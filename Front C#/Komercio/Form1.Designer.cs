@@ -43,6 +43,7 @@
             this.manualToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.loteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.entradaEstoqueToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.descarteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.vendasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.novaVendaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.relatóriosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -69,7 +70,7 @@
             this.materialButton7 = new MaterialSkin.Controls.MaterialButton();
             this.materialButton8 = new MaterialSkin.Controls.MaterialButton();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.descarteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.listaDeProdutosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStripCaixa.SuspendLayout();
             this.pCaixa.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -160,7 +161,8 @@
             this.produtosToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.novoProdutoToolStripMenuItem,
             this.entradaEstoqueToolStripMenuItem,
-            this.descarteToolStripMenuItem});
+            this.descarteToolStripMenuItem,
+            this.listaDeProdutosToolStripMenuItem});
             this.produtosToolStripMenuItem.Name = "produtosToolStripMenuItem";
             this.produtosToolStripMenuItem.Size = new System.Drawing.Size(67, 20);
             this.produtosToolStripMenuItem.Text = "Produtos";
@@ -195,6 +197,13 @@
             this.entradaEstoqueToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.entradaEstoqueToolStripMenuItem.Text = "Entrada estoque";
             this.entradaEstoqueToolStripMenuItem.Click += new System.EventHandler(this.entradaEstoqueToolStripMenuItem_Click);
+            // 
+            // descarteToolStripMenuItem
+            // 
+            this.descarteToolStripMenuItem.Name = "descarteToolStripMenuItem";
+            this.descarteToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.descarteToolStripMenuItem.Text = "Descarte";
+            this.descarteToolStripMenuItem.Click += new System.EventHandler(this.descarteToolStripMenuItem_Click);
             // 
             // vendasToolStripMenuItem
             // 
@@ -579,12 +588,12 @@
             this.pictureBox1.TabIndex = 6;
             this.pictureBox1.TabStop = false;
             // 
-            // descarteToolStripMenuItem
+            // listaDeProdutosToolStripMenuItem
             // 
-            this.descarteToolStripMenuItem.Name = "descarteToolStripMenuItem";
-            this.descarteToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.descarteToolStripMenuItem.Text = "Descarte";
-            this.descarteToolStripMenuItem.Click += new System.EventHandler(this.descarteToolStripMenuItem_Click);
+            this.listaDeProdutosToolStripMenuItem.Name = "listaDeProdutosToolStripMenuItem";
+            this.listaDeProdutosToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.listaDeProdutosToolStripMenuItem.Text = "Lista de produtos";
+            this.listaDeProdutosToolStripMenuItem.Click += new System.EventHandler(this.listaDeProdutosToolStripMenuItem_Click);
             // 
             // Home
             // 
@@ -594,6 +603,7 @@
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.pCaixa);
             this.Controls.Add(this.menuStripCaixa);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStripCaixa;
             this.Name = "Home";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -657,6 +667,7 @@
         private MaterialSkin.Controls.MaterialButton materialButton9;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.ToolStripMenuItem descarteToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem listaDeProdutosToolStripMenuItem;
     }
 }
 

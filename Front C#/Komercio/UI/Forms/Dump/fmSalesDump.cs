@@ -33,7 +33,7 @@ namespace Komercio.UI.Forms.Dump
             {
                 BaseAddress = new Uri(baseUrl)
             };
-            _reportService = new ReportService();
+            _reportService = new ReportService(baseUrl);
 
             InitializeComponent();
         }
@@ -45,7 +45,7 @@ namespace Komercio.UI.Forms.Dump
         public async void LoadDGVReport()
         {
 
-            reportDTO = await _reportService.ReturnDumpSale(_httpClient);
+            reportDTO = await _reportService.ReturnDumpSale();
             dgvSalesDump.DataSource = reportDTO;
 
             this.FormBorderStyle = FormBorderStyle.FixedSingle;

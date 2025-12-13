@@ -361,8 +361,14 @@ namespace Komercio
 
         private void DescartarProdutos()
         {
-            frmDescarte descarteProduto = new frmDescarte(_productService);
+            frmDescarte descarteProduto = new frmDescarte(_productService,_employeeService);
             descarteProduto.ShowDialog();
+        }
+
+        private void ListaDeProdutos()
+        {
+            frmProductVisualize listaProduto = new frmProductVisualize(_productService,_productGroupService);
+            listaProduto.ShowDialog();
         }
 
 
@@ -422,6 +428,9 @@ namespace Komercio
             AlterarSenhaFuncionario();
         }
 
-
+        private void listaDeProdutosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ListaDeProdutos();
+        }
     }
 }

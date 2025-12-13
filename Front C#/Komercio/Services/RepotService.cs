@@ -2,6 +2,7 @@
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Net.Http;
 using System.Threading.Tasks;
 
@@ -9,14 +10,26 @@ namespace Komercio.Services
 {
     public class ReportService
     {
+        private readonly HttpClient _httpClient;
+        internal readonly string key = ConfigurationManager.AppSettings["ChavePrivada"];
 
 
-        public ReportService()
+
+
+        public ReportService(string baseUrl)
         {
+            var handler = new HttpClientHandler();
+            handler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => true;
+            _httpClient = new HttpClient(handler)
+            {
+                BaseAddress = new Uri(baseUrl)
+            };
+            _httpClient.DefaultRequestHeaders.Add("X-Token-Secreto", $"{key}");
+
 
         }
 
-        public async Task<List<SaleReportDTO>> ReturnDumpSale(HttpClient _httpClient)
+        public async Task<List<SaleReportDTO>> ReturnDumpSale()
         {
             try
             {
