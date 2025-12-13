@@ -10,9 +10,13 @@ func RegisterProductRoutes(server *gin.Engine, productController *controller.Pro
 	server.GET("/products/codbar/:productcodbar", productController.GetProductByCodbar)
 	server.GET("/products/notification/", productController.GetAllProductsSettings)
 	server.GET("/products/:id", productController.GetProductById)
+
 	server.POST("/products", productController.CreateProduct)
+	server.POST("/products/updateDescarte/", productController.CreateProductDescarte)
+
 	server.PUT("/products/:id", productController.UpdateProduct)
 	server.PUT("/products/notification", productController.UpdateProductNotification)
 	server.PUT("/products/updateStock/:productcodbar", productController.UpdateProductInputStock)
+
 	server.DELETE("/products/:id", productController.DeactivateProduct)
 }

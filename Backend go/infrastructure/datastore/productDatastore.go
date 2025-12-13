@@ -2,6 +2,7 @@ package datastore
 
 import (
 	"context"
+	"errors"
 	"fmt"
 	"log"
 
@@ -52,6 +53,36 @@ func (d *ProductDatastore) CreateProduct(product *entity.Product) error {
 
 	if err != nil {
 		return fmt.Errorf("erro ao inserir produto: %w", err)
+	}
+	//fmt.Println("Produto cadastrado com sucesso!")
+	return nil
+
+}
+func (d *ProductDatastore) CreateProductDescarte(productDescarte *entity.ProducrtDescarte) error {
+	query := `
+    INSERT INTO baixa_produtos (id_product, id_funcionario, justificativa)
+    SELECT 
+        p.id,
+        $1,
+        $2
+    FROM products p
+    WHERE p.productcodbar = $3
+`
+
+	cmdTag, err := d.Conn.Exec(
+		context.Background(),
+		query,
+		productDescarte.Id_funcionario,
+		productDescarte.Justificativa,
+		productDescarte.CodBarProduto,
+	)
+
+	if err != nil {
+		return fmt.Errorf("erro ao inserir produto: %w", err)
+	}
+
+	if cmdTag.RowsAffected() == 0 {
+		return errors.New("produto não encontrado para o código de barras informado")
 	}
 	//fmt.Println("Produto cadastrado com sucesso!")
 	return nil
@@ -220,6 +251,25 @@ func (d *ProductDatastore) DeactivateProduct(id int) error {
 
 	return nil
 
+}
+func (d *ProductDatastore) UpdateProductOutputStock(productcodbar string) error {
+	query := `
+        UPDATE products
+        SET productstock = productstock - 1
+        WHERE productcodbar = $1
+          AND productstock > 0
+    `
+
+	cmdTag, err := d.Conn.Exec(context.Background(), query, productcodbar)
+	if err != nil {
+		return fmt.Errorf("erro ao atualizar estoque do produto: %w", err)
+	}
+
+	if cmdTag.RowsAffected() == 0 {
+		return errors.New("produto não encontrado ou estoque insuficiente")
+	}
+
+	return nil
 }
 
 func (d *ProductDatastore) UpdateProductInputStock(productcodbar string, ProductStock int) (*entity.Product, error) {

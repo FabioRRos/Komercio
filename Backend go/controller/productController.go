@@ -91,6 +91,21 @@ func (c *ProductController) CreateProduct(ctx *gin.Context) {
 	ctx.JSON(http.StatusCreated, gin.H{"message": "Produto criado com sucesso"})
 }
 
+func (c *ProductController) CreateProductDescarte(ctx *gin.Context) {
+	var productDescarte entity.ProducrtDescarte
+	if err := ctx.ShouldBindJSON(&productDescarte); err != nil {
+		ctx.JSON(http.StatusBadRequest, gin.H{"error": "Parâmetros inválidos"})
+		return
+	}
+
+	if err := c.service.CreateProductDescarte(ctx, &productDescarte); err != nil {
+		ctx.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+
+	ctx.JSON(http.StatusCreated, gin.H{"message": "Produto descartado com sucesso"})
+}
+
 // PUT /products/:id
 func (c *ProductController) UpdateProduct(ctx *gin.Context) {
 	var product entity.Product

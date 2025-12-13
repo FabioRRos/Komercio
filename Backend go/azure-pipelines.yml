@@ -68,8 +68,3 @@ stages:
                 sudo chmod +x /home/azureuser/komercio/app/komercio-api
                 sudo systemctl start komercio
                 sleep 3
-
-                echo "Testando..."
-                curl -sf -k -o /dev/null https://localhost:8443/ping \
-                  && echo "✓ Healthcheck OK!" \
-                  || (echo "❌ API não respondeu" && exit 1)

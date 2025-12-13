@@ -12,6 +12,7 @@ import (
 
 type ProductService interface {
 	CreateProduct(ctx context.Context, product *entity.Product) error
+	CreateProductDescarte(ctx context.Context, productDescarte *entity.ProducrtDescarte) error
 	SelectAllProducts(ctx context.Context) ([]*entity.Product, error)
 	SelectProductById(ctx context.Context, id int) (*entity.Product, error)
 	SelectProductByCodBar(ctx context.Context, productcodbar string) (*entity.Product, error)
@@ -54,6 +55,33 @@ func (s *productService) CreateProduct(ctx context.Context, product *entity.Prod
 	}
 
 	return s.repo.Create(ctx, product)
+}
+
+// CRIAR BAIXA DO PRODUTO E ATUALIZAR ESTOQUE
+
+func (s *productService) CreateProductDescarte(ctx context.Context, productDescarte *entity.ProducrtDescarte) error {
+
+	if productDescarte == nil {
+		return fmt.Errorf("Descarte não pode ser nulo")
+	}
+
+	if productDescarte.CodBarProduto == "" {
+		return fmt.Errorf("O código de barras não pode ser vazio!")
+	}
+
+	err := s.repo.UpdateProductOutputStock(ctx, productDescarte.CodBarProduto)
+
+	if err != nil {
+		return err
+	}
+
+	_, err = s.repo.SelectProductByCodBar(ctx, productDescarte.CodBarProduto)
+
+	if err != nil {
+		return fmt.Errorf("Código de barras não localizado")
+	}
+
+	return s.repo.CreateProductDescarte(ctx, productDescarte)
 }
 
 func (s *productService) SelectAllProducts(ctx context.Context) ([]*entity.Product, error) {
