@@ -1,5 +1,6 @@
 ﻿using Komercio.Models;
 using Komercio.Services;
+using Komercio.UI.Forms.Product.Produto;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,14 +30,14 @@ namespace Komercio.ApplicationLayer
             _productDescriptionService = productAndGroupAndSubgroup;
         }
 
-        //GET de produto (salva eles)
+        //POST de produto (salva eles)
         public async Task<bool> CadastrarProduto(ProductDTO product)
         {
             var returnSatus = await _productService.CreateProductAsync(product);
 
             return returnSatus;
         }
-
+        // AQUI ELE BUSCA PRODUTO, GRUPO E SUBGRUPO EM UMA TACADA SÓ. É ÚTIL AS VEZES.
         public async Task<ProductDescriptionDTO> Description()
         {
             var response = await _productDescriptionService.GetProductDescriptionAsync();
@@ -48,6 +49,20 @@ namespace Komercio.ApplicationLayer
             description.Subgroup = response.Subgroup.OrderBy(p => p.ProductsubgroupName).ToList();
 
             return description;
+        }
+
+        // AQUI EU FAÇO O GET DO PRODUTO PELO CODIGO DE BARRAS.
+
+        public async Task<ProductDTO> BuscarProdutoPorCodigoDeBarras(string CodBar)
+        {
+            return await _productService.GetProductByCodbad(CodBar);
+        }
+
+        // AQUI SERÁ O PUT PARA REALIZAR ALTERAÇÃO DO PRODUTO
+
+        public async Task<bool> AlterarProduto(ProductDTO produto)
+        {
+            return await _productService.PutProductAtt(produto);
         }
     }
 }

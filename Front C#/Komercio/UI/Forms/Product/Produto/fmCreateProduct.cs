@@ -110,8 +110,8 @@ namespace Komercio.UI.Forms.Product
                 product = product.ValidaProduto(mtbProductName.Text,
                     mtbProductPrice.Text,
                     mtbProductCodeBar.Text,
-                    mcbGroup.SelectedItem.ToString(),
-                    mcbSubGroup.SelectedItem.ToString(),
+                    mcbGroup.Text,
+                    mcbSubGroup.Text,
                     mtbProductStock.Text
                     );
             }

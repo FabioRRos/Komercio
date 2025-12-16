@@ -1,4 +1,5 @@
-﻿using Komercio.Models;
+﻿using Komercio.ApplicationLayer;
+using Komercio.Models;
 using Komercio.Services;
 using System;
 using System.Collections.Generic;
@@ -20,10 +21,17 @@ namespace Komercio.UI.Forms.Product.Produto
         private readonly ProductSubgroupService _productSubgroupService;
         private readonly ProductGroupService _productGroupService;
 
+        ///////
+        private readonly ProdutoApp _produtoApp;
+        private  List<ProductgroupDTO> productGrupo = new List<ProductgroupDTO>();
+        private List<ProductSubgroupDTO> productSubGrupo = new List<ProductSubgroupDTO>();
+
 
         private ProductDescriptionDTO description = new ProductDescriptionDTO();
-        private ProductDTO product = new ProductDTO();
-        public fmAlterarProduto(ProductService productService, ProductDescriptionService productAndGroupAndSubgroup, ProductSubgroupService productSubgroupService, ProductGroupService productGroupService, ProductDTO productDTO )
+       private ProductDTO product = new ProductDTO();
+        private ProductDTO productReturnet = new ProductDTO();
+
+        public fmAlterarProduto(ProductService productService, ProductDescriptionService productAndGroupAndSubgroup, ProductSubgroupService productSubgroupService, ProductGroupService productGroupService, ProductDTO productDTO, ProdutoApp produtoApp)
         {
             _productSubgroupService = productSubgroupService;
             _productGroupService = productGroupService;
@@ -31,6 +39,10 @@ namespace Komercio.UI.Forms.Product.Produto
             _productDescriptionService = productAndGroupAndSubgroup;
             _productService = productService;
             product = productDTO;
+
+
+            /////////
+            _produtoApp = produtoApp;
 
             InitializeComponent();
         }
@@ -42,6 +54,8 @@ namespace Komercio.UI.Forms.Product.Produto
             this.MinimizeBox = true;
             this.KeyPreview = true;
             LoadForms();
+            //Carrego a lista de grupo e subgrupo. As listas vão estar carregadas e prontas para utilização.
+            LoadListGroupAndSubgroup();
 
 
         }
@@ -50,14 +64,14 @@ namespace Komercio.UI.Forms.Product.Produto
         {
             if (product != null) 
             {
+                //Carrega os componentes na tela
                 LoadComponentes();
                 CarregaDescricao();
                 return;
             }
-
             BlockComponentes();
         }
-
+        // BLOQUEIA COMPONENTES PARA NÃO PERMITIR A EDIÇÃO ENQUANTO NÃO BUSCAR O CÓDIGO DE BARRAS.
         private void BlockComponentes()
         {
             mtbProductName.Enabled = false;
@@ -71,7 +85,7 @@ namespace Komercio.UI.Forms.Product.Produto
         }
 
 
-
+        // LIBERA PARA EDIÇÃO APÓS LOCALIZAR O CÓDIGO DE BARRAS
         private void LibereComponentes()
         {
             mtbProductName.Enabled = true;
@@ -82,7 +96,7 @@ namespace Komercio.UI.Forms.Product.Produto
             msProductStatus.Enabled = true;
             mbtSaveProduct.Enabled = true;
         }
-
+        // O MATERIAL SKIN É BUGADO. SE NÃO RECARREGAR O HINT ELE FICA TODO TORTO.
         private void CarregaDescricao()
         {
             mtbProductName.Hint = "Descrição do produto";
@@ -93,12 +107,13 @@ namespace Komercio.UI.Forms.Product.Produto
             mtbProductStock.Hint = "Quantidade";
 
         }
-
+        //REALIZA A BUSCA DO CÓDIGO DE BARRAS. SE LOCALIZADO, CARREGA O FORMS COM OS DADOS.
         public async void BuscaProduto()
         {
             try
             {
-                product = await _productService.GetProductByCodbad(mtbProductCodeBar.Text);
+                product = await _produtoApp.BuscarProdutoPorCodigoDeBarras(mtbProductCodeBar.Text);
+                    
 
                 if (product.idProduct == 0)
                 {
@@ -115,16 +130,16 @@ namespace Komercio.UI.Forms.Product.Produto
             }
             LoadForms();
         }
-
+        //CARREGA OS COMPONENTES DA TELA COM OS DADOS CARREGADOS PELO BUSCAR PRODUTO
         private void LoadComponentes()
         {
-            mtbProductName.Text = product.productName;
-            mtbProductPrice.Text = product.productPrice.ToString("C2");
-            mtbProductCodeBar.Text = product.productCodbar;
-            mcbGroup.Items.Add(product.productGroup);
-            mcbSubGroup.Items.Add(product.productSubgroup);
-            mtbProductStock.Text = product.productStock.ToString();
-            msProductStatus.Checked = product.productStatus;
+            mtbProductName.Text = productReturnet.productName;
+            mtbProductPrice.Text = productReturnet.productPrice.ToString("C2");
+            mtbProductCodeBar.Text = productReturnet.productCodbar;
+            mcbGroup.Items.Add(productReturnet.productGroup);
+            mcbSubGroup.Items.Add(productReturnet.productSubgroup);
+            mtbProductStock.Text = productReturnet.productStock.ToString();
+            msProductStatus.Checked = productReturnet.productStatus;
 
             LibereComponentes();
         }
@@ -136,19 +151,14 @@ namespace Komercio.UI.Forms.Product.Produto
             mcbSubGroup.Items.Clear();
             try
             {
-                var response = await _productDescriptionService.GetProductDescriptionAsync();
-
-                description.Product = response.Product;
-                description.Group = response.Group.OrderBy(p => p.ProductgroupName).ToList();
-                description.Subgroup = response.Subgroup.OrderBy(p => p.ProductsubgroupName).ToList();
+                 description = await _produtoApp.Description();
+                productGrupo = description.Group;
+                productSubGrupo = description.Subgroup;
 
                 foreach (ProductgroupDTO group in description.Group)
                 {
-
                     mcbGroup.Items.Add(group.ProductgroupName);
-
                 }
-
 
             }
             catch
@@ -156,10 +166,10 @@ namespace Komercio.UI.Forms.Product.Produto
                 MessageBox.Show("Erro ao baixar os grupos e subgrupos");
             }
         }
+
         //SÓ VAI ALTERAR QUANDO O GRUPO FOR ALTERADO!!!!
         private void mcbGroup_SelectedIndexChanged(object sender, EventArgs e)
         {
-            
             int id = 0;
             // descobrir o id
             foreach (ProductgroupDTO group in description.Group)
@@ -182,79 +192,42 @@ namespace Komercio.UI.Forms.Product.Produto
                 }
             }
         }
-
+        // valida o produto antes de tentar enviar para alteração.
         private void mbtSaveProduct_Click(object sender, EventArgs e)
         {
-
-           
-
-            product.productName = mtbProductName.Text;
             try
             {
-                product.productPrice = float.Parse(mtbProductPrice.Text.Replace("R$", ""));
-                if (product.productPrice < 0)
-                {
-                    MessageBox.Show("Preço inválido!", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return;
-                }
+                productReturnet = productReturnet.ValidaProduto(mtbProductName.Text,
+                    mtbProductPrice.Text,
+                    mtbProductCodeBar.Text,
+                    mcbGroup.Text,
+                    mcbSubGroup.Text,
+                    mtbProductStock.Text
+                    );
             }
-            catch
-            {
-                MessageBox.Show("Preço inválido!", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-            product.productCodbar = mtbProductCodeBar.Text;
-            try
-            {
-                var grupo = mcbGroup.SelectedItem.ToString();
-                 product.productGroup = grupo;
-            }
-            catch
-            {
-                
-            }
-
-            try
-            {
-                var subgrupo = mcbSubGroup.SelectedItem.ToString();
-                product.productSubgroup = subgrupo;
-            }
-            catch
+            catch (Exception ex)
             {
 
-            }
 
-            try
-            {
-                product.productStock = int.Parse(mtbProductStock.Text);
 
-                if (product.productStock < 0)
-                {
-                    MessageBox.Show("Quantidade inválida!", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return;
-                }
-            }
-            catch
-            {
-                MessageBox.Show("Quantidade inválida!", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show($"{ex.Message}", "ERRO!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
-            if (product.productStatus = msProductStatus.Checked)
+            if (productReturnet.productStatus = msProductStatus.Checked)
             {
-                product.productStatus = true;
+                productReturnet.productStatus = true;
             }
             else
             {
-                product.productStatus = false;
+                productReturnet.productStatus = false;
             }
-
 
             try
             {
-                CreateProductAsync(product);
-
-
+                // criei uma função para ela poder ser assincrona.
+               
+                CreateProductAsync(productReturnet);
             }
 
             catch
@@ -264,24 +237,23 @@ namespace Komercio.UI.Forms.Product.Produto
 
 
         }
-
+        //Aqui salva a alteração do menor.
         private async void CreateProductAsync(ProductDTO product)
         {
+            if (productReturnet.productGroup == "") productReturnet.productGroup = product.productGroup;
+            if (productReturnet.productSubgroup =="") productReturnet.productSubgroup = product.productSubgroup;
 
-            var returnSatus = await _productService.PutProductAtt(product);
 
-
+            var returnSatus = await _produtoApp.AlterarProduto(productReturnet);
             if (!returnSatus)
             {
                 MessageBox.Show("Erro ao atualizar produto!", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
             }
             else
             {
                 MessageBox.Show("Produto atualizado com sucesso!", "Sucesso!", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 this.Close();
             }
-
 
         }
 
@@ -292,7 +264,7 @@ namespace Komercio.UI.Forms.Product.Produto
 
 
 
-
+        //bloqueia o campo para só aceitar numeros.
         private async void fmAlterarProduto_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
@@ -310,7 +282,7 @@ namespace Komercio.UI.Forms.Product.Produto
                
             }
         }
-
+        //formata em tempo real o numero.
         private void mtbProductPrice_TextChanged(object sender, EventArgs e)
         {
             string texto = mtbProductPrice.Text.Replace("R$", "").Replace(",", "").Replace(".", "").TrimStart('0');
@@ -321,6 +293,7 @@ namespace Komercio.UI.Forms.Product.Produto
             decimal valor = Convert.ToDecimal(texto) / 100;
             mtbProductPrice.Text = string.Format(System.Globalization.CultureInfo.GetCultureInfo("pt-BR"), "{0:C2}", valor);
             mtbProductPrice.SelectionStart = mtbProductPrice.Text.Length;
+
 
         }
     }
