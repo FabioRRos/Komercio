@@ -146,7 +146,7 @@
             this.mbtnSeePassword.Depth = 0;
             this.mbtnSeePassword.HighEmphasis = true;
             this.mbtnSeePassword.Icon = null;
-            this.mbtnSeePassword.Location = new System.Drawing.Point(187, 177);
+            this.mbtnSeePassword.Location = new System.Drawing.Point(207, 138);
             this.mbtnSeePassword.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.mbtnSeePassword.MouseState = MaterialSkin.MouseState.HOVER;
             this.mbtnSeePassword.Name = "mbtnSeePassword";

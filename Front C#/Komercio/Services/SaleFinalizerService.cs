@@ -162,7 +162,8 @@ namespace Komercio.Services
                 MessageBox.Show("Não consegui criar o cupom - SALE FINALIZER SERVICE");
             }
 
-            // Geração do JSON e salvamento
+            // Geração do JSON e salvamento 
+            //  ESSE EU PRECISO CONFIGURAR VIA PARÂMETRO FUTURAMENTE.
              try
              {
                  string conteudoJson = JsonConvert.SerializeObject(vendaAggregate, Formatting.Indented);
@@ -174,7 +175,7 @@ namespace Komercio.Services
 
                 string caminhoCompleto = Path.Combine(diretorio, nomeArquivo);
 
-                 File.WriteAllText(caminhoCompleto, conteudoJson, Encoding.UTF8);
+               //  File.WriteAllText(caminhoCompleto, conteudoJson, Encoding.UTF8);
 
                 // MessageBox.Show("Arquivo salvo com sucesso!\n\n" + caminhoCompleto);
              }
@@ -182,7 +183,7 @@ namespace Komercio.Services
              {
                  MessageBox.Show(ex.Message);
              }
-
+            
             return cupomForPrint;
 
         }

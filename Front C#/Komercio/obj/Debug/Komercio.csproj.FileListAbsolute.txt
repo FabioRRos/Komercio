@@ -12,7 +12,6 @@ C:\Projeto Komercial\Komercio\Front C#\Komercio\obj\Debug\Komercio.pdb
 C:\Projeto Komercial\Komercio\Front C#\Komercio\bin\Debug\Newtonsoft.Json.dll
 C:\Projeto Komercial\Komercio\Front C#\Komercio\bin\Debug\Newtonsoft.Json.xml
 C:\Projeto Komercial\Komercio\Front C#\Komercio\obj\Debug\Komercio.csproj.Up2Date
-C:\Projeto Komercial\Komercio\Front C#\Komercio\obj\Debug\Komercio.exe.config
 C:\Projeto Komercial\Komercio\Front C#\Komercio\bin\Debug\MaterialSkin.dll
 C:\Projeto Komercial\Komercio\Front C#\Komercio\obj\Debug\Komercio.UI.Forms.Employee.fmChangePasswordEmployeer.resources
 C:\Projeto Komercial\Komercio\Front C#\Komercio\obj\Debug\Komercio.UI.Forms.Customer.fmCreateCustomer.resources
@@ -34,3 +33,7 @@ C:\Projeto Komercial\Komercio\Front C#\Komercio\obj\Debug\Komercio.UI.Forms.frmL
 C:\Projeto Komercial\Komercio\Front C#\Komercio\obj\Debug\Komercio.UI.Forms.Caixa.frmSangria.resources
 C:\Projeto Komercial\Komercio\Front C#\Komercio\obj\Debug\Komercio.UI.Forms.Product.frmDescarte.resources
 C:\Projeto Komercial\Komercio\Front C#\Komercio\obj\Debug\Komercio.UI.Forms.Product.frmProductVisualize.resources
+C:\Projeto Komercial\Komercio\Front C#\Komercio\obj\Debug\Komercio.UI.Forms.Product.fmrCadastroSubGrupoProduto.resources
+C:\Projeto Komercial\Komercio\Front C#\Komercio\obj\Debug\Komercio.exe.config
+C:\Projeto Komercial\Komercio\Front C#\Komercio\obj\Debug\Komercio.UI.Forms.Product.frmCadastroGrupo.resources
+C:\Projeto Komercial\Komercio\Front C#\Komercio\obj\Debug\Komercio.UI.Forms.Product.Produto.fmAlterarProduto.resources

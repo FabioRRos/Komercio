@@ -6,6 +6,7 @@ using Komercio.UI.Forms.Customer;
 using Komercio.UI.Forms.Dump;
 using Komercio.UI.Forms.Employee;
 using Komercio.UI.Forms.Product;
+using Komercio.UI.Forms.Product.Produto;
 using Komercio.UI.Forms.Sales;
 using Komercio.UI.Forms.Transactions;
 using MeuProjetoWinForms.Services;
@@ -60,8 +61,8 @@ namespace Komercio
 
         private void novoFuncionárioToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Função desativada temporariamente!!","ATENÇÃO",MessageBoxButtons.OK,MessageBoxIcon.Warning);
-            //CadastrarFuncionario();
+       //     MessageBox.Show("Função desativada temporariamente!!","ATENÇÃO",MessageBoxButtons.OK,MessageBoxIcon.Warning);
+            CadastrarFuncionario();
         }
 
         private void Home_Load(object sender, EventArgs e)
@@ -195,8 +196,7 @@ namespace Komercio
 
         private void loteToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            btnImportStock newProductLote = new btnImportStock(_productService);
-            newProductLote.ShowDialog();
+            CadastrarProdutoLote();
         }
 
         private void cadernetaToolStripMenuItem_Click(object sender, EventArgs e)
@@ -329,7 +329,7 @@ namespace Komercio
 
         private void CadastrarProdutoManual()
         {
-            fmCreateProduct createProduct = new fmCreateProduct(_productService, _productDescriptionService);
+            fmCreateProduct createProduct = new fmCreateProduct(_productService, _productDescriptionService,_productSubgroupService,_productGroupService);
             createProduct.ShowDialog();
         }
 
@@ -371,6 +371,27 @@ namespace Komercio
             listaProduto.ShowDialog();
         }
 
+        private void SubGrupo()
+        {
+            fmrCadastroSubGrupoProduto cadastrarSubGrupo = new fmrCadastroSubGrupoProduto(_productSubgroupService,_productGroupService);
+            cadastrarSubGrupo.ShowDialog();
+        }
+        private void Grupo()
+        {
+            frmCadastroGrupo cadastroGrupo = new frmCadastroGrupo(_productGroupService);
+            cadastroGrupo.ShowDialog();
+        }
+        private void AlterarProduto()
+        {
+            fmAlterarProduto alterarProduto = new fmAlterarProduto(_productService, _productDescriptionService, _productSubgroupService, _productGroupService,null);
+            alterarProduto.ShowDialog();
+        }
+
+        private void CadastrarProdutoLote()
+        {
+            btnImportStock newProductLote = new btnImportStock(_productService);
+            newProductLote.ShowDialog();
+        }
 
 
         /// <summary>
@@ -413,10 +434,7 @@ namespace Komercio
             EntradaEstoque();
         }
 
-        private void materialButton8_Click(object sender, EventArgs e)
-        {
-            CadastrarProdutoManual();
-        }
+
 
         private void materialButton9_Click(object sender, EventArgs e)
         {
@@ -431,6 +449,36 @@ namespace Komercio
         private void listaDeProdutosToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ListaDeProdutos();
+        }
+
+        private void grupoDeProdutosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SubGrupo();
+        }
+
+        private void grupoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Grupo();
+        }
+
+        private void materialButton1_Click_1(object sender, EventArgs e)
+        {
+            CadastrarProdutoManual();
+        }
+
+        private void materialButton3_Click(object sender, EventArgs e)
+        {
+            EntradaEstoque();
+        }
+
+        private void materialButton8_Click(object sender, EventArgs e)
+        {
+            CadastrarProdutoLote();
+        }
+
+        private void materialButton2_Click(object sender, EventArgs e)
+        {
+            AlterarProduto();
         }
     }
 }

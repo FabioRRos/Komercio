@@ -447,7 +447,7 @@ namespace Komercio.UI.Forms.Sales
         {
             if(e.KeyCode == Keys.F4)
             {
-                fmCreateProduct createProduct = new fmCreateProduct(_productService, _productDescriptionService);
+                fmCreateProduct createProduct = new fmCreateProduct(_productService, _productDescriptionService,null,null);
                 createProduct.ShowDialog();
                 loaddbListaproduto();
             }

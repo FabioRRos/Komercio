@@ -152,7 +152,7 @@
             this.mbtNewProduct.Depth = 0;
             this.mbtNewProduct.HighEmphasis = true;
             this.mbtNewProduct.Icon = null;
-            this.mbtNewProduct.Location = new System.Drawing.Point(312, 190);
+            this.mbtNewProduct.Location = new System.Drawing.Point(312, 174);
             this.mbtNewProduct.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.mbtNewProduct.MouseState = MaterialSkin.MouseState.HOVER;
             this.mbtNewProduct.Name = "mbtNewProduct";
@@ -172,7 +172,7 @@
             this.mbtSaveProduct.Depth = 0;
             this.mbtSaveProduct.HighEmphasis = true;
             this.mbtSaveProduct.Icon = null;
-            this.mbtSaveProduct.Location = new System.Drawing.Point(433, 190);
+            this.mbtSaveProduct.Location = new System.Drawing.Point(433, 174);
             this.mbtSaveProduct.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.mbtSaveProduct.MouseState = MaterialSkin.MouseState.HOVER;
             this.mbtSaveProduct.Name = "mbtSaveProduct";
@@ -234,8 +234,9 @@
             this.mcbGroup.MouseState = MaterialSkin.MouseState.OUT;
             this.mcbGroup.Name = "mcbGroup";
             this.mcbGroup.Size = new System.Drawing.Size(250, 49);
-//this.mcbGroup.StartIndex = 0;
+            this.mcbGroup.StartIndex = 0;
             this.mcbGroup.TabIndex = 3;
+            this.mcbGroup.SelectedIndexChanged += new System.EventHandler(this.mcbGroup_SelectedIndexChanged);
             // 
             // mcbSubGroup
             // 
@@ -277,7 +278,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "fmCreateProduct";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Cadastro produtos - Manual";
+            this.Text = " Cadastrar Produtos";
             this.Load += new System.EventHandler(this.fmCreateProduct_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

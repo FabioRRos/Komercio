@@ -70,7 +70,7 @@ namespace Komercio.UI.Forms.Product
             dgvProdutos.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
 
             dgvProdutos.Columns["productName"].HeaderText = "Produto";
-            dgvProdutos.Columns["productCodbar"].HeaderText = "Grupo";
+            dgvProdutos.Columns["productCodbar"].HeaderText = "Codigo de barras";
             dgvProdutos.Columns["productStock"].HeaderText = "QTD";
             dgvProdutos.Columns["productPrice"].HeaderText = "Preço";
             dgvProdutos.Columns["productGroup"].HeaderText = "Grupo";
@@ -89,33 +89,16 @@ namespace Komercio.UI.Forms.Product
 
         private void mtbNomeProduto_TextChanged(object sender, EventArgs e)
         {
-
-            FiltraPorNome();
-
-        }
-
-        private void FiltraPorNome()
-        {
-            List<ProductDTO> list = new List<ProductDTO>();
-
-            foreach (var prod in product)
+            if (mtbNomeProduto.Text == "")
             {
-                bool encontrou = prod.productName.Contains(
-    mtbNomeProduto.Text);
-
-                if (encontrou)
-                {
-                    list.Add(prod);
-                }
-                else
-                {
-                    continue;
-                }
+                dgvProdutos.DataSource = product;
             }
+            else
+            {
+                FiltrarProdutosPorCampo(mtbNomeProduto.Text);
 
-            dgvProdutos.DataSource = list;
+            }
         }
-
 
 
 
@@ -125,8 +108,12 @@ namespace Komercio.UI.Forms.Product
 
             foreach (var prod in product)
             {
-                bool encontrou = prod.productName.Contains(
-    mgbGrupo.Text);
+                bool encontrou =
+    prod.productGroup != null &&
+    mgbGrupo.Text != null &&
+    prod.productGroup.IndexOf(
+        mgbGrupo.Text,
+        StringComparison.OrdinalIgnoreCase) >= 0;
 
                 if (encontrou)
                 {
@@ -152,6 +139,30 @@ namespace Komercio.UI.Forms.Product
         private void mgbGrupo_SelectedIndexChanged(object sender, EventArgs e)
         {
             FiltraPorGrupo();
+        }
+
+
+
+
+        private void FiltrarProdutosPorCampo(string valorFiltro)
+        {
+            List<ProductDTO> filtrados = new List<ProductDTO>();
+
+
+            string filtro = valorFiltro.ToLower();
+
+            foreach (ProductDTO produto in product)
+            {
+                string campoComparado = "";
+                campoComparado = produto.productName.ToLower();
+
+                if (campoComparado.Contains(filtro))
+                {
+                    filtrados.Add(produto);
+                }
+            }
+
+            dgvProdutos.DataSource = filtrados;
         }
     }
 }

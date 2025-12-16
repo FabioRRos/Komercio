@@ -18,9 +18,16 @@ namespace Komercio.UI.Forms.Product
     {
         private readonly ProductService _productService;
         private readonly ProductDescriptionService _productDescriptionService;
-    
-        public fmCreateProduct(ProductService productService, ProductDescriptionService productAndGroupAndSubgroup)
+        private readonly ProductSubgroupService _productSubgroupService;
+        private readonly ProductGroupService _productGroupService;
+
+
+        private ProductDescriptionDTO description = new ProductDescriptionDTO();
+
+        public fmCreateProduct(ProductService productService, ProductDescriptionService productAndGroupAndSubgroup, ProductSubgroupService productSubgroupService, ProductGroupService productGroupService)
         {
+            _productSubgroupService = productSubgroupService;
+            _productGroupService = productGroupService;
             _productService = productService;
             _productDescriptionService = productAndGroupAndSubgroup;
             InitializeComponent();
@@ -115,7 +122,7 @@ namespace Komercio.UI.Forms.Product
             }
             product.productCodbar = mtbProductCodeBar.Text;
             product.productGroup = mcbGroup.SelectedItem.ToString();
-            product.productSubgroup = mcbGroup.SelectedItem.ToString();
+            product.productSubgroup = mcbSubGroup.SelectedItem.ToString();
 
             try
             {
@@ -201,32 +208,60 @@ namespace Komercio.UI.Forms.Product
         {
             LoadListGroupAndSubgroup();
         }
+        private void SubGrupo()
+        {
+            fmrCadastroSubGrupoProduto cadastrarSubGrupo = new fmrCadastroSubGrupoProduto(_productSubgroupService, _productGroupService);
+            cadastrarSubGrupo.ShowDialog();
+        }
 
 
         public async  void LoadListGroupAndSubgroup()
         {
-            var response = await _productDescriptionService.GetProductDescriptionAsync();
-
-
-            ProductDescriptionDTO description = new ProductDescriptionDTO();
+            try
+            {
+                var response = await _productDescriptionService.GetProductDescriptionAsync();
 
             description.Product = response.Product;
             description.Group = response.Group.OrderBy(p => p.ProductgroupName).ToList() ;
             description.Subgroup = response.Subgroup.OrderBy(p => p.ProductsubgroupName).ToList() ;
 
-
-            
-            
-
             foreach (ProductgroupDTO group in description.Group)
             {
+
                 mcbGroup.Items.Add(group.ProductgroupName);
 
             }
 
+
+            }
+            catch
+            {
+                MessageBox.Show("Erro ao baixar os grupos e subgrupos");
+            }
+        }
+
+        private void mcbGroup_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int id = 0;
+            // descobrir o id
+            foreach (ProductgroupDTO group in description.Group)
+            {
+                if (mcbGroup.Text == group.ProductgroupName)
+                {
+                    id = group.ProductgroupId;
+                    break;
+                }
+            }
+
+            if (id == 0) return;
+            mcbSubGroup.Items.Clear();
             foreach (ProductSubgroupDTO subgroup in description.Subgroup)
             {
-                mcbSubGroup.Items.Add(subgroup.ProductsubgroupName);
+                if (subgroup.Product_group_id == id)
+                {
+                    mcbSubGroup.Items.Add(subgroup.ProductsubgroupName);
+
+                }
             }
         }
     }

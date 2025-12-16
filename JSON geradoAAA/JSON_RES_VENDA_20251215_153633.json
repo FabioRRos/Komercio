@@ -1,0 +1,31 @@
+﻿{
+  "sale": {
+    "customer_id": 0,
+    "total_amount": 30.0,
+    "discount_amount": 0.0,
+    "final_amount": 30.0,
+    "sale_date": "2025-12-15T15:36:11.850006-03:00",
+    "sale_time": "15:36:11",
+    "payment_method": "Dinheiro",
+    "seller_id": 1,
+    "sale_notes": ""
+  },
+  "items": [
+    {
+      "product_id": 4,
+      "product_name": "Jogo da bolinha",
+      "barcode": "943964809",
+      "unit_price": 30.0,
+      "quantity": 1,
+      "total": 30.0
+    }
+  ],
+  "cash_movement": {
+    "movement_type": "Entrada",
+    "description": null,
+    "amount": 30.0,
+    "payment_method": "Dinheiro",
+    "movement_datetime": "2025-12-15T15:36:12.7257065-03:00",
+    "seller_id": 1
+  }
+}

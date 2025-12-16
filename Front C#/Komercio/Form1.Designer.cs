@@ -44,6 +44,9 @@
             this.loteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.entradaEstoqueToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.descarteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.listaDeProdutosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.grupoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.grupoDeProdutosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.vendasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.novaVendaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.relatóriosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -68,14 +71,18 @@
             this.materialButton5 = new MaterialSkin.Controls.MaterialButton();
             this.materialButton6 = new MaterialSkin.Controls.MaterialButton();
             this.materialButton7 = new MaterialSkin.Controls.MaterialButton();
-            this.materialButton8 = new MaterialSkin.Controls.MaterialButton();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.listaDeProdutosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
+            this.mbtCadProd = new MaterialSkin.Controls.MaterialButton();
+            this.mbtAltProd = new MaterialSkin.Controls.MaterialButton();
+            this.mbtEntradaMan = new MaterialSkin.Controls.MaterialButton();
+            this.mbtProdCadLote = new MaterialSkin.Controls.MaterialButton();
             this.menuStripCaixa.SuspendLayout();
             this.pCaixa.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.groupBox1.SuspendLayout();
+            this.tableLayoutPanel3.SuspendLayout();
             this.SuspendLayout();
             // 
             // arquivoToolStripMenuItem
@@ -121,7 +128,7 @@
             this.caixaToolStripMenuItem});
             this.menuStripCaixa.Location = new System.Drawing.Point(0, 0);
             this.menuStripCaixa.Name = "menuStripCaixa";
-            this.menuStripCaixa.Size = new System.Drawing.Size(800, 24);
+            this.menuStripCaixa.Size = new System.Drawing.Size(910, 24);
             this.menuStripCaixa.TabIndex = 0;
             this.menuStripCaixa.Text = "menuStrip1";
             // 
@@ -162,7 +169,9 @@
             this.novoProdutoToolStripMenuItem,
             this.entradaEstoqueToolStripMenuItem,
             this.descarteToolStripMenuItem,
-            this.listaDeProdutosToolStripMenuItem});
+            this.listaDeProdutosToolStripMenuItem,
+            this.grupoToolStripMenuItem,
+            this.grupoDeProdutosToolStripMenuItem});
             this.produtosToolStripMenuItem.Name = "produtosToolStripMenuItem";
             this.produtosToolStripMenuItem.Size = new System.Drawing.Size(67, 20);
             this.produtosToolStripMenuItem.Text = "Produtos";
@@ -204,6 +213,27 @@
             this.descarteToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.descarteToolStripMenuItem.Text = "Descarte";
             this.descarteToolStripMenuItem.Click += new System.EventHandler(this.descarteToolStripMenuItem_Click);
+            // 
+            // listaDeProdutosToolStripMenuItem
+            // 
+            this.listaDeProdutosToolStripMenuItem.Name = "listaDeProdutosToolStripMenuItem";
+            this.listaDeProdutosToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.listaDeProdutosToolStripMenuItem.Text = "Lista de produtos";
+            this.listaDeProdutosToolStripMenuItem.Click += new System.EventHandler(this.listaDeProdutosToolStripMenuItem_Click);
+            // 
+            // grupoToolStripMenuItem
+            // 
+            this.grupoToolStripMenuItem.Name = "grupoToolStripMenuItem";
+            this.grupoToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.grupoToolStripMenuItem.Text = "Grupo";
+            this.grupoToolStripMenuItem.Click += new System.EventHandler(this.grupoToolStripMenuItem_Click);
+            // 
+            // grupoDeProdutosToolStripMenuItem
+            // 
+            this.grupoDeProdutosToolStripMenuItem.Name = "grupoDeProdutosToolStripMenuItem";
+            this.grupoDeProdutosToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.grupoDeProdutosToolStripMenuItem.Text = "Subgrupo";
+            this.grupoDeProdutosToolStripMenuItem.Click += new System.EventHandler(this.grupoDeProdutosToolStripMenuItem_Click);
             // 
             // vendasToolStripMenuItem
             // 
@@ -395,8 +425,8 @@
             // tableLayoutPanel1
             // 
             this.tableLayoutPanel1.ColumnCount = 2;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 60F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 40F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 40.82232F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 59.17768F));
             this.tableLayoutPanel1.Controls.Add(this.materialButton4, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel2, 1, 0);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -404,7 +434,7 @@
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(571, 426);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(681, 426);
             this.tableLayoutPanel1.TabIndex = 4;
             // 
             // materialButton4
@@ -420,7 +450,7 @@
             this.materialButton4.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialButton4.Name = "materialButton4";
             this.materialButton4.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.materialButton4.Size = new System.Drawing.Size(334, 414);
+            this.materialButton4.Size = new System.Drawing.Size(270, 414);
             this.materialButton4.TabIndex = 0;
             this.materialButton4.Text = "Nova venda (F5)";
             this.materialButton4.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Outlined;
@@ -438,17 +468,16 @@
             this.tableLayoutPanel2.Controls.Add(this.materialButton5, 0, 0);
             this.tableLayoutPanel2.Controls.Add(this.materialButton6, 1, 0);
             this.tableLayoutPanel2.Controls.Add(this.materialButton7, 0, 1);
-            this.tableLayoutPanel2.Controls.Add(this.materialButton8, 1, 1);
-            this.tableLayoutPanel2.Controls.Add(this.pictureBox1, 1, 3);
+            this.tableLayoutPanel2.Controls.Add(this.groupBox1, 1, 1);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(345, 3);
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(281, 3);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
-            this.tableLayoutPanel2.RowCount = 4;
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(223, 420);
+            this.tableLayoutPanel2.RowCount = 3;
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(397, 420);
             this.tableLayoutPanel2.TabIndex = 1;
             // 
             // materialButton10
@@ -459,12 +488,12 @@
             this.materialButton10.Dock = System.Windows.Forms.DockStyle.Fill;
             this.materialButton10.HighEmphasis = true;
             this.materialButton10.Icon = null;
-            this.materialButton10.Location = new System.Drawing.Point(115, 216);
+            this.materialButton10.Location = new System.Drawing.Point(202, 284);
             this.materialButton10.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.materialButton10.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialButton10.Name = "materialButton10";
             this.materialButton10.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.materialButton10.Size = new System.Drawing.Size(104, 93);
+            this.materialButton10.Size = new System.Drawing.Size(191, 130);
             this.materialButton10.TabIndex = 5;
             this.materialButton10.Text = "Alterar senha";
             this.materialButton10.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
@@ -480,12 +509,12 @@
             this.materialButton9.Dock = System.Windows.Forms.DockStyle.Fill;
             this.materialButton9.HighEmphasis = true;
             this.materialButton9.Icon = null;
-            this.materialButton9.Location = new System.Drawing.Point(4, 216);
+            this.materialButton9.Location = new System.Drawing.Point(4, 284);
             this.materialButton9.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.materialButton9.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialButton9.Name = "materialButton9";
             this.materialButton9.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.materialButton9.Size = new System.Drawing.Size(103, 93);
+            this.materialButton9.Size = new System.Drawing.Size(190, 130);
             this.materialButton9.TabIndex = 4;
             this.materialButton9.Text = "Atualizar clientes";
             this.materialButton9.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
@@ -506,7 +535,7 @@
             this.materialButton5.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialButton5.Name = "materialButton5";
             this.materialButton5.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.materialButton5.Size = new System.Drawing.Size(103, 93);
+            this.materialButton5.Size = new System.Drawing.Size(190, 127);
             this.materialButton5.TabIndex = 0;
             this.materialButton5.Text = "Caderneta";
             this.materialButton5.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
@@ -522,12 +551,12 @@
             this.materialButton6.Dock = System.Windows.Forms.DockStyle.Fill;
             this.materialButton6.HighEmphasis = true;
             this.materialButton6.Icon = null;
-            this.materialButton6.Location = new System.Drawing.Point(115, 6);
+            this.materialButton6.Location = new System.Drawing.Point(202, 6);
             this.materialButton6.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.materialButton6.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialButton6.Name = "materialButton6";
             this.materialButton6.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.materialButton6.Size = new System.Drawing.Size(104, 93);
+            this.materialButton6.Size = new System.Drawing.Size(191, 127);
             this.materialButton6.TabIndex = 1;
             this.materialButton6.Text = "Cadastrar clientes";
             this.materialButton6.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
@@ -543,12 +572,12 @@
             this.materialButton7.Dock = System.Windows.Forms.DockStyle.Fill;
             this.materialButton7.HighEmphasis = true;
             this.materialButton7.Icon = null;
-            this.materialButton7.Location = new System.Drawing.Point(4, 111);
+            this.materialButton7.Location = new System.Drawing.Point(4, 145);
             this.materialButton7.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.materialButton7.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialButton7.Name = "materialButton7";
             this.materialButton7.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.materialButton7.Size = new System.Drawing.Size(103, 93);
+            this.materialButton7.Size = new System.Drawing.Size(190, 127);
             this.materialButton7.TabIndex = 2;
             this.materialButton7.Text = "Entrada estoque";
             this.materialButton7.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
@@ -556,50 +585,124 @@
             this.materialButton7.UseVisualStyleBackColor = true;
             this.materialButton7.Click += new System.EventHandler(this.materialButton7_Click);
             // 
-            // materialButton8
+            // groupBox1
             // 
-            this.materialButton8.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.materialButton8.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
-            this.materialButton8.Depth = 0;
-            this.materialButton8.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.materialButton8.HighEmphasis = true;
-            this.materialButton8.Icon = null;
-            this.materialButton8.Location = new System.Drawing.Point(115, 111);
-            this.materialButton8.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.materialButton8.MouseState = MaterialSkin.MouseState.HOVER;
-            this.materialButton8.Name = "materialButton8";
-            this.materialButton8.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.materialButton8.Size = new System.Drawing.Size(104, 93);
-            this.materialButton8.TabIndex = 3;
-            this.materialButton8.Text = "Cadastrar produtos";
-            this.materialButton8.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
-            this.materialButton8.UseAccentColor = false;
-            this.materialButton8.UseVisualStyleBackColor = true;
-            this.materialButton8.Click += new System.EventHandler(this.materialButton8_Click);
+            this.groupBox1.Controls.Add(this.tableLayoutPanel3);
+            this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBox1.Location = new System.Drawing.Point(201, 142);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(193, 133);
+            this.groupBox1.TabIndex = 6;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Produtos";
             // 
-            // pictureBox1
+            // tableLayoutPanel3
             // 
-            this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(114, 318);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(106, 99);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox1.TabIndex = 6;
-            this.pictureBox1.TabStop = false;
+            this.tableLayoutPanel3.ColumnCount = 2;
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel3.Controls.Add(this.mbtCadProd, 0, 0);
+            this.tableLayoutPanel3.Controls.Add(this.mbtAltProd, 1, 0);
+            this.tableLayoutPanel3.Controls.Add(this.mbtEntradaMan, 0, 1);
+            this.tableLayoutPanel3.Controls.Add(this.mbtProdCadLote, 1, 1);
+            this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel3.Location = new System.Drawing.Point(3, 16);
+            this.tableLayoutPanel3.Name = "tableLayoutPanel3";
+            this.tableLayoutPanel3.RowCount = 2;
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(187, 114);
+            this.tableLayoutPanel3.TabIndex = 0;
             // 
-            // listaDeProdutosToolStripMenuItem
+            // mbtCadProd
             // 
-            this.listaDeProdutosToolStripMenuItem.Name = "listaDeProdutosToolStripMenuItem";
-            this.listaDeProdutosToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.listaDeProdutosToolStripMenuItem.Text = "Lista de produtos";
-            this.listaDeProdutosToolStripMenuItem.Click += new System.EventHandler(this.listaDeProdutosToolStripMenuItem_Click);
+            this.mbtCadProd.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.mbtCadProd.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.mbtCadProd.Depth = 0;
+            this.mbtCadProd.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.mbtCadProd.HighEmphasis = true;
+            this.mbtCadProd.Icon = null;
+            this.mbtCadProd.Location = new System.Drawing.Point(4, 6);
+            this.mbtCadProd.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.mbtCadProd.MouseState = MaterialSkin.MouseState.HOVER;
+            this.mbtCadProd.Name = "mbtCadProd";
+            this.mbtCadProd.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.mbtCadProd.Size = new System.Drawing.Size(85, 45);
+            this.mbtCadProd.TabIndex = 0;
+            this.mbtCadProd.Text = "Cadastro";
+            this.mbtCadProd.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+            this.mbtCadProd.UseAccentColor = false;
+            this.mbtCadProd.UseVisualStyleBackColor = true;
+            this.mbtCadProd.Click += new System.EventHandler(this.materialButton1_Click_1);
+            // 
+            // mbtAltProd
+            // 
+            this.mbtAltProd.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.mbtAltProd.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.mbtAltProd.Depth = 0;
+            this.mbtAltProd.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.mbtAltProd.HighEmphasis = true;
+            this.mbtAltProd.Icon = null;
+            this.mbtAltProd.Location = new System.Drawing.Point(97, 6);
+            this.mbtAltProd.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.mbtAltProd.MouseState = MaterialSkin.MouseState.HOVER;
+            this.mbtAltProd.Name = "mbtAltProd";
+            this.mbtAltProd.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.mbtAltProd.Size = new System.Drawing.Size(86, 45);
+            this.mbtAltProd.TabIndex = 1;
+            this.mbtAltProd.Text = "Alterar";
+            this.mbtAltProd.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+            this.mbtAltProd.UseAccentColor = false;
+            this.mbtAltProd.UseVisualStyleBackColor = true;
+            this.mbtAltProd.Click += new System.EventHandler(this.materialButton2_Click);
+            // 
+            // mbtEntradaMan
+            // 
+            this.mbtEntradaMan.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.mbtEntradaMan.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.mbtEntradaMan.Depth = 0;
+            this.mbtEntradaMan.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.mbtEntradaMan.HighEmphasis = true;
+            this.mbtEntradaMan.Icon = null;
+            this.mbtEntradaMan.Location = new System.Drawing.Point(4, 63);
+            this.mbtEntradaMan.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.mbtEntradaMan.MouseState = MaterialSkin.MouseState.HOVER;
+            this.mbtEntradaMan.Name = "mbtEntradaMan";
+            this.mbtEntradaMan.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.mbtEntradaMan.Size = new System.Drawing.Size(85, 45);
+            this.mbtEntradaMan.TabIndex = 2;
+            this.mbtEntradaMan.Text = "Entrada Manual";
+            this.mbtEntradaMan.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+            this.mbtEntradaMan.UseAccentColor = false;
+            this.mbtEntradaMan.UseVisualStyleBackColor = true;
+            this.mbtEntradaMan.Click += new System.EventHandler(this.materialButton3_Click);
+            // 
+            // mbtProdCadLote
+            // 
+            this.mbtProdCadLote.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.mbtProdCadLote.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.mbtProdCadLote.Depth = 0;
+            this.mbtProdCadLote.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.mbtProdCadLote.HighEmphasis = true;
+            this.mbtProdCadLote.Icon = null;
+            this.mbtProdCadLote.Location = new System.Drawing.Point(97, 63);
+            this.mbtProdCadLote.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.mbtProdCadLote.MouseState = MaterialSkin.MouseState.HOVER;
+            this.mbtProdCadLote.Name = "mbtProdCadLote";
+            this.mbtProdCadLote.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.mbtProdCadLote.Size = new System.Drawing.Size(86, 45);
+            this.mbtProdCadLote.TabIndex = 3;
+            this.mbtProdCadLote.Text = "Cadastro em lote";
+            this.mbtProdCadLote.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+            this.mbtProdCadLote.UseAccentColor = false;
+            this.mbtProdCadLote.UseVisualStyleBackColor = true;
+            this.mbtProdCadLote.Click += new System.EventHandler(this.materialButton8_Click);
             // 
             // Home
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(910, 450);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.pCaixa);
             this.Controls.Add(this.menuStripCaixa);
@@ -618,7 +721,9 @@
             this.tableLayoutPanel1.PerformLayout();
             this.tableLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanel2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.groupBox1.ResumeLayout(false);
+            this.tableLayoutPanel3.ResumeLayout(false);
+            this.tableLayoutPanel3.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -662,12 +767,18 @@
         private MaterialSkin.Controls.MaterialButton materialButton5;
         private MaterialSkin.Controls.MaterialButton materialButton6;
         private MaterialSkin.Controls.MaterialButton materialButton7;
-        private MaterialSkin.Controls.MaterialButton materialButton8;
         private MaterialSkin.Controls.MaterialButton materialButton10;
         private MaterialSkin.Controls.MaterialButton materialButton9;
-        private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.ToolStripMenuItem descarteToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem listaDeProdutosToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem grupoDeProdutosToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem grupoToolStripMenuItem;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
+        private MaterialSkin.Controls.MaterialButton mbtCadProd;
+        private MaterialSkin.Controls.MaterialButton mbtAltProd;
+        private MaterialSkin.Controls.MaterialButton mbtEntradaMan;
+        private MaterialSkin.Controls.MaterialButton mbtProdCadLote;
     }
 }
 

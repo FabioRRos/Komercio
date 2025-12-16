@@ -31,7 +31,7 @@ func CreateLogin(employee *Employees) error {
 
 func ValidatePassword(password string) error {
 
-	if len(password) < 8 {
+	if len(password) < 4 {
 		return fmt.Errorf("A senha precisa ter no minimo 8 caracteres")
 	}
 

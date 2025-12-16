@@ -14,6 +14,8 @@ namespace Komercio.Models
         public int ProductsubgroupId { get; set; }
         [JsonProperty("subgroup_name")]
         public string ProductsubgroupName { get; set; }
+        [JsonProperty("product_group_id")]
+        public int Product_group_id { get; set; }
     }
 
 

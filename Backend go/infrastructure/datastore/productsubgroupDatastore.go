@@ -35,9 +35,9 @@ func (d *ProductSubgroupDatastore) Close() {
 // CREATE (PUT)
 func (d *ProductSubgroupDatastore) CreateProducGroup(ProductSubgroup *entity.ProductSubGroup) error {
 	query := `INSERT INTO product_subgroup
-	(subgroup_id, subgroup_name) Values ($1, $2)`
+	(subgroup_name,product_group_id) Values ($1,$2)`
 
-	_, err := d.Conn.Exec(context.Background(), query, ProductSubgroup.ProductSubGroup_id, ProductSubgroup.ProducSubGroup_name)
+	_, err := d.Conn.Exec(context.Background(), query, ProductSubgroup.ProducSubGroup_name, ProductSubgroup.Product_group_id)
 
 	if err != nil {
 		return fmt.Errorf("Erro ao inserir subgrupo de produtos: %w", err)
@@ -66,10 +66,12 @@ func (d *ProductSubgroupDatastore) SelectAllProductSubgroup() ([]*entity.Product
 		err := rows.Scan(
 			&pg.ProductSubGroup_id,
 			&pg.ProducSubGroup_name,
+			&pg.Product_group_id,
 		)
 		if err != nil {
-			return nil, fmt.Errorf("erro ao ler linha do produto: %w", err)
+			return nil, fmt.Errorf("erro ao ler linha do produto:\n %w", err)
 		}
+
 		ProductSubgroup = append(ProductSubgroup, &pg)
 	}
 

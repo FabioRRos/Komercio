@@ -35,9 +35,9 @@ func (d *ProductGroupDatastore) Close() {
 // CREATE (POST)
 func (d *ProductGroupDatastore) CreateProducGroup(productGroup *entity.ProductGroup) error {
 	query := `INSERT INTO product_group
-	(group_id, group_name) Values ($1, $2)`
+	(group_name) Values ($1)`
 
-	_, err := d.Conn.Exec(context.Background(), query, productGroup.ProductGroup_id, productGroup.ProducGroup_name)
+	_, err := d.Conn.Exec(context.Background(), query, productGroup.ProducGroup_name)
 
 	if err != nil {
 		return fmt.Errorf("Erro ao inserir grupo de produtos: %w", err)

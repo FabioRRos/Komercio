@@ -28,11 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmProductVisualize));
             this.panel1 = new System.Windows.Forms.Panel();
-            this.dgvProdutos = new System.Windows.Forms.DataGridView();
-            this.mtbNomeProduto = new MaterialSkin.Controls.MaterialTextBox2();
-            this.mbtLimparFiltros = new MaterialSkin.Controls.MaterialButton();
             this.mgbGrupo = new MaterialSkin.Controls.MaterialComboBox();
+            this.mbtLimparFiltros = new MaterialSkin.Controls.MaterialButton();
+            this.mtbNomeProduto = new MaterialSkin.Controls.MaterialTextBox2();
+            this.dgvProdutos = new System.Windows.Forms.DataGridView();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProdutos)).BeginInit();
             this.SuspendLayout();
@@ -48,17 +49,50 @@
             this.panel1.Size = new System.Drawing.Size(611, 98);
             this.panel1.TabIndex = 0;
             // 
-            // dgvProdutos
+            // mgbGrupo
             // 
-            this.dgvProdutos.AllowUserToAddRows = false;
-            this.dgvProdutos.AllowUserToDeleteRows = false;
-            this.dgvProdutos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvProdutos.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvProdutos.Location = new System.Drawing.Point(0, 98);
-            this.dgvProdutos.Name = "dgvProdutos";
-            this.dgvProdutos.ReadOnly = true;
-            this.dgvProdutos.Size = new System.Drawing.Size(611, 409);
-            this.dgvProdutos.TabIndex = 1;
+            this.mgbGrupo.AutoResize = false;
+            this.mgbGrupo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.mgbGrupo.Depth = 0;
+            this.mgbGrupo.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
+            this.mgbGrupo.DropDownHeight = 174;
+            this.mgbGrupo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.mgbGrupo.DropDownWidth = 121;
+            this.mgbGrupo.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
+            this.mgbGrupo.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.mgbGrupo.FormattingEnabled = true;
+            this.mgbGrupo.Hint = "Grupo do produto";
+            this.mgbGrupo.IntegralHeight = false;
+            this.mgbGrupo.ItemHeight = 43;
+            this.mgbGrupo.Location = new System.Drawing.Point(226, 24);
+            this.mgbGrupo.MaxDropDownItems = 4;
+            this.mgbGrupo.MouseState = MaterialSkin.MouseState.OUT;
+            this.mgbGrupo.Name = "mgbGrupo";
+            this.mgbGrupo.Size = new System.Drawing.Size(192, 49);
+            this.mgbGrupo.StartIndex = 0;
+            this.mgbGrupo.TabIndex = 2;
+            this.mgbGrupo.SelectedIndexChanged += new System.EventHandler(this.mgbGrupo_SelectedIndexChanged);
+            // 
+            // mbtLimparFiltros
+            // 
+            this.mbtLimparFiltros.AutoSize = false;
+            this.mbtLimparFiltros.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.mbtLimparFiltros.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.mbtLimparFiltros.Depth = 0;
+            this.mbtLimparFiltros.HighEmphasis = true;
+            this.mbtLimparFiltros.Icon = null;
+            this.mbtLimparFiltros.Location = new System.Drawing.Point(444, 24);
+            this.mbtLimparFiltros.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.mbtLimparFiltros.MouseState = MaterialSkin.MouseState.HOVER;
+            this.mbtLimparFiltros.Name = "mbtLimparFiltros";
+            this.mbtLimparFiltros.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.mbtLimparFiltros.Size = new System.Drawing.Size(127, 48);
+            this.mbtLimparFiltros.TabIndex = 4;
+            this.mbtLimparFiltros.Text = "Limpar Filtros";
+            this.mbtLimparFiltros.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+            this.mbtLimparFiltros.UseAccentColor = false;
+            this.mbtLimparFiltros.UseVisualStyleBackColor = true;
+            this.mbtLimparFiltros.Click += new System.EventHandler(this.mbtLimparFiltros_Click);
             // 
             // mtbNomeProduto
             // 
@@ -66,7 +100,7 @@
             this.mtbNomeProduto.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.mtbNomeProduto.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
             this.mtbNomeProduto.Depth = 0;
-            this.mtbNomeProduto.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.mtbNomeProduto.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.mtbNomeProduto.HideSelection = true;
             this.mtbNomeProduto.Hint = "Nome do produto";
             this.mtbNomeProduto.LeadingIcon = null;
@@ -91,50 +125,17 @@
             this.mtbNomeProduto.Click += new System.EventHandler(this.mtbNomeProduto_Click);
             this.mtbNomeProduto.TextChanged += new System.EventHandler(this.mtbNomeProduto_TextChanged);
             // 
-            // mbtLimparFiltros
+            // dgvProdutos
             // 
-            this.mbtLimparFiltros.AutoSize = false;
-            this.mbtLimparFiltros.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.mbtLimparFiltros.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
-            this.mbtLimparFiltros.Depth = 0;
-            this.mbtLimparFiltros.HighEmphasis = true;
-            this.mbtLimparFiltros.Icon = null;
-            this.mbtLimparFiltros.Location = new System.Drawing.Point(444, 24);
-            this.mbtLimparFiltros.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.mbtLimparFiltros.MouseState = MaterialSkin.MouseState.HOVER;
-            this.mbtLimparFiltros.Name = "mbtLimparFiltros";
-            this.mbtLimparFiltros.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.mbtLimparFiltros.Size = new System.Drawing.Size(127, 48);
-            this.mbtLimparFiltros.TabIndex = 4;
-            this.mbtLimparFiltros.Text = "Limpar Filtros";
-            this.mbtLimparFiltros.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
-            this.mbtLimparFiltros.UseAccentColor = false;
-            this.mbtLimparFiltros.UseVisualStyleBackColor = true;
-            this.mbtLimparFiltros.Click += new System.EventHandler(this.mbtLimparFiltros_Click);
-            // 
-            // mgbGrupo
-            // 
-            this.mgbGrupo.AutoResize = false;
-            this.mgbGrupo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.mgbGrupo.Depth = 0;
-            this.mgbGrupo.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
-            this.mgbGrupo.DropDownHeight = 174;
-            this.mgbGrupo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.mgbGrupo.DropDownWidth = 121;
-            this.mgbGrupo.Font = new System.Drawing.Font("Roboto Medium", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
-            this.mgbGrupo.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.mgbGrupo.FormattingEnabled = true;
-            this.mgbGrupo.Hint = "Grupo do produto";
-            this.mgbGrupo.IntegralHeight = false;
-            this.mgbGrupo.ItemHeight = 43;
-            this.mgbGrupo.Location = new System.Drawing.Point(226, 24);
-            this.mgbGrupo.MaxDropDownItems = 4;
-            this.mgbGrupo.MouseState = MaterialSkin.MouseState.OUT;
-            this.mgbGrupo.Name = "mgbGrupo";
-            this.mgbGrupo.Size = new System.Drawing.Size(192, 49);
-            this.mgbGrupo.StartIndex = 0;
-            this.mgbGrupo.TabIndex = 2;
-            this.mgbGrupo.SelectedIndexChanged += new System.EventHandler(this.mgbGrupo_SelectedIndexChanged);
+            this.dgvProdutos.AllowUserToAddRows = false;
+            this.dgvProdutos.AllowUserToDeleteRows = false;
+            this.dgvProdutos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvProdutos.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvProdutos.Location = new System.Drawing.Point(0, 98);
+            this.dgvProdutos.Name = "dgvProdutos";
+            this.dgvProdutos.ReadOnly = true;
+            this.dgvProdutos.Size = new System.Drawing.Size(611, 409);
+            this.dgvProdutos.TabIndex = 1;
             // 
             // frmProductVisualize
             // 
@@ -143,8 +144,9 @@
             this.ClientSize = new System.Drawing.Size(611, 507);
             this.Controls.Add(this.dgvProdutos);
             this.Controls.Add(this.panel1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmProductVisualize";
-            this.Text = "frmProductVisualize";
+            this.Text = "Visualizar produtos cadastrados";
             this.Load += new System.EventHandler(this.frmProductVisualize_Load);
             this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvProdutos)).EndInit();

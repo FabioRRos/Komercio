@@ -166,22 +166,28 @@
     <Compile Include="UI\Forms\Product\fmCreateGroupAndSubgroup.Designer.cs">
       <DependentUpon>fmCreateGroupAndSubgroup.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\Forms\Product\fmCreateProduct.cs">
+    <Compile Include="UI\Forms\Product\Produto\fmAlterarProduto.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\Forms\Product\fmCreateProduct.Designer.cs">
+    <Compile Include="UI\Forms\Product\Produto\fmAlterarProduto.Designer.cs">
+      <DependentUpon>fmAlterarProduto.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Forms\Product\Produto\fmCreateProduct.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Forms\Product\Produto\fmCreateProduct.Designer.cs">
       <DependentUpon>fmCreateProduct.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\Forms\Product\fmImputProduct.cs">
+    <Compile Include="UI\Forms\Product\Produto\fmImputProduct.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\Forms\Product\fmImputProduct.Designer.cs">
+    <Compile Include="UI\Forms\Product\Produto\fmImputProduct.Designer.cs">
       <DependentUpon>fmImputProduct.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\Forms\Product\fmNewProductLote.cs">
+    <Compile Include="UI\Forms\Product\Produto\fmNewProductLote.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\Forms\Product\fmNewProductLote.Designer.cs">
+    <Compile Include="UI\Forms\Product\Produto\fmNewProductLote.Designer.cs">
       <DependentUpon>fmNewProductLote.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\Forms\Product\fmProductSettings.cs">
@@ -189,6 +195,18 @@
     </Compile>
     <Compile Include="UI\Forms\Product\fmProductSettings.Designer.cs">
       <DependentUpon>fmProductSettings.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Forms\Product\Subgrupo\fmrCadastroSubGrupoProduto.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Forms\Product\Subgrupo\fmrCadastroSubGrupoProduto.Designer.cs">
+      <DependentUpon>fmrCadastroSubGrupoProduto.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Forms\Product\Grupo\frmCadastroGrupo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Forms\Product\Grupo\frmCadastroGrupo.Designer.cs">
+      <DependentUpon>frmCadastroGrupo.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\Forms\Product\frmDescarte.cs">
       <SubType>Form</SubType>
@@ -258,17 +276,26 @@
     <EmbeddedResource Include="UI\Forms\Product\fmCreateGroupAndSubgroup.resx">
       <DependentUpon>fmCreateGroupAndSubgroup.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\Forms\Product\fmCreateProduct.resx">
+    <EmbeddedResource Include="UI\Forms\Product\Produto\fmAlterarProduto.resx">
+      <DependentUpon>fmAlterarProduto.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Forms\Product\Produto\fmCreateProduct.resx">
       <DependentUpon>fmCreateProduct.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\Forms\Product\fmImputProduct.resx">
+    <EmbeddedResource Include="UI\Forms\Product\Produto\fmImputProduct.resx">
       <DependentUpon>fmImputProduct.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\Forms\Product\fmNewProductLote.resx">
+    <EmbeddedResource Include="UI\Forms\Product\Produto\fmNewProductLote.resx">
       <DependentUpon>fmNewProductLote.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Forms\Product\fmProductSettings.resx">
       <DependentUpon>fmProductSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Forms\Product\Subgrupo\fmrCadastroSubGrupoProduto.resx">
+      <DependentUpon>fmrCadastroSubGrupoProduto.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Forms\Product\Grupo\frmCadastroGrupo.resx">
+      <DependentUpon>frmCadastroGrupo.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Forms\Product\frmDescarte.resx">
       <DependentUpon>frmDescarte.cs</DependentUpon>

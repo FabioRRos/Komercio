@@ -135,6 +135,24 @@ namespace Komercio.Services
             }
         }
 
+        public async Task<bool> PutProductAtt(ProductDTO product)
+        {
+            var json = JsonConvert.SerializeObject(product);
+            var content = new StringContent(json, Encoding.UTF8, "application/json");
+            var response = await _httpClient.PutAsync($"products/{product.idProduct}", content);
+
+
+            if (response.IsSuccessStatusCode)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+
+        }
+
 
 
 

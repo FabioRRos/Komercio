@@ -1,0 +1,31 @@
+﻿{
+  "sale": {
+    "customer_id": 0,
+    "total_amount": 29.9,
+    "discount_amount": 0.0,
+    "final_amount": 29.9,
+    "sale_date": "2025-12-15T15:46:59.1458968-03:00",
+    "sale_time": "15:46:59",
+    "payment_method": "Dinheiro",
+    "seller_id": 1,
+    "sale_notes": ""
+  },
+  "items": [
+    {
+      "product_id": 10,
+      "product_name": "Capa Silicone Anti Impacto + Preta iPhone 13",
+      "barcode": "789000010",
+      "unit_price": 29.9,
+      "quantity": 1,
+      "total": 29.9
+    }
+  ],
+  "cash_movement": {
+    "movement_type": "Entrada",
+    "description": null,
+    "amount": 29.9,
+    "payment_method": "Dinheiro",
+    "movement_datetime": "2025-12-15T15:46:59.9343912-03:00",
+    "seller_id": 1
+  }
+}

@@ -1,5 +1,6 @@
 ﻿using Komercio.Models;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -7,6 +8,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace Komercio.Services
 {
@@ -55,6 +57,44 @@ namespace Komercio.Services
                 }
 
                 return productgroup;
+            }
+        }
+
+
+        public async Task<bool> CreateGroup(ProductgroupDTO productGroup)
+        {
+            var json = JsonConvert.SerializeObject(productGroup);
+            var content = new StringContent(json, Encoding.UTF8, "application/json");
+            var response = await _httpClient.PostAsync("productGroup", content);
+
+
+            if (response.IsSuccessStatusCode)
+            {
+                return true;
+            }
+            else
+            {
+                var responseContent = await response.Content.ReadAsStringAsync();
+
+                try
+                {
+                    var jsonError = JObject.Parse(responseContent);
+
+                    string errorMessage = jsonError["error"]?.ToString();
+
+                    if (string.IsNullOrWhiteSpace(errorMessage))
+                        errorMessage = "Erro desconhecido";
+
+                    MessageBox.Show(errorMessage, "Erro ao criar Grupo",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                catch
+                {
+                    // Se não conseguir desserializar, mostra o conteúdo bruto
+                    MessageBox.Show(responseContent, "Erro ao criar o Group", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+
+                return false;
             }
         }
     }

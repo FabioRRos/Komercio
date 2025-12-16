@@ -663,6 +663,7 @@ namespace Komercio.UI.Forms.Sales
                 return;
 
             // Salva JSON pra validação
+            //HABILITAR PARÂMETRO FUTURAMENTE TAMBÉM
             string json = Newtonsoft.Json.JsonConvert.SerializeObject(venda, Newtonsoft.Json.Formatting.Indented);
             System.IO.File.WriteAllText("venda.json", json);
 
@@ -676,7 +677,7 @@ namespace Komercio.UI.Forms.Sales
             var cupom = await finalizer.MontarVenda(venda, _itensVenda, formaPagamento, func);
             _cupomText = cupom;
 
-            printCupom.Print();
+          //  printCupom.Print();
             //    MessageBox.Show("Venda formalizada e arquivo JSON gerado com sucesso!",
             //    "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
 

@@ -170,11 +170,11 @@ namespace Komercio.Services
 
 
             _receiptText = textoFinal;
-            //PrintCupom(Printer);
+           // PrintCupom(Printer);
 
-            return textoFinal;
+             return textoFinal;
         }
-
+        //CRIAR PARÂMETRO PARA IMPRESSÃO DO CUPOM FISCAL!!!!!!
         private void PrintCupom(string printerName)
         {
             try
