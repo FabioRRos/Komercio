@@ -1,4 +1,5 @@
-﻿using Komercio.Models;
+﻿using Komercio.ApplicationLayer;
+using Komercio.Models;
 using Komercio.Services;
 using Komercio.UI.Forms;
 using MeuProjetoWinForms.Services;
@@ -24,7 +25,7 @@ namespace Komercio
             Application.SetCompatibleTextRenderingDefault(false);
             //Base URL da API
             string apiBaseUrl = ConfigurationManager.AppSettings["ApiBaseUrl"];
-
+            
 
             // Cria a instância do serviço da API
             var employeeService = new EmployeeService(apiBaseUrl);
@@ -39,10 +40,10 @@ namespace Komercio
             var cupomService = new CupomService(apiBaseUrl);
 
 
-
+            var productApp = new ProdutoApp(productService, productDescriptionService, productrsuggroupService, productgroupService);
 
             // aqui estou aplicando a injeção de dependência manualmente
-            Application.Run(new Home(employeeService, customerService, productService, productgroupService, productrsuggroupService, productDescriptionService, customerTransactionService, caixaService, cashMovement, cupomService, apiBaseUrl));
+            Application.Run(new Home(employeeService, customerService, productService, productgroupService, productrsuggroupService, productDescriptionService, customerTransactionService, caixaService, cashMovement, cupomService, productApp, apiBaseUrl));
 
 
         }

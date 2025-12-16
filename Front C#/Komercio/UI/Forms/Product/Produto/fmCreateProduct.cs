@@ -1,4 +1,5 @@
-﻿using Komercio.Models;
+﻿using Komercio.ApplicationLayer;
+using Komercio.Models;
 using Komercio.Services;
 using System;
 using System.Collections.Generic;
@@ -16,26 +17,23 @@ namespace Komercio.UI.Forms.Product
 {
     public partial class fmCreateProduct : Form
     {
-        private readonly ProductService _productService;
-        private readonly ProductDescriptionService _productDescriptionService;
-        private readonly ProductSubgroupService _productSubgroupService;
-        private readonly ProductGroupService _productGroupService;
+        private readonly ProdutoApp _produtoApp;
 
 
         private ProductDescriptionDTO description = new ProductDescriptionDTO();
 
-        public fmCreateProduct(ProductService productService, ProductDescriptionService productAndGroupAndSubgroup, ProductSubgroupService productSubgroupService, ProductGroupService productGroupService)
+        public fmCreateProduct(ProdutoApp produtoApp)
         {
-            _productSubgroupService = productSubgroupService;
-            _productGroupService = productGroupService;
-            _productService = productService;
-            _productDescriptionService = productAndGroupAndSubgroup;
+
+
+            _produtoApp = produtoApp;
+
+
             InitializeComponent();
             ComponentsInitialize();
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.MinimizeBox = true;
-            _productService = productService;
         }
 
         public void ComponentsInitialize()
@@ -83,63 +81,50 @@ namespace Komercio.UI.Forms.Product
         }
 
 
-
+        //Chama o app layer para fazer a regra do negócio.
         private async void CreateProductAsync(ProductDTO product)
         {
 
-            var returnSatus = await _productService.CreateProductAsync(product);
+            var result = await _produtoApp.CadastrarProduto(product);
 
-        
-            if (!returnSatus)
+            if (!result)
             {
                 MessageBox.Show("Erro ao criar produto!", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
             }
-
+            else
+            {
+                MessageBox.Show("Produto cadastrado com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
 
         }
 
         private void mbtSaveProduct_Click(object sender, EventArgs e)
         {
 
+            //Joga para a entidade se resolver com a validação.
+
 
             ProductDTO product = new ProductDTO();
-
-           product.productName = mtbProductName.Text;
-            try
-            { 
-                product.productPrice = float.Parse(mtbProductPrice.Text.Replace("R$","")); 
-                if (product.productPrice < 0) 
-                {
-                    MessageBox.Show("Preço inválido!", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return;
-                }
-            }
-            catch
-            {
-                MessageBox.Show("Preço inválido!", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-            product.productCodbar = mtbProductCodeBar.Text;
-            product.productGroup = mcbGroup.SelectedItem.ToString();
-            product.productSubgroup = mcbSubGroup.SelectedItem.ToString();
-
             try
             {
-                product.productStock = int.Parse(mtbProductStock.Text);
-
-                if (product.productStock < 0)
-                {
-                    MessageBox.Show("Quantidade inválida!", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return;
-                }
+                product = product.ValidaProduto(mtbProductName.Text,
+                    mtbProductPrice.Text,
+                    mtbProductCodeBar.Text,
+                    mcbGroup.SelectedItem.ToString(),
+                    mcbSubGroup.SelectedItem.ToString(),
+                    mtbProductStock.Text
+                    );
             }
-            catch
-                        {
-                MessageBox.Show("Quantidade inválida!", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            catch (Exception ex)
+            {
+
+
+
+                    MessageBox.Show($"{ex.Message}", "ERRO!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
+            //menos esse cara aqui kkkk
             if (product.productStatus = msProductStatus.Checked)
             {
                 product.productStatus = true;
@@ -149,20 +134,17 @@ namespace Komercio.UI.Forms.Product
                 product.productStatus = false;
             }
 
-
+            
             try
             {
                 CreateProductAsync(product);
-               
-                
             }
 
             catch
             {
                 return;
             }
-
-            //  this.DialogResult = DialogResult.OK;
+            //zera os componentes
             ComponentsInitialize();
             ComponentsClear();
             mcbGroup.SelectedItem = null;
@@ -179,60 +161,38 @@ namespace Komercio.UI.Forms.Product
             mtbProductPrice.Text = "";
             mtbProductCodeBar.Text = "";
             mcbGroup.SelectedIndex = 0;
-            mcbSubGroup.SelectedIndex = 0;
             mtbProductStock.Text = "";
             msProductStatus.Checked = true;
         }
 
         private void mtbProductPrice_TextChanged(object sender, EventArgs e)
         {
-            try
-            {
-                string texto = mtbProductPrice.Text.Replace("R$", "").Replace(",", "").Replace(".", "").TrimStart('0');
+            //formata o texto da entrada  de valores
+            string texto = mtbProductPrice.Text.Replace("R$", "").Replace(",", "").Replace(".", "").TrimStart('0');
 
-                if (texto.Length == 0)
-                    texto = "0";
+            if (texto.Length == 0)
+                texto = "0";
 
-                decimal valor = Convert.ToDecimal(texto) / 100;
-                mtbProductPrice.Text = string.Format(System.Globalization.CultureInfo.GetCultureInfo("pt-BR"), "{0:C2}", valor);
-                mtbProductPrice.SelectionStart = mtbProductPrice.Text.Length;
-            }
-            catch {
-                MessageBox.Show("Formato de entrada invalido!!", "ATENÇÃO", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                mtbProductPrice.Text = string.Empty;
-                return;
-            };
+            decimal valor = Convert.ToDecimal(texto) / 100;
+            mtbProductPrice.Text = string.Format(System.Globalization.CultureInfo.GetCultureInfo("pt-BR"), "{0:C2}", valor);
+            mtbProductPrice.SelectionStart = mtbProductPrice.Text.Length;
+
         }
 
         private void fmCreateProduct_Load(object sender, EventArgs e)
         {
             LoadListGroupAndSubgroup();
         }
-        private void SubGrupo()
-        {
-            fmrCadastroSubGrupoProduto cadastrarSubGrupo = new fmrCadastroSubGrupoProduto(_productSubgroupService, _productGroupService);
-            cadastrarSubGrupo.ShowDialog();
-        }
-
-
         public async  void LoadListGroupAndSubgroup()
         {
             try
             {
-                var response = await _productDescriptionService.GetProductDescriptionAsync();
+                description = await _produtoApp.Description();
 
-            description.Product = response.Product;
-            description.Group = response.Group.OrderBy(p => p.ProductgroupName).ToList() ;
-            description.Subgroup = response.Subgroup.OrderBy(p => p.ProductsubgroupName).ToList() ;
-
-            foreach (ProductgroupDTO group in description.Group)
-            {
-
-                mcbGroup.Items.Add(group.ProductgroupName);
-
-            }
-
-
+                foreach (ProductgroupDTO group in description.Group)
+                {
+                        mcbGroup.Items.Add(group.ProductgroupName);
+                }
             }
             catch
             {
@@ -254,6 +214,7 @@ namespace Komercio.UI.Forms.Product
             }
 
             if (id == 0) return;
+
             mcbSubGroup.Items.Clear();
             foreach (ProductSubgroupDTO subgroup in description.Subgroup)
             {
@@ -262,6 +223,14 @@ namespace Komercio.UI.Forms.Product
                     mcbSubGroup.Items.Add(subgroup.ProductsubgroupName);
 
                 }
+            }
+        }
+
+        private void mtbProductPrice_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
             }
         }
     }

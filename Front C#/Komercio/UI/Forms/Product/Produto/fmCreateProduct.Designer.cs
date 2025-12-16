@@ -97,6 +97,7 @@
             this.mtbProductPrice.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.mtbProductPrice.TrailingIcon = null;
             this.mtbProductPrice.UseSystemPasswordChar = false;
+            this.mtbProductPrice.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.mtbProductPrice_KeyPress);
             this.mtbProductPrice.TextChanged += new System.EventHandler(this.mtbProductPrice_TextChanged);
             // 
             // mtbProductCodeBar

@@ -1,4 +1,5 @@
-﻿using Komercio.Models;
+﻿using Komercio.ApplicationLayer;
+using Komercio.Models;
 using Komercio.Services;
 using Komercio.UI.Forms;
 using Komercio.UI.Forms.Caixa;
@@ -36,13 +37,20 @@ namespace Komercio
         private readonly CaixaService _caixaService;
         private readonly CashmovementsService _cashmovementsService;
         private readonly CupomService _cupomService;
+        private readonly ProdutoApp _produtoApp;
+
 
         //Status do caixa 
         internal bool caixaStatus;
 
-        public Home(EmployeeService empliyeeService, CustomerService customerService, ProductService productService, ProductGroupService productGroupService, ProductSubgroupService productSubgroupService , ProductDescriptionService productDescriptionService, CustomerTransactionService customerTransactionService,CaixaService caixaService,CashmovementsService cashMovement,CupomService cupomService, string baseUrl)
+        public Home(EmployeeService empliyeeService, CustomerService customerService, ProductService productService, ProductGroupService productGroupService, ProductSubgroupService productSubgroupService , ProductDescriptionService productDescriptionService, CustomerTransactionService customerTransactionService,CaixaService caixaService,CashmovementsService cashMovement,CupomService cupomService, ProdutoApp produtoApp,string httpClient)
         {
             InitializeComponent();
+            // novo testamento
+            _produtoApp = produtoApp;
+
+
+            // antigo testamento abaixo
             _employeeService = empliyeeService;
             _customerService = customerService;
             _productService = productService;
@@ -53,8 +61,10 @@ namespace Komercio
             _caixaService = caixaService;
             _cashmovementsService = cashMovement;
             _cupomService = cupomService;
+            _httpClient = httpClient;
 
-            _httpClient = baseUrl;
+
+
 
 
         }
@@ -275,7 +285,7 @@ namespace Komercio
         {
             if (caixaStatus)
             {
-                fmSalesProduct salesProduct = new fmSalesProduct(_employeeService, _productService, _productGroupService, _productSubgroupService, _customerService, _productDescriptionService, _cupomService, _httpClient);
+                fmSalesProduct salesProduct = new fmSalesProduct(_employeeService, _productService, _productGroupService, _productSubgroupService, _customerService, _productDescriptionService, _cupomService, _httpClient, _produtoApp);
                 salesProduct.ShowDialog();
             }
             else
@@ -329,7 +339,7 @@ namespace Komercio
 
         private void CadastrarProdutoManual()
         {
-            fmCreateProduct createProduct = new fmCreateProduct(_productService, _productDescriptionService,_productSubgroupService,_productGroupService);
+            fmCreateProduct createProduct = new fmCreateProduct(_produtoApp);
             createProduct.ShowDialog();
         }
 

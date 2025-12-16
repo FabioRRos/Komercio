@@ -1,4 +1,5 @@
-﻿using Komercio.Models;
+﻿using Komercio.ApplicationLayer;
+using Komercio.Models;
 using Komercio.Services;
 using Komercio.UI.Forms.Product;
 using MeuProjetoWinForms.Services;
@@ -28,8 +29,15 @@ namespace Komercio.UI.Forms.Sales
         private readonly ProductDescriptionService _productDescriptionService;
         private readonly CupomService _cupomService;
 
-        public fmSalesProduct(EmployeeService employeeService, ProductService productService, ProductGroupService productGroupService, ProductSubgroupService productSubgroupService, CustomerService customerService, ProductDescriptionService productDescriptionService,CupomService cupomService, string baseUrl)
+
+        private readonly ProdutoApp _produtoApp;
+
+        public fmSalesProduct(EmployeeService employeeService, ProductService productService, ProductGroupService productGroupService, ProductSubgroupService productSubgroupService, CustomerService customerService, ProductDescriptionService productDescriptionService,CupomService cupomService, string baseUrl, ProdutoApp produtoApp)
         {
+            _produtoApp = produtoApp;
+
+
+            ////////////////////
             InitializeComponent();
 
             _productService = productService;
@@ -447,7 +455,7 @@ namespace Komercio.UI.Forms.Sales
         {
             if(e.KeyCode == Keys.F4)
             {
-                fmCreateProduct createProduct = new fmCreateProduct(_productService, _productDescriptionService,null,null);
+                fmCreateProduct createProduct = new fmCreateProduct(_produtoApp);
                 createProduct.ShowDialog();
                 loaddbListaproduto();
             }
