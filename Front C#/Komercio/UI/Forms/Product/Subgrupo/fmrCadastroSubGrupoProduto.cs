@@ -1,4 +1,5 @@
-﻿using Komercio.Models;
+﻿using Komercio.ApplicationLayer;
+using Komercio.Models;
 using Komercio.Services;
 using System;
 using System.Collections.Generic;
@@ -22,16 +23,14 @@ namespace Komercio.UI.Forms.Product
 
         private ProductSubgroupDTO ProductDTOSave = new ProductSubgroupDTO();
 
+        private readonly ProdutoApp _produtoApp;
 
 
-        private readonly ProductGroupService _productGroupService;
-        private readonly ProductSubgroupService _productSubgroupService;
 
-        public fmrCadastroSubGrupoProduto(ProductSubgroupService productSubgroupService, ProductGroupService productGroupService)
+
+        public fmrCadastroSubGrupoProduto(ProdutoApp produtoApp)
         {
-            _productGroupService = productGroupService;
-            _productSubgroupService = productSubgroupService;
-
+            _produtoApp = produtoApp;
 
             InitializeComponent();
            
@@ -53,7 +52,7 @@ namespace Komercio.UI.Forms.Product
             productSubgroups.Clear();
             try
             {
-                productSubgroups = await _productSubgroupService.GetProductSubgroupAsync();
+                productSubgroups = await _produtoApp.GetListaDeSubGrupoDeProduto();
             }
             catch
             (Exception ex)
@@ -69,7 +68,7 @@ namespace Komercio.UI.Forms.Product
             
             try
                 {
-                    productGroups = await _productGroupService.GetProductGroupAsync();
+                productGroups = await _produtoApp.GetListaDeGrupoDeProduto();
                 }
             catch(Exception ex)
                 {
@@ -101,11 +100,6 @@ namespace Komercio.UI.Forms.Product
 
         public void AddLista()
         {
-            productGroups = productGroups
-    .OrderBy(p => p.ProductgroupName)
-    .ToList();
-
-
             foreach (var item in productGroups)
             {
                 mcbGrupo.Items.Add(item.ProductgroupName);
@@ -172,7 +166,7 @@ namespace Komercio.UI.Forms.Product
 
         private async void SalvarSubGrupo()
         {
-            var retorno = await _productSubgroupService.CreateSubGroup(ProductDTOSave);
+            var retorno = await _produtoApp.SalvarSubGrupo(ProductDTOSave);
 
 
             if (retorno) MessageBox.Show("SubGrupo Criado com sucesso!");

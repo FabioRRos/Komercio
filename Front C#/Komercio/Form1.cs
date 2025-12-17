@@ -387,12 +387,12 @@ namespace Komercio
 
         private void SubGrupo()
         {
-            fmrCadastroSubGrupoProduto cadastrarSubGrupo = new fmrCadastroSubGrupoProduto(_productSubgroupService,_productGroupService);
+            fmrCadastroSubGrupoProduto cadastrarSubGrupo = new fmrCadastroSubGrupoProduto(_produtoApp);
             cadastrarSubGrupo.ShowDialog();
         }
         private void Grupo()
         {
-            frmCadastroGrupo cadastroGrupo = new frmCadastroGrupo(_productGroupService);
+            frmCadastroGrupo cadastroGrupo = new frmCadastroGrupo(_produtoApp);
             cadastroGrupo.ShowDialog();
         }
         private void AlterarProduto()

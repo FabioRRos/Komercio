@@ -16,13 +16,10 @@ namespace Komercio.UI.Forms.Product
     public partial class frmCadastroGrupo : Form
     {
         private ProductgroupDTO productGroup = new ProductgroupDTO();
-        private readonly ProductGroupService _productGrupo;
         private readonly ProdutoApp _produtoApp;
-        public frmCadastroGrupo(ProductGroupService productGrupo,
-                                ProdutoApp produtoApp)
+        public frmCadastroGrupo(ProdutoApp produtoApp)
         {
             _produtoApp = produtoApp;
-            _productGrupo = productGrupo;
             InitializeComponent();
         }
 

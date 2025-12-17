@@ -164,14 +164,40 @@ namespace Komercio.ApplicationLayer
             return _productService.PutDescarteProduto(descarteProdutoDTO);
         }
 
+        // get da lista de grupos de produtos
+        public async Task<List<ProductgroupDTO>> GetListaDeGrupoDeProduto()
+        {
+            var productGroups =  await _productGroupService.GetProductGroupAsync();
+            productGroups = productGroups
+            .OrderBy(p => p.ProductgroupName)
+            .ToList();
+            return productGroups;
+        }
+
+
+        // get da lista de subgrupos de produtos
+        public async Task<List<ProductSubgroupDTO>> GetListaDeSubGrupoDeProduto()
+        {
+
+            var productSubGroups =  await _productSubgroupService.GetProductSubgroupAsync();
+            productSubGroups = productSubGroups
+            .OrderBy(p => p.ProductsubgroupName)
+            .ToList();
+            return productSubGroups;
+        }
+
+
         //Cadastro grupo de produto
         public async Task<bool>CadastrarGrupoDeProduto(ProductgroupDTO productGroup)
         {
             return await _productGroupService.CreateGroup(productGroup);
         }
 
-
         // cadastro subgrupo de produto
+        public async Task<bool> SalvarSubGrupo(ProductSubgroupDTO ProductDTOSave)
+        {
+            return await _productSubgroupService.CreateSubGroup(ProductDTOSave);
+        }
 
 
 
