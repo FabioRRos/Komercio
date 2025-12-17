@@ -1,4 +1,5 @@
-﻿using Komercio.Models;
+﻿using Komercio.ApplicationLayer;
+using Komercio.Models;
 using Komercio.Services;
 using System;
 using System.Collections.Generic;
@@ -16,8 +17,11 @@ namespace Komercio.UI.Forms.Product
     {
         private ProductgroupDTO productGroup = new ProductgroupDTO();
         private readonly ProductGroupService _productGrupo;
-        public frmCadastroGrupo(ProductGroupService productGrupo)
+        private readonly ProdutoApp _produtoApp;
+        public frmCadastroGrupo(ProductGroupService productGrupo,
+                                ProdutoApp produtoApp)
         {
+            _produtoApp = produtoApp;
             _productGrupo = productGrupo;
             InitializeComponent();
         }
@@ -33,7 +37,7 @@ namespace Komercio.UI.Forms.Product
         private async void CadastroGrupo()
         {
             bool retorno;
-                retorno = await _productGrupo.CreateGroup(productGroup);
+            retorno = await _produtoApp.CadastrarGrupoDeProduto(productGroup);
             if (retorno) MessageBox.Show("Grupo Criado com sucesso!");
             return;
         }

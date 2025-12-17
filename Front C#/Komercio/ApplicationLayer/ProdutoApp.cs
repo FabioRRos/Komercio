@@ -164,6 +164,15 @@ namespace Komercio.ApplicationLayer
             return _productService.PutDescarteProduto(descarteProdutoDTO);
         }
 
+        //Cadastro grupo de produto
+        public async Task<bool>CadastrarGrupoDeProduto(ProductgroupDTO productGroup)
+        {
+            return await _productGroupService.CreateGroup(productGroup);
+        }
+
+
+        // cadastro subgrupo de produto
+
 
 
 
