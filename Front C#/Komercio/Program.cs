@@ -40,10 +40,27 @@ namespace Komercio
             var cupomService = new CupomService(apiBaseUrl);
 
 
-            var productApp = new ProdutoApp(productService, productDescriptionService, productrsuggroupService, productgroupService);
+            var employeeServiceApp = new EmployeeServiceApp(employeeService);
+            var productApp = new ProdutoApp(productService,
+                                            productDescriptionService,
+                                            productrsuggroupService,
+                                            productgroupService,
+                                            employeeServiceApp);
 
             // aqui estou aplicando a injeção de dependência manualmente
-            Application.Run(new Home(employeeService, customerService, productService, productgroupService, productrsuggroupService, productDescriptionService, customerTransactionService, caixaService, cashMovement, cupomService, productApp, apiBaseUrl));
+            Application.Run(new Home(employeeService,
+                                    customerService,
+                                    productService,
+                                    productgroupService,
+                                    productrsuggroupService,
+                                    productDescriptionService,
+                                    customerTransactionService,
+                                    caixaService,
+                                    cashMovement,
+                                    cupomService,
+                                    productApp,
+                                    employeeServiceApp,
+                                    apiBaseUrl));
 
 
         }

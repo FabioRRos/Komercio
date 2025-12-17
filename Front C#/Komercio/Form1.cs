@@ -37,17 +37,21 @@ namespace Komercio
         private readonly CaixaService _caixaService;
         private readonly CashmovementsService _cashmovementsService;
         private readonly CupomService _cupomService;
+
+        //pós refatoração
         private readonly ProdutoApp _produtoApp;
+        private readonly EmployeeServiceApp _employeeServiceApp;
 
 
         //Status do caixa 
         internal bool caixaStatus;
 
-        public Home(EmployeeService empliyeeService, CustomerService customerService, ProductService productService, ProductGroupService productGroupService, ProductSubgroupService productSubgroupService , ProductDescriptionService productDescriptionService, CustomerTransactionService customerTransactionService,CaixaService caixaService,CashmovementsService cashMovement,CupomService cupomService, ProdutoApp produtoApp,string httpClient)
+        public Home(EmployeeService empliyeeService, CustomerService customerService, ProductService productService, ProductGroupService productGroupService, ProductSubgroupService productSubgroupService , ProductDescriptionService productDescriptionService, CustomerTransactionService customerTransactionService,CaixaService caixaService,CashmovementsService cashMovement,CupomService cupomService, ProdutoApp produtoApp, EmployeeServiceApp employeeServiceApp,string httpClient)
         {
             InitializeComponent();
             // novo testamento
             _produtoApp = produtoApp;
+            _employeeServiceApp = employeeServiceApp;
 
 
             // antigo testamento abaixo
@@ -371,7 +375,7 @@ namespace Komercio
 
         private void DescartarProdutos()
         {
-            frmDescarte descarteProduto = new frmDescarte(_productService,_employeeService);
+            frmDescarte descarteProduto = new frmDescarte(_produtoApp, _employeeServiceApp);
             descarteProduto.ShowDialog();
         }
 

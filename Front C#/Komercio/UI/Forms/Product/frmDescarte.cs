@@ -1,4 +1,5 @@
-﻿using Komercio.Models;
+﻿using Komercio.ApplicationLayer;
+using Komercio.Models;
 using Komercio.Services;
 using MeuProjetoWinForms.Services;
 using System;
@@ -15,15 +16,22 @@ namespace Komercio.UI.Forms.Product
 {
     public partial class frmDescarte : Form
     {
-        private readonly ProductService _productService;
-        private readonly EmployeeService _employeeService;
+
+
+        private readonly EmployeeServiceApp _employeeServiceApp;
+        private readonly ProdutoApp _produtoApp;
+
         private DescarteProdutoDTO descarteProdutoDTO = new DescarteProdutoDTO();
 
-        public frmDescarte(ProductService productService, EmployeeService employeeService)
+        public frmDescarte(ProdutoApp produtoApp,
+                            EmployeeServiceApp employeeServiceApp)
         {
             InitializeComponent();
-            _employeeService = employeeService;
-            _productService = productService;
+
+
+            _employeeServiceApp = employeeServiceApp;
+            _produtoApp = produtoApp;
+
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.MinimizeBox = true;
@@ -59,7 +67,7 @@ namespace Komercio.UI.Forms.Product
 
         private async void UpdateProduct()
         {
-            var temp = await _productService.PutDescarteProduto(descarteProdutoDTO);
+            var temp = await _produtoApp.AtualizaStatusDoProdutoEmDescarte(descarteProdutoDTO);
 
 
             if (temp != false)
@@ -70,20 +78,17 @@ namespace Komercio.UI.Forms.Product
 
         private void ValidationLogin()
         {
-            using (frmLogin login = new frmLogin(_employeeService))
-            {
-                var retorno = login.ShowDialog();
+                var (retorno,id) = _employeeServiceApp.ValidaLogin();
 
                 if (retorno == DialogResult.OK)
                 {
-                    descarteProdutoDTO.Id_funcionario = login.employeersId;
+                    descarteProdutoDTO.Id_funcionario = id;
                 }
                 else
                 {
                     MessageBox.Show("ACESSO NEGADO", "ATENÇÃO", MessageBoxButtons.OK, MessageBoxIcon.Stop);
                     this.Close();
                 }
-            }
         }
     }
 }

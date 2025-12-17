@@ -17,20 +17,21 @@ namespace Komercio.ApplicationLayer
         private readonly ProductSubgroupService _productSubgroupService;
         private readonly ProductGroupService _productGroupService;
         
+        private readonly EmployeeServiceApp _employeesServiceApp;
 
         // Variáveis utilizadas na classe.
         internal ProductDTO _productDTO = new ProductDTO();
 
         // Lista utilizadas na classe.
 
-        public ProdutoApp(ProductService productService, ProductDescriptionService productAndGroupAndSubgroup, ProductSubgroupService productSubgroupService, ProductGroupService productGroupService)
+        public ProdutoApp(ProductService productService, ProductDescriptionService productAndGroupAndSubgroup, ProductSubgroupService productSubgroupService, ProductGroupService productGroupService, EmployeeServiceApp employeesServiceApp)
         {
             _productSubgroupService = productSubgroupService;
             _productGroupService = productGroupService;
             _productService = productService;
             _productDescriptionService = productAndGroupAndSubgroup;
 
-
+            _employeesServiceApp = employeesServiceApp;
         }
 
         //POST de produto (salva eles)
@@ -114,7 +115,7 @@ namespace Komercio.ApplicationLayer
             return (product, productGroup);
         }
 
-
+        //sempre que precisar realizar um filtro por nome do produto, é esse carinha aqui
         public List<ProductDTO> FiltroDeProdutos(List<ProductDTO> product,string valor)
         {
             List<ProductDTO> list = new List<ProductDTO>();
@@ -156,6 +157,15 @@ namespace Komercio.ApplicationLayer
         {
             return await _productService.PutProductNotification(productListChenged);
         }
+
+        //Sempre que quiser descartar um produto, utiliar esse cara
+        public Task<bool> AtualizaStatusDoProdutoEmDescarte(DescarteProdutoDTO descarteProdutoDTO)
+        {
+            return _productService.PutDescarteProduto(descarteProdutoDTO);
+        }
+
+
+
 
 
 
