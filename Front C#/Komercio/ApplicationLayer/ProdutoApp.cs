@@ -16,6 +16,7 @@ namespace Komercio.ApplicationLayer
         private readonly ProductDescriptionService _productDescriptionService;
         private readonly ProductSubgroupService _productSubgroupService;
         private readonly ProductGroupService _productGroupService;
+        
 
         // Variáveis utilizadas na classe.
         internal ProductDTO _productDTO = new ProductDTO();
@@ -104,5 +105,43 @@ namespace Komercio.ApplicationLayer
             }
             return error;
         }
+
+        public async Task<(List<ProductDTO>, List<ProductgroupDTO>)> BuscaListaDeProdutoEGrupo()
+        {
+            var product = await _productService.GetProductInStockAsync();
+            var productGroup = await _productGroupService.GetProductGroupAsync();
+
+            return (product, productGroup);
+        }
+
+
+        public List<ProductDTO> FiltroDeProdutos(List<ProductDTO> product,string valor)
+        {
+            List<ProductDTO> list = new List<ProductDTO>();
+
+            foreach (var prod in product)
+            {
+                bool encontrou =
+            prod.productGroup != null &&
+            valor != null &&
+            prod.productGroup.IndexOf(
+                valor,
+                StringComparison.OrdinalIgnoreCase) >= 0;
+
+                if (encontrou)
+                {
+                    list.Add(prod);
+                }
+                else
+                {
+                    continue;
+                }
+            }
+
+            return list;
+        }
+
+
+
     }
 }

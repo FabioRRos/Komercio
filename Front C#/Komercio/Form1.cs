@@ -377,7 +377,7 @@ namespace Komercio
 
         private void ListaDeProdutos()
         {
-            frmProductVisualize listaProduto = new frmProductVisualize(_productService,_productGroupService);
+            frmProductVisualize listaProduto = new frmProductVisualize(_produtoApp);
             listaProduto.ShowDialog();
         }
 

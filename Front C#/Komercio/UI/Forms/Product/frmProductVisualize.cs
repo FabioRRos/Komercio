@@ -1,4 +1,5 @@
-﻿using Komercio.Models;
+﻿using Komercio.ApplicationLayer;
+using Komercio.Models;
 using Komercio.Services;
 using System;
 using System.Collections.Generic;
@@ -21,13 +22,16 @@ namespace Komercio.UI.Forms.Product
 
         // injeção de dependência
 
-        private readonly ProductService _productService;
-        private readonly ProductGroupService _productgroup;
+        private readonly ProdutoApp _produtoApp;
 
-        public frmProductVisualize(ProductService productService, ProductGroupService productgroup)
+        //private readonly ProductService _productService;
+        //private readonly ProductGroupService _productgroup;
+
+        public frmProductVisualize(ProdutoApp produtoApp)
         {
-           _productService = productService;
-            _productgroup = productgroup;
+            _produtoApp = produtoApp;
+           //_productService = productService;
+           // _productgroup = productgroup;
             InitializeComponent();
         }
 
@@ -43,19 +47,18 @@ namespace Komercio.UI.Forms.Product
         private async void loaddbListaproduto()
         {
             // Aqui estou carregando a lista dentro do service.
-            product = await _productService.GetProductInStockAsync();
-            productList = await _productgroup.GetProductGroupAsync();
-
+            (product, productList) = await _produtoApp.BuscaListaDeProdutoEGrupo();
             dgvProdutos.DataSource = product;
             ConfigurarColunasProdutos();
             CarregaLista();
         }
-
+        // adiciono os itens no groupBox
         private void CarregaLista()
         {
             foreach (var product in productList) {
                 mgbGrupo.Items.Add(product.ProductgroupName);
             }
+            ConfigurarDataGridViews();
 
         }
         private void ConfigurarDataGridViews()
@@ -106,24 +109,26 @@ namespace Komercio.UI.Forms.Product
         {
             List<ProductDTO> list = new List<ProductDTO>();
 
-            foreach (var prod in product)
-            {
-                bool encontrou =
-    prod.productGroup != null &&
-    mgbGrupo.Text != null &&
-    prod.productGroup.IndexOf(
-        mgbGrupo.Text,
-        StringComparison.OrdinalIgnoreCase) >= 0;
+            list =  _produtoApp.FiltroDeProdutos(product, mgbGrupo.Text);
 
-                if (encontrou)
-                {
-                    list.Add(prod);
-                }
-                else
-                {
-                    continue;
-                }
-            }
+    //        foreach (var prod in product)
+    //        {
+    //            bool encontrou =
+    //prod.productGroup != null &&
+    //mgbGrupo.Text != null &&
+    //prod.productGroup.IndexOf(
+    //    mgbGrupo.Text,
+    //    StringComparison.OrdinalIgnoreCase) >= 0;
+
+    //            if (encontrou)
+    //            {
+    //                list.Add(prod);
+    //            }
+    //            else
+    //            {
+    //                continue;
+    //            }
+    //        }
 
             dgvProdutos.DataSource = list;
         }

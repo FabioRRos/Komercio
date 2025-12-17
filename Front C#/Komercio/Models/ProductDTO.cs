@@ -53,7 +53,6 @@ namespace Komercio.Models
                 if (product.productPrice < 0)
                 {
                     throw new ArgumentException("Preço inválido!");
-
                 }
             }
             catch
@@ -72,13 +71,11 @@ namespace Komercio.Models
                 if (product.productStock < 0)
                 {
                     throw new ArgumentException("Quantidade inválida!");
-
                 }
             }
             catch
             {
                 throw new ArgumentException("Quantidade inválida!");
-
             }
 
            
