@@ -462,7 +462,7 @@ namespace Komercio.UI.Forms.Sales
 
             if (e.KeyCode == Keys.F5)
             {
-                fmImputProduct inputProduct = new fmImputProduct(_productService);
+                fmImputProduct inputProduct = new fmImputProduct(_produtoApp);
                 inputProduct.ShowDialog();
                 loaddbListaproduto();
             }

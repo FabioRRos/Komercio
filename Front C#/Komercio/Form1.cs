@@ -333,7 +333,7 @@ namespace Komercio
 
         private void EntradaEstoque()
         {
-            fmImputProduct imputProduct = new fmImputProduct(_productService);
+            fmImputProduct imputProduct = new fmImputProduct(_produtoApp);
             imputProduct.ShowDialog();
         }
 

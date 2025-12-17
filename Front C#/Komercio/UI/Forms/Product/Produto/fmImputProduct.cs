@@ -1,4 +1,5 @@
-﻿using Komercio.Models;
+﻿using Komercio.ApplicationLayer;
+using Komercio.Models;
 using Komercio.Services;
 using MaterialSkin.Controls;
 using System;
@@ -17,11 +18,13 @@ namespace Komercio.UI.Forms.Product
 {
     public partial class fmImputProduct : Form
     {
-        private readonly ProductService _productService;
-        public fmImputProduct(ProductService productService)
+        private readonly ProdutoApp _produtoApp;
+        public fmImputProduct( ProdutoApp produtoApp)
         {
             InitializeComponent();
-            _productService = productService;
+           
+
+            _produtoApp = produtoApp;
         }
         private void msOptionsInput_CheckedChanged(object sender, EventArgs e)
         {
@@ -39,6 +42,9 @@ namespace Komercio.UI.Forms.Product
             }
         }
 
+
+        //AQUI EU DOU A ENTRADA SE TUDO DER CERTO SE DER ERRO, AI EU TRATO.
+        //Entrada automática
         private async void mtbCodBar_TextChanged(object sender, EventArgs e)
         {
             if (msOptionsInput.Checked == true)
@@ -49,7 +55,7 @@ namespace Komercio.UI.Forms.Product
                 }
                 try
                 {
-                    var temp = await _productService.PutProductInStock(mtbCodBar.Text, 1);
+                    var temp = await _produtoApp.EntradaEstoqueCodigoDeBarras(mtbCodBar.Text);
 
                     if (temp == null)
                     {                   
@@ -71,14 +77,14 @@ namespace Komercio.UI.Forms.Product
                 }
             }
         }
-
+        //garante que o form fique do tamanho que foi planejado.
         private void fmImputProduct_Load(object sender, EventArgs e)
         {
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.MinimizeBox = true;
         }
-
+        //entrada manual
         private async void mbtSave_Click(object sender, EventArgs e)
         {
             var stockToAdd = int.Parse(mtbStock.Text);
@@ -95,7 +101,7 @@ namespace Komercio.UI.Forms.Product
                 return;
             }
 
-            var temp = await _productService.PutProductInStock(mtbCodBar.Text, stockToAdd);
+            var temp = await _produtoApp.EntradaEstoqueCodigoDeBarras(mtbCodBar.Text);
 
             if (temp == null)
             {
