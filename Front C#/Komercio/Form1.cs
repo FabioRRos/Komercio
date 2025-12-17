@@ -399,7 +399,7 @@ namespace Komercio
 
         private void CadastrarProdutoLote()
         {
-            btnImportStock newProductLote = new btnImportStock(_productService);
+            btnImportStock newProductLote = new btnImportStock(_produtoApp);
             newProductLote.ShowDialog();
         }
 

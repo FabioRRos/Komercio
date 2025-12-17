@@ -1,4 +1,5 @@
-﻿using Komercio.Models;
+﻿using Komercio.ApplicationLayer;
+using Komercio.Models;
 using Komercio.Services;
 using System;
 using System.Collections.Generic;
@@ -16,18 +17,22 @@ namespace Komercio.UI.Forms.Product
     public partial class btnImportStock : Form
     {
         private string _caminhoArquivo;
-        private readonly ProductService _productService;
+        private readonly ProdutoApp _produtoApp;
         internal ProductDTO _productDTO = new ProductDTO();
 
-        public btnImportStock(ProductService productService)
+        public btnImportStock(ProdutoApp produtoApp)
         {
-            _productService = productService;
+            _produtoApp = produtoApp;
+
+
             InitializeComponent();
         }
-
+        // Busca o diretório e salva em uma variavel.
+        // Aceita CSV apenas.
         private void mtbDirectorySearcher_Click(object sender, EventArgs e)
         {
             OpenFileDialog abrir = new OpenFileDialog();
+
             abrir.Filter = "Arquivos CSV (*.CSV)|*.CSV";
 
             if (abrir.ShowDialog() == DialogResult.OK)
@@ -37,17 +42,17 @@ namespace Komercio.UI.Forms.Product
 
           
             LoadItens(_caminhoArquivo);
+
             materialButton1.Enabled = true;
             mtbDirectorySearcher.Enabled = false;
 
         }
 
         public List<ProductDTO> ProductList = new List<ProductDTO>();
-        public List<string> ErrorProductList = new List<string>();
 
 
 
-
+        // Busca o arquivo no diretório importado e retorna a lista de produtos que deu bom + a quantidade que deu ruim
         public void LoadItens(string caminhoArquivo)
         {
 
@@ -55,9 +60,7 @@ namespace Komercio.UI.Forms.Product
             {
                 return;
             }
-
-          (ProductList,ErrorProductList) =   _productDTO.FileImport(caminhoArquivo);
-            int qtdError = ErrorProductList.Count;
+         var  (ProductList, qtdError) = _produtoApp.BuscarEAbrirArquivo(caminhoArquivo);
 
             if (qtdError > 0)
             {
@@ -66,7 +69,7 @@ namespace Komercio.UI.Forms.Product
                 dgwImportList.DataSource = ProductList;
             VisualizeDG();
         }
-
+        //firnata o DG
         private void VisualizeDG()
         {
             dgwImportList.Columns["idproduct"].Visible = false;
@@ -79,50 +82,15 @@ namespace Komercio.UI.Forms.Product
             dgwImportList.Columns["productStatus"].HeaderText = "Status";
 
 
-
-
-
             dgwImportList.BackgroundColor = Color.White;
             dgwImportList.BorderStyle = BorderStyle.None;
             dgwImportList.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
-
-
-
         }
 
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+
+        private void materialButton1_Click(object sender, EventArgs e)
         {
-
-        }
-
-        private  void materialButton1_Click(object sender, EventArgs e)
-        {
-            var error = 0;
-
-            foreach (var product in ProductList)
-            {
-                try
-                {
-                    CreateProductAsync(product);
-                }
-                catch 
-                {
-                    error++;
-                }
-
-            }
-
-            if (error == 0)
-            {
-                MessageBox.Show("Todos os produtos imporatdos com sucesso!", "Sucesso.", MessageBoxButtons.OK, MessageBoxIcon.Information);
-       
-            }
-            else
-            {
-                MessageBox.Show(error + "produtos tiveram erro de importação. Favor verificar a lista e tentar novamente.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
-            }
-
+             CadastrarList();
             materialButton1.Enabled = false;
             mtbDirectorySearcher.Enabled = true;
             dgwImportList.DataSource = null;
@@ -137,17 +105,26 @@ namespace Komercio.UI.Forms.Product
         }
 
 
-        private async void CreateProductAsync(ProductDTO product)
+        private async void CadastrarList()
         {
+            var error = await _produtoApp.CadastrarProdutosEmLote(ProductList);
 
-            await _productService.CreateProductAsync(product);
+            if (error == 0)
+            {
+                MessageBox.Show("Todos os produtos imporatdos com sucesso!", "Sucesso.", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+            }
+            else
+            {
+                MessageBox.Show(error + "produtos tiveram erro de importação. Favor verificar a lista e tentar novamente.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
 
+            }
         }
 
         private void btnImportStock_Load(object sender, EventArgs e)
         {
 
-        }
+      }
     }
 }

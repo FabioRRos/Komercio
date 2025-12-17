@@ -65,7 +65,7 @@
             this.dgwImportList.ReadOnly = true;
             this.dgwImportList.Size = new System.Drawing.Size(596, 207);
             this.dgwImportList.TabIndex = 1;
-            this.dgwImportList.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
+            //this.dgwImportList.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
             // materialButton1
             // 

@@ -18,7 +18,7 @@ namespace Komercio.ApplicationLayer
         private readonly ProductGroupService _productGroupService;
 
         // Variáveis utilizadas na classe.
-
+        internal ProductDTO _productDTO = new ProductDTO();
 
         // Lista utilizadas na classe.
 
@@ -28,6 +28,8 @@ namespace Komercio.ApplicationLayer
             _productGroupService = productGroupService;
             _productService = productService;
             _productDescriptionService = productAndGroupAndSubgroup;
+
+
         }
 
         //POST de produto (salva eles)
@@ -65,10 +67,42 @@ namespace Komercio.ApplicationLayer
             return await _productService.PutProductAtt(produto);
         }
 
-
+        // put de produtos no estoque
         public async Task<ProductDTO> EntradaEstoqueCodigoDeBarras(string codBarras)
         {
             return await _productService.PutProductInStock(codBarras, 1);
+        }
+
+
+        // abre o arquivo no diretório que recebo e retorno a lista de produtos que estavam com a formatação correta + a quantidade de itens que deram erro.
+
+        public (List<ProductDTO>, int erros) BuscarEAbrirArquivo(string caminhoArquivo)
+        {
+
+            var (productList, errorProductList) = _productDTO.FileImport(caminhoArquivo);
+            int erros = errorProductList.Count;
+            return (productList, erros);
+        }
+
+        //Aqui eu faço a importação da lista item a item
+        //Como já fiz a validação dos campos e do layout, eu garanto que se der erro sera uma excessão.
+        public async Task<int> CadastrarProdutosEmLote(List<ProductDTO> productDTO)
+        {
+            var error = 0;
+
+            foreach (var product in productDTO)
+            {
+                try
+                {
+                    await _productService.CreateProductAsync(product);
+                }
+                catch
+                {
+                    error++;
+                }
+
+            }
+            return error;
         }
     }
 }
