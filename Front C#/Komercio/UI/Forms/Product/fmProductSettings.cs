@@ -1,4 +1,5 @@
-﻿using Komercio.Models;
+﻿using Komercio.ApplicationLayer;
+using Komercio.Models;
 using Komercio.Services;
 using System;
 using System.Collections.Generic;
@@ -16,14 +17,12 @@ namespace Komercio.UI.Forms.Product
     public partial class fmProductSettings : Form
     {
 
-        private readonly ProductService _productService;
         List<ProductNotificationSettingsDTO> productListChenged = new List<ProductNotificationSettingsDTO>();
+        private readonly ProdutoApp _produtoApp;
 
-
-
-        public fmProductSettings(ProductService productService)
+        public fmProductSettings(ProdutoApp produtoApp)
         {
-            _productService = productService;
+            _produtoApp = produtoApp;
 
             InitializeComponent();
         }
@@ -48,10 +47,7 @@ namespace Komercio.UI.Forms.Product
         List<ProductNotificationSettingsDTO> productList = new List<ProductNotificationSettingsDTO>();
         private async void LoadDGProductSettings()
         {
-            productList = await _productService.GetProductNotificationSettingAsync();
-
-            productList =  productList.OrderBy(p => p.Productname).ToList();
-
+            productList = await _produtoApp.ListaDeProdutosParaNotificacao();
             dgwNotStick.DataSource = productList;
             DataGridStyle();
             DGPorudctLayout();
@@ -60,22 +56,11 @@ namespace Komercio.UI.Forms.Product
         private void DGPorudctLayout()
         {
             dgwNotStick.Columns["Id_productNotification"].Visible = false;
-
-
             dgwNotStick.Columns["Productname"].HeaderText = "Produto";
             dgwNotStick.Columns["Productstock"].HeaderText = "Notificar em:";
             dgwNotStick.Columns["Notify_enabled"].HeaderText = "Ativar Notificação?";
-
-
             dgwNotStick.Columns["Productname"].ReadOnly = true;
-
         }
-
-        private void dgwNotStick_CellEndEdit(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
         private void dgwNotStick_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
         {
             if (dgwNotStick.CurrentCell.ColumnIndex == 2) 
@@ -97,31 +82,49 @@ namespace Komercio.UI.Forms.Product
                 e.Handled = true; // bloqueia o caractere
             }
         }
-
+        //Esse cara aqui é complicado kkk
         private void dgwNotStick_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
+            // se linha e coluna forem maiores que 0 (tem itens) inicio o processo.
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
             {
+                // Pega a celula clicada no DataGridView
                 DataGridViewCell cell = dgwNotStick.Rows[e.RowIndex].Cells[e.ColumnIndex];
+
+                // Cria uma nova variavel (na vdd obj~) de notificação de produto
                 ProductNotificationSettingsDTO prodChenged = new ProductNotificationSettingsDTO();
 
+                // corre a lista de produtos já alterados
                 foreach (var item in productListChenged)
                 {
+                    // Pega o Id da notificação da linha clicada
                     int idcontrole = Convert.ToInt32(dgwNotStick.Rows[e.RowIndex].Cells["Id_productNotification"].Value);
+
+                    // Verifica se já existe na linha alterada
                     if (idcontrole == item.Id_productNotification)
                     {
+                        // Atualiza os valores
+                        //Lembrando que ele atualiza tanto se habilitou a notificação quanto a
+                        //quantidade de itens em estoque que ele quer marcar para notificar.
+
                         item.Productstock = Convert.ToInt32(dgwNotStick.Rows[e.RowIndex].Cells["Productstock"].Value);
                         item.Notify_enabled = Convert.ToBoolean(dgwNotStick.Rows[e.RowIndex].Cells["Notify_enabled"].Value);
+
+                        // Sai porque os que precisava atualizar já foram atualizados
                         return;
                     }
                 }
 
+                // Se não encontrou o produto na lista cria um...
                 prodChenged.Productname = dgwNotStick.Rows[e.RowIndex].Cells["Productname"].Value.ToString();
                 prodChenged.Id_productNotification = Convert.ToInt32(dgwNotStick.Rows[e.RowIndex].Cells["Id_productNotification"].Value);
                 prodChenged.Productstock = Convert.ToInt32(dgwNotStick.Rows[e.RowIndex].Cells["Productstock"].Value);
                 prodChenged.Notify_enabled = Convert.ToBoolean(dgwNotStick.Rows[e.RowIndex].Cells["Notify_enabled"].Value);
 
+                // ... e adiciona o novo produto alterado à lista
                 productListChenged.Add(prodChenged);
+
+                // fim kk
             }
         }
 
@@ -134,7 +137,7 @@ namespace Komercio.UI.Forms.Product
         {
 
 
-            bool retorno = await _productService.PutProductNotification(productListChenged);
+            bool retorno = await _produtoApp.AtualizarListaDeProdutosParaNotificacao(productListChenged);
 
             if (retorno)
             {

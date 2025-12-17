@@ -105,7 +105,7 @@ namespace Komercio.ApplicationLayer
             }
             return error;
         }
-
+        //busca casada de lista de produtos e lista de grupo.
         public async Task<(List<ProductDTO>, List<ProductgroupDTO>)> BuscaListaDeProdutoEGrupo()
         {
             var product = await _productService.GetProductInStockAsync();
@@ -139,6 +139,22 @@ namespace Komercio.ApplicationLayer
             }
 
             return list;
+        }
+
+
+        //get para notificação de baixa do produto
+        public async Task<List<ProductNotificationSettingsDTO>> ListaDeProdutosParaNotificacao()
+        {
+            var productList = await _productService.GetProductNotificationSettingAsync();
+            productList = productList.OrderBy(p => p.Productname).ToList();
+            return productList;
+        }
+
+        //put para notificação de baixa do produto
+
+        public async Task<bool> AtualizarListaDeProdutosParaNotificacao(List<ProductNotificationSettingsDTO> productListChenged)
+        {
+            return await _productService.PutProductNotification(productListChenged);
         }
 
 

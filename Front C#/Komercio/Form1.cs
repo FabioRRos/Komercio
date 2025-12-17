@@ -200,8 +200,8 @@ namespace Komercio
 
         private void estoqueBaixoToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Função desativada temporariamente!!", "ATENÇÃO", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            //ConfigurarBaixaEstoque();
+            //MessageBox.Show("Função desativada temporariamente!!", "ATENÇÃO", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            ConfigurarBaixaEstoque();
         }
 
         private void loteToolStripMenuItem_Click(object sender, EventArgs e)
