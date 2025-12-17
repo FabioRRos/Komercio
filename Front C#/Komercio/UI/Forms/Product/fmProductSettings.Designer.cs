@@ -59,7 +59,6 @@
             this.dgwNotStick.Name = "dgwNotStick";
             this.dgwNotStick.Size = new System.Drawing.Size(478, 354);
             this.dgwNotStick.TabIndex = 0;
-            this.dgwNotStick.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgwNotStick_CellEndEdit);
             this.dgwNotStick.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgwNotStick_CellValueChanged);
             this.dgwNotStick.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.dgwNotStick_EditingControlShowing);
             // 

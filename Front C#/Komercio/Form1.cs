@@ -364,7 +364,7 @@ namespace Komercio
 
         private void ConfigurarBaixaEstoque()
         {
-            fmProductSettings productSettingos = new fmProductSettings(_productService);
+            fmProductSettings productSettingos = new fmProductSettings(_produtoApp);
             productSettingos.ShowDialog();
         }
 
