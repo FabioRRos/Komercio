@@ -182,7 +182,7 @@
             this.manualToolStripMenuItem,
             this.loteToolStripMenuItem});
             this.novoProdutoToolStripMenuItem.Name = "novoProdutoToolStripMenuItem";
-            this.novoProdutoToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.novoProdutoToolStripMenuItem.Size = new System.Drawing.Size(165, 22);
             this.novoProdutoToolStripMenuItem.Text = "Cadastrar";
             this.novoProdutoToolStripMenuItem.Click += new System.EventHandler(this.novoProdutoToolStripMenuItem_Click);
             // 
@@ -203,35 +203,35 @@
             // entradaEstoqueToolStripMenuItem
             // 
             this.entradaEstoqueToolStripMenuItem.Name = "entradaEstoqueToolStripMenuItem";
-            this.entradaEstoqueToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.entradaEstoqueToolStripMenuItem.Size = new System.Drawing.Size(165, 22);
             this.entradaEstoqueToolStripMenuItem.Text = "Entrada estoque";
             this.entradaEstoqueToolStripMenuItem.Click += new System.EventHandler(this.entradaEstoqueToolStripMenuItem_Click);
             // 
             // descarteToolStripMenuItem
             // 
             this.descarteToolStripMenuItem.Name = "descarteToolStripMenuItem";
-            this.descarteToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.descarteToolStripMenuItem.Size = new System.Drawing.Size(165, 22);
             this.descarteToolStripMenuItem.Text = "Descarte";
             this.descarteToolStripMenuItem.Click += new System.EventHandler(this.descarteToolStripMenuItem_Click);
             // 
             // listaDeProdutosToolStripMenuItem
             // 
             this.listaDeProdutosToolStripMenuItem.Name = "listaDeProdutosToolStripMenuItem";
-            this.listaDeProdutosToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.listaDeProdutosToolStripMenuItem.Size = new System.Drawing.Size(165, 22);
             this.listaDeProdutosToolStripMenuItem.Text = "Lista de produtos";
             this.listaDeProdutosToolStripMenuItem.Click += new System.EventHandler(this.listaDeProdutosToolStripMenuItem_Click);
             // 
             // grupoToolStripMenuItem
             // 
             this.grupoToolStripMenuItem.Name = "grupoToolStripMenuItem";
-            this.grupoToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.grupoToolStripMenuItem.Size = new System.Drawing.Size(165, 22);
             this.grupoToolStripMenuItem.Text = "Grupo";
             this.grupoToolStripMenuItem.Click += new System.EventHandler(this.grupoToolStripMenuItem_Click);
             // 
             // grupoDeProdutosToolStripMenuItem
             // 
             this.grupoDeProdutosToolStripMenuItem.Name = "grupoDeProdutosToolStripMenuItem";
-            this.grupoDeProdutosToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.grupoDeProdutosToolStripMenuItem.Size = new System.Drawing.Size(165, 22);
             this.grupoDeProdutosToolStripMenuItem.Text = "Subgrupo";
             this.grupoDeProdutosToolStripMenuItem.Click += new System.EventHandler(this.grupoDeProdutosToolStripMenuItem_Click);
             // 
@@ -488,12 +488,12 @@
             this.materialButton10.Dock = System.Windows.Forms.DockStyle.Fill;
             this.materialButton10.HighEmphasis = true;
             this.materialButton10.Icon = null;
-            this.materialButton10.Location = new System.Drawing.Point(202, 284);
+            this.materialButton10.Location = new System.Drawing.Point(202, 286);
             this.materialButton10.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.materialButton10.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialButton10.Name = "materialButton10";
             this.materialButton10.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.materialButton10.Size = new System.Drawing.Size(191, 130);
+            this.materialButton10.Size = new System.Drawing.Size(191, 128);
             this.materialButton10.TabIndex = 5;
             this.materialButton10.Text = "Alterar senha";
             this.materialButton10.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
@@ -509,12 +509,12 @@
             this.materialButton9.Dock = System.Windows.Forms.DockStyle.Fill;
             this.materialButton9.HighEmphasis = true;
             this.materialButton9.Icon = null;
-            this.materialButton9.Location = new System.Drawing.Point(4, 284);
+            this.materialButton9.Location = new System.Drawing.Point(4, 286);
             this.materialButton9.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.materialButton9.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialButton9.Name = "materialButton9";
             this.materialButton9.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.materialButton9.Size = new System.Drawing.Size(190, 130);
+            this.materialButton9.Size = new System.Drawing.Size(190, 128);
             this.materialButton9.TabIndex = 4;
             this.materialButton9.Text = "Atualizar clientes";
             this.materialButton9.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
@@ -535,7 +535,7 @@
             this.materialButton5.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialButton5.Name = "materialButton5";
             this.materialButton5.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.materialButton5.Size = new System.Drawing.Size(190, 127);
+            this.materialButton5.Size = new System.Drawing.Size(190, 128);
             this.materialButton5.TabIndex = 0;
             this.materialButton5.Text = "Caderneta";
             this.materialButton5.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
@@ -556,7 +556,7 @@
             this.materialButton6.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialButton6.Name = "materialButton6";
             this.materialButton6.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.materialButton6.Size = new System.Drawing.Size(191, 127);
+            this.materialButton6.Size = new System.Drawing.Size(191, 128);
             this.materialButton6.TabIndex = 1;
             this.materialButton6.Text = "Cadastrar clientes";
             this.materialButton6.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
@@ -572,12 +572,12 @@
             this.materialButton7.Dock = System.Windows.Forms.DockStyle.Fill;
             this.materialButton7.HighEmphasis = true;
             this.materialButton7.Icon = null;
-            this.materialButton7.Location = new System.Drawing.Point(4, 145);
+            this.materialButton7.Location = new System.Drawing.Point(4, 146);
             this.materialButton7.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.materialButton7.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialButton7.Name = "materialButton7";
             this.materialButton7.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.materialButton7.Size = new System.Drawing.Size(190, 127);
+            this.materialButton7.Size = new System.Drawing.Size(190, 128);
             this.materialButton7.TabIndex = 2;
             this.materialButton7.Text = "Entrada estoque";
             this.materialButton7.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
@@ -589,9 +589,9 @@
             // 
             this.groupBox1.Controls.Add(this.tableLayoutPanel3);
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox1.Location = new System.Drawing.Point(201, 142);
+            this.groupBox1.Location = new System.Drawing.Point(201, 143);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(193, 133);
+            this.groupBox1.Size = new System.Drawing.Size(193, 134);
             this.groupBox1.TabIndex = 6;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Produtos";
@@ -611,7 +611,7 @@
             this.tableLayoutPanel3.RowCount = 2;
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(187, 114);
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(187, 115);
             this.tableLayoutPanel3.TabIndex = 0;
             // 
             // mbtCadProd
@@ -669,7 +669,7 @@
             this.mbtEntradaMan.MouseState = MaterialSkin.MouseState.HOVER;
             this.mbtEntradaMan.Name = "mbtEntradaMan";
             this.mbtEntradaMan.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.mbtEntradaMan.Size = new System.Drawing.Size(85, 45);
+            this.mbtEntradaMan.Size = new System.Drawing.Size(85, 46);
             this.mbtEntradaMan.TabIndex = 2;
             this.mbtEntradaMan.Text = "Entrada Manual";
             this.mbtEntradaMan.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
@@ -690,7 +690,7 @@
             this.mbtProdCadLote.MouseState = MaterialSkin.MouseState.HOVER;
             this.mbtProdCadLote.Name = "mbtProdCadLote";
             this.mbtProdCadLote.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.mbtProdCadLote.Size = new System.Drawing.Size(86, 45);
+            this.mbtProdCadLote.Size = new System.Drawing.Size(86, 46);
             this.mbtProdCadLote.TabIndex = 3;
             this.mbtProdCadLote.Text = "Cadastro em lote";
             this.mbtProdCadLote.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
@@ -713,6 +713,7 @@
             this.Text = "home";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.Home_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Home_KeyDown);
             this.menuStripCaixa.ResumeLayout(false);
             this.menuStripCaixa.PerformLayout();
             this.pCaixa.ResumeLayout(false);

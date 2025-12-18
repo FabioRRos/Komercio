@@ -66,11 +66,6 @@ namespace Komercio
             _cashmovementsService = cashMovement;
             _cupomService = cupomService;
             _httpClient = httpClient;
-
-
-
-
-
         }
 
         private void novoFuncionárioToolStripMenuItem_Click(object sender, EventArgs e)
@@ -81,6 +76,7 @@ namespace Komercio
 
         private void Home_Load(object sender, EventArgs e)
         {
+            this.KeyPreview = true;
             StatusCaixa();
         }
         //DTO para status Caixa:
@@ -415,11 +411,13 @@ namespace Komercio
         /// <param name="e"></param>
         private void mbtSangria_Click(object sender, EventArgs e)
         {
+
             Sangria();
         }
 
         private void mtbFecharCaixa_Click(object sender, EventArgs e)
         {
+         
             FechamentoDoCaixa();
         }
 
@@ -493,6 +491,33 @@ namespace Komercio
         private void materialButton2_Click(object sender, EventArgs e)
         {
             AlterarProduto();
+        }
+
+        private void Home_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.F1)
+            {
+                AberturaDoCaixa();
+               
+
+            }
+            if (e.KeyCode == Keys.F2)
+            {
+                FechamentoDoCaixa();
+               
+
+            }
+            if (e.KeyCode == Keys.F3)
+            {
+                Sangria();
+
+            }
+
+            if (e.KeyCode == Keys.F5)
+            {
+                Vendas();
+
+            }
         }
     }
 }

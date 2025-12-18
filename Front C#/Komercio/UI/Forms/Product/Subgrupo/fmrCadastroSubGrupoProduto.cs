@@ -43,7 +43,7 @@ namespace Komercio.UI.Forms.Product
             this.MaximizeBox = false;
             this.MinimizeBox = true;
             GetGrupo();
-            GetSubgroup();
+           GetSubgroup();
         }
 
 
@@ -60,7 +60,7 @@ namespace Komercio.UI.Forms.Product
                 MessageBox.Show($"Não consegui baixar os subgrupos:\nERRO: {ex.Message}","ERROR!",MessageBoxButtons.OK,MessageBoxIcon.Error);
                 return;
             }
-            LoadGrid(productSubgroups);
+           
         }
 
         public async void GetGrupo()
@@ -93,68 +93,59 @@ namespace Komercio.UI.Forms.Product
             dgwSubgrupo.Columns["Product_group_id"].Visible = false;
 
             dgwSubgrupo.Columns["ProductsubgroupName"].HeaderText = "Subgrupo";
-            dgwSubgrupo.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.None;
+            dgwSubgrupo.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+
 
 
         }
 
         public void AddLista()
         {
-            foreach (var item in productGroups)
-            {
-                mcbGrupo.Items.Add(item.ProductgroupName);
-            }
+            dggroup.DataSource = productGroups;
+
+            dggroup.Columns["ProductgroupId"].Visible = false;
+            dggroup.Columns["ProductgroupName"].HeaderText = "Grupo:";
+            dggroup.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dggroup.BackgroundColor = Color.White;
+            dggroup.BorderStyle = BorderStyle.None;
+            dggroup.RowHeadersVisible = false;
+
         }
 
-        private void mcbGrupo_SelectedIndexChanged(object sender, EventArgs e)
-        {
-           List<ProductSubgroupDTO> productSubgroupsFiltrado = new List<ProductSubgroupDTO>();
 
-        int id = 0;
+        private void dggroup_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+                RecarregarFormdeSubGrupo();
+               
 
             
-
-            foreach (var item in productGroups)
-            {
-                if (mcbGrupo.Text == item.ProductgroupName)
-                {
-                    id = item.ProductgroupId;
-                    break;
-                }
-            }
-
-            foreach (var item in productSubgroups)
-            {
-                if (item.Product_group_id == id)
-                {
-                    productSubgroupsFiltrado.Add(item);
-                }
-            }
-
-            LoadGrid(productSubgroupsFiltrado);
-            ProductDTOSave.Product_group_id = id;
-
         }
-
-        private void mbtCadastrar_Click(object sender, EventArgs e)
+        private void RecarregarFormdeSubGrupo()
         {
-            if(mcbGrupo.Text == "")
-            {
-                MessageBox.Show("Selecione o grupo que deseja adicionar o subgrupo", "ATENTÇÃO!");
+            if (dggroup.CurrentRow == null || dggroup.CurrentRow.Cells["ProductgroupId"].Value == null)
                 return;
-            }
 
-            if (mtbSubgrupo.Text == "")
-            {
-                MessageBox.Show("Por gentileza, digite o subgrupo", "ATENTÇÃO!");
-                return;
-            };
+             var id = Convert.ToInt32(dggroup.CurrentRow.Cells["ProductgroupId"].Value);
 
 
-            ProductDTOSave.ProductsubgroupName = mtbSubgrupo.Text;
-            SalvarSubGrupo();
-            ReloadForm();
+            // Filtra os subgrupos que pertencem a esse grupo
+            List<ProductSubgroupDTO> productSubgroupsFiltrado = productSubgroups
+                    .Where(sub => sub.Product_group_id == id)
+                    .ToList();
+
+                // Atualiza o grid com os subgrupos filtrados
+                LoadGrid(productSubgroupsFiltrado);
+
+                // Salva o id do grupo selecionado no DTO
+                ProductDTOSave.Product_group_id = id;
+
         }
+
+
+
+
+
 
         private void ReloadForm()
         {
@@ -171,6 +162,31 @@ namespace Komercio.UI.Forms.Product
 
             if (retorno) MessageBox.Show("SubGrupo Criado com sucesso!");
             return ;
+
+        }
+
+        private void mbtCadastrar_Click_1(object sender, EventArgs e)
+        {
+            if (dggroup.CurrentRow == null)
+            {
+                MessageBox.Show("Selecione o grupo que deseja adicionar o subgrupo", "ATENÇÃO!",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (mtbSubgrupo.Text == "")
+            {
+                MessageBox.Show("Por gentileza, digite o subgrupo", "ATENTÇÃO!");
+                return;
+            }
+            ;
+
+
+            ProductDTOSave.ProductsubgroupName = mtbSubgrupo.Text;
+            SalvarSubGrupo();
+            ReloadForm();
+
+
 
         }
     }
