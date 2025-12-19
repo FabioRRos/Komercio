@@ -37,3 +37,42 @@ C:\Projeto Komercial\Komercio\Front C#\Komercio\obj\Debug\Komercio.UI.Forms.Prod
 C:\Projeto Komercial\Komercio\Front C#\Komercio\obj\Debug\Komercio.UI.Forms.Product.frmCadastroGrupo.resources
 C:\Projeto Komercial\Komercio\Front C#\Komercio\obj\Debug\Komercio.UI.Forms.Product.Produto.fmAlterarProduto.resources
 C:\Projeto Komercial\Komercio\Front C#\Komercio\obj\Debug\Komercio.UI.Forms.settings.frmParametros.resources
+C:\Komercio\Front C#\Komercio\bin\Debug\Komercio.exe.config
+C:\Komercio\Front C#\Komercio\bin\Debug\Komercio.exe
+C:\Komercio\Front C#\Komercio\bin\Debug\Komercio.pdb
+C:\Komercio\Front C#\Komercio\bin\Debug\MaterialSkin.dll
+C:\Komercio\Front C#\Komercio\bin\Debug\Newtonsoft.Json.dll
+C:\Komercio\Front C#\Komercio\bin\Debug\System.Configuration.ConfigurationManager.dll
+C:\Komercio\Front C#\Komercio\bin\Debug\Newtonsoft.Json.xml
+C:\Komercio\Front C#\Komercio\bin\Debug\System.Configuration.ConfigurationManager.xml
+C:\Komercio\Front C#\Komercio\obj\Debug\Komercio.csproj.AssemblyReference.cache
+C:\Komercio\Front C#\Komercio\obj\Debug\Komercio.Home.resources
+C:\Komercio\Front C#\Komercio\obj\Debug\Komercio.Properties.Resources.resources
+C:\Komercio\Front C#\Komercio\obj\Debug\Komercio.UI.Forms.Caixa.fmAberturaCaixa.resources
+C:\Komercio\Front C#\Komercio\obj\Debug\Komercio.UI.Forms.Caixa.frmSangria.resources
+C:\Komercio\Front C#\Komercio\obj\Debug\Komercio.UI.Forms.Customer.fmChangeCustomer.resources
+C:\Komercio\Front C#\Komercio\obj\Debug\Komercio.UI.Forms.Customer.fmCreateCustomer.resources
+C:\Komercio\Front C#\Komercio\obj\Debug\Komercio.UI.Forms.Dump.fmSalesDump.resources
+C:\Komercio\Front C#\Komercio\obj\Debug\Komercio.UI.Forms.fmCreateEmployee.resources
+C:\Komercio\Front C#\Komercio\obj\Debug\Komercio.UI.Forms.Employee.fmChangePasswordEmployeer.resources
+C:\Komercio\Front C#\Komercio\obj\Debug\Komercio.UI.Forms.frmFechamentoCaixa.resources
+C:\Komercio\Front C#\Komercio\obj\Debug\Komercio.UI.Forms.frmLogin.resources
+C:\Komercio\Front C#\Komercio\obj\Debug\Komercio.UI.Forms.Product.fmCreateGroupAndSubgroup.resources
+C:\Komercio\Front C#\Komercio\obj\Debug\Komercio.UI.Forms.Product.Produto.fmAlterarProduto.resources
+C:\Komercio\Front C#\Komercio\obj\Debug\Komercio.UI.Forms.Product.fmCreateProduct.resources
+C:\Komercio\Front C#\Komercio\obj\Debug\Komercio.UI.Forms.Product.fmImputProduct.resources
+C:\Komercio\Front C#\Komercio\obj\Debug\Komercio.UI.Forms.Product.btnImportStock.resources
+C:\Komercio\Front C#\Komercio\obj\Debug\Komercio.UI.Forms.Product.fmProductSettings.resources
+C:\Komercio\Front C#\Komercio\obj\Debug\Komercio.UI.Forms.Product.fmrCadastroSubGrupoProduto.resources
+C:\Komercio\Front C#\Komercio\obj\Debug\Komercio.UI.Forms.Product.frmCadastroGrupo.resources
+C:\Komercio\Front C#\Komercio\obj\Debug\Komercio.UI.Forms.Product.frmDescarte.resources
+C:\Komercio\Front C#\Komercio\obj\Debug\Komercio.UI.Forms.Product.frmProductVisualize.resources
+C:\Komercio\Front C#\Komercio\obj\Debug\Komercio.UI.Forms.Sales.fmSalePaymant.resources
+C:\Komercio\Front C#\Komercio\obj\Debug\Komercio.UI.Forms.Sales.fmSalesProduct.resources
+C:\Komercio\Front C#\Komercio\obj\Debug\Komercio.UI.Forms.settings.frmParametros.resources
+C:\Komercio\Front C#\Komercio\obj\Debug\Komercio.UI.Forms.Transactions.fmCustomerTransactions.resources
+C:\Komercio\Front C#\Komercio\obj\Debug\Komercio.csproj.GenerateResource.cache
+C:\Komercio\Front C#\Komercio\obj\Debug\Komercio.csproj.CoreCompileInputs.cache
+C:\Komercio\Front C#\Komercio\obj\Debug\Komercio.csproj.Up2Date
+C:\Komercio\Front C#\Komercio\obj\Debug\Komercio.exe
+C:\Komercio\Front C#\Komercio\obj\Debug\Komercio.pdb

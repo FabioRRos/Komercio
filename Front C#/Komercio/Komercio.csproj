@@ -326,6 +326,7 @@
     <EmbeddedResource Include="UI\Forms\Transactions\fmCustomerTransactions.resx">
       <DependentUpon>fmCustomerTransactions.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="global.json" />
     <None Include="packages.config" />
     <None Include="packages\MaterialSkin.2.2.3.1\.signature.p7s" />
     <None Include="packages\MaterialSkin.2.2.3.1\MaterialSkin.2.2.3.1.nupkg" />
