@@ -60,6 +60,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApplicationLayer\EmployeeServiceApp.cs" />
+    <Compile Include="ApplicationLayer\ParametrosApp.cs" />
     <Compile Include="ApplicationLayer\ProdutoApp.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
@@ -75,6 +76,7 @@
     <Compile Include="Models\CustomerTransactionsDTO.cs" />
     <Compile Include="Models\DescarteProdutoDTO.cs" />
     <Compile Include="Models\EmployeeDto.cs" />
+    <Compile Include="Models\ParametroDTO.cs" />
     <Compile Include="Models\ProductDescriptionDTO.cs" />
     <Compile Include="Models\ProductDTO.cs" />
     <Compile Include="Models\ProductgroupDTO.cs" />
@@ -101,6 +103,7 @@
     <Compile Include="Services\CustomerTransactionService.cs" />
     <Compile Include="Services\DoccumentValidationService.cs" />
     <Compile Include="Services\EmployeeService.cs" />
+    <Compile Include="Services\ParametrosService.cs" />
     <Compile Include="Services\ProductDescriptionService.cs" />
     <Compile Include="Services\ProductGroupService.cs" />
     <Compile Include="Services\ProductService.cs" />
@@ -234,6 +237,12 @@
     <Compile Include="UI\Forms\Sales\fmSalesProduct.Designer.cs">
       <DependentUpon>fmSalesProduct.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\Forms\settings\frmParametros.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Forms\settings\frmParametros.Designer.cs">
+      <DependentUpon>frmParametros.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\Forms\Transactions\fmCustomerTransactions.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -310,6 +319,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Forms\Sales\fmSalesProduct.resx">
       <DependentUpon>fmSalesProduct.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Forms\settings\frmParametros.resx">
+      <DependentUpon>frmParametros.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Forms\Transactions\fmCustomerTransactions.resx">
       <DependentUpon>fmCustomerTransactions.cs</DependentUpon>

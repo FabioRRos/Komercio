@@ -38,18 +38,18 @@ namespace Komercio
             var caixaService = new CaixaService(apiBaseUrl);
             var cashMovement = new CashmovementsService(apiBaseUrl);
             var cupomService = new CupomService(apiBaseUrl);
+            var parametrosService = new ParametrosService(apiBaseUrl);
 
-            // é para ficar só daqui pra baixo.
+
             var employeeServiceApp = new EmployeeServiceApp(employeeService);
             var productApp = new ProdutoApp(productService,
                                             productDescriptionService,
                                             productrsuggroupService,
                                             productgroupService,
                                             employeeServiceApp);
+            var parametrosapp = new ParametrosApp(parametrosService);
 
-            // aqui estou aplicando a injeção de dependência 
-            // O intuito é no futuro só precisar compartilhar a injeção da camada de applicationLayer. 
-            // A UI não precisa saber da camada de serviço
+            // aqui estou aplicando a injeção de dependência manualmente
             Application.Run(new Home(employeeService,
                                     customerService,
                                     productService,
@@ -62,6 +62,7 @@ namespace Komercio
                                     cupomService,
                                     productApp,
                                     employeeServiceApp,
+                                    parametrosapp,
                                     apiBaseUrl));
 
 

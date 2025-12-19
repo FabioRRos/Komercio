@@ -77,6 +77,7 @@
             this.mbtAltProd = new MaterialSkin.Controls.MaterialButton();
             this.mbtEntradaMan = new MaterialSkin.Controls.MaterialButton();
             this.mbtProdCadLote = new MaterialSkin.Controls.MaterialButton();
+            this.parametrosDeConfiguraçãoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStripCaixa.SuspendLayout();
             this.pCaixa.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -268,7 +269,8 @@
             // configuraçõesToolStripMenuItem
             // 
             this.configuraçõesToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.notificaçõesToolStripMenuItem});
+            this.notificaçõesToolStripMenuItem,
+            this.parametrosDeConfiguraçãoToolStripMenuItem});
             this.configuraçõesToolStripMenuItem.Name = "configuraçõesToolStripMenuItem";
             this.configuraçõesToolStripMenuItem.Size = new System.Drawing.Size(96, 20);
             this.configuraçõesToolStripMenuItem.Text = "Configurações";
@@ -278,7 +280,7 @@
             this.notificaçõesToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.estoqueBaixoToolStripMenuItem});
             this.notificaçõesToolStripMenuItem.Name = "notificaçõesToolStripMenuItem";
-            this.notificaçõesToolStripMenuItem.Size = new System.Drawing.Size(140, 22);
+            this.notificaçõesToolStripMenuItem.Size = new System.Drawing.Size(223, 22);
             this.notificaçõesToolStripMenuItem.Text = "Notificações";
             // 
             // estoqueBaixoToolStripMenuItem
@@ -698,6 +700,13 @@
             this.mbtProdCadLote.UseVisualStyleBackColor = true;
             this.mbtProdCadLote.Click += new System.EventHandler(this.materialButton8_Click);
             // 
+            // parametrosDeConfiguraçãoToolStripMenuItem
+            // 
+            this.parametrosDeConfiguraçãoToolStripMenuItem.Name = "parametrosDeConfiguraçãoToolStripMenuItem";
+            this.parametrosDeConfiguraçãoToolStripMenuItem.Size = new System.Drawing.Size(223, 22);
+            this.parametrosDeConfiguraçãoToolStripMenuItem.Text = "Parametros de configuração";
+            this.parametrosDeConfiguraçãoToolStripMenuItem.Click += new System.EventHandler(this.parametrosDeConfiguraçãoToolStripMenuItem_Click);
+            // 
             // Home
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -713,7 +722,6 @@
             this.Text = "home";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.Home_Load);
-            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Home_KeyDown);
             this.menuStripCaixa.ResumeLayout(false);
             this.menuStripCaixa.PerformLayout();
             this.pCaixa.ResumeLayout(false);
@@ -780,6 +788,7 @@
         private MaterialSkin.Controls.MaterialButton mbtAltProd;
         private MaterialSkin.Controls.MaterialButton mbtEntradaMan;
         private MaterialSkin.Controls.MaterialButton mbtProdCadLote;
+        private System.Windows.Forms.ToolStripMenuItem parametrosDeConfiguraçãoToolStripMenuItem;
     }
 }
 

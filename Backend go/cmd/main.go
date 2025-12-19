@@ -49,9 +49,17 @@ func main() {
 	defer transationDatastore.Close()
 	caixaDatastore := datastore.NewCaixaDatastore()
 	defer caixaDatastore.Close()
+	parametros := datastore.NewParametrosDatastore()
+	defer parametros.Close()
 
 	//#####################################################
 	//Injeção de dependências
+
+	parametrosController := controller.NewParametroController(
+		service.NewParametrosService(
+			repository.NewParametrosRepository(parametros),
+		),
+	)
 
 	productController := controller.NewProductController(
 		service.NewProductService(
@@ -157,6 +165,7 @@ func main() {
 	routes.CupomRoute(server, cupomCoontroller)
 	routes.CustomertransactionControllerRoutes(server, transationController)
 	routes.CaixaRoute(server, caixaController)
+	routes.ParametrosrRoutes(server, parametrosController)
 	//server.Run("0.0.0.0:8000")
 
 	//Minha antiga validação manual

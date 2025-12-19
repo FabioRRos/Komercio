@@ -28,30 +28,31 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.dgwSubgrupo = new System.Windows.Forms.DataGridView();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.dgwSubgrupo = new System.Windows.Forms.DataGridView();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.mcbGrupo = new MaterialSkin.Controls.MaterialComboBox();
             this.mtbSubgrupo = new MaterialSkin.Controls.MaterialTextBox2();
             this.mbtCadastrar = new MaterialSkin.Controls.MaterialButton();
-            this.dggroup = new System.Windows.Forms.DataGridView();
-            this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgwSubgrupo)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
-            this.groupBox2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dggroup)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgwSubgrupo)).BeginInit();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // groupBox1
+            // tableLayoutPanel1
             // 
-            this.groupBox1.Controls.Add(this.dggroup);
-            this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox1.Location = new System.Drawing.Point(3, 3);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(194, 363);
-            this.groupBox1.TabIndex = 1;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Grupos";
+            this.tableLayoutPanel1.ColumnCount = 2;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 75F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel1.Controls.Add(this.dgwSubgrupo, 1, 0);
+            this.tableLayoutPanel1.Controls.Add(this.groupBox1, 0, 0);
+            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.RowCount = 1;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(528, 237);
+            this.tableLayoutPanel1.TabIndex = 4;
             // 
             // dgwSubgrupo
             // 
@@ -60,41 +61,48 @@
             this.dgwSubgrupo.AllowUserToOrderColumns = true;
             this.dgwSubgrupo.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgwSubgrupo.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgwSubgrupo.Location = new System.Drawing.Point(203, 3);
+            this.dgwSubgrupo.Location = new System.Drawing.Point(399, 3);
             this.dgwSubgrupo.Name = "dgwSubgrupo";
             this.dgwSubgrupo.ReadOnly = true;
-            this.dgwSubgrupo.Size = new System.Drawing.Size(194, 363);
+            this.dgwSubgrupo.Size = new System.Drawing.Size(126, 231);
             this.dgwSubgrupo.TabIndex = 0;
             // 
-            // tableLayoutPanel1
+            // groupBox1
             // 
-            this.tableLayoutPanel1.AutoSize = true;
-            this.tableLayoutPanel1.ColumnCount = 3;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 40F));
-            this.tableLayoutPanel1.Controls.Add(this.dgwSubgrupo, 1, 0);
-            this.tableLayoutPanel1.Controls.Add(this.groupBox1, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.groupBox2, 2, 0);
-            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
-            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 1;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(669, 369);
-            this.tableLayoutPanel1.TabIndex = 4;
+            this.groupBox1.Controls.Add(this.mcbGrupo);
+            this.groupBox1.Controls.Add(this.mtbSubgrupo);
+            this.groupBox1.Controls.Add(this.mbtCadastrar);
+            this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBox1.Location = new System.Drawing.Point(3, 3);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(390, 231);
+            this.groupBox1.TabIndex = 1;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Cadastro de subgrupos";
             // 
-            // groupBox2
+            // mcbGrupo
             // 
-            this.groupBox2.Controls.Add(this.mbtCadastrar);
-            this.groupBox2.Controls.Add(this.mtbSubgrupo);
-            this.groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox2.Location = new System.Drawing.Point(403, 3);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(263, 363);
-            this.groupBox2.TabIndex = 2;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Cadastro de subgrupos";
+            this.mcbGrupo.AutoResize = false;
+            this.mcbGrupo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.mcbGrupo.Depth = 0;
+            this.mcbGrupo.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
+            this.mcbGrupo.DropDownHeight = 174;
+            this.mcbGrupo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.mcbGrupo.DropDownWidth = 121;
+            this.mcbGrupo.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
+            this.mcbGrupo.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.mcbGrupo.FormattingEnabled = true;
+            this.mcbGrupo.Hint = "Selecione o grupo para cadastrar o subgrupo";
+            this.mcbGrupo.IntegralHeight = false;
+            this.mcbGrupo.ItemHeight = 43;
+            this.mcbGrupo.Location = new System.Drawing.Point(9, 28);
+            this.mcbGrupo.MaxDropDownItems = 4;
+            this.mcbGrupo.MouseState = MaterialSkin.MouseState.OUT;
+            this.mcbGrupo.Name = "mcbGrupo";
+            this.mcbGrupo.Size = new System.Drawing.Size(372, 49);
+            this.mcbGrupo.StartIndex = 0;
+            this.mcbGrupo.TabIndex = 6;
+            this.mcbGrupo.SelectedIndexChanged += new System.EventHandler(this.mcbGrupo_SelectedIndexChanged);
             // 
             // mtbSubgrupo
             // 
@@ -106,7 +114,7 @@
             this.mtbSubgrupo.HideSelection = true;
             this.mtbSubgrupo.Hint = "Digite o nome do subgrupo";
             this.mtbSubgrupo.LeadingIcon = null;
-            this.mtbSubgrupo.Location = new System.Drawing.Point(8, 123);
+            this.mtbSubgrupo.Location = new System.Drawing.Point(9, 122);
             this.mtbSubgrupo.MaxLength = 32767;
             this.mtbSubgrupo.MouseState = MaterialSkin.MouseState.OUT;
             this.mtbSubgrupo.Name = "mtbSubgrupo";
@@ -119,7 +127,7 @@
             this.mtbSubgrupo.SelectionStart = 0;
             this.mtbSubgrupo.ShortcutsEnabled = true;
             this.mtbSubgrupo.Size = new System.Drawing.Size(250, 48);
-            this.mtbSubgrupo.TabIndex = 6;
+            this.mtbSubgrupo.TabIndex = 5;
             this.mtbSubgrupo.TabStop = false;
             this.mtbSubgrupo.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.mtbSubgrupo.TrailingIcon = null;
@@ -133,59 +141,41 @@
             this.mbtCadastrar.Depth = 0;
             this.mbtCadastrar.HighEmphasis = true;
             this.mbtCadastrar.Icon = null;
-            this.mbtCadastrar.Location = new System.Drawing.Point(83, 192);
+            this.mbtCadastrar.Location = new System.Drawing.Point(284, 122);
             this.mbtCadastrar.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.mbtCadastrar.MouseState = MaterialSkin.MouseState.HOVER;
             this.mbtCadastrar.Name = "mbtCadastrar";
             this.mbtCadastrar.NoAccentTextColor = System.Drawing.Color.Empty;
             this.mbtCadastrar.Size = new System.Drawing.Size(97, 48);
-            this.mbtCadastrar.TabIndex = 7;
+            this.mbtCadastrar.TabIndex = 4;
             this.mbtCadastrar.Text = "Salvar";
             this.mbtCadastrar.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
             this.mbtCadastrar.UseAccentColor = false;
             this.mbtCadastrar.UseVisualStyleBackColor = true;
-            this.mbtCadastrar.Click += new System.EventHandler(this.mbtCadastrar_Click_1);
-            // 
-            // dggroup
-            // 
-            this.dggroup.AllowUserToAddRows = false;
-            this.dggroup.AllowUserToDeleteRows = false;
-            this.dggroup.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dggroup.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dggroup.Location = new System.Drawing.Point(3, 16);
-            this.dggroup.Name = "dggroup";
-            this.dggroup.ReadOnly = true;
-            this.dggroup.Size = new System.Drawing.Size(188, 344);
-            this.dggroup.TabIndex = 1;
-            this.dggroup.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dggroup_CellContentClick);
+            this.mbtCadastrar.Click += new System.EventHandler(this.mbtCadastrar_Click);
             // 
             // fmrCadastroSubGrupoProduto
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(669, 369);
+            this.ClientSize = new System.Drawing.Size(528, 237);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "fmrCadastroSubGrupoProduto";
             this.Text = "Cadastro subgrupo";
             this.Load += new System.EventHandler(this.fmrCadastroSubGrupoProduto_Load);
-            this.groupBox1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgwSubgrupo)).EndInit();
             this.tableLayoutPanel1.ResumeLayout(false);
-            this.groupBox2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dggroup)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgwSubgrupo)).EndInit();
+            this.groupBox1.ResumeLayout(false);
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.DataGridView dggroup;
-        private System.Windows.Forms.DataGridView dgwSubgrupo;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private System.Windows.Forms.GroupBox groupBox2;
-        private MaterialSkin.Controls.MaterialButton mbtCadastrar;
+        private System.Windows.Forms.DataGridView dgwSubgrupo;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private MaterialSkin.Controls.MaterialComboBox mcbGrupo;
         private MaterialSkin.Controls.MaterialTextBox2 mtbSubgrupo;
+        private MaterialSkin.Controls.MaterialButton mbtCadastrar;
     }
 }

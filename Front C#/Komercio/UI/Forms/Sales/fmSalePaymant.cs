@@ -1,4 +1,5 @@
-﻿using Komercio.Models;
+﻿using Komercio.ApplicationLayer;
+using Komercio.Models;
 using Komercio.Services;
 using Komercio.UI.Forms.Customer;
 using Komercio.UI.Forms.Product;
@@ -26,6 +27,8 @@ namespace Komercio.UI.Forms.Sales
         private readonly HttpClient _httpClient;
         private readonly CupomService _cupomService;
 
+        private readonly ParametrosApp _parametrosApp;
+
 
         public float total = 0;
         private string formaPagamento = "";
@@ -40,7 +43,14 @@ namespace Komercio.UI.Forms.Sales
 
         private string _cupomText;
 
-        public fmSalePaymant(EmployeeService employeeService, CustomerService customerService, SaleService saleService, BindingList<SalesItensDTO> itensVenda, float totalVenda,CupomService cupomService, HttpClient baseUrl)
+        public fmSalePaymant(EmployeeService employeeService,
+            CustomerService customerService,
+            SaleService saleService,
+            BindingList<SalesItensDTO> itensVenda,
+            float totalVenda,
+            CupomService cupomService,
+            ParametrosApp parametrosApp,
+            HttpClient baseUrl)
         {
             var handler = new HttpClientHandler();
             handler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => true;
@@ -52,6 +62,10 @@ namespace Komercio.UI.Forms.Sales
             InitializeComponent();
             total = totalVenda;
             _cupomService = cupomService;
+
+
+            //
+            _parametrosApp = parametrosApp;
 
 
         }
@@ -677,11 +691,18 @@ namespace Komercio.UI.Forms.Sales
             var cupom = await finalizer.MontarVenda(venda, _itensVenda, formaPagamento, func);
             _cupomText = cupom;
 
-          //  printCupom.Print();
-            //    MessageBox.Show("Venda formalizada e arquivo JSON gerado com sucesso!",
-            //    "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                var retorno = await VerificaStatusParametro(1);
 
-            //  o form atual
+                if (retorno)
+                {
+                    printCupom.Print();
+                   // MessageBox.Show("Venda formalizada e arquivo JSON gerado com sucesso!",
+                   // "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                
+
+
+                //  o form atual
             this.Close();
 
             }
@@ -694,6 +715,19 @@ namespace Komercio.UI.Forms.Sales
             {
                 this.Owner.Close();
             }
+        }
+
+
+        /// <summary>
+        /// Recebe um id do parâmetro e recebe um bool para informar se está autoriado ou não.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        private async Task<bool> VerificaStatusParametro(int id)
+        {
+            var status = await _parametrosApp.ConsultaStatusParametro(id);
+
+            return status;
         }
     }
 

@@ -29,10 +29,21 @@ namespace Komercio.UI.Forms.Sales
         private readonly ProductDescriptionService _productDescriptionService;
         private readonly CupomService _cupomService;
 
+        private readonly ParametrosApp _parametrosApp;
+
 
         private readonly ProdutoApp _produtoApp;
 
-        public fmSalesProduct(EmployeeService employeeService, ProductService productService, ProductGroupService productGroupService, ProductSubgroupService productSubgroupService, CustomerService customerService, ProductDescriptionService productDescriptionService,CupomService cupomService, string baseUrl, ProdutoApp produtoApp)
+        public fmSalesProduct(EmployeeService employeeService,
+            ProductService productService,
+            ProductGroupService productGroupService,
+            ProductSubgroupService productSubgroupService,
+            CustomerService customerService,
+            ProductDescriptionService productDescriptionService,
+            CupomService cupomService,
+            string baseUrl,
+            ParametrosApp parametrosApp,
+            ProdutoApp produtoApp)
         {
             _produtoApp = produtoApp;
 
@@ -54,6 +65,11 @@ namespace Komercio.UI.Forms.Sales
             };
             _productDescriptionService = productDescriptionService;
             _cupomService = cupomService;
+
+
+            ///
+
+            _parametrosApp = parametrosApp;
 
         }
 
@@ -441,7 +457,14 @@ namespace Komercio.UI.Forms.Sales
             }
 
             // Instancia o formulário de pagamento, passando as dependências
-            fmSalePaymant formPagamento = new fmSalePaymant(_employeeService,_customerService, _saleService, _saleService._productCar, totalVenda, _cupomService, _httpClient);
+            fmSalePaymant formPagamento = new fmSalePaymant(_employeeService,
+                _customerService,
+                _saleService,
+                _saleService._productCar,
+                totalVenda,
+                _cupomService,
+                _parametrosApp,
+                _httpClient);
 
             // Exibe como diálogo (bloqueia até fechar)
             formPagamento.Owner = this;
@@ -457,14 +480,14 @@ namespace Komercio.UI.Forms.Sales
             {
                 fmCreateProduct createProduct = new fmCreateProduct(_produtoApp);
                 createProduct.ShowDialog();
-                loaddbListaproduto();
+                await loaddbListaproduto();
             }
 
             if (e.KeyCode == Keys.F5)
             {
                 fmImputProduct inputProduct = new fmImputProduct(_produtoApp);
                 inputProduct.ShowDialog();
-                loaddbListaproduto();
+                await loaddbListaproduto();
             }
         }
     }

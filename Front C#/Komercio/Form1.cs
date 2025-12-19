@@ -9,6 +9,7 @@ using Komercio.UI.Forms.Employee;
 using Komercio.UI.Forms.Product;
 using Komercio.UI.Forms.Product.Produto;
 using Komercio.UI.Forms.Sales;
+using Komercio.UI.Forms.settings;
 using Komercio.UI.Forms.Transactions;
 using MeuProjetoWinForms.Services;
 using System;
@@ -41,17 +42,31 @@ namespace Komercio
         //pós refatoração
         private readonly ProdutoApp _produtoApp;
         private readonly EmployeeServiceApp _employeeServiceApp;
+        private readonly ParametrosApp _parametrosApp;
 
 
         //Status do caixa 
         internal bool caixaStatus;
 
-        public Home(EmployeeService empliyeeService, CustomerService customerService, ProductService productService, ProductGroupService productGroupService, ProductSubgroupService productSubgroupService , ProductDescriptionService productDescriptionService, CustomerTransactionService customerTransactionService,CaixaService caixaService,CashmovementsService cashMovement,CupomService cupomService, ProdutoApp produtoApp, EmployeeServiceApp employeeServiceApp,string httpClient)
+        public Home(EmployeeService empliyeeService,
+            CustomerService customerService,
+            ProductService productService,
+            ProductGroupService productGroupService,
+            ProductSubgroupService productSubgroupService ,
+            ProductDescriptionService productDescriptionService,
+            CustomerTransactionService customerTransactionService,
+            CaixaService caixaService,CashmovementsService cashMovement,
+            CupomService cupomService,
+            ProdutoApp produtoApp,
+            EmployeeServiceApp employeeServiceApp,
+            ParametrosApp parametrosApp,
+            string httpClient)
         {
             InitializeComponent();
             // novo testamento
             _produtoApp = produtoApp;
             _employeeServiceApp = employeeServiceApp;
+            _parametrosApp = parametrosApp;
 
 
             // antigo testamento abaixo
@@ -66,17 +81,20 @@ namespace Komercio
             _cashmovementsService = cashMovement;
             _cupomService = cupomService;
             _httpClient = httpClient;
+
+
+
+
+
         }
 
         private void novoFuncionárioToolStripMenuItem_Click(object sender, EventArgs e)
         {
-       //     MessageBox.Show("Função desativada temporariamente!!","ATENÇÃO",MessageBoxButtons.OK,MessageBoxIcon.Warning);
             CadastrarFuncionario();
         }
 
         private void Home_Load(object sender, EventArgs e)
         {
-            this.KeyPreview = true;
             StatusCaixa();
         }
         //DTO para status Caixa:
@@ -285,7 +303,16 @@ namespace Komercio
         {
             if (caixaStatus)
             {
-                fmSalesProduct salesProduct = new fmSalesProduct(_employeeService, _productService, _productGroupService, _productSubgroupService, _customerService, _productDescriptionService, _cupomService, _httpClient, _produtoApp);
+                fmSalesProduct salesProduct = new fmSalesProduct(_employeeService,
+                    _productService,
+                    _productGroupService,
+                    _productSubgroupService,
+                    _customerService,
+                    _productDescriptionService,
+                    _cupomService,
+                    _httpClient,
+                    _parametrosApp,
+                    _produtoApp);
                 salesProduct.ShowDialog();
             }
             else
@@ -355,10 +382,21 @@ namespace Komercio
             changePasswordEmployeer.ShowDialog();
         }
 
-        private void CadastrarFuncionario()
+        private async void CadastrarFuncionario()
         {
-            fmCreateEmployee newEmployee = new fmCreateEmployee(_employeeService);
-            newEmployee.ShowDialog();
+            var retorno = await VerificaStatusParametro(4);
+
+            if (retorno)
+            {
+                fmCreateEmployee newEmployee = new fmCreateEmployee(_employeeService);
+                newEmployee.ShowDialog();
+            }
+            else
+            {
+               MessageBox.Show("Função desativada temporariamente!!","ATENÇÃO",MessageBoxButtons.OK,MessageBoxIcon.Warning);
+            }
+
+
         }
 
 
@@ -403,21 +441,25 @@ namespace Komercio
             newProductLote.ShowDialog();
         }
 
+        private void Parametros()
+        {
+            frmParametros frmParametros = new frmParametros(_parametrosApp);
+            frmParametros.ShowDialog();
+        }
 
-        /// <summary>
+
+
+
+
         /// BOTÕES FORM PRINCIPAL
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+   
         private void mbtSangria_Click(object sender, EventArgs e)
         {
-
             Sangria();
         }
 
         private void mtbFecharCaixa_Click(object sender, EventArgs e)
         {
-         
             FechamentoDoCaixa();
         }
 
@@ -493,31 +535,26 @@ namespace Komercio
             AlterarProduto();
         }
 
-        private void Home_KeyDown(object sender, KeyEventArgs e)
+
+        private void parametrosDeConfiguraçãoToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (e.KeyCode == Keys.F1)
-            {
-                AberturaDoCaixa();
-               
+            Parametros();
+        }
 
-            }
-            if (e.KeyCode == Keys.F2)
-            {
-                FechamentoDoCaixa();
-               
 
-            }
-            if (e.KeyCode == Keys.F3)
-            {
-                Sangria();
 
-            }
 
-            if (e.KeyCode == Keys.F5)
-            {
-                Vendas();
 
-            }
+        /// <summary>
+        /// Recebe um id do parâmetro e recebe um bool para informar se está autoriado ou não.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        private async Task<bool> VerificaStatusParametro(int id)
+        {
+            var status = await _parametrosApp.ConsultaStatusParametro(id);
+
+            return status;
         }
     }
 }

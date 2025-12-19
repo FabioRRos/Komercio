@@ -10,7 +10,6 @@ namespace Komercio.Models
 {
     public class ProductgroupDTO
     {
-        private readonly HttpClient _httpClient;
 
         [JsonProperty("group_id")]
         public int ProductgroupId { get; set; }

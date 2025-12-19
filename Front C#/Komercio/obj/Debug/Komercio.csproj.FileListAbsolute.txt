@@ -34,6 +34,6 @@ C:\Projeto Komercial\Komercio\Front C#\Komercio\obj\Debug\Komercio.UI.Forms.Caix
 C:\Projeto Komercial\Komercio\Front C#\Komercio\obj\Debug\Komercio.UI.Forms.Product.frmDescarte.resources
 C:\Projeto Komercial\Komercio\Front C#\Komercio\obj\Debug\Komercio.UI.Forms.Product.frmProductVisualize.resources
 C:\Projeto Komercial\Komercio\Front C#\Komercio\obj\Debug\Komercio.UI.Forms.Product.fmrCadastroSubGrupoProduto.resources
-C:\Projeto Komercial\Komercio\Front C#\Komercio\obj\Debug\Komercio.exe.config
 C:\Projeto Komercial\Komercio\Front C#\Komercio\obj\Debug\Komercio.UI.Forms.Product.frmCadastroGrupo.resources
 C:\Projeto Komercial\Komercio\Front C#\Komercio\obj\Debug\Komercio.UI.Forms.Product.Produto.fmAlterarProduto.resources
+C:\Projeto Komercial\Komercio\Front C#\Komercio\obj\Debug\Komercio.UI.Forms.settings.frmParametros.resources
