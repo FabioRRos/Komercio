@@ -1,24 +1,7 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "C:\\Komercio\\Front C#\\Komercio\\",
-  "Documents": [
-    {
-      "AbsoluteMoniker": "D:0:0:{44D56DD6-A48F-48C7-9DB4-CD3BA6950EF2}|Komercio.csproj|c:\\komercio\\front c#\\komercio\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{44D56DD6-A48F-48C7-9DB4-CD3BA6950EF2}|Komercio.csproj|solutionrelative:form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{44D56DD6-A48F-48C7-9DB4-CD3BA6950EF2}|Komercio.csproj|c:\\komercio\\front c#\\komercio\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{44D56DD6-A48F-48C7-9DB4-CD3BA6950EF2}|Komercio.csproj|solutionrelative:form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{44D56DD6-A48F-48C7-9DB4-CD3BA6950EF2}|Komercio.csproj|C:\\Komercio\\Front C#\\Komercio\\ui\\forms\\product\\subgrupo\\fmrcadastrosubgrupoproduto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{44D56DD6-A48F-48C7-9DB4-CD3BA6950EF2}|Komercio.csproj|solutionrelative:ui\\forms\\product\\subgrupo\\fmrcadastrosubgrupoproduto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{44D56DD6-A48F-48C7-9DB4-CD3BA6950EF2}|Komercio.csproj|c:\\komercio\\front c#\\komercio\\ui\\forms\\product\\subgrupo\\fmrcadastrosubgrupoproduto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{44D56DD6-A48F-48C7-9DB4-CD3BA6950EF2}|Komercio.csproj|solutionrelative:ui\\forms\\product\\subgrupo\\fmrcadastrosubgrupoproduto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    }
-  ],
+  "Documents": [],
   "DocumentGroupContainers": [
     {
       "Orientation": 1,
@@ -26,61 +9,11 @@
       "DocumentGroups": [
         {
           "DockedHeight": 96,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": -1,
           "Children": [
             {
               "$type": "Bookmark",
               "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "Form1.cs",
-              "DocumentMoniker": "C:\\Komercio\\Front C#\\Komercio\\Form1.cs",
-              "RelativeDocumentMoniker": "Form1.cs",
-              "ToolTip": "C:\\Komercio\\Front C#\\Komercio\\Form1.cs",
-              "RelativeToolTip": "Form1.cs",
-              "ViewState": "AgIAAJgBAAAAAAAAAAAewKUBAAAfAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-19T19:17:58.293Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "Form1.cs [Design]",
-              "DocumentMoniker": "C:\\Komercio\\Front C#\\Komercio\\Form1.cs",
-              "RelativeDocumentMoniker": "Form1.cs",
-              "ToolTip": "C:\\Komercio\\Front C#\\Komercio\\Form1.cs [Design]",
-              "RelativeToolTip": "Form1.cs [Design]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-19T19:17:49.991Z",
-              "EditorCaption": " [Design]"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "fmrCadastroSubGrupoProduto.cs",
-              "DocumentMoniker": "C:\\Komercio\\Front C#\\Komercio\\UI\\Forms\\Product\\Subgrupo\\fmrCadastroSubGrupoProduto.cs",
-              "RelativeDocumentMoniker": "UI\\Forms\\Product\\Subgrupo\\fmrCadastroSubGrupoProduto.cs",
-              "ToolTip": "C:\\Komercio\\Front C#\\Komercio\\UI\\Forms\\Product\\Subgrupo\\fmrCadastroSubGrupoProduto.cs",
-              "RelativeToolTip": "UI\\Forms\\Product\\Subgrupo\\fmrCadastroSubGrupoProduto.cs",
-              "ViewState": "AgIAABoAAAAAAAAAAAAnwCgAAAAMAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-19T19:14:46.633Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "fmrCadastroSubGrupoProduto.cs [Design]",
-              "DocumentMoniker": "C:\\Komercio\\Front C#\\Komercio\\UI\\Forms\\Product\\Subgrupo\\fmrCadastroSubGrupoProduto.cs",
-              "RelativeDocumentMoniker": "UI\\Forms\\Product\\Subgrupo\\fmrCadastroSubGrupoProduto.cs",
-              "ToolTip": "C:\\Komercio\\Front C#\\Komercio\\UI\\Forms\\Product\\Subgrupo\\fmrCadastroSubGrupoProduto.cs [Design]",
-              "RelativeToolTip": "UI\\Forms\\Product\\Subgrupo\\fmrCadastroSubGrupoProduto.cs [Design]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-19T18:59:04.799Z",
-              "EditorCaption": " [Design]"
             }
           ]
         }

@@ -44,6 +44,8 @@ namespace Komercio.Services
         }
 
 
+
+
             // Vou receber a lista de itens da compra. Se a lista estiver Ok, retorno vazio. Se não retorno erro
 
          public string ValidarItens(BindingList<SalesItensDTO> itens) {

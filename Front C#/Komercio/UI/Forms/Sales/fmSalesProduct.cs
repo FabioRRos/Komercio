@@ -96,7 +96,6 @@ namespace Komercio.UI.Forms.Sales
         private void ConfigurarColunasProdutos()
         {
             dbListaproduto.RowHeadersVisible = false;
-            dbListaproduto.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
 
             dbListaproduto.Columns["idProduct"].Visible = false;
             dbListaproduto.Columns["productName"].HeaderText = "Produto";
@@ -106,12 +105,16 @@ namespace Komercio.UI.Forms.Sales
             dbListaproduto.Columns["productSubgroup"].HeaderText = "Subgrupo";
             dbListaproduto.Columns["productStock"].Visible = false;
             dbListaproduto.Columns["productStatus"].Visible = false;
+
+
+            dbListaproduto.Columns["productName"].AutoSizeMode = (DataGridViewAutoSizeColumnMode)DataGridViewAutoSizeColumnsMode.AllCells;
+
+            dbListaproduto.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
 
         private void ConfigurarColunasCarrinho()
         {
             dgvCarrinho.RowHeadersVisible = false;
-            dgvCarrinho.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
 
             dgvCarrinho.Columns["ProductId"].Visible = false;
             dgvCarrinho.Columns["ProductName"].HeaderText = "Produto";
@@ -119,6 +122,9 @@ namespace Komercio.UI.Forms.Sales
             dgvCarrinho.Columns["UnitPrice"].HeaderText = "Preço Unitário";
             dgvCarrinho.Columns["quantity"].HeaderText = "Quantidade";
             dgvCarrinho.Columns["total"].HeaderText = "Total produto";
+
+            dgvCarrinho.Columns["ProductName"].AutoSizeMode = (DataGridViewAutoSizeColumnMode)DataGridViewAutoSizeColumnsMode.AllCells;
+            dgvCarrinho.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
 
 //carrega produtos

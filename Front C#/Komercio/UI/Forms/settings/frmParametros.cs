@@ -27,6 +27,9 @@ namespace Komercio.UI.Forms.settings
 
         private void frmParametros_Load(object sender, EventArgs e)
         {
+            this.FormBorderStyle = FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
+            this.MinimizeBox = true;
             BuscarParametros();
         }
 

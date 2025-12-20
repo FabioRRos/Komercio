@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmParametros));
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.dgwTabela = new System.Windows.Forms.DataGridView();
             this.mbtnSalvar = new MaterialSkin.Controls.MaterialButton();
@@ -87,8 +88,9 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(318, 450);
             this.Controls.Add(this.tableLayoutPanel1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmParametros";
-            this.Text = "frmParametros";
+            this.Text = "Parâmetros do sistema";
             this.Load += new System.EventHandler(this.frmParametros_Load);
             this.tableLayoutPanel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgwTabela)).EndInit();

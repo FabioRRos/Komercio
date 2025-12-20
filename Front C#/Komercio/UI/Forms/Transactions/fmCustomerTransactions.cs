@@ -94,7 +94,6 @@ namespace Komercio.UI.Forms.Transactions
         {
             // customização do grid            
             dgvTransactionsList.RowHeadersVisible = false;
-            //dgvTransactionsList.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
             dgvTransactionsList.BackgroundColor = Color.White;
             dgvTransactionsList.BorderStyle = BorderStyle.None;
             
@@ -121,7 +120,13 @@ namespace Komercio.UI.Forms.Transactions
             dgvTransactionsList.Columns["TypePayment"].Visible = false;
             dgvTransactionsList.Columns["IdTransaction"].Visible = false;
 
-            
+
+            dgvTransactionsList.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+
+
+          //  dgvTransactionsList.Columns["Parametro_name"].AutoSizeMode = (DataGridViewAutoSizeColumnMode)DataGridViewAutoSizeColumnsMode.AllCells;
+
+
 
 
         }
@@ -135,9 +140,10 @@ namespace Komercio.UI.Forms.Transactions
 
             // customização do grid            
             dgvCustomerList.RowHeadersVisible = false;
-            dgvCustomerList.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+            dgvCustomerList.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvCustomerList.BackgroundColor = Color.White;
             dgvCustomerList.BorderStyle = BorderStyle.None;
+            dgvCustomerList.Columns["customer_last_name"].AutoSizeMode = (DataGridViewAutoSizeColumnMode)DataGridViewAutoSizeColumnsMode.AllCells;
 
 
             //ocultar as colunas que não preciso mostrar
@@ -165,10 +171,11 @@ namespace Komercio.UI.Forms.Transactions
 
             // customização do grid            
             dgvItensVenda.RowHeadersVisible = false;
-            dgvItensVenda.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
             dgvItensVenda.BackgroundColor = Color.White;
             dgvItensVenda.BorderStyle = BorderStyle.None;
             dgvItensVenda.Columns["ProductName"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            dgvItensVenda.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgvItensVenda.Columns["ProductName"].AutoSizeMode = (DataGridViewAutoSizeColumnMode)DataGridViewAutoSizeColumnsMode.AllCells;
 
         }
 

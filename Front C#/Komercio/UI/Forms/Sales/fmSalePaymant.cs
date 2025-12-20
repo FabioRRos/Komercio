@@ -62,12 +62,8 @@ namespace Komercio.UI.Forms.Sales
             InitializeComponent();
             total = totalVenda;
             _cupomService = cupomService;
-
-
             //
             _parametrosApp = parametrosApp;
-
-
         }
 
         private void fmSalePaymant_Load(object sender, EventArgs e)
@@ -91,14 +87,12 @@ namespace Komercio.UI.Forms.Sales
             mtbValorRecebido.Text = total.ToString("C2");
             mlbTotal.Text = total.ToString("C2");
 
-
             mtbSubTotal.Hint = "SUBTOTAL";
             mtbAddValue.Hint = "ACRÉSCIMO";
             mtbDesc.Hint = "DESCONTO";
             mtbTroco.Hint = "TROCO";
             mtbValorRecebido.Hint = "VALOR RECEBIDO";
             
-
         }
 
         // Atualiza total com base em desconto e acréscimo
@@ -164,7 +158,6 @@ namespace Komercio.UI.Forms.Sales
             {
                 troco = valorRecebido - total;
                 mtbTroco.Text = troco.ToString("C2");
-
             }
             else
             {
@@ -473,14 +466,10 @@ namespace Komercio.UI.Forms.Sales
         }
 
 
-
-
         private void mtbDoccument_Leave(object sender, EventArgs e)
         {
           
-               // SearchCustomer(mtbDoccument.Text.Replace(".", "").Replace("-", ""));
-
-            
+               // SearchCustomer(mtbDoccument.Text.Replace(".", "").Replace("-", ""));            
         }
 
 

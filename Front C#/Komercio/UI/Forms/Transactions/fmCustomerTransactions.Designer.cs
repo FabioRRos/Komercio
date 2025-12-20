@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(fmCustomerTransactions));
             this.mtbName = new MaterialSkin.Controls.MaterialTextBox2();
             this.mbtSearch = new MaterialSkin.Controls.MaterialButton();
             this.mtbDoc = new MaterialSkin.Controls.MaterialTextBox2();
@@ -551,6 +552,7 @@
             this.Controls.Add(this.mtbDoc);
             this.Controls.Add(this.mbtSearch);
             this.Controls.Add(this.mtbName);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "fmCustomerTransactions";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Visualizar débitos";

@@ -431,7 +431,7 @@ namespace Komercio
         }
         private void AlterarProduto()
         {
-            fmAlterarProduto alterarProduto = new fmAlterarProduto(_productService, _productDescriptionService, _productSubgroupService, _productGroupService,null,_produtoApp);
+            fmAlterarProduto alterarProduto = new fmAlterarProduto(null,_produtoApp);
             alterarProduto.ShowDialog();
         }
 

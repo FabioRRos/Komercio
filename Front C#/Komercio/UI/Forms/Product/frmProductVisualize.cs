@@ -70,7 +70,6 @@ namespace Komercio.UI.Forms.Product
         private void ConfigurarColunasProdutos()
         {
             dgvProdutos.RowHeadersVisible = false;
-            dgvProdutos.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
 
             dgvProdutos.Columns["productName"].HeaderText = "Produto";
             dgvProdutos.Columns["productCodbar"].HeaderText = "Codigo de barras";
@@ -82,6 +81,10 @@ namespace Komercio.UI.Forms.Product
             dgvProdutos.Columns["idProduct"].Visible = false;
             dgvProdutos.Columns["productStatus"].Visible = false;
             dgvProdutos.Columns["productSubgroup"].Visible = false;
+
+
+            dgvProdutos.Columns["productName"].AutoSizeMode = (DataGridViewAutoSizeColumnMode)DataGridViewAutoSizeColumnsMode.AllCells;
+            dgvProdutos.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
 
         }
 

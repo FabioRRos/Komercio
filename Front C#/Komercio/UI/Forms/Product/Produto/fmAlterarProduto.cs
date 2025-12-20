@@ -16,10 +16,7 @@ namespace Komercio.UI.Forms.Product.Produto
 {
     public partial class fmAlterarProduto : Form
     {
-        private readonly ProductService _productService;
-        private readonly ProductDescriptionService _productDescriptionService;
-        private readonly ProductSubgroupService _productSubgroupService;
-        private readonly ProductGroupService _productGroupService;
+
 
         ///////
         private readonly ProdutoApp _produtoApp;
@@ -31,13 +28,10 @@ namespace Komercio.UI.Forms.Product.Produto
        private ProductDTO product = new ProductDTO();
         private ProductDTO productReturnet = new ProductDTO();
 
-        public fmAlterarProduto(ProductService productService, ProductDescriptionService productAndGroupAndSubgroup, ProductSubgroupService productSubgroupService, ProductGroupService productGroupService, ProductDTO productDTO, ProdutoApp produtoApp)
+        public fmAlterarProduto(ProductDTO productDTO,
+            ProdutoApp produtoApp)
         {
-            _productSubgroupService = productSubgroupService;
-            _productGroupService = productGroupService;
-            _productService = productService;
-            _productDescriptionService = productAndGroupAndSubgroup;
-            _productService = productService;
+
             product = productDTO;
 
 
@@ -136,8 +130,10 @@ namespace Komercio.UI.Forms.Product.Produto
             mtbProductName.Text = productReturnet.productName;
             mtbProductPrice.Text = productReturnet.productPrice.ToString("C2");
             mtbProductCodeBar.Text = productReturnet.productCodbar;
-            mcbGroup.Items.Add(productReturnet.productGroup);
-            mcbSubGroup.Items.Add(productReturnet.productSubgroup);
+            if (productReturnet.productGroup != null)
+                mcbGroup.Items.Add(productReturnet.productGroup);
+            if (productReturnet.productSubgroup != null)
+                mcbSubGroup.Items.Add(productReturnet.productSubgroup);
             mtbProductStock.Text = productReturnet.productStock.ToString();
             msProductStatus.Checked = productReturnet.productStatus;
 
