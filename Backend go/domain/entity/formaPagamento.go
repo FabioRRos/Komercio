@@ -15,9 +15,6 @@ type FormaPagamento struct {
 
 func ValidarCamposFormaPagamento(formaPagamento *FormaPagamento) error {
 
-	if formaPagamento.Sale_id <= 0 {
-		return fmt.Errorf("ID da venda inválido!")
-	}
 	if formaPagamento.Forma_de_pagamento == "" {
 		return fmt.Errorf("Forma de pagamento inválida!")
 	}

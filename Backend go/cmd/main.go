@@ -113,7 +113,8 @@ func main() {
 	)
 	caixaController := controller.NewCaixaController(
 		service.NewCaixaService(
-			repository.NewCaixaRepository(caixaDatastore), service.NewCashmovementService(repository.NewCashmovementsRepository(cashmovementDatastore))),
+			repository.NewCaixaRepository(caixaDatastore),
+			service.NewCashmovementService(repository.NewCashmovementsRepository(cashmovementDatastore))),
 	)
 
 	fullSaleService := service.NewFullSaleService(
@@ -129,6 +130,8 @@ func main() {
 			repository.NewCustomertransactionRepository(transationDatastore), nil),
 		service.NewCaixaService(
 			repository.NewCaixaRepository(caixaDatastore), nil),
+		service.NewFormaPagamentoService(
+			repository.NewFormaPagamentoRepository(formaPagamento)),
 	)
 
 	listProductDescription := service.NewProductDescriptionService(

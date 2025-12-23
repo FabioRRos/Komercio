@@ -7,9 +7,10 @@ import (
 
 // SaleAggregate é o cara onde vou salvar os dados da venda no json
 type SaleAggregate struct {
-	Sale         Sales         `json:"sale"`
-	Items        []SalesItens  `json:"items"`
-	CashMovement Cashmovements `json:"cash_movement"`
+	Sale            Sales            `json:"sale"`
+	Items           []SalesItens     `json:"items"`
+	CashMovement    Cashmovements    `json:"cash_movement"`
+	FormaPpagamento []FormaPagamento `json:"forma_pagamento"` // array para suportar multiplas formas de pagamento
 }
 
 // Função para validar cálculos da venda
@@ -24,6 +25,17 @@ func Valedatecalcofsale(aggregate *SaleAggregate) error {
 
 	if math.Abs(float64(result-finalAmount)) > epsilon {
 		return fmt.Errorf("total final %.2f não bate com total %.2f - desconto %.2f", aggregate.Sale.FinalAmount, aggregate.Sale.TotalAmount, aggregate.Sale.DiscountAmount)
+	}
+
+	///Aqui vou validar a forma de pagamento se está ok. Se as contas batem com a venda e com o movimento de caixa
+
+	somaFormaPagamento := float32(0)
+	for _, forma := range aggregate.FormaPpagamento {
+		somaFormaPagamento += forma.Valor_pago
+	}
+
+	if math.Abs(float64(somaFormaPagamento-aggregate.Sale.FinalAmount)) > epsilon {
+		return fmt.Errorf("soma das formas de pagamento %.2f não bate com o valor final da venda %.2f", somaFormaPagamento, aggregate.Sale.FinalAmount)
 	}
 
 	//return fmt.Errorf("Passou1")

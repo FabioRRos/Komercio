@@ -23,21 +23,21 @@ func NewFullSaleController(fullSaleService service.FullSaleService) *FullSaleCon
 func (c *FullSaleController) CreateFullSale(ctx *gin.Context) {
 	var saleAggregate entity.SaleAggregate
 
-	// 1️⃣ Faz o bind do JSON recebido
+	// Faz o bind do JSON recebido
 	if err := ctx.ShouldBindJSON(&saleAggregate); err != nil {
 		ctx.JSON(http.StatusBadRequest, gin.H{"error": "Parâmetros inválidos ou JSON mal formatado"})
 		return
 	}
 
-	// 2️⃣ Chama o service para processar tudo
-	// Aqui usamos o contexto do request HTTPcle
+	// Chama o service para processar tudo
+	// Aqui usamos o contexto do request.
 	saleID, err := c.service.CreateFullSale(ctx.Request.Context(), &saleAggregate)
 	if err != nil {
 		ctx.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
 	}
 
-	// 3️⃣ Retorna sucesso
+	// Retorna sucesso
 	ctx.JSON(http.StatusOK, gin.H{
 		"message": "Venda completa registrada com sucesso",
 		"sale_id": saleID,

@@ -22,6 +22,7 @@ func NewFullSaleService(
 	product ProductService,
 	transation CustomertransactionService,
 	caixaService CaixaService,
+	formaPagamento FormaPagamentoService,
 ) FullSaleService {
 	return &fullSaleService{
 		salesService:        salesService,
@@ -30,6 +31,7 @@ func NewFullSaleService(
 		product:             product,
 		transation:          transation,
 		caixaService:        caixaService,
+		formaPagamento:      formaPagamento,
 	}
 }
 
@@ -43,11 +45,12 @@ type fullSaleService struct {
 	product             ProductService
 	transation          CustomertransactionService
 	caixaService        CaixaService
+	formaPagamento      FormaPagamentoService
 }
 
 func (s *fullSaleService) CreateFullSale(ctx context.Context, salesAggregate *entity.SaleAggregate) (int, error) {
 	now := time.Now()
-
+	//chamo a validação financeira da venda
 	err := entity.Valedatecalcofsale(salesAggregate)
 	if err != nil {
 		return 0, fmt.Errorf("Erro na validação financeira da tranzação. %w", err)
@@ -91,10 +94,11 @@ func (s *fullSaleService) CreateFullSale(ctx context.Context, salesAggregate *en
 
 	// Registra a movimentação de caixa
 	cashMovement := entity.Cashmovements{
-		SalesId:                    saleID,
-		Cashmovementstype:          salesAggregate.CashMovement.Cashmovementstype,
-		Cashmovementsdescription:   salesAggregate.CashMovement.Cashmovementsdescription,
-		Cashmovementsamount:        salesAggregate.CashMovement.Cashmovementsamount,
+		SalesId:                  saleID,
+		Cashmovementstype:        salesAggregate.CashMovement.Cashmovementstype,
+		Cashmovementsdescription: salesAggregate.CashMovement.Cashmovementsdescription,
+		Cashmovementsamount:      salesAggregate.CashMovement.Cashmovementsamount,
+		//Abaixo teremos formas unicas como dinheiro, cartão, cheque, conta ou "Misto"
 		Cashmovementspaymentmethod: salesAggregate.CashMovement.Cashmovementspaymentmethod,
 		Cashmovementsdatetime:      now,
 		SellerId:                   salesAggregate.CashMovement.SellerId,
@@ -115,37 +119,58 @@ func (s *fullSaleService) CreateFullSale(ctx context.Context, salesAggregate *en
 		}
 	}
 
-	//Aqui será a entrada dda caderneta se a venda for feita com pagamento na conta.
+	// aqui eu deixei o IF de lado e vou utilizar o Swithch para tratar as formas de pagamento
+	// Basicamente eu vou rodar a lista de forma de pagamento para adiciona-las onde elas devem ser adicionadas.
 
-	if salesAggregate.Sale.PaymentMethod == "Conta" {
-		newTransation := entity.CustomerTransaction{
-			Sale_id:           saleID,
-			Customer_id:       sale.CustomerId,
-			Origin_type:       "Venda", // Sempre será entrada
-			Transaction_value: cashMovement.Cashmovementsamount,
-			Transaction_date:  cashMovement.Cashmovementsdatetime,
-			Obs:               sale.SaleNotes,
-			Seller:            strconv.Itoa(cashMovement.SellerId),
-			Type_payment:      cashMovement.Cashmovementspaymentmethod,
+	for _, forma := range salesAggregate.FormaPpagamento {
+		switch forma.Forma_de_pagamento {
+		case "Conta":
+			{
+				newTransation := entity.CustomerTransaction{
+					Sale_id:           saleID,
+					Customer_id:       sale.CustomerId,
+					Origin_type:       "Venda", // Sempre será entrada
+					Transaction_value: forma.Valor_pago,
+					Transaction_date:  cashMovement.Cashmovementsdatetime,
+					Obs:               sale.SaleNotes,
+					Seller:            strconv.Itoa(cashMovement.SellerId),
+					Type_payment:      forma.Forma_de_pagamento,
+				}
+				if err := s.transation.CreateTransactionTX(ctx, tx, &newTransation); err != nil {
+					return 0, fmt.Errorf("erro ao tentar salvar transição na conta\nErro: %w", err)
+				}
+			}
+		case "Dinheiro":
+			{
+				// Atualiza o caixa
+				caixaChange := entity.Caixa{
+					ValueChanged: forma.Valor_pago,
+					ChangeType:   "entrada",
+					ChangeOrigin: "venda",
+					ChangeDate:   now,
+					VendedorID:   cashMovement.SellerId,
+					Status:       true,
+					Observations: fmt.Sprintf("Venda ID %d", saleID),
+				}
+				if err := s.caixaService.CaixaChangeTX(ctx, tx, &caixaChange); err != nil {
+					return 0, fmt.Errorf("erro ao atualizar o caixa: %w", err)
+				}
+			}
+		default:
+			{
+				// Outras formas de pagamento podem ser tratadas aqui
+			}
 		}
-		if err := s.transation.CreateTransactionTX(ctx, tx, &newTransation); err != nil {
-			return 0, fmt.Errorf("erro ao tentar salvar transição na conta\nErro: %w", err)
+
+		// Aqui vou salvar as formas de pagamento utilizadas na venda
+		formaPagamentoRecord := entity.FormaPagamento{
+			Sale_id:            saleID,
+			Forma_de_pagamento: forma.Forma_de_pagamento,
+			Valor_pago:         forma.Valor_pago,
+			Data_pagamento:     sale.SalesDate,
 		}
-	}
-	//caixa local (dinheiro)
-	if salesAggregate.Sale.PaymentMethod == "Dinheiro" {
-		// Atualiza o caixa
-		caixaChange := entity.Caixa{
-			ValueChanged: cashMovement.Cashmovementsamount,
-			ChangeType:   "entrada",
-			ChangeOrigin: "venda",
-			ChangeDate:   now,
-			VendedorID:   cashMovement.SellerId,
-			Status:       true,
-			Observations: fmt.Sprintf("Venda ID %d", saleID),
-		}
-		if err := s.caixaService.CaixaChangeTX(ctx, tx, &caixaChange); err != nil {
-			return 0, fmt.Errorf("erro ao atualizar o caixa: %w", err)
+		if err := s.formaPagamento.CreateFormaPagamentoTX(ctx, tx, &formaPagamentoRecord); err != nil {
+			return 0, fmt.Errorf("erro ao salvar forma de pagamento: %w", err)
 		}
 	}
 
