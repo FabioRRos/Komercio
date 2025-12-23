@@ -51,6 +51,8 @@ func main() {
 	defer caixaDatastore.Close()
 	parametros := datastore.NewParametrosDatastore()
 	defer parametros.Close()
+	formaPagamento := datastore.NewFormaPagamentoDatastore()
+	defer formaPagamento.Close()
 
 	//#####################################################
 	//Injeção de dependências
@@ -58,6 +60,12 @@ func main() {
 	parametrosController := controller.NewParametroController(
 		service.NewParametrosService(
 			repository.NewParametrosRepository(parametros),
+		),
+	)
+
+	formaPagamentoController := controller.NewFormaPagamentoController(
+		service.NewFormaPagamentoService(
+			repository.NewFormaPagamentoRepository(formaPagamento),
 		),
 	)
 
@@ -166,6 +174,7 @@ func main() {
 	routes.CustomertransactionControllerRoutes(server, transationController)
 	routes.CaixaRoute(server, caixaController)
 	routes.ParametrosrRoutes(server, parametrosController)
+	routes.RegisterFormaPagamentoRoutes(server, formaPagamentoController)
 	//server.Run("0.0.0.0:8000")
 
 	//Minha antiga validação manual
