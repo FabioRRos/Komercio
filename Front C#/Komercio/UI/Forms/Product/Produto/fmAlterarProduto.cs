@@ -127,15 +127,16 @@ namespace Komercio.UI.Forms.Product.Produto
         //CARREGA OS COMPONENTES DA TELA COM OS DADOS CARREGADOS PELO BUSCAR PRODUTO
         private void LoadComponentes()
         {
-            mtbProductName.Text = productReturnet.productName;
-            mtbProductPrice.Text = productReturnet.productPrice.ToString("C2");
-            mtbProductCodeBar.Text = productReturnet.productCodbar;
-            if (productReturnet.productGroup != null)
-                mcbGroup.Items.Add(productReturnet.productGroup);
-            if (productReturnet.productSubgroup != null)
-                mcbSubGroup.Items.Add(productReturnet.productSubgroup);
-            mtbProductStock.Text = productReturnet.productStock.ToString();
-            msProductStatus.Checked = productReturnet.productStatus;
+
+            mtbProductName.Text = product.productName;
+            mtbProductPrice.Text = product.productPrice.ToString("C2");
+            mtbProductCodeBar.Text = product.productCodbar;
+            if (product.productGroup != null)
+                mcbGroup.Items.Add(product.productGroup);
+            if (product.productSubgroup != null)
+                mcbSubGroup.Items.Add(product.productSubgroup);
+            mtbProductStock.Text = product.productStock.ToString();
+            msProductStatus.Checked = product.productStatus;
 
             LibereComponentes();
         }
@@ -200,6 +201,8 @@ namespace Komercio.UI.Forms.Product.Produto
                     mcbSubGroup.Text,
                     mtbProductStock.Text
                     );
+
+                productReturnet.idProduct = product.idProduct;
             }
             catch (Exception ex)
             {

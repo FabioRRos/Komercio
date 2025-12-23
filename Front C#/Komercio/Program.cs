@@ -23,9 +23,10 @@ namespace Komercio
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+
             //Base URL da API
             string apiBaseUrl = ConfigurationManager.AppSettings["ApiBaseUrl"];
-            
+           
 
             // Cria a instância do serviço da API
             var employeeService = new EmployeeService(apiBaseUrl);

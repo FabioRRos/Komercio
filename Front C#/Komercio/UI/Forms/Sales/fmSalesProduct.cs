@@ -2,6 +2,7 @@
 using Komercio.Models;
 using Komercio.Services;
 using Komercio.UI.Forms.Product;
+using Komercio.UI.Forms.Product.Produto;
 using MeuProjetoWinForms.Services;
 using System;
 using System.Collections.Generic;
@@ -490,6 +491,12 @@ namespace Komercio.UI.Forms.Sales
             }
 
             if (e.KeyCode == Keys.F5)
+            {
+                fmAlterarProduto inputProduct = new fmAlterarProduto(null,_produtoApp);
+                inputProduct.ShowDialog();
+                await loaddbListaproduto();
+            }
+            if (e.KeyCode == Keys.F6)
             {
                 fmImputProduct inputProduct = new fmImputProduct(_produtoApp);
                 inputProduct.ShowDialog();

@@ -83,6 +83,10 @@ namespace Komercio.UI.Forms.Product
             dgvProdutos.Columns["productSubgroup"].Visible = false;
 
 
+            dgvProdutos.Columns["productPrice"].DefaultCellStyle.Format = "C2";
+
+
+
             dgvProdutos.Columns["productName"].AutoSizeMode = (DataGridViewAutoSizeColumnMode)DataGridViewAutoSizeColumnsMode.AllCells;
             dgvProdutos.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
 

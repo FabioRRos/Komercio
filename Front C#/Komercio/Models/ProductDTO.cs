@@ -49,8 +49,9 @@ namespace Komercio.Models
             product.productName = name;
             try
             {
+                // verifica se o valor do produto é valido (maior ou igual a zero).
                 product.productPrice = float.Parse(preco.Replace("R$", ""));
-                if (product.productPrice < 0)
+                if (product.productPrice <= 0)
                 {
                     throw new ArgumentException("Preço inválido!");
                 }

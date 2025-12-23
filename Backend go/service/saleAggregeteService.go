@@ -132,7 +132,7 @@ func (s *fullSaleService) CreateFullSale(ctx context.Context, salesAggregate *en
 			return 0, fmt.Errorf("erro ao tentar salvar transição na conta\nErro: %w", err)
 		}
 	}
-	//caixa local (dinheir)
+	//caixa local (dinheiro)
 	if salesAggregate.Sale.PaymentMethod == "Dinheiro" {
 		// Atualiza o caixa
 		caixaChange := entity.Caixa{

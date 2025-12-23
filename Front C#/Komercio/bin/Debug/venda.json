@@ -1,11 +1,11 @@
 {
   "customer_id": 0,
-  "total_amount": 32.9,
+  "total_amount": 50.0,
   "discount_amount": 0.0,
-  "final_amount": 32.9,
-  "sale_date": "2025-12-19T15:47:04.2792798-03:00",
-  "sale_time": "15:47:04",
-  "payment_method": "Débito",
+  "final_amount": 50.0,
+  "sale_date": "2025-12-22T15:18:17.1386032-03:00",
+  "sale_time": "15:18:17",
+  "payment_method": "PIX",
   "seller_id": 0,
   "sale_notes": ""
 }

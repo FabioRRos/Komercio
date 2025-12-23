@@ -74,10 +74,14 @@ namespace Komercio.UI.Forms.Sales
             this.MinimizeBox = true;
             EmployeerList();
             printCupom.PrintPage += printCupom_PrintPage;
-            Inicio();
+            Inicio(); 
         }
 
-        // Inicializa valores padrão
+        /// <summary>
+        /// Ele carrega os componentes na forma inicial.
+        /// Basicamente ele coloca as tags de dinheiro nos campos e preenshe o Hint pra ficar
+        /// bem formatado.
+        /// </summary>
         private void Inicio()
         {
             mtbSubTotal.Text = total.ToString("C2");
@@ -95,7 +99,9 @@ namespace Komercio.UI.Forms.Sales
             
         }
 
-        // Atualiza total com base em desconto e acréscimo
+        /// <summary>
+        ///Atualiza total com base em desconto e acréscimo
+        /// </summary>
         private void AtualizarTotal()
         {
             subtotal = ConverterTextoParaFloat(mtbSubTotal.Text);
@@ -116,8 +122,11 @@ namespace Komercio.UI.Forms.Sales
 
             mlbTotal.Text = total.ToString("C2");
         }
-
-        // Formata campo numérico para moeda
+        /// <summary>
+        /// Formata campo numérico para moeda
+        ///  
+        /// </summary>
+        /// <param name="campo"></param>
         private void FormatarCampoMonetario(MaterialSkin.Controls.MaterialTextBox2 campo)
         {
             if (string.IsNullOrWhiteSpace(campo.Text))
@@ -145,7 +154,8 @@ namespace Komercio.UI.Forms.Sales
             }
         }
 
-        // Botões de pagamento
+        /// Botões de pagamento
+        /// 
         private void buttonschangecolor()
         {
             mtbcash.UseAccentColor = false;
@@ -344,9 +354,6 @@ namespace Komercio.UI.Forms.Sales
                     }
             }
 
-
-
-
                     var (customer, ok) = await _customerService.GetValidationCustomerDocument(doccument);
                     if (ok)
                     {
@@ -366,12 +373,6 @@ namespace Komercio.UI.Forms.Sales
                         mtbFirstAndLastName.Text = "";
                     }           
         }
-
-
-
-
-
-
 
         // Monta objeto pronto pra enviar pro service
         private SalesDTO CriarObjetoVenda(List<SalesItensDTO> itens, CustomerDto cliente)
@@ -547,7 +548,9 @@ namespace Komercio.UI.Forms.Sales
             SearchCustomer(mtbDoccument.Text.Replace(".", "").Replace("-", ""));
         }
 
-
+        /// <summary>
+        /// Cerrega lista de funcionários no forms.
+        /// </summary>
         private async void EmployeerList()
         {
             employeerList = await _employeeService.GetActiveEmployeeNamesAsync();
@@ -684,15 +687,15 @@ namespace Komercio.UI.Forms.Sales
 
                 if (retorno)
                 {
-                    printCupom.Print();
-                   // MessageBox.Show("Venda formalizada e arquivo JSON gerado com sucesso!",
-                   // "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                     printCupom.Print();
+                    // MessageBox.Show("Venda formalizada e arquivo JSON gerado com sucesso!",
+                    // "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
-                
+
 
 
                 //  o form atual
-            this.Close();
+                this.Close();
 
             }
             catch

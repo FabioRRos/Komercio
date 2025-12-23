@@ -170,7 +170,7 @@ namespace Komercio.Services
 
 
             _receiptText = textoFinal;
-           // PrintCupom(Printer);
+            PrintCupom(Printer);
 
              return textoFinal;
         }
@@ -189,6 +189,7 @@ namespace Komercio.Services
                 pd.DefaultPageSettings.PaperSize = paper;
 
                 pd.PrintPage += new PrintPageEventHandler(PrintPage);
+                
                 pd.Print();
             }
             catch (Exception ex)

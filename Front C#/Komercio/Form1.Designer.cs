@@ -54,6 +54,7 @@
             this.configuraçõesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.notificaçõesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.estoqueBaixoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.parametrosDeConfiguraçãoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.caixaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aberturaDoCaixaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.fechamentoDoCaixaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -77,7 +78,6 @@
             this.mbtAltProd = new MaterialSkin.Controls.MaterialButton();
             this.mbtEntradaMan = new MaterialSkin.Controls.MaterialButton();
             this.mbtProdCadLote = new MaterialSkin.Controls.MaterialButton();
-            this.parametrosDeConfiguraçãoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStripCaixa.SuspendLayout();
             this.pCaixa.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -105,14 +105,14 @@
             // 
             this.novoFuncionárioToolStripMenuItem.Image = global::Komercio.Properties.Resources.komercio;
             this.novoFuncionárioToolStripMenuItem.Name = "novoFuncionárioToolStripMenuItem";
-            this.novoFuncionárioToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
+            this.novoFuncionárioToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.novoFuncionárioToolStripMenuItem.Text = "Novo Funcionário";
             this.novoFuncionárioToolStripMenuItem.Click += new System.EventHandler(this.novoFuncionárioToolStripMenuItem_Click);
             // 
             // alterarSenhaToolStripMenuItem
             // 
             this.alterarSenhaToolStripMenuItem.Name = "alterarSenhaToolStripMenuItem";
-            this.alterarSenhaToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
+            this.alterarSenhaToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.alterarSenhaToolStripMenuItem.Text = "Alterar senha";
             this.alterarSenhaToolStripMenuItem.Click += new System.EventHandler(this.alterarSenhaToolStripMenuItem_Click);
             // 
@@ -289,6 +289,13 @@
             this.estoqueBaixoToolStripMenuItem.Size = new System.Drawing.Size(147, 22);
             this.estoqueBaixoToolStripMenuItem.Text = "Estoque baixo";
             this.estoqueBaixoToolStripMenuItem.Click += new System.EventHandler(this.estoqueBaixoToolStripMenuItem_Click);
+            // 
+            // parametrosDeConfiguraçãoToolStripMenuItem
+            // 
+            this.parametrosDeConfiguraçãoToolStripMenuItem.Name = "parametrosDeConfiguraçãoToolStripMenuItem";
+            this.parametrosDeConfiguraçãoToolStripMenuItem.Size = new System.Drawing.Size(223, 22);
+            this.parametrosDeConfiguraçãoToolStripMenuItem.Text = "Parametros de configuração";
+            this.parametrosDeConfiguraçãoToolStripMenuItem.Click += new System.EventHandler(this.parametrosDeConfiguraçãoToolStripMenuItem_Click);
             // 
             // caixaToolStripMenuItem
             // 
@@ -700,13 +707,6 @@
             this.mbtProdCadLote.UseVisualStyleBackColor = true;
             this.mbtProdCadLote.Click += new System.EventHandler(this.materialButton8_Click);
             // 
-            // parametrosDeConfiguraçãoToolStripMenuItem
-            // 
-            this.parametrosDeConfiguraçãoToolStripMenuItem.Name = "parametrosDeConfiguraçãoToolStripMenuItem";
-            this.parametrosDeConfiguraçãoToolStripMenuItem.Size = new System.Drawing.Size(223, 22);
-            this.parametrosDeConfiguraçãoToolStripMenuItem.Text = "Parametros de configuração";
-            this.parametrosDeConfiguraçãoToolStripMenuItem.Click += new System.EventHandler(this.parametrosDeConfiguraçãoToolStripMenuItem_Click);
-            // 
             // Home
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -719,7 +719,7 @@
             this.MainMenuStrip = this.menuStripCaixa;
             this.Name = "Home";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "home";
+            this.Text = "Komercio + ";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.Home_Load);
             this.menuStripCaixa.ResumeLayout(false);

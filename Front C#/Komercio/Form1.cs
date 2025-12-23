@@ -91,11 +91,18 @@ namespace Komercio
         private void novoFuncionárioToolStripMenuItem_Click(object sender, EventArgs e)
         {
             CadastrarFuncionario();
+
         }
 
         private void Home_Load(object sender, EventArgs e)
         {
+           // MessageBox.Show(_httpClient);
+            if (_httpClient == "https://localhost:8443/")
+            {
+                this.BackColor = SystemColors.ControlDark;
+            }
             StatusCaixa();
+
         }
         //DTO para status Caixa:
         private List<CaixaDTO> caixaDTO = new List<CaixaDTO>();
@@ -396,14 +403,24 @@ namespace Komercio
                MessageBox.Show("Função desativada temporariamente!!","ATENÇÃO",MessageBoxButtons.OK,MessageBoxIcon.Warning);
             }
 
-
         }
 
 
-        private void ConfigurarBaixaEstoque()
+        private async void ConfigurarBaixaEstoque()
         {
-            fmProductSettings productSettingos = new fmProductSettings(_produtoApp);
-            productSettingos.ShowDialog();
+            var retorno = await VerificaStatusParametro(5);
+
+            if (retorno)
+            {
+                fmProductSettings productSettingos = new fmProductSettings(_produtoApp);
+                productSettingos.ShowDialog();
+            }
+            else
+            {
+            MessageBox.Show("Função desativada temporariamente!!", "ATENÇÃO", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+            }
+
         }
 
 
