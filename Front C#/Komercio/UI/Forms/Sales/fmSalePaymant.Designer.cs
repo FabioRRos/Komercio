@@ -173,6 +173,7 @@
             this.mtbValorRecebido.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.mtbValorRecebido.TrailingIcon = null;
             this.mtbValorRecebido.UseSystemPasswordChar = false;
+            this.mtbValorRecebido.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.mtbValorRecebido_KeyPress);
             this.mtbValorRecebido.Leave += new System.EventHandler(this.mtbValorRecebido_Leave);
             this.mtbValorRecebido.TextChanged += new System.EventHandler(this.mtbValorRecebido_TextChanged);
             // 
@@ -313,6 +314,7 @@
             this.mtbDesc.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.mtbDesc.TrailingIcon = null;
             this.mtbDesc.UseSystemPasswordChar = false;
+            this.mtbDesc.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.mtbDesc_KeyPress);
             this.mtbDesc.Leave += new System.EventHandler(this.mtbDesc_Leave_1);
             this.mtbDesc.TextChanged += new System.EventHandler(this.mtbDesc_TextChanged);
             // 
@@ -344,22 +346,24 @@
             this.mtbAddValue.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.mtbAddValue.TrailingIcon = null;
             this.mtbAddValue.UseSystemPasswordChar = false;
+            this.mtbAddValue.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.mtbAddValue_KeyPress);
             this.mtbAddValue.Leave += new System.EventHandler(this.mtbAddValue_Leave_1);
             this.mtbAddValue.TextChanged += new System.EventHandler(this.mtbAddValue_TextChanged);
             // 
             // mtbcardcred
             // 
+            this.mtbcardcred.AutoSize = false;
             this.mtbcardcred.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.mtbcardcred.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
             this.mtbcardcred.Depth = 0;
             this.mtbcardcred.HighEmphasis = true;
             this.mtbcardcred.Icon = null;
-            this.mtbcardcred.Location = new System.Drawing.Point(106, 189);
+            this.mtbcardcred.Location = new System.Drawing.Point(197, 189);
             this.mtbcardcred.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.mtbcardcred.MouseState = MaterialSkin.MouseState.HOVER;
             this.mtbcardcred.Name = "mtbcardcred";
             this.mtbcardcred.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.mtbcardcred.Size = new System.Drawing.Size(82, 36);
+            this.mtbcardcred.Size = new System.Drawing.Size(91, 36);
             this.mtbcardcred.TabIndex = 22;
             this.mtbcardcred.TabStop = false;
             this.mtbcardcred.Text = "CRÉDITO";
@@ -374,7 +378,7 @@
             this.mbtCarddeb.Depth = 0;
             this.mbtCarddeb.HighEmphasis = true;
             this.mbtCarddeb.Icon = null;
-            this.mbtCarddeb.Location = new System.Drawing.Point(208, 189);
+            this.mbtCarddeb.Location = new System.Drawing.Point(106, 189);
             this.mbtCarddeb.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.mbtCarddeb.MouseState = MaterialSkin.MouseState.HOVER;
             this.mbtCarddeb.Name = "mbtCarddeb";
@@ -416,15 +420,15 @@
             this.mbtCheque.Depth = 0;
             this.mbtCheque.HighEmphasis = true;
             this.mbtCheque.Icon = null;
-            this.mbtCheque.Location = new System.Drawing.Point(106, 239);
+            this.mbtCheque.Location = new System.Drawing.Point(197, 244);
             this.mbtCheque.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.mbtCheque.MouseState = MaterialSkin.MouseState.HOVER;
             this.mbtCheque.Name = "mbtCheque";
             this.mbtCheque.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.mbtCheque.Size = new System.Drawing.Size(82, 36);
+            this.mbtCheque.Size = new System.Drawing.Size(91, 36);
             this.mbtCheque.TabIndex = 25;
             this.mbtCheque.TabStop = false;
-            this.mbtCheque.Text = "CHEQUE";
+            this.mbtCheque.Text = "Multiplos";
             this.mbtCheque.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
             this.mbtCheque.UseAccentColor = false;
             this.mbtCheque.Click += new System.EventHandler(this.mbtCheque_Click);
@@ -436,7 +440,7 @@
             this.mbtAccount.Depth = 0;
             this.mbtAccount.HighEmphasis = true;
             this.mbtAccount.Icon = null;
-            this.mbtAccount.Location = new System.Drawing.Point(208, 239);
+            this.mbtAccount.Location = new System.Drawing.Point(106, 244);
             this.mbtAccount.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.mbtAccount.MouseState = MaterialSkin.MouseState.HOVER;
             this.mbtAccount.Name = "mbtAccount";
@@ -508,6 +512,7 @@
             this.mtbDoccument.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.mtbDoccument.TrailingIcon = null;
             this.mtbDoccument.UseSystemPasswordChar = false;
+            this.mtbDoccument.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.mtbDoccument_KeyPress);
             this.mtbDoccument.Leave += new System.EventHandler(this.mtbDoccument_Leave);
             this.mtbDoccument.TextChanged += new System.EventHandler(this.mtbDoccument_TextChanged);
             // 

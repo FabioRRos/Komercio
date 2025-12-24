@@ -6,10 +6,12 @@ using Komercio.UI.Forms.Product;
 using MeuProjetoWinForms.Models;
 using MeuProjetoWinForms.Services;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.Drawing.Printing;
+using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -39,6 +41,8 @@ namespace Komercio.UI.Forms.Sales
         private float troco = 0f;
         private CustomerDto _custmerDTO = new CustomerDto();
         private List<EmployeeDto> employeerList = new List<EmployeeDto>();
+
+        private List<FormaPagamentoDTO> listaPagamentos = new List<FormaPagamentoDTO>();
 
 
         private string _cupomText;
@@ -215,10 +219,26 @@ namespace Komercio.UI.Forms.Sales
 
         private void mbtCheque_Click(object sender, EventArgs e)
         {
-            buttonschangecolor();
-            formaPagamento = "Cheque";
-            mbtCheque.UseAccentColor = true;
+            using (frmMultiplosPagamentos multiplos = new frmMultiplosPagamentos(total))
+
+            {
+                var retornoListaPagamento = multiplos.ShowDialog();
+
+                if (retornoListaPagamento == DialogResult.OK)
+                {
+                    listaPagamentos = multiplos.formaPagamento;
+                    buttonschangecolor();
+                    formaPagamento = "Misto";
+                    mbtCheque.UseAccentColor = true;
+                }
+                else
+                {
+                    MessageBox.Show("Por gentileza, escolha a forma de pagamento","ATENÇÃO!!",MessageBoxButtons.OK,MessageBoxIcon.Exclamation);
+                }
+            }
         }
+
+
 
         private void mbtAccount_Click(object sender, EventArgs e)
         {
@@ -395,6 +415,17 @@ namespace Komercio.UI.Forms.Sales
             venda.PaymentMethod = formaPagamento;
             venda.SellerId = 0;                      // ainda fixo, conforme seu fluxo atual
             venda.SaleNotes = mtbObservacao.Text;
+
+            if (listaPagamentos.Count <= 0)
+            {
+                var lp = new FormaPagamentoDTO();
+
+                lp.FormaDePagamento = formaPagamento;
+                lp.ValorPago = totalItens;
+
+
+                listaPagamentos.Add(lp);
+            }
 
             return venda;
         }
@@ -658,6 +689,15 @@ namespace Komercio.UI.Forms.Sales
                 return;
             }
 
+            foreach (var formadePagamento in listaPagamentos)
+            {
+                if (formadePagamento.FormaDePagamento == "Conta" && _custmerDTO.customer_id == 0)
+                {
+                    MessageBox.Show("Para salvar na conta, identifique o cliente!", "Identifique o cliente!!!!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+            }
+
             int func = BuscaIdEmployeer();
 
             // Cria a venda pronta
@@ -676,11 +716,11 @@ namespace Komercio.UI.Forms.Sales
             // MessageBox.Show("Venda salva como venda.json", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
 
-            SaleFinalizerService finalizer = new SaleFinalizerService(_customerService, _saleService, _itensVenda, _cupomService, _httpClient);
+            SaleFinalizerService finalizer = new SaleFinalizerService(_customerService, _saleService, _itensVenda, _cupomService, _httpClient, _parametrosApp);
 
             try
             {
-            var cupom = await finalizer.MontarVenda(venda, _itensVenda, formaPagamento, func);
+            var cupom = await finalizer.MontarVenda(venda, _itensVenda, formaPagamento, func, listaPagamentos);
             _cupomText = cupom;
 
                 var retorno = await VerificaStatusParametro(1);
@@ -720,6 +760,38 @@ namespace Komercio.UI.Forms.Sales
             var status = await _parametrosApp.ConsultaStatusParametro(id);
 
             return status;
+        }
+
+        private void mtbDesc_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void mtbAddValue_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void mtbValorRecebido_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void mtbDoccument_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
         }
     }
 

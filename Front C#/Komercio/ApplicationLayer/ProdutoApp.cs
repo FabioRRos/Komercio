@@ -70,9 +70,9 @@ namespace Komercio.ApplicationLayer
         }
 
         // put de produtos no estoque
-        public async Task<ProductDTO> EntradaEstoqueCodigoDeBarras(string codBarras)
+        public async Task<ProductDTO> EntradaEstoqueCodigoDeBarras(string codBarras, int quantidade)
         {
-            return await _productService.PutProductInStock(codBarras, 1);
+            return await _productService.PutProductInStock(codBarras, quantidade);
         }
 
 

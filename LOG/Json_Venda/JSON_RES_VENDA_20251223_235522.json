@@ -1,0 +1,37 @@
+﻿{
+  "sale": {
+    "customer_id": 0,
+    "total_amount": 99.9,
+    "discount_amount": 0.0,
+    "final_amount": 99.9,
+    "sale_date": "2025-12-23T23:55:15.8865801-03:00",
+    "sale_time": "23:55:15",
+    "payment_method": "Dinheiro",
+    "seller_id": 3,
+    "sale_notes": ""
+  },
+  "items": [
+    {
+      "product_id": 22,
+      "product_name": "Microfone de Mesa USB Condensador",
+      "barcode": "789000022",
+      "unit_price": 99.9,
+      "quantity": 1,
+      "total": 99.9
+    }
+  ],
+  "cash_movement": {
+    "movement_type": "Entrada",
+    "description": null,
+    "amount": 99.9,
+    "payment_method": "Dinheiro",
+    "movement_datetime": "2025-12-23T23:55:16.6239259-03:00",
+    "seller_id": 3
+  },
+  "forma_pagamento": [
+    {
+      "forma_de_pagamento": "Dinheiro",
+      "valor_pago": 99.9
+    }
+  ]
+}

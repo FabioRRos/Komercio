@@ -40,6 +40,7 @@
             this.materialButton1 = new MaterialSkin.Controls.MaterialButton();
             this.mtbJustificativa = new MaterialSkin.Controls.MaterialTextBox2();
             this.mcbJustDif = new MaterialSkin.Controls.MaterialCheckbox();
+            this.printCupom = new System.Drawing.Printing.PrintDocument();
             this.SuspendLayout();
             // 
             // mtbDinheiro
@@ -337,6 +338,10 @@
             this.mcbJustDif.UseVisualStyleBackColor = true;
             this.mcbJustDif.CheckedChanged += new System.EventHandler(this.mcbJustDif_CheckedChanged);
             // 
+            // printCupom
+            // 
+            this.printCupom.PrintPage += new System.Drawing.Printing.PrintPageEventHandler(this.printCupom_PrintPage);
+            // 
             // frmFechamentoCaixa
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -375,5 +380,6 @@
         private MaterialSkin.Controls.MaterialButton materialButton1;
         private MaterialSkin.Controls.MaterialTextBox2 mtbJustificativa;
         private MaterialSkin.Controls.MaterialCheckbox mcbJustDif;
+        private System.Drawing.Printing.PrintDocument printCupom;
     }
 }

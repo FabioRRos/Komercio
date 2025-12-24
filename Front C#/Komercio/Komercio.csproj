@@ -98,6 +98,7 @@
     <Compile Include="Models\CustomerTransactionsDTO.cs" />
     <Compile Include="Models\DescarteProdutoDTO.cs" />
     <Compile Include="Models\EmployeeDto.cs" />
+    <Compile Include="Models\formaPagamentoDTO.cs" />
     <Compile Include="Models\ParametroDTO.cs" />
     <Compile Include="Models\ProductDescriptionDTO.cs" />
     <Compile Include="Models\ProductDTO.cs" />
@@ -259,6 +260,12 @@
     <Compile Include="UI\Forms\Sales\fmSalesProduct.Designer.cs">
       <DependentUpon>fmSalesProduct.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\Forms\Sales\frmMultiplosPagamentos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Forms\Sales\frmMultiplosPagamentos.Designer.cs">
+      <DependentUpon>frmMultiplosPagamentos.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\Forms\settings\frmParametros.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -341,6 +348,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Forms\Sales\fmSalesProduct.resx">
       <DependentUpon>fmSalesProduct.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Forms\Sales\frmMultiplosPagamentos.resx">
+      <DependentUpon>frmMultiplosPagamentos.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Forms\settings\frmParametros.resx">
       <DependentUpon>frmParametros.cs</DependentUpon>

@@ -295,7 +295,10 @@ namespace Komercio
             }
             else if (caixaStatus)
             {
-                var caixa = new frmFechamentoCaixa(_caixaService, _cashmovementsService, caixaDTO,_employeeService);
+                var caixa = new frmFechamentoCaixa(_caixaService,
+                    _cashmovementsService,
+                    caixaDTO,_employeeService,
+                    _parametrosApp);
                 var retorno = caixa.ShowDialog();
 
                 if (retorno == DialogResult.OK)

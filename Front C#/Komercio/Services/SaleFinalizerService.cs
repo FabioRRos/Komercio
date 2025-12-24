@@ -1,4 +1,5 @@
-﻿using Komercio.Models;
+﻿using Komercio.ApplicationLayer;
+using Komercio.Models;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -25,12 +26,13 @@ namespace Komercio.Services
         private readonly CustomerService _customerService;
         private readonly SaleService _saleService;
         private readonly CupomService _cupomService;
+        private readonly ParametrosApp _parametrosApp;
         internal readonly string key = ConfigurationManager.AppSettings["ChavePrivada"];
 
 
         //Fabio do futuro, aqui eu faço a injeção da URL da API
         //Parecido com o que fiz nos formulários mas aqui eu vou receber do antigo formulário, então dou prioridade a ela
-        public SaleFinalizerService(CustomerService customerService, SaleService saleService, BindingList<SalesItensDTO> itensVenda,CupomService cupomService, HttpClient baseUrl)
+        public SaleFinalizerService(CustomerService customerService, SaleService saleService, BindingList<SalesItensDTO> itensVenda,CupomService cupomService, HttpClient baseUrl, ParametrosApp parametrosApp)
         {
             _customerService = customerService;
             _saleService = saleService;
@@ -40,6 +42,7 @@ namespace Komercio.Services
             _httpClient.DefaultRequestHeaders.Add("X-Token-Secreto", $"{key}");
 
             _cupomService = cupomService;
+            _parametrosApp = parametrosApp;
 
         }
 
@@ -108,11 +111,12 @@ namespace Komercio.Services
 
         //Agora vou montar o SaleFInalizerService para depois gerar o JSON
 
-        public async  Task<string> MontarVenda(
+        public async Task<string> MontarVenda(
     SalesDTO venda,                  // agora recebe a venda criada no form
     BindingList<SalesItensDTO> itens,
     string metodoPagamento,
-    int sellerId)
+    int sellerId,
+    List<FormaPagamentoDTO> formaPagamento)
         {
             // Validação nos metodos acima.
             string erro = ValidarItens(itens);
@@ -150,7 +154,7 @@ namespace Komercio.Services
             }
 
             //  Agora o aggregate recebe o cabeçalho real da venda
-            SaleAggregateDTO vendaAggregate = new SaleAggregateDTO(salesHeader, itensLista, cash);
+            SaleAggregateDTO vendaAggregate = new SaleAggregateDTO(salesHeader, itensLista, cash, formaPagamento);
             string cupomForPrint = "";
             bool retorno = false;
             try
@@ -170,16 +174,23 @@ namespace Komercio.Services
              {
                  string conteudoJson = JsonConvert.SerializeObject(vendaAggregate, Formatting.Indented);
 
-                string diretorio = @"C:\Projeto Komercial\Komercio\JSON gerado";
+                string diretorio = @"C:\Komercio\log\Json_Venda";
                 Directory.CreateDirectory(diretorio);
 
                 string nomeArquivo = "JSON_RES_VENDA_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".json";
 
                 string caminhoCompleto = Path.Combine(diretorio, nomeArquivo);
 
-               //  File.WriteAllText(caminhoCompleto, conteudoJson, Encoding.UTF8);
+                // desabilitar esse
+               var habilitaJson =  await VerificaStatusParametro(9);
 
-                // MessageBox.Show("Arquivo salvo com sucesso!\n\n" + caminhoCompleto);
+                if (habilitaJson)
+                {
+                 File.WriteAllText(caminhoCompleto, conteudoJson, Encoding.UTF8);
+                    MessageBox.Show("Arquivo salvo com sucesso!\n\n" + caminhoCompleto);
+                }
+
+                
              }
              catch (Exception ex)
              {
@@ -188,6 +199,13 @@ namespace Komercio.Services
             
             return cupomForPrint;
 
+        }
+
+        private async Task<bool> VerificaStatusParametro(int id)
+        {
+            var status = await _parametrosApp.ConsultaStatusParametro(id);
+
+            return status;
         }
 
 

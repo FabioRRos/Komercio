@@ -76,3 +76,4 @@ C:\Komercio\Front C#\Komercio\obj\Debug\Komercio.csproj.CoreCompileInputs.cache
 C:\Komercio\Front C#\Komercio\obj\Debug\Komercio.csproj.Up2Date
 C:\Komercio\Front C#\Komercio\obj\Debug\Komercio.exe
 C:\Komercio\Front C#\Komercio\obj\Debug\Komercio.pdb
+C:\Komercio\Front C#\Komercio\obj\Debug\Komercio.UI.Forms.Sales.frmMultiplosPagamentos.resources

@@ -1,4 +1,5 @@
-﻿using Komercio.Models;
+﻿using Komercio.ApplicationLayer;
+using Komercio.Models;
 using Komercio.Services;
 using MeuProjetoWinForms.Services;
 using System;
@@ -25,8 +26,10 @@ namespace Komercio.UI.Forms
         private List<CaixaDTO> _caixaDTO = new List<CaixaDTO>();
         private ValoresFechamentoDTO valoresFechamento = new ValoresFechamentoDTO();
         private ValoresFechamentoDTO valoresInputFechamento = new ValoresFechamentoDTO();
-        internal string cupom;
+        internal string _cupom;
         private CaixaDTO fechamento = new CaixaDTO();
+
+        private ParametrosApp  _parametrosApp;
 
 
         //listas utilizadas no código
@@ -45,12 +48,17 @@ namespace Komercio.UI.Forms
 
 
 
-        public frmFechamentoCaixa(CaixaService caixaService, CashmovementsService cashMovement, List<CaixaDTO> caixa, EmployeeService employeeService)
+        public frmFechamentoCaixa(CaixaService caixaService,
+            CashmovementsService cashMovement,
+            List<CaixaDTO> caixa,
+            EmployeeService employeeService,
+            ParametrosApp parametrosApp)
         {
             _caixaService = caixaService;
             _caixaDTO = caixa;
             _cashmovementsService = cashMovement;
             _employeeService = employeeService;
+            _parametrosApp = parametrosApp;
             InitializeComponent();
         }
 
@@ -378,8 +386,12 @@ namespace Komercio.UI.Forms
             sb.AppendLine($"Restante em caixa: {valoresFechamento.Restante.ToString("C2")}");
             sb.AppendLine("--------------------------------------");
             rtbCupon.Text = sb.ToString();
+            _cupom = sb.ToString();
 
         }
+
+
+
 
         private void rtbCupon_TextChanged(object sender, EventArgs e)
         {
@@ -393,14 +405,32 @@ namespace Komercio.UI.Forms
              CupomFiscal();
         }
 
-        private void mbtFechar_Click(object sender, EventArgs e)
+        private async void mbtFechar_Click(object sender, EventArgs e)
         {
            if (!ValidaValores())
                 return;
             FechamentoCaixa();
 
+            CupomFiscal();
+
+            var retorno = await VerificaStatusParametro(3);
+
+            if (retorno)
+            {
+                printCupom.Print();
+
+            }
+
+
             // imprimir o cupom com o valor alterado pela diferença de dinheiro no caixa.
 
+        }
+
+        private async Task<bool> VerificaStatusParametro(int id)
+        {
+            var status = await _parametrosApp.ConsultaStatusParametro(id);
+
+            return status;
         }
 
         private async void FechamentoCaixa()
@@ -509,6 +539,26 @@ namespace Komercio.UI.Forms
             else
             {
                 mtbJustificativa.Enabled = false;
+            }
+        }
+
+        private void printCupom_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)
+        {
+            Font fonte = new Font("Consolas", 8);
+            float y = 0;
+            float margem = 5;
+            float alturaLinha = fonte.GetHeight(e.Graphics);
+
+            // evita erros
+            if (string.IsNullOrWhiteSpace(_cupom))
+                return;
+
+            string[] linhas = _cupom.Split('\n');
+
+            foreach (var linha in linhas)
+            {
+                e.Graphics.DrawString(linha, fonte, Brushes.Black, margem, y);
+                y += alturaLinha;
             }
         }
     }

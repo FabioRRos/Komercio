@@ -55,7 +55,7 @@ namespace Komercio.UI.Forms.Product
                 }
                 try
                 {
-                    var temp = await _produtoApp.EntradaEstoqueCodigoDeBarras(mtbCodBar.Text);
+                    var temp = await _produtoApp.EntradaEstoqueCodigoDeBarras(mtbCodBar.Text,1);
 
                     if (temp == null)
                     {                   
@@ -101,7 +101,17 @@ namespace Komercio.UI.Forms.Product
                 return;
             }
 
-            var temp = await _produtoApp.EntradaEstoqueCodigoDeBarras(mtbCodBar.Text);
+            int quantidade = 0;
+            try
+            {
+                quantidade = int.Parse(mtbStock.Text);
+            }
+            catch
+            {
+                MessageBox.Show("Quantidade invalida!!!");
+            }
+
+            var temp = await _produtoApp.EntradaEstoqueCodigoDeBarras(mtbCodBar.Text, quantidade);
 
             if (temp == null)
             {
