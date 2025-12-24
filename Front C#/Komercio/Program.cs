@@ -40,6 +40,7 @@ namespace Komercio
             var cashMovement = new CashmovementsService(apiBaseUrl);
             var cupomService = new CupomService(apiBaseUrl);
             var parametrosService = new ParametrosService(apiBaseUrl);
+            var formaPagamento = new FormaPagamentoService(apiBaseUrl);
 
 
             var employeeServiceApp = new EmployeeServiceApp(employeeService);
@@ -64,6 +65,7 @@ namespace Komercio
                                     productApp,
                                     employeeServiceApp,
                                     parametrosapp,
+                                    formaPagamento,
                                     apiBaseUrl));
 
 

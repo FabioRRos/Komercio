@@ -21,6 +21,7 @@ namespace Komercio.UI.Forms
         private CaixaService _caixaService;
         private CashmovementsService _cashmovementsService;
         private EmployeeService _employeeService;
+        private FormaPagamentoService _formaPagamentoservice;
 
         //objetos e variaveis utilizadas em todo o código
         private List<CaixaDTO> _caixaDTO = new List<CaixaDTO>();
@@ -33,7 +34,8 @@ namespace Komercio.UI.Forms
 
 
         //listas utilizadas no código
-        private List<CashovementsDTO> movimentacaoCaixa = new List<CashovementsDTO>();
+        //private List<CashovementsDTO> movimentacaoCaixa = new List<CashovementsDTO>();
+        private List<FormaPagamentoDTO> movimentacaoCaixa = new List<FormaPagamentoDTO>();
 
 
         private string _receiptText = string.Empty;
@@ -52,13 +54,15 @@ namespace Komercio.UI.Forms
             CashmovementsService cashMovement,
             List<CaixaDTO> caixa,
             EmployeeService employeeService,
-            ParametrosApp parametrosApp)
+            ParametrosApp parametrosApp,
+            FormaPagamentoService formaPagamentoservice)
         {
             _caixaService = caixaService;
             _caixaDTO = caixa;
             _cashmovementsService = cashMovement;
             _employeeService = employeeService;
             _parametrosApp = parametrosApp;
+            _formaPagamentoservice = formaPagamentoservice;
             InitializeComponent();
         }
 
@@ -112,7 +116,8 @@ namespace Komercio.UI.Forms
 
         private async void CarregaLista()
         {
-            movimentacaoCaixa = await _cashmovementsService.GetCashMovement();
+            // movimentacaoCaixa = await _cashmovementsService.GetCashMovement();
+            movimentacaoCaixa = await _formaPagamentoservice.GetFormaPagamento();
 
             if (movimentacaoCaixa == null) {
                 MessageBox.Show("Alguma coisa deu errado");
@@ -126,36 +131,36 @@ namespace Komercio.UI.Forms
         {
             foreach (var moviment in movimentacaoCaixa)
             {
-                switch (moviment.paymentMethod)
+                switch (moviment.FormaDePagamento)
                 {
                     case "Dinheiro":
                         {
-                            valoresFechamento.Dinheiro += moviment.amount;
+                            valoresFechamento.Dinheiro += moviment.ValorPago;
                         }
                         break;
                     case "Débito":
                         {
-                            valoresFechamento.Debito += moviment.amount;
+                            valoresFechamento.Debito += moviment.ValorPago;
                         }
                         break;
                     case "Crédito":
                         {
-                            valoresFechamento.Credito += moviment.amount;
+                            valoresFechamento.Credito += moviment.ValorPago;
                         }
                         break;
                     case "PIX":
                         {
-                            valoresFechamento.Pix += moviment.amount;
+                            valoresFechamento.Pix += moviment.ValorPago;
                         }
                         break;
                     case "Conta":
                         {
-                            valoresFechamento.Conta += moviment.amount;
+                            valoresFechamento.Conta += moviment.ValorPago;
                         }
                         break;
                     case "Sangria":
                         {
-                            valoresFechamento.Sangria += moviment.amount;
+                            valoresFechamento.Sangria += moviment.ValorPago;
                         }
                         break;
                     default: break;
@@ -357,9 +362,7 @@ namespace Komercio.UI.Forms
 
 
         private void CupomFiscal()
-        {            
-            
-
+        {           
             var sb = new StringBuilder();
             sb.AppendLine("--------------------------------------");
             sb.AppendLine($"     *** {nomeFantasia} ***");
@@ -375,19 +378,17 @@ namespace Komercio.UI.Forms
             sb.AppendLine("--------------------------------------");
             sb.AppendLine($"CAIXA NA ABERTURA : {_caixaDTO[0].ValueChanged.ToString("C2")}");
             sb.AppendLine($"DINHEIRO : {valoresFechamento.Dinheiro.ToString("C2")}");
-            sb.AppendLine($"DEBITO : {valoresFechamento.Credito.ToString("C2")}");
+            sb.AppendLine($"DEBITO : {valoresFechamento.Debito.ToString("C2")}");
             sb.AppendLine($"CREDITO : {valoresFechamento.Credito.ToString("C2")}");
             sb.AppendLine($"PIX : {valoresFechamento.Pix.ToString("C2")}");
             sb.AppendLine($"CONTA : {valoresFechamento.Conta.ToString("C2")}");
             sb.AppendLine($"SANGRIA : {valoresFechamento.Sangria.ToString("C2")}");
             sb.AppendLine($"DATA: {DateTime.Now}");
             sb.AppendLine("--------------------------------------");
-
             sb.AppendLine($"Restante em caixa: {valoresFechamento.Restante.ToString("C2")}");
             sb.AppendLine("--------------------------------------");
             rtbCupon.Text = sb.ToString();
             _cupom = sb.ToString();
-
         }
 
 
@@ -400,9 +401,8 @@ namespace Komercio.UI.Forms
 
         private void materialButton1_Click(object sender, EventArgs e)
         {
-
             validaCaixa();
-             CupomFiscal();
+            CupomFiscal();
         }
 
         private async void mbtFechar_Click(object sender, EventArgs e)
@@ -420,7 +420,6 @@ namespace Komercio.UI.Forms
                 printCupom.Print();
 
             }
-
 
             // imprimir o cupom com o valor alterado pela diferença de dinheiro no caixa.
 

@@ -178,7 +178,7 @@ func (d *FormaPagamentoDatastore) ReadFormaPagamentoById(ctx context.Context, id
 // ################################################# Read Todos os registros de pagamento
 func (d *FormaPagamentoDatastore) ReadAllFormaPagamento(ctx context.Context) ([]*entity.FormaPagamento, error) {
 	query := `select id_forma_pagamento, sale_id, forma_de_pagamento, valor_pago, data_pagamento 
-	from forma_pagamento`
+	from forma_pagamento where DATE(data_pagamento ) = current_date;`
 	rows, err := d.Conn.Query(ctx, query)
 	if err != nil {
 		return nil, fmt.Errorf("Erro ao ler os metodos de pagamento: %v", err)

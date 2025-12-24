@@ -709,7 +709,6 @@ namespace Komercio.UI.Forms.Sales
                 return;
 
             // Salva JSON pra validação
-            //HABILITAR PARÂMETRO FUTURAMENTE TAMBÉM
             string json = Newtonsoft.Json.JsonConvert.SerializeObject(venda, Newtonsoft.Json.Formatting.Indented);
             System.IO.File.WriteAllText("venda.json", json);
 
@@ -725,6 +724,7 @@ namespace Komercio.UI.Forms.Sales
 
                 var retorno = await VerificaStatusParametro(1);
 
+                // impressão do cupom fiscal de acordo com parâmetro
                 if (retorno)
                 {
                      printCupom.Print();

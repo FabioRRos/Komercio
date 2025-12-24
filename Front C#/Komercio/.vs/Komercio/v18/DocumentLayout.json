@@ -7,10 +7,6 @@
       "RelativeMoniker": "D:0:0:{44D56DD6-A48F-48C7-9DB4-CD3BA6950EF2}|Komercio.csproj|solutionrelative:ui\\forms\\caixa\\frmfechamentocaixa.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{44D56DD6-A48F-48C7-9DB4-CD3BA6950EF2}|Komercio.csproj|c:\\komercio\\front c#\\komercio\\ui\\forms\\sales\\fmsalepaymant.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{44D56DD6-A48F-48C7-9DB4-CD3BA6950EF2}|Komercio.csproj|solutionrelative:ui\\forms\\sales\\fmsalepaymant.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{44D56DD6-A48F-48C7-9DB4-CD3BA6950EF2}|Komercio.csproj|c:\\komercio\\front c#\\komercio\\ui\\forms\\caixa\\frmfechamentocaixa.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{44D56DD6-A48F-48C7-9DB4-CD3BA6950EF2}|Komercio.csproj|solutionrelative:ui\\forms\\caixa\\frmfechamentocaixa.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
@@ -19,16 +15,12 @@
       "RelativeMoniker": "D:0:0:{44D56DD6-A48F-48C7-9DB4-CD3BA6950EF2}|Komercio.csproj|solutionrelative:form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{44D56DD6-A48F-48C7-9DB4-CD3BA6950EF2}|Komercio.csproj|c:\\komercio\\front c#\\komercio\\ui\\forms\\sales\\fmsalepaymant.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{44D56DD6-A48F-48C7-9DB4-CD3BA6950EF2}|Komercio.csproj|solutionrelative:ui\\forms\\sales\\fmsalepaymant.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+      "AbsoluteMoniker": "D:0:0:{44D56DD6-A48F-48C7-9DB4-CD3BA6950EF2}|Komercio.csproj|c:\\komercio\\front c#\\komercio\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{44D56DD6-A48F-48C7-9DB4-CD3BA6950EF2}|Komercio.csproj|solutionrelative:form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{44D56DD6-A48F-48C7-9DB4-CD3BA6950EF2}|Komercio.csproj|c:\\komercio\\front c#\\komercio\\ui\\forms\\sales\\frmmultiplospagamentos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{44D56DD6-A48F-48C7-9DB4-CD3BA6950EF2}|Komercio.csproj|solutionrelative:ui\\forms\\sales\\frmmultiplospagamentos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{44D56DD6-A48F-48C7-9DB4-CD3BA6950EF2}|Komercio.csproj|c:\\komercio\\front c#\\komercio\\ui\\forms\\sales\\frmmultiplospagamentos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{44D56DD6-A48F-48C7-9DB4-CD3BA6950EF2}|Komercio.csproj|solutionrelative:ui\\forms\\sales\\frmmultiplospagamentos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+      "AbsoluteMoniker": "D:0:0:{44D56DD6-A48F-48C7-9DB4-CD3BA6950EF2}|Komercio.csproj|c:\\komercio\\front c#\\komercio\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{44D56DD6-A48F-48C7-9DB4-CD3BA6950EF2}|Komercio.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -38,7 +30,7 @@
       "DocumentGroups": [
         {
           "DockedHeight": 96,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Bookmark",
@@ -46,16 +38,28 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 2,
               "Title": "Form1.cs",
               "DocumentMoniker": "C:\\Komercio\\Front C#\\Komercio\\Form1.cs",
               "RelativeDocumentMoniker": "Form1.cs",
               "ToolTip": "C:\\Komercio\\Front C#\\Komercio\\Form1.cs",
               "RelativeToolTip": "Form1.cs",
-              "ViewState": "AgIAABkBAAAAAAAAAAAmwCwBAAAiAAAAAAAAAA==",
+              "ViewState": "AgIAABkBAAAAAAAAAAAvwCsBAAAjAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-24T03:06:15.856Z",
+              "WhenOpened": "2025-12-24T13:20:11.011Z",
               "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Form1.cs [Design]",
+              "DocumentMoniker": "C:\\Komercio\\Front C#\\Komercio\\Form1.cs",
+              "RelativeDocumentMoniker": "Form1.cs",
+              "ToolTip": "C:\\Komercio\\Front C#\\Komercio\\Form1.cs [Design]",
+              "RelativeToolTip": "Form1.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-24T13:20:06.27Z",
+              "EditorCaption": " [Design]"
             },
             {
               "$type": "Document",
@@ -65,99 +69,35 @@
               "RelativeDocumentMoniker": "UI\\Forms\\Caixa\\frmFechamentoCaixa.cs",
               "ToolTip": "C:\\Komercio\\Front C#\\Komercio\\UI\\Forms\\Caixa\\frmFechamentoCaixa.cs",
               "RelativeToolTip": "UI\\Forms\\Caixa\\frmFechamentoCaixa.cs",
-              "ViewState": "AgIAAJMBAAAAAAAAAAAvwKQBAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAHQBAAAAAAAAAAAuwH0BAABTAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-23T20:29:45.491Z",
+              "WhenOpened": "2025-12-24T13:18:33.292Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 1,
               "Title": "frmFechamentoCaixa.cs [Design]",
               "DocumentMoniker": "C:\\Komercio\\Front C#\\Komercio\\UI\\Forms\\Caixa\\frmFechamentoCaixa.cs",
               "RelativeDocumentMoniker": "UI\\Forms\\Caixa\\frmFechamentoCaixa.cs",
               "ToolTip": "C:\\Komercio\\Front C#\\Komercio\\UI\\Forms\\Caixa\\frmFechamentoCaixa.cs [Design]",
               "RelativeToolTip": "UI\\Forms\\Caixa\\frmFechamentoCaixa.cs [Design]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-24T02:56:45.809Z",
+              "WhenOpened": "2025-12-24T13:18:31.112Z",
               "EditorCaption": " [Design]"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "Orientation": 0,
-      "VerticalTabListWidth": 256,
-      "FloatingWindowState": {
-        "Id": "595e296f-e5aa-440b-86cc-649d4c3f194f",
-        "Display": 1,
-        "X": 375,
-        "Y": 7,
-        "Width": 1019,
-        "Height": 646,
-        "WindowState": 2
-      },
-      "DocumentGroups": [
-        {
-          "DockedWidth": 200,
-          "SelectedChildIndex": 1,
-          "Children": [
+            },
             {
               "$type": "Document",
               "DocumentIndex": 4,
-              "Title": "fmSalePaymant.cs [Design]",
-              "DocumentMoniker": "C:\\Komercio\\Front C#\\Komercio\\UI\\Forms\\Sales\\fmSalePaymant.cs",
-              "RelativeDocumentMoniker": "UI\\Forms\\Sales\\fmSalePaymant.cs",
-              "ToolTip": "C:\\Komercio\\Front C#\\Komercio\\UI\\Forms\\Sales\\fmSalePaymant.cs [Design]",
-              "RelativeToolTip": "UI\\Forms\\Sales\\fmSalePaymant.cs [Design]",
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Komercio\\Front C#\\Komercio\\Program.cs",
+              "RelativeDocumentMoniker": "Program.cs",
+              "ToolTip": "C:\\Komercio\\Front C#\\Komercio\\Program.cs",
+              "RelativeToolTip": "Program.cs",
+              "ViewState": "AgIAABQAAAAAAAAAAAAQwCoAAAAeAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-23T23:45:37.886Z",
-              "EditorCaption": " [Design]"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "fmSalePaymant.cs",
-              "DocumentMoniker": "C:\\Komercio\\Front C#\\Komercio\\UI\\Forms\\Sales\\fmSalePaymant.cs",
-              "RelativeDocumentMoniker": "UI\\Forms\\Sales\\fmSalePaymant.cs",
-              "ToolTip": "C:\\Komercio\\Front C#\\Komercio\\UI\\Forms\\Sales\\fmSalePaymant.cs",
-              "RelativeToolTip": "UI\\Forms\\Sales\\fmSalePaymant.cs",
-              "ViewState": "AgIAAMQCAAAAAAAAAADgv9UCAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-23T23:45:42.33Z",
+              "WhenOpened": "2025-12-24T13:19:19.358Z",
               "EditorCaption": ""
-            }
-          ]
-        },
-        {
-          "DockedWidth": 200,
-          "SelectedChildIndex": 0,
-          "Children": [
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "frmMultiplosPagamentos.cs",
-              "DocumentMoniker": "C:\\Komercio\\Front C#\\Komercio\\UI\\Forms\\Sales\\frmMultiplosPagamentos.cs",
-              "RelativeDocumentMoniker": "UI\\Forms\\Sales\\frmMultiplosPagamentos.cs",
-              "ToolTip": "C:\\Komercio\\Front C#\\Komercio\\UI\\Forms\\Sales\\frmMultiplosPagamentos.cs",
-              "RelativeToolTip": "UI\\Forms\\Sales\\frmMultiplosPagamentos.cs",
-              "ViewState": "AgIAAC8AAAAAAAAAAAAkwDcAAAAMAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-24T03:04:39.967Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "frmMultiplosPagamentos.cs [Design]",
-              "DocumentMoniker": "C:\\Komercio\\Front C#\\Komercio\\UI\\Forms\\Sales\\frmMultiplosPagamentos.cs",
-              "RelativeDocumentMoniker": "UI\\Forms\\Sales\\frmMultiplosPagamentos.cs",
-              "ToolTip": "C:\\Komercio\\Front C#\\Komercio\\UI\\Forms\\Sales\\frmMultiplosPagamentos.cs [Design]",
-              "RelativeToolTip": "UI\\Forms\\Sales\\frmMultiplosPagamentos.cs [Design]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-23T20:54:02.319Z",
-              "EditorCaption": " [Design]"
             }
           ]
         }

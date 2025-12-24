@@ -44,6 +44,8 @@ namespace Komercio
         private readonly EmployeeServiceApp _employeeServiceApp;
         private readonly ParametrosApp _parametrosApp;
 
+        private readonly FormaPagamentoService _formaPagamentoservice;
+
 
         //Status do caixa 
         internal bool caixaStatus;
@@ -52,14 +54,15 @@ namespace Komercio
             CustomerService customerService,
             ProductService productService,
             ProductGroupService productGroupService,
-            ProductSubgroupService productSubgroupService ,
+            ProductSubgroupService productSubgroupService,
             ProductDescriptionService productDescriptionService,
             CustomerTransactionService customerTransactionService,
-            CaixaService caixaService,CashmovementsService cashMovement,
+            CaixaService caixaService, CashmovementsService cashMovement,
             CupomService cupomService,
             ProdutoApp produtoApp,
             EmployeeServiceApp employeeServiceApp,
             ParametrosApp parametrosApp,
+            FormaPagamentoService formaPagamentoservice,
             string httpClient)
         {
             InitializeComponent();
@@ -67,6 +70,7 @@ namespace Komercio
             _produtoApp = produtoApp;
             _employeeServiceApp = employeeServiceApp;
             _parametrosApp = parametrosApp;
+            _formaPagamentoservice = formaPagamentoservice;
 
 
             // antigo testamento abaixo
@@ -81,11 +85,6 @@ namespace Komercio
             _cashmovementsService = cashMovement;
             _cupomService = cupomService;
             _httpClient = httpClient;
-
-
-
-
-
         }
 
         private void novoFuncionárioToolStripMenuItem_Click(object sender, EventArgs e)
@@ -298,7 +297,8 @@ namespace Komercio
                 var caixa = new frmFechamentoCaixa(_caixaService,
                     _cashmovementsService,
                     caixaDTO,_employeeService,
-                    _parametrosApp);
+                    _parametrosApp,
+                    _formaPagamentoservice);
                 var retorno = caixa.ShowDialog();
 
                 if (retorno == DialogResult.OK)
