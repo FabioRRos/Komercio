@@ -12,7 +12,7 @@ namespace Komercio.Models
         [JsonIgnore]
         public int movementId { get; set; }
 
-        [JsonIgnore]
+        [JsonProperty("sale_id", NullValueHandling = NullValueHandling.Ignore)]
         public int saleId { get; set; }
 
             [JsonProperty("movement_type")]

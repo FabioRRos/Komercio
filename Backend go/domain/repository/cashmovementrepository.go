@@ -13,13 +13,13 @@ import (
 // Ex:
 // Função create ela inicia com o ctx + o que ela recebe
 type CashmovementRepository interface {
-	CreateCashmovement(ctx context.Context, cashmovements *entity.Cashmovements) error
+	CreateCashmovement(ctx context.Context, cashmovements *entity.Cashmovements) (int, error)
 	SelectCashmovement(ctx context.Context) ([]*entity.Cashmovements, error)
 
 	// Novo método com suporte à transação
 	// Esse método permite que a movimentação de caixa seja criada dentro de uma transação (Tx)
 	// junto com a venda e os itens. Assim, se der erro em qualquer etapa, o rollback cancela tudo.
-	CreateCashmovementTx(ctx context.Context, tx pgx.Tx, cashmovements *entity.Cashmovements) error
+	CreateCashmovementTx(ctx context.Context, tx pgx.Tx, cashmovements *entity.Cashmovements) (int, error)
 }
 
 //essa estrutura me garante que eu receba o datastore criado no Datastore
@@ -43,14 +43,14 @@ func NewCashmovementsRepository(ds *datastore.CashmovementsDatastore) Cashmoveme
 // Aqui eu implemento a criação da movimentação de caixa.
 // Isso serve para que meu código cague para a implementação de banco.
 // Um bom costume de DDD.
-func (r *cashmovementrepository) CreateCashmovement(ctx context.Context, cashmovements *entity.Cashmovements) error {
+func (r *cashmovementrepository) CreateCashmovement(ctx context.Context, cashmovements *entity.Cashmovements) (int, error) {
 	return r.datastore.CreateNewCashmovement(ctx, cashmovements)
 }
 
 // Aqui eu implemento a criação de movimentação de caixa dentro de uma transação.
 // Isso garante que o caixa seja atualizado junto com a venda e os itens.
 // Caso alguma parte falhe, o rollback cancela tudo automaticamente.
-func (r *cashmovementrepository) CreateCashmovementTx(ctx context.Context, tx pgx.Tx, cashmovements *entity.Cashmovements) error {
+func (r *cashmovementrepository) CreateCashmovementTx(ctx context.Context, tx pgx.Tx, cashmovements *entity.Cashmovements) (int, error) {
 	return r.datastore.CreateNewCashmovementTx(ctx, tx, cashmovements)
 }
 

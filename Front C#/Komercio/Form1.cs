@@ -112,7 +112,7 @@ namespace Komercio
 
             if (caixaDTO.Count <= 0)
             {
-                MessageBox.Show("É necessário realizar a abertura do caixa!!");
+             //   MessageBox.Show("É necessário realizar a abertura do caixa!!");
                 mlbStatusCaixaa.Text = "Fechado";
                 caixaStatus = false;
                 mbtAbrirCaixa.UseAccentColor = false;
@@ -298,7 +298,8 @@ namespace Komercio
                     _cashmovementsService,
                     caixaDTO,_employeeService,
                     _parametrosApp,
-                    _formaPagamentoservice);
+                    _formaPagamentoservice,
+                    _productService);
                 var retorno = caixa.ShowDialog();
 
                 if (retorno == DialogResult.OK)

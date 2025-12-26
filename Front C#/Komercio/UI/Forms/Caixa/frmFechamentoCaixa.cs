@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Configuration;
 using System.Data;
+using System.Data.SqlTypes;
 using System.Drawing;
 using System.Linq;
 using System.Runtime.InteropServices;
@@ -22,6 +23,7 @@ namespace Komercio.UI.Forms
         private CashmovementsService _cashmovementsService;
         private EmployeeService _employeeService;
         private FormaPagamentoService _formaPagamentoservice;
+        private ProductService _productService;
 
         //objetos e variaveis utilizadas em todo o código
         private List<CaixaDTO> _caixaDTO = new List<CaixaDTO>();
@@ -34,8 +36,9 @@ namespace Komercio.UI.Forms
 
 
         //listas utilizadas no código
-        //private List<CashovementsDTO> movimentacaoCaixa = new List<CashovementsDTO>();
-        private List<FormaPagamentoDTO> movimentacaoCaixa = new List<FormaPagamentoDTO>();
+        private List<CashovementsDTO> movimentacaoCaixa = new List<CashovementsDTO>();
+        private List<FormaPagamentoDTO> formaPagamento = new List<FormaPagamentoDTO>();
+        private List<SalesItensDTO> salesItensDTO = new List<SalesItensDTO>();   
 
 
         private string _receiptText = string.Empty;
@@ -46,7 +49,7 @@ namespace Komercio.UI.Forms
         readonly string endereco = ConfigurationManager.AppSettings["Endereco"];
         readonly string cidade = ConfigurationManager.AppSettings["Cidade"];
         readonly string contato = ConfigurationManager.AppSettings["Contato"];
-        readonly string funcionarioNome;
+        private string _funcionarioNome;
 
 
 
@@ -55,7 +58,8 @@ namespace Komercio.UI.Forms
             List<CaixaDTO> caixa,
             EmployeeService employeeService,
             ParametrosApp parametrosApp,
-            FormaPagamentoService formaPagamentoservice)
+            FormaPagamentoService formaPagamentoservice,
+            ProductService productService)
         {
             _caixaService = caixaService;
             _caixaDTO = caixa;
@@ -64,6 +68,7 @@ namespace Komercio.UI.Forms
             _parametrosApp = parametrosApp;
             _formaPagamentoservice = formaPagamentoservice;
             InitializeComponent();
+            _productService = productService;
         }
 
         private void frmCaixa_Load(object sender, EventArgs e)
@@ -75,6 +80,8 @@ namespace Komercio.UI.Forms
             CarregaLista();
             loadMTB();
             
+
+
         }
 
         private void ValidationLogin()
@@ -86,6 +93,7 @@ namespace Komercio.UI.Forms
                 if (retorno == DialogResult.OK)
                 {
                     fechamento.VendedorID = login.employeersId;
+                    _funcionarioNome = login.funcionario;
                 }
                 else
                 {
@@ -94,6 +102,8 @@ namespace Komercio.UI.Forms
                 }
             }
         }
+
+
         
         private void loadMTB()
         {
@@ -116,56 +126,79 @@ namespace Komercio.UI.Forms
 
         private async void CarregaLista()
         {
-            // movimentacaoCaixa = await _cashmovementsService.GetCashMovement();
-            movimentacaoCaixa = await _formaPagamentoservice.GetFormaPagamento();
+             movimentacaoCaixa = await _cashmovementsService.GetCashMovement();
+            formaPagamento = await _formaPagamentoservice.GetFormaPagamento();
 
             if (movimentacaoCaixa == null) {
                 MessageBox.Show("Alguma coisa deu errado");
                 return;
             }
-
+            CarregaProdutos();
             CalculaValores();
+        }
+
+        private async void CarregaProdutos()
+        {
+            foreach (var idvenda in movimentacaoCaixa)
+            {
+                if (idvenda.saleId != 0)
+                {
+                    var retorno = await _productService.BuscaItemVenda(idvenda.saleId);
+                    foreach(var item in retorno)
+                    {
+                        salesItensDTO.Add(item);
+                    }
+                    
+                }
+            }
         }
 
         private void CalculaValores()
         {
-            foreach (var moviment in movimentacaoCaixa)
+
+
+            foreach (var pagamento in formaPagamento)
             {
-                switch (moviment.FormaDePagamento)
+
+                switch (pagamento.FormaDePagamento)
                 {
                     case "Dinheiro":
                         {
-                            valoresFechamento.Dinheiro += moviment.ValorPago;
+                            valoresFechamento.Dinheiro += pagamento.ValorPago;
                         }
                         break;
                     case "Débito":
                         {
-                            valoresFechamento.Debito += moviment.ValorPago;
+                            valoresFechamento.Debito += pagamento.ValorPago;
                         }
                         break;
                     case "Crédito":
                         {
-                            valoresFechamento.Credito += moviment.ValorPago;
+                            valoresFechamento.Credito += pagamento.ValorPago;
                         }
                         break;
                     case "PIX":
                         {
-                            valoresFechamento.Pix += moviment.ValorPago;
+                            valoresFechamento.Pix += pagamento.ValorPago;
                         }
                         break;
                     case "Conta":
                         {
-                            valoresFechamento.Conta += moviment.ValorPago;
+                            valoresFechamento.Conta += pagamento.ValorPago;
                         }
                         break;
-                    case "Sangria":
-                        {
-                            valoresFechamento.Sangria += moviment.ValorPago;
-                        }
-                        break;
+
                     default: break;
                 }
             }
+            foreach (var moviment in movimentacaoCaixa)
+            {
+                if (moviment.paymentMethod == "Sangria")
+                    {
+                        valoresFechamento.Sangria += moviment.amount;
+
+                    }
+                }
 
             foreach (var caixa in _caixaDTO)
             {
@@ -367,12 +400,13 @@ namespace Komercio.UI.Forms
             sb.AppendLine("--------------------------------------");
             sb.AppendLine($"     *** {nomeFantasia} ***");
             sb.AppendLine("          CUPOM NAO FISCAL");
-            sb.AppendLine("--------------------------------------");
-            sb.AppendLine($"RAZAO SOCIAL: {razaoSocial}");
+            sb.AppendLine($"DATA FECHAMENTO: {DateTime.Now}"); sb.AppendLine($"RAZAO SOCIAL: {razaoSocial}");
             sb.AppendLine($"CNPJ: {cNPJ}");
             sb.AppendLine($"ENDERECO:{endereco}");
             sb.AppendLine($"{cidade}");
             sb.AppendLine($"FONE/WHATSAPP:{contato}");
+            sb.AppendLine("--------------------------------------");
+            sb.AppendLine($"FUNCIONÁRIO:{_funcionarioNome}");
             sb.AppendLine("--------------------------------------");
             sb.AppendLine("-------- FECHAMENTO DO CAIXA ---------");
             sb.AppendLine("--------------------------------------");
@@ -383,10 +417,42 @@ namespace Komercio.UI.Forms
             sb.AppendLine($"PIX : {valoresFechamento.Pix.ToString("C2")}");
             sb.AppendLine($"CONTA : {valoresFechamento.Conta.ToString("C2")}");
             sb.AppendLine($"SANGRIA : {valoresFechamento.Sangria.ToString("C2")}");
-            sb.AppendLine($"DATA: {DateTime.Now}");
             sb.AppendLine("--------------------------------------");
             sb.AppendLine($"Restante em caixa: {valoresFechamento.Restante.ToString("C2")}");
+
+            //Parte da lista de produtos
             sb.AppendLine("--------------------------------------");
+            sb.AppendLine("--------- LISTA DE PRODUTOS ----------");
+            sb.AppendLine("--------------------------------------");
+            sb.AppendLine("QTD - DESCRICAO");
+            sb.AppendLine("--------------------------------------");
+            foreach (var itens in salesItensDTO)
+            {
+                string qtd = itens.Quantity.ToString().PadLeft(3);
+                string nome = itens.ProductName.ToUpper();
+
+                if (nome.Length > 32)
+                {
+                    nome = nome.Substring(0, 32);
+                }
+
+                sb.AppendLine(qtd + " - " + nome);
+
+            }
+
+
+            if (mcbJustDif.Checked == true)
+            {
+                sb.AppendLine("--------------------------------------");
+                sb.AppendLine("----- VALOR DO CAIXA DIVERGÊNTE ------");
+                sb.AppendLine("--------------------------------------");
+                sb.AppendLine($"Valor em sistema: {valoresFechamento.Dinheiro.ToString("C2")}");
+                sb.AppendLine($"Valor em caixa: {mtbDinheiro.Text}");
+                sb.AppendLine("--------- Justificativa --------------");
+                sb.AppendLine($"{mtbJustificativa.Text}");
+                sb.AppendLine("--------------------------------------");
+            }
+
             rtbCupon.Text = sb.ToString();
             _cupom = sb.ToString();
         }
@@ -481,6 +547,7 @@ namespace Komercio.UI.Forms
                             MessageBox.Show("É necessário justificar as diferenças no caixa!!!");
                             return false;
                         }
+
                     }
                     else
                     {
@@ -538,6 +605,7 @@ namespace Komercio.UI.Forms
             else
             {
                 mtbJustificativa.Enabled = false;
+                mtbJustificativa.Text = string.Empty;
             }
         }
 

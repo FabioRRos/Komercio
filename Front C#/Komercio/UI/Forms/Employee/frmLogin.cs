@@ -18,6 +18,7 @@ namespace Komercio.UI.Forms
         private readonly EmployeeService _employeeService;
         private bool returnAutentication = false;
         public int employeersId { get; private set; }
+        public string funcionario { get; private set;  }
        public  EmployeeDto employee = new EmployeeDto();
         public frmLogin(EmployeeService service)
         {
@@ -105,6 +106,7 @@ namespace Komercio.UI.Forms
                 if (usuarioAbreviado == employee.EmployeeLogin )
                 {
                     employeersId = emp.Id;
+                    funcionario = emp.EmployeeFullName;
                 }
             }
 

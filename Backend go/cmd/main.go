@@ -99,22 +99,40 @@ func main() {
 	)
 	cashmovementController := controller.NewCashmovementController(
 		service.NewCashmovementService(
-			repository.NewCashmovementsRepository(cashmovementDatastore)),
+			repository.NewCashmovementsRepository(cashmovementDatastore),
+			repository.NewFormaPagamentoRepository(formaPagamento),
+			service.NewFormaPagamentoService(
+				repository.NewFormaPagamentoRepository(formaPagamento)),
+		),
 	)
 	salesitensController := controller.NewSaleItemsController(
 		service.NewSaleItemsService(
 			repository.NewSaleItemsRepository(saleItemsDatastore)),
 	)
-	transationController := controller.NewCustomerTransactioController(
-		service.NewCustomertransactionService(
-			repository.NewCustomertransactionRepository(transationDatastore),
-			repository.NewCashmovementsRepository(cashmovementDatastore),
-		),
-	)
+
 	caixaController := controller.NewCaixaController(
 		service.NewCaixaService(
 			repository.NewCaixaRepository(caixaDatastore),
-			service.NewCashmovementService(repository.NewCashmovementsRepository(cashmovementDatastore))),
+			service.NewCashmovementService(repository.NewCashmovementsRepository(cashmovementDatastore),
+				repository.NewFormaPagamentoRepository(formaPagamento),
+				service.NewFormaPagamentoService(
+					repository.NewFormaPagamentoRepository(formaPagamento)),
+			),
+		),
+	)
+
+	transationController := controller.NewCustomerTransactioController(
+		service.NewCustomertransactionService(
+
+			repository.NewCustomertransactionRepository(transationDatastore),
+
+			service.NewCashmovementService(repository.NewCashmovementsRepository(cashmovementDatastore),
+				repository.NewFormaPagamentoRepository(formaPagamento),
+				service.NewFormaPagamentoService(
+					repository.NewFormaPagamentoRepository(formaPagamento))),
+
+			repository.NewCaixaRepository(caixaDatastore),
+		),
 	)
 
 	fullSaleService := service.NewFullSaleService(
@@ -123,11 +141,18 @@ func main() {
 		service.NewSaleItemsService(
 			repository.NewSaleItemsRepository(saleItemsDatastore)),
 		service.NewCashmovementService(
-			repository.NewCashmovementsRepository(cashmovementDatastore)),
+			repository.NewCashmovementsRepository(cashmovementDatastore),
+			repository.NewFormaPagamentoRepository(formaPagamento),
+			service.NewFormaPagamentoService(
+				repository.NewFormaPagamentoRepository(formaPagamento)),
+		),
+
 		service.NewProductService(
 			repository.NewProductRepository(dbProduct)),
 		service.NewCustomertransactionService(
-			repository.NewCustomertransactionRepository(transationDatastore), nil),
+			repository.NewCustomertransactionRepository(transationDatastore),
+			nil,
+			nil),
 		service.NewCaixaService(
 			repository.NewCaixaRepository(caixaDatastore), nil),
 		service.NewFormaPagamentoService(

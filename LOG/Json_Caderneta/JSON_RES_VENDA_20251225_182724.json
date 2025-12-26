@@ -1,0 +1,11 @@
+﻿{
+  "id_transaction": 0,
+  "sale_id": 0,
+  "customer_id": 2,
+  "origin_type": "Pagamento",
+  "transaction_value": 9.9,
+  "transaction_date": "2025-12-25T18:27:23.2450538-03:00",
+  "obs": "",
+  "seller": "3",
+  "type_payment": "Dinheiro"
+}

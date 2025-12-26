@@ -421,7 +421,7 @@ namespace Komercio.UI.Forms.Sales
                 var lp = new FormaPagamentoDTO();
 
                 lp.FormaDePagamento = formaPagamento;
-                lp.ValorPago = totalItens;
+                lp.ValorPago = venda.FinalAmount;
 
 
                 listaPagamentos.Add(lp);

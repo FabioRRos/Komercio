@@ -50,19 +50,23 @@ func (d *CashmovementsDatastore) Close() {
 // ai abro o datastore (conexão), e executo a query.
 // o EXEC precisa receber o contexto + query + parâmetros
 // Trato possiveis erros e depois, por fim, retorno nulo sem erro (se for o caso)
-func (d *CashmovementsDatastore) CreateNewCashmovement(ctx context.Context, cashmovements *entity.Cashmovements) error {
+func (d *CashmovementsDatastore) CreateNewCashmovement(ctx context.Context, cashmovements *entity.Cashmovements) (int, error) {
 	//Querie melhorada
-	query := `insert into cash_movements (
-				sale_id,
-				movement_type,
-				description,
-				amount,
-				payment_method,
-				movement_datetime,
-				seller_id
-				) VALUES($1 ,$2 ,$3 ,$4 ,$5 ,$6 ,$7 )`
+	query := `
+		INSERT INTO cash_movements (
+			sale_id,
+			movement_type,
+			description,
+			amount,
+			payment_method,
+			movement_datetime,
+			seller_id
+		)
+		VALUES ($1, $2, $3, $4, $5, $6, $7)
+		RETURNING movement_id
+	`
 
-	_, err := d.Conn.Exec(ctx, query,
+	err := d.Conn.QueryRow(ctx, query,
 		cashmovements.SalesId,
 		cashmovements.Cashmovementstype,
 		cashmovements.Cashmovementsdescription,
@@ -70,30 +74,34 @@ func (d *CashmovementsDatastore) CreateNewCashmovement(ctx context.Context, cash
 		cashmovements.Cashmovementspaymentmethod,
 		cashmovements.Cashmovementsdatetime,
 		cashmovements.SellerId,
-	)
+	).Scan(&cashmovements.Cashmovementsid)
 
 	if err != nil {
-		return fmt.Errorf("erro ao inserir movimentação do caixa: %w", err)
+		return 0, fmt.Errorf("erro ao inserir movimentação do caixa (Tx): %w", err)
 	}
-	return nil
+
+	return cashmovements.Cashmovementsid, nil
 }
 
 // Essa função é igual à anterior, mas usa tx.Exec() em vez de d.Conn.Exec().
 // Assim, ela faz parte da mesma transação do processo de venda.
-func (d *CashmovementsDatastore) CreateNewCashmovementTx(ctx context.Context, tx pgx.Tx, cashmovements *entity.Cashmovements) error {
-	//Querie melhorada
+func (d *CashmovementsDatastore) CreateNewCashmovementTx(ctx context.Context, tx pgx.Tx, cashmovements *entity.Cashmovements) (int, error) {
 
-	query := `insert into cash_movements (
-				sale_id,
-				movement_type,
-				description,
-				amount,
-				payment_method,
-				movement_datetime,
-				seller_id
-				) VALUES($1 ,$2 ,$3 ,$4 ,$5 ,$6 ,$7 )`
+	query := `
+		INSERT INTO cash_movements (
+			sale_id,
+			movement_type,
+			description,
+			amount,
+			payment_method,
+			movement_datetime,
+			seller_id
+		)
+		VALUES ($1, $2, $3, $4, $5, $6, $7)
+		RETURNING movement_id
+	`
 
-	_, err := tx.Exec(ctx, query,
+	err := tx.QueryRow(ctx, query,
 		cashmovements.SalesId,
 		cashmovements.Cashmovementstype,
 		cashmovements.Cashmovementsdescription,
@@ -101,12 +109,13 @@ func (d *CashmovementsDatastore) CreateNewCashmovementTx(ctx context.Context, tx
 		cashmovements.Cashmovementspaymentmethod,
 		cashmovements.Cashmovementsdatetime,
 		cashmovements.SellerId,
-	)
+	).Scan(&cashmovements.Cashmovementsid)
 
 	if err != nil {
-		return fmt.Errorf("erro ao inserir movimentação do caixa (Tx): %w", err)
+		return 0, fmt.Errorf("erro ao inserir movimentação do caixa (Tx): %w", err)
 	}
-	return nil
+
+	return cashmovements.Cashmovementsid, nil
 }
 
 // Aqui criamos a função select. Lembrando que precisamos passar o datastore

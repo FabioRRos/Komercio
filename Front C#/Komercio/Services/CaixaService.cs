@@ -57,7 +57,7 @@ namespace Komercio.Services
         {
             var jsonContent = Newtonsoft.Json.JsonConvert.SerializeObject(caixaDTO);
             var content = new StringContent(jsonContent, Encoding.UTF8, "application/json");
-            var response = await _httpClient.PostAsync($"Caixa/", content);
+            var response = await _httpClient.PostAsync($"Caixa", content);
 
             if (!response.IsSuccessStatusCode)
             {

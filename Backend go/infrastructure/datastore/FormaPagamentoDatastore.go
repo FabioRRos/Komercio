@@ -33,11 +33,21 @@ func (d *FormaPagamentoDatastore) Close() {
 // ################################################# CREATE forma de pagamento (sem transação)
 
 func (d *FormaPagamentoDatastore) CreateFormaPagamento(ctx context.Context, formaPagamento *entity.FormaPagamento) error {
-	query := `insert into forma_pagamento 
-	(sale_id,forma_de_pagamento, valor_pago, data_pagamento)
-values 
-($1, $2, $3, $4)`
-	_, err := d.Conn.Exec(ctx, query,
+
+	if formaPagamento == nil {
+		return fmt.Errorf("formaPagamento não pode ser nil")
+	}
+
+	query := `
+		INSERT INTO forma_pagamento
+			(sale_id, forma_de_pagamento, valor_pago, data_pagamento)
+		VALUES
+			($1, $2, $3, $4)
+	`
+
+	_, err := d.Conn.Exec(
+		ctx,
+		query,
 		formaPagamento.Sale_id,
 		formaPagamento.Forma_de_pagamento,
 		formaPagamento.Valor_pago,
@@ -45,9 +55,10 @@ values
 	)
 
 	if err != nil {
-		log.Printf("Erro ao inserir forma de pagamento: %v", err)
+		return fmt.Errorf("erro ao inserir forma de pagamento: %w", err)
 	}
-	return err
+
+	return nil
 }
 
 // ################################################# CREATE forma de pagamento TX (dentro de uma transação)

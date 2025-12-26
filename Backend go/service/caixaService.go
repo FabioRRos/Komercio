@@ -49,22 +49,17 @@ func (s *caixaService) CaixaChange(ctx context.Context, caixa *entity.Caixa) err
 	if err != nil {
 		return err
 	}
+	var cash entity.Cashmovements
 
-	if caixa.ChangeOrigin == "Sangria" {
+	cash.SalesId = 0
+	cash.Cashmovementstype = caixa.ChangeType
+	cash.Cashmovementsdescription = caixa.Observations
+	cash.Cashmovementsamount = caixa.ValueChanged
+	cash.Cashmovementspaymentmethod = caixa.ChangeOrigin
+	cash.Cashmovementsdatetime = caixa.ChangeDate
+	cash.SellerId = caixa.VendedorID
 
-		var cash entity.Cashmovements
-		cash.SalesId = 0
-		cash.Cashmovementstype = caixa.ChangeType
-		cash.Cashmovementsdescription = caixa.Observations
-		cash.Cashmovementsamount = caixa.ValueChanged
-		cash.Cashmovementspaymentmethod = caixa.ChangeOrigin
-		cash.Cashmovementsdatetime = caixa.ChangeDate
-		cash.SalesId = caixa.VendedorID
-
-		err = s.cashMovementService.CreateCashmovement(ctx, &cash)
-	}
-
-	return nil
+	return s.cashMovementService.CreateCashmovement(ctx, &cash)
 }
 
 func (s *caixaService) GetCaixa(ctx context.Context) ([]*entity.Caixa, error) {

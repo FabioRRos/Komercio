@@ -155,9 +155,6 @@ namespace Komercio.Services
 
 
 
-
-
-
         public async Task<bool> PutProductNotification(List<ProductNotificationSettingsDTO> productList)
         {
             if (productList == null || productList.Count == 0)
@@ -183,7 +180,7 @@ namespace Komercio.Services
             // Retorna todos os produtos (pretendo salvar em um txt futuramente para garantir utilização offline)
 
             var response = await _httpClient.GetAsync("products");
-                {
+                
                 if (!response.IsSuccessStatusCode)
                 {
                     return new List<ProductDTO>();
@@ -203,7 +200,24 @@ namespace Komercio.Services
                 }
 
                 return products;
+            
+        }
+
+
+        public async Task<List<SalesItensDTO>> BuscaItemVenda(int id)
+        {
+            var response = await _httpClient.GetAsync($"sale_items/{id}");
+
+            if (!response.IsSuccessStatusCode)
+            {
+                return new List<SalesItensDTO>();
             }
+
+            var returnJSON = await response.Content.ReadAsStringAsync();
+            var saleItem = JsonConvert.DeserializeObject <List<SalesItensDTO>>(returnJSON);
+
+            return saleItem;
+
         }
 
         public async Task<List<ProductNotificationSettingsDTO>> GetProductNotificationSettingAsync()

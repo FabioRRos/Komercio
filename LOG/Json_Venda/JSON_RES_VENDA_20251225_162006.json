@@ -1,0 +1,41 @@
+﻿{
+  "sale": {
+    "customer_id": 2,
+    "total_amount": 200.0,
+    "discount_amount": 0.0,
+    "final_amount": 200.0,
+    "sale_date": "2025-12-25T16:20:04.7284524-03:00",
+    "sale_time": "16:20:04",
+    "payment_method": "Misto",
+    "seller_id": 2,
+    "sale_notes": ""
+  },
+  "items": [
+    {
+      "product_id": 63,
+      "product_name": "Caneca listada",
+      "barcode": "474956621",
+      "unit_price": 200.0,
+      "quantity": 1,
+      "total": 200.0
+    }
+  ],
+  "cash_movement": {
+    "movement_type": "Entrada",
+    "description": null,
+    "amount": 200.0,
+    "payment_method": "Misto",
+    "movement_datetime": "2025-12-25T16:20:05.405761-03:00",
+    "seller_id": 2
+  },
+  "forma_pagamento": [
+    {
+      "forma_de_pagamento": "Dinheiro",
+      "valor_pago": 50.0
+    },
+    {
+      "forma_de_pagamento": "Conta",
+      "valor_pago": 150.0
+    }
+  ]
+}

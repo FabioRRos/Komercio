@@ -3,6 +3,7 @@ package service
 import (
 	"context"
 	"fmt"
+	"time"
 
 	"github.com/fabioros/Komercio/domain/entity"
 	"github.com/fabioros/Komercio/domain/repository"
@@ -18,17 +19,20 @@ type CustomertransactionService interface {
 }
 
 type customertransactionService struct {
-	repo repository.CustomertransactionRepository
-	cash repository.CashmovementRepository
+	repo  repository.CustomertransactionRepository
+	cash  CashmovementService
+	caixa repository.CaixaRepository
 }
 
 func NewCustomertransactionService(
 	repo repository.CustomertransactionRepository,
-	cash repository.CashmovementRepository,
+	cash CashmovementService,
+	caixa repository.CaixaRepository,
 ) CustomertransactionService {
 	return &customertransactionService{
-		repo: repo,
-		cash: cash,
+		repo:  repo,
+		cash:  cash,
+		caixa: caixa,
 	}
 }
 
@@ -56,6 +60,7 @@ func (s *customertransactionService) CreateTransaction(ctx context.Context, tran
 	}
 	transaction.Origin_type = "Pagamento"
 
+	//salva na movimentação de caixa
 	cashMovement := entity.Cashmovements{
 		SalesId:                    transaction.Sale_id,
 		Cashmovementstype:          "Entrada",
@@ -65,10 +70,32 @@ func (s *customertransactionService) CreateTransaction(ctx context.Context, tran
 		Cashmovementsdatetime:      transaction.Transaction_date,
 		SellerId:                   0,
 	}
+
+	//salva na forma de pagamento
+
 	err = s.cash.CreateCashmovement(ctx, &cashMovement)
 	if err != nil {
 		return err
 	}
+
+	caixaService := &entity.Caixa{
+		ValueChanged: cashMovement.Cashmovementsamount,
+		ChangeType:   "entrada",
+		ChangeOrigin: "Pagamento de conta",
+		ChangeDate:   time.Now(),
+		VendedorID:   cashMovement.SellerId,
+		Status:       true,
+		Observations: transaction.Obs,
+	}
+
+	if cashMovement.Cashmovementspaymentmethod == "Dinheiro" {
+		err = s.caixa.CaixaChange(ctx, caixaService)
+
+		if err != nil {
+			return err
+		}
+	}
+
 	return s.repo.CreateTransaction(ctx, transaction)
 }
 

@@ -50,7 +50,7 @@ func (c *CustomerTransactionController) GETTransactionById(ctx *gin.Context) {
 	ctx.JSON(200, customerTransactions)
 }
 
-//PUT
+//post
 
 func (c *CustomerTransactionController) CreateTransaction(ctx *gin.Context) {
 	var payment entity.CustomerTransaction

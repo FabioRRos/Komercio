@@ -104,7 +104,7 @@ func (s *fullSaleService) CreateFullSale(ctx context.Context, salesAggregate *en
 		SellerId:                   salesAggregate.CashMovement.SellerId,
 	}
 
-	if err := s.cashMovementService.CreateCashmovementTx(ctx, tx, &cashMovement); err != nil {
+	if err := s.cashMovementService.CreateCashmovementTx(ctx, tx, &cashMovement, salesAggregate.FormaPpagamento); err != nil {
 		return 0, fmt.Errorf("erro ao registrar movimentação de caixa: %w", err)
 	}
 
@@ -162,16 +162,6 @@ func (s *fullSaleService) CreateFullSale(ctx context.Context, salesAggregate *en
 			}
 		}
 
-		// Aqui vou salvar as formas de pagamento utilizadas na venda
-		formaPagamentoRecord := entity.FormaPagamento{
-			Sale_id:            saleID,
-			Forma_de_pagamento: forma.Forma_de_pagamento,
-			Valor_pago:         forma.Valor_pago,
-			Data_pagamento:     sale.SalesDate,
-		}
-		if err := s.formaPagamento.CreateFormaPagamentoTX(ctx, tx, &formaPagamentoRecord); err != nil {
-			return 0, fmt.Errorf("erro ao salvar forma de pagamento: %w", err)
-		}
 	}
 
 	//Se tudo deu certo, confirma a transação
