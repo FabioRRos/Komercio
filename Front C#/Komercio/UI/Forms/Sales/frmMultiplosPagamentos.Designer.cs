@@ -29,6 +29,9 @@
         private void InitializeComponent()
         {
             this.materialCard1 = new MaterialSkin.Controls.MaterialCard();
+            this.mtbPago = new MaterialSkin.Controls.MaterialTextBox2();
+            this.mtbDevido = new MaterialSkin.Controls.MaterialTextBox2();
+            this.mtbVoltarPagamento = new MaterialSkin.Controls.MaterialButton();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.mbtDinheiro = new MaterialSkin.Controls.MaterialButton();
             this.mbtPix = new MaterialSkin.Controls.MaterialButton();
@@ -40,9 +43,6 @@
             this.mtbDebito = new MaterialSkin.Controls.MaterialTextBox2();
             this.mtbCredito = new MaterialSkin.Controls.MaterialTextBox2();
             this.mtbConta = new MaterialSkin.Controls.MaterialTextBox2();
-            this.mtbVoltarPagamento = new MaterialSkin.Controls.MaterialButton();
-            this.mtbDevido = new MaterialSkin.Controls.MaterialTextBox2();
-            this.mtbPago = new MaterialSkin.Controls.MaterialTextBox2();
             this.materialCard1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
@@ -63,6 +63,86 @@
             this.materialCard1.Padding = new System.Windows.Forms.Padding(14);
             this.materialCard1.Size = new System.Drawing.Size(418, 108);
             this.materialCard1.TabIndex = 0;
+            // 
+            // mtbPago
+            // 
+            this.mtbPago.AnimateReadOnly = false;
+            this.mtbPago.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.mtbPago.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
+            this.mtbPago.Depth = 0;
+            this.mtbPago.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.mtbPago.HideSelection = true;
+            this.mtbPago.Hint = "Valor pago";
+            this.mtbPago.LeadingIcon = null;
+            this.mtbPago.Location = new System.Drawing.Point(224, 9);
+            this.mtbPago.MaxLength = 32767;
+            this.mtbPago.MouseState = MaterialSkin.MouseState.OUT;
+            this.mtbPago.Name = "mtbPago";
+            this.mtbPago.PasswordChar = '\0';
+            this.mtbPago.PrefixSuffixText = null;
+            this.mtbPago.ReadOnly = true;
+            this.mtbPago.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.mtbPago.SelectedText = "";
+            this.mtbPago.SelectionLength = 0;
+            this.mtbPago.SelectionStart = 0;
+            this.mtbPago.ShortcutsEnabled = true;
+            this.mtbPago.Size = new System.Drawing.Size(180, 48);
+            this.mtbPago.TabIndex = 2;
+            this.mtbPago.TabStop = false;
+            this.mtbPago.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.mtbPago.TrailingIcon = null;
+            this.mtbPago.UseSystemPasswordChar = false;
+            // 
+            // mtbDevido
+            // 
+            this.mtbDevido.AnimateReadOnly = false;
+            this.mtbDevido.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.mtbDevido.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
+            this.mtbDevido.Depth = 0;
+            this.mtbDevido.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.mtbDevido.HideSelection = true;
+            this.mtbDevido.Hint = "Valor compra";
+            this.mtbDevido.LeadingIcon = null;
+            this.mtbDevido.Location = new System.Drawing.Point(14, 9);
+            this.mtbDevido.MaxLength = 32767;
+            this.mtbDevido.MouseState = MaterialSkin.MouseState.OUT;
+            this.mtbDevido.Name = "mtbDevido";
+            this.mtbDevido.PasswordChar = '\0';
+            this.mtbDevido.PrefixSuffixText = null;
+            this.mtbDevido.ReadOnly = true;
+            this.mtbDevido.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.mtbDevido.SelectedText = "";
+            this.mtbDevido.SelectionLength = 0;
+            this.mtbDevido.SelectionStart = 0;
+            this.mtbDevido.ShortcutsEnabled = true;
+            this.mtbDevido.Size = new System.Drawing.Size(184, 48);
+            this.mtbDevido.TabIndex = 1;
+            this.mtbDevido.TabStop = false;
+            this.mtbDevido.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.mtbDevido.TrailingIcon = null;
+            this.mtbDevido.UseSystemPasswordChar = false;
+            // 
+            // mtbVoltarPagamento
+            // 
+            this.mtbVoltarPagamento.AutoSize = false;
+            this.mtbVoltarPagamento.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.mtbVoltarPagamento.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.mtbVoltarPagamento.Depth = 0;
+            this.mtbVoltarPagamento.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.mtbVoltarPagamento.HighEmphasis = true;
+            this.mtbVoltarPagamento.Icon = null;
+            this.mtbVoltarPagamento.Location = new System.Drawing.Point(14, 65);
+            this.mtbVoltarPagamento.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.mtbVoltarPagamento.MouseState = MaterialSkin.MouseState.HOVER;
+            this.mtbVoltarPagamento.Name = "mtbVoltarPagamento";
+            this.mtbVoltarPagamento.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.mtbVoltarPagamento.Size = new System.Drawing.Size(390, 29);
+            this.mtbVoltarPagamento.TabIndex = 0;
+            this.mtbVoltarPagamento.Text = "Continuar";
+            this.mtbVoltarPagamento.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+            this.mtbVoltarPagamento.UseAccentColor = false;
+            this.mtbVoltarPagamento.UseVisualStyleBackColor = true;
+            this.mtbVoltarPagamento.Click += new System.EventHandler(this.mtbVoltarPagamento_Click);
             // 
             // tableLayoutPanel1
             // 
@@ -204,7 +284,7 @@
             this.mtbDinheiro.Depth = 0;
             this.mtbDinheiro.Dock = System.Windows.Forms.DockStyle.Fill;
             this.mtbDinheiro.Enabled = false;
-            this.mtbDinheiro.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.mtbDinheiro.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.mtbDinheiro.HideSelection = true;
             this.mtbDinheiro.Hint = "Dinheiro";
             this.mtbDinheiro.LeadingIcon = null;
@@ -273,7 +353,7 @@
             this.mtbDebito.Depth = 0;
             this.mtbDebito.Dock = System.Windows.Forms.DockStyle.Fill;
             this.mtbDebito.Enabled = false;
-            this.mtbDebito.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.mtbDebito.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.mtbDebito.HideSelection = true;
             this.mtbDebito.Hint = "Debito";
             this.mtbDebito.LeadingIcon = null;
@@ -307,7 +387,7 @@
             this.mtbCredito.Depth = 0;
             this.mtbCredito.Dock = System.Windows.Forms.DockStyle.Fill;
             this.mtbCredito.Enabled = false;
-            this.mtbCredito.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.mtbCredito.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.mtbCredito.HideSelection = true;
             this.mtbCredito.Hint = "Credito";
             this.mtbCredito.LeadingIcon = null;
@@ -341,7 +421,7 @@
             this.mtbConta.Depth = 0;
             this.mtbConta.Dock = System.Windows.Forms.DockStyle.Fill;
             this.mtbConta.Enabled = false;
-            this.mtbConta.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.mtbConta.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.mtbConta.HideSelection = true;
             this.mtbConta.Hint = "Conta";
             this.mtbConta.LeadingIcon = null;
@@ -366,86 +446,6 @@
             this.mtbConta.UseSystemPasswordChar = false;
             this.mtbConta.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.mtbConta_KeyPress);
             this.mtbConta.TextChanged += new System.EventHandler(this.mtbConta_TextChanged);
-            // 
-            // mtbVoltarPagamento
-            // 
-            this.mtbVoltarPagamento.AutoSize = false;
-            this.mtbVoltarPagamento.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.mtbVoltarPagamento.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
-            this.mtbVoltarPagamento.Depth = 0;
-            this.mtbVoltarPagamento.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.mtbVoltarPagamento.HighEmphasis = true;
-            this.mtbVoltarPagamento.Icon = null;
-            this.mtbVoltarPagamento.Location = new System.Drawing.Point(14, 65);
-            this.mtbVoltarPagamento.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.mtbVoltarPagamento.MouseState = MaterialSkin.MouseState.HOVER;
-            this.mtbVoltarPagamento.Name = "mtbVoltarPagamento";
-            this.mtbVoltarPagamento.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.mtbVoltarPagamento.Size = new System.Drawing.Size(390, 29);
-            this.mtbVoltarPagamento.TabIndex = 0;
-            this.mtbVoltarPagamento.Text = "Continuar";
-            this.mtbVoltarPagamento.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
-            this.mtbVoltarPagamento.UseAccentColor = false;
-            this.mtbVoltarPagamento.UseVisualStyleBackColor = true;
-            this.mtbVoltarPagamento.Click += new System.EventHandler(this.mtbVoltarPagamento_Click);
-            // 
-            // mtbDevido
-            // 
-            this.mtbDevido.AnimateReadOnly = false;
-            this.mtbDevido.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.mtbDevido.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
-            this.mtbDevido.Depth = 0;
-            this.mtbDevido.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.mtbDevido.HideSelection = true;
-            this.mtbDevido.Hint = "Valor compra";
-            this.mtbDevido.LeadingIcon = null;
-            this.mtbDevido.Location = new System.Drawing.Point(14, 9);
-            this.mtbDevido.MaxLength = 32767;
-            this.mtbDevido.MouseState = MaterialSkin.MouseState.OUT;
-            this.mtbDevido.Name = "mtbDevido";
-            this.mtbDevido.PasswordChar = '\0';
-            this.mtbDevido.PrefixSuffixText = null;
-            this.mtbDevido.ReadOnly = true;
-            this.mtbDevido.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.mtbDevido.SelectedText = "";
-            this.mtbDevido.SelectionLength = 0;
-            this.mtbDevido.SelectionStart = 0;
-            this.mtbDevido.ShortcutsEnabled = true;
-            this.mtbDevido.Size = new System.Drawing.Size(184, 48);
-            this.mtbDevido.TabIndex = 1;
-            this.mtbDevido.TabStop = false;
-            this.mtbDevido.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
-            this.mtbDevido.TrailingIcon = null;
-            this.mtbDevido.UseSystemPasswordChar = false;
-            // 
-            // mtbPago
-            // 
-            this.mtbPago.AnimateReadOnly = false;
-            this.mtbPago.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.mtbPago.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
-            this.mtbPago.Depth = 0;
-            this.mtbPago.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.mtbPago.HideSelection = true;
-            this.mtbPago.Hint = "Valor pago";
-            this.mtbPago.LeadingIcon = null;
-            this.mtbPago.Location = new System.Drawing.Point(224, 9);
-            this.mtbPago.MaxLength = 32767;
-            this.mtbPago.MouseState = MaterialSkin.MouseState.OUT;
-            this.mtbPago.Name = "mtbPago";
-            this.mtbPago.PasswordChar = '\0';
-            this.mtbPago.PrefixSuffixText = null;
-            this.mtbPago.ReadOnly = true;
-            this.mtbPago.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.mtbPago.SelectedText = "";
-            this.mtbPago.SelectionLength = 0;
-            this.mtbPago.SelectionStart = 0;
-            this.mtbPago.ShortcutsEnabled = true;
-            this.mtbPago.Size = new System.Drawing.Size(180, 48);
-            this.mtbPago.TabIndex = 2;
-            this.mtbPago.TabStop = false;
-            this.mtbPago.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
-            this.mtbPago.TrailingIcon = null;
-            this.mtbPago.UseSystemPasswordChar = false;
             // 
             // frmMultiplosPagamentos
             // 

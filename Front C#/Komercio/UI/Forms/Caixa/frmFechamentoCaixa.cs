@@ -398,18 +398,24 @@ namespace Komercio.UI.Forms
         {           
             var sb = new StringBuilder();
             sb.AppendLine("--------------------------------------");
+            sb.AppendLine("");
             sb.AppendLine($"     *** {nomeFantasia} ***");
             sb.AppendLine("          CUPOM NAO FISCAL");
+            sb.AppendLine("");
+            sb.AppendLine("--------------------------------------");
+            sb.AppendLine("");
             sb.AppendLine($"DATA FECHAMENTO: {DateTime.Now}"); sb.AppendLine($"RAZAO SOCIAL: {razaoSocial}");
             sb.AppendLine($"CNPJ: {cNPJ}");
             sb.AppendLine($"ENDERECO:{endereco}");
             sb.AppendLine($"{cidade}");
             sb.AppendLine($"FONE/WHATSAPP:{contato}");
+            sb.AppendLine("");
             sb.AppendLine("--------------------------------------");
             sb.AppendLine($"FUNCIONÁRIO:{_funcionarioNome}");
             sb.AppendLine("--------------------------------------");
             sb.AppendLine("-------- FECHAMENTO DO CAIXA ---------");
             sb.AppendLine("--------------------------------------");
+            sb.AppendLine("");
             sb.AppendLine($"CAIXA NA ABERTURA : {_caixaDTO[0].ValueChanged.ToString("C2")}");
             sb.AppendLine($"DINHEIRO : {valoresFechamento.Dinheiro.ToString("C2")}");
             sb.AppendLine($"DEBITO : {valoresFechamento.Debito.ToString("C2")}");
@@ -419,7 +425,7 @@ namespace Komercio.UI.Forms
             sb.AppendLine($"SANGRIA : {valoresFechamento.Sangria.ToString("C2")}");
             sb.AppendLine("--------------------------------------");
             sb.AppendLine($"Restante em caixa: {valoresFechamento.Restante.ToString("C2")}");
-
+            sb.AppendLine("");
             //Parte da lista de produtos
             sb.AppendLine("--------------------------------------");
             sb.AppendLine("--------- LISTA DE PRODUTOS ----------");
@@ -443,6 +449,7 @@ namespace Komercio.UI.Forms
 
             if (mcbJustDif.Checked == true)
             {
+                sb.AppendLine("");
                 sb.AppendLine("--------------------------------------");
                 sb.AppendLine("----- VALOR DO CAIXA DIVERGÊNTE ------");
                 sb.AppendLine("--------------------------------------");

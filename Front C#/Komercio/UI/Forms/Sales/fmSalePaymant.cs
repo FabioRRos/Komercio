@@ -233,7 +233,7 @@ namespace Komercio.UI.Forms.Sales
                 }
                 else
                 {
-                    MessageBox.Show("Por gentileza, escolha a forma de pagamento","ATENÇÃO!!",MessageBoxButtons.OK,MessageBoxIcon.Exclamation);
+                   // MessageBox.Show("Por gentileza, escolha a forma de pagamento","ATENÇÃO!!",MessageBoxButtons.OK,MessageBoxIcon.Exclamation);
                 }
             }
         }
