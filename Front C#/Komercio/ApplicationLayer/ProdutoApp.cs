@@ -106,6 +106,41 @@ namespace Komercio.ApplicationLayer
             }
             return error;
         }
+
+
+        // o mesmo de cima mas com progress bar
+
+        public async Task<int> CadastrarProdutosEmLotePB(List<ProductDTO> productDTO,IProgress<int> progress)
+        {
+            var error = 0;
+            var processados = 0;
+
+            foreach (var product in productDTO)
+            {
+                try
+                {
+                    await _productService.CreateProductAsync(product);
+                }
+                catch (Exception)
+                {
+                    error++;
+                    // possível log futuro, preciso pensar sobre
+                }
+
+                processados++;
+
+                if (progress != null)
+                    progress.Report(processados);
+            }
+
+            return error;
+        }
+
+
+
+
+
+
         //busca casada de lista de produtos e lista de grupo.
         public async Task<(List<ProductDTO>, List<ProductgroupDTO>)> BuscaListaDeProdutoEGrupo()
         {
@@ -198,11 +233,5 @@ namespace Komercio.ApplicationLayer
         {
             return await _productSubgroupService.CreateSubGroup(ProductDTOSave);
         }
-
-
-
-
-
-
     }
 }

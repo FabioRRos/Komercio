@@ -37,6 +37,11 @@
             this.mtbProductCodeBar = new MaterialSkin.Controls.MaterialTextBox2();
             this.mtbProductPrice = new MaterialSkin.Controls.MaterialTextBox2();
             this.mtbProductName = new MaterialSkin.Controls.MaterialTextBox2();
+            this.mepBuscaDescricao = new MaterialSkin.Controls.MaterialExpansionPanel();
+            this.materialTextBox21 = new MaterialSkin.Controls.MaterialTextBox2();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.mepBuscaDescricao.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // mcbSubGroup
@@ -54,7 +59,7 @@
             this.mcbSubGroup.Hint = "Subgrupo do produto";
             this.mcbSubGroup.IntegralHeight = false;
             this.mcbSubGroup.ItemHeight = 43;
-            this.mcbSubGroup.Location = new System.Drawing.Point(265, 69);
+            this.mcbSubGroup.Location = new System.Drawing.Point(265, 157);
             this.mcbSubGroup.MaxDropDownItems = 4;
             this.mcbSubGroup.MouseState = MaterialSkin.MouseState.OUT;
             this.mcbSubGroup.Name = "mcbSubGroup";
@@ -77,7 +82,7 @@
             this.mcbGroup.Hint = "Grupo do produto";
             this.mcbGroup.IntegralHeight = false;
             this.mcbGroup.ItemHeight = 43;
-            this.mcbGroup.Location = new System.Drawing.Point(12, 200);
+            this.mcbGroup.Location = new System.Drawing.Point(12, 288);
             this.mcbGroup.MaxDropDownItems = 4;
             this.mcbGroup.MouseState = MaterialSkin.MouseState.OUT;
             this.mcbGroup.Name = "mcbGroup";
@@ -97,7 +102,7 @@
             this.mtbProductStock.HideSelection = true;
             this.mtbProductStock.Hint = "Quantidade";
             this.mtbProductStock.LeadingIcon = null;
-            this.mtbProductStock.Location = new System.Drawing.Point(268, 123);
+            this.mtbProductStock.Location = new System.Drawing.Point(268, 211);
             this.mtbProductStock.MaxLength = 32767;
             this.mtbProductStock.MouseState = MaterialSkin.MouseState.OUT;
             this.mtbProductStock.Name = "mtbProductStock";
@@ -124,7 +129,7 @@
             this.mbtSaveProduct.Depth = 0;
             this.mbtSaveProduct.HighEmphasis = true;
             this.mbtSaveProduct.Icon = null;
-            this.mbtSaveProduct.Location = new System.Drawing.Point(384, 200);
+            this.mbtSaveProduct.Location = new System.Drawing.Point(384, 288);
             this.mbtSaveProduct.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.mbtSaveProduct.MouseState = MaterialSkin.MouseState.HOVER;
             this.mbtSaveProduct.Name = "mbtSaveProduct";
@@ -143,7 +148,7 @@
             this.msProductStatus.Checked = true;
             this.msProductStatus.CheckState = System.Windows.Forms.CheckState.Checked;
             this.msProductStatus.Depth = 0;
-            this.msProductStatus.Location = new System.Drawing.Point(265, 207);
+            this.msProductStatus.Location = new System.Drawing.Point(265, 295);
             this.msProductStatus.Margin = new System.Windows.Forms.Padding(0);
             this.msProductStatus.MouseLocation = new System.Drawing.Point(-1, -1);
             this.msProductStatus.MouseState = MaterialSkin.MouseState.HOVER;
@@ -165,7 +170,7 @@
             this.mtbProductCodeBar.HideSelection = true;
             this.mtbProductCodeBar.Hint = "Código de barras";
             this.mtbProductCodeBar.LeadingIcon = null;
-            this.mtbProductCodeBar.Location = new System.Drawing.Point(12, 123);
+            this.mtbProductCodeBar.Location = new System.Drawing.Point(12, 211);
             this.mtbProductCodeBar.MaxLength = 32767;
             this.mtbProductCodeBar.MouseState = MaterialSkin.MouseState.OUT;
             this.mtbProductCodeBar.Name = "mtbProductCodeBar";
@@ -195,7 +200,7 @@
             this.mtbProductPrice.HideSelection = true;
             this.mtbProductPrice.Hint = "Preço unitário";
             this.mtbProductPrice.LeadingIcon = null;
-            this.mtbProductPrice.Location = new System.Drawing.Point(12, 69);
+            this.mtbProductPrice.Location = new System.Drawing.Point(12, 157);
             this.mtbProductPrice.MaxLength = 32767;
             this.mtbProductPrice.MouseState = MaterialSkin.MouseState.OUT;
             this.mtbProductPrice.Name = "mtbProductPrice";
@@ -225,7 +230,7 @@
             this.mtbProductName.HideSelection = true;
             this.mtbProductName.Hint = "Descrição do produto";
             this.mtbProductName.LeadingIcon = null;
-            this.mtbProductName.Location = new System.Drawing.Point(12, 15);
+            this.mtbProductName.Location = new System.Drawing.Point(12, 103);
             this.mtbProductName.MaxLength = 32767;
             this.mtbProductName.MouseState = MaterialSkin.MouseState.OUT;
             this.mtbProductName.Name = "mtbProductName";
@@ -244,11 +249,71 @@
             this.mtbProductName.TrailingIcon = null;
             this.mtbProductName.UseSystemPasswordChar = false;
             // 
+            // mepBuscaDescricao
+            // 
+            this.mepBuscaDescricao.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.mepBuscaDescricao.CancelButtonText = "";
+            this.mepBuscaDescricao.Controls.Add(this.dataGridView1);
+            this.mepBuscaDescricao.Controls.Add(this.materialTextBox21);
+            this.mepBuscaDescricao.Depth = 0;
+            this.mepBuscaDescricao.Description = "Selecione e clique duas vezes";
+            this.mepBuscaDescricao.ExpandHeight = 346;
+            this.mepBuscaDescricao.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.mepBuscaDescricao.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.mepBuscaDescricao.Location = new System.Drawing.Point(12, 24);
+            this.mepBuscaDescricao.Margin = new System.Windows.Forms.Padding(16);
+            this.mepBuscaDescricao.MouseState = MaterialSkin.MouseState.HOVER;
+            this.mepBuscaDescricao.Name = "mepBuscaDescricao";
+            this.mepBuscaDescricao.Padding = new System.Windows.Forms.Padding(24, 64, 24, 16);
+            this.mepBuscaDescricao.ShowValidationButtons = false;
+            this.mepBuscaDescricao.Size = new System.Drawing.Size(450, 346);
+            this.mepBuscaDescricao.TabIndex = 17;
+            this.mepBuscaDescricao.Title = "Buscar produto";
+            this.mepBuscaDescricao.ValidationButtonText = "";
+            // 
+            // materialTextBox21
+            // 
+            this.materialTextBox21.AnimateReadOnly = false;
+            this.materialTextBox21.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.materialTextBox21.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
+            this.materialTextBox21.Depth = 0;
+            this.materialTextBox21.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.materialTextBox21.HideSelection = true;
+            this.materialTextBox21.LeadingIcon = null;
+            this.materialTextBox21.Location = new System.Drawing.Point(27, 48);
+            this.materialTextBox21.MaxLength = 32767;
+            this.materialTextBox21.MouseState = MaterialSkin.MouseState.OUT;
+            this.materialTextBox21.Name = "materialTextBox21";
+            this.materialTextBox21.PasswordChar = '\0';
+            this.materialTextBox21.PrefixSuffixText = null;
+            this.materialTextBox21.ReadOnly = false;
+            this.materialTextBox21.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.materialTextBox21.SelectedText = "";
+            this.materialTextBox21.SelectionLength = 0;
+            this.materialTextBox21.SelectionStart = 0;
+            this.materialTextBox21.ShortcutsEnabled = true;
+            this.materialTextBox21.Size = new System.Drawing.Size(396, 48);
+            this.materialTextBox21.TabIndex = 2;
+            this.materialTextBox21.TabStop = false;
+            this.materialTextBox21.Text = "materialTextBox21";
+            this.materialTextBox21.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.materialTextBox21.TrailingIcon = null;
+            this.materialTextBox21.UseSystemPasswordChar = false;
+            // 
+            // dataGridView1
+            // 
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Location = new System.Drawing.Point(27, 108);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.Size = new System.Drawing.Size(396, 219);
+            this.dataGridView1.TabIndex = 3;
+            // 
             // fmAlterarProduto
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(478, 272);
+            this.ClientSize = new System.Drawing.Size(478, 382);
+            this.Controls.Add(this.mepBuscaDescricao);
             this.Controls.Add(this.mcbSubGroup);
             this.Controls.Add(this.mcbGroup);
             this.Controls.Add(this.mtbProductStock);
@@ -263,6 +328,9 @@
             this.Text = "Alterar Produto";
             this.Load += new System.EventHandler(this.fmAlterarProduto_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.fmAlterarProduto_KeyDown);
+            this.mepBuscaDescricao.ResumeLayout(false);
+            this.mepBuscaDescricao.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -278,5 +346,8 @@
         private MaterialSkin.Controls.MaterialTextBox2 mtbProductCodeBar;
         private MaterialSkin.Controls.MaterialTextBox2 mtbProductPrice;
         private MaterialSkin.Controls.MaterialTextBox2 mtbProductName;
+        private MaterialSkin.Controls.MaterialExpansionPanel mepBuscaDescricao;
+        private System.Windows.Forms.DataGridView dataGridView1;
+        private MaterialSkin.Controls.MaterialTextBox2 materialTextBox21;
     }
 }

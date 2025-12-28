@@ -11,6 +11,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace Komercio.UI.Forms.Product
 {
@@ -40,7 +41,7 @@ namespace Komercio.UI.Forms.Product
                 _caminhoArquivo = abrir.FileName;
             }
 
-          
+
             LoadItens(_caminhoArquivo);
 
             materialButton1.Enabled = true;
@@ -49,7 +50,7 @@ namespace Komercio.UI.Forms.Product
         }
 
         public List<ProductDTO> ProductList = new List<ProductDTO>();
-
+        public int qtdError = 0;
 
 
         // Busca o arquivo no diretório importado e retorna a lista de produtos que deu bom + a quantidade que deu ruim
@@ -60,13 +61,13 @@ namespace Komercio.UI.Forms.Product
             {
                 return;
             }
-         var  (ProductList, qtdError) = _produtoApp.BuscarEAbrirArquivo(caminhoArquivo);
+            (ProductList, qtdError) = _produtoApp.BuscarEAbrirArquivo(caminhoArquivo);
 
             if (qtdError > 0)
             {
                 MessageBox.Show(qtdError + "itens com erro de formatação não puderam ser importados", "ERRO DE IMPORTAÇÃO", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-                dgwImportList.DataSource = ProductList;
+            dgwImportList.DataSource = ProductList;
             VisualizeDG();
         }
         //firnata o DG
@@ -90,7 +91,7 @@ namespace Komercio.UI.Forms.Product
 
         private void materialButton1_Click(object sender, EventArgs e)
         {
-             CadastrarList();
+            CadastrarList();
             materialButton1.Enabled = false;
             mtbDirectorySearcher.Enabled = true;
             dgwImportList.DataSource = null;
@@ -105,26 +106,47 @@ namespace Komercio.UI.Forms.Product
         }
 
 
-        private async void CadastrarList()
+        private async Task CadastrarList()
         {
-            var error = await _produtoApp.CadastrarProdutosEmLote(ProductList);
+            mpbload.Minimum = 0;
+            mpbload.Maximum = ProductList.Count;
+            mpbload.Value = 0;
+
+            var progress = new Progress<int>(valor =>
+            {
+                if (valor <= mpbload.Maximum)
+                    mpbload.Value = valor;
+            });
+
+            var error = await _produtoApp.CadastrarProdutosEmLotePB(
+                ProductList,
+                progress
+            );
 
             if (error == 0)
             {
-                MessageBox.Show("Todos os produtos imporatdos com sucesso!", "Sucesso.", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
+                MessageBox.Show(
+                    "Todos os produtos importados com sucesso!",
+                    "Sucesso",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information
+                );
             }
             else
             {
-                MessageBox.Show(error + "produtos tiveram erro de importação. Favor verificar a lista e tentar novamente.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
-
+                MessageBox.Show(
+                    $"{error} produtos tiveram erro de importação. Favor verificar a lista e tentar novamente.",
+                    "Erro",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error
+                );
             }
         }
+
 
         private void btnImportStock_Load(object sender, EventArgs e)
         {
 
-      }
+        }
     }
 }

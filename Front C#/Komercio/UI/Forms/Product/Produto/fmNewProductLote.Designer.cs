@@ -32,6 +32,7 @@
             this.mtbDirectorySearcher = new MaterialSkin.Controls.MaterialButton();
             this.dgwImportList = new System.Windows.Forms.DataGridView();
             this.materialButton1 = new MaterialSkin.Controls.MaterialButton();
+            this.mpbload = new MaterialSkin.Controls.MaterialProgressBar();
             ((System.ComponentModel.ISupportInitialize)(this.dgwImportList)).BeginInit();
             this.SuspendLayout();
             // 
@@ -65,7 +66,6 @@
             this.dgwImportList.ReadOnly = true;
             this.dgwImportList.Size = new System.Drawing.Size(596, 207);
             this.dgwImportList.TabIndex = 1;
-            //this.dgwImportList.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
             // materialButton1
             // 
@@ -89,11 +89,21 @@
             this.materialButton1.UseVisualStyleBackColor = true;
             this.materialButton1.Click += new System.EventHandler(this.materialButton1_Click);
             // 
+            // mpbload
+            // 
+            this.mpbload.Depth = 0;
+            this.mpbload.Location = new System.Drawing.Point(12, 68);
+            this.mpbload.MouseState = MaterialSkin.MouseState.HOVER;
+            this.mpbload.Name = "mpbload";
+            this.mpbload.Size = new System.Drawing.Size(596, 5);
+            this.mpbload.TabIndex = 3;
+            // 
             // btnImportStock
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(621, 299);
+            this.Controls.Add(this.mpbload);
             this.Controls.Add(this.materialButton1);
             this.Controls.Add(this.dgwImportList);
             this.Controls.Add(this.mtbDirectorySearcher);
@@ -111,5 +121,6 @@
         private MaterialSkin.Controls.MaterialButton mtbDirectorySearcher;
         private System.Windows.Forms.DataGridView dgwImportList;
         private MaterialSkin.Controls.MaterialButton materialButton1;
+        private MaterialSkin.Controls.MaterialProgressBar mpbload;
     }
 }

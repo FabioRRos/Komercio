@@ -468,6 +468,12 @@ namespace Komercio
             frmParametros.ShowDialog();
         }
 
+        private void EntradaEstoqueLote()
+        {
+            frmEntradEstoqueEmLote entradaLoteEstoque = new frmEntradEstoqueEmLote(_produtoApp);
+        entradaLoteEstoque.ShowDialog();
+        }
+
 
 
 
@@ -543,7 +549,7 @@ namespace Komercio
 
         private void materialButton3_Click(object sender, EventArgs e)
         {
-            EntradaEstoque();
+            EntradaEstoqueLote();
         }
 
         private void materialButton8_Click(object sender, EventArgs e)
@@ -576,6 +582,11 @@ namespace Komercio
             var status = await _parametrosApp.ConsultaStatusParametro(id);
 
             return status;
+        }
+
+        private void loteToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            EntradaEstoqueLote();
         }
     }
 }

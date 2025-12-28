@@ -225,6 +225,12 @@
     <Compile Include="UI\Forms\Product\fmProductSettings.Designer.cs">
       <DependentUpon>fmProductSettings.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\Forms\Product\Produto\frmEntradEstoqueEmLote.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Forms\Product\Produto\frmEntradEstoqueEmLote.Designer.cs">
+      <DependentUpon>frmEntradEstoqueEmLote.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\Forms\Product\Subgrupo\fmrCadastroSubGrupoProduto.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -331,6 +337,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Forms\Product\fmProductSettings.resx">
       <DependentUpon>fmProductSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Forms\Product\Produto\frmEntradEstoqueEmLote.resx">
+      <DependentUpon>frmEntradEstoqueEmLote.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Forms\Product\Subgrupo\fmrCadastroSubGrupoProduto.resx">
       <DependentUpon>fmrCadastroSubGrupoProduto.cs</DependentUpon>

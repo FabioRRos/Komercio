@@ -43,6 +43,7 @@
             this.manualToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.loteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.entradaEstoqueToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.loteToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.descarteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.listaDeProdutosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.grupoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -105,14 +106,14 @@
             // 
             this.novoFuncionárioToolStripMenuItem.Image = global::Komercio.Properties.Resources.komercio;
             this.novoFuncionárioToolStripMenuItem.Name = "novoFuncionárioToolStripMenuItem";
-            this.novoFuncionárioToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.novoFuncionárioToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
             this.novoFuncionárioToolStripMenuItem.Text = "Novo Funcionário";
             this.novoFuncionárioToolStripMenuItem.Click += new System.EventHandler(this.novoFuncionárioToolStripMenuItem_Click);
             // 
             // alterarSenhaToolStripMenuItem
             // 
             this.alterarSenhaToolStripMenuItem.Name = "alterarSenhaToolStripMenuItem";
-            this.alterarSenhaToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.alterarSenhaToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
             this.alterarSenhaToolStripMenuItem.Text = "Alterar senha";
             this.alterarSenhaToolStripMenuItem.Click += new System.EventHandler(this.alterarSenhaToolStripMenuItem_Click);
             // 
@@ -203,10 +204,19 @@
             // 
             // entradaEstoqueToolStripMenuItem
             // 
+            this.entradaEstoqueToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.loteToolStripMenuItem1});
             this.entradaEstoqueToolStripMenuItem.Name = "entradaEstoqueToolStripMenuItem";
             this.entradaEstoqueToolStripMenuItem.Size = new System.Drawing.Size(165, 22);
             this.entradaEstoqueToolStripMenuItem.Text = "Entrada estoque";
             this.entradaEstoqueToolStripMenuItem.Click += new System.EventHandler(this.entradaEstoqueToolStripMenuItem_Click);
+            // 
+            // loteToolStripMenuItem1
+            // 
+            this.loteToolStripMenuItem1.Name = "loteToolStripMenuItem1";
+            this.loteToolStripMenuItem1.Size = new System.Drawing.Size(97, 22);
+            this.loteToolStripMenuItem1.Text = "Lote";
+            this.loteToolStripMenuItem1.Click += new System.EventHandler(this.loteToolStripMenuItem1_Click);
             // 
             // descarteToolStripMenuItem
             // 
@@ -680,7 +690,7 @@
             this.mbtEntradaMan.NoAccentTextColor = System.Drawing.Color.Empty;
             this.mbtEntradaMan.Size = new System.Drawing.Size(85, 46);
             this.mbtEntradaMan.TabIndex = 2;
-            this.mbtEntradaMan.Text = "Entrada Manual";
+            this.mbtEntradaMan.Text = "Entrada lote";
             this.mbtEntradaMan.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
             this.mbtEntradaMan.UseAccentColor = false;
             this.mbtEntradaMan.UseVisualStyleBackColor = true;
@@ -789,6 +799,7 @@
         private MaterialSkin.Controls.MaterialButton mbtEntradaMan;
         private MaterialSkin.Controls.MaterialButton mbtProdCadLote;
         private System.Windows.Forms.ToolStripMenuItem parametrosDeConfiguraçãoToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem loteToolStripMenuItem1;
     }
 }
 
