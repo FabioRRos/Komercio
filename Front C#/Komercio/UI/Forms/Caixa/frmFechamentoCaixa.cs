@@ -31,7 +31,7 @@ namespace Komercio.UI.Forms
         private ValoresFechamentoDTO valoresInputFechamento = new ValoresFechamentoDTO();
         internal string _cupom;
         private CaixaDTO fechamento = new CaixaDTO();
-
+        private float _totalVendido = 0;
         private ParametrosApp  _parametrosApp;
 
 
@@ -189,6 +189,7 @@ namespace Komercio.UI.Forms
                         break;
 
                     default: break;
+                   
                 }
             }
             foreach (var moviment in movimentacaoCaixa)
@@ -209,6 +210,14 @@ namespace Komercio.UI.Forms
                 else if (caixa.ChangeType == "retirada")
                 {
                     valoresFechamento.Saida += caixa.ValueChanged;
+                }
+
+
+
+                //
+                if (caixa.ChangeOrigin == "venda")
+                {
+                    _totalVendido += caixa.ValueChanged;
                 }
             }
 
@@ -395,7 +404,11 @@ namespace Komercio.UI.Forms
 
 
         private void CupomFiscal()
-        {           
+        {
+
+            _totalVendido = valoresFechamento.Dinheiro + valoresFechamento.Debito + valoresFechamento.Credito + valoresFechamento.Pix + valoresFechamento.Conta;
+
+
             var sb = new StringBuilder();
             sb.AppendLine("--------------------------------------");
             sb.AppendLine("");
@@ -425,6 +438,8 @@ namespace Komercio.UI.Forms
             sb.AppendLine($"SANGRIA : {valoresFechamento.Sangria.ToString("C2")}");
             sb.AppendLine("--------------------------------------");
             sb.AppendLine($"Restante em caixa: {valoresFechamento.Restante.ToString("C2")}");
+          //  sb.AppendLine($"Total vendido: {_totalVendido.ToString("C2")}");
+
             sb.AppendLine("");
             //Parte da lista de produtos
             sb.AppendLine("--------------------------------------");

@@ -62,7 +62,6 @@
             this.mepSearchProduct.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.mepSearchProduct.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.mepSearchProduct.CancelButtonText = "Cancelar";
-            this.mepSearchProduct.Collapse = true;
             this.mepSearchProduct.Controls.Add(this.dbListaproduto);
             this.mepSearchProduct.Controls.Add(this.materialTextBox22);
             this.mepSearchProduct.Controls.Add(this.materialTextBox21);
@@ -72,12 +71,12 @@
             this.mepSearchProduct.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.mepSearchProduct.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.mepSearchProduct.Location = new System.Drawing.Point(12, 10);
-            this.mepSearchProduct.Margin = new System.Windows.Forms.Padding(16, 1, 16, 0);
+            this.mepSearchProduct.Margin = new System.Windows.Forms.Padding(16);
             this.mepSearchProduct.MouseState = MaterialSkin.MouseState.HOVER;
             this.mepSearchProduct.Name = "mepSearchProduct";
             this.mepSearchProduct.Padding = new System.Windows.Forms.Padding(24, 64, 24, 16);
             this.mepSearchProduct.ShowCollapseExpand = false;
-            this.mepSearchProduct.Size = new System.Drawing.Size(672, 48);
+            this.mepSearchProduct.Size = new System.Drawing.Size(672, 401);
             this.mepSearchProduct.TabIndex = 1;
             this.mepSearchProduct.Title = "Busca manual de produtos";
             this.mepSearchProduct.ValidationButtonText = "";

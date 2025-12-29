@@ -3,8 +3,8 @@
   "sale_id": 0,
   "customer_id": 2,
   "origin_type": "Pagamento",
-  "transaction_value": 50.0,
-  "transaction_date": "2025-12-25T19:27:47.1638157-03:00",
+  "transaction_value": 10.0,
+  "transaction_date": "2025-12-29T12:31:15.7562536-03:00",
   "obs": "",
   "seller": "3",
   "type_payment": "PIX"

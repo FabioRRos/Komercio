@@ -27,8 +27,11 @@ func main() {
 		c.Next()
 	})
 
-	dbProduct := datastore.NewProductDataStore()
-	defer dbProduct.Close()
+	pool := datastore.NewPostgresPool()
+	defer pool.Close()
+
+	dbProduct := datastore.NewProductDataStore(pool)
+
 	dbCustomer := datastore.NewCustomerDataStore()
 	defer dbCustomer.Close()
 	dbEmployee := datastore.NewEmployeesDataStore()

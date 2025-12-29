@@ -38,10 +38,10 @@
             this.mtbProductPrice = new MaterialSkin.Controls.MaterialTextBox2();
             this.mtbProductName = new MaterialSkin.Controls.MaterialTextBox2();
             this.mepBuscaDescricao = new MaterialSkin.Controls.MaterialExpansionPanel();
-            this.materialTextBox21 = new MaterialSkin.Controls.MaterialTextBox2();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.dgwListaProdutos = new System.Windows.Forms.DataGridView();
+            this.mtbBusca = new MaterialSkin.Controls.MaterialTextBox2();
             this.mepBuscaDescricao.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgwListaProdutos)).BeginInit();
             this.SuspendLayout();
             // 
             // mcbSubGroup
@@ -253,60 +253,68 @@
             // 
             this.mepBuscaDescricao.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.mepBuscaDescricao.CancelButtonText = "";
-            this.mepBuscaDescricao.Controls.Add(this.dataGridView1);
-            this.mepBuscaDescricao.Controls.Add(this.materialTextBox21);
+            this.mepBuscaDescricao.Collapse = true;
+            this.mepBuscaDescricao.Controls.Add(this.dgwListaProdutos);
+            this.mepBuscaDescricao.Controls.Add(this.mtbBusca);
             this.mepBuscaDescricao.Depth = 0;
-            this.mepBuscaDescricao.Description = "Selecione e clique duas vezes";
-            this.mepBuscaDescricao.ExpandHeight = 346;
-            this.mepBuscaDescricao.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.mepBuscaDescricao.Description = "";
+            this.mepBuscaDescricao.ExpandHeight = 333;
+            this.mepBuscaDescricao.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.mepBuscaDescricao.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.mepBuscaDescricao.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.mepBuscaDescricao.Location = new System.Drawing.Point(12, 24);
-            this.mepBuscaDescricao.Margin = new System.Windows.Forms.Padding(16);
+            this.mepBuscaDescricao.Margin = new System.Windows.Forms.Padding(16, 1, 16, 0);
             this.mepBuscaDescricao.MouseState = MaterialSkin.MouseState.HOVER;
             this.mepBuscaDescricao.Name = "mepBuscaDescricao";
             this.mepBuscaDescricao.Padding = new System.Windows.Forms.Padding(24, 64, 24, 16);
-            this.mepBuscaDescricao.ShowValidationButtons = false;
-            this.mepBuscaDescricao.Size = new System.Drawing.Size(450, 346);
+            this.mepBuscaDescricao.ShowCollapseExpand = false;
+            this.mepBuscaDescricao.Size = new System.Drawing.Size(450, 48);
             this.mepBuscaDescricao.TabIndex = 17;
             this.mepBuscaDescricao.Title = "Buscar produto";
             this.mepBuscaDescricao.ValidationButtonText = "";
+            this.mepBuscaDescricao.Paint += new System.Windows.Forms.PaintEventHandler(this.mepBuscaDescricao_Paint);
             // 
-            // materialTextBox21
+            // dgwListaProdutos
             // 
-            this.materialTextBox21.AnimateReadOnly = false;
-            this.materialTextBox21.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.materialTextBox21.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
-            this.materialTextBox21.Depth = 0;
-            this.materialTextBox21.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.materialTextBox21.HideSelection = true;
-            this.materialTextBox21.LeadingIcon = null;
-            this.materialTextBox21.Location = new System.Drawing.Point(27, 48);
-            this.materialTextBox21.MaxLength = 32767;
-            this.materialTextBox21.MouseState = MaterialSkin.MouseState.OUT;
-            this.materialTextBox21.Name = "materialTextBox21";
-            this.materialTextBox21.PasswordChar = '\0';
-            this.materialTextBox21.PrefixSuffixText = null;
-            this.materialTextBox21.ReadOnly = false;
-            this.materialTextBox21.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.materialTextBox21.SelectedText = "";
-            this.materialTextBox21.SelectionLength = 0;
-            this.materialTextBox21.SelectionStart = 0;
-            this.materialTextBox21.ShortcutsEnabled = true;
-            this.materialTextBox21.Size = new System.Drawing.Size(396, 48);
-            this.materialTextBox21.TabIndex = 2;
-            this.materialTextBox21.TabStop = false;
-            this.materialTextBox21.Text = "materialTextBox21";
-            this.materialTextBox21.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
-            this.materialTextBox21.TrailingIcon = null;
-            this.materialTextBox21.UseSystemPasswordChar = false;
+            this.dgwListaProdutos.AllowUserToAddRows = false;
+            this.dgwListaProdutos.AllowUserToDeleteRows = false;
+            this.dgwListaProdutos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgwListaProdutos.Location = new System.Drawing.Point(27, 108);
+            this.dgwListaProdutos.Name = "dgwListaProdutos";
+            this.dgwListaProdutos.ReadOnly = true;
+            this.dgwListaProdutos.Size = new System.Drawing.Size(396, 160);
+            this.dgwListaProdutos.TabIndex = 3;
+            this.dgwListaProdutos.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellDoubleClick);
             // 
-            // dataGridView1
+            // mtbBusca
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(27, 108);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(396, 219);
-            this.dataGridView1.TabIndex = 3;
+            this.mtbBusca.AnimateReadOnly = false;
+            this.mtbBusca.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.mtbBusca.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
+            this.mtbBusca.Depth = 0;
+            this.mtbBusca.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.mtbBusca.HideSelection = true;
+            this.mtbBusca.Hint = "Digite o nome do produto";
+            this.mtbBusca.LeadingIcon = null;
+            this.mtbBusca.Location = new System.Drawing.Point(27, 48);
+            this.mtbBusca.MaxLength = 32767;
+            this.mtbBusca.MouseState = MaterialSkin.MouseState.OUT;
+            this.mtbBusca.Name = "mtbBusca";
+            this.mtbBusca.PasswordChar = '\0';
+            this.mtbBusca.PrefixSuffixText = null;
+            this.mtbBusca.ReadOnly = false;
+            this.mtbBusca.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.mtbBusca.SelectedText = "";
+            this.mtbBusca.SelectionLength = 0;
+            this.mtbBusca.SelectionStart = 0;
+            this.mtbBusca.ShortcutsEnabled = true;
+            this.mtbBusca.Size = new System.Drawing.Size(396, 48);
+            this.mtbBusca.TabIndex = 2;
+            this.mtbBusca.TabStop = false;
+            this.mtbBusca.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.mtbBusca.TrailingIcon = null;
+            this.mtbBusca.UseSystemPasswordChar = false;
+            this.mtbBusca.TextChanged += new System.EventHandler(this.mtbBusca_TextChanged);
             // 
             // fmAlterarProduto
             // 
@@ -330,7 +338,7 @@
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.fmAlterarProduto_KeyDown);
             this.mepBuscaDescricao.ResumeLayout(false);
             this.mepBuscaDescricao.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgwListaProdutos)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -347,7 +355,7 @@
         private MaterialSkin.Controls.MaterialTextBox2 mtbProductPrice;
         private MaterialSkin.Controls.MaterialTextBox2 mtbProductName;
         private MaterialSkin.Controls.MaterialExpansionPanel mepBuscaDescricao;
-        private System.Windows.Forms.DataGridView dataGridView1;
-        private MaterialSkin.Controls.MaterialTextBox2 materialTextBox21;
+        private System.Windows.Forms.DataGridView dgwListaProdutos;
+        private MaterialSkin.Controls.MaterialTextBox2 mtbBusca;
     }
 }
