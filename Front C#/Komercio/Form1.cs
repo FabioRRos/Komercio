@@ -84,6 +84,7 @@ namespace Komercio
             _caixaService = caixaService;
             _cashmovementsService = cashMovement;
             _cupomService = cupomService;
+            _produtoApp = produtoApp;
             _httpClient = httpClient;
         }
 
@@ -218,8 +219,7 @@ namespace Komercio
 
         private void vendaPorPeriodoToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            fmSalesDump saleDump = new fmSalesDump(_httpClient);
-            saleDump.ShowDialog();
+            Relatorios();
         }
 
         private void estoqueBaixoToolStripMenuItem_Click(object sender, EventArgs e)
@@ -434,6 +434,12 @@ namespace Komercio
             descarteProduto.ShowDialog();
         }
 
+        private void Relatorios()
+        {
+            fmSalesDump saleDump = new fmSalesDump(_httpClient);
+            saleDump.ShowDialog();
+        }
+
         private void ListaDeProdutos()
         {
             frmProductVisualize listaProduto = new frmProductVisualize(_produtoApp);
@@ -524,7 +530,7 @@ namespace Komercio
 
         private void materialButton10_Click(object sender, EventArgs e)
         {
-            AlterarSenhaFuncionario();
+            Relatorios();
         }
 
         private void listaDeProdutosToolStripMenuItem_Click(object sender, EventArgs e)

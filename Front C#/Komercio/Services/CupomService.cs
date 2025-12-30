@@ -150,8 +150,8 @@ namespace Komercio.Services
             sb.AppendLine("         VOLTE SEMPRE :)");
 
             string textoFinal = sb.ToString();
-
-            string directory = @"C:\Projeto Komercial\Komercio\Arquivos de teste\Cupom";
+            //AQUI SALVO O CUPOM DE VENDA PARA REIMPRIMIR!
+            string directory = @"C:\Komercio\log\Cupom";
             string fileName = $"Cupom_{sale.SaleId}_{DateTime.Now:yyyyMMdd_HHmmss}.txt";
             string fullPath = Path.Combine(directory, fileName);
 

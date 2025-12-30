@@ -17,6 +17,7 @@
 
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(fmSalePaymant));
             this.mtbFunc = new MaterialSkin.Controls.MaterialComboBox();
             this.mbtCancel = new MaterialSkin.Controls.MaterialButton();
             this.mbtConfirm = new MaterialSkin.Controls.MaterialButton();
@@ -563,6 +564,7 @@
             this.Controls.Add(this.mtbValorRecebido);
             this.Controls.Add(this.mtbTroco);
             this.Controls.Add(this.mtbFunc);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "fmSalePaymant";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Pagamento da Venda";

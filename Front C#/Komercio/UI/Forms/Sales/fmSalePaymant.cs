@@ -727,9 +727,20 @@ namespace Komercio.UI.Forms.Sales
                 // impressão do cupom fiscal de acordo com parâmetro
                 if (retorno)
                 {
-                     printCupom.Print();
+                    MessageBox.Show("Venda registrada com sucesso!", "SUCESSO!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    printCupom.Print();
                     // MessageBox.Show("Venda formalizada e arquivo JSON gerado com sucesso!",
                     // "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+
+                    var resposta = MessageBox.Show("Venda registrada com sucesso!\nImprimir via do cliente?", "Cliente.", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+                    if (resposta == DialogResult.Yes) 
+                    { 
+                        printCupom.Print(); 
+                    }
                 }
 
 

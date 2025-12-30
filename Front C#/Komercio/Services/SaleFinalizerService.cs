@@ -168,8 +168,7 @@ namespace Komercio.Services
                 MessageBox.Show("Não consegui criar o cupom - SALE FINALIZER SERVICE");
             }
 
-            // Geração do JSON e salvamento 
-            //  ESSE EU PRECISO CONFIGURAR VIA PARÂMETRO FUTURAMENTE.
+            // Geração do JSON e salvamento para log
              try
              {
                  string conteudoJson = JsonConvert.SerializeObject(vendaAggregate, Formatting.Indented);
@@ -243,7 +242,6 @@ namespace Komercio.Services
                 return (false, "");
             }
 
-            MessageBox.Show("Venda registrada com sucesso!", "SUCESSO!", MessageBoxButtons.OK, MessageBoxIcon.Information);
             return (true, cupomForPrint);
         }
         public class SaleResponseDTO
@@ -254,6 +252,11 @@ namespace Komercio.Services
             [JsonProperty("sale_id")]
             public int SaleId { get; set; }
         }
+
+
+
+
+       
 
     }
 

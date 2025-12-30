@@ -33,6 +33,7 @@ namespace Komercio.UI.Forms
         private CaixaDTO fechamento = new CaixaDTO();
         private float _totalVendido = 0;
         private ParametrosApp  _parametrosApp;
+        private float _totalMarcado = 0;
 
 
         //listas utilizadas no código
@@ -403,77 +404,127 @@ namespace Komercio.UI.Forms
         }
 
 
+        // ===== CONFIGURAÇÃO DO PAPEL / LAYOUT =====
+        const int LARGURA_LINHA = 48;   // largura total do papel (80mm)
+        const int COLUNA_PRECO = 32;   // coluna onde o preço começa (começa no 1)
+        const int MAX_DESC = COLUNA_PRECO - 4; // espaço máximo da descrição
+        //Para separar a linha
+        string LinhaSeparadora()
+        {
+            return new string('-', LARGURA_LINHA);
+        }
+        // para centralizar 
+        string Centralizar(string texto)
+        {
+            if (texto.Length >= LARGURA_LINHA)
+                return texto.Substring(0, LARGURA_LINHA);
+
+            int espacos = (LARGURA_LINHA - texto.Length) / 2;
+            return new string(' ', espacos) + texto;
+        }
+
+
+
         private void CupomFiscal()
         {
 
-            _totalVendido = valoresFechamento.Dinheiro + valoresFechamento.Debito + valoresFechamento.Credito + valoresFechamento.Pix + valoresFechamento.Conta;
+            _totalVendido = valoresFechamento.Dinheiro + valoresFechamento.Debito + valoresFechamento.Credito;
+            _totalMarcado = valoresFechamento.Conta;
 
 
             var sb = new StringBuilder();
-            sb.AppendLine("--------------------------------------");
+
+            // ===== CABEÇALHO =====
+            sb.AppendLine(LinhaSeparadora());
             sb.AppendLine("");
-            sb.AppendLine($"     *** {nomeFantasia} ***");
-            sb.AppendLine("          CUPOM NAO FISCAL");
+            sb.AppendLine(Centralizar($"*** {nomeFantasia} ***"));
+            sb.AppendLine(Centralizar("FECHAMENTO DO CAIXA"));
+            sb.AppendLine($"DATA FECHAMENTO: {DateTime.Now}");
+            sb.AppendLine($"FUNCIONÁRIO: {_funcionarioNome}");
             sb.AppendLine("");
-            sb.AppendLine("--------------------------------------");
+            sb.AppendLine(LinhaSeparadora());
+            sb.AppendLine(Centralizar("FECHAMENTO DO CAIXA"));
+            sb.AppendLine(LinhaSeparadora());
             sb.AppendLine("");
-            sb.AppendLine($"DATA FECHAMENTO: {DateTime.Now}"); sb.AppendLine($"RAZAO SOCIAL: {razaoSocial}");
-            sb.AppendLine($"CNPJ: {cNPJ}");
-            sb.AppendLine($"ENDERECO:{endereco}");
-            sb.AppendLine($"{cidade}");
-            sb.AppendLine($"FONE/WHATSAPP:{contato}");
-            sb.AppendLine("");
-            sb.AppendLine("--------------------------------------");
-            sb.AppendLine($"FUNCIONÁRIO:{_funcionarioNome}");
-            sb.AppendLine("--------------------------------------");
-            sb.AppendLine("-------- FECHAMENTO DO CAIXA ---------");
-            sb.AppendLine("--------------------------------------");
-            sb.AppendLine("");
+
+            // ===== VALORES =====
             sb.AppendLine($"CAIXA NA ABERTURA : {_caixaDTO[0].ValueChanged.ToString("C2")}");
-            sb.AppendLine($"DINHEIRO : {valoresFechamento.Dinheiro.ToString("C2")}");
-            sb.AppendLine($"DEBITO : {valoresFechamento.Debito.ToString("C2")}");
-            sb.AppendLine($"CREDITO : {valoresFechamento.Credito.ToString("C2")}");
-            sb.AppendLine($"PIX : {valoresFechamento.Pix.ToString("C2")}");
-            sb.AppendLine($"CONTA : {valoresFechamento.Conta.ToString("C2")}");
-            sb.AppendLine($"SANGRIA : {valoresFechamento.Sangria.ToString("C2")}");
-            sb.AppendLine("--------------------------------------");
-            sb.AppendLine($"Restante em caixa: {valoresFechamento.Restante.ToString("C2")}");
-          //  sb.AppendLine($"Total vendido: {_totalVendido.ToString("C2")}");
-
+            sb.AppendLine($"DINHEIRO          : {valoresFechamento.Dinheiro.ToString("C2")}");
+            sb.AppendLine($"DEBITO            : {valoresFechamento.Debito.ToString("C2")}");
+            sb.AppendLine($"CREDITO           : {valoresFechamento.Credito.ToString("C2")}");
+            sb.AppendLine($"PIX               : {valoresFechamento.Pix.ToString("C2")}");
+            sb.AppendLine($"CONTA             : {valoresFechamento.Conta.ToString("C2")}");
+            sb.AppendLine($"SANGRIA           : {valoresFechamento.Sangria.ToString("C2")}");
+            sb.AppendLine(LinhaSeparadora());
             sb.AppendLine("");
-            //Parte da lista de produtos
-            sb.AppendLine("--------------------------------------");
-            sb.AppendLine("--------- LISTA DE PRODUTOS ----------");
-            sb.AppendLine("--------------------------------------");
-            sb.AppendLine("QTD - DESCRICAO");
-            sb.AppendLine("--------------------------------------");
-            foreach (var itens in salesItensDTO)
-            {
-                string qtd = itens.Quantity.ToString().PadLeft(3);
-                string nome = itens.ProductName.ToUpper();
+            sb.AppendLine($"RESTANTE EM CAIXA : {valoresFechamento.Restante.ToString("C2")}");
+            sb.AppendLine($"TOTAL VENDIDO     : {_totalVendido.ToString("C2")}");
+            sb.AppendLine($"TOTAL MARCADO     : {_totalMarcado.ToString("C2")}");
 
-                if (nome.Length > 32)
-                {
-                    nome = nome.Substring(0, 32);
-                }
-
-                sb.AppendLine(qtd + " - " + nome);
-
-            }
-
-
-            if (mcbJustDif.Checked == true)
+            // ===== DIVERGÊNCIA =====
+            if (mcbJustDif.Checked)
             {
                 sb.AppendLine("");
-                sb.AppendLine("--------------------------------------");
-                sb.AppendLine("----- VALOR DO CAIXA DIVERGÊNTE ------");
-                sb.AppendLine("--------------------------------------");
-                sb.AppendLine($"Valor em sistema: {valoresFechamento.Dinheiro.ToString("C2")}");
-                sb.AppendLine($"Valor em caixa: {mtbDinheiro.Text}");
-                sb.AppendLine("--------- Justificativa --------------");
-                sb.AppendLine($"{mtbJustificativa.Text}");
-                sb.AppendLine("--------------------------------------");
+                sb.AppendLine(LinhaSeparadora());
+                sb.AppendLine(Centralizar("VALOR DO CAIXA DIVERGENTE"));
+                sb.AppendLine(LinhaSeparadora());
+                sb.AppendLine($"VALOR EM SISTEMA : {valoresFechamento.Dinheiro.ToString("C2")}");
+                sb.AppendLine($"VALOR EM CAIXA   : {mtbDinheiro.Text}");
+                sb.AppendLine("JUSTIFICATIVA:");
+                sb.AppendLine(mtbJustificativa.Text);
+                sb.AppendLine(LinhaSeparadora());
             }
+
+            // ===== LISTA DE PRODUTOS =====
+            sb.AppendLine("");
+            sb.AppendLine(LinhaSeparadora());
+            sb.AppendLine(Centralizar("LISTA DE PRODUTOS"));
+            sb.AppendLine(LinhaSeparadora());
+            sb.AppendLine("QTD - DESCRICAO - VALOR");
+            sb.AppendLine(LinhaSeparadora());
+
+            // ===== ITENS =====
+            foreach (var itens in salesItensDTO)
+            {
+                string qtd = itens.Quantity.ToString().PadLeft(2) + "-";
+                string preco = itens.Total.ToString("C2");
+
+                string nome = itens.ProductName.ToUpper();
+                string[] palavras = nome.Split(' ');
+                StringBuilder nsb = new StringBuilder();
+
+                foreach (string palavra in palavras)
+                {
+                    if (palavra.Length > 5)
+                        nsb.Append(palavra.Substring(0, 5));
+                    else
+                        nsb.Append(palavra);
+
+                    nsb.Append(" ");
+                }
+
+                string abrevNome = nsb.ToString().Trim();
+
+                if (abrevNome.Length > MAX_DESC)
+                    abrevNome = abrevNome.Substring(0, MAX_DESC);
+
+                string linha = qtd + abrevNome;
+
+                // completa até a coluna do preço
+                linha = linha.PadRight(COLUNA_PRECO - 1);
+
+                // adiciona preço
+                linha += preco;
+
+                // segurança final
+                if (linha.Length > LARGURA_LINHA)
+                    linha = linha.Substring(0, LARGURA_LINHA);
+
+                sb.AppendLine(linha);
+            }
+
+
+
 
             rtbCupon.Text = sb.ToString();
             _cupom = sb.ToString();

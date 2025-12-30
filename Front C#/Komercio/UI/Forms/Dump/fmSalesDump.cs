@@ -2,13 +2,8 @@
 using Komercio.Services;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
 using System.Net.Http;
-using System.Text;
-using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -18,97 +13,113 @@ namespace Komercio.UI.Forms.Dump
     {
         private readonly HttpClient _httpClient;
         private readonly ReportService _reportService;
-        //Lista que vem da API
+
+        // Lista que vem da API
         private List<SaleReportDTO> reportDTO = new List<SaleReportDTO>();
-        //Lista filtrada
+
+        // Lista filtrada
         private List<SaleReportDTO> reportFiltro = new List<SaleReportDTO>();
-        //controle para saber se o filtro está ativo ou não
-        bool filtroactive = false;
+
+        // Controle de filtro ativo
+        private bool filtroactive = false;
+
+        // Lista de vendedores
+        private List<string> vendedorList = new List<string>();
 
         public fmSalesDump(string baseUrl)
         {
             var handler = new HttpClientHandler();
             handler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => true;
+
             _httpClient = new HttpClient(handler)
             {
                 BaseAddress = new Uri(baseUrl)
             };
+
             _reportService = new ReportService(baseUrl);
 
             InitializeComponent();
         }
-        private void fmSalesDump_Load(object sender, EventArgs e)
+
+        private async void fmSalesDump_Load(object sender, EventArgs e)
         {
-            LoadDGVReport();
+            await LoadDGVReport();
         }
 
-        public async void LoadDGVReport()
+        public async Task LoadDGVReport()
         {
-
             reportDTO = await _reportService.ReturnDumpSale();
-            dgvSalesDump.DataSource = reportDTO;
 
-            this.FormBorderStyle = FormBorderStyle.FixedSingle;
-            this.MaximizeBox = false;
-            this.MinimizeBox = true;
+            AjustaPorData(reportDTO);
 
+            FormBorderStyle = FormBorderStyle.FixedSingle;
+            MaximizeBox = false;
+            MinimizeBox = true;
 
-
-
-            DataGridStyle();
-            DataGridColumns();
-            StatusInicialComponentes();
             TotalVendaPeriodo(reportDTO);
+        }
+
+        /// <summary>
+        /// Coloca a lista no DataGrid
+        /// </summary>
+        public void AjustaPorData(List<SaleReportDTO> list)
+        {
+            dgvSalesDump.DataSource = list;
+
+            DataGridColumns();
+            DataGridStyle();
+            StatusInicialComponentes();
             Vendedores();
         }
 
+        /// <summary>
+        /// Inicializa filtros de data (Hoje - 30 dias)
+        /// </summary>
         public void StatusInicialComponentes()
         {
-            mtbDataInicial.Text = DateTime.Now.AddDays(-30).ToString("dd/MM/yyyy");
-            mtbDataFinal.Text = DateTime.Now.ToString("dd/MM/yyyy");
+            dtpInicio.Format = DateTimePickerFormat.Custom;
+            dtpInicio.CustomFormat = "dd/MM/yyyy";
 
+            dtpFim.Format = DateTimePickerFormat.Custom;
+            dtpFim.CustomFormat = "dd/MM/yyyy";
 
+            dtpInicio.Value = DateTime.Now.AddDays(-30);
+            dtpFim.Value = DateTime.Now;
         }
 
+        /// <summary>
+        /// Soma total de vendas do período
+        /// </summary>
         public void TotalVendaPeriodo(List<SaleReportDTO> list)
         {
-            
             float total = 0;
-            foreach (var report in list) 
+
+            foreach (var report in list)
             {
                 total += report.FinalAmount;
             }
 
-
             mtbTotalPeriodo.Text = total.ToString("C2");
-
-
-
         }
 
-
+        /// <summary>
+        /// Estilo do DataGrid
+        /// </summary>
         public void DataGridStyle()
         {
-            
             dgvSalesDump.BackgroundColor = Color.White;
             dgvSalesDump.BorderStyle = BorderStyle.None;
             dgvSalesDump.RowHeadersVisible = false;
-            dgvSalesDump.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
         }
 
+        /// <summary>
+        /// Formatação das colunas
+        /// </summary>
         public void DataGridColumns()
         {
-
             dgvSalesDump.Columns["SaleId"].Visible = false;
             dgvSalesDump.Columns["Saletime"].Visible = false;
             dgvSalesDump.Columns["SaleNotes"].Visible = false;
-
-
-            dgvSalesDump.Columns["TotalAmount"].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
-            dgvSalesDump.Columns["FinalAmount"].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
-            dgvSalesDump.Columns["SaleDate"].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
-            dgvSalesDump.Columns["PaymantMethod"].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
-
 
             dgvSalesDump.Columns["CustomerName"].HeaderText = "Cliente";
             dgvSalesDump.Columns["CustomerDocument"].HeaderText = "CPF/CNPJ";
@@ -119,152 +130,104 @@ namespace Komercio.UI.Forms.Dump
             dgvSalesDump.Columns["SaleDate"].HeaderText = "Data venda";
             dgvSalesDump.Columns["PaymantMethod"].HeaderText = "Forma pagamento";
 
-
             dgvSalesDump.Columns["TotalAmount"].DefaultCellStyle.Format = "C2";
             dgvSalesDump.Columns["DiscountAmount"].DefaultCellStyle.Format = "C2";
             dgvSalesDump.Columns["FinalAmount"].DefaultCellStyle.Format = "C2";
 
-
+            dgvSalesDump.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
 
-        private void mtbDataInicial_TextChanged(object sender, EventArgs e)
-        {
-
-            mtbDataInicial.TextChanged -= mtbDataInicial_TextChanged;
-
-            string texto = new string(mtbDataInicial.Text.Where(char.IsDigit).ToArray());
-
-            if (texto.Length >= 2 && texto.Length < 4)
-                texto = texto.Insert(2, "/");
-            else if (texto.Length >= 4 && texto.Length < 8)
-                texto = texto.Insert(2, "/").Insert(5, "/");
-            else if (texto.Length >= 8)
-                texto = texto.Insert(2, "/").Insert(5, "/").Substring(0, 10);
-
-            mtbDataInicial.Text = texto;
-
-            mtbDataInicial.SelectionStart = mtbDataInicial.Text.Length;
-
-            mtbDataInicial.TextChanged += mtbDataInicial_TextChanged;
-
-
-        }
-
-        private void mtbDataFinal_TextChanged(object sender, EventArgs e)
-        {
-            mtbDataFinal.TextChanged -= mtbDataFinal_TextChanged;
-
-            string texto = new string(mtbDataFinal.Text.Where(char.IsDigit).ToArray());
-
-            if (texto.Length >= 2 && texto.Length < 4)
-                texto = texto.Insert(2, "/");
-            else if (texto.Length >= 4 && texto.Length < 8)
-                texto = texto.Insert(2, "/").Insert(5, "/");
-            else if (texto.Length >= 8)
-                texto = texto.Insert(2, "/").Insert(5, "/").Substring(0, 10);
-
-            mtbDataFinal.Text = texto;
-
-            mtbDataFinal.SelectionStart = mtbDataFinal.Text.Length;
-
-            mtbDataFinal.TextChanged += mtbDataFinal_TextChanged;
-
-        }
-
-        private void mbtFiltarData_Click(object sender, EventArgs e)
-        {
-            FiltroData();
-            filtroactive = true;
-            
-        }
-
-
+        /// <summary>
+        /// Aplica filtro por data
+        /// </summary>
         private void FiltroData()
         {
-
-
-            DateTime dataInicial = DateTime.Parse(mtbDataInicial.Text);
-            DateTime dataFinal = DateTime.Parse(mtbDataFinal.Text);
+            DateTime dataInicial = dtpInicio.Value.Date;
+            DateTime dataFinal = dtpFim.Value.Date.AddDays(1).AddSeconds(-1);
 
             reportFiltro.Clear();
 
             foreach (SaleReportDTO sale in reportDTO)
             {
-               
-                if (sale.SaleDate >= dataInicial && sale.SaleDate  <= dataFinal)
+                if (sale.SaleDate >= dataInicial &&
+                    sale.SaleDate <= dataFinal)
                 {
-                reportFiltro.Add(sale);
+                    reportFiltro.Add(sale);
                 }
             }
-            
+
             dgvSalesDump.DataSource = reportFiltro;
             TotalVendaPeriodo(reportFiltro);
-
             DataGridStyle();
+
+            filtroactive = true;
         }
 
-
+        private void mbtFiltarData_Click(object sender, EventArgs e)
+        {
+            FiltroData();
+        }
 
         private void mbtLimparFiltro_Click(object sender, EventArgs e)
         {
             filtroactive = false;
-            LoadDGVReport();
-            StatusInicialComponentes();
 
+            dgvSalesDump.DataSource = reportDTO;
+            TotalVendaPeriodo(reportDTO);
+
+            StatusInicialComponentes();
         }
 
-        List<string> vendedorList = new List<string>();
-
+        /// <summary>
+        /// Carrega vendedores únicos
+        /// </summary>
         private void Vendedores()
         {
-            
+            vendedorList.Clear();
+            mcbSallerName.Items.Clear();
+
             foreach (SaleReportDTO sale in reportDTO)
             {
-
-               
-                    if (!vendedorList.Contains(sale.SallerName))
-                    {
+                if (!vendedorList.Contains(sale.SallerName))
+                {
                     vendedorList.Add(sale.SallerName);
                     mcbSallerName.Items.Add(sale.SallerName);
                 }
             }
-
-            
         }
 
-
+        /// <summary>
+        /// Filtro por vendedor
+        /// </summary>
         private void FiltroPorVendedores()
         {
             var lista = new List<SaleReportDTO>();
-            switch (filtroactive)
+
+            DateTime dataInicial = dtpInicio.Value.Date;
+            DateTime dataFinal = dtpFim.Value.Date.AddDays(1).AddSeconds(-1);
+
+            if (filtroactive)
             {
-                case true:
+                foreach (SaleReportDTO sale in reportFiltro)
+                {
+                    if (sale.SallerName == mcbSallerName.Text &&
+                        sale.SaleDate >= dataInicial &&
+                        sale.SaleDate <= dataFinal)
                     {
-                        foreach (SaleReportDTO sale in reportFiltro)
-                        {
-                            DateTime dataInicial = DateTime.Parse(mtbDataInicial.Text);
-                            DateTime dataFinal = DateTime.Parse(mtbDataFinal.Text);
-                            if (sale.SallerName == mcbSallerName.Text && sale.SaleDate >= dataInicial && sale.SaleDate <= dataFinal)
-                            {
-                                lista.Add(sale);
-                            }
-                        }
-                    }break;
-                case false:
-                    {
-                        foreach (SaleReportDTO sale in reportDTO)
-                        {
-                            if (sale.SallerName == mcbSallerName.Text)
-                            {
-                                lista.Add(sale);
-
-                            }
-                        }
-                    }break;
-
-                default: return;
+                        lista.Add(sale);
+                    }
+                }
             }
-
+            else
+            {
+                foreach (SaleReportDTO sale in reportDTO)
+                {
+                    if (sale.SallerName == mcbSallerName.Text)
+                    {
+                        lista.Add(sale);
+                    }
+                }
+            }
 
             dgvSalesDump.DataSource = lista;
             TotalVendaPeriodo(lista);
@@ -275,9 +238,9 @@ namespace Komercio.UI.Forms.Dump
             if (mcbSallerName.SelectedIndex == -1)
             {
                 FiltroData();
-                // LoadDGVReport();
                 return;
             }
+
             FiltroPorVendedores();
         }
 
@@ -285,5 +248,54 @@ namespace Komercio.UI.Forms.Dump
         {
             mcbSallerName.SelectedIndex = -1;
         }
+
+        private void dtpInicio_ValueChanged(object sender, EventArgs e)
+        {
+            if (dtpInicio.Value >= dtpFim.Value)
+            {
+                dtpFim.Value = dtpInicio.Value;
+            }
+        }
+
+        private void dtpFim_ValueChanged(object sender, EventArgs e)
+        {
+            if (dtpFim.Value < dtpInicio.Value)
+            {
+                dtpInicio.Value = dtpFim.Value;
+            }
+        }
+
+        private void dgvSalesDump_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+            if (e.RowIndex < 0)
+                return;
+
+            int saleIdSelecionado = Convert.ToInt32(
+                dgvSalesDump.Rows[e.RowIndex].Cells["SaleId"].Value
+            );
+
+            SalesDTO vendaSelecionada = null;
+
+            foreach (var venda in reportDTO)
+            {
+                if (venda.SaleId == saleIdSelecionado)
+                {
+                    frmDetalheVendas frmDetalhesVendas = new frmDetalheVendas(venda, _reportService);
+                    frmDetalhesVendas.ShowDialog();
+                    return;
+                }
+            }
+
+            if (vendaSelecionada == null)
+            {
+                MessageBox.Show("Venda não encontrada.");
+                return;
+            }
+
+
+        }
+
+
     }
 }

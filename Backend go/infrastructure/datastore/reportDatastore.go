@@ -51,7 +51,7 @@ SELECT
 FROM sales AS s
 LEFT JOIN customers AS c ON c.customerid = s.customer_id
 LEFT JOIN employees AS e ON e.employeeid = s.seller_id
-ORDER BY s.sale_id ASC;
+ORDER BY s.sale_id DESC;
 `
 
 	rows, err := d.Conn.Query(context.Background(), query)
@@ -107,7 +107,7 @@ func (d *ReportDatastore) SelectSalesReportbyId(id int) (*entity.Salereport, err
 	LEFT JOIN customers c ON s.customer_id = c.customerid
 	LEFT JOIN employees e ON s.seller_id = e.employeeid
 	WHERE s.sale_id = $1
-	ORDER BY s.sale_id ASC`
+	ORDER BY s.sale_id DESC`
 
 	row := d.Conn.QueryRow(context.Background(), query, id)
 

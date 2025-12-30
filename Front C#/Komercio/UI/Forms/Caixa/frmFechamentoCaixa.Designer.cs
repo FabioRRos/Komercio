@@ -216,7 +216,7 @@
             this.mbtFechar.MouseState = MaterialSkin.MouseState.HOVER;
             this.mbtFechar.Name = "mbtFechar";
             this.mbtFechar.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.mbtFechar.Size = new System.Drawing.Size(119, 36);
+            this.mbtFechar.Size = new System.Drawing.Size(163, 36);
             this.mbtFechar.TabIndex = 8;
             this.mbtFechar.Text = "Fechar Caixa";
             this.mbtFechar.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
@@ -263,7 +263,7 @@
             this.rtbCupon.Location = new System.Drawing.Point(279, 17);
             this.rtbCupon.Name = "rtbCupon";
             this.rtbCupon.ReadOnly = true;
-            this.rtbCupon.Size = new System.Drawing.Size(290, 344);
+            this.rtbCupon.Size = new System.Drawing.Size(335, 344);
             this.rtbCupon.TabIndex = 9;
             this.rtbCupon.Text = "";
             this.rtbCupon.TextChanged += new System.EventHandler(this.rtbCupon_TextChanged);
@@ -346,7 +346,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(581, 506);
+            this.ClientSize = new System.Drawing.Size(626, 506);
             this.Controls.Add(this.mcbJustDif);
             this.Controls.Add(this.mtbJustificativa);
             this.Controls.Add(this.materialButton1);

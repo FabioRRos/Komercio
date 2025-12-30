@@ -1,11 +1,11 @@
 {
-  "customer_id": 2,
-  "total_amount": 60.0,
+  "customer_id": 0,
+  "total_amount": 27.9,
   "discount_amount": 0.0,
-  "final_amount": 60.0,
-  "sale_date": "2025-12-29T12:30:43.6562179-03:00",
-  "sale_time": "12:30:43",
-  "payment_method": "Conta",
+  "final_amount": 27.9,
+  "sale_date": "2025-12-30T15:08:33.7556521-03:00",
+  "sale_time": "15:08:33",
+  "payment_method": "Dinheiro",
   "seller_id": 0,
   "sale_notes": ""
 }

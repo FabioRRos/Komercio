@@ -118,3 +118,4 @@ C:\Repositório Komercio\Komercio\Front C#\Komercio\obj\Debug\Komercio.csproj.Up
 C:\Repositório Komercio\Komercio\Front C#\Komercio\obj\Debug\Komercio.exe
 C:\Repositório Komercio\Komercio\Front C#\Komercio\obj\Debug\Komercio.pdb
 C:\Repositório Komercio\Komercio\Front C#\Komercio\obj\Debug\Komercio.UI.Forms.Product.Produto.frmEntradEstoqueEmLote.resources
+C:\Repositório Komercio\Komercio\Front C#\Komercio\obj\Debug\Komercio.UI.Forms.Dump.frmDetalheVendas.resources

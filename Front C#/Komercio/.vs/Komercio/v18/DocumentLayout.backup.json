@@ -5,22 +5,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{44D56DD6-A48F-48C7-9DB4-CD3BA6950EF2}|Komercio.csproj|c:\\reposit\u00F3rio komercio\\komercio\\front c#\\komercio\\bin\\debug\\komercio.exe.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
       "RelativeMoniker": "D:0:0:{44D56DD6-A48F-48C7-9DB4-CD3BA6950EF2}|Komercio.csproj|solutionrelative:bin\\debug\\komercio.exe.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{44D56DD6-A48F-48C7-9DB4-CD3BA6950EF2}|Komercio.csproj|c:\\reposit\u00F3rio komercio\\komercio\\front c#\\komercio\\ui\\forms\\caixa\\frmfechamentocaixa.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{44D56DD6-A48F-48C7-9DB4-CD3BA6950EF2}|Komercio.csproj|solutionrelative:ui\\forms\\caixa\\frmfechamentocaixa.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{44D56DD6-A48F-48C7-9DB4-CD3BA6950EF2}|Komercio.csproj|c:\\reposit\u00F3rio komercio\\komercio\\front c#\\komercio\\ui\\forms\\caixa\\frmfechamentocaixa.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{44D56DD6-A48F-48C7-9DB4-CD3BA6950EF2}|Komercio.csproj|solutionrelative:ui\\forms\\caixa\\frmfechamentocaixa.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{44D56DD6-A48F-48C7-9DB4-CD3BA6950EF2}|Komercio.csproj|c:\\reposit\u00F3rio komercio\\komercio\\front c#\\komercio\\ui\\forms\\sales\\fmsalesproduct.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{44D56DD6-A48F-48C7-9DB4-CD3BA6950EF2}|Komercio.csproj|solutionrelative:ui\\forms\\sales\\fmsalesproduct.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{44D56DD6-A48F-48C7-9DB4-CD3BA6950EF2}|Komercio.csproj|C:\\Reposit\u00F3rio Komercio\\Komercio\\Front C#\\Komercio\\ui\\forms\\sales\\fmsalesproduct.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{44D56DD6-A48F-48C7-9DB4-CD3BA6950EF2}|Komercio.csproj|solutionrelative:ui\\forms\\sales\\fmsalesproduct.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     }
   ],
   "DocumentGroupContainers": [
@@ -30,36 +14,11 @@
       "DocumentGroups": [
         {
           "DockedWidth": 318,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Bookmark",
               "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "frmFechamentoCaixa.cs",
-              "DocumentMoniker": "C:\\Reposit\u00F3rio Komercio\\Komercio\\Front C#\\Komercio\\UI\\Forms\\Caixa\\frmFechamentoCaixa.cs",
-              "RelativeDocumentMoniker": "UI\\Forms\\Caixa\\frmFechamentoCaixa.cs",
-              "ToolTip": "C:\\Reposit\u00F3rio Komercio\\Komercio\\Front C#\\Komercio\\UI\\Forms\\Caixa\\frmFechamentoCaixa.cs",
-              "RelativeToolTip": "UI\\Forms\\Caixa\\frmFechamentoCaixa.cs",
-              "ViewState": "AgIAAGcCAAAAAAAAAAAIwHQCAAAxAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-29T15:20:03.466Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "frmFechamentoCaixa.cs [Design]",
-              "DocumentMoniker": "C:\\Reposit\u00F3rio Komercio\\Komercio\\Front C#\\Komercio\\UI\\Forms\\Caixa\\frmFechamentoCaixa.cs",
-              "RelativeDocumentMoniker": "UI\\Forms\\Caixa\\frmFechamentoCaixa.cs",
-              "ToolTip": "C:\\Reposit\u00F3rio Komercio\\Komercio\\Front C#\\Komercio\\UI\\Forms\\Caixa\\frmFechamentoCaixa.cs [Design]",
-              "RelativeToolTip": "UI\\Forms\\Caixa\\frmFechamentoCaixa.cs [Design]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-29T15:19:59.923Z",
-              "EditorCaption": " [Design]"
             },
             {
               "$type": "Document",
@@ -71,54 +30,8 @@
               "RelativeToolTip": "bin\\Debug\\Komercio.exe.config",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAXAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000601|",
-              "WhenOpened": "2025-12-29T14:38:41.682Z",
+              "WhenOpened": "2025-12-30T19:22:39.686Z",
               "EditorCaption": ""
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "Orientation": 0,
-      "VerticalTabListWidth": 256,
-      "FloatingWindowState": {
-        "Id": "1a4ddb24-f084-4724-a7dc-ebc002b40c17",
-        "Display": 0,
-        "X": 230,
-        "Y": -41,
-        "Width": 1410,
-        "Height": 928,
-        "WindowState": 0
-      },
-      "DocumentGroups": [
-        {
-          "DockedWidth": 200,
-          "SelectedChildIndex": 0,
-          "Children": [
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "fmSalesProduct.cs",
-              "DocumentMoniker": "C:\\Reposit\u00F3rio Komercio\\Komercio\\Front C#\\Komercio\\UI\\Forms\\Sales\\fmSalesProduct.cs",
-              "RelativeDocumentMoniker": "UI\\Forms\\Sales\\fmSalesProduct.cs",
-              "ToolTip": "C:\\Reposit\u00F3rio Komercio\\Komercio\\Front C#\\Komercio\\UI\\Forms\\Sales\\fmSalesProduct.cs",
-              "RelativeToolTip": "UI\\Forms\\Sales\\fmSalesProduct.cs",
-              "ViewState": "AgIAAIABAAAAAAAAAAAUwPcAAAAMAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-29T12:21:24.448Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "fmSalesProduct.cs [Design]",
-              "DocumentMoniker": "C:\\Reposit\u00F3rio Komercio\\Komercio\\Front C#\\Komercio\\UI\\Forms\\Sales\\fmSalesProduct.cs",
-              "RelativeDocumentMoniker": "UI\\Forms\\Sales\\fmSalesProduct.cs",
-              "ToolTip": "C:\\Reposit\u00F3rio Komercio\\Komercio\\Front C#\\Komercio\\UI\\Forms\\Sales\\fmSalesProduct.cs [Design]",
-              "RelativeToolTip": "UI\\Forms\\Sales\\fmSalesProduct.cs [Design]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-29T12:16:52.578Z",
-              "EditorCaption": " [Design]"
             }
           ]
         }

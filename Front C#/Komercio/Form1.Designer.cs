@@ -514,7 +514,7 @@
             this.materialButton10.NoAccentTextColor = System.Drawing.Color.Empty;
             this.materialButton10.Size = new System.Drawing.Size(191, 128);
             this.materialButton10.TabIndex = 5;
-            this.materialButton10.Text = "Alterar senha";
+            this.materialButton10.Text = "Relatórios";
             this.materialButton10.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
             this.materialButton10.UseAccentColor = false;
             this.materialButton10.UseVisualStyleBackColor = true;

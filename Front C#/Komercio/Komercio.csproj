@@ -165,6 +165,12 @@
     <Compile Include="UI\Forms\Dump\fmSalesDump.Designer.cs">
       <DependentUpon>fmSalesDump.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\Forms\Dump\frmDetalheVendas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Forms\Dump\frmDetalheVendas.Designer.cs">
+      <DependentUpon>frmDetalheVendas.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\Forms\Employee\CreateEmployee.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -307,6 +313,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Forms\Dump\fmSalesDump.resx">
       <DependentUpon>fmSalesDump.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Forms\Dump\frmDetalheVendas.resx">
+      <DependentUpon>frmDetalheVendas.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Forms\Employee\CreateEmployee.resx">
       <DependentUpon>CreateEmployee.cs</DependentUpon>

@@ -30,8 +30,6 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(fmSalesDump));
             this.dgvSalesDump = new System.Windows.Forms.DataGridView();
-            this.mtbDataInicial = new MaterialSkin.Controls.MaterialTextBox2();
-            this.mtbDataFinal = new MaterialSkin.Controls.MaterialTextBox2();
             this.mbtFiltarData = new MaterialSkin.Controls.MaterialButton();
             this.mbtLimparFiltro = new MaterialSkin.Controls.MaterialButton();
             this.mtbTotalPeriodo = new MaterialSkin.Controls.MaterialTextBox2();
@@ -40,6 +38,8 @@
             this.materialLabel3 = new MaterialSkin.Controls.MaterialLabel();
             this.mcbSallerName = new MaterialSkin.Controls.MaterialComboBox();
             this.mtbLimparVendedor = new MaterialSkin.Controls.MaterialButton();
+            this.dtpInicio = new System.Windows.Forms.DateTimePicker();
+            this.dtpFim = new System.Windows.Forms.DateTimePicker();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSalesDump)).BeginInit();
             this.SuspendLayout();
             // 
@@ -54,68 +54,7 @@
             this.dgvSalesDump.ReadOnly = true;
             this.dgvSalesDump.Size = new System.Drawing.Size(809, 293);
             this.dgvSalesDump.TabIndex = 0;
-            // 
-            // mtbDataInicial
-            // 
-            this.mtbDataInicial.AnimateReadOnly = true;
-            this.mtbDataInicial.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.mtbDataInicial.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
-            this.mtbDataInicial.Depth = 0;
-            this.mtbDataInicial.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.mtbDataInicial.HideSelection = true;
-            this.mtbDataInicial.Hint = "Data Inicial";
-            this.mtbDataInicial.LeadingIcon = null;
-            this.mtbDataInicial.Location = new System.Drawing.Point(12, 42);
-            this.mtbDataInicial.MaxLength = 32767;
-            this.mtbDataInicial.MouseState = MaterialSkin.MouseState.OUT;
-            this.mtbDataInicial.Name = "mtbDataInicial";
-            this.mtbDataInicial.PasswordChar = '\0';
-            this.mtbDataInicial.PrefixSuffixText = null;
-            this.mtbDataInicial.ReadOnly = false;
-            this.mtbDataInicial.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.mtbDataInicial.SelectedText = "";
-            this.mtbDataInicial.SelectionLength = 0;
-            this.mtbDataInicial.SelectionStart = 0;
-            this.mtbDataInicial.ShortcutsEnabled = true;
-            this.mtbDataInicial.Size = new System.Drawing.Size(146, 36);
-            this.mtbDataInicial.TabIndex = 1;
-            this.mtbDataInicial.TabStop = false;
-            this.mtbDataInicial.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
-            this.mtbDataInicial.TrailingIcon = null;
-            this.mtbDataInicial.UseSystemPasswordChar = false;
-            this.mtbDataInicial.UseTallSize = false;
-            this.mtbDataInicial.TextChanged += new System.EventHandler(this.mtbDataInicial_TextChanged);
-            // 
-            // mtbDataFinal
-            // 
-            this.mtbDataFinal.AnimateReadOnly = true;
-            this.mtbDataFinal.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.mtbDataFinal.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
-            this.mtbDataFinal.Depth = 0;
-            this.mtbDataFinal.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.mtbDataFinal.HideSelection = true;
-            this.mtbDataFinal.Hint = "Data Final";
-            this.mtbDataFinal.LeadingIcon = null;
-            this.mtbDataFinal.Location = new System.Drawing.Point(176, 42);
-            this.mtbDataFinal.MaxLength = 32767;
-            this.mtbDataFinal.MouseState = MaterialSkin.MouseState.OUT;
-            this.mtbDataFinal.Name = "mtbDataFinal";
-            this.mtbDataFinal.PasswordChar = '\0';
-            this.mtbDataFinal.PrefixSuffixText = null;
-            this.mtbDataFinal.ReadOnly = false;
-            this.mtbDataFinal.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.mtbDataFinal.SelectedText = "";
-            this.mtbDataFinal.SelectionLength = 0;
-            this.mtbDataFinal.SelectionStart = 0;
-            this.mtbDataFinal.ShortcutsEnabled = true;
-            this.mtbDataFinal.Size = new System.Drawing.Size(146, 36);
-            this.mtbDataFinal.TabIndex = 2;
-            this.mtbDataFinal.TabStop = false;
-            this.mtbDataFinal.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
-            this.mtbDataFinal.TrailingIcon = null;
-            this.mtbDataFinal.UseSystemPasswordChar = false;
-            this.mtbDataFinal.UseTallSize = false;
-            this.mtbDataFinal.TextChanged += new System.EventHandler(this.mtbDataFinal_TextChanged);
+            this.dgvSalesDump.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvSalesDump_CellDoubleClick);
             // 
             // mbtFiltarData
             // 
@@ -272,11 +211,35 @@
             this.mtbLimparVendedor.UseVisualStyleBackColor = true;
             this.mtbLimparVendedor.Click += new System.EventHandler(this.mtbLimparVendedor_Click);
             // 
+            // dtpInicio
+            // 
+            this.dtpInicio.CustomFormat = "dd/MM/yyyy";
+            this.dtpInicio.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtpInicio.Location = new System.Drawing.Point(15, 42);
+            this.dtpInicio.Name = "dtpInicio";
+            this.dtpInicio.Size = new System.Drawing.Size(108, 20);
+            this.dtpInicio.TabIndex = 11;
+            this.dtpInicio.Value = new System.DateTime(2025, 12, 30, 0, 0, 0, 0);
+            this.dtpInicio.ValueChanged += new System.EventHandler(this.dtpInicio_ValueChanged);
+            // 
+            // dtpFim
+            // 
+            this.dtpFim.CustomFormat = "dd/MM/yyyy";
+            this.dtpFim.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtpFim.Location = new System.Drawing.Point(176, 42);
+            this.dtpFim.Name = "dtpFim";
+            this.dtpFim.Size = new System.Drawing.Size(108, 20);
+            this.dtpFim.TabIndex = 12;
+            this.dtpFim.Value = new System.DateTime(2025, 12, 30, 0, 0, 0, 0);
+            this.dtpFim.ValueChanged += new System.EventHandler(this.dtpFim_ValueChanged);
+            // 
             // fmSalesDump
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(832, 450);
+            this.Controls.Add(this.dtpFim);
+            this.Controls.Add(this.dtpInicio);
             this.Controls.Add(this.mtbLimparVendedor);
             this.Controls.Add(this.mcbSallerName);
             this.Controls.Add(this.materialLabel3);
@@ -285,8 +248,6 @@
             this.Controls.Add(this.mtbTotalPeriodo);
             this.Controls.Add(this.mbtLimparFiltro);
             this.Controls.Add(this.mbtFiltarData);
-            this.Controls.Add(this.mtbDataFinal);
-            this.Controls.Add(this.mtbDataInicial);
             this.Controls.Add(this.dgvSalesDump);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "fmSalesDump";
@@ -302,8 +263,6 @@
         #endregion
 
         private System.Windows.Forms.DataGridView dgvSalesDump;
-        private MaterialSkin.Controls.MaterialTextBox2 mtbDataInicial;
-        private MaterialSkin.Controls.MaterialTextBox2 mtbDataFinal;
         private MaterialSkin.Controls.MaterialButton mbtFiltarData;
         private MaterialSkin.Controls.MaterialButton mbtLimparFiltro;
         private MaterialSkin.Controls.MaterialTextBox2 mtbTotalPeriodo;
@@ -312,5 +271,7 @@
         private MaterialSkin.Controls.MaterialLabel materialLabel3;
         private MaterialSkin.Controls.MaterialComboBox mcbSallerName;
         private MaterialSkin.Controls.MaterialButton mtbLimparVendedor;
+        private System.Windows.Forms.DateTimePicker dtpInicio;
+        private System.Windows.Forms.DateTimePicker dtpFim;
     }
 }

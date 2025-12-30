@@ -56,5 +56,31 @@ namespace Komercio.Services
                 return new List<SaleReportDTO>();
             }
         }
+
+        /// <summary>
+        /// Retorna os itens da Venda
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public async Task<List<SalesItensDTO>> GetProductList(int id)
+        {
+            var response = await _httpClient.GetAsync($"sale_items/{id}");
+
+            if (!response.IsSuccessStatusCode)
+            {
+                return null;
+
+            }
+
+            var returnJson = await response.Content.ReadAsStringAsync();
+            var productList = JsonConvert.DeserializeObject<List<SalesItensDTO>>(returnJson);
+
+            if (productList == null)
+            {
+                return null;
+            }
+
+            return productList;
+        }
     }
 }
