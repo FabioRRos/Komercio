@@ -32,12 +32,13 @@
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.mlvListaProduto = new MaterialSkin.Controls.MaterialListView();
             this.gbVenda = new System.Windows.Forms.GroupBox();
+            this.mtbReimpressao = new MaterialSkin.Controls.MaterialButton();
             this.mtbPagamento = new MaterialSkin.Controls.MaterialTextBox2();
             this.mtbOBS = new MaterialSkin.Controls.MaterialTextBox2();
             this.mtbVendedor = new MaterialSkin.Controls.MaterialTextBox2();
             this.mtbValorTotal = new MaterialSkin.Controls.MaterialTextBox2();
-            this.mtbReimpressao = new MaterialSkin.Controls.MaterialButton();
             this.printDocument1 = new System.Drawing.Printing.PrintDocument();
+            this.mtbExcluirVenda = new MaterialSkin.Controls.MaterialButton();
             this.tableLayoutPanel1.SuspendLayout();
             this.gbVenda.SuspendLayout();
             this.SuspendLayout();
@@ -79,6 +80,7 @@
             // 
             // gbVenda
             // 
+            this.gbVenda.Controls.Add(this.mtbExcluirVenda);
             this.gbVenda.Controls.Add(this.mtbReimpressao);
             this.gbVenda.Controls.Add(this.mtbPagamento);
             this.gbVenda.Controls.Add(this.mtbOBS);
@@ -91,6 +93,27 @@
             this.gbVenda.TabIndex = 1;
             this.gbVenda.TabStop = false;
             this.gbVenda.Text = "gbVenda";
+            // 
+            // mtbReimpressao
+            // 
+            this.mtbReimpressao.AutoSize = false;
+            this.mtbReimpressao.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.mtbReimpressao.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.mtbReimpressao.Depth = 0;
+            this.mtbReimpressao.HighEmphasis = true;
+            this.mtbReimpressao.Icon = null;
+            this.mtbReimpressao.Location = new System.Drawing.Point(595, 19);
+            this.mtbReimpressao.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.mtbReimpressao.MouseState = MaterialSkin.MouseState.HOVER;
+            this.mtbReimpressao.Name = "mtbReimpressao";
+            this.mtbReimpressao.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.mtbReimpressao.Size = new System.Drawing.Size(164, 48);
+            this.mtbReimpressao.TabIndex = 4;
+            this.mtbReimpressao.Text = "Imprimir cupom";
+            this.mtbReimpressao.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+            this.mtbReimpressao.UseAccentColor = false;
+            this.mtbReimpressao.UseVisualStyleBackColor = true;
+            this.mtbReimpressao.Click += new System.EventHandler(this.mtbReimpressao_Click);
             // 
             // mtbPagamento
             // 
@@ -208,30 +231,30 @@
             this.mtbValorTotal.TrailingIcon = null;
             this.mtbValorTotal.UseSystemPasswordChar = false;
             // 
-            // mtbReimpressao
-            // 
-            this.mtbReimpressao.AutoSize = false;
-            this.mtbReimpressao.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.mtbReimpressao.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
-            this.mtbReimpressao.Depth = 0;
-            this.mtbReimpressao.HighEmphasis = true;
-            this.mtbReimpressao.Icon = null;
-            this.mtbReimpressao.Location = new System.Drawing.Point(595, 19);
-            this.mtbReimpressao.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.mtbReimpressao.MouseState = MaterialSkin.MouseState.HOVER;
-            this.mtbReimpressao.Name = "mtbReimpressao";
-            this.mtbReimpressao.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.mtbReimpressao.Size = new System.Drawing.Size(164, 48);
-            this.mtbReimpressao.TabIndex = 4;
-            this.mtbReimpressao.Text = "Imprimir cupom";
-            this.mtbReimpressao.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
-            this.mtbReimpressao.UseAccentColor = false;
-            this.mtbReimpressao.UseVisualStyleBackColor = true;
-            this.mtbReimpressao.Click += new System.EventHandler(this.mtbReimpressao_Click);
-            // 
             // printDocument1
             // 
             this.printDocument1.PrintPage += new System.Drawing.Printing.PrintPageEventHandler(this.printDocument1_PrintPage);
+            // 
+            // mtbExcluirVenda
+            // 
+            this.mtbExcluirVenda.AutoSize = false;
+            this.mtbExcluirVenda.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.mtbExcluirVenda.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.mtbExcluirVenda.Depth = 0;
+            this.mtbExcluirVenda.HighEmphasis = true;
+            this.mtbExcluirVenda.Icon = null;
+            this.mtbExcluirVenda.Location = new System.Drawing.Point(595, 83);
+            this.mtbExcluirVenda.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.mtbExcluirVenda.MouseState = MaterialSkin.MouseState.HOVER;
+            this.mtbExcluirVenda.Name = "mtbExcluirVenda";
+            this.mtbExcluirVenda.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.mtbExcluirVenda.Size = new System.Drawing.Size(164, 48);
+            this.mtbExcluirVenda.TabIndex = 5;
+            this.mtbExcluirVenda.Text = "Excluir venda";
+            this.mtbExcluirVenda.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+            this.mtbExcluirVenda.UseAccentColor = true;
+            this.mtbExcluirVenda.UseVisualStyleBackColor = true;
+            this.mtbExcluirVenda.Click += new System.EventHandler(this.mtbExcluirVenda_Click);
             // 
             // frmDetalheVendas
             // 
@@ -261,5 +284,6 @@
         private MaterialSkin.Controls.MaterialTextBox2 mtbValorTotal;
         private MaterialSkin.Controls.MaterialButton mtbReimpressao;
         private System.Drawing.Printing.PrintDocument printDocument1;
+        private MaterialSkin.Controls.MaterialButton mtbExcluirVenda;
     }
 }

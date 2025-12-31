@@ -14,6 +14,8 @@ type SalesRepository interface {
 	// adicionados, mas ainda não dependem do datastore
 	BeginTransaction(ctx context.Context) (pgx.Tx, error)
 	CreateNewSaleTx(ctx context.Context, tx pgx.Tx, sale *entity.Sales) (int, error)
+
+	DeleteSaleCascade(ctx context.Context, saleId int) error
 }
 
 type salesRepository struct {
@@ -41,4 +43,9 @@ func (r *salesRepository) BeginTransaction(ctx context.Context) (pgx.Tx, error) 
 // ################################################# Criação da venda dentro da transação
 func (r *salesRepository) CreateNewSaleTx(ctx context.Context, tx pgx.Tx, sale *entity.Sales) (int, error) {
 	return r.datastore.NewSaleTx(ctx, tx, sale)
+}
+
+// ################################################# Deletar venda em cascata
+func (r *salesRepository) DeleteSaleCascade(ctx context.Context, saleId int) error {
+	return r.datastore.DeleteSaleCascade(ctx, saleId)
 }

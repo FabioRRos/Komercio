@@ -10,8 +10,10 @@ using System.Windows.Forms;
 
 namespace Komercio.Services
 {
-   
-    public class SaleService
+   /// <summary>
+   /// Esse cara tira a lógica da venda do form e coloca aqui.
+   /// </summary>
+    public class SaleManager
     {
         //Lista de produtos para controlar o que está em estoque ou não
 
@@ -59,19 +61,14 @@ namespace Komercio.Services
         }
 
 
-
+        /// <summary>
+        /// BuscaProdutos
+        /// </summary>
+        /// <param name="cod"></param>
+        /// <returns></returns>
         public ProductDTO buscaprodutonalista(string cod)
         {
-            /*foreach (ProductDTO product in listaDeprodutosPraUtilizarNoForm)
-            {
-                if (product.productCodbar.Contains(cod))
-                {
-                    return product;
-                }
 
-            }
-            
-            return null;*/
 
 
             ProductDTO produtoEncontrado = null;
@@ -84,20 +81,14 @@ namespace Komercio.Services
             return produtoEncontrado;
 
         }
-
+        /// <summary>
+        /// Atualiza o carrinho (onde eu salvo o que vai ser comprado)
+        /// </summary>
+        /// <param name="sale"></param>
         public void CarUpdateInput(SalesItensDTO sale)
         {
 
             _productCar.Add(sale);
-
-            /*
-            foreach (ProductDTO product in listaDeprodutosPraUtilizarNoForm)
-            {
-                if (product.productCodbar.Contains(sale.Barcode))
-                {
-                    product.productStock -= sale.Quantity;
-                }
-            }*/
 
 
             ProductDTO produto = buscaprodutonalista(sale.Barcode);
@@ -107,7 +98,11 @@ namespace Komercio.Services
                 some += sale.UnitPrice * sale.Quantity;
             }
         }
-
+        /// <summary>
+        /// Para remover os itens do carrinho
+        /// </summary>
+        /// <param name="codbar"></param>
+        /// <returns></returns>
         public bool RemoveItemCar(string codbar)
         {
             SalesItensDTO item = null;
@@ -146,7 +141,10 @@ namespace Komercio.Services
         }
 
 
-
+        /// <summary>
+        /// Apenas para retornar o carrinho para finalizar a venda.
+        /// </summary>
+        /// <returns></returns>
         public BindingList<SalesItensDTO> ReturnDTO()
         {
             return _productCar;

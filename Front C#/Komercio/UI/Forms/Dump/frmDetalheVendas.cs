@@ -1,4 +1,5 @@
-﻿using Komercio.Models;
+﻿using Komercio.ApplicationLayer;
+using Komercio.Models;
 using Komercio.Services;
 using MaterialSkin.Controls;
 using System;
@@ -21,14 +22,19 @@ namespace Komercio.UI.Forms.Dump
         private List<SalesItensDTO> salesItensDTO = new List<SalesItensDTO>();
         private SaleReportDTO _saleReportDTO;
         private ReportService _reportService;
+        private DumpApp _dumpApp;
         private string _conteudoCupom;
 
 
-        public frmDetalheVendas(SaleReportDTO saleReportDTO, ReportService reportService )
+        public frmDetalheVendas(SaleReportDTO saleReportDTO,
+            ReportService reportService,
+            DumpApp dumpApp)
         {
             InitializeComponent();
             _saleReportDTO = saleReportDTO;
             _reportService = reportService;
+
+            _dumpApp = dumpApp;
         }
 
         private async void frmDetalheVendas_Load(object sender, EventArgs e)
@@ -99,7 +105,9 @@ namespace Komercio.UI.Forms.Dump
 
         }
 
-
+        /// <summary>
+        /// Com o ID da venda eu consigo retornar os itens da venda.
+        /// </summary>
         private async void CarregaLista()
         {
 
@@ -107,6 +115,9 @@ namespace Komercio.UI.Forms.Dump
             MostraListaNaTela();
         }
 
+        /// <summary>
+        /// Carrega os itens da venda na tela.
+        /// </summary>
         private void MostraListaNaTela()
         {
             mlvListaProduto.BeginUpdate();
@@ -188,6 +199,39 @@ namespace Komercio.UI.Forms.Dump
                 e.Graphics.DrawString(linha, fonte, Brushes.Black, margem, y);
                 y += alturaLinha;
             }
+        }
+
+        private async void mtbExcluirVenda_Click(object sender, EventArgs e)
+        {
+
+            var response = MessageBox.Show("Deseja mesmo excluir esta venda?\nNão haverá volta!", "ATENÇÃO", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+            if (response == DialogResult.Yes)
+            {
+
+                var retorno = await ExcluirVenda(_saleReportDTO.SaleId);
+
+
+                if (retorno)
+                {
+                    MessageBox.Show("Venda excluida com sucesso!", "Sucesso!");
+                    this.DialogResult = DialogResult.OK;
+                    this.Close();
+                }
+                else
+                {
+                    MessageBox.Show("Tivemos problema com a exclusão, tente mais tarde!", "OPS");
+                }
+
+            }
+        }
+
+        private  async Task<bool> ExcluirVenda(int id)
+        {
+            var retorno = false;
+            retorno = await _dumpApp.ExcluirVendaApp(id);
+
+            return retorno;
         }
     }
 }

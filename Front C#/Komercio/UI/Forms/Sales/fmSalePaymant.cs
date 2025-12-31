@@ -23,13 +23,18 @@ namespace Komercio.UI.Forms.Sales
     {
 
         private readonly CustomerService _customerService;
-        private readonly SaleService _saleService;
+        private readonly SaleManager _saleService;
         private readonly BindingList<SalesItensDTO> _itensVenda;
         private readonly EmployeeService _employeeService;
         private readonly HttpClient _httpClient;
         private readonly CupomService _cupomService;
 
+
+
+        // ########### REFATORADO ######################
         private readonly ParametrosApp _parametrosApp;
+        private readonly SalesApp _salesApp;
+
 
 
         public float total = 0;
@@ -49,12 +54,13 @@ namespace Komercio.UI.Forms.Sales
 
         public fmSalePaymant(EmployeeService employeeService,
             CustomerService customerService,
-            SaleService saleService,
+            SaleManager saleService,
             BindingList<SalesItensDTO> itensVenda,
             float totalVenda,
             CupomService cupomService,
             ParametrosApp parametrosApp,
-            HttpClient baseUrl)
+            HttpClient baseUrl,
+            SalesApp salesApp)
         {
             var handler = new HttpClientHandler();
             handler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => true;
@@ -68,6 +74,7 @@ namespace Komercio.UI.Forms.Sales
             _cupomService = cupomService;
             //
             _parametrosApp = parametrosApp;
+            _salesApp = salesApp;
         }
 
         private void fmSalePaymant_Load(object sender, EventArgs e)
@@ -714,12 +721,13 @@ namespace Komercio.UI.Forms.Sales
 
             // MessageBox.Show("Venda salva como venda.json", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-
-            SaleFinalizerService finalizer = new SaleFinalizerService(_customerService, _saleService, _itensVenda, _cupomService, _httpClient, _parametrosApp);
+            //SaleFinalizerService finalizer = new SaleFinalizerService(_customerService, _saleService, _itensVenda, _cupomService, _httpClient, _parametrosApp);
+           // SaleFinalizerService finalizer = new SaleFinalizerService(_httpClient.ToString());
 
             try
             {
-            var cupom = await finalizer.MontarVenda(venda, _itensVenda, formaPagamento, func, listaPagamentos);
+           // var cupom = await finalizer.MontarVenda(venda, _itensVenda, formaPagamento, func, listaPagamentos);
+            var cupom = await _salesApp.MontarVenda(venda, _itensVenda, formaPagamento, func, listaPagamentos);
             _cupomText = cupom;
 
                 var retorno = await VerificaStatusParametro(1);

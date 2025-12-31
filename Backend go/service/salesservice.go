@@ -15,6 +15,8 @@ type SalesService interface {
 	// novos métodos para transações
 	BeginTransaction(ctx context.Context) (pgx.Tx, error)
 	CreateNewSaleTx(ctx context.Context, tx pgx.Tx, sale *entity.Sales) (int, error)
+
+	DeleteSaleCascade(ctx context.Context, saleId int) error
 }
 
 type salesService struct {
@@ -49,4 +51,13 @@ func (s *salesService) CreateNewSaleTx(ctx context.Context, tx pgx.Tx, sale *ent
 	}
 
 	return s.repo.CreateNewSaleTx(ctx, tx, sale)
+}
+
+// ################################################# DELETAR VENDA EM CASCATA
+func (s *salesService) DeleteSaleCascade(ctx context.Context, saleId int) error {
+
+	if saleId <= 0 {
+		return errors.New("ID da venda inválido")
+	}
+	return s.repo.DeleteSaleCascade(ctx, saleId)
 }

@@ -24,16 +24,17 @@ namespace Komercio.UI.Forms.Sales
         private readonly ProductService _productService;
         private readonly ProductGroupService _productGroupService;
         private readonly ProductSubgroupService _productSubgroupService;
-        private readonly SaleService _saleService;
+        private readonly SaleManager _saleService;
         private readonly CustomerService _customerService;
         private readonly EmployeeService _employeeService;
         private readonly ProductDescriptionService _productDescriptionService;
         private readonly CupomService _cupomService;
 
+
+        //######### REFATORADO #########
         private readonly ParametrosApp _parametrosApp;
-
-
         private readonly ProdutoApp _produtoApp;
+        private readonly SalesApp _saleApp;
 
         public fmSalesProduct(EmployeeService employeeService,
             ProductService productService,
@@ -44,9 +45,11 @@ namespace Komercio.UI.Forms.Sales
             CupomService cupomService,
             string baseUrl,
             ParametrosApp parametrosApp,
-            ProdutoApp produtoApp)
+            ProdutoApp produtoApp,
+            SalesApp saleApp)
         {
             _produtoApp = produtoApp;
+            _saleApp = saleApp;
 
 
             ////////////////////
@@ -55,7 +58,7 @@ namespace Komercio.UI.Forms.Sales
             _productService = productService;
             _productGroupService = productGroupService;
             _productSubgroupService = productSubgroupService;
-            _saleService = new SaleService();
+            _saleService = new SaleManager();
             _customerService = customerService;
             _employeeService = employeeService;
             var handler = new HttpClientHandler();
@@ -71,7 +74,7 @@ namespace Komercio.UI.Forms.Sales
             ///
 
             _parametrosApp = parametrosApp;
-
+            _saleApp = saleApp;
         }
 
 
@@ -471,7 +474,8 @@ namespace Komercio.UI.Forms.Sales
                 totalVenda,
                 _cupomService,
                 _parametrosApp,
-                _httpClient);
+                _httpClient,
+                _saleApp);
 
             // Exibe como diálogo (bloqueia até fechar)
             formPagamento.Owner = this;

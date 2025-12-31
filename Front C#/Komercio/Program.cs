@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Web.ApplicationServices;
 using System.Windows.Forms;
 
 
@@ -40,7 +41,8 @@ namespace Komercio
             var cupomService = new CupomService(apiBaseUrl);
             var parametrosService = new ParametrosService(apiBaseUrl);
             var formaPagamento = new FormaPagamentoService(apiBaseUrl);
-
+            var saleFinalizeService = new SaleFinalizerService(apiBaseUrl);
+            ;
 
             var employeeServiceApp = new EmployeeServiceApp(employeeService);
             var productApp = new ProdutoApp(productService,
@@ -49,6 +51,17 @@ namespace Komercio
                                             productgroupService,
                                             employeeServiceApp);
             var parametrosapp = new ParametrosApp(parametrosService);
+            var saleApp = new SalesApp(
+                customerService,
+                cupomService,
+                apiBaseUrl,
+                parametrosapp,
+                saleFinalizeService);
+
+
+            var dumpApp = new DumpApp(saleApp);
+
+
             var customerTransactionService = new CustomerTransactionService(apiBaseUrl, parametrosapp);
 
 
@@ -67,6 +80,8 @@ namespace Komercio
                                     employeeServiceApp,
                                     parametrosapp,
                                     formaPagamento,
+                                    saleApp,
+                                    dumpApp,
                                     apiBaseUrl));
 
 

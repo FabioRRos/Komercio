@@ -1,4 +1,5 @@
-﻿using Komercio.Models;
+﻿using Komercio.ApplicationLayer;
+using Komercio.Models;
 using Komercio.Services;
 using System;
 using System.Collections.Generic;
@@ -13,6 +14,7 @@ namespace Komercio.UI.Forms.Dump
     {
         private readonly HttpClient _httpClient;
         private readonly ReportService _reportService;
+        private DumpApp _dumpApp;
 
         // Lista que vem da API
         private List<SaleReportDTO> reportDTO = new List<SaleReportDTO>();
@@ -26,7 +28,8 @@ namespace Komercio.UI.Forms.Dump
         // Lista de vendedores
         private List<string> vendedorList = new List<string>();
 
-        public fmSalesDump(string baseUrl)
+        public fmSalesDump(string baseUrl,
+            DumpApp dumpApp)
         {
             var handler = new HttpClientHandler();
             handler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => true;
@@ -39,6 +42,7 @@ namespace Komercio.UI.Forms.Dump
             _reportService = new ReportService(baseUrl);
 
             InitializeComponent();
+            _dumpApp = dumpApp;
         }
 
         private async void fmSalesDump_Load(object sender, EventArgs e)
@@ -265,7 +269,7 @@ namespace Komercio.UI.Forms.Dump
             }
         }
 
-        private void dgvSalesDump_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        private async void dgvSalesDump_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
 
             if (e.RowIndex < 0)
@@ -281,8 +285,13 @@ namespace Komercio.UI.Forms.Dump
             {
                 if (venda.SaleId == saleIdSelecionado)
                 {
-                    frmDetalheVendas frmDetalhesVendas = new frmDetalheVendas(venda, _reportService);
-                    frmDetalhesVendas.ShowDialog();
+                    frmDetalheVendas frmDetalhesVendas = new frmDetalheVendas(venda, _reportService, _dumpApp);
+                    var retorno = frmDetalhesVendas.ShowDialog();
+                    if (retorno == DialogResult.OK)
+                    {
+                        await LoadDGVReport();
+                    }
+
                     return;
                 }
             }

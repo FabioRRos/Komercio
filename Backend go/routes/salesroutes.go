@@ -9,5 +9,6 @@ func RegisterSaleRoutes(server *gin.Engine, salesController *controller.SalesCon
 	salesRouts := server.Group("/sales")
 	{
 		salesRouts.POST("/newsales", salesController.CreateNewSale)
+		salesRouts.DELETE("/deletesalecascade/:saleId", salesController.DeleteSaleCascade)
 	}
 }

@@ -43,6 +43,8 @@ namespace Komercio
         private readonly ProdutoApp _produtoApp;
         private readonly EmployeeServiceApp _employeeServiceApp;
         private readonly ParametrosApp _parametrosApp;
+        private readonly SalesApp _saleApp;
+        private readonly DumpApp _dumpApp;
 
         private readonly FormaPagamentoService _formaPagamentoservice;
 
@@ -63,6 +65,8 @@ namespace Komercio
             EmployeeServiceApp employeeServiceApp,
             ParametrosApp parametrosApp,
             FormaPagamentoService formaPagamentoservice,
+            SalesApp saleApp,
+            DumpApp dumpApp,
             string httpClient)
         {
             InitializeComponent();
@@ -71,6 +75,8 @@ namespace Komercio
             _employeeServiceApp = employeeServiceApp;
             _parametrosApp = parametrosApp;
             _formaPagamentoservice = formaPagamentoservice;
+            _saleApp = saleApp;
+            _dumpApp = dumpApp;
 
 
             // antigo testamento abaixo
@@ -323,7 +329,9 @@ namespace Komercio
                     _cupomService,
                     _httpClient,
                     _parametrosApp,
-                    _produtoApp);
+                    _produtoApp,
+                    _saleApp
+                    );
                 salesProduct.ShowDialog();
             }
             else
@@ -436,7 +444,7 @@ namespace Komercio
 
         private void Relatorios()
         {
-            fmSalesDump saleDump = new fmSalesDump(_httpClient);
+            fmSalesDump saleDump = new fmSalesDump(_httpClient, _dumpApp);
             saleDump.ShowDialog();
         }
 

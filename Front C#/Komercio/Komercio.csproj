@@ -81,9 +81,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ApplicationLayer\DumpApp.cs" />
     <Compile Include="ApplicationLayer\EmployeeServiceApp.cs" />
     <Compile Include="ApplicationLayer\ParametrosApp.cs" />
     <Compile Include="ApplicationLayer\ProdutoApp.cs" />
+    <Compile Include="ApplicationLayer\SalesApp.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -134,7 +136,7 @@
     <Compile Include="Services\ProductSubgroupService.cs" />
     <Compile Include="Services\RepotService.cs" />
     <Compile Include="Services\SaleFinalizerService.cs" />
-    <Compile Include="Services\SaleService.cs" />
+    <Compile Include="ApplicationLayer\Managers\SaleManager.cs" />
     <Compile Include="UI\Forms\Caixa\fmAberturaCaixa.cs">
       <SubType>Form</SubType>
     </Compile>

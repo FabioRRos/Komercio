@@ -13,7 +13,7 @@ type SaleItemsRepository interface {
 	GetAllSaleItems(ctx context.Context) ([]*entity.SalesItens, error)
 	GetItemsBySaleId(ctx context.Context, saleId int) ([]*entity.SalesItens, error)
 
-	// 🔹 Novo método: inserir item dentro de uma transação
+	//Novo método: inserir item dentro de uma transação
 	CreateSaleItemTx(ctx context.Context, tx pgx.Tx, item *entity.SalesItens) error
 }
 
