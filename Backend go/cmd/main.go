@@ -89,7 +89,10 @@ func main() {
 
 	salesController := controller.NewSalesController(
 		service.NewSalesService(
-			repository.NewSalesRepository(dbSales)),
+			repository.NewSalesRepository(dbSales),
+			service.NewProductService(
+				repository.NewProductRepository(dbProduct)),
+		),
 	)
 	productGroupController := controller.NewProductGroupController(
 		service.NewProductGroupService(
@@ -140,7 +143,10 @@ func main() {
 
 	fullSaleService := service.NewFullSaleService(
 		service.NewSalesService(
-			repository.NewSalesRepository(dbSales)),
+			repository.NewSalesRepository(dbSales),
+			service.NewProductService(
+				repository.NewProductRepository(dbProduct)),
+		),
 		service.NewSaleItemsService(
 			repository.NewSaleItemsRepository(saleItemsDatastore)),
 		service.NewCashmovementService(

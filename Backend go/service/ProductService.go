@@ -22,6 +22,7 @@ type ProductService interface {
 	UpdateProductOutputStockTX(ctx context.Context, tx pgx.Tx, productcodbar string, productStock int) error
 	SelectProductSettings(ctx context.Context) ([]*entity.ProductNotification, error)
 	UpdateProductNotification(ctx context.Context, productList []*entity.ProductNotification) error
+	GetCodbarBySaleId(ctx context.Context, saleId int) error
 }
 
 type productService struct {
@@ -207,4 +208,18 @@ func (s *productService) UpdateProductNotification(ctx context.Context, productL
 	}
 
 	return s.repo.UpdateProductNotification(ctx, productList)
+}
+
+func (s *productService) GetCodbarBySaleId(ctx context.Context, saleId int) error {
+	if saleId <= 0 {
+		return errors.New("ID da venda inválido")
+	}
+	listaCode, _ := s.repo.GetCodbarBySaleId(ctx, saleId)
+
+	for _, k := range listaCode {
+
+		s.UpdateProductInputStock(ctx, k.CodBar, k.Quantity)
+
+	}
+	return nil
 }

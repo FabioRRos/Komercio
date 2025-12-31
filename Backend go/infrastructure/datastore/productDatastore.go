@@ -289,6 +289,34 @@ func (d *ProductDatastore) UpdateProductOutputStockTX(
 	return nil
 }
 
+type ProductCodBarQuantity struct {
+	CodBar   string
+	Quantity int
+}
+
+func (d *ProductDatastore) GetCodbarBySaleId(saleId int) ([]*ProductCodBarQuantity, error) {
+	query := `select barcode,quantity from sale_items where sale_id  = $1`
+
+	rows, err := d.Pool.Query(context.Background(), query, saleId)
+	if err != nil {
+		return nil, fmt.Errorf("erro ao consultar codbars: %w", err)
+	}
+	defer rows.Close()
+	var codbars []*ProductCodBarQuantity
+
+	for rows.Next() {
+		var code string
+		var quantity int
+		err := rows.Scan(&code, &quantity)
+		if err != nil {
+			return nil, fmt.Errorf("erro ao ler codbar: %w", err)
+		}
+		codbars = append(codbars, &ProductCodBarQuantity{CodBar: code, Quantity: quantity})
+	}
+	return codbars, nil
+
+}
+
 func (d *ProductDatastore) SelectProductSettings() ([]*entity.ProductNotification, error) {
 	query := `
 		SELECT 

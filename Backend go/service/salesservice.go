@@ -20,11 +20,12 @@ type SalesService interface {
 }
 
 type salesService struct {
-	repo repository.SalesRepository
+	repo    repository.SalesRepository
+	service ProductService
 }
 
-func NewSalesService(repo repository.SalesRepository) SalesService {
-	return &salesService{repo: repo}
+func NewSalesService(repo repository.SalesRepository, service ProductService) SalesService {
+	return &salesService{repo: repo, service: service}
 }
 
 // sem transação (já existia)
@@ -59,5 +60,15 @@ func (s *salesService) DeleteSaleCascade(ctx context.Context, saleId int) error 
 	if saleId <= 0 {
 		return errors.New("ID da venda inválido")
 	}
+
+	// Busca a lista de produtos da venda para dar entrada novamente.
+
+	err := s.service.GetCodbarBySaleId(ctx, saleId)
+
+	if err != nil {
+		return err
+	}
+
+	// Chama o repositório para deletar a venda em cascata
 	return s.repo.DeleteSaleCascade(ctx, saleId)
 }

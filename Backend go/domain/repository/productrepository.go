@@ -22,6 +22,7 @@ type ProductRepository interface {
 	SelectProductByCodBar(ctx context.Context, productcodbar string) (*entity.Product, error)
 	SelectProductSettings(ctx context.Context) ([]*entity.ProductNotification, error)
 	UpdateProductNotification(ctx context.Context, productList []*entity.ProductNotification) error
+	GetCodbarBySaleId(ctx context.Context, saleId int) ([]*datastore.ProductCodBarQuantity, error)
 }
 
 type productRepository struct {
@@ -80,4 +81,8 @@ func (r *productRepository) SelectProductSettings(ctx context.Context) ([]*entit
 
 func (r *productRepository) UpdateProductNotification(ctx context.Context, productList []*entity.ProductNotification) error {
 	return r.datastore.UpdateProductNotification(ctx, productList)
+}
+
+func (r *productRepository) GetCodbarBySaleId(ctx context.Context, saleId int) ([]*datastore.ProductCodBarQuantity, error) {
+	return r.datastore.GetCodbarBySaleId(saleId)
 }
