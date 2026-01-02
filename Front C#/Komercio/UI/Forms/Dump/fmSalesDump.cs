@@ -2,6 +2,7 @@
 using Komercio.Models;
 using Komercio.Services;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Net.Http;
@@ -69,6 +70,8 @@ namespace Komercio.UI.Forms.Dump
         public void AjustaPorData(List<SaleReportDTO> list)
         {
             dgvSalesDump.DataSource = list;
+            mlbTotalVendas.Text = list.Count.ToString();
+
 
             DataGridColumns();
             DataGridStyle();
@@ -161,6 +164,7 @@ namespace Komercio.UI.Forms.Dump
             }
 
             dgvSalesDump.DataSource = reportFiltro;
+            mlbTotalVendas.Text = reportFiltro.Count.ToString();
             TotalVendaPeriodo(reportFiltro);
             DataGridStyle();
 
@@ -177,6 +181,8 @@ namespace Komercio.UI.Forms.Dump
             filtroactive = false;
 
             dgvSalesDump.DataSource = reportDTO;
+            mlbTotalVendas.Text = reportDTO.Count.ToString();
+
             TotalVendaPeriodo(reportDTO);
 
             StatusInicialComponentes();
@@ -234,6 +240,9 @@ namespace Komercio.UI.Forms.Dump
             }
 
             dgvSalesDump.DataSource = lista;
+            mlbTotalVendas.Text = lista.Count.ToString();
+
+
             TotalVendaPeriodo(lista);
         }
 

@@ -3,24 +3,28 @@
   "WorkspaceRootPath": "C:\\Reposit\u00F3rio Komercio\\Komercio\\Front C#\\Komercio\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{44D56DD6-A48F-48C7-9DB4-CD3BA6950EF2}|Komercio.csproj|C:\\Reposit\u00F3rio Komercio\\Komercio\\Front C#\\Komercio\\ui\\forms\\dump\\fmsalesdump.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{44D56DD6-A48F-48C7-9DB4-CD3BA6950EF2}|Komercio.csproj|solutionrelative:ui\\forms\\dump\\fmsalesdump.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{44D56DD6-A48F-48C7-9DB4-CD3BA6950EF2}|Komercio.csproj|c:\\reposit\u00F3rio komercio\\komercio\\front c#\\komercio\\services\\cupomservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{44D56DD6-A48F-48C7-9DB4-CD3BA6950EF2}|Komercio.csproj|solutionrelative:services\\cupomservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{44D56DD6-A48F-48C7-9DB4-CD3BA6950EF2}|Komercio.csproj|c:\\reposit\u00F3rio komercio\\komercio\\front c#\\komercio\\bin\\debug\\komercio.exe.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
-      "RelativeMoniker": "D:0:0:{44D56DD6-A48F-48C7-9DB4-CD3BA6950EF2}|Komercio.csproj|solutionrelative:bin\\debug\\komercio.exe.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
+      "AbsoluteMoniker": "D:0:0:{44D56DD6-A48F-48C7-9DB4-CD3BA6950EF2}|Komercio.csproj|C:\\Reposit\u00F3rio Komercio\\Komercio\\Front C#\\Komercio\\services\\salefinalizerservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{44D56DD6-A48F-48C7-9DB4-CD3BA6950EF2}|Komercio.csproj|solutionrelative:services\\salefinalizerservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{44D56DD6-A48F-48C7-9DB4-CD3BA6950EF2}|Komercio.csproj|c:\\reposit\u00F3rio komercio\\komercio\\front c#\\komercio\\ui\\forms\\dump\\frmdetalhevendas.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{44D56DD6-A48F-48C7-9DB4-CD3BA6950EF2}|Komercio.csproj|solutionrelative:ui\\forms\\dump\\frmdetalhevendas.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{44D56DD6-A48F-48C7-9DB4-CD3BA6950EF2}|Komercio.csproj|C:\\Reposit\u00F3rio Komercio\\Komercio\\Front C#\\Komercio\\ui\\forms\\sales\\fmsalepaymant.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{44D56DD6-A48F-48C7-9DB4-CD3BA6950EF2}|Komercio.csproj|solutionrelative:ui\\forms\\sales\\fmsalepaymant.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{44D56DD6-A48F-48C7-9DB4-CD3BA6950EF2}|Komercio.csproj|C:\\Reposit\u00F3rio Komercio\\Komercio\\Front C#\\Komercio\\ui\\forms\\dump\\frmdetalhevendas.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{44D56DD6-A48F-48C7-9DB4-CD3BA6950EF2}|Komercio.csproj|solutionrelative:ui\\forms\\dump\\frmdetalhevendas.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+      "AbsoluteMoniker": "D:0:0:{44D56DD6-A48F-48C7-9DB4-CD3BA6950EF2}|Komercio.csproj|C:\\Reposit\u00F3rio Komercio\\Komercio\\Front C#\\Komercio\\applicationlayer\\managers\\salemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{44D56DD6-A48F-48C7-9DB4-CD3BA6950EF2}|Komercio.csproj|solutionrelative:applicationlayer\\managers\\salemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{44D56DD6-A48F-48C7-9DB4-CD3BA6950EF2}|Komercio.csproj|C:\\Reposit\u00F3rio Komercio\\Komercio\\Front C#\\Komercio\\ui\\forms\\dump\\fmsalesdump.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{44D56DD6-A48F-48C7-9DB4-CD3BA6950EF2}|Komercio.csproj|solutionrelative:ui\\forms\\dump\\fmsalesdump.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+      "AbsoluteMoniker": "D:0:0:{44D56DD6-A48F-48C7-9DB4-CD3BA6950EF2}|Komercio.csproj|C:\\Reposit\u00F3rio Komercio\\Komercio\\Front C#\\Komercio\\services\\repotservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{44D56DD6-A48F-48C7-9DB4-CD3BA6950EF2}|Komercio.csproj|solutionrelative:services\\repotservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Reposit\u00F3rio Komercio\\Komercio\\Front C#\\Komercio\\bin\\Debug\\Komercio.exe.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:bin\\Debug\\Komercio.exe.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
     }
   ],
   "DocumentGroupContainers": [
@@ -30,7 +34,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 318,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Bookmark",
@@ -38,66 +42,76 @@
             },
             {
               "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "CupomService.cs",
+              "DocumentMoniker": "C:\\Reposit\u00F3rio Komercio\\Komercio\\Front C#\\Komercio\\Services\\CupomService.cs",
+              "RelativeDocumentMoniker": "Services\\CupomService.cs",
+              "ToolTip": "C:\\Reposit\u00F3rio Komercio\\Komercio\\Front C#\\Komercio\\Services\\CupomService.cs",
+              "RelativeToolTip": "Services\\CupomService.cs",
+              "ViewState": "AgIAAJ8AAAAAAAAAAADgv8AAAAAQAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-02T16:23:46.254Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "fmSalePaymant.cs",
+              "DocumentMoniker": "C:\\Reposit\u00F3rio Komercio\\Komercio\\Front C#\\Komercio\\UI\\Forms\\Sales\\fmSalePaymant.cs",
+              "RelativeDocumentMoniker": "UI\\Forms\\Sales\\fmSalePaymant.cs",
+              "ToolTip": "C:\\Reposit\u00F3rio Komercio\\Komercio\\Front C#\\Komercio\\UI\\Forms\\Sales\\fmSalePaymant.cs",
+              "RelativeToolTip": "UI\\Forms\\Sales\\fmSalePaymant.cs",
+              "ViewState": "AgIAAMACAAAAAAAAAAASwNoCAAAMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-02T16:23:46.291Z"
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 1,
+              "Title": "SaleFinalizerService.cs",
+              "DocumentMoniker": "C:\\Reposit\u00F3rio Komercio\\Komercio\\Front C#\\Komercio\\Services\\SaleFinalizerService.cs",
+              "RelativeDocumentMoniker": "Services\\SaleFinalizerService.cs",
+              "ToolTip": "C:\\Reposit\u00F3rio Komercio\\Komercio\\Front C#\\Komercio\\Services\\SaleFinalizerService.cs",
+              "RelativeToolTip": "Services\\SaleFinalizerService.cs",
+              "ViewState": "AgIAAPwAAAAAAAAAAAASwCUBAAAMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-02T16:23:46.304Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "SaleManager.cs",
+              "DocumentMoniker": "C:\\Reposit\u00F3rio Komercio\\Komercio\\Front C#\\Komercio\\ApplicationLayer\\Managers\\SaleManager.cs",
+              "RelativeDocumentMoniker": "ApplicationLayer\\Managers\\SaleManager.cs",
+              "ToolTip": "C:\\Reposit\u00F3rio Komercio\\Komercio\\Front C#\\Komercio\\ApplicationLayer\\Managers\\SaleManager.cs",
+              "RelativeToolTip": "ApplicationLayer\\Managers\\SaleManager.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-02T16:23:46.331Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
               "Title": "Komercio.exe.config",
               "DocumentMoniker": "C:\\Reposit\u00F3rio Komercio\\Komercio\\Front C#\\Komercio\\bin\\Debug\\Komercio.exe.config",
               "RelativeDocumentMoniker": "bin\\Debug\\Komercio.exe.config",
               "ToolTip": "C:\\Reposit\u00F3rio Komercio\\Komercio\\Front C#\\Komercio\\bin\\Debug\\Komercio.exe.config",
               "RelativeToolTip": "bin\\Debug\\Komercio.exe.config",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAXAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAA/AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000601|",
-              "WhenOpened": "2025-12-31T17:42:14.825Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "fmSalesDump.cs",
-              "DocumentMoniker": "C:\\Reposit\u00F3rio Komercio\\Komercio\\Front C#\\Komercio\\UI\\Forms\\Dump\\fmSalesDump.cs",
-              "RelativeDocumentMoniker": "UI\\Forms\\Dump\\fmSalesDump.cs",
-              "ToolTip": "C:\\Reposit\u00F3rio Komercio\\Komercio\\Front C#\\Komercio\\UI\\Forms\\Dump\\fmSalesDump.cs",
-              "RelativeToolTip": "UI\\Forms\\Dump\\fmSalesDump.cs",
-              "ViewState": "AgIAABUBAAAAAAAAAAAAwCEBAAAUAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-31T16:05:04.232Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-01-02T16:23:32.078Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 4,
-              "Title": "fmSalesDump.cs [Design]",
-              "DocumentMoniker": "C:\\Reposit\u00F3rio Komercio\\Komercio\\Front C#\\Komercio\\UI\\Forms\\Dump\\fmSalesDump.cs",
-              "RelativeDocumentMoniker": "UI\\Forms\\Dump\\fmSalesDump.cs",
-              "ToolTip": "C:\\Reposit\u00F3rio Komercio\\Komercio\\Front C#\\Komercio\\UI\\Forms\\Dump\\fmSalesDump.cs [Design]",
-              "RelativeToolTip": "UI\\Forms\\Dump\\fmSalesDump.cs [Design]",
+              "Title": "RepotService.cs",
+              "DocumentMoniker": "C:\\Reposit\u00F3rio Komercio\\Komercio\\Front C#\\Komercio\\Services\\RepotService.cs",
+              "RelativeDocumentMoniker": "Services\\RepotService.cs",
+              "ToolTip": "C:\\Reposit\u00F3rio Komercio\\Komercio\\Front C#\\Komercio\\Services\\RepotService.cs",
+              "RelativeToolTip": "Services\\RepotService.cs",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAAADcAAAAQAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-31T16:05:02.763Z",
-              "EditorCaption": " [Design]"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "frmDetalheVendas.cs",
-              "DocumentMoniker": "C:\\Reposit\u00F3rio Komercio\\Komercio\\Front C#\\Komercio\\UI\\Forms\\Dump\\frmDetalheVendas.cs",
-              "RelativeDocumentMoniker": "UI\\Forms\\Dump\\frmDetalheVendas.cs",
-              "ToolTip": "C:\\Reposit\u00F3rio Komercio\\Komercio\\Front C#\\Komercio\\UI\\Forms\\Dump\\frmDetalheVendas.cs",
-              "RelativeToolTip": "UI\\Forms\\Dump\\frmDetalheVendas.cs",
-              "ViewState": "AgIAANMAAAAAAAAAAAAEwO0AAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-31T16:04:17.27Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "frmDetalheVendas.cs [Design]",
-              "DocumentMoniker": "C:\\Reposit\u00F3rio Komercio\\Komercio\\Front C#\\Komercio\\UI\\Forms\\Dump\\frmDetalheVendas.cs",
-              "RelativeDocumentMoniker": "UI\\Forms\\Dump\\frmDetalheVendas.cs",
-              "ToolTip": "C:\\Reposit\u00F3rio Komercio\\Komercio\\Front C#\\Komercio\\UI\\Forms\\Dump\\frmDetalheVendas.cs [Design]",
-              "RelativeToolTip": "UI\\Forms\\Dump\\frmDetalheVendas.cs [Design]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-31T16:04:16.176Z",
-              "EditorCaption": " [Design]"
+              "WhenOpened": "2026-01-02T15:15:43.836Z"
             }
           ]
         }

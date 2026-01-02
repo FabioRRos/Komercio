@@ -40,6 +40,8 @@
             this.mtbLimparVendedor = new MaterialSkin.Controls.MaterialButton();
             this.dtpInicio = new System.Windows.Forms.DateTimePicker();
             this.dtpFim = new System.Windows.Forms.DateTimePicker();
+            this.materialLabel4 = new MaterialSkin.Controls.MaterialLabel();
+            this.mlbTotalVendas = new MaterialSkin.Controls.MaterialLabel();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSalesDump)).BeginInit();
             this.SuspendLayout();
             // 
@@ -233,11 +235,38 @@
             this.dtpFim.Value = new System.DateTime(2025, 12, 30, 0, 0, 0, 0);
             this.dtpFim.ValueChanged += new System.EventHandler(this.dtpFim_ValueChanged);
             // 
+            // materialLabel4
+            // 
+            this.materialLabel4.AutoSize = true;
+            this.materialLabel4.Depth = 0;
+            this.materialLabel4.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.materialLabel4.Location = new System.Drawing.Point(356, 96);
+            this.materialLabel4.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialLabel4.Name = "materialLabel4";
+            this.materialLabel4.Size = new System.Drawing.Size(118, 19);
+            this.materialLabel4.TabIndex = 13;
+            this.materialLabel4.Text = "Total de vendas:";
+            // 
+            // mlbTotalVendas
+            // 
+            this.mlbTotalVendas.AutoSize = true;
+            this.mlbTotalVendas.Depth = 0;
+            this.mlbTotalVendas.Font = new System.Drawing.Font("Roboto", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
+            this.mlbTotalVendas.FontType = MaterialSkin.MaterialSkinManager.fontType.H5;
+            this.mlbTotalVendas.Location = new System.Drawing.Point(480, 93);
+            this.mlbTotalVendas.MouseState = MaterialSkin.MouseState.HOVER;
+            this.mlbTotalVendas.Name = "mlbTotalVendas";
+            this.mlbTotalVendas.Size = new System.Drawing.Size(37, 29);
+            this.mlbTotalVendas.TabIndex = 14;
+            this.mlbTotalVendas.Text = "qtd";
+            // 
             // fmSalesDump
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(832, 450);
+            this.Controls.Add(this.mlbTotalVendas);
+            this.Controls.Add(this.materialLabel4);
             this.Controls.Add(this.dtpFim);
             this.Controls.Add(this.dtpInicio);
             this.Controls.Add(this.mtbLimparVendedor);
@@ -273,5 +302,7 @@
         private MaterialSkin.Controls.MaterialButton mtbLimparVendedor;
         private System.Windows.Forms.DateTimePicker dtpInicio;
         private System.Windows.Forms.DateTimePicker dtpFim;
+        private MaterialSkin.Controls.MaterialLabel materialLabel4;
+        private MaterialSkin.Controls.MaterialLabel mlbTotalVendas;
     }
 }

@@ -428,7 +428,7 @@ namespace Komercio.UI.Forms
         private void CupomFiscal()
         {
 
-            _totalVendido = valoresFechamento.Dinheiro + valoresFechamento.Debito + valoresFechamento.Credito;
+            _totalVendido = valoresFechamento.Dinheiro + valoresFechamento.Debito + valoresFechamento.Credito + valoresFechamento.Pix;
             _totalMarcado = valoresFechamento.Conta;
 
 

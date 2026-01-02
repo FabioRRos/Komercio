@@ -1,7 +1,9 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\Front AspNet",
+    "\\Front AspNet\\Komercio"
   ],
-  "SelectedNode": "\\Komercio.sln",
+  "SelectedNode": "\\Front AspNet\\Komercio\\Komercio.csproj",
   "PreviewInSolutionExplorer": false
 }
