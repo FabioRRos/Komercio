@@ -14,11 +14,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Repositório Komercio\\Komercio\\Front AspNet\\Komercio\\Komercio.csproj",
+      "projectUniqueName": "C:\\Repositório Komercio\\Azure\\Komercio plus\\Fronend_ AspNet\\Komercio\\Komercio.csproj",
       "projectName": "Komercio",
-      "projectPath": "C:\\Repositório Komercio\\Komercio\\Front AspNet\\Komercio\\Komercio.csproj",
+      "projectPath": "C:\\Repositório Komercio\\Azure\\Komercio plus\\Fronend_ AspNet\\Komercio\\Komercio.csproj",
       "packagesPath": "C:\\Users\\Fabio Ros\\.nuget\\packages\\",
-      "outputPath": "C:\\Repositório Komercio\\Komercio\\Front AspNet\\Komercio\\obj\\",
+      "outputPath": "C:\\Repositório Komercio\\Azure\\Komercio plus\\Fronend_ AspNet\\Komercio\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

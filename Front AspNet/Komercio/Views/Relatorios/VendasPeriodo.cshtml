@@ -1,15 +1,15 @@
-﻿@model Komercio.Models.RelatorioVendasViewModel
+﻿@model Komercio.Models.ViewModels.RelatorioVendasViewModel
 
 @{
     ViewData["Title"] = "Relatório de Vendas por Período";
 }
 
 <div class="container-fluid mt-4">
+
     <div class="card bg-light mb-4 shadow-sm">
         <div class="card-body">
             <form asp-action="VendasPeriodo" method="get">
                 <div class="row align-items-end">
-
                     <div class="col-md-5">
                         <div class="row">
                             <div class="col-6">
@@ -42,16 +42,13 @@
                     <div class="col-md-4">
                         <label class="form-label fw-bold text-secondary">Vendedor</label>
                         <div class="input-group">
-
                             <select asp-for="VendedorSelecionado"
                                     asp-items="Model.ListaVendedores"
                                     class="form-select">
                                 <option value="">Todos os vendedores</option>
                             </select>
-
                         </div>
                     </div>
-
                 </div>
             </form>
         </div>
@@ -72,6 +69,7 @@
                             <th>Valor Final</th>
                             <th>Data Venda</th>
                             <th>Forma Pagto</th>
+                            <th class="text-center">Detalhes da Venda</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -84,26 +82,30 @@
                                     <td>@item.CustomerName</td>
                                     <td>@item.CustomerDocument</td>
                                     <td>@item.SellerName</td>
-
                                     <td>@item.TotalAmount.ToString("C2")</td>
                                     <td class="text-danger">@item.DiscountAmount.ToString("C2")</td>
                                     <td class="fw-bold text-success">@item.FinalAmount.ToString("C2")</td>
-
                                     <td>
                                         @item.SaleDate.ToString("dd/MM/yyyy")
-
                                         <small class="text-muted ms-1">
                                             @(item.SaleTime.Length >= 5 ? item.SaleTime.Substring(0, 5) : item.SaleTime)
                                         </small>
                                     </td>
                                     <td><span class="badge bg-secondary">@item.PaymentMethod</span></td>
+
+                                    <td class="text-center">
+                                        <button class="btn btn-sm btn-primary shadow-sm px-3 d-inline-flex align-items-center"
+                                                onclick="CarregarItens(@item.SaleId)">
+                                            <i class="bi bi-info-circle me-2"></i> DETALHES
+                                        </button>
+                                    </td>
                                 </tr>
                             }
                         }
                         else
                         {
                             <tr>
-                                <td colspan="9" class="text-center py-5 text-muted">
+                                <td colspan="10" class="text-center py-5 text-muted">
                                     <i class="bi bi-inbox fs-1 d-block mb-2"></i>
                                     Nenhuma venda encontrada neste período.
                                 </td>
@@ -115,3 +117,51 @@
         </div>
     </div>
 </div>
+
+<div class="modal fade" id="modalItens" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header bg-primary text-white">
+                <h5 class="modal-title">Itens da Venda</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" id="conteudoDoModal">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        function CarregarItens(idVenda) {
+            // Abre o modal
+            var meuModal = new bootstrap.Modal(document.getElementById('modalItens'));
+            meuModal.show();
+
+            // Mostra loading
+            var divConteudo = document.getElementById('conteudoDoModal');
+            divConteudo.innerHTML = `
+                <div class="text-center p-4">
+                    <div class="spinner-border text-primary" role="status"></div>
+                    <p class="mt-2 text-muted">Buscando produtos...</p>
+                </div>`;
+
+            // Chama o Controller
+            fetch(`/Relatorios/ItensDaVenda?saleId=${idVenda}`)
+                .then(resposta => {
+                    if (!resposta.ok) throw new Error('Erro na requisição');
+                    return resposta.text();
+                })
+                .then(html => {
+                    divConteudo.innerHTML = html;
+                })
+                .catch(erro => {
+                    divConteudo.innerHTML = '<div class="alert alert-danger">Erro ao carregar itens. Tente novamente.</div>';
+                    console.error(erro);
+                });
+        }
+    </script>
+}

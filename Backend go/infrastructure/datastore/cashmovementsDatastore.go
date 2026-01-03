@@ -130,7 +130,8 @@ func (d *CashmovementsDatastore) CreateNewCashmovementTx(ctx context.Context, tx
 // Por fim, retorno a entidade e o erro.
 func (d *CashmovementsDatastore) SelectallCashmovements(ctx context.Context) ([]*entity.Cashmovements, error) {
 
-	query := `SELECT * FROM cash_movements where DATE(movement_datetime ) = current_date `
+	//query := `SELECT * FROM cash_movements where DATE(movement_datetime ) = current_date `
+	query := `SELECT * FROM cash_movements`
 
 	rows, err := d.Conn.Query(ctx, query)
 

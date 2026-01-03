@@ -1,0 +1,29 @@
+﻿@using Komercio.Models
+@using Komercio.Models.DTO
+@model List<ItensVendaModel>
+
+<table class="table table-sm table-bordered">
+    <thead class="table-light">
+        <tr>
+            <th>Produto</th>
+            <th class="text-center">Qtd</th>
+            <th class="text-end">Preço Un.</th>
+            <th class="text-end">Total</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.ProductName</td>
+                <td class="text-center">@item.Quantity</td>
+                <td class="text-end">@item.UnitPrice.ToString("C2")</td>
+                <td class="text-end fw-bold">@item.Total.ToString("C2")</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div class="text-end mt-2">
+    <h5>Total da Venda: <span class="text-success">@Model.Sum(x => x.Total).ToString("C2")</span></h5>
+</div>

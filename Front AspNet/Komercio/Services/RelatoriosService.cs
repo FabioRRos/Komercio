@@ -1,4 +1,4 @@
-﻿using Komercio.Models;
+﻿using Komercio.Models.DTO;
 using Microsoft.AspNetCore.Mvc;
 using System.Net.Http;
 using System.Text.Json;
@@ -11,6 +11,8 @@ namespace Komercio.Services
     public interface IRelatoriosService
     {
         Task<List<VendaRelatorio>> ListaDeVendaGeral();
+        Task<List<MovimentacaoCaixaModel>> MovimentacaoCaixa();
+        Task<List<FormaPagamentoModel>> FormaPagamento();
     }
     public class RelatoriosService : IRelatoriosService
     {
@@ -34,7 +36,7 @@ namespace Komercio.Services
         {
             try
             {
-                var response = await _httpClient.GetAsync("Report/Sales/");
+                var response = await _httpClient.GetAsync("Report/Sales");
                 if (!response.IsSuccessStatusCode)
                 {
                     return new List<VendaRelatorio>();
@@ -56,6 +58,40 @@ namespace Komercio.Services
             {
                 return new List<VendaRelatorio>();
             }
+        }
+
+
+
+        public async Task<List<MovimentacaoCaixaModel>>MovimentacaoCaixa()
+        {
+            var response = await _httpClient.GetAsync("cashmovements");
+            if (!response.IsSuccessStatusCode)
+            {
+                return new List<MovimentacaoCaixaModel> ();
+            }
+
+            var json = await response.Content.ReadAsStringAsync();
+
+            var options = new JsonSerializerOptions {PropertyNameCaseInsensitive = true};
+            var listaDeMovimentacao = JsonSerializer.Deserialize<List<MovimentacaoCaixaModel>>(json,options);
+
+            return listaDeMovimentacao ?? new List<MovimentacaoCaixaModel>();
+        }
+
+        public async Task<List<FormaPagamentoModel>> FormaPagamento()
+        {
+            var response = await _httpClient.GetAsync("formadepagamento");
+            if (!response.IsSuccessStatusCode)
+            {
+                return new List<FormaPagamentoModel>();
+            }
+
+            var json = await response.Content.ReadAsStringAsync();
+
+            var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
+            var listaFormaPagamento = JsonSerializer.Deserialize<List<FormaPagamentoModel>>(json, options);
+
+            return listaFormaPagamento ?? new List<FormaPagamentoModel>();
         }
     }
 }

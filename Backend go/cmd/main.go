@@ -17,12 +17,6 @@ func main() {
 
 		token := c.GetHeader("X-Token-Secreto")
 
-		if token != "B@tata123!SegredoMaximo" {
-
-			c.AbortWithStatusJSON(401, gin.H{"error": "Acesso negado: Token inválido ou ausente"})
-			return
-		}
-
 		// 3. Se estiver certa, deixa passar para as rotas (Caixa, Produtos, etc)
 		c.Next()
 	})
@@ -212,9 +206,11 @@ func main() {
 	routes.CaixaRoute(server, caixaController)
 	routes.ParametrosrRoutes(server, parametrosController)
 	routes.RegisterFormaPagamentoRoutes(server, formaPagamentoController)
+	//server.Run("0.0.0.0:8000")
+
+	//Minha antiga validação manual
 
 	// Inicia o servidor com HTTPS na porta 8443
-	// O Gin vai ler os arquivos que criamos no passo anterior
 	err := server.RunTLS(":8443", "./server.crt", "./server.key")
 
 	if err != nil {

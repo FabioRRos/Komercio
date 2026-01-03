@@ -9,11 +9,11 @@ namespace Komercio.Models
 {
     public class CashovementsDTO
     {
-        [JsonIgnore]
-        public int movementId { get; set; }
+            [JsonIgnore]
+            public int movementId { get; set; }
 
-        [JsonProperty("sale_id", NullValueHandling = NullValueHandling.Ignore)]
-        public int saleId { get; set; }
+            [JsonProperty("sale_id", NullValueHandling = NullValueHandling.Ignore)]
+            public int saleId { get; set; }
 
             [JsonProperty("movement_type")]
             public string movementType { get; set; }
