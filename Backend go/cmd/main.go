@@ -1,12 +1,16 @@
 package main
 
 import (
+	"context"
+	"log"
+
 	"github.com/fabioros/Komercio/controller"
 	"github.com/fabioros/Komercio/domain/repository"
 	"github.com/fabioros/Komercio/infrastructure/datastore"
 	"github.com/fabioros/Komercio/routes"
 	service "github.com/fabioros/Komercio/service"
 	"github.com/gin-gonic/gin"
+	"github.com/jackc/pgx/v5/pgxpool"
 )
 
 func main() {
@@ -17,39 +21,50 @@ func main() {
 
 		token := c.GetHeader("X-Token-Secreto")
 
+		if token != "B@tata123!SegredoMaximo" {
+
+			c.AbortWithStatusJSON(401, gin.H{"error": "Acesso negado: Token inválido ou ausente"})
+			return
+		}
+
 		// 3. Se estiver certa, deixa passar para as rotas (Caixa, Produtos, etc)
 		c.Next()
 	})
 
-	pool := datastore.NewPostgresPool()
+	connStr := "postgresql://postgres:postgres@localhost:5432/komercio?sslmode=disable"
+	ctx := context.Background()
+
+	pool, err := pgxpool.New(ctx, connStr)
+	if err != nil {
+		log.Fatal(err)
+	}
 	defer pool.Close()
 
 	dbProduct := datastore.NewProductDataStore(pool)
 
-	dbCustomer := datastore.NewCustomerDataStore()
-	defer dbCustomer.Close()
-	dbEmployee := datastore.NewEmployeesDataStore()
-	defer dbEmployee.Close()
-	dbSales := datastore.NewSalesDataStore()
-	defer dbSales.Close()
-	dbproductGroupe := datastore.NewProductGroupDataStore()
-	defer dbproductGroupe.Close()
-	dbproductSubgroup := datastore.NewProductSubgroupDatastore()
-	defer dbproductSubgroup.Close()
-	cashmovementDatastore := datastore.NewCashmovementsDatastore()
-	defer cashmovementDatastore.Close()
-	saleItemsDatastore := datastore.NewSaleItemsDatastore()
-	defer saleItemsDatastore.Close()
-	reportDatastore := datastore.NewConReportDataStore()
-	defer reportDatastore.Close()
-	transationDatastore := datastore.NewCustomertransactionDatastore()
-	defer transationDatastore.Close()
-	caixaDatastore := datastore.NewCaixaDatastore()
-	defer caixaDatastore.Close()
-	parametros := datastore.NewParametrosDatastore()
-	defer parametros.Close()
-	formaPagamento := datastore.NewFormaPagamentoDatastore()
-	defer formaPagamento.Close()
+	dbCustomer := datastore.NewCustomerDataStore(pool)
+
+	dbEmployee := datastore.NewEmployeesDataStore(pool)
+
+	dbSales := datastore.NewSalesDataStore(pool)
+
+	dbproductGroupe := datastore.NewProductGroupDataStore(pool)
+
+	dbproductSubgroup := datastore.NewProductSubgroupDatastore(pool)
+
+	cashmovementDatastore := datastore.NewCashmovementsDatastore(pool)
+
+	saleItemsDatastore := datastore.NewSaleItemsDatastore(pool)
+
+	reportDatastore := datastore.NewConReportDataStore(pool)
+
+	transationDatastore := datastore.NewCustomertransactionDatastore(pool)
+
+	caixaDatastore := datastore.NewCaixaDatastore(pool)
+
+	parametros := datastore.NewParametrosDatastore(pool)
+
+	formaPagamento := datastore.NewFormaPagamentoDatastore(pool)
 
 	//#####################################################
 	//Injeção de dependências
@@ -211,7 +226,7 @@ func main() {
 	//Minha antiga validação manual
 
 	// Inicia o servidor com HTTPS na porta 8443
-	err := server.RunTLS(":8443", "./server.crt", "./server.key")
+	err = server.RunTLS(":8443", "./server.crt", "./server.key")
 
 	if err != nil {
 		panic(err) // Se der erro ao subir (ex: senha errada), o programa avisa e para

@@ -3,32 +3,19 @@ package datastore
 import (
 	"context"
 	"fmt"
-	"log"
 
 	"github.com/fabioros/Komercio/domain/entity"
 	"github.com/jackc/pgx/v5"
+	"github.com/jackc/pgx/v5/pgxpool"
 )
 
 type EmployeesDatastore struct {
-	Conn *pgx.Conn
+	Pool *pgxpool.Pool
 }
 
-func NewEmployeesDataStore() *EmployeesDatastore {
-	connStr := "postgresql://postgres:postgres@localhost:5432/komercio?sslmode=disable"
-
-	conn, err := pgx.Connect(context.Background(), connStr)
-
-	if err != nil {
-
-		log.Fatalf("Erro na conexão: %v", err)
-
-	}
-	return &EmployeesDatastore{Conn: conn}
-}
-
-func (d *EmployeesDatastore) Close() {
-	if d.Conn != nil {
-		d.Conn.Close(context.TODO())
+func NewEmployeesDataStore(pool *pgxpool.Pool) *EmployeesDatastore {
+	return &EmployeesDatastore{
+		Pool: pool,
 	}
 }
 
@@ -41,7 +28,7 @@ func (d *EmployeesDatastore) CreateEmployees(employees *entity.Employees) error 
 		) VALUES ($1, $2, $3)
 	`
 
-	_, err := d.Conn.Exec(
+	_, err := d.Pool.Exec(
 		context.Background(),
 		query,
 		employees.EmployeeFullName,
@@ -65,7 +52,7 @@ func (d *EmployeesDatastore) ValidateLogin(login, password string) (bool, error)
         LIMIT 1
     `
 	var exists int
-	err := d.Conn.QueryRow(context.Background(), query, login, password).Scan(&exists)
+	err := d.Pool.QueryRow(context.Background(), query, login, password).Scan(&exists)
 	if err != nil {
 		if err == pgx.ErrNoRows {
 			return false, nil
@@ -80,11 +67,10 @@ func (d *EmployeesDatastore) SelectActiveEmployeeNames() ([]int, []string, error
 		FROM employees
 		WHERE EmployeeStatus = true
 	`
-	rows, err := d.Conn.Query(context.Background(), query)
+	rows, err := d.Pool.Query(context.Background(), query)
 	if err != nil {
 		return nil, nil, fmt.Errorf("erro ao consultar funcionários ativos: %w", err)
 	}
-	defer rows.Close()
 
 	var ids []int
 	var names []string
@@ -108,7 +94,7 @@ func (d *EmployeesDatastore) UpdateEmployeePassword(login, newPassword string) e
 		SET EmployeePassword = $2
 		WHERE EmployeeLogin = $1
 	`
-	_, err := d.Conn.Exec(context.Background(), query, login, newPassword)
+	_, err := d.Pool.Exec(context.Background(), query, login, newPassword)
 	if err != nil {
 		return fmt.Errorf("erro ao atualizar senha do funcionário: %w", err)
 	}
@@ -121,7 +107,7 @@ func (d *EmployeesDatastore) UpdateEmployeeName(login, newName string) error {
 		SET EmployeeFullName = $2
 		WHERE EmployeeLogin = $1
 	`
-	_, err := d.Conn.Exec(context.Background(), query, login, newName)
+	_, err := d.Pool.Exec(context.Background(), query, login, newName)
 	if err != nil {
 		return fmt.Errorf("erro ao atualizar nome do funcionário: %w", err)
 	}
@@ -134,7 +120,7 @@ func (d *EmployeesDatastore) DeactivateEmployee(login string) error {
 		SET EmployeeStatus = false
 		WHERE employeelogin = $1
 	`
-	_, err := d.Conn.Exec(context.Background(), query, login)
+	_, err := d.Pool.Exec(context.Background(), query, login)
 	if err != nil {
 		return fmt.Errorf("erro ao desativar funcionário: %w", err)
 	}

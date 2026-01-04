@@ -1,9 +1,11 @@
 ﻿using Komercio.Models.DTO;
 using Komercio.Models.ViewModels;
 using Komercio.Services; // Importante para achar a Interface
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using static Komercio.Services.RelatoriosService;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Komercio.Controllers
 {
@@ -18,6 +20,7 @@ namespace Komercio.Controllers
             _itensVendaService = itensVendaService;
         }
 
+        [Authorize]
         public IActionResult Index()
         {
             var menuOptions = new List<ReportMenuOption>

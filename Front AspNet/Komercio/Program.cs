@@ -8,8 +8,7 @@ var url = new Uri("https://localhost:8443/");
 
 builder.Services.AddHttpClient<Komercio.Services.IAuthService, Komercio.Services.AuthService>(client =>
 {
-    client.BaseAddress = url;
-})
+    client.BaseAddress = url;})
 
     .ConfigurePrimaryHttpMessageHandler(() =>
     {
@@ -20,25 +19,24 @@ builder.Services.AddHttpClient<Komercio.Services.IAuthService, Komercio.Services
         };
     });
 
+
 builder.Services.AddHttpClient<Komercio.Services.IRelatoriosService, Komercio.Services.RelatoriosService>(client =>
 {
     // A URL base é a mesma, já que ambos consultam o mesmo Backend Go
     client.BaseAddress = url;
-})
-
-.ConfigurePrimaryHttpMessageHandler(() => new HttpClientHandler
+}).ConfigurePrimaryHttpMessageHandler(() => new HttpClientHandler
 {
     // Ignora erro de SSL (Necessário se o certificado do Go for autoassinado)
     ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; }
 });
 
+
+
 builder.Services.AddHttpClient<Komercio.Services.IItensVendaService, Komercio.Services.ItensVendaService>(client =>
 {
     // A URL base é a mesma, já que ambos consultam o mesmo Backend Go
     client.BaseAddress = url;
-})
-
-.ConfigurePrimaryHttpMessageHandler(() => new HttpClientHandler
+}).ConfigurePrimaryHttpMessageHandler(() => new HttpClientHandler
 {
     // Ignora erro de SSL (Necessário se o certificado do Go for autoassinado)
     ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; }

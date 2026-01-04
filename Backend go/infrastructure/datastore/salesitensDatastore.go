@@ -3,36 +3,21 @@ package datastore
 import (
 	"context"
 	"fmt"
-	"log"
 
 	"github.com/fabioros/Komercio/domain/entity"
 	"github.com/jackc/pgx/v5"
+	"github.com/jackc/pgx/v5/pgxpool"
 )
 
 // Estrutura base que mantém a conexão ativa com o banco de dados
 type SaleItemsDatastore struct {
-	Conn *pgx.Conn
+	Pool *pgxpool.Pool
 }
 
 // Função construtora que cria uma nova instância de SaleItemsDatastore
-func NewSaleItemsDatastore() *SaleItemsDatastore {
-	connStr := "postgresql://postgres:postgres@localhost:5432/komercio?sslmode=disable"
-	conn, err := pgx.Connect(context.Background(), connStr)
+func NewSaleItemsDatastore(pool *pgxpool.Pool) *SaleItemsDatastore {
 
-	if err != nil {
-
-		log.Fatalf("Erro na conexão: %v", err)
-
-	}
-
-	return &SaleItemsDatastore{Conn: conn}
-}
-
-// Fecha a conexão com o banco
-func (d *SaleItemsDatastore) Close() {
-	if d.Conn != nil {
-		d.Conn.Close(context.TODO())
-	}
+	return &SaleItemsDatastore{Pool: pool}
 }
 
 // ################################################# Inserir item de venda (sem transação)
@@ -49,7 +34,7 @@ func (d *SaleItemsDatastore) CreateSaleItem(ctx context.Context, item *entity.Sa
 		) VALUES ($1, $2, $3, $4, $5, $6, $7)
 	`
 
-	_, err := d.Conn.Exec(ctx, query,
+	_, err := d.Pool.Exec(ctx, query,
 		item.SaleId,
 		item.ProductId,
 		item.ProductName,
@@ -99,11 +84,10 @@ func (d *SaleItemsDatastore) CreateSaleItemTx(ctx context.Context, tx pgx.Tx, it
 func (d *SaleItemsDatastore) GetAllSaleItems(ctx context.Context) ([]*entity.SalesItens, error) {
 	query := `SELECT sale_item_id, sale_id, product_id, product_name, barcode, unit_price, quantity, total FROM sale_items`
 
-	rows, err := d.Conn.Query(ctx, query)
+	rows, err := d.Pool.Query(ctx, query)
 	if err != nil {
 		return nil, fmt.Errorf("erro ao buscar itens da venda: %w", err)
 	}
-	defer rows.Close()
 
 	var items []*entity.SalesItens
 
@@ -136,11 +120,10 @@ func (d *SaleItemsDatastore) GetItemsBySaleId(ctx context.Context, saleId int) (
 		WHERE sale_id = $1
 	`
 
-	rows, err := d.Conn.Query(ctx, query, saleId)
+	rows, err := d.Pool.Query(ctx, query, saleId)
 	if err != nil {
 		return nil, fmt.Errorf("erro ao buscar itens da venda (sale_id=%d): %w", saleId, err)
 	}
-	defer rows.Close()
 
 	var items []*entity.SalesItens
 

@@ -3,32 +3,18 @@ package datastore
 import (
 	"context"
 	"fmt"
-	"log"
 
 	"github.com/fabioros/Komercio/domain/entity"
 	"github.com/jackc/pgx/v5"
+	"github.com/jackc/pgx/v5/pgxpool"
 )
 
 type ReportDatastore struct {
-	Conn *pgx.Conn
+	Pool *pgxpool.Pool
 }
 
-func NewConReportDataStore() *ReportDatastore {
-	connStr := "postgresql://postgres:postgres@localhost:5432/komercio?sslmode=disable"
-	conn, err := pgx.Connect(context.Background(), connStr)
-
-	if err != nil {
-
-		log.Fatalf("Erro na conexão: %v", err)
-
-	}
-	return &ReportDatastore{Conn: conn}
-}
-
-func (d *ReportDatastore) Close() {
-	if d.Conn != nil {
-		d.Conn.Close(context.TODO())
-	}
+func NewConReportDataStore(pool *pgxpool.Pool) *ReportDatastore {
+	return &ReportDatastore{Pool: pool}
 }
 
 //Querie melhorada
@@ -54,7 +40,7 @@ LEFT JOIN employees AS e ON e.employeeid = s.seller_id
 ORDER BY s.sale_id DESC;
 `
 
-	rows, err := d.Conn.Query(context.Background(), query)
+	rows, err := d.Pool.Query(context.Background(), query)
 
 	if err != nil {
 		return nil, fmt.Errorf("Erro ao consultar o relatório")
@@ -109,7 +95,7 @@ func (d *ReportDatastore) SelectSalesReportbyId(id int) (*entity.Salereport, err
 	WHERE s.sale_id = $1
 	ORDER BY s.sale_id DESC`
 
-	row := d.Conn.QueryRow(context.Background(), query, id)
+	row := d.Pool.QueryRow(context.Background(), query, id)
 
 	var r entity.Salereport
 

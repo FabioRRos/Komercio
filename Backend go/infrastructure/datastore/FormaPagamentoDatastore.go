@@ -7,27 +7,16 @@ import (
 
 	"github.com/fabioros/Komercio/domain/entity"
 	"github.com/jackc/pgx/v5"
+	"github.com/jackc/pgx/v5/pgxpool"
 )
 
 type FormaPagamentoDatastore struct {
-	Conn *pgx.Conn
+	Pool *pgxpool.Pool
 }
 
-func NewFormaPagamentoDatastore() *FormaPagamentoDatastore {
-	connStr := "postgresql://postgres:postgres@localhost:5432/komercio?sslmode=disable"
+func NewFormaPagamentoDatastore(Pool *pgxpool.Pool) *FormaPagamentoDatastore {
 
-	conn, err := pgx.Connect(context.Background(), connStr)
-
-	if err != nil {
-		log.Fatalf("Erro na conexão: %v", err)
-	}
-	return &FormaPagamentoDatastore{Conn: conn}
-}
-
-func (d *FormaPagamentoDatastore) Close() {
-	if d.Conn != nil {
-		d.Conn.Close(context.TODO())
-	}
+	return &FormaPagamentoDatastore{Pool: Pool}
 }
 
 // ################################################# CREATE forma de pagamento (sem transação)
@@ -45,7 +34,7 @@ func (d *FormaPagamentoDatastore) CreateFormaPagamento(ctx context.Context, form
 			($1, $2, $3, $4)
 	`
 
-	_, err := d.Conn.Exec(
+	_, err := d.Pool.Exec(
 		ctx,
 		query,
 		formaPagamento.Sale_id,
@@ -98,7 +87,7 @@ RETURNING
     data_pagamento`
 
 	var t entity.FormaPagamento
-	err := d.Conn.QueryRow(context.Background(), query,
+	err := d.Pool.QueryRow(context.Background(), query,
 		formaPagamento.Sale_id,
 		formaPagamento.Forma_de_pagamento,
 		formaPagamento.Valor_pago,
@@ -139,7 +128,7 @@ RETURNING
     data_pagamento`
 
 	var t entity.FormaPagamento
-	err := d.Conn.QueryRow(context.Background(), query,
+	err := d.Pool.QueryRow(context.Background(), query,
 		formaPagamento.Sale_id,
 		formaPagamento.Forma_de_pagamento,
 		formaPagamento.Valor_pago,
@@ -169,7 +158,7 @@ func (d *FormaPagamentoDatastore) ReadFormaPagamentoById(ctx context.Context, id
 	query := `select id_forma_pagamento, sale_id, forma_de_pagamento, valor_pago, data_pagamento 
 	from forma_pagamento where id=$1`
 	var t entity.FormaPagamento
-	err := d.Conn.QueryRow(context.Background(), query, id).Scan(
+	err := d.Pool.QueryRow(context.Background(), query, id).Scan(
 		&t.Id_forma_pagamento,
 		&t.Sale_id,
 		&t.Forma_de_pagamento,
@@ -190,11 +179,10 @@ func (d *FormaPagamentoDatastore) ReadFormaPagamentoById(ctx context.Context, id
 func (d *FormaPagamentoDatastore) ReadAllFormaPagamento(ctx context.Context) ([]*entity.FormaPagamento, error) {
 	query := `select id_forma_pagamento, sale_id, forma_de_pagamento, valor_pago, data_pagamento 
 	from forma_pagamento where DATE(data_pagamento ) = current_date;`
-	rows, err := d.Conn.Query(ctx, query)
+	rows, err := d.Pool.Query(ctx, query)
 	if err != nil {
 		return nil, fmt.Errorf("Erro ao ler os metodos de pagamento: %v", err)
 	}
-	defer rows.Close()
 
 	var formasPagamento []*entity.FormaPagamento
 	for rows.Next() {
@@ -218,7 +206,7 @@ func (d *FormaPagamentoDatastore) ReadAllFormaPagamento(ctx context.Context) ([]
 // ################################################# Delete forma de pagamento pelo Id (sem transação)
 func (d *FormaPagamentoDatastore) DeleteFormaPagamentoById(ctx context.Context, sale_id int) error {
 	query := `delete from forma_pagamento where sale_id=$1`
-	_, err := d.Conn.Exec(ctx, query, sale_id)
+	_, err := d.Pool.Exec(ctx, query, sale_id)
 	if err != nil {
 		log.Printf("Erro ao deletar forma de pagamento: %v", err)
 		return err

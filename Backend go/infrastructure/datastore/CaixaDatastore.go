@@ -3,29 +3,19 @@ package datastore
 import (
 	"context"
 	"fmt"
-	"log"
 
 	"github.com/fabioros/Komercio/domain/entity"
 	"github.com/jackc/pgx/v5"
+	"github.com/jackc/pgx/v5/pgxpool"
 )
 
 type CaixaDatastore struct {
-	Conn *pgx.Conn
+	Pool *pgxpool.Pool
 }
 
-func NewCaixaDatastore() *CaixaDatastore {
-	connStr := "postgresql://postgres:postgres@localhost:5432/komercio?sslmode=disable"
-	conn, err := pgx.Connect(context.Background(), connStr)
-	if err != nil {
-		log.Fatalf("Erro na conexão: %v", err)
-	}
-	return &CaixaDatastore{Conn: conn}
-}
+func NewCaixaDatastore(pool *pgxpool.Pool) *CaixaDatastore {
 
-func (d *CaixaDatastore) Close() {
-	if d.Conn != nil {
-		d.Conn.Close(context.TODO())
-	}
+	return &CaixaDatastore{Pool: pool}
 }
 
 // creat (PUT) TX porque ele está no fluxo de pagamento.
@@ -82,7 +72,7 @@ func (d *CaixaDatastore) CaixaChange(ctx context.Context, caixa *entity.Caixa) e
     $6,   -- Status do caixa (aberto/fechado)
     $7    -- observações (Caixa com alteração, id da venda etc.)
 )`
-	_, err := d.Conn.Exec(ctx, query,
+	_, err := d.Pool.Exec(ctx, query,
 		caixa.ValueChanged,
 		caixa.ChangeType,
 		caixa.ChangeOrigin,
@@ -101,12 +91,11 @@ func (d *CaixaDatastore) CaixaChange(ctx context.Context, caixa *entity.Caixa) e
 // GET geral
 func (d *CaixaDatastore) GetCaixa(ctx context.Context) ([]*entity.Caixa, error) {
 	query := `select * from caixa c where DATE(change_date ) = current_date`
-	row, err := d.Conn.Query(ctx, query)
+	row, err := d.Pool.Query(ctx, query)
 
 	if err != nil {
 		return nil, fmt.Errorf("Erro ao buscar as alterações no caixa: %w", err)
 	}
-	defer row.Close()
 
 	var caixaReturn []*entity.Caixa
 	for row.Next() {

@@ -3,32 +3,20 @@ package datastore
 import (
 	"context"
 	"fmt"
-	"log"
+
 	"strconv"
 
 	"github.com/fabioros/Komercio/domain/entity"
 	"github.com/jackc/pgx/v5"
+	"github.com/jackc/pgx/v5/pgxpool"
 )
 
 type CustomertransactionDatastore struct {
-	Conn *pgx.Conn
+	Pool *pgxpool.Pool
 }
 
-func NewCustomertransactionDatastore() *CustomertransactionDatastore {
-	connStr := "postgresql://postgres:postgres@localhost:5432/komercio?sslmode=disable"
-	conn, err := pgx.Connect(context.Background(), connStr)
-	if err != nil {
-
-		log.Fatalf("Erro na conexão: %v", err)
-
-	}
-	return &CustomertransactionDatastore{Conn: conn}
-}
-
-func (d *CustomertransactionDatastore) Close() {
-	if d.Conn != nil {
-		d.Conn.Close(context.TODO())
-	}
+func NewCustomertransactionDatastore(pool *pgxpool.Pool) *CustomertransactionDatastore {
+	return &CustomertransactionDatastore{Pool: pool}
 }
 
 func (d *CustomertransactionDatastore) CreateTransactionTX(ctx context.Context, tx pgx.Tx, transaction *entity.CustomerTransaction) error {
@@ -74,7 +62,7 @@ func (d *CustomertransactionDatastore) CreateTransaction(ctx context.Context, tr
 	type_payment
 	)VALUES($1,$2,$3,$4,$5,$6,$7,$8)`
 	id, _ := strconv.Atoi(transaction.Seller)
-	_, err := d.Conn.Exec(ctx, query,
+	_, err := d.Pool.Exec(ctx, query,
 		transaction.Sale_id,     // id da venda OU do pagamento (serve para os dois)
 		transaction.Customer_id, // id do cliente
 		transaction.Origin_type, // tipo. Entrada, saida
@@ -96,12 +84,11 @@ func (d *CustomertransactionDatastore) GETTransaction(ctx context.Context) ([]*e
 
 	query := `select * from customer_transactions`
 
-	rows, err := d.Conn.Query(context.Background(), query)
+	rows, err := d.Pool.Query(context.Background(), query)
 
 	if err != nil {
 		return nil, fmt.Errorf("DT1 - erro ao consultar transações: %w", err)
 	}
-	defer rows.Close()
 
 	var transactions []*entity.CustomerTransaction
 
@@ -143,12 +130,11 @@ LEFT JOIN employees e
     ON e.employeeid   = ct.seller
 WHERE ct.customer_id = $1`
 
-	rows, err := d.Conn.Query(context.Background(), query, idtransaction)
+	rows, err := d.Pool.Query(context.Background(), query, idtransaction)
 
 	if err != nil {
 		return nil, fmt.Errorf("erro ao consultar transações: %w", err)
 	}
-	defer rows.Close()
 
 	var transactions []*entity.CustomerTransaction
 

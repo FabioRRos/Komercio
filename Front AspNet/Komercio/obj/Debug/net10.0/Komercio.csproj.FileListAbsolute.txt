@@ -196,3 +196,4 @@ C:\Repositório Komercio\Azure\Komercio plus\Fronend_ AspNet\Komercio\obj\Debug\
 C:\Repositório Komercio\Azure\Komercio plus\Fronend_ AspNet\Komercio\obj\Debug\net10.0\staticwebassets.upToDateCheck.txt
 C:\Repositório Komercio\Azure\Komercio plus\Fronend_ AspNet\Komercio\obj\Debug\net10.0\Komercio.genruntimeconfig.cache
 C:\Repositório Komercio\Azure\Komercio plus\Fronend_ AspNet\Komercio\obj\Debug\net10.0\ref\Komercio.dll
+C:\Repositório Komercio\Azure\Komercio plus\Fronend_ AspNet\Komercio\bin\Debug\net10.0\appsettings.Production.json

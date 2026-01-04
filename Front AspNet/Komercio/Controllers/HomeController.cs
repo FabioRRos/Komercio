@@ -69,9 +69,16 @@ namespace Komercio.Controllers
                 }
 
                 //Status do Caixa 
-                bool caixaEstaAberto = true;
+                bool caixaEstaAberto = false;
 
-                if (movimentacoesDoDiaAtual.Count > 0)
+                if (movimentacoesDoDiaAtual.Count <= 0)
+                {
+                    caixaEstaAberto = false;
+                }
+
+
+
+                if (movimentacoesDoDiaAtual.Count >= 0)
                 {
                     // Pega o último item da lista pelo índice (Total - 1)
                     int indiceDoUltimoItem = movimentacoesDoDiaAtual.Count - 1;
@@ -81,7 +88,15 @@ namespace Komercio.Controllers
                     {
                         caixaEstaAberto = false;
                     }
+                    else if (ultimaMovimentacao.PaymentMethod == "Abertura")
+                    {
+                        caixaEstaAberto = true;
+                    }
+
                 }
+
+
+                
 
                 // LÓGICA DE FORMAS DE PAGAMENTO
                 Dictionary<string, float> dicionarioResumoPagamento = new Dictionary<string, float>();
