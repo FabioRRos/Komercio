@@ -1,0 +1,34 @@
+package repository
+
+import (
+	"context"
+
+	"github.com/fabioros/Komercio/domain/entity"
+	"github.com/fabioros/Komercio/infrastructure/datastore"
+)
+
+type PrecoCompraRepository interface {
+	EntradaEstoqueCompraTX(ctx context.Context, produtoEntrada *entity.PrecoCompra) error
+	SelecEstoqueByCodbar(ctx context.Context, codigobarras string) (*entity.PrecoCompra, error)
+	UpdateEstoqueCompra(ctx context.Context, produto entity.PrecoCompra) error
+}
+
+type precoCompraRepository struct {
+	datastore *datastore.PrecoCompraDatastore
+}
+
+func NewPrecoCompraRepository(datastore *datastore.PrecoCompraDatastore) PrecoCompraRepository {
+	return &precoCompraRepository{datastore: datastore}
+}
+
+func (r *precoCompraRepository) EntradaEstoqueCompraTX(ctx context.Context, produtoEntrada *entity.PrecoCompra) error {
+	return r.datastore.EntradaEstoqueCompraTX(ctx, produtoEntrada)
+}
+
+func (r *precoCompraRepository) SelecEstoqueByCodbar(ctx context.Context, codigobarras string) (*entity.PrecoCompra, error) {
+	return r.datastore.SelecEstoqueByCodbar(ctx, codigobarras)
+}
+
+func (r *precoCompraRepository) UpdateEstoqueCompra(ctx context.Context, produto entity.PrecoCompra) error {
+	return r.datastore.UpdateEstoqueCompra(ctx, produto)
+}

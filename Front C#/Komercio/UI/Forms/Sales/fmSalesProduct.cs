@@ -109,6 +109,7 @@ namespace Komercio.UI.Forms.Sales
             dbListaproduto.Columns["productSubgroup"].HeaderText = "Subgrupo";
             dbListaproduto.Columns["productStock"].Visible = false;
             dbListaproduto.Columns["productStatus"].Visible = false;
+            dbListaproduto.Columns["ProductPrchasePrice"].Visible = false;
 
 
             dbListaproduto.Columns["productName"].AutoSizeMode = (DataGridViewAutoSizeColumnMode)DataGridViewAutoSizeColumnsMode.AllCells;

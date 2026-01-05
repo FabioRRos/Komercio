@@ -46,9 +46,11 @@ namespace Komercio.UI.Forms.Product
             mtbProductStock.Enabled = false;
             msProductStatus.Enabled = false;
             mbtSaveProduct.Enabled = false;
+            mtbPrecoCompra.Enabled = false;
 
             mtbProductName.Text= string.Empty;
             mtbProductPrice.Text = string.Empty;
+            mtbPrecoCompra.Text = string.Empty;
             mtbProductCodeBar.Text = string.Empty;
             mtbProductStock.Text = string.Empty;
 
@@ -63,6 +65,7 @@ namespace Komercio.UI.Forms.Product
         {
             mtbProductName.Enabled = true;
             mtbProductPrice.Enabled = true;
+            mtbPrecoCompra.Enabled = true;
             mtbProductCodeBar.Enabled = true;
             mcbGroup.Enabled = true;
             mcbSubGroup.Enabled = true;
@@ -112,7 +115,8 @@ namespace Komercio.UI.Forms.Product
                     mtbProductCodeBar.Text,
                     mcbGroup.Text,
                     mcbSubGroup.Text,
-                    mtbProductStock.Text
+                    mtbProductStock.Text,
+                    mtbPrecoCompra.Text
                     );
             }
             catch (Exception ex)
@@ -232,6 +236,27 @@ namespace Komercio.UI.Forms.Product
             {
                 e.Handled = true;
             }
+        }
+
+        private void mtbPrecoCompra_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void mtbPrecoCompra_TextChanged(object sender, EventArgs e)
+        {
+            //formata o texto da entrada  de valores
+            string texto = mtbPrecoCompra.Text.Replace("R$", "").Replace(",", "").Replace(".", "").TrimStart('0');
+
+            if (texto.Length == 0)
+                texto = "0";
+
+            decimal valor = Convert.ToDecimal(texto) / 100;
+            mtbPrecoCompra.Text = string.Format(System.Globalization.CultureInfo.GetCultureInfo("pt-BR"), "{0:C2}", valor);
+            mtbPrecoCompra.SelectionStart = mtbPrecoCompra.Text.Length;
         }
     }
 }

@@ -23,6 +23,7 @@ func NewFullSaleService(
 	transation CustomertransactionService,
 	caixaService CaixaService,
 	formaPagamento FormaPagamentoService,
+	serv PrecoCompraService,
 ) FullSaleService {
 	return &fullSaleService{
 		salesService:        salesService,
@@ -32,6 +33,7 @@ func NewFullSaleService(
 		transation:          transation,
 		caixaService:        caixaService,
 		formaPagamento:      formaPagamento,
+		serv:                serv,
 	}
 }
 
@@ -46,6 +48,7 @@ type fullSaleService struct {
 	transation          CustomertransactionService
 	caixaService        CaixaService
 	formaPagamento      FormaPagamentoService
+	serv                PrecoCompraService
 }
 
 func (s *fullSaleService) CreateFullSale(ctx context.Context, salesAggregate *entity.SaleAggregate) (int, error) {
@@ -169,5 +172,13 @@ func (s *fullSaleService) CreateFullSale(ctx context.Context, salesAggregate *en
 		return 0, fmt.Errorf("erro ao confirmar transação: %w", err)
 	}
 
-	return saleID, nil
+	// aaqui vou baixar a lista dos produtos.
+	for _, item := range salesAggregate.Items {
+		if err := s.serv.BaixarProdutosListaDePrecos(ctx, item.Barcode, item.Quantity); err != nil {
+			return saleID, err
+
+		}
+	}
+
+	return saleID, err
 }

@@ -66,6 +66,8 @@ func main() {
 
 	formaPagamento := datastore.NewFormaPagamentoDatastore(pool)
 
+	precocompra := datastore.NewPrecoCompraDatastore(pool)
+
 	//#####################################################
 	//Injeção de dependências
 
@@ -73,6 +75,10 @@ func main() {
 		service.NewParametrosService(
 			repository.NewParametrosRepository(parametros),
 		),
+	)
+
+	precocompraService := service.NewPrecoCompraService(
+		repository.NewPrecoCompraRepository(precocompra),
 	)
 
 	formaPagamentoController := controller.NewFormaPagamentoController(
@@ -83,7 +89,7 @@ func main() {
 
 	productController := controller.NewProductController(
 		service.NewProductService(
-			repository.NewProductRepository(dbProduct)),
+			repository.NewProductRepository(dbProduct), precocompraService),
 	)
 
 	customerController := controller.NewCustomerController(
@@ -100,7 +106,7 @@ func main() {
 		service.NewSalesService(
 			repository.NewSalesRepository(dbSales),
 			service.NewProductService(
-				repository.NewProductRepository(dbProduct)),
+				repository.NewProductRepository(dbProduct), precocompraService),
 		),
 	)
 	productGroupController := controller.NewProductGroupController(
@@ -154,7 +160,7 @@ func main() {
 		service.NewSalesService(
 			repository.NewSalesRepository(dbSales),
 			service.NewProductService(
-				repository.NewProductRepository(dbProduct)),
+				repository.NewProductRepository(dbProduct), precocompraService),
 		),
 		service.NewSaleItemsService(
 			repository.NewSaleItemsRepository(saleItemsDatastore)),
@@ -166,7 +172,7 @@ func main() {
 		),
 
 		service.NewProductService(
-			repository.NewProductRepository(dbProduct)),
+			repository.NewProductRepository(dbProduct), precocompraService),
 		service.NewCustomertransactionService(
 			repository.NewCustomertransactionRepository(transationDatastore),
 			nil,
@@ -174,12 +180,12 @@ func main() {
 		service.NewCaixaService(
 			repository.NewCaixaRepository(caixaDatastore), nil),
 		service.NewFormaPagamentoService(
-			repository.NewFormaPagamentoRepository(formaPagamento)),
+			repository.NewFormaPagamentoRepository(formaPagamento)), precocompraService,
 	)
 
 	listProductDescription := service.NewProductDescriptionService(
 		service.NewProductService(
-			repository.NewProductRepository(dbProduct)),
+			repository.NewProductRepository(dbProduct), precocompraService),
 		service.NewProductGroupService(
 			repository.NewProductGroupRepository(dbproductGroupe)),
 		service.NewProductSubgroupService(

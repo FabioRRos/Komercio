@@ -81,6 +81,7 @@ namespace Komercio.UI.Forms.Product
             dgvProdutos.Columns["idProduct"].Visible = false;
             dgvProdutos.Columns["productStatus"].Visible = false;
             dgvProdutos.Columns["productSubgroup"].Visible = false;
+            dgvProdutos.Columns["ProductPrchasePrice"].Visible = false;
 
 
             dgvProdutos.Columns["productPrice"].DefaultCellStyle.Format = "C2";

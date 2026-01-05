@@ -37,8 +37,11 @@ namespace Komercio.Models
         [JsonProperty("product_status")]
         public bool productStatus { get; set; }
 
+        [JsonProperty("product_purchase_price")]
+        public float ProductPrchasePrice { get; set; }
+
         //VALIDA PRODUTO (pode ser usado sempre).
-        public ProductDTO ValidaProduto(string name, string preco, string codBarras, string grupo, string subGrupo, string stock)
+        public ProductDTO ValidaProduto(string name, string preco, string codBarras, string grupo, string subGrupo, string stock, string precocompra )
         {
             var product = new ProductDTO();
             if (name == "")
@@ -61,6 +64,27 @@ namespace Komercio.Models
                 throw new ArgumentException("Preço inválido!", "Atenção");
 
             }
+
+            // preço da compra
+
+            try
+            {
+                // verifica se o valor do produto é valido (maior ou igual a zero).
+                product.ProductPrchasePrice = float.Parse(precocompra.Replace("R$", ""));
+                if (product.productPrice < 0)
+                {
+                    throw new ArgumentException("Preço compra inválido!");
+                }
+            }
+            catch
+            {
+                throw new ArgumentException("Preço compra inválido!", "Atenção");
+
+            }
+
+
+
+
             product.productCodbar = codBarras;
             product.productGroup = grupo;
             product.productSubgroup = subGrupo;
