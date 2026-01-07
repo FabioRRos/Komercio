@@ -115,13 +115,16 @@ WHERE id_preco_compra = $3
 func (d *PrecoCompraDatastore) CreateValorCompraEVenda(ctx context.Context, valores *entity.DifValue) error {
 	query := `INSERT Into valores_compra_venda(sale_id,
 	valor_venda_produto,
-	valor_compra_produto)
-	VALUES($1,$2,$3)`
+	valor_compra_produto,
+	product_id)
+	VALUES($1,$2,$3,$4)`
 
 	_, err := d.Pool.Exec(ctx, query,
 		valores.Sale_id,
 		valores.PrecoVenda,
-		valores.PrecoCompra)
+		valores.PrecoCompra,
+		valores.ProdictId,
+	)
 
 	if err != nil {
 		return fmt.Errorf("Não pude salvar na tabela - %w", err)

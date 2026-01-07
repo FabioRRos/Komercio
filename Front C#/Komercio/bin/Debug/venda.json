@@ -1,11 +1,11 @@
 {
   "customer_id": 0,
-  "total_amount": 200.0,
+  "total_amount": 120.0,
   "discount_amount": 0.0,
-  "final_amount": 200.0,
-  "sale_date": "2026-01-07T14:28:16.8219821-03:00",
-  "sale_time": "14:28:16",
-  "payment_method": "Crédito",
+  "final_amount": 120.0,
+  "sale_date": "2026-01-07T19:45:24.5727208-03:00",
+  "sale_time": "19:45:24",
+  "payment_method": "Débito",
   "seller_id": 0,
   "sale_notes": ""
 }

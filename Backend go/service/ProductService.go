@@ -185,6 +185,10 @@ func (s *productService) UpdateProductInputStock(ctx context.Context, productcod
 	updatePrecoProduct := update
 
 	updatePrecoProduct.ProductStock = productStock
+
+	if precocompra < 0 {
+		precocompra = 0
+	}
 	updatePrecoProduct.ProductPrchasePrice = precocompra
 
 	err = s.serv.EntradaEstoqueCompraTX(ctx, updatePrecoProduct)

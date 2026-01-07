@@ -183,8 +183,9 @@ func (s *fullSaleService) CreateFullSale(ctx context.Context, salesAggregate *en
 	// aaqui vou baixar a lista dos produtos.
 	for _, item := range salesAggregate.Items {
 		prodTemp := &entity.DifValue{
-			Sale_id:    saleID,     //id da venda
-			PrecoVenda: item.Total, // total recuperado no pacote atual
+			Sale_id:    saleID,         //id da venda
+			PrecoVenda: item.Total,     // total recuperado no pacote atual
+			ProdictId:  item.ProductId, // o id do produto
 		}
 
 		prodTemp.PrecoCompra, err = s.serv.BaixarProdutosListaDePrecos(

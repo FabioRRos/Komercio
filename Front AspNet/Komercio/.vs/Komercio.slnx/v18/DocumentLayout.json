@@ -26,7 +26,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 372,
-          "SelectedChildIndex": 5,
+          "SelectedChildIndex": 4,
           "Children": [
             {
               "$type": "Bookmark",
@@ -42,8 +42,7 @@
               "RelativeToolTip": "Views\\Relatorios\\Financeiro.cshtml",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAA9AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2026-01-07T14:13:14.683Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-01-07T14:13:14.683Z"
             },
             {
               "$type": "Document",
@@ -55,12 +54,7 @@
               "RelativeToolTip": "Controllers\\RelatoriosController.cs",
               "ViewState": "AgIAALkAAAAAAAAAAAAIwM4AAAA7AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-07T14:12:55.049Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{d78612c7-9962-4b83-95d9-268046dad23a}"
+              "WhenOpened": "2026-01-07T14:12:55.049Z"
             },
             {
               "$type": "Document",
@@ -82,7 +76,7 @@
               "RelativeDocumentMoniker": "Controllers\\HomeController.cs",
               "ToolTip": "C:\\Reposit\u00F3rio Komercio\\Azure\\Komercio plus\\Fronend_ AspNet\\Komercio\\Controllers\\HomeController.cs",
               "RelativeToolTip": "Controllers\\HomeController.cs",
-              "ViewState": "AgIAAD8AAAAAAAAAAAAowFAAAABKAAAAAAAAAA==",
+              "ViewState": "AgIAAKUAAAAAAAAAAAAowLIAAAANAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-01-04T15:21:00.241Z",
               "EditorCaption": ""

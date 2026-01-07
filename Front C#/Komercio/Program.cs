@@ -42,8 +42,8 @@ namespace Komercio
             var parametrosService = new ParametrosService(apiBaseUrl);
             var formaPagamento = new FormaPagamentoService(apiBaseUrl);
             var saleFinalizeService = new SaleFinalizerService(apiBaseUrl);
-            ;
-
+            
+            //  INICIANDO A REFATORAÇÃO PARA APPLICATIONS LAYER
             var employeeServiceApp = new EmployeeServiceApp(employeeService);
             var productApp = new ProdutoApp(productService,
                                             productDescriptionService,

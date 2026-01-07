@@ -3,6 +3,7 @@ package repository
 import (
 	"context"
 
+	dto "github.com/fabioros/Komercio/domain/DTO"
 	"github.com/fabioros/Komercio/domain/entity"
 	"github.com/fabioros/Komercio/infrastructure/datastore"
 )
@@ -10,6 +11,7 @@ import (
 type ReportRepository interface {
 	SelectSaleReport(ctx context.Context) ([]*entity.Salereport, error)
 	SelectSaleReportById(ctx context.Context, id int) (*entity.Salereport, error)
+	SelectMargemLucroVendas(ctx context.Context) ([]*dto.SaleItemReportDTO, error)
 }
 
 type reportRepository struct {
@@ -28,4 +30,8 @@ func (r *reportRepository) SelectSaleReport(ctx context.Context) ([]*entity.Sale
 
 func (r *reportRepository) SelectSaleReportById(ctx context.Context, id int) (*entity.Salereport, error) {
 	return r.datastore.SelectSalesReportbyId(id)
+}
+
+func (r *reportRepository) SelectMargemLucroVendas(ctx context.Context) ([]*dto.SaleItemReportDTO, error) {
+	return r.datastore.SelectMargemLucroVendas(ctx)
 }

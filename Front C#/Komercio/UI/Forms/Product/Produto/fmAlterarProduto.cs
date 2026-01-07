@@ -348,6 +348,8 @@ namespace Komercio.UI.Forms.Product.Produto
             dgwListaProdutos.Columns["productSubgroup"].Visible = false;
             dgwListaProdutos.Columns["productStock"].Visible = false;
             dgwListaProdutos.Columns["productStatus"].Visible = false;
+            dgwListaProdutos.Columns["ProductPrchasePrice"].Visible = false;
+
 
 
             dgwListaProdutos.BackgroundColor = Color.White;

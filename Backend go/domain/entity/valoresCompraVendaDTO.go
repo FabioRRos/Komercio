@@ -5,4 +5,5 @@ type DifValue struct {
 	Sale_id     int     `Json:"sale_id"`
 	PrecoVenda  float32 `Json:"PrecoVenda"`
 	PrecoCompra float32 `Json:"PrecoCompra"`
+	ProdictId   int     `Json:"productId"`
 }

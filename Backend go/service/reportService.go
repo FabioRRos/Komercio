@@ -3,6 +3,7 @@ package service
 import (
 	"context"
 
+	dto "github.com/fabioros/Komercio/domain/DTO"
 	"github.com/fabioros/Komercio/domain/entity"
 	"github.com/fabioros/Komercio/domain/repository"
 )
@@ -10,6 +11,7 @@ import (
 type ReportService interface {
 	SelectSaleReport(ctx context.Context) ([]*entity.Salereport, error)
 	SelectSalesReportbyId(ctx context.Context, id int) (*entity.Salereport, error)
+	SelectMargemLucroVendas(ctx context.Context) ([]*dto.SaleItemReportDTO, error)
 }
 
 type reportService struct {
@@ -36,4 +38,14 @@ func (s *reportService) SelectSalesReportbyId(ctx context.Context, id int) (*ent
 	}
 
 	return salereport, err
+}
+
+func (s *reportService) SelectMargemLucroVendas(ctx context.Context) ([]*dto.SaleItemReportDTO, error) {
+	salereport, err := s.repo.SelectMargemLucroVendas(ctx)
+	if err != nil {
+		return nil, err
+	}
+
+	return salereport, nil
+
 }

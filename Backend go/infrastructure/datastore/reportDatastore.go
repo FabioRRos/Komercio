@@ -4,7 +4,9 @@ import (
 	"context"
 	"fmt"
 
+	dto "github.com/fabioros/Komercio/domain/DTO"
 	"github.com/fabioros/Komercio/domain/entity"
+
 	"github.com/jackc/pgx/v5"
 	"github.com/jackc/pgx/v5/pgxpool"
 )
@@ -121,4 +123,104 @@ func (d *ReportDatastore) SelectSalesReportbyId(id int) (*entity.Salereport, err
 	}
 
 	return &r, nil
+}
+
+func (d *ReportDatastore) SelectMargemLucroVendas(ctx context.Context) ([]*dto.SaleItemReportDTO, error) {
+	query := `SELECT
+    -- Identificação da venda
+    s.sale_id,
+    s.sale_date,
+    s.sale_time,
+
+    -- Cliente e vendedor
+    s.customer_id,
+    s.seller_id,
+    f.employeefullname AS seller_name,
+    f.employeelogin    AS seller_login,
+
+    -- Produto
+    si.sale_item_id,
+    si.product_id,
+    si.product_name,
+    si.barcode,
+
+    -- Valores de venda
+    si.unit_price      AS valor_unitario_venda,
+    si.quantity        AS quantidade_vendida,
+    si.total           AS valor_total_venda_produto,
+
+    -- Valores de compra (CMV / FIFO)
+    vcv.valor_compra_produto AS valor_total_compra_produto,
+
+    -- Margem
+    (si.total - vcv.valor_compra_produto) AS margem_produto,
+
+    -- Totais da venda
+    s.total_amount,
+    s.discount_amount,
+    s.final_amount,
+    s.payment_method
+
+FROM sales s
+
+INNER JOIN sale_items si
+    ON si.sale_id = s.sale_id
+
+INNER JOIN valores_compra_venda vcv
+    ON vcv.sale_id = s.sale_id
+   AND vcv.product_id = si.product_id
+
+INNER JOIN employees f   --  ajuste esse nome se necessário
+    ON f.employeeid = s.seller_id
+
+ORDER BY
+    s.sale_date,
+    s.sale_id,
+    si.sale_item_id;`
+
+	rows, err := d.Pool.Query(ctx, query)
+
+	if err != nil {
+		return nil, fmt.Errorf("Erro ao consultar o relatório")
+	}
+
+	defer rows.Close()
+
+	var report []*dto.SaleItemReportDTO
+
+	for rows.Next() {
+		var r dto.SaleItemReportDTO
+		err := rows.Scan(
+			&r.SaleID,
+			&r.SaleDate,
+			&r.SaleTime,
+			&r.CustomerID,
+			&r.SellerID,
+			&r.SellerName,
+			&r.SellerLogin,
+			&r.SaleItemID,
+			&r.ProductID,
+			&r.ProductName,
+			&r.Barcode,
+			&r.UnitPrice,
+			&r.Quantity,
+			&r.TotalSaleProduct,
+			&r.TotalPurchaseProduct,
+			&r.Margin,
+			&r.TotalAmount,
+			&r.DiscountAmount,
+			&r.FinalAmount,
+			&r.PaymentMethod,
+		)
+
+		if err != nil {
+			return nil, fmt.Errorf("erro ao ler linha do produto: %w", err)
+		}
+
+		report = append(report, &r)
+	}
+	if err := rows.Err(); err != nil {
+		return nil, fmt.Errorf("erro durante iteração das linhas: %w", err)
+	}
+	return report, nil
 }

@@ -152,10 +152,8 @@ public class SalesApp
         string cupomForPrint = "";
         bool retorno = false;
 
-         // Eu chamo a função de criar venda e tenho o retorno TRUE ou FALSE.
-         retorno = await CriarVendaApp(vendaAggregate);
+       
 
-        var cupom = await Cupom(saleId);
 
         // Geração do JSON e salvamento para log
         try
@@ -184,6 +182,10 @@ public class SalesApp
         {
             MessageBox.Show(ex.Message);
         }
+
+        // Eu chamo a função de criar venda e tenho o retorno TRUE ou FALSE.
+        retorno = await CriarVendaApp(vendaAggregate);
+        var cupom = await Cupom(saleId);
 
 
         return cupom;
