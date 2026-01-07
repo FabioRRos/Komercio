@@ -66,6 +66,29 @@ func (d *PrecoCompraDatastore) SelecEstoqueByCodbar(ctx context.Context, codigob
 	return &produto, nil
 }
 
+// esse cara é apenas para retornar o ultimo valor cadastrado do produto.
+// Dessa forma, caso não seja digitado o valor de compra, considerarei o ultimo cadastrado.
+func (d *PrecoCompraDatastore) SelectItemEstoqueByCodbar(ctx context.Context, codigobarras string) (float32, error) {
+	var preco float32 = 0
+
+	query := `select valorcompra 
+	from valueproduct v  
+	where v.codigobarras = $1 
+	and status = true  
+	order by dataentrada desc 
+	limit 1 ;`
+
+	err := d.Pool.QueryRow(ctx, query, codigobarras).Scan(
+		&preco,
+	)
+	if err != nil {
+		return 0, fmt.Errorf("Erro ao buscar o produto na tabela VALUEPRODUCT")
+	}
+
+	return preco, nil
+
+}
+
 // aqui eu atualizo o estoque de acordo com a necessidade.
 func (d *PrecoCompraDatastore) UpdateEstoqueCompra(ctx context.Context, produto entity.PrecoCompra) error {
 
@@ -87,4 +110,23 @@ WHERE id_preco_compra = $3
 	}
 
 	return nil
+}
+
+func (d *PrecoCompraDatastore) CreateValorCompraEVenda(ctx context.Context, valores *entity.DifValue) error {
+	query := `INSERT Into valores_compra_venda(sale_id,
+	valor_venda_produto,
+	valor_compra_produto)
+	VALUES($1,$2,$3)`
+
+	_, err := d.Pool.Exec(ctx, query,
+		valores.Sale_id,
+		valores.PrecoVenda,
+		valores.PrecoCompra)
+
+	if err != nil {
+		return fmt.Errorf("Não pude salvar na tabela - %w", err)
+	}
+
+	return nil
+
 }

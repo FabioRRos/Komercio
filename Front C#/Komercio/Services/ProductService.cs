@@ -111,11 +111,11 @@ namespace Komercio.Services
             }
         }
 
-        public async Task<ProductDTO> PutProductInStock(string barcode, int newStock)
+        public async Task<ProductDTO> PutProductInStock(string barcode, int newStock,float preco)
         {
             // Monta o corpo JSON
             var content = new StringContent(
-                JsonConvert.SerializeObject(new { product_stock = newStock }),
+                JsonConvert.SerializeObject(new { product_stock = newStock, product_compra = preco }),
                 Encoding.UTF8,
                 "application/json"
             );

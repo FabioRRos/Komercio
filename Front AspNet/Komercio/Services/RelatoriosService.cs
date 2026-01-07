@@ -13,6 +13,7 @@ namespace Komercio.Services
         Task<List<VendaRelatorio>> ListaDeVendaGeral();
         Task<List<MovimentacaoCaixaModel>> MovimentacaoCaixa();
         Task<List<FormaPagamentoModel>> FormaPagamento();
+        Task<List<CaixaModel>> Caixa();
     }
     public class RelatoriosService : IRelatoriosService
     {
@@ -93,5 +94,25 @@ namespace Komercio.Services
 
             return listaFormaPagamento ?? new List<FormaPagamentoModel>();
         }
+
+        public async Task<List<CaixaModel>> Caixa()
+        {
+            var response = await _httpClient.GetAsync("Caixa");
+
+            if (!response.IsSuccessStatusCode)
+            {
+                return new List<CaixaModel>();
+            }
+
+            var json = await response.Content.ReadAsStringAsync();
+            var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
+            var caixa = JsonSerializer.Deserialize<List<CaixaModel>>(json, options);
+
+
+            return caixa;
+        }
+
+
+
     }
 }

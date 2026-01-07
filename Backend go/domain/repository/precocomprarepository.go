@@ -11,6 +11,8 @@ type PrecoCompraRepository interface {
 	EntradaEstoqueCompraTX(ctx context.Context, produtoEntrada *entity.PrecoCompra) error
 	SelecEstoqueByCodbar(ctx context.Context, codigobarras string) (*entity.PrecoCompra, error)
 	UpdateEstoqueCompra(ctx context.Context, produto entity.PrecoCompra) error
+	SelectItemEstoqueByCodbar(ctx context.Context, codigoBarras string) (float32, error)
+	CreateValorCompraEVenda(ctx context.Context, valores *entity.DifValue) error
 }
 
 type precoCompraRepository struct {
@@ -31,4 +33,12 @@ func (r *precoCompraRepository) SelecEstoqueByCodbar(ctx context.Context, codigo
 
 func (r *precoCompraRepository) UpdateEstoqueCompra(ctx context.Context, produto entity.PrecoCompra) error {
 	return r.datastore.UpdateEstoqueCompra(ctx, produto)
+}
+
+func (r *precoCompraRepository) SelectItemEstoqueByCodbar(ctx context.Context, codigoBarras string) (float32, error) {
+	return r.datastore.SelectItemEstoqueByCodbar(ctx, codigoBarras)
+}
+
+func (r *precoCompraRepository) CreateValorCompraEVenda(ctx context.Context, valor *entity.DifValue) error {
+	return r.datastore.CreateValorCompraEVenda(ctx, valor)
 }

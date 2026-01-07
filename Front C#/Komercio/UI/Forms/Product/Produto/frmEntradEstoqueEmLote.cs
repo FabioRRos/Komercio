@@ -93,6 +93,7 @@ namespace Komercio.UI.Forms.Product.Produto
             dgwListaDeProdutos.Columns["productName"].HeaderText = "Produto";
             dgwListaDeProdutos.Columns["productCodbar"].HeaderText = "Codigo de barras";
             dgwListaDeProdutos.Columns["productStock"].HeaderText = "QTD";
+            dgwListaDeProdutos.Columns["ProductPrchasePrice"].HeaderText = "Preço de compra";
 
             dgwListaDeProdutos.Columns["productGroup"].Visible = false;
             dgwListaDeProdutos.Columns["productPrice"].Visible = false;
@@ -129,11 +130,11 @@ namespace Komercio.UI.Forms.Product.Produto
 
                 using (StreamWriter writer = new StreamWriter(caminhoCompleto, false, Encoding.UTF8))
                 {
-                    writer.WriteLine("Descrição do Produto;Código De Barras;QUANTIDADE");
+                    writer.WriteLine("Descrição do Produto;Código De Barras;QUANTIDADE;Preço de compra");
                     
                     foreach (var item in listaDeProdutosRetornado)
                     {
-                        string linha = item.productName + ";" + item.productCodbar;
+                        string linha = item.productName + ";" + item.productCodbar + ";;" + item.ProductPrchasePrice;
                         writer.WriteLine(linha);
                     }
                 }
@@ -212,8 +213,17 @@ namespace Komercio.UI.Forms.Product.Produto
         /// </summary>
         private void CarregaArquivoNaLista()
         {
-            
-            string[] rows = File.ReadAllLines(_caminhoLoadArquivo);
+            string[] rows;
+
+            try
+            {
+                 rows = File.ReadAllLines(_caminhoLoadArquivo);
+
+            }
+            catch
+            {
+                return;
+            }
 
             for (int i = 0; i < rows.Length; i++)
             {
@@ -230,6 +240,7 @@ namespace Komercio.UI.Forms.Product.Produto
                             productName = campos[0],
                             productCodbar = campos[1],
                             productStock = int.Parse(campos[2]),
+                            ProductPrchasePrice = float.Parse(campos[3]),
                         };
                         listaProdutoAlterado.Add(Product);
                     }
@@ -301,7 +312,7 @@ namespace Komercio.UI.Forms.Product.Produto
         }
         private async Task<int> SaveItens(ProductDTO item)
         {
-          var retorno =   await _produtoApp.EntradaEstoqueCodigoDeBarras(item.productCodbar,item.productStock);
+          var retorno =   await _produtoApp.EntradaEstoqueCodigoDeBarras(item.productCodbar,item.productStock,item.ProductPrchasePrice);
 
             if (retorno.productCodbar == item.productCodbar)
             {

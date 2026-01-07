@@ -28,8 +28,9 @@ namespace Komercio.Controllers
                 DateTime dataDeHoje = DateTime.Today;
 
                 // Busca os dados brutos
-                var todasAsMovimentacoes = await _relatoriosService.MovimentacaoCaixa();
-                var todosDetalhesPagamento = await _relatoriosService.FormaPagamento();
+                var todasAsMovimentacoes =      await _relatoriosService.MovimentacaoCaixa();
+                var todosDetalhesPagamento =    await _relatoriosService.FormaPagamento();
+                var caixa =                     await _relatoriosService.Caixa();
 
                 // Filtra apenas o que aconteceu HOJE
                 List<MovimentacaoCaixaModel> movimentacoesDoDiaAtual = new List<MovimentacaoCaixaModel>();
@@ -75,23 +76,12 @@ namespace Komercio.Controllers
                 {
                     caixaEstaAberto = false;
                 }
-
-
-
-                if (movimentacoesDoDiaAtual.Count >= 0)
+                if (movimentacoesDoDiaAtual.Count > 0)
                 {
                     // Pega o último item da lista pelo índice (Total - 1)
-                    int indiceDoUltimoItem = movimentacoesDoDiaAtual.Count - 1;
-                    MovimentacaoCaixaModel ultimaMovimentacao = movimentacoesDoDiaAtual[indiceDoUltimoItem];
-
-                    if (ultimaMovimentacao.PaymentMethod == "Fechamento")
-                    {
-                        caixaEstaAberto = false;
-                    }
-                    else if (ultimaMovimentacao.PaymentMethod == "Abertura")
-                    {
-                        caixaEstaAberto = true;
-                    }
+                    int indiceDoUltimoItem = caixa.Count - 1;
+                    CaixaModel ultimaMovimentacao = caixa[indiceDoUltimoItem];
+                    caixaEstaAberto = ultimaMovimentacao.Status;
 
                 }
 

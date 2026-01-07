@@ -100,7 +100,7 @@ func (s *productService) CreateProductDescarte(ctx context.Context, productDesca
 		return err
 	}
 
-	err = s.serv.BaixarProdutosListaDePrecos(ctx, productDescarte.CodBarProduto, 1)
+	_, err = s.serv.BaixarProdutosListaDePrecos(ctx, productDescarte.CodBarProduto, 1)
 
 	return err
 }

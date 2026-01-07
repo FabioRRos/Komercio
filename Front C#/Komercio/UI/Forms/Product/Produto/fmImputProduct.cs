@@ -33,12 +33,14 @@ namespace Komercio.UI.Forms.Product
                 mbtSave.Enabled = true;
                 mtbStock.Enabled = true;
                 mtbStock.Text = "0";
+                mtbprecoentrada.Enabled = true;
             }
             if (msOptionsInput.Checked == true)
             {
                 mbtSave.Enabled = false;
                 mtbStock.Enabled = false;
                 mtbStock.Text = "1";
+                mtbprecoentrada.Enabled = false;
             }
         }
 
@@ -55,7 +57,9 @@ namespace Komercio.UI.Forms.Product
                 }
                 try
                 {
-                    var temp = await _produtoApp.EntradaEstoqueCodigoDeBarras(mtbCodBar.Text,1);
+                    var temp = await _produtoApp.EntradaEstoqueCodigoDeBarras(mtbCodBar.Text,1,0); // Aqui vou deixar zero
+                                                                                                   // pois em entrada automatica não há
+                                                                                                   // a adição de valores.
 
                     if (temp == null)
                     {                   
@@ -111,7 +115,18 @@ namespace Komercio.UI.Forms.Product
                 MessageBox.Show("Quantidade invalida!!!");
             }
 
-            var temp = await _produtoApp.EntradaEstoqueCodigoDeBarras(mtbCodBar.Text, quantidade);
+            float preco = 0;
+            try
+            {
+
+            preco = float.Parse(mtbprecoentrada.Text.Replace("R$", "").Replace(".", "").Replace(",", ".").Trim())/100;
+            }
+            catch
+            {
+                
+            }
+
+            var temp = await _produtoApp.EntradaEstoqueCodigoDeBarras(mtbCodBar.Text, quantidade, preco); 
 
             if (temp == null)
             {
@@ -125,6 +140,26 @@ namespace Komercio.UI.Forms.Product
 
             }
            return;
+        }
+
+        private void mtbprecoentrada_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void mtbprecoentrada_TextChanged(object sender, EventArgs e)
+        {
+            string texto = mtbprecoentrada.Text.Replace("R$", "").Replace(",", "").Replace(".", "").TrimStart('0');
+
+            if (texto.Length == 0)
+                texto = "0";
+
+            decimal valor = Convert.ToDecimal(texto) / 100;
+            mtbprecoentrada.Text = string.Format(System.Globalization.CultureInfo.GetCultureInfo("pt-BR"), "{0:C2}", valor);
+            mtbprecoentrada.SelectionStart = mtbprecoentrada.Text.Length;
         }
     }
 }

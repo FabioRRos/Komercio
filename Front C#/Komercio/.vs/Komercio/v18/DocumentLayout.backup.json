@@ -3,32 +3,32 @@
   "WorkspaceRootPath": "C:\\Reposit\u00F3rio Komercio\\Azure\\Komercio plus\\Frontend_Forms\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{44D56DD6-A48F-48C7-9DB4-CD3BA6950EF2}|Komercio.csproj|c:\\reposit\u00F3rio komercio\\azure\\komercio plus\\frontend_forms\\ui\\forms\\product\\produto\\fmalterarproduto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{44D56DD6-A48F-48C7-9DB4-CD3BA6950EF2}|Komercio.csproj|solutionrelative:ui\\forms\\product\\produto\\fmalterarproduto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{44D56DD6-A48F-48C7-9DB4-CD3BA6950EF2}|Komercio.csproj|c:\\reposit\u00F3rio komercio\\azure\\komercio plus\\frontend_forms\\bin\\debug\\komercio.exe.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
+      "RelativeMoniker": "D:0:0:{44D56DD6-A48F-48C7-9DB4-CD3BA6950EF2}|Komercio.csproj|solutionrelative:bin\\debug\\komercio.exe.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{44D56DD6-A48F-48C7-9DB4-CD3BA6950EF2}|Komercio.csproj|c:\\reposit\u00F3rio komercio\\azure\\komercio plus\\frontend_forms\\ui\\forms\\product\\produto\\fmcreateproduct.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{44D56DD6-A48F-48C7-9DB4-CD3BA6950EF2}|Komercio.csproj|solutionrelative:ui\\forms\\product\\produto\\fmcreateproduct.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{44D56DD6-A48F-48C7-9DB4-CD3BA6950EF2}|Komercio.csproj|c:\\reposit\u00F3rio komercio\\azure\\komercio plus\\frontend_forms\\ui\\forms\\product\\produto\\fmimputproduct.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{44D56DD6-A48F-48C7-9DB4-CD3BA6950EF2}|Komercio.csproj|solutionrelative:ui\\forms\\product\\produto\\fmimputproduct.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{44D56DD6-A48F-48C7-9DB4-CD3BA6950EF2}|Komercio.csproj|c:\\reposit\u00F3rio komercio\\azure\\komercio plus\\frontend_forms\\models\\productdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{44D56DD6-A48F-48C7-9DB4-CD3BA6950EF2}|Komercio.csproj|solutionrelative:models\\productdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{44D56DD6-A48F-48C7-9DB4-CD3BA6950EF2}|Komercio.csproj|c:\\reposit\u00F3rio komercio\\azure\\komercio plus\\frontend_forms\\ui\\forms\\product\\produto\\fmimputproduct.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{44D56DD6-A48F-48C7-9DB4-CD3BA6950EF2}|Komercio.csproj|solutionrelative:ui\\forms\\product\\produto\\fmimputproduct.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{44D56DD6-A48F-48C7-9DB4-CD3BA6950EF2}|Komercio.csproj|c:\\reposit\u00F3rio komercio\\azure\\komercio plus\\frontend_forms\\ui\\forms\\product\\produto\\fmcreateproduct.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{44D56DD6-A48F-48C7-9DB4-CD3BA6950EF2}|Komercio.csproj|solutionrelative:ui\\forms\\product\\produto\\fmcreateproduct.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+      "AbsoluteMoniker": "D:0:0:{44D56DD6-A48F-48C7-9DB4-CD3BA6950EF2}|Komercio.csproj|c:\\reposit\u00F3rio komercio\\azure\\komercio plus\\frontend_forms\\ui\\forms\\sales\\fmsalepaymant.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{44D56DD6-A48F-48C7-9DB4-CD3BA6950EF2}|Komercio.csproj|solutionrelative:ui\\forms\\sales\\fmsalepaymant.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{44D56DD6-A48F-48C7-9DB4-CD3BA6950EF2}|Komercio.csproj|c:\\reposit\u00F3rio komercio\\azure\\komercio plus\\frontend_forms\\ui\\forms\\product\\frmproductvisualize.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{44D56DD6-A48F-48C7-9DB4-CD3BA6950EF2}|Komercio.csproj|solutionrelative:ui\\forms\\product\\frmproductvisualize.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{44D56DD6-A48F-48C7-9DB4-CD3BA6950EF2}|Komercio.csproj|c:\\reposit\u00F3rio komercio\\azure\\komercio plus\\frontend_forms\\applicationlayer\\produtoapp.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{44D56DD6-A48F-48C7-9DB4-CD3BA6950EF2}|Komercio.csproj|solutionrelative:applicationlayer\\produtoapp.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{44D56DD6-A48F-48C7-9DB4-CD3BA6950EF2}|Komercio.csproj|c:\\reposit\u00F3rio komercio\\azure\\komercio plus\\frontend_forms\\ui\\forms\\product\\frmproductvisualize.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{44D56DD6-A48F-48C7-9DB4-CD3BA6950EF2}|Komercio.csproj|solutionrelative:ui\\forms\\product\\frmproductvisualize.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+      "AbsoluteMoniker": "D:0:0:{44D56DD6-A48F-48C7-9DB4-CD3BA6950EF2}|Komercio.csproj|c:\\reposit\u00F3rio komercio\\azure\\komercio plus\\frontend_forms\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{44D56DD6-A48F-48C7-9DB4-CD3BA6950EF2}|Komercio.csproj|solutionrelative:form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{44D56DD6-A48F-48C7-9DB4-CD3BA6950EF2}|Komercio.csproj|c:\\reposit\u00F3rio komercio\\azure\\komercio plus\\frontend_forms\\ui\\forms\\sales\\fmsalesproduct.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{44D56DD6-A48F-48C7-9DB4-CD3BA6950EF2}|Komercio.csproj|solutionrelative:ui\\forms\\sales\\fmsalesproduct.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{44D56DD6-A48F-48C7-9DB4-CD3BA6950EF2}|Komercio.csproj|c:\\reposit\u00F3rio komercio\\azure\\komercio plus\\frontend_forms\\ui\\forms\\sales\\fmsalepaymant.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{44D56DD6-A48F-48C7-9DB4-CD3BA6950EF2}|Komercio.csproj|solutionrelative:ui\\forms\\sales\\fmsalepaymant.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -38,103 +38,98 @@
       "DocumentGroups": [
         {
           "DockedWidth": 318,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 1,
           "Children": [
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "fmAlterarProduto.cs",
-              "DocumentMoniker": "C:\\Reposit\u00F3rio Komercio\\Azure\\Komercio plus\\Frontend_Forms\\UI\\Forms\\Product\\Produto\\fmAlterarProduto.cs",
-              "RelativeDocumentMoniker": "UI\\Forms\\Product\\Produto\\fmAlterarProduto.cs",
-              "ToolTip": "C:\\Reposit\u00F3rio Komercio\\Azure\\Komercio plus\\Frontend_Forms\\UI\\Forms\\Product\\Produto\\fmAlterarProduto.cs",
-              "RelativeToolTip": "UI\\Forms\\Product\\Produto\\fmAlterarProduto.cs",
-              "ViewState": "AgIAALMAAAAAAAAAAAAvwNMAAAAiAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-05T12:33:38.224Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "ProductDTO.cs",
-              "DocumentMoniker": "C:\\Reposit\u00F3rio Komercio\\Azure\\Komercio plus\\Frontend_Forms\\Models\\ProductDTO.cs",
-              "RelativeDocumentMoniker": "Models\\ProductDTO.cs",
-              "ToolTip": "C:\\Reposit\u00F3rio Komercio\\Azure\\Komercio plus\\Frontend_Forms\\Models\\ProductDTO.cs",
-              "RelativeToolTip": "Models\\ProductDTO.cs",
-              "ViewState": "AgIAACQAAAAAAAAAAAAUwDUAAAANAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-05T12:31:35.378Z",
-              "EditorCaption": ""
-            },
             {
               "$type": "Bookmark",
               "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
             },
             {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{d78612c7-9962-4b83-95d9-268046dad23a}"
-            },
-            {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "fmCreateProduct.cs",
-              "DocumentMoniker": "C:\\Reposit\u00F3rio Komercio\\Azure\\Komercio plus\\Frontend_Forms\\UI\\Forms\\Product\\Produto\\fmCreateProduct.cs",
-              "RelativeDocumentMoniker": "UI\\Forms\\Product\\Produto\\fmCreateProduct.cs",
-              "ToolTip": "C:\\Reposit\u00F3rio Komercio\\Azure\\Komercio plus\\Frontend_Forms\\UI\\Forms\\Product\\Produto\\fmCreateProduct.cs",
-              "RelativeToolTip": "UI\\Forms\\Product\\Produto\\fmCreateProduct.cs",
-              "ViewState": "AgIAAHkAAAAAAAAAAAAmwI8AAAAZAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-05T12:28:29.952Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "fmCreateProduct.cs [Design]",
-              "DocumentMoniker": "C:\\Reposit\u00F3rio Komercio\\Azure\\Komercio plus\\Frontend_Forms\\UI\\Forms\\Product\\Produto\\fmCreateProduct.cs",
-              "RelativeDocumentMoniker": "UI\\Forms\\Product\\Produto\\fmCreateProduct.cs",
-              "ToolTip": "C:\\Reposit\u00F3rio Komercio\\Azure\\Komercio plus\\Frontend_Forms\\UI\\Forms\\Product\\Produto\\fmCreateProduct.cs [Design]",
-              "RelativeToolTip": "UI\\Forms\\Product\\Produto\\fmCreateProduct.cs [Design]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-05T12:25:34.722Z",
-              "EditorCaption": " [Design]"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "frmProductVisualize.cs",
-              "DocumentMoniker": "C:\\Reposit\u00F3rio Komercio\\Azure\\Komercio plus\\Frontend_Forms\\UI\\Forms\\Product\\frmProductVisualize.cs",
-              "RelativeDocumentMoniker": "UI\\Forms\\Product\\frmProductVisualize.cs",
-              "ToolTip": "C:\\Reposit\u00F3rio Komercio\\Azure\\Komercio plus\\Frontend_Forms\\UI\\Forms\\Product\\frmProductVisualize.cs",
-              "RelativeToolTip": "UI\\Forms\\Product\\frmProductVisualize.cs",
-              "ViewState": "AgIAAC4AAAAAAAAAAAA3wFMAAABHAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-05T12:10:59.644Z",
+              "DocumentIndex": 0,
+              "Title": "Komercio.exe.config",
+              "DocumentMoniker": "C:\\Reposit\u00F3rio Komercio\\Azure\\Komercio plus\\Frontend_Forms\\bin\\Debug\\Komercio.exe.config",
+              "RelativeDocumentMoniker": "bin\\Debug\\Komercio.exe.config",
+              "ToolTip": "C:\\Reposit\u00F3rio Komercio\\Azure\\Komercio plus\\Frontend_Forms\\bin\\Debug\\Komercio.exe.config",
+              "RelativeToolTip": "bin\\Debug\\Komercio.exe.config",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAXAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000601|",
+              "WhenOpened": "2026-01-07T15:23:52.257Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 5,
-              "Title": "frmProductVisualize.cs [Design]",
-              "DocumentMoniker": "C:\\Reposit\u00F3rio Komercio\\Azure\\Komercio plus\\Frontend_Forms\\UI\\Forms\\Product\\frmProductVisualize.cs",
-              "RelativeDocumentMoniker": "UI\\Forms\\Product\\frmProductVisualize.cs",
-              "ToolTip": "C:\\Reposit\u00F3rio Komercio\\Azure\\Komercio plus\\Frontend_Forms\\UI\\Forms\\Product\\frmProductVisualize.cs [Design]",
-              "RelativeToolTip": "UI\\Forms\\Product\\frmProductVisualize.cs [Design]",
+              "Title": "Form1.cs [Design]",
+              "DocumentMoniker": "C:\\Reposit\u00F3rio Komercio\\Azure\\Komercio plus\\Frontend_Forms\\Form1.cs",
+              "RelativeDocumentMoniker": "Form1.cs",
+              "ToolTip": "C:\\Reposit\u00F3rio Komercio\\Azure\\Komercio plus\\Frontend_Forms\\Form1.cs [Design]",
+              "RelativeToolTip": "Form1.cs [Design]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-05T12:10:58.529Z",
+              "WhenOpened": "2026-01-07T14:10:24.745Z",
               "EditorCaption": " [Design]"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "fmSalesProduct.cs",
-              "DocumentMoniker": "C:\\Reposit\u00F3rio Komercio\\Azure\\Komercio plus\\Frontend_Forms\\UI\\Forms\\Sales\\fmSalesProduct.cs",
-              "RelativeDocumentMoniker": "UI\\Forms\\Sales\\fmSalesProduct.cs",
-              "ToolTip": "C:\\Reposit\u00F3rio Komercio\\Azure\\Komercio plus\\Frontend_Forms\\UI\\Forms\\Sales\\fmSalesProduct.cs",
-              "RelativeToolTip": "UI\\Forms\\Sales\\fmSalesProduct.cs",
-              "ViewState": "AgIAAFMAAAAAAAAAAAAcwGsAAABIAAAAAAAAAA==",
+              "DocumentIndex": 4,
+              "Title": "ProdutoApp.cs",
+              "DocumentMoniker": "C:\\Reposit\u00F3rio Komercio\\Azure\\Komercio plus\\Frontend_Forms\\ApplicationLayer\\ProdutoApp.cs",
+              "RelativeDocumentMoniker": "ApplicationLayer\\ProdutoApp.cs",
+              "ToolTip": "C:\\Reposit\u00F3rio Komercio\\Azure\\Komercio plus\\Frontend_Forms\\ApplicationLayer\\ProdutoApp.cs",
+              "RelativeToolTip": "ApplicationLayer\\ProdutoApp.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAIsAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-05T12:09:31.759Z",
+              "WhenOpened": "2026-01-07T14:08:20.524Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "fmSalePaymant.cs [Design]",
+              "DocumentMoniker": "C:\\Reposit\u00F3rio Komercio\\Azure\\Komercio plus\\Frontend_Forms\\UI\\Forms\\Sales\\fmSalePaymant.cs",
+              "RelativeDocumentMoniker": "UI\\Forms\\Sales\\fmSalePaymant.cs",
+              "ToolTip": "C:\\Reposit\u00F3rio Komercio\\Azure\\Komercio plus\\Frontend_Forms\\UI\\Forms\\Sales\\fmSalePaymant.cs [Design]",
+              "RelativeToolTip": "UI\\Forms\\Sales\\fmSalePaymant.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-07T12:52:44.466Z",
+              "EditorCaption": " [Design]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "fmImputProduct.cs [Design]",
+              "DocumentMoniker": "C:\\Reposit\u00F3rio Komercio\\Azure\\Komercio plus\\Frontend_Forms\\UI\\Forms\\Product\\Produto\\fmImputProduct.cs",
+              "RelativeDocumentMoniker": "UI\\Forms\\Product\\Produto\\fmImputProduct.cs",
+              "ToolTip": "C:\\Reposit\u00F3rio Komercio\\Azure\\Komercio plus\\Frontend_Forms\\UI\\Forms\\Product\\Produto\\fmImputProduct.cs [Design]",
+              "RelativeToolTip": "UI\\Forms\\Product\\Produto\\fmImputProduct.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-05T23:43:47.684Z",
+              "EditorCaption": " [Design]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "fmImputProduct.cs",
+              "DocumentMoniker": "C:\\Reposit\u00F3rio Komercio\\Azure\\Komercio plus\\Frontend_Forms\\UI\\Forms\\Product\\Produto\\fmImputProduct.cs",
+              "RelativeDocumentMoniker": "UI\\Forms\\Product\\Produto\\fmImputProduct.cs",
+              "ToolTip": "C:\\Reposit\u00F3rio Komercio\\Azure\\Komercio plus\\Frontend_Forms\\UI\\Forms\\Product\\Produto\\fmImputProduct.cs",
+              "RelativeToolTip": "UI\\Forms\\Product\\Produto\\fmImputProduct.cs",
+              "ViewState": "AgIAADgAAAAAAAAAAAAiwE8AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-05T23:40:57.389Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "fmSalePaymant.cs",
+              "DocumentMoniker": "C:\\Reposit\u00F3rio Komercio\\Azure\\Komercio plus\\Frontend_Forms\\UI\\Forms\\Sales\\fmSalePaymant.cs",
+              "RelativeDocumentMoniker": "UI\\Forms\\Sales\\fmSalePaymant.cs",
+              "ToolTip": "C:\\Reposit\u00F3rio Komercio\\Azure\\Komercio plus\\Frontend_Forms\\UI\\Forms\\Sales\\fmSalePaymant.cs",
+              "RelativeToolTip": "UI\\Forms\\Sales\\fmSalePaymant.cs",
+              "ViewState": "AgIAAIwAAAAAAAAAAAAswJ0AAABVAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-07T12:52:50.448Z",
               "EditorCaption": ""
             }
           ]

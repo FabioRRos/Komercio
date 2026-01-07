@@ -172,13 +172,34 @@ func (s *fullSaleService) CreateFullSale(ctx context.Context, salesAggregate *en
 		return 0, fmt.Errorf("erro ao confirmar transação: %w", err)
 	}
 
+	type difValue struct {
+		Sale_id     int
+		PrecoVenda  float32
+		PrecoCompra float32
+	}
+
+	var prod []*entity.DifValue
+
 	// aaqui vou baixar a lista dos produtos.
 	for _, item := range salesAggregate.Items {
-		if err := s.serv.BaixarProdutosListaDePrecos(ctx, item.Barcode, item.Quantity); err != nil {
-			return saleID, err
-
+		prodTemp := &entity.DifValue{
+			Sale_id:    saleID,     //id da venda
+			PrecoVenda: item.Total, // total recuperado no pacote atual
 		}
+
+		prodTemp.PrecoCompra, err = s.serv.BaixarProdutosListaDePrecos(
+			ctx,
+			item.Barcode,
+			item.Quantity,
+		)
+		if err != nil {
+			return saleID, err
+		}
+
+		prod = append(prod, prodTemp) // valor recebido da baixaProdutos.
 	}
+
+	err = s.serv.CreateValorCompraEVenda(ctx, prod)
 
 	return saleID, err
 }

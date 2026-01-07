@@ -40,6 +40,7 @@
             this.QTD = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Produto = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.mtbprecoentrada = new MaterialSkin.Controls.MaterialTextBox2();
             this.SuspendLayout();
             // 
             // mtbCodBar
@@ -150,18 +151,19 @@
             // 
             // mbtSave
             // 
+            this.mbtSave.AutoSize = false;
             this.mbtSave.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.mbtSave.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
             this.mbtSave.Depth = 0;
             this.mbtSave.Enabled = false;
             this.mbtSave.HighEmphasis = true;
             this.mbtSave.Icon = null;
-            this.mbtSave.Location = new System.Drawing.Point(109, 244);
+            this.mbtSave.Location = new System.Drawing.Point(23, 273);
             this.mbtSave.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.mbtSave.MouseState = MaterialSkin.MouseState.HOVER;
             this.mbtSave.Name = "mbtSave";
             this.mbtSave.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.mbtSave.Size = new System.Drawing.Size(76, 36);
+            this.mbtSave.Size = new System.Drawing.Size(250, 25);
             this.mbtSave.TabIndex = 10;
             this.mbtSave.Text = "Salvar";
             this.mbtSave.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
@@ -200,7 +202,7 @@
             this.mlvInput.MouseState = MaterialSkin.MouseState.OUT;
             this.mlvInput.Name = "mlvInput";
             this.mlvInput.OwnerDraw = true;
-            this.mlvInput.Size = new System.Drawing.Size(298, 240);
+            this.mlvInput.Size = new System.Drawing.Size(298, 263);
             this.mlvInput.TabIndex = 13;
             this.mlvInput.UseCompatibleStateImageBehavior = false;
             this.mlvInput.View = System.Windows.Forms.View.Details;
@@ -218,11 +220,46 @@
             // 
             this.columnHeader1.Text = "";
             // 
+            // mtbprecoentrada
+            // 
+            this.mtbprecoentrada.AnimateReadOnly = false;
+            this.mtbprecoentrada.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.mtbprecoentrada.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
+            this.mtbprecoentrada.Depth = 0;
+            this.mtbprecoentrada.Enabled = false;
+            this.mtbprecoentrada.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.mtbprecoentrada.HelperText = "0 manterá o valor atual.";
+            this.mtbprecoentrada.HideSelection = true;
+            this.mtbprecoentrada.Hint = "Preço entrada";
+            this.mtbprecoentrada.LeadingIcon = null;
+            this.mtbprecoentrada.Location = new System.Drawing.Point(23, 200);
+            this.mtbprecoentrada.MaxLength = 32767;
+            this.mtbprecoentrada.MouseState = MaterialSkin.MouseState.OUT;
+            this.mtbprecoentrada.Name = "mtbprecoentrada";
+            this.mtbprecoentrada.PasswordChar = '\0';
+            this.mtbprecoentrada.PrefixSuffixText = null;
+            this.mtbprecoentrada.ReadOnly = false;
+            this.mtbprecoentrada.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.mtbprecoentrada.SelectedText = "";
+            this.mtbprecoentrada.SelectionLength = 0;
+            this.mtbprecoentrada.SelectionStart = 0;
+            this.mtbprecoentrada.ShortcutsEnabled = true;
+            this.mtbprecoentrada.ShowAssistiveText = true;
+            this.mtbprecoentrada.Size = new System.Drawing.Size(250, 64);
+            this.mtbprecoentrada.TabIndex = 14;
+            this.mtbprecoentrada.TabStop = false;
+            this.mtbprecoentrada.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.mtbprecoentrada.TrailingIcon = null;
+            this.mtbprecoentrada.UseSystemPasswordChar = false;
+            this.mtbprecoentrada.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.mtbprecoentrada_KeyPress);
+            this.mtbprecoentrada.TextChanged += new System.EventHandler(this.mtbprecoentrada_TextChanged);
+            // 
             // fmImputProduct
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(613, 294);
+            this.ClientSize = new System.Drawing.Size(613, 313);
+            this.Controls.Add(this.mtbprecoentrada);
             this.Controls.Add(this.mlvInput);
             this.Controls.Add(this.materialLabel5);
             this.Controls.Add(this.mbtSave);
@@ -254,5 +291,6 @@
         private System.Windows.Forms.ColumnHeader QTD;
         private System.Windows.Forms.ColumnHeader Produto;
         private System.Windows.Forms.ColumnHeader columnHeader1;
+        private MaterialSkin.Controls.MaterialTextBox2 mtbprecoentrada;
     }
 }
