@@ -137,6 +137,7 @@ namespace Komercio.UI.Forms.Sales
         {
             // Aqui estou carregando a lista dentro do service.
             await _saleService.loaddbListaproduto(_productService);
+           _saleService.AtualizaListaDeProdutosComOCarrinho();
             dbListaproduto.DataSource = _saleService.listaDeprodutosPraUtilizarNoForm;
             ConfigurarColunasProdutos();
         }
@@ -167,25 +168,6 @@ namespace Komercio.UI.Forms.Sales
             }
 
 
-            /*
-  * Via API
-  * 
-  * try
-  * {
-  *     var temp = await _productService.GetProductByCodbad(mtbBarCode.Text);
-  * 
-  *     if (temp.idProduct == 0)
-  *         return;
-  * 
-  *     PreencherCamposProduto(temp);
-  * }
-  * catch
-  * {
-  *     return;
-  * }
-  */
-
-            // lista em memória
         }
 
         //Preenche os campos da lista de produtos
@@ -303,7 +285,9 @@ namespace Komercio.UI.Forms.Sales
             materialTextBox22.Text = "";
         }
 
-
+        /// <summary>
+        /// Adiciona um item no carrinho.
+        /// </summary>
         private void newIten()
         {
             if (mtbBarCode.Text == "")
@@ -504,7 +488,9 @@ namespace Komercio.UI.Forms.Sales
             if (e.KeyCode == Keys.F6)
             {
                 fmImputProduct inputProduct = new fmImputProduct(_produtoApp);
-                inputProduct.ShowDialog();
+                var retorno = inputProduct.ShowDialog();
+
+               
                 await loaddbListaproduto();
             }
         }

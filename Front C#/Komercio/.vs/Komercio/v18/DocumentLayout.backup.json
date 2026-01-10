@@ -3,44 +3,28 @@
   "WorkspaceRootPath": "C:\\Reposit\u00F3rio Komercio\\Azure\\Komercio plus\\Frontend_Forms\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{44D56DD6-A48F-48C7-9DB4-CD3BA6950EF2}|Komercio.csproj|c:\\reposit\u00F3rio komercio\\azure\\komercio plus\\frontend_forms\\applicationlayer\\salesapp.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{44D56DD6-A48F-48C7-9DB4-CD3BA6950EF2}|Komercio.csproj|solutionrelative:applicationlayer\\salesapp.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{44D56DD6-A48F-48C7-9DB4-CD3BA6950EF2}|Komercio.csproj|c:\\reposit\u00F3rio komercio\\azure\\komercio plus\\frontend_forms\\models\\productdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{44D56DD6-A48F-48C7-9DB4-CD3BA6950EF2}|Komercio.csproj|solutionrelative:models\\productdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{44D56DD6-A48F-48C7-9DB4-CD3BA6950EF2}|Komercio.csproj|c:\\reposit\u00F3rio komercio\\azure\\komercio plus\\frontend_forms\\services\\buscacepservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{44D56DD6-A48F-48C7-9DB4-CD3BA6950EF2}|Komercio.csproj|solutionrelative:services\\buscacepservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{44D56DD6-A48F-48C7-9DB4-CD3BA6950EF2}|Komercio.csproj|c:\\reposit\u00F3rio komercio\\azure\\komercio plus\\frontend_forms\\services\\productservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{44D56DD6-A48F-48C7-9DB4-CD3BA6950EF2}|Komercio.csproj|solutionrelative:services\\productservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{44D56DD6-A48F-48C7-9DB4-CD3BA6950EF2}|Komercio.csproj|c:\\reposit\u00F3rio komercio\\azure\\komercio plus\\frontend_forms\\applicationlayer\\managers\\salemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{44D56DD6-A48F-48C7-9DB4-CD3BA6950EF2}|Komercio.csproj|solutionrelative:applicationlayer\\managers\\salemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{44D56DD6-A48F-48C7-9DB4-CD3BA6950EF2}|Komercio.csproj|c:\\reposit\u00F3rio komercio\\azure\\komercio plus\\frontend_forms\\ui\\forms\\sales\\fmsalesproduct.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{44D56DD6-A48F-48C7-9DB4-CD3BA6950EF2}|Komercio.csproj|solutionrelative:ui\\forms\\sales\\fmsalesproduct.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{44D56DD6-A48F-48C7-9DB4-CD3BA6950EF2}|Komercio.csproj|c:\\reposit\u00F3rio komercio\\azure\\komercio plus\\frontend_forms\\applicationlayer\\dumpapp.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{44D56DD6-A48F-48C7-9DB4-CD3BA6950EF2}|Komercio.csproj|solutionrelative:applicationlayer\\dumpapp.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{44D56DD6-A48F-48C7-9DB4-CD3BA6950EF2}|Komercio.csproj|c:\\reposit\u00F3rio komercio\\azure\\komercio plus\\frontend_forms\\ui\\forms\\sales\\fmsalesproduct.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{44D56DD6-A48F-48C7-9DB4-CD3BA6950EF2}|Komercio.csproj|solutionrelative:ui\\forms\\sales\\fmsalesproduct.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{44D56DD6-A48F-48C7-9DB4-CD3BA6950EF2}|Komercio.csproj|c:\\reposit\u00F3rio komercio\\azure\\komercio plus\\frontend_forms\\applicationlayer\\employeeserviceapp.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{44D56DD6-A48F-48C7-9DB4-CD3BA6950EF2}|Komercio.csproj|solutionrelative:applicationlayer\\employeeserviceapp.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{44D56DD6-A48F-48C7-9DB4-CD3BA6950EF2}|Komercio.csproj|c:\\reposit\u00F3rio komercio\\azure\\komercio plus\\frontend_forms\\ui\\forms\\product\\produto\\fmimputproduct.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{44D56DD6-A48F-48C7-9DB4-CD3BA6950EF2}|Komercio.csproj|solutionrelative:ui\\forms\\product\\produto\\fmimputproduct.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{44D56DD6-A48F-48C7-9DB4-CD3BA6950EF2}|Komercio.csproj|c:\\reposit\u00F3rio komercio\\azure\\komercio plus\\frontend_forms\\applicationlayer\\parametrosapp.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{44D56DD6-A48F-48C7-9DB4-CD3BA6950EF2}|Komercio.csproj|solutionrelative:applicationlayer\\parametrosapp.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{44D56DD6-A48F-48C7-9DB4-CD3BA6950EF2}|Komercio.csproj|c:\\reposit\u00F3rio komercio\\azure\\komercio plus\\frontend_forms\\applicationlayer\\produtoapp.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{44D56DD6-A48F-48C7-9DB4-CD3BA6950EF2}|Komercio.csproj|solutionrelative:applicationlayer\\produtoapp.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{44D56DD6-A48F-48C7-9DB4-CD3BA6950EF2}|Komercio.csproj|c:\\reposit\u00F3rio komercio\\azure\\komercio plus\\frontend_forms\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{44D56DD6-A48F-48C7-9DB4-CD3BA6950EF2}|Komercio.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{44D56DD6-A48F-48C7-9DB4-CD3BA6950EF2}|Komercio.csproj|c:\\reposit\u00F3rio komercio\\azure\\komercio plus\\frontend_forms\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{44D56DD6-A48F-48C7-9DB4-CD3BA6950EF2}|Komercio.csproj|solutionrelative:form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{44D56DD6-A48F-48C7-9DB4-CD3BA6950EF2}|Komercio.csproj|c:\\reposit\u00F3rio komercio\\azure\\komercio plus\\frontend_forms\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{44D56DD6-A48F-48C7-9DB4-CD3BA6950EF2}|Komercio.csproj|solutionrelative:form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+      "AbsoluteMoniker": "D:0:0:{44D56DD6-A48F-48C7-9DB4-CD3BA6950EF2}|Komercio.csproj|c:\\reposit\u00F3rio komercio\\azure\\komercio plus\\frontend_forms\\ui\\forms\\product\\produto\\fmimputproduct.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{44D56DD6-A48F-48C7-9DB4-CD3BA6950EF2}|Komercio.csproj|solutionrelative:ui\\forms\\product\\produto\\fmimputproduct.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     }
   ],
   "DocumentGroupContainers": [
@@ -50,7 +34,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 318,
-          "SelectedChildIndex": 4,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Bookmark",
@@ -58,132 +42,79 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "BuscaCEPService.cs",
-              "DocumentMoniker": "C:\\Reposit\u00F3rio Komercio\\Azure\\Komercio plus\\Frontend_Forms\\Services\\BuscaCEPService.cs",
-              "RelativeDocumentMoniker": "Services\\BuscaCEPService.cs",
-              "ToolTip": "C:\\Reposit\u00F3rio Komercio\\Azure\\Komercio plus\\Frontend_Forms\\Services\\BuscaCEPService.cs",
-              "RelativeToolTip": "Services\\BuscaCEPService.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAB0AAAAJAAAAAAAAAA==",
+              "DocumentIndex": 0,
+              "Title": "ProductDTO.cs",
+              "DocumentMoniker": "C:\\Reposit\u00F3rio Komercio\\Azure\\Komercio plus\\Frontend_Forms\\Models\\ProductDTO.cs",
+              "RelativeDocumentMoniker": "Models\\ProductDTO.cs",
+              "ToolTip": "C:\\Reposit\u00F3rio Komercio\\Azure\\Komercio plus\\Frontend_Forms\\Models\\ProductDTO.cs",
+              "RelativeToolTip": "Models\\ProductDTO.cs",
+              "ViewState": "AgIAABYAAAAAAAAAAAAowB4AAAAqAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-07T17:59:54.731Z",
+              "WhenOpened": "2026-01-10T01:15:24.888Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "SaleManager.cs",
-              "DocumentMoniker": "C:\\Reposit\u00F3rio Komercio\\Azure\\Komercio plus\\Frontend_Forms\\ApplicationLayer\\Managers\\SaleManager.cs",
-              "RelativeDocumentMoniker": "ApplicationLayer\\Managers\\SaleManager.cs",
-              "ToolTip": "C:\\Reposit\u00F3rio Komercio\\Azure\\Komercio plus\\Frontend_Forms\\ApplicationLayer\\Managers\\SaleManager.cs",
-              "RelativeToolTip": "ApplicationLayer\\Managers\\SaleManager.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAEEAAAAWAAAAAAAAAA==",
+              "Title": "fmSalesProduct.cs",
+              "DocumentMoniker": "C:\\Reposit\u00F3rio Komercio\\Azure\\Komercio plus\\Frontend_Forms\\UI\\Forms\\Sales\\fmSalesProduct.cs",
+              "RelativeDocumentMoniker": "UI\\Forms\\Sales\\fmSalesProduct.cs",
+              "ToolTip": "C:\\Reposit\u00F3rio Komercio\\Azure\\Komercio plus\\Frontend_Forms\\UI\\Forms\\Sales\\fmSalesProduct.cs",
+              "RelativeToolTip": "UI\\Forms\\Sales\\fmSalesProduct.cs",
+              "ViewState": "AgIAADoBAAAAAAAAAAAawEkBAAAMAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-07T17:59:33.558Z",
+              "WhenOpened": "2026-01-10T00:48:06.722Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 3,
-              "Title": "DumpApp.cs",
-              "DocumentMoniker": "C:\\Reposit\u00F3rio Komercio\\Azure\\Komercio plus\\Frontend_Forms\\ApplicationLayer\\DumpApp.cs",
-              "RelativeDocumentMoniker": "ApplicationLayer\\DumpApp.cs",
-              "ToolTip": "C:\\Reposit\u00F3rio Komercio\\Azure\\Komercio plus\\Frontend_Forms\\ApplicationLayer\\DumpApp.cs",
-              "RelativeToolTip": "ApplicationLayer\\DumpApp.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Title": "fmSalesProduct.cs [Design]",
+              "DocumentMoniker": "C:\\Reposit\u00F3rio Komercio\\Azure\\Komercio plus\\Frontend_Forms\\UI\\Forms\\Sales\\fmSalesProduct.cs",
+              "RelativeDocumentMoniker": "UI\\Forms\\Sales\\fmSalesProduct.cs",
+              "ToolTip": "C:\\Reposit\u00F3rio Komercio\\Azure\\Komercio plus\\Frontend_Forms\\UI\\Forms\\Sales\\fmSalesProduct.cs [Design]",
+              "RelativeToolTip": "UI\\Forms\\Sales\\fmSalesProduct.cs [Design]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-07T17:59:29.04Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "SalesApp.cs",
-              "DocumentMoniker": "C:\\Reposit\u00F3rio Komercio\\Azure\\Komercio plus\\Frontend_Forms\\ApplicationLayer\\SalesApp.cs",
-              "RelativeDocumentMoniker": "ApplicationLayer\\SalesApp.cs",
-              "ToolTip": "C:\\Reposit\u00F3rio Komercio\\Azure\\Komercio plus\\Frontend_Forms\\ApplicationLayer\\SalesApp.cs",
-              "RelativeToolTip": "ApplicationLayer\\SalesApp.cs",
-              "ViewState": "AgIAAJ8AAAAAAAAAAAAAwKoAAABAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-07T17:59:03.771Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-01-10T00:47:58.671Z",
+              "EditorCaption": " [Design]"
             },
             {
               "$type": "Document",
               "DocumentIndex": 4,
-              "Title": "EmployeeServiceApp.cs",
-              "DocumentMoniker": "C:\\Reposit\u00F3rio Komercio\\Azure\\Komercio plus\\Frontend_Forms\\ApplicationLayer\\EmployeeServiceApp.cs",
-              "RelativeDocumentMoniker": "ApplicationLayer\\EmployeeServiceApp.cs",
-              "ToolTip": "C:\\Reposit\u00F3rio Komercio\\Azure\\Komercio plus\\Frontend_Forms\\ApplicationLayer\\EmployeeServiceApp.cs",
-              "RelativeToolTip": "ApplicationLayer\\EmployeeServiceApp.cs",
-              "ViewState": "AgIAAA4AAAAAAAAAAAAQwCcAAAAAAAAAAAAAAA==",
+              "Title": "fmImputProduct.cs",
+              "DocumentMoniker": "C:\\Reposit\u00F3rio Komercio\\Azure\\Komercio plus\\Frontend_Forms\\UI\\Forms\\Product\\Produto\\fmImputProduct.cs",
+              "RelativeDocumentMoniker": "UI\\Forms\\Product\\Produto\\fmImputProduct.cs",
+              "ToolTip": "C:\\Reposit\u00F3rio Komercio\\Azure\\Komercio plus\\Frontend_Forms\\UI\\Forms\\Product\\Produto\\fmImputProduct.cs",
+              "RelativeToolTip": "UI\\Forms\\Product\\Produto\\fmImputProduct.cs",
+              "ViewState": "AgIAADIAAAAAAAAAAAAawDsAAABNAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-07T17:59:14.344Z",
+              "WhenOpened": "2026-01-10T00:29:01.772Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 5,
-              "Title": "ParametrosApp.cs",
-              "DocumentMoniker": "C:\\Reposit\u00F3rio Komercio\\Azure\\Komercio plus\\Frontend_Forms\\ApplicationLayer\\ParametrosApp.cs",
-              "RelativeDocumentMoniker": "ApplicationLayer\\ParametrosApp.cs",
-              "ToolTip": "C:\\Reposit\u00F3rio Komercio\\Azure\\Komercio plus\\Frontend_Forms\\ApplicationLayer\\ParametrosApp.cs",
-              "RelativeToolTip": "ApplicationLayer\\ParametrosApp.cs",
-              "ViewState": "AgIAABAAAAAAAAAAAAAgwAAAAAAAAAAAAAAAAA==",
+              "Title": "fmImputProduct.cs [Design]",
+              "DocumentMoniker": "C:\\Reposit\u00F3rio Komercio\\Azure\\Komercio plus\\Frontend_Forms\\UI\\Forms\\Product\\Produto\\fmImputProduct.cs",
+              "RelativeDocumentMoniker": "UI\\Forms\\Product\\Produto\\fmImputProduct.cs",
+              "ToolTip": "C:\\Reposit\u00F3rio Komercio\\Azure\\Komercio plus\\Frontend_Forms\\UI\\Forms\\Product\\Produto\\fmImputProduct.cs [Design]",
+              "RelativeToolTip": "UI\\Forms\\Product\\Produto\\fmImputProduct.cs [Design]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-07T17:59:11.301Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "ProdutoApp.cs",
-              "DocumentMoniker": "C:\\Reposit\u00F3rio Komercio\\Azure\\Komercio plus\\Frontend_Forms\\ApplicationLayer\\ProdutoApp.cs",
-              "RelativeDocumentMoniker": "ApplicationLayer\\ProdutoApp.cs",
-              "ToolTip": "C:\\Reposit\u00F3rio Komercio\\Azure\\Komercio plus\\Frontend_Forms\\ApplicationLayer\\ProdutoApp.cs",
-              "RelativeToolTip": "ApplicationLayer\\ProdutoApp.cs",
-              "ViewState": "AgIAAEYAAAAAAAAAAAAcwAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-07T17:59:08.66Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Reposit\u00F3rio Komercio\\Azure\\Komercio plus\\Frontend_Forms\\Program.cs",
-              "RelativeDocumentMoniker": "Program.cs",
-              "ToolTip": "C:\\Reposit\u00F3rio Komercio\\Azure\\Komercio plus\\Frontend_Forms\\Program.cs",
-              "RelativeToolTip": "Program.cs",
-              "ViewState": "AgIAACgAAAAAAAAAAAAgwDAAAABGAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-07T17:57:49.729Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "Form1.cs",
-              "DocumentMoniker": "C:\\Reposit\u00F3rio Komercio\\Azure\\Komercio plus\\Frontend_Forms\\Form1.cs",
-              "RelativeDocumentMoniker": "Form1.cs",
-              "ToolTip": "C:\\Reposit\u00F3rio Komercio\\Azure\\Komercio plus\\Frontend_Forms\\Form1.cs",
-              "RelativeToolTip": "Form1.cs",
-              "ViewState": "AgIAAEQCAAAAAAAAAAAmwEwCAAAVAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-07T17:57:15.941Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "Form1.cs [Design]",
-              "DocumentMoniker": "C:\\Reposit\u00F3rio Komercio\\Azure\\Komercio plus\\Frontend_Forms\\Form1.cs",
-              "RelativeDocumentMoniker": "Form1.cs",
-              "ToolTip": "C:\\Reposit\u00F3rio Komercio\\Azure\\Komercio plus\\Frontend_Forms\\Form1.cs [Design]",
-              "RelativeToolTip": "Form1.cs [Design]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-07T17:57:14.156Z",
+              "WhenOpened": "2026-01-10T00:28:58.691Z",
               "EditorCaption": " [Design]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "ProductService.cs",
+              "DocumentMoniker": "C:\\Reposit\u00F3rio Komercio\\Azure\\Komercio plus\\Frontend_Forms\\Services\\ProductService.cs",
+              "RelativeDocumentMoniker": "Services\\ProductService.cs",
+              "ToolTip": "C:\\Reposit\u00F3rio Komercio\\Azure\\Komercio plus\\Frontend_Forms\\Services\\ProductService.cs",
+              "RelativeToolTip": "Services\\ProductService.cs",
+              "ViewState": "AgIAAGIAAAAAAAAAAAAawGkAAABOAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-10T01:13:38.426Z",
+              "EditorCaption": ""
             }
           ]
         }

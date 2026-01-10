@@ -227,7 +227,7 @@
             this.mtbprecoentrada.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
             this.mtbprecoentrada.Depth = 0;
             this.mtbprecoentrada.Enabled = false;
-            this.mtbprecoentrada.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.mtbprecoentrada.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.mtbprecoentrada.HelperText = "0 manterá o valor atual.";
             this.mtbprecoentrada.HideSelection = true;
             this.mtbprecoentrada.Hint = "Preço entrada";
@@ -272,6 +272,7 @@
             this.Name = "fmImputProduct";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Entrada estoque";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.fmImputProduct_FormClosed);
             this.Load += new System.EventHandler(this.fmImputProduct_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

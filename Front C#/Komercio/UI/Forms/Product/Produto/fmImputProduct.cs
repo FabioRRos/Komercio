@@ -161,5 +161,10 @@ namespace Komercio.UI.Forms.Product
             mtbprecoentrada.Text = string.Format(System.Globalization.CultureInfo.GetCultureInfo("pt-BR"), "{0:C2}", valor);
             mtbprecoentrada.SelectionStart = mtbprecoentrada.Text.Length;
         }
+
+        private void fmImputProduct_FormClosed(object sender, FormClosedEventArgs e)
+        {
+
+        }
     }
 }

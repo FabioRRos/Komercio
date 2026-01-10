@@ -60,6 +60,27 @@ namespace Komercio.Services
             }
         }
 
+        /// <summary>
+        /// Esse cara vai atualizar a lista de produtos.
+        /// O que acontecia, quando eu adicionava um produto em estoque durante a venda,
+        /// Eu atualizava os produtos chamando a api de produtos. Então eu perdia os produtos que tirei e permitia, por exempo,
+        /// vender mais do que eu tinha em estoque.
+        /// </summary>
+        public void AtualizaListaDeProdutosComOCarrinho()
+        {
+            //Primeiro eu rodo a lista de itens do carrinho por ser menor.
+            foreach(var produtoCarrinho in _productCar)
+            {   //Depois eu procuro o item do carinho no estoque
+                foreach (var produtoEstoque in listaDeprodutosPraUtilizarNoForm)
+                {       //se encontra-do, eu tiro do estoque o que já está no carrinho, deixando apenas o produto lançado.
+                    if(produtoCarrinho.Barcode == produtoEstoque.productCodbar)
+                    {
+                        produtoEstoque.productStock -= produtoCarrinho.Quantity;
+                    }
+                }
+            }
+        }
+
 
         /// <summary>
         /// BuscaProdutos
