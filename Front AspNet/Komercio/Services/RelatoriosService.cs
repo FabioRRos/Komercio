@@ -14,6 +14,7 @@ namespace Komercio.Services
         Task<List<MovimentacaoCaixaModel>> MovimentacaoCaixa();
         Task<List<FormaPagamentoModel>> FormaPagamento();
         Task<List<CaixaModel>> Caixa();
+        Task<List<LucratividadeModel>> GetLucratividadeAsync();
     }
     public class RelatoriosService : IRelatoriosService
     {
@@ -113,6 +114,34 @@ namespace Komercio.Services
         }
 
 
+
+        public async Task<List<LucratividadeModel>> GetLucratividadeAsync()
+        {
+            try
+            {
+                // Chamada para o endpoint do backend Go
+                // O GetFromJsonAsync usa internamente o System.Text.Json que lerá seus [JsonPropertyName]
+                var response = await _httpClient.GetAsync("Report/Margem");
+
+                if (!response.IsSuccessStatusCode)
+                {
+                    new List<LucratividadeModel>();
+                }
+
+                var json = await response.Content.ReadAsStringAsync();
+                var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
+                var caixa = JsonSerializer.Deserialize<List<LucratividadeModel>>(json, options);
+
+
+                return caixa;
+            }
+            catch (Exception ex)
+            {
+                // Logar o erro conforme sua necessidade
+                Console.WriteLine($"Erro ao buscar relatório: {ex.Message}");
+                return new List<LucratividadeModel>();
+            }
+        }
 
     }
 }

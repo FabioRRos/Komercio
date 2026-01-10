@@ -3,16 +3,20 @@
   "WorkspaceRootPath": "C:\\Reposit\u00F3rio Komercio\\Azure\\Komercio plus\\Fronend_ AspNet\\Komercio\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{390FB3F9-5348-9C75-552F-974EAA9D4639}|Komercio.csproj|c:\\reposit\u00F3rio komercio\\azure\\komercio plus\\fronend_ aspnet\\komercio\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{390FB3F9-5348-9C75-552F-974EAA9D4639}|Komercio.csproj|solutionrelative:controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{390FB3F9-5348-9C75-552F-974EAA9D4639}|Komercio.csproj|c:\\reposit\u00F3rio komercio\\azure\\komercio plus\\fronend_ aspnet\\komercio\\views\\relatorios\\financeiro.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{390FB3F9-5348-9C75-552F-974EAA9D4639}|Komercio.csproj|solutionrelative:views\\relatorios\\financeiro.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{390FB3F9-5348-9C75-552F-974EAA9D4639}|Komercio.csproj|c:\\reposit\u00F3rio komercio\\azure\\komercio plus\\fronend_ aspnet\\komercio\\models\\viewmodels\\relatoriolucratividadeviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{390FB3F9-5348-9C75-552F-974EAA9D4639}|Komercio.csproj|solutionrelative:models\\viewmodels\\relatoriolucratividadeviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{390FB3F9-5348-9C75-552F-974EAA9D4639}|Komercio.csproj|c:\\reposit\u00F3rio komercio\\azure\\komercio plus\\fronend_ aspnet\\komercio\\controllers\\relatorioscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{390FB3F9-5348-9C75-552F-974EAA9D4639}|Komercio.csproj|solutionrelative:controllers\\relatorioscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{390FB3F9-5348-9C75-552F-974EAA9D4639}|Komercio.csproj|c:\\reposit\u00F3rio komercio\\azure\\komercio plus\\fronend_ aspnet\\komercio\\views\\relatorios\\financeiro.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{390FB3F9-5348-9C75-552F-974EAA9D4639}|Komercio.csproj|solutionrelative:views\\relatorios\\financeiro.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{390FB3F9-5348-9C75-552F-974EAA9D4639}|Komercio.csproj|c:\\reposit\u00F3rio komercio\\azure\\komercio plus\\fronend_ aspnet\\komercio\\models\\dto\\lucratividademodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{390FB3F9-5348-9C75-552F-974EAA9D4639}|Komercio.csproj|solutionrelative:models\\dto\\lucratividademodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{390FB3F9-5348-9C75-552F-974EAA9D4639}|Komercio.csproj|c:\\reposit\u00F3rio komercio\\azure\\komercio plus\\fronend_ aspnet\\komercio\\services\\relatoriosservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -26,7 +30,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 372,
-          "SelectedChildIndex": 4,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Bookmark",
@@ -34,52 +38,64 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "Financeiro.cshtml",
-              "DocumentMoniker": "C:\\Reposit\u00F3rio Komercio\\Azure\\Komercio plus\\Fronend_ AspNet\\Komercio\\Views\\Relatorios\\Financeiro.cshtml",
-              "RelativeDocumentMoniker": "Views\\Relatorios\\Financeiro.cshtml",
-              "ToolTip": "C:\\Reposit\u00F3rio Komercio\\Azure\\Komercio plus\\Fronend_ AspNet\\Komercio\\Views\\Relatorios\\Financeiro.cshtml",
-              "RelativeToolTip": "Views\\Relatorios\\Financeiro.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAA9AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2026-01-07T14:13:14.683Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "RelatoriosController.cs",
-              "DocumentMoniker": "C:\\Reposit\u00F3rio Komercio\\Azure\\Komercio plus\\Fronend_ AspNet\\Komercio\\Controllers\\RelatoriosController.cs",
-              "RelativeDocumentMoniker": "Controllers\\RelatoriosController.cs",
-              "ToolTip": "C:\\Reposit\u00F3rio Komercio\\Azure\\Komercio plus\\Fronend_ AspNet\\Komercio\\Controllers\\RelatoriosController.cs",
-              "RelativeToolTip": "Controllers\\RelatoriosController.cs",
-              "ViewState": "AgIAALkAAAAAAAAAAAAIwM4AAAA7AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-07T14:12:55.049Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 4,
               "Title": "RelatoriosService.cs",
               "DocumentMoniker": "C:\\Reposit\u00F3rio Komercio\\Azure\\Komercio plus\\Fronend_ AspNet\\Komercio\\Services\\RelatoriosService.cs",
               "RelativeDocumentMoniker": "Services\\RelatoriosService.cs",
               "ToolTip": "C:\\Reposit\u00F3rio Komercio\\Azure\\Komercio plus\\Fronend_ AspNet\\Komercio\\Services\\RelatoriosService.cs",
               "RelativeToolTip": "Services\\RelatoriosService.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAHUAAAABAAAAAAAAAA==",
+              "ViewState": "AgIAAG4AAAAAAAAAAAAswHsAAAA8AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-07T11:59:42.816Z"
+              "WhenOpened": "2026-01-08T17:20:30.28Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "RelatoriosController.cs",
+              "DocumentMoniker": "C:\\Reposit\u00F3rio Komercio\\Azure\\Komercio plus\\Fronend_ AspNet\\Komercio\\Controllers\\RelatoriosController.cs",
+              "RelativeDocumentMoniker": "Controllers\\RelatoriosController.cs",
+              "ToolTip": "C:\\Reposit\u00F3rio Komercio\\Azure\\Komercio plus\\Fronend_ AspNet\\Komercio\\Controllers\\RelatoriosController.cs",
+              "RelativeToolTip": "Controllers\\RelatoriosController.cs",
+              "ViewState": "AgIAABABAAAAAAAAAADwvxwBAAA3AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-08T17:18:44.628Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "HomeController.cs",
-              "DocumentMoniker": "C:\\Reposit\u00F3rio Komercio\\Azure\\Komercio plus\\Fronend_ AspNet\\Komercio\\Controllers\\HomeController.cs",
-              "RelativeDocumentMoniker": "Controllers\\HomeController.cs",
-              "ToolTip": "C:\\Reposit\u00F3rio Komercio\\Azure\\Komercio plus\\Fronend_ AspNet\\Komercio\\Controllers\\HomeController.cs",
-              "RelativeToolTip": "Controllers\\HomeController.cs",
-              "ViewState": "AgIAAKUAAAAAAAAAAAAowLIAAAANAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-04T15:21:00.241Z",
+              "Title": "Financeiro.cshtml",
+              "DocumentMoniker": "C:\\Reposit\u00F3rio Komercio\\Azure\\Komercio plus\\Fronend_ AspNet\\Komercio\\Views\\Relatorios\\Financeiro.cshtml",
+              "RelativeDocumentMoniker": "Views\\Relatorios\\Financeiro.cshtml",
+              "ToolTip": "C:\\Reposit\u00F3rio Komercio\\Azure\\Komercio plus\\Fronend_ AspNet\\Komercio\\Views\\Relatorios\\Financeiro.cshtml",
+              "RelativeToolTip": "Views\\Relatorios\\Financeiro.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAARAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-01-08T17:16:26.31Z",
               "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "RelatorioLucratividadeViewModel.cs",
+              "DocumentMoniker": "C:\\Reposit\u00F3rio Komercio\\Azure\\Komercio plus\\Fronend_ AspNet\\Komercio\\Models\\ViewModels\\RelatorioLucratividadeViewModel.cs",
+              "RelativeDocumentMoniker": "Models\\ViewModels\\RelatorioLucratividadeViewModel.cs",
+              "ToolTip": "C:\\Reposit\u00F3rio Komercio\\Azure\\Komercio plus\\Fronend_ AspNet\\Komercio\\Models\\ViewModels\\RelatorioLucratividadeViewModel.cs",
+              "RelativeToolTip": "Models\\ViewModels\\RelatorioLucratividadeViewModel.cs",
+              "ViewState": "AgIAAAsAAAAAAAAAAAAwwB4AAAAcAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-08T17:15:29.301Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "LucratividadeModel.cs",
+              "DocumentMoniker": "C:\\Reposit\u00F3rio Komercio\\Azure\\Komercio plus\\Fronend_ AspNet\\Komercio\\Models\\DTO\\LucratividadeModel.cs",
+              "RelativeDocumentMoniker": "Models\\DTO\\LucratividadeModel.cs",
+              "ToolTip": "C:\\Reposit\u00F3rio Komercio\\Azure\\Komercio plus\\Fronend_ AspNet\\Komercio\\Models\\DTO\\LucratividadeModel.cs",
+              "RelativeToolTip": "Models\\DTO\\LucratividadeModel.cs",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAiwC4AAAAuAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-08T17:13:44.905Z"
             }
           ]
         }

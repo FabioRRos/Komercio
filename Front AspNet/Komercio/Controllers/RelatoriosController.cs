@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using static Komercio.Services.RelatoriosService;
 using Microsoft.AspNetCore.Authorization;
+using Komercio.Models;
 
 namespace Komercio.Controllers
 {
@@ -277,7 +278,21 @@ namespace Komercio.Controllers
         }
 
         public IActionResult BaixoEstoque() => View();
-        public IActionResult Financeiro() => View();
+
+        public async Task<IActionResult> Financeiro(DateTime? dataInicial, DateTime? dataFinal)
+        {
+            // Busca tudo do Go uma única vez
+            var todosOsItens = await _relatoriosService.GetLucratividadeAsync();
+
+            var viewModel = new RelatorioLucratividadeViewModel
+            {
+                TodosOsItens = todosOsItens,
+                DataInicial = dataInicial,
+                DataFinal = dataFinal
+            };
+
+            return View(viewModel);
+        }
 
 
 

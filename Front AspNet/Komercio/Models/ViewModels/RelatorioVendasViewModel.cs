@@ -23,5 +23,7 @@ namespace Komercio.Models.ViewModels
         // Totais calculados (pode ser feito aqui ou no controller)
         public decimal TotalVendido => Vendas.Sum(v => v.FinalAmount);
         public int TotalQuantidade => Vendas.Count;
+
+
     }
 }
