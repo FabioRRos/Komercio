@@ -73,8 +73,7 @@ func (d *PrecoCompraDatastore) SelectItemEstoqueByCodbar(ctx context.Context, co
 
 	query := `select valorcompra 
 	from valueproduct v  
-	where v.codigobarras = $1 
-	and status = true  
+	where v.codigobarras = $1   
 	order by dataentrada desc 
 	limit 1 ;`
 
