@@ -1,75 +1,80 @@
-﻿using Komercio.Models.DTO;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Komercio.Models.ViewModels
 {
     public class RelatorioLucratividadeViewModel
     {
-        // Lista bruta que vem do JSON do Go
-        public List<LucratividadeModel> TodosOsItens { get; set; } = new();
+        // Lista bruta de vendas recebida do serviço
+        public List<JsonVendaDto> TodasAsVendas { get; set; } = new();
 
         public DateTime? DataInicial { get; set; }
         public DateTime? DataFinal { get; set; }
 
-        // Esta propriedade filtra os itens automaticamente antes de mandar para a tela
-        public List<LucratividadeModel> ItensFiltrados
+        // Desdobra as vendas em itens individuais para a view
+        public List<LucratividadeRelatorioItemDto> ItensFiltradosExpandida
         {
             get
             {
-                List<LucratividadeModel> itensFiltrados = new List<LucratividadeModel>();
+                var lista = new List<LucratividadeRelatorioItemDto>();
+                if (TodasAsVendas == null) return lista;
 
-                foreach (LucratividadeModel item in TodosOsItens)
+                foreach (var venda in TodasAsVendas)
                 {
-                    bool incluirItem = true;
+                    if (DataInicial.HasValue && venda.SaleDate.Date < DataInicial.Value.Date)
+                        continue;
+                    if (DataFinal.HasValue && venda.SaleDate.Date > DataFinal.Value.Date)
+                        continue;
 
-                    // Verifica Data Inicial
-                    if (DataInicial.HasValue)
+                    int itemCounter = 1; // para criar SaleItemId único por venda
+                    foreach (var produto in venda.Products)
                     {
-                        if (item.SaleDate.Date < DataInicial.Value.Date)
+                        decimal custoTotal = 0;
+                        if (produto.Costs != null && produto.Costs.Any())
                         {
-                            incluirItem = false;
+                            foreach (var custo in produto.Costs)
+                                custoTotal += custo.ValorCompra;
                         }
-                    }
 
-                    // Verifica Data Final
-                    if (DataFinal.HasValue)
-                    {
-                        if (item.SaleDate.Date > DataFinal.Value.Date)
+                        lista.Add(new LucratividadeRelatorioItemDto
                         {
-                            incluirItem = false;
-                        }
-                    }
+                            SaleId = venda.SaleID,
+                            SaleItemId = venda.SaleID * 1000 + itemCounter, // garante ID único
+                            SaleDate = venda.SaleDate,
+                            SaleTime = venda.SaleDate.ToString("HH:mm"),
+                            ProductName = produto.ProductName,
+                            Quantity = produto.Quantity,
+                            UnitPrice = produto.UnitPrice,
+                            TotalSaleProduct = produto.Total,
+                            TotalPurchaseProduct = custoTotal,
+                            Margin = produto.Total - custoTotal,
+                            FinalAmount = venda.TotalAmount,
+                            SellerName = venda.SellerName,
+                            PaymentMethod = venda.Payment
+                        });
 
-                    // Se passou por todas as validações
-                    if (incluirItem)
-                    {
-                        itensFiltrados.Add(item);
+                        itemCounter++;
                     }
                 }
 
-                return itensFiltrados;
+                return lista;
             }
         }
 
-        // Agora as contas são feitas apenas sobre os ITENS FILTRADOS
-        // Faturamento: Soma o valor FINAL da nota (uma vez por sale_id)
+        // Faturamento: soma apenas uma vez por venda
         public decimal FaturamentoTotal
         {
             get
             {
                 decimal total = 0;
+                var salesJaSomadas = new HashSet<int>();
 
-                // Lista para controlar quais vendas já foram somadas
-                List<int> salesJaSomadas = new List<int>();
-
-                foreach (LucratividadeModel item in ItensFiltrados)
+                foreach (var item in ItensFiltradosExpandida)
                 {
-                    // Se essa venda ainda não foi considerada
                     if (!salesJaSomadas.Contains(item.SaleId))
                     {
-                        // Soma o valor final da venda
                         total += item.FinalAmount;
-
-                        // Marca essa venda como já processada
                         salesJaSomadas.Add(item.SaleId);
                     }
                 }
@@ -78,81 +83,37 @@ namespace Komercio.Models.ViewModels
             }
         }
 
-        // Custo Total: Soma o custo de cada item individual
-        // Se houver repetição de sale_item_id no JSON, precisamos filtrar aqui também!
+        // Custo total: soma o custo de cada item
         public decimal CustoTotal
         {
             get
             {
                 decimal total = 0;
+                var saleItemsJaProcessados = new HashSet<int>();
 
-                // Lista para controlar quais SaleItemId já foram considerados
-                List<int> saleItemsJaProcessados = new List<int>();
-
-                foreach (LucratividadeModel item in ItensFiltrados)
+                foreach (var item in ItensFiltradosExpandida)
                 {
-                    // Se esse SaleItemId já foi processado, pula
+                    // Evita duplicidade
                     if (saleItemsJaProcessados.Contains(item.SaleItemId))
-                    {
                         continue;
-                    }
 
-                    // Marca como processado
                     saleItemsJaProcessados.Add(item.SaleItemId);
-
-                    LucratividadeModel itemEscolhido = null;
-
-                    // Procura dentro dos itens o primeiro com mesmo SaleItemId e custo > 0
-                    foreach (LucratividadeModel candidato in ItensFiltrados)
-                    {
-                        if (candidato.SaleItemId == item.SaleItemId)
-                        {
-                            if (candidato.TotalPurchaseProduct > 0)
-                            {
-                                itemEscolhido = candidato;
-                                break;
-                            }
-
-                            // Guarda o primeiro encontrado caso nenhum tenha custo > 0
-                            if (itemEscolhido == null)
-                            {
-                                itemEscolhido = candidato;
-                            }
-                        }
-                    }
-
-                    // Soma o custo do item escolhido
-                    if (itemEscolhido != null)
-                    {
-                        total += itemEscolhido.TotalPurchaseProduct;
-                    }
+                    total += item.TotalPurchaseProduct;
                 }
 
                 return total;
             }
         }
 
-
-
-        // Lucro Líquido: A conta real deve ser Faturamento - Custo
-        // Ou a soma das margens (se a margem no Go estiver correta)
         public decimal LucroTotal => FaturamentoTotal - CustoTotal;
+
         public decimal PercentualMargem
         {
             get
             {
-                decimal percentual = 0;
-
                 if (FaturamentoTotal > 0)
-                {
-                    percentual = (LucroTotal / FaturamentoTotal) * 100;
-                }
-                else
-                {
-                    percentual = 0;
-                }
-
-                return percentual;
+                    return (LucroTotal / FaturamentoTotal) * 100;
+                return 0;
             }
         }
     }

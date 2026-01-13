@@ -1,3 +1,6 @@
+using Komercio.Services;
+using Microsoft.Extensions.DependencyInjection;
+
 var builder = WebApplication.CreateBuilder(args);
 
 var url = new Uri("https://localhost:8443/");
@@ -22,12 +25,14 @@ builder.Services.AddHttpClient<Komercio.Services.IAuthService, Komercio.Services
 
 builder.Services.AddHttpClient<Komercio.Services.IRelatoriosService, Komercio.Services.RelatoriosService>(client =>
 {
-    // A URL base é a mesma, já que ambos consultam o mesmo Backend Go
     client.BaseAddress = url;
-}).ConfigurePrimaryHttpMessageHandler(() => new HttpClientHandler
+})
+.ConfigurePrimaryHttpMessageHandler(() =>
 {
-    // Ignora erro de SSL (Necessário se o certificado do Go for autoassinado)
-    ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; }
+    return new HttpClientHandler
+    {
+        ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => true
+    };
 });
 
 

@@ -8,22 +8,22 @@ using System.Text.Json.Serialization;
 
 namespace Komercio.Services
 {
-    public interface IRelatoriosService
-    {
-        Task<List<VendaRelatorio>> ListaDeVendaGeral();
-        Task<List<MovimentacaoCaixaModel>> MovimentacaoCaixa();
-        Task<List<FormaPagamentoModel>> FormaPagamento();
-        Task<List<CaixaModel>> Caixa();
-        Task<List<LucratividadeModel>> GetLucratividadeAsync();
-    }
-    public class RelatoriosService : IRelatoriosService
-    {
+        public interface IRelatoriosService
+        {
+            Task<List<VendaRelatorio>> ListaDeVendaGeral();
+            Task<List<MovimentacaoCaixaModel>> MovimentacaoCaixa();
+            Task<List<FormaPagamentoModel>> FormaPagamento();
+            Task<List<CaixaModel>> Caixa();
+            Task<List<JsonVendaDto>> ValorCompraService();
+        }
+        public class RelatoriosService : IRelatoriosService
+        {
         private List<VendaRelatorio> listaDeVendaRelatorio = new List<VendaRelatorio>();
 
         private readonly HttpClient _httpClient;
         internal readonly string _key;
-
-        public RelatoriosService(HttpClient httpClient, IConfiguration configuration) {
+        public RelatoriosService(HttpClient httpClient, IConfiguration configuration)
+        {
 
             _httpClient = httpClient;
             _key = configuration["ChavePrivada"];
@@ -34,114 +34,118 @@ namespace Komercio.Services
         }
 
 
+
+
         public async Task<List<VendaRelatorio>> ListaDeVendaGeral()
-        {
-            try
             {
-                var response = await _httpClient.GetAsync("Report/Sales");
-                if (!response.IsSuccessStatusCode)
+                try
+                {
+                    var response = await _httpClient.GetAsync("Report/Sales");
+                    if (!response.IsSuccessStatusCode)
+                    {
+                        return new List<VendaRelatorio>();
+                    }
+
+                    var json = await response.Content.ReadAsStringAsync();
+
+
+
+                    var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
+
+                    listaDeVendaRelatorio = JsonSerializer.Deserialize<List<VendaRelatorio>>(json, options);
+
+                    return listaDeVendaRelatorio ?? new List<VendaRelatorio>();
+
+
+                }
+                catch
                 {
                     return new List<VendaRelatorio>();
                 }
+            }
+
+
+
+            public async Task<List<MovimentacaoCaixaModel>> MovimentacaoCaixa()
+            {
+                var response = await _httpClient.GetAsync("cashmovements");
+                if (!response.IsSuccessStatusCode)
+                {
+                    return new List<MovimentacaoCaixaModel>();
+                }
 
                 var json = await response.Content.ReadAsStringAsync();
 
+                var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
+                var listaDeMovimentacao = JsonSerializer.Deserialize<List<MovimentacaoCaixaModel>>(json, options);
 
+                return listaDeMovimentacao ?? new List<MovimentacaoCaixaModel>();
+            }
+
+            public async Task<List<FormaPagamentoModel>> FormaPagamento()
+            {
+                var response = await _httpClient.GetAsync("formadepagamento");
+                if (!response.IsSuccessStatusCode)
+                {
+                    return new List<FormaPagamentoModel>();
+                }
+
+                var json = await response.Content.ReadAsStringAsync();
 
                 var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
+                var listaFormaPagamento = JsonSerializer.Deserialize<List<FormaPagamentoModel>>(json, options);
 
-                listaDeVendaRelatorio = JsonSerializer.Deserialize<List<VendaRelatorio>>(json,options);
-
-                return listaDeVendaRelatorio ?? new List<VendaRelatorio>();
-
-
-            }
-            catch
-            {
-                return new List<VendaRelatorio>();
-            }
-        }
-
-
-
-        public async Task<List<MovimentacaoCaixaModel>>MovimentacaoCaixa()
-        {
-            var response = await _httpClient.GetAsync("cashmovements");
-            if (!response.IsSuccessStatusCode)
-            {
-                return new List<MovimentacaoCaixaModel> ();
+                return listaFormaPagamento ?? new List<FormaPagamentoModel>();
             }
 
-            var json = await response.Content.ReadAsStringAsync();
-
-            var options = new JsonSerializerOptions {PropertyNameCaseInsensitive = true};
-            var listaDeMovimentacao = JsonSerializer.Deserialize<List<MovimentacaoCaixaModel>>(json,options);
-
-            return listaDeMovimentacao ?? new List<MovimentacaoCaixaModel>();
-        }
-
-        public async Task<List<FormaPagamentoModel>> FormaPagamento()
-        {
-            var response = await _httpClient.GetAsync("formadepagamento");
-            if (!response.IsSuccessStatusCode)
+            public async Task<List<CaixaModel>> Caixa()
             {
-                return new List<FormaPagamentoModel>();
-            }
-
-            var json = await response.Content.ReadAsStringAsync();
-
-            var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
-            var listaFormaPagamento = JsonSerializer.Deserialize<List<FormaPagamentoModel>>(json, options);
-
-            return listaFormaPagamento ?? new List<FormaPagamentoModel>();
-        }
-
-        public async Task<List<CaixaModel>> Caixa()
-        {
-            var response = await _httpClient.GetAsync("Caixa");
-
-            if (!response.IsSuccessStatusCode)
-            {
-                return new List<CaixaModel>();
-            }
-
-            var json = await response.Content.ReadAsStringAsync();
-            var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
-            var caixa = JsonSerializer.Deserialize<List<CaixaModel>>(json, options);
-
-
-            return caixa;
-        }
-
-
-
-        public async Task<List<LucratividadeModel>> GetLucratividadeAsync()
-        {
-            try
-            {
-                // Chamada para o endpoint do backend Go
-                // O GetFromJsonAsync usa internamente o System.Text.Json que lerá seus [JsonPropertyName]
-                var response = await _httpClient.GetAsync("Report/Margem");
+                var response = await _httpClient.GetAsync("Caixa");
 
                 if (!response.IsSuccessStatusCode)
                 {
-                    new List<LucratividadeModel>();
+                    return new List<CaixaModel>();
                 }
 
                 var json = await response.Content.ReadAsStringAsync();
                 var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
-                var caixa = JsonSerializer.Deserialize<List<LucratividadeModel>>(json, options);
+                var caixa = JsonSerializer.Deserialize<List<CaixaModel>>(json, options);
 
 
                 return caixa;
             }
-            catch (Exception ex)
-            {
-                // Logar o erro conforme sua necessidade
-                Console.WriteLine($"Erro ao buscar relatório: {ex.Message}");
-                return new List<LucratividadeModel>();
-            }
-        }
 
-    }
+
+
+            public async Task<List<JsonVendaDto>> ValorCompraService()
+            {
+                try
+                {
+                    // Chamada para o endpoint do backend Go
+                    // O GetFromJsonAsync usa internamente o System.Text.Json que lerá seus [JsonPropertyName]
+                    var response = await _httpClient.GetAsync("Report/Margem");
+
+                    if (!response.IsSuccessStatusCode)
+                    {
+                        new List<JsonVendaDto>();
+                    }
+
+                    var json = await response.Content.ReadAsStringAsync();
+                    var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
+                    var caixa = JsonSerializer.Deserialize<List<JsonVendaDto>>(json, options);
+
+
+                    return caixa;
+                }
+                catch (Exception ex)
+                {
+                    // Logar o erro conforme sua necessidade
+                    Console.WriteLine($"Erro ao buscar relatório: {ex.Message}");
+                    return new List<JsonVendaDto>();
+                }
+            }
+
+        }
 }
+
+

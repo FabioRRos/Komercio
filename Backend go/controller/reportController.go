@@ -51,15 +51,28 @@ func (c *ReportController) SelectSaleReportById(ctx *gin.Context) {
 	ctx.JSON(200, saleReport)
 }
 
-// get margem
-func (c *ReportController) SelectMargemLucroVendas(ctx *gin.Context) {
-	salereportMargem, err := c.report.SelectMargemLucroVendas(ctx)
+//get relatório de custos V2
+
+func (c *ReportController) RelatorioLucros(ctx *gin.Context) {
+	reportLucros, err := c.report.ReportSaleCoust(ctx)
 
 	if err != nil {
-		ctx.JSON(500, gin.H{"error": err.Error()})
-		return
+		ctx.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 	}
 
-	ctx.JSON(200, salereportMargem)
+	ctx.JSON(200, reportLucros)
 
 }
+
+// get margem
+// func (c *ReportController) SelectMargemLucroVendas(ctx *gin.Context) {
+// 	salereportMargem, err := c.report.SelectMargemLucroVendas(ctx)
+
+// 	if err != nil {
+// 		ctx.JSON(500, gin.H{"error": err.Error()})
+// 		return
+// 	}
+
+// 	ctx.JSON(200, salereportMargem)
+
+// }

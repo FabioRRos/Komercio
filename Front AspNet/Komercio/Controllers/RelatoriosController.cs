@@ -4,8 +4,6 @@ using Komercio.Services; // Importante para achar a Interface
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using static Komercio.Services.RelatoriosService;
-using Microsoft.AspNetCore.Authorization;
 using Komercio.Models;
 
 namespace Komercio.Controllers
@@ -281,18 +279,19 @@ namespace Komercio.Controllers
 
         public async Task<IActionResult> Financeiro(DateTime? dataInicial, DateTime? dataFinal)
         {
-            // Busca tudo do Go uma única vez
-            var todosOsItens = await _relatoriosService.GetLucratividadeAsync();
+            // Busca todas as vendas do serviço
+            var todasAsVendas = await _relatoriosService.ValorCompraService();
 
             var viewModel = new RelatorioLucratividadeViewModel
             {
-                TodosOsItens = todosOsItens,
+                TodasAsVendas = todasAsVendas,
                 DataInicial = dataInicial,
                 DataFinal = dataFinal
             };
 
             return View(viewModel);
         }
+
 
 
 

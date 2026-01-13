@@ -11,7 +11,7 @@
                 <i class="bi bi-cash-stack me-2 text-success"></i>Análise de Lucratividade
             </h2>
             <p class="text-muted small mb-0">
-                @Model.ItensFiltrados.Select(x => x.SaleId).Distinct().Count() vendas no período
+                @Model.ItensFiltradosExpandida.Select(x => x.SaleId).Distinct().Count() vendas no período
             </p>
         </div>
         <a asp-action="Index" asp-controller="Home" class="btn btn-outline-secondary shadow-sm px-3">
@@ -104,33 +104,33 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @if (Model.ItensFiltrados != null && Model.ItensFiltrados.Any())
+                        @if (Model.ItensFiltradosExpandida != null && Model.ItensFiltradosExpandida.Any())
                         {
-                            foreach (var item in Model.ItensFiltrados
-                            .GroupBy(x => x.SaleItemId)
-                            .Select(g => g.First()))
+                            foreach (var item in Model.ItensFiltradosExpandida)
                             {
+                                decimal custoUnitario = 0;
+                                if (item.Quantity > 0)
+                                    custoUnitario = item.TotalPurchaseProduct;
+
+                                decimal lucro = item.Margin; // usa a margem já calculada
+                                string classeLucro = lucro >= 0 ? "text-success" : "text-danger";
+
                                 <tr>
                                     <td class="ps-3">
-                                        <span class="badge bg-light text-dark border shadow-sm">#@item.SaleId</span>
+                                        <span class="badge bg-light text-dark border shadow-sm">
+                                            #@item.SaleId
+                                        </span>
                                     </td>
                                     <td>
                                         <div class="fw-bold">@item.ProductName</div>
                                         <div class="text-muted small">
-                                            @item.SaleDate.ToString("dd/MM/yyyy")
-                                            @item.SaleTime.Substring(0, 5)
+                                            @item.SaleDate.ToString("dd/MM/yyyy") @item.SaleTime.Substring(0, 5)
                                         </div>
                                     </td>
                                     <td class="text-center">@item.Quantity</td>
-                                    <td>@item.UnitPrice.ToString("C2")</td>
-                                    <td class="text-muted small">
-                                        @((item.Quantity > 0
-                                                                        ? item.TotalPurchaseProduct / item.Quantity
-                                                                        : 0).ToString("C2"))
-                                    </td>
-                                    <td class="fw-bold @((item.TotalSaleProduct - item.TotalPurchaseProduct) > 0 ? "text-success" : "text-danger")">
-                                        @((item.TotalSaleProduct - item.TotalPurchaseProduct).ToString("C2"))
-                                    </td>
+                                    <td>@item.TotalSaleProduct.ToString("C2")</td>
+                                    <td class="text-muted small">@custoUnitario.ToString("C2")</td>
+                                    <td class="fw-bold @classeLucro">@lucro.ToString("C2")</td>
                                     <td class="small pe-3 text-muted">@item.SellerName</td>
                                 </tr>
                             }
