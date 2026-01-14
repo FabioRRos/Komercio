@@ -9,10 +9,18 @@ namespace Projeto.Interface
 {
     public interface IProduct
     {   
-        Task<IEnumerable<ProdutosModel>> BuscarProdutosAsyncService();
-        Task<ProdutosModel> AddProdutoAsyncService(ProdutosModel produto);
-        Task<ProdutosModel?> BuscarProdutosByIdAsyncService(int id);
-        Task<ProdutosModel?> AlterarProdutoAsyncService(ProdutosModel produto, int id);
+        Task<ServiceResponse<IEnumerable<ProdutosModel>>> BuscarProdutosAsyncService();
 
+        Task<ServiceResponse<ProdutosModel>> AddProdutoAsyncService(ProdutosModel produto);
+
+        Task<ServiceResponse<ProdutosModel>> BuscarProdutosByIdAsyncService(int id);
+
+        Task<ServiceResponse<ProdutosModel>> AlterarProdutoAsyncService(ProdutosModel produto, int id);
+
+        Task<ServiceResponse<ProdutosModel>> BuscarProdutosByCodBarAsyncService(string productcodbar);
+
+        Task<ServiceResponse<bool>> DesativarProdutoService(int id);
+
+        Task<ServiceResponse<ProdutosModel>> RemoverProdutoNoEstoqueAsyncService(string productcodbar, int productstock);
     }
 } 

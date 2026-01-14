@@ -3,11 +3,10 @@ using Projeto.Models;
 
 namespace Projeto.Data
 {
-    public class AppDbContext :DbContext
+    public class AppDbContext(DbContextOptions options) : DbContext(options)
     {
-        string _url;
+        readonly string _url;
 
-        public AppDbContext(DbContextOptions options): base(options){}
         public DbSet<ProdutosModel> products { get; set; }
     }
 }

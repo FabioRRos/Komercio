@@ -23,29 +23,55 @@ namespace Projeto.Service
         /// Busca o produto no repository.
         /// </summary>
         /// <returns></returns>
-        public async Task<IEnumerable<ProdutosModel>> BuscarProdutosAsyncService()
+public async Task<ServiceResponse<IEnumerable<ProdutosModel>>> BuscarProdutosAsyncService()
+    {
+        var response = new ServiceResponse<IEnumerable<ProdutosModel>>();
+        
+        try 
         {
-           var produto = await _produtoRepository.BuscarProdutosAsyncRepository();
-
-           return produto;
+            var produtos = await _produtoRepository.BuscarProdutosAsyncRepository();
+            response.Dados = produtos;
+            response.Mensagem = "Produtos listados com sucesso.";
         }
+        catch (Exception ex)
+        {
+            response.Mensagem = ex.Message;
+            response.Sucesso = false;
+        }
+
+        return response;
+    }
         /// <summary>
         /// Busca o produto de acordo com o Id dele.
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
         /// <exception cref="Exception"></exception>
-        public async Task<ProdutosModel?> BuscarProdutosByIdAsyncService(int id)
-        {
+public async Task<ServiceResponse<ProdutosModel>> BuscarProdutosByIdAsyncService(int id)
+    {
+        var response = new ServiceResponse<ProdutosModel>();
 
+        try
+        {
             var produto = await _produtoRepository.BuscarProdutosByIdAsyncRepository(id);
 
             if (produto == null)
             {
-                throw new Exception("Produto não encontrado ou Id invalido.");
+                response.Sucesso = false;
+                response.Mensagem = "Produto não encontrado ou Id invalido.";
+                return response;
             }
-            return produto;
+
+            response.Dados = produto;
         }
+        catch (Exception ex)
+        {
+            response.Mensagem = ex.Message;
+            response.Sucesso = false;
+        }
+
+        return response;
+    }
 
 
         /// <summary>
@@ -53,21 +79,35 @@ namespace Projeto.Service
         /// </summary>
         /// <param name="produto"></param>
         /// <returns></returns>
-        public async Task<ProdutosModel> AddProdutoAsyncService(ProdutosModel produto)
-        {
-            
-            ProdutosModel product = new ProdutosModel();
+       public async Task<ServiceResponse<ProdutosModel>> AddProdutoAsyncService(ProdutosModel produto)
+    {
+        var response = new ServiceResponse<ProdutosModel>();
 
-            var status = product.ProductValidation(produto);
+        try 
+        {
+            ProdutosModel productValidator = new ProdutosModel(); // Renomeado para clareza
+            var status = productValidator.ProductValidation(produto);
 
             if (!status)
             {
-                throw new Exception("Dados do produto inválidos.");
+                response.Sucesso = false;
+                response.Mensagem = "Dados do produto inválidos.";
+                return response;
             }
 
-            var produtoRetornado =  await _produtoRepository.AddProdutoAsyncRepository(produto);
-            return produtoRetornado;
+            var produtoRetornado = await _produtoRepository.AddProdutoAsyncRepository(produto);
+            
+            response.Dados = produtoRetornado;
+            response.Mensagem = "Produto cadastrado com sucesso!";
         }
+        catch (Exception ex)
+        {
+            response.Mensagem = ex.Message;
+            response.Sucesso = false;
+        }
+
+        return response;
+    }
 
         /// <summary>
         /// Metodo Post para salvar alteração.
@@ -75,27 +115,172 @@ namespace Projeto.Service
         /// <param name="produto"></param>
         /// <param name="id"></param>
         /// <returns></returns>
-        public async Task<ProdutosModel?> AlterarProdutoAsyncService(ProdutosModel produto, int id)
+        public async Task<ServiceResponse<ProdutosModel>> AlterarProdutoAsyncService(ProdutosModel produto, int id)
+    {
+        var response = new ServiceResponse<ProdutosModel>();
+
+        try
         {
-
-            ProdutosModel product = new ProdutosModel();
-
-            var status = product.ProductValidation(produto);
+            ProdutosModel productValidator = new ProdutosModel();
+            var status = productValidator.ProductValidation(produto);
 
             if (!status)
             {
-                throw new Exception("Dados do produto inválidos.");
+                response.Sucesso = false;
+                response.Mensagem = "Dados do produto inválidos.";
+                return response;
             }
 
-            var produtoRetornado = await _produtoRepository.AlterarProdutoAsyncRepository(product,id);
+            // CORREÇÃO: Enviando 'produto' (com dados) ao invés de 'productValidator' (vazio)
+            var produtoRetornado = await _produtoRepository.AlterarProdutoAsyncRepository(produto, id);
 
             if (produtoRetornado == null)
             {
-                throw new Exception("Produto não localizado.");
+                response.Sucesso = false;
+                response.Mensagem = "Produto não localizado.";
+                return response;
             }
 
-            return produtoRetornado;
-
+            response.Dados = produtoRetornado;
+            response.Mensagem = "Produto alterado com sucesso!";
         }
+        catch (Exception ex)
+        {
+            response.Mensagem = ex.Message;
+            response.Sucesso = false;
+        }
+
+        return response;
     }
+        /// <summary>
+        /// Metodo para validar o código de barras antes de solicitar.
+        /// </summary>
+        /// <param name="productcodbar"></param>
+        /// <returns></returns>
+       public async Task<ServiceResponse<ProdutosModel>> BuscarProdutosByCodBarAsyncService(string productcodbar)
+    {
+        var response = new ServiceResponse<ProdutosModel>();
+
+        try 
+        {
+            if (string.IsNullOrEmpty(productcodbar))
+            {
+                response.Sucesso = false;
+                response.Mensagem = "Código de barras invalido!";
+                return response;
+            }
+            
+            var produto = await _produtoRepository.BuscarProdutosByCodBarAsyncRepository(productcodbar);
+
+            if (produto == null)
+            {
+                response.Sucesso = false;
+                response.Mensagem = "Produto não encontrado.";
+                return response;
+            }
+
+            response.Dados = produto;
+        }
+        catch (Exception ex)
+        {
+            response.Mensagem = ex.Message;
+            response.Sucesso = false;
+        }
+
+        return response;
+    }
+
+        /// <summary>
+        /// Desativa o produto com base no id informado. 
+        /// Basicamente eu chamo o bucarprodutobyid, altero o obj e faço o post com o status "False"
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
+       public async Task<ServiceResponse<bool>> DesativarProdutoService(int id)
+    {
+        var response = new ServiceResponse<bool>();
+
+        try
+        {
+            var produto = await _produtoRepository.BuscarProdutosByIdAsyncRepository(id);
+
+            if (produto == null)
+            {
+                response.Sucesso = false;
+                response.Mensagem = "Produto não encontrado ou Id invalido.";
+                return response;
+            }
+
+            produto.Status = false;
+
+            var produtoRetornado = await _produtoRepository.AlterarProdutoAsyncRepository(produto, produto.Id);
+
+            if (produtoRetornado == null)
+            {
+                response.Sucesso = false;
+                response.Mensagem = "Erro ao tentar desativar o produto.";
+                response.Dados = false;
+                return response;
+            }
+
+            response.Dados = true;
+            response.Mensagem = "Produto desativado com sucesso.";
+        }
+        catch (Exception ex)
+        {
+            response.Mensagem = ex.Message;
+            response.Sucesso = false;
+            response.Dados = false;
+        }
+
+        return response;
+    }
+
+
+        /// <summary>
+        /// Esse metodo serve para adicionar produtos no estoque da tabela Product.
+        /// </summary>
+        /// <param name="productcodbar"></param>
+        /// <param name="productstock"></param>
+        /// <returns></returns>
+        public async Task<ServiceResponse<ProdutosModel>> RemoverProdutoNoEstoqueAsyncService(string productcodbar, int productstock)
+        {
+            var response = new ServiceResponse<ProdutosModel>();
+
+
+            if (productcodbar == "")
+            {
+                response.Sucesso = false;
+                response.Mensagem = "Código de barras inválido";
+                return response;          
+            }
+            
+            if (productstock <= 0)
+            {
+                response.Sucesso = false;
+                response.Mensagem = "Quantidade inválida";
+                return response;
+            }
+
+
+            var produto = await _produtoRepository.RemoverProdutoNoEstoqueAsyncRepository(productcodbar, productstock);
+
+
+            if (produto == null || produto.Id == 0)
+            {
+                response.Sucesso = false;
+                response.Mensagem = "Produto não encontrado ou erro ao atualizar.";
+                return response;
+            }
+
+            response.Dados = produto;
+            response.Mensagem = "Estoque atualizado com sucesso!";
+
+            return response;
+        } 
+    }
+
+
+
 }

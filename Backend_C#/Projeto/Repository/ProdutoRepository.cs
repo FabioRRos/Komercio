@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Projeto.Data;
@@ -9,8 +10,20 @@ using Projeto.Models;
 
 namespace Projeto.Repository
 {
-    public class ProdutoRepository
+    
+    public interface IProdutoRepository
+    {   
+        Task<IEnumerable<ProdutosModel>> BuscarProdutosAsyncRepository();
+        Task<ProdutosModel?> BuscarProdutosByIdAsyncRepository(int id);
+        Task<ProdutosModel> AddProdutoAsyncRepository(ProdutosModel produto);
+        Task<ProdutosModel?> AlterarProdutoAsyncRepository(ProdutosModel produto, int id);
+        Task<ProdutosModel?> BuscarProdutosByCodBarAsyncRepository(string productcodbar);
+        Task<ProdutosModel?> RemoverProdutoNoEstoqueAsyncRepository(string productcodbar, int productstock);
+        
+    }
+    public class ProdutoRepository : IProdutoRepository
     {
+
         private readonly AppDbContext _appDbContext;
 
         public ProdutoRepository (AppDbContext appContext)
@@ -27,7 +40,11 @@ namespace Projeto.Repository
             var produto =  await _appDbContext.products.ToListAsync();
             return produto;
         }
-
+        /// <summary>
+        /// Busca os produtos pelo Id na taabela Product.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public async Task<ProdutosModel?> BuscarProdutosByIdAsyncRepository(int id)
         {
            var produto =  await _appDbContext.products.FindAsync(id);
@@ -70,7 +87,33 @@ namespace Projeto.Repository
         }
 
 
+        /// <summary>
+        /// Metodo para buscar produto pelo código de barras na tabela Product.
+        /// </summary>
+        /// <param name="productcodbar"></param>
+        /// <returns></returns>
+        public async Task<ProdutosModel?> BuscarProdutosByCodBarAsyncRepository(string productcodbar)
+        {
+           var produto =  await _appDbContext.products
+                                .FirstOrDefaultAsync(p => p.Productcodbar == productcodbar);
+            //se for nulo, é nulo.
+            return produto;
+        }
 
+
+        public async Task<ProdutosModel?> RemoverProdutoNoEstoqueAsyncRepository(string productcodbar, int productstock)
+        {
+            var produto = await _appDbContext.products
+                                .FirstOrDefaultAsync(p => p.Productcodbar == productcodbar);
+            if (produto == null)
+            {
+                return new ProdutosModel();
+            }
+
+                produto.Productstock -= productstock;
+                await _appDbContext.SaveChangesAsync();
+                return produto;        
+        }
 
     }
 }

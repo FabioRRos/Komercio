@@ -17,70 +17,108 @@ namespace Projeto.Controllers
     {
         private readonly IProduct _iproduct;
 
-
-
-        public ProdutosController(
-            IProduct iproduct)
+        public ProdutosController(IProduct iproduct)
         {
             _iproduct = iproduct;
         }
 
-
         [HttpPost]
         public async Task<IActionResult> AddProduto(ProdutosModel produto)
         {
+            var response = await _iproduct.AddProdutoAsyncService(produto);
 
-            try
+            if (!response.Sucesso)
             {
-            var product = await _iproduct.AddProdutoAsyncService(produto);
-            return Ok(produto);
-              
+                return BadRequest(response);
             }
-            catch (Exception ex)
-            {
-                return BadRequest(new {message = ex.Message});   
-            }  
+
+            return Ok(response);
         }
 
         [HttpGet]
         public async Task<ActionResult<IEnumerable<ProdutosModel>>> BuscarProduto()
         {
-           var produto =  await _iproduct.BuscarProdutosAsyncService();
+            var response = await _iproduct.BuscarProdutosAsyncService();
 
-            return Ok(produto);
+            if (!response.Sucesso)
+            {
+                return BadRequest(response);
+            }
+
+            return Ok(response);
         }
 
-
-        [HttpGet("{id}")]
+        [HttpGet("id/{id}")]
         public async Task<ActionResult<ProdutosModel>> BuscarProdutoById(int id)
+        {
+            var response = await _iproduct.BuscarProdutosByIdAsyncService(id);
+
+            if (!response.Sucesso)
+            {
+                return BadRequest(response);
+            }
+
+            return Ok(response);
+        }
+
+        [HttpGet("codbar/{productcodbar}")]
+        public async Task<ActionResult<ProdutosModel>> BuscarProdutoByCodBar(string productcodbar)
         {
             try
             {
-                var produto = await _iproduct.BuscarProdutosByIdAsyncService(id);
+                var produto = await _iproduct.BuscarProdutosByCodBarAsyncService(productcodbar);
+
+                if (produto == null)
+                {
+                    return NotFound(new { message = "Codigo de barras não localizado" });
+                }
+
                 return Ok(produto);
-                
             }
             catch (Exception ex)
             {
-                return BadRequest(new {message = ex.Message});  
+                return BadRequest(new { message = ex.Message });
             }
         }
 
         [HttpPut("{id}")]
         public async Task<IActionResult> AtualizarProdutoById(int id, [FromBody] ProdutosModel produtoAtualizado)
         {
-            try
-            {
-                
-            var produto =  await _iproduct.AlterarProdutoAsyncService(produtoAtualizado,id);
-            return StatusCode(201,produtoAtualizado);
-            
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(new {message = ex.Message});  
-            }         
+            var response = await _iproduct.AlterarProdutoAsyncService(produtoAtualizado, id);
 
+            if (!response.Sucesso)
+            {
+                return BadRequest(response);
+            }
+
+            return Ok(response);
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DesativarProduto(int id)
+        {
+            var response = await _iproduct.DesativarProdutoService(id);
+
+            if (!response.Sucesso)
+            {
+                return BadRequest(response);
+            }
+
+            return Ok(response);
+        }
+
+        public class EstoqueRequest { public int productstock { get; set; } }
+        [HttpPut("removeEstoque/{productcodbar}")]
+        public async Task<ActionResult<ServiceResponse<ProdutosModel>>> EntradaNoEstoqueByCodBar(string productcodbar, [FromBody] EstoqueRequest request)
+        {
+
+            var response = await _iproduct.RemoverProdutoNoEstoqueAsyncService(productcodbar, request.productstock);
+            if (!response.Sucesso)
+            {
+                return BadRequest(response);
+            }
+
+            return Ok(response);
         }
     }
 }
