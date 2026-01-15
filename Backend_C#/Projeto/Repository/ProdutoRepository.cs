@@ -18,6 +18,7 @@ namespace Projeto.Repository
         Task<ProdutosModel> AddProdutoAsyncRepository(ProdutosModel produto);
         Task<ProdutosModel?> AlterarProdutoAsyncRepository(ProdutosModel produto, int id);
         Task<ProdutosModel?> BuscarProdutosByCodBarAsyncRepository(string productcodbar);
+        Task<ProdutosModel?> AdicionarProdutoNoEstoqueAsyncRepository(string productcodbar, int productstock);
         Task<ProdutosModel?> RemoverProdutoNoEstoqueAsyncRepository(string productcodbar, int productstock);
         
     }
@@ -111,6 +112,21 @@ namespace Projeto.Repository
             }
 
                 produto.Productstock -= productstock;
+                await _appDbContext.SaveChangesAsync();
+                return produto;        
+        }
+
+
+                public async Task<ProdutosModel?> AdicionarProdutoNoEstoqueAsyncRepository(string productcodbar, int productstock)
+        {
+            var produto = await _appDbContext.products
+                                .FirstOrDefaultAsync(p => p.Productcodbar == productcodbar);
+            if (produto == null)
+            {
+                return new ProdutosModel();
+            }
+
+                produto.Productstock += productstock;
                 await _appDbContext.SaveChangesAsync();
                 return produto;        
         }

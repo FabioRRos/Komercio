@@ -8,5 +8,6 @@ namespace Projeto.Data
         readonly string _url;
 
         public DbSet<ProdutosModel> products { get; set; }
+        public DbSet<GrupoDeProduto> product_group{get;set;}
     }
 }

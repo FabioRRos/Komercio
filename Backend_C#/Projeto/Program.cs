@@ -27,6 +27,10 @@ builder.Services.AddScoped<ProdutoRepository>();
 builder.Services.AddScoped<IProduct, ProdutoService>();
 
 
+builder.Services.AddScoped<GrupoDeProdutoRepository>();
+builder.Services.AddScoped<IGrupoDeProduto, GrupoDeProdutoService>();
+
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

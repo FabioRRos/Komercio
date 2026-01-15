@@ -107,12 +107,26 @@ namespace Projeto.Controllers
             return Ok(response);
         }
 
-        public class EstoqueRequest { public int productstock { get; set; } }
+        //DTO criada para eu conseguir receber no corpo da requisição. Estava dando "problemas" receber valores inteiros.
+        public struct EstoqueRequest { public int productstock { get; set; } }
         [HttpPut("removeEstoque/{productcodbar}")]
-        public async Task<ActionResult<ServiceResponse<ProdutosModel>>> EntradaNoEstoqueByCodBar(string productcodbar, [FromBody] EstoqueRequest request)
+        public async Task<ActionResult<ServiceResponse<ProdutosModel>>> RemoveNoEstoqueByCodBar(string productcodbar, [FromBody] EstoqueRequest request)
         {
 
             var response = await _iproduct.RemoverProdutoNoEstoqueAsyncService(productcodbar, request.productstock);
+            if (!response.Sucesso)
+            {
+                return BadRequest(response);
+            }
+
+            return Ok(response);
+        }
+
+            [HttpPut("adicionaEstoque/{productcodbar}")]
+        public async Task<ActionResult<ServiceResponse<ProdutosModel>>> EntradaNoEstoqueByCodBar(string productcodbar, [FromBody] EstoqueRequest request)
+        {
+
+            var response = await _iproduct.AdicionarProdutoNoEstoqueAsyncService(productcodbar, request.productstock);
             if (!response.Sucesso)
             {
                 return BadRequest(response);
