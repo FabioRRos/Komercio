@@ -9,5 +9,6 @@ namespace Projeto.Data
 
         public DbSet<ProdutosModel> products { get; set; }
         public DbSet<GrupoDeProduto> product_group{get;set;}
+        public DbSet<Funcionario>employees {get;set;} 
     }
 }
