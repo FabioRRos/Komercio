@@ -15,6 +15,8 @@ type EmployeeService interface {
 	UpdateEmployeePassword(ctx context.Context, login, newPassword string) error
 	UpdateEmployeeName(ctx context.Context, login, newName string) error
 	DeactivateEmployee(ctx context.Context, login string) error
+
+	ValidateLoginAdmin(ctx context.Context, login, password string) (bool, error)
 }
 
 type employeeService struct {
@@ -46,6 +48,13 @@ func (s *employeeService) ValidateLogin(ctx context.Context, login, password str
 		return false, nil // login ou senha vazios não são válidos
 	}
 	return s.repo.ValidateLogin(ctx, login, password)
+}
+
+func (s *employeeService) ValidateLoginAdmin(ctx context.Context, login, password string) (bool, error) {
+	if login == "" || password == "" {
+		return false, nil // login ou senha vazios não são válidos
+	}
+	return s.repo.ValidateLoginAdmin(ctx, login, password)
 }
 
 func (s *employeeService) GetActiveEmployeeNames(ctx context.Context) ([]int, []string, error) {

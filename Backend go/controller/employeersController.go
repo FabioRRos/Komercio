@@ -60,6 +60,27 @@ func (c *EmployeerController) Login(ctx *gin.Context) {
 	ctx.JSON(http.StatusOK, gin.H{"success": true})
 }
 
+func (c *EmployeerController) LoginAdmin(ctx *gin.Context) {
+	var req LoginRequest
+	if err := ctx.ShouldBindJSON(&req); err != nil {
+		ctx.JSON(http.StatusBadRequest, gin.H{"error": "Parâmetros inválidos"})
+		return
+	}
+
+	ok, err := c.service.ValidateLoginAdmin(context.Background(), req.Login, req.Password)
+	if err != nil {
+		ctx.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		return
+	}
+
+	if !ok {
+		ctx.JSON(http.StatusUnauthorized, gin.H{"success": false})
+		return
+	}
+
+	ctx.JSON(http.StatusOK, gin.H{"success": true})
+}
+
 type NameAndID struct {
 	ID   int    `json:"id"`
 	Name string `json:"name"`

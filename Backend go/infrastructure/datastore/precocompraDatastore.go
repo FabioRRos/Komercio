@@ -66,6 +66,40 @@ func (d *PrecoCompraDatastore) SelecEstoqueByCodbar(ctx context.Context, codigob
 	return &produto, nil
 }
 
+// aqui eu estou buscando os itens que foram vendidos dentro de uma venda. Por aqui eu consigo, por exemplo, dar entrada apenas nos itens de venda
+// e também consigo saber exatamente o valor de compra e venda de cada produto.
+func (d *PrecoCompraDatastore) GetValoresCompraVenda(ctx context.Context, saleId int) ([]*entity.DifValue, error) {
+	query := `select id_valores_compra_venda,sale_id,valor_venda_produto,valor_compra_produto,product_id 
+from valores_compra_venda
+where sale_id = $1`
+
+	rows, err := d.Pool.Query(ctx, query, saleId)
+
+	if err != nil {
+		return nil, fmt.Errorf("Não consegui localizar a venda")
+	}
+
+	var lista []*entity.DifValue
+
+	for rows.Next() {
+		var p entity.DifValue
+		err := rows.Scan(
+			&p.Id_Valores,
+			&p.Sale_id,
+			&p.PrecoVenda,
+			&p.PrecoCompra,
+			&p.ProdictId,
+		)
+		if err != nil {
+			return nil, fmt.Errorf("Erro ao listar os dados da venda")
+		}
+		lista = append(lista, &p)
+	}
+
+	return lista, nil
+
+}
+
 // esse cara é apenas para retornar o ultimo valor cadastrado do produto.
 // Dessa forma, caso não seja digitado o valor de compra, considerarei o ultimo cadastrado.
 func (d *PrecoCompraDatastore) SelectItemEstoqueByCodbar(ctx context.Context, codigobarras string) (float32, error) {
@@ -130,5 +164,4 @@ func (d *PrecoCompraDatastore) CreateValorCompraEVenda(ctx context.Context, valo
 	}
 
 	return nil
-
 }

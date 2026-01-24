@@ -15,6 +15,7 @@ type PrecoCompraService interface {
 	UpdateEstoqueCompra(ctx context.Context, produto entity.PrecoCompra) error
 	BaixarProdutosListaDePrecos(ctx context.Context, codBarras string, quantidade int) (float32, error)
 	CreateValorCompraEVenda(ctx context.Context, valores []*entity.DifValue) error
+	GetValoresCompraVenda(ctx context.Context, saleId int) ([]*entity.DifValue, error)
 }
 
 type precoCompraService struct {
@@ -27,10 +28,13 @@ func NewPrecoCompraService(repo repository.PrecoCompraRepository) PrecoCompraSer
 func (s *precoCompraService) EntradaEstoqueCompraTX(ctx context.Context, produtoEntrada *entity.Product) error {
 
 	if produtoEntrada.ProductPrchasePrice <= 0 {
-		precocompra, err := s.repo.SelectItemEstoqueByCodbar(ctx, produtoEntrada.ProductCodBar)
-		if err != nil {
-			return fmt.Errorf("Não consegui buscar o ultimo valor - %w", err)
-		}
+		precocompra, _ := s.repo.SelectItemEstoqueByCodbar(ctx, produtoEntrada.ProductCodBar)
+
+		// Esse cara estava quebrando a lógica de valor = 0, atribuir valor de venda
+
+		// if err != nil {
+		// 	return fmt.Errorf("Não consegui buscar o ultimo valor - %w", err)
+		// }
 		produtoEntrada.ProductPrchasePrice = precocompra
 	}
 
@@ -123,4 +127,18 @@ func (s *precoCompraService) CreateValorCompraEVenda(ctx context.Context, valor 
 		}
 	}
 	return nil
+}
+
+func (s *precoCompraService) GetValoresCompraVenda(ctx context.Context, saleId int) ([]*entity.DifValue, error) {
+	if saleId == 0 {
+		return nil, fmt.Errorf("Id invalido!")
+	}
+
+	lista, err := s.GetValoresCompraVenda(ctx, saleId)
+
+	if err == nil {
+		return nil, err
+	}
+
+	return lista, nil
 }

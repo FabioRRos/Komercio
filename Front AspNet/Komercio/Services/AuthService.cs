@@ -42,7 +42,7 @@ namespace Komercio.Services
             _httpClient.DefaultRequestHeaders.Remove("X-Token-Secreto"); // Limpa anteriores se houver
             _httpClient.DefaultRequestHeaders.Add("X-Token-Secreto", _key);
 
-            var response = await _httpClient.PostAsync("employees/login", content);
+            var response = await _httpClient.PostAsync("employees/loginadmin", content);
 
             return response.IsSuccessStatusCode;
         }

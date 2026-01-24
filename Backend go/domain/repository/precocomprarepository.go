@@ -13,6 +13,7 @@ type PrecoCompraRepository interface {
 	UpdateEstoqueCompra(ctx context.Context, produto entity.PrecoCompra) error
 	SelectItemEstoqueByCodbar(ctx context.Context, codigoBarras string) (float32, error)
 	CreateValorCompraEVenda(ctx context.Context, valores *entity.DifValue) error
+	GetValoresCompraVenda(ctx context.Context, saleId int) ([]*entity.DifValue, error)
 }
 
 type precoCompraRepository struct {
@@ -41,4 +42,8 @@ func (r *precoCompraRepository) SelectItemEstoqueByCodbar(ctx context.Context, c
 
 func (r *precoCompraRepository) CreateValorCompraEVenda(ctx context.Context, valor *entity.DifValue) error {
 	return r.datastore.CreateValorCompraEVenda(ctx, valor)
+}
+
+func (r *precoCompraRepository) GetValoresCompraVenda(ctx context.Context, saleId int) ([]*entity.DifValue, error) {
+	return r.datastore.GetValoresCompraVenda(ctx, saleId)
 }

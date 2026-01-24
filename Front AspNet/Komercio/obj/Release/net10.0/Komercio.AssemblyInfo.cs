@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Komercio")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d3897793793703bd6a210796b111c6dd69501ac3")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a7ff15ea0dac7ee16607a24b188616a384d433dd")]
 [assembly: System.Reflection.AssemblyProductAttribute("Komercio")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Komercio")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

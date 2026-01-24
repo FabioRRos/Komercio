@@ -20,6 +20,7 @@ func NewProductDataStore(pool *pgxpool.Pool) *ProductDatastore {
 	}
 }
 
+// ok
 func (d *ProductDatastore) CreateProduct(product *entity.Product) error {
 	query := `
 		INSERT INTO products 
@@ -76,6 +77,7 @@ func (d *ProductDatastore) CreateProductDescarte(productDescarte *entity.Producr
 	return nil
 }
 
+// ok
 func (d *ProductDatastore) SelectAllProducts() ([]*entity.Product, error) {
 	query := `
 		SELECT id, productname, productprice, productcodbar,
@@ -111,6 +113,7 @@ func (d *ProductDatastore) SelectAllProducts() ([]*entity.Product, error) {
 	return products, nil
 }
 
+// ok
 func (d *ProductDatastore) SelectProductById(id int) (*entity.Product, error) {
 	query := `
 		SELECT id, productname, productprice, productcodbar,
@@ -142,6 +145,7 @@ func (d *ProductDatastore) SelectProductById(id int) (*entity.Product, error) {
 	return &p, nil
 }
 
+// ok
 func (d *ProductDatastore) SelectProductByCodBar(productCodBar string) (*entity.Product, error) {
 	query := `
 		SELECT id, productname, productprice, productcodbar,
@@ -173,6 +177,7 @@ func (d *ProductDatastore) SelectProductByCodBar(productCodBar string) (*entity.
 	return &p, nil
 }
 
+// ok
 func (d *ProductDatastore) UpdateProduct(product *entity.Product) (*entity.Product, error) {
 	query := `
 		UPDATE products SET
@@ -220,6 +225,7 @@ func (d *ProductDatastore) UpdateProduct(product *entity.Product) (*entity.Produ
 	return &p, nil
 }
 
+// ok
 func (d *ProductDatastore) DeactivateProduct(id int) error {
 	query := `
 		UPDATE products
@@ -255,6 +261,7 @@ func (d *ProductDatastore) UpdateProductOutputStock(productcodbar string) error 
 	return nil
 }
 
+// ok
 func (d *ProductDatastore) UpdateProductOutputStockTX(
 	ctx context.Context,
 	tx pgx.Tx,

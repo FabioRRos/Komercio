@@ -30,12 +30,28 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Repositório Komercio/Azure/Komercio plus/Fronend_ AspNet/Komercio/Views/Relatorios/Financeiro.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVsYXRvcmlvc1xGaW5hbmNlaXJvLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Repositório Komercio/Azure/Komercio plus/Fronend_ AspNet/Komercio/Views/Relatorios/GruposMaisVendidos.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVsYXRvcmlvc1xHcnVwb3NNYWlzVmVuZGlkb3MuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Repositório Komercio/Azure/Komercio plus/Fronend_ AspNet/Komercio/Views/Relatorios/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVsYXRvcmlvc1xJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Repositório Komercio/Azure/Komercio plus/Fronend_ AspNet/Komercio/Views/Relatorios/ProdutosTop.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVsYXRvcmlvc1xQcm9kdXRvc1RvcC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Repositório Komercio/Azure/Komercio plus/Fronend_ AspNet/Komercio/Views/Relatorios/VendasPeriodo.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVsYXRvcmlvc1xWZW5kYXNQZXJpb2RvLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Repositório Komercio/Azure/Komercio plus/Fronend_ AspNet/Komercio/Views/Relatorios/_ListaItensModal.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVsYXRvcmlvc1xfTGlzdGFJdGVuc01vZGFsLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Repositório Komercio/Azure/Komercio plus/Fronend_ AspNet/Komercio/Views/Shared/Error.cshtml]

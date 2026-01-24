@@ -11,6 +11,7 @@ type Employees struct {
 	EmployeeFullName string `Json:"employees_name"`
 	EmployeeLogin    string `Json:"employees_login"`
 	EmployeePassword string `Json:"employees_password"`
+	EmployeesAdmin   bool   `Json:"employees_admin"`
 }
 
 func CreateLogin(employee *Employees) error {

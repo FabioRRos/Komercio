@@ -9,7 +9,9 @@ func RegisterEmployeeRoutes(server *gin.Engine, employeeController *controller.E
 	employeeRoutes := server.Group("/employees")
 	{
 		employeeRoutes.POST("", employeeController.CreateEmployee)
+		employeeRoutes.POST("/loginadmin", employeeController.LoginAdmin)
 		employeeRoutes.POST("/login", employeeController.Login)
+
 		employeeRoutes.GET("/names", employeeController.GetActiveEmployeeNames)
 		employeeRoutes.POST("/password", employeeController.UpdatePassword)
 		employeeRoutes.POST("/name", employeeController.UpdateName)

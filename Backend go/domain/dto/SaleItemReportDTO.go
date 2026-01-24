@@ -21,11 +21,9 @@ type SaleItemReportDTO struct {
 	Barcode     string `json:"barcode"`
 
 	// Valores de venda
-	UnitPrice        float64 `json:"unit_price"`
-	Quantity         int     `json:"quantity"`
-	TotalSaleProduct float64 `json:"total_sale_product"`
-
-	// Valores de compra (FIFO / CMV)
+	UnitPrice            float64 `json:"unit_price"`
+	Quantity             int     `json:"quantity"`
+	TotalSaleProduct     float64 `json:"total_sale_product"`
 	TotalPurchaseProduct float64 `json:"total_purchase_product"`
 
 	// Margem

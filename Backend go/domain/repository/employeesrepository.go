@@ -14,6 +14,8 @@ type EmployeesRepository interface {
 	UpdateEmployeePassword(ctx context.Context, login, newPassword string) error
 	UpdateEmployeeName(ctx context.Context, login, newName string) error
 	DeactivateEmployee(ctx context.Context, login string) error
+
+	ValidateLoginAdmin(ctx context.Context, login, password string) (bool, error)
 }
 
 type employeesRepository struct {
@@ -48,4 +50,8 @@ func (r *employeesRepository) UpdateEmployeeName(ctx context.Context, login, new
 
 func (r *employeesRepository) DeactivateEmployee(ctx context.Context, login string) error {
 	return r.datastore.DeactivateEmployee(login)
+}
+
+func (r *employeesRepository) ValidateLoginAdmin(ctx context.Context, login, password string) (bool, error) {
+	return r.datastore.ValidateLoginAdmin(login, password)
 }

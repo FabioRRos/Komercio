@@ -126,3 +126,23 @@ func (d *EmployeesDatastore) DeactivateEmployee(login string) error {
 	}
 	return nil
 }
+
+func (d *EmployeesDatastore) ValidateLoginAdmin(login, password string) (bool, error) {
+	query := `
+        SELECT 1
+        FROM employees
+        WHERE employeelogin = $1
+        AND employeepassword = $2
+		AND employeeadmin = true
+        LIMIT 1
+    `
+	var exists int
+	err := d.Pool.QueryRow(context.Background(), query, login, password).Scan(&exists)
+	if err != nil {
+		if err == pgx.ErrNoRows {
+			return false, nil
+		}
+		return false, fmt.Errorf("Acesso negado: %w", err)
+	}
+	return true, nil
+}

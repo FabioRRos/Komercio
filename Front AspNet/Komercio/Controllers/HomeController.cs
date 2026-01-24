@@ -47,6 +47,7 @@ namespace Komercio.Controllers
                 float saldoInicial = 0;
                 float totalEntradas = 0;
                 float totalSaidas = 0;
+                float saldoAtual = 0;
 
                 foreach (var movimentacao in movimentacoesDoDiaAtual)
                 {
@@ -62,11 +63,16 @@ namespace Komercio.Controllers
                         totalEntradas = totalEntradas + movimentacao.amount;
                     }
 
+                    // Lógica de valor atual em caixa.
+
+
+
                     // Lógica das Saídas
                     if (movimentacao.MovementType.ToLower() == "retirada" || movimentacao.MovementType.ToLower() == "saida")
                     {
                         totalSaidas = totalSaidas + movimentacao.amount;
-                    }
+                    }                    
+
                 }
 
                 //Status do Caixa 
@@ -162,8 +168,18 @@ namespace Komercio.Controllers
                     novoItem.Forma = itemDoDicionario.Key;
                     novoItem.Valor = itemDoDicionario.Value;
 
+                    if (novoItem.Forma.ToLower()== "dinheiro")
+                    {
+                        saldoAtual += novoItem.Valor;
+                    }
+
                     listaResumoPagamentos.Add(novoItem);
+
+
                 }
+
+                saldoAtual = saldoAtual + saldoInicial - totalSaidas;
+
 
                 // 8. Monta o ViewModel
                 DashboardFinanceiroViewModel viewModel = new DashboardFinanceiroViewModel();
@@ -172,6 +188,7 @@ namespace Komercio.Controllers
                 viewModel.SaldoInicial = saldoInicial;
                 viewModel.TotalEntradas = totalEntradas;
                 viewModel.TotalSaidas = totalSaidas;
+                viewModel.SaldoAtual = saldoAtual;
                 viewModel.HistoricoMovimentacoes = movimentacoesDoDiaAtual;
                 viewModel.ResumoPorFormaPagamento = listaResumoPagamentos;
 
