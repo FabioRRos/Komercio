@@ -26,14 +26,18 @@ type ProductService interface {
 }
 
 type productService struct {
-	repo repository.ProductRepository
-	serv PrecoCompraService
+	repo        repository.ProductRepository
+	precoCompra repository.PrecoCompraRepository
+	serv        PrecoCompraService
 }
 
-func NewProductService(repo repository.ProductRepository, serv PrecoCompraService) ProductService {
+func NewProductService(repo repository.ProductRepository,
+	serv PrecoCompraService,
+	precoCompra repository.PrecoCompraRepository) ProductService {
 	return &productService{
-		repo: repo,
-		serv: serv,
+		repo:        repo,
+		serv:        serv,
+		precoCompra: precoCompra,
 	}
 }
 
@@ -246,11 +250,14 @@ func (s *productService) GetCodbarBySaleId(ctx context.Context, saleId int) erro
 	if saleId <= 0 {
 		return errors.New("ID da venda inválido")
 	}
-	listaCode, _ := s.repo.GetCodbarBySaleId(ctx, saleId)
+	listaCode, err := s.precoCompra.GetValoresCompraVenda(ctx, saleId)
+
+	if err != nil {
+		return fmt.Errorf("Não consegui listar.")
+	}
 
 	for _, k := range listaCode {
-
-		s.UpdateProductInputStock(ctx, k.CodBar, k.Quantity, 0) //<- ARRUMAR AQUI DEPOIS FÁBIO!
+		s.UpdateProductInputStock(ctx, k.CodBar, 1, 0) //<- ARRUMAR AQUI DEPOIS FÁBIO!
 
 	}
 	return nil

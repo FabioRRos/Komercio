@@ -15,7 +15,6 @@ type PrecoCompraService interface {
 	UpdateEstoqueCompra(ctx context.Context, produto entity.PrecoCompra) error
 	BaixarProdutosListaDePrecos(ctx context.Context, codBarras string, quantidade int) (float32, error)
 	CreateValorCompraEVenda(ctx context.Context, valores []*entity.DifValue) error
-	GetValoresCompraVenda(ctx context.Context, saleId int) ([]*entity.DifValue, error)
 }
 
 type precoCompraService struct {
@@ -127,18 +126,4 @@ func (s *precoCompraService) CreateValorCompraEVenda(ctx context.Context, valor 
 		}
 	}
 	return nil
-}
-
-func (s *precoCompraService) GetValoresCompraVenda(ctx context.Context, saleId int) ([]*entity.DifValue, error) {
-	if saleId == 0 {
-		return nil, fmt.Errorf("Id invalido!")
-	}
-
-	lista, err := s.GetValoresCompraVenda(ctx, saleId)
-
-	if err == nil {
-		return nil, err
-	}
-
-	return lista, nil
 }

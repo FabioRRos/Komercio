@@ -42,8 +42,12 @@
       "DocumentGroups": [
         {
           "DockedWidth": 372,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 1,
           "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
             {
               "$type": "Document",
               "DocumentIndex": 0,
@@ -58,10 +62,6 @@
               "EditorCaption": ""
             },
             {
-              "$type": "Bookmark",
-              "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
-            },
-            {
               "$type": "Document",
               "DocumentIndex": 1,
               "Title": "AccountController.cs",
@@ -71,8 +71,7 @@
               "RelativeToolTip": "Controllers\\AccountController.cs",
               "ViewState": "AgIAABgAAAAAAAAAAAAowCEAAAA8AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-24T15:20:57.866Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-01-24T15:20:57.866Z"
             },
             {
               "$type": "Document",
@@ -84,8 +83,7 @@
               "RelativeToolTip": "Models\\ViewModels\\DashboardFinanceiroViewModel.cs",
               "ViewState": "AgIAAAMAAAAAAAAAAAAmwAYAAAAvAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-24T13:19:19.43Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-01-24T13:19:19.43Z"
             },
             {
               "$type": "Document",
@@ -97,8 +95,7 @@
               "RelativeToolTip": "Views\\Home\\Index.cshtml",
               "ViewState": "AgIAACQAAAAAAAAAAAAmwDQAAAAeAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2026-01-24T13:20:08.425Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-01-24T13:20:08.425Z"
             },
             {
               "$type": "Document",
@@ -110,8 +107,7 @@
               "RelativeToolTip": "Controllers\\HomeController.cs",
               "ViewState": "AgIAAJUAAAAAAAAAAAAiwLEAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-24T13:16:48.981Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-01-24T13:16:48.981Z"
             },
             {
               "$type": "Document",
@@ -123,8 +119,7 @@
               "RelativeToolTip": "Controllers\\RelatoriosController.cs",
               "ViewState": "AgIAABAAAAAAAAAAAAAUwCAAAAAmAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-11T16:26:20.647Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-01-11T16:26:20.647Z"
             },
             {
               "$type": "Document",
@@ -136,8 +131,7 @@
               "RelativeToolTip": "Models\\ViewModels\\RelatorioLucratividadeViewModel.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAHgAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-10T17:46:00.246Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-01-10T17:46:00.246Z"
             },
             {
               "$type": "Document",
