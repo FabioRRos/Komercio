@@ -18,7 +18,7 @@ type ProductService interface {
 	SelectProductByCodBar(ctx context.Context, productcodbar string) (*entity.Product, error)
 	UpdateProduct(ctx context.Context, product *entity.Product) (*entity.Product, error)
 	DeactivateProduct(ctx context.Context, id int) error
-	UpdateProductInputStock(ctx context.Context, productcodbar string, productStock int, precocompra float32) (*entity.Product, error)
+	UpdateProductInputStock(ctx context.Context, productcodbar string, productStock int) (*entity.Product, error)
 	UpdateProductOutputStockTX(ctx context.Context, tx pgx.Tx, productcodbar string, productStock int) error
 	SelectProductSettings(ctx context.Context) ([]*entity.ProductNotification, error)
 	UpdateProductNotification(ctx context.Context, productList []*entity.ProductNotification) error
@@ -26,19 +26,11 @@ type ProductService interface {
 }
 
 type productService struct {
-	repo        repository.ProductRepository
-	precoCompra repository.PrecoCompraRepository
-	serv        PrecoCompraService
+	repo repository.ProductRepository
 }
 
-func NewProductService(repo repository.ProductRepository,
-	serv PrecoCompraService,
-	precoCompra repository.PrecoCompraRepository) ProductService {
-	return &productService{
-		repo:        repo,
-		serv:        serv,
-		precoCompra: precoCompra,
-	}
+func NewProductService(repo repository.ProductRepository) ProductService {
+	return &productService{repo: repo}
 }
 
 func (s *productService) CreateProduct(ctx context.Context, product *entity.Product) error {
@@ -63,15 +55,7 @@ func (s *productService) CreateProduct(ctx context.Context, product *entity.Prod
 		product.ProductCodBar = entity.CreateCodbar()
 	}
 
-	err = s.repo.Create(ctx, product)
-
-	if err != nil {
-		return fmt.Errorf("%w - Create", err)
-	}
-
-	err = s.serv.EntradaEstoqueCompraTX(ctx, product)
-
-	return err
+	return s.repo.Create(ctx, product)
 }
 
 // CRIAR BAIXA DO PRODUTO E ATUALIZAR ESTOQUE
@@ -98,15 +82,7 @@ func (s *productService) CreateProductDescarte(ctx context.Context, productDesca
 		return fmt.Errorf("Código de barras não localizado")
 	}
 
-	err = s.repo.CreateProductDescarte(ctx, productDescarte)
-
-	if err != nil {
-		return err
-	}
-
-	_, err = s.serv.BaixarProdutosListaDePrecos(ctx, productDescarte.CodBarProduto, 1)
-
-	return err
+	return s.repo.CreateProductDescarte(ctx, productDescarte)
 }
 
 func (s *productService) SelectAllProducts(ctx context.Context) ([]*entity.Product, error) {
@@ -180,24 +156,13 @@ func (s *productService) UpdateProduct(ctx context.Context, product *entity.Prod
 	return updated, nil
 }
 
-func (s *productService) UpdateProductInputStock(ctx context.Context, productcodbar string, productStock int, precocompra float32) (*entity.Product, error) {
+func (s *productService) UpdateProductInputStock(ctx context.Context, productcodbar string, productStock int) (*entity.Product, error) {
 	update, err := s.repo.UpdateProductInputStock(ctx, productcodbar, productStock)
 	if err != nil {
 		return nil, err
 	}
 
-	updatePrecoProduct := update
-
-	updatePrecoProduct.ProductStock = productStock
-
-	if precocompra < 0 {
-		precocompra = 0
-	}
-	updatePrecoProduct.ProductPrchasePrice = precocompra
-
-	err = s.serv.EntradaEstoqueCompraTX(ctx, updatePrecoProduct)
-
-	return update, err
+	return update, nil
 }
 
 func (s *productService) DeactivateProduct(ctx context.Context, id int) error {
@@ -245,19 +210,15 @@ func (s *productService) UpdateProductNotification(ctx context.Context, productL
 	return s.repo.UpdateProductNotification(ctx, productList)
 }
 
-// devoluçao para o estoque (quando cancelar a venda)
 func (s *productService) GetCodbarBySaleId(ctx context.Context, saleId int) error {
 	if saleId <= 0 {
 		return errors.New("ID da venda inválido")
 	}
-	listaCode, err := s.precoCompra.GetValoresCompraVenda(ctx, saleId)
-
-	if err != nil {
-		return fmt.Errorf("Não consegui listar.")
-	}
+	listaCode, _ := s.repo.GetCodbarBySaleId(ctx, saleId)
 
 	for _, k := range listaCode {
-		s.UpdateProductInputStock(ctx, k.CodBar, 1, 0) //<- ARRUMAR AQUI DEPOIS FÁBIO!
+
+		s.UpdateProductInputStock(ctx, k.CodBar, k.Quantity)
 
 	}
 	return nil

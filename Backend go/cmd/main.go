@@ -1,16 +1,12 @@
 package main
 
 import (
-	"context"
-	"log"
-
 	"github.com/fabioros/Komercio/controller"
 	"github.com/fabioros/Komercio/domain/repository"
 	"github.com/fabioros/Komercio/infrastructure/datastore"
 	"github.com/fabioros/Komercio/routes"
 	service "github.com/fabioros/Komercio/service"
 	"github.com/gin-gonic/gin"
-	"github.com/jackc/pgx/v5/pgxpool"
 )
 
 func main() {
@@ -31,42 +27,35 @@ func main() {
 		c.Next()
 	})
 
-	connStr := "postgresql://postgres:postgres@localhost:5432/komercio?sslmode=disable"
-	ctx := context.Background()
-
-	pool, err := pgxpool.New(ctx, connStr)
-	if err != nil {
-		log.Fatal(err)
-	}
+	pool := datastore.NewPostgresPool()
 	defer pool.Close()
 
 	dbProduct := datastore.NewProductDataStore(pool)
 
-	dbCustomer := datastore.NewCustomerDataStore(pool)
-
-	dbEmployee := datastore.NewEmployeesDataStore(pool)
-
-	dbSales := datastore.NewSalesDataStore(pool)
-
-	dbproductGroupe := datastore.NewProductGroupDataStore(pool)
-
-	dbproductSubgroup := datastore.NewProductSubgroupDatastore(pool)
-
-	cashmovementDatastore := datastore.NewCashmovementsDatastore(pool)
-
-	saleItemsDatastore := datastore.NewSaleItemsDatastore(pool)
-
-	reportDatastore := datastore.NewConReportDataStore(pool)
-
-	transationDatastore := datastore.NewCustomertransactionDatastore(pool)
-
-	caixaDatastore := datastore.NewCaixaDatastore(pool)
-
-	parametros := datastore.NewParametrosDatastore(pool)
-
-	formaPagamento := datastore.NewFormaPagamentoDatastore(pool)
-
-	precocompra := datastore.NewPrecoCompraDatastore(pool)
+	dbCustomer := datastore.NewCustomerDataStore()
+	defer dbCustomer.Close()
+	dbEmployee := datastore.NewEmployeesDataStore()
+	defer dbEmployee.Close()
+	dbSales := datastore.NewSalesDataStore()
+	defer dbSales.Close()
+	dbproductGroupe := datastore.NewProductGroupDataStore()
+	defer dbproductGroupe.Close()
+	dbproductSubgroup := datastore.NewProductSubgroupDatastore()
+	defer dbproductSubgroup.Close()
+	cashmovementDatastore := datastore.NewCashmovementsDatastore()
+	defer cashmovementDatastore.Close()
+	saleItemsDatastore := datastore.NewSaleItemsDatastore()
+	defer saleItemsDatastore.Close()
+	reportDatastore := datastore.NewConReportDataStore()
+	defer reportDatastore.Close()
+	transationDatastore := datastore.NewCustomertransactionDatastore()
+	defer transationDatastore.Close()
+	caixaDatastore := datastore.NewCaixaDatastore()
+	defer caixaDatastore.Close()
+	parametros := datastore.NewParametrosDatastore()
+	defer parametros.Close()
+	formaPagamento := datastore.NewFormaPagamentoDatastore()
+	defer formaPagamento.Close()
 
 	//#####################################################
 	//Injeção de dependências
@@ -77,10 +66,6 @@ func main() {
 		),
 	)
 
-	precocompraService := service.NewPrecoCompraService(
-		repository.NewPrecoCompraRepository(precocompra),
-	)
-
 	formaPagamentoController := controller.NewFormaPagamentoController(
 		service.NewFormaPagamentoService(
 			repository.NewFormaPagamentoRepository(formaPagamento),
@@ -89,7 +74,7 @@ func main() {
 
 	productController := controller.NewProductController(
 		service.NewProductService(
-			repository.NewProductRepository(dbProduct), precocompraService),
+			repository.NewProductRepository(dbProduct)),
 	)
 
 	customerController := controller.NewCustomerController(
@@ -106,7 +91,7 @@ func main() {
 		service.NewSalesService(
 			repository.NewSalesRepository(dbSales),
 			service.NewProductService(
-				repository.NewProductRepository(dbProduct), precocompraService),
+				repository.NewProductRepository(dbProduct)),
 		),
 	)
 	productGroupController := controller.NewProductGroupController(
@@ -160,7 +145,7 @@ func main() {
 		service.NewSalesService(
 			repository.NewSalesRepository(dbSales),
 			service.NewProductService(
-				repository.NewProductRepository(dbProduct), precocompraService),
+				repository.NewProductRepository(dbProduct)),
 		),
 		service.NewSaleItemsService(
 			repository.NewSaleItemsRepository(saleItemsDatastore)),
@@ -172,7 +157,7 @@ func main() {
 		),
 
 		service.NewProductService(
-			repository.NewProductRepository(dbProduct), precocompraService),
+			repository.NewProductRepository(dbProduct)),
 		service.NewCustomertransactionService(
 			repository.NewCustomertransactionRepository(transationDatastore),
 			nil,
@@ -180,12 +165,12 @@ func main() {
 		service.NewCaixaService(
 			repository.NewCaixaRepository(caixaDatastore), nil),
 		service.NewFormaPagamentoService(
-			repository.NewFormaPagamentoRepository(formaPagamento)), precocompraService,
+			repository.NewFormaPagamentoRepository(formaPagamento)),
 	)
 
 	listProductDescription := service.NewProductDescriptionService(
 		service.NewProductService(
-			repository.NewProductRepository(dbProduct), precocompraService),
+			repository.NewProductRepository(dbProduct)),
 		service.NewProductGroupService(
 			repository.NewProductGroupRepository(dbproductGroupe)),
 		service.NewProductSubgroupService(
@@ -231,8 +216,179 @@ func main() {
 
 	//Minha antiga validação manual
 
+	/*var opcao int
+
+	fmt.Println("Para cadastrar, digite 1")
+	fmt.Println("Para consultar, digite 2")
+	fmt.Println("Para buscar id, digite 3")
+	fmt.Println("Para alterar, digite 4")
+	fmt.Println("Para inativar produto, digite 5")
+	fmt.Scan(&opcao)
+
+	switch opcao {
+	case 1:
+		{
+
+			// Simula entrada do Json do produto
+			produto := entity.Product{
+				ProductName:     "Coca cola zero",
+				ProductPrice:    12,
+				ProductCodBar:   "102060",
+				ProductGroup:    "Bebida",
+				ProductSubGroup: "Refrigerante",
+				ProductStock:    4,
+				ProductStatus:   false,
+			}
+
+			//Inicia o processo de cadastro chamando o Service
+			err := productService.CreateProduct(&produto)
+			if err != nil {
+				fmt.Println("Erro:", err)
+				return
+			}
+
+			fmt.Println("Produto cadastrado com sucesso!")
+		}
+	case 2:
+		{
+
+			//Esse aqui inicia o processo que realiza o select dos produtos
+			listaProduto, err := productService.SelectAllProducts()
+
+			if err != nil {
+				fmt.Println("Tive dificuldades em buscar a lista")
+			}
+
+			for _, k := range listaProduto {
+				fmt.Println(k.Id, "-", k.ProductName)
+			}
+		}
+	case 3:
+		{
+			fmt.Println("Digite o código do produto")
+			fmt.Scan(&opcao)
+
+			produto, err := productService.SelectProductById(opcao)
+
+			if err != nil {
+				fmt.Println("Não consegui retornar, motivo é:", err)
+				return
+			}
+			fmt.Println(produto)
+
+		}
+	case 4:
+		{
+
+			fmt.Println("Digite o id do produto que gostaria de alterar")
+			fmt.Scan(&opcao)
+			produtoChanged, err := productService.SelectProductById(opcao)
+
+			if err != nil {
+				fmt.Println("Não consegui retornar, motivo é:", err)
+				return
+			}
+			fmt.Println("Vamos alterar o nome de", produtoChanged.ProductName, " Para:")
+			_, err = fmt.Scan(&produtoChanged.ProductName)
+			if err != nil {
+				fmt.Println("Entrada invalida")
+				return
+			}
+
+			fmt.Println("Vamos alterar o código de", produtoChanged.ProductCodBar, "Para:")
+			_, err = fmt.Scan(&produtoChanged.ProductCodBar)
+			if err != nil {
+				fmt.Println("Entrada invalida")
+				return
+			}
+
+			fmt.Println("Vamos alterar o grupo de", produtoChanged.ProductGroup, "Para:")
+			_, err = fmt.Scan(&produtoChanged.ProductGroup)
+			if err != nil {
+				fmt.Println("Entrada invalida")
+				return
+			}
+
+			fmt.Println("Vamos alterar o subgrupo de", produtoChanged.ProductSubGroup, "Para:")
+			_, err = fmt.Scan(&produtoChanged.ProductSubGroup)
+			if err != nil {
+				fmt.Println("Entrada invalida")
+				return
+			}
+
+			fmt.Println("Vamos alterar o preço de", produtoChanged.ProductPrice, "Para:")
+			_, err = fmt.Scan(&produtoChanged.ProductPrice)
+			if err != nil {
+				fmt.Println("Entrada invalida")
+				return
+			}
+
+			fmt.Println("Vamos alterar a quantidade no estoque de", produtoChanged.ProductStock, "Para:")
+			_, err = fmt.Scan(&produtoChanged.ProductStock)
+			if err != nil {
+				fmt.Println("Entrada invalida")
+				return
+			}
+
+			var status string
+
+			if produtoChanged.ProductStatus == true {
+				status = "Ativo"
+			} else {
+				status = "Inativo"
+			}
+
+			fmt.Println("Vamos alterar o status de", status, "\nPara:")
+			fmt.Println("1 - Ativo")
+			fmt.Println("2 - Innativo")
+			fmt.Scan(&opcao)
+			if err != nil {
+				fmt.Println("Entrada invalida")
+				return
+			}
+
+			if opcao == 1 {
+				produtoChanged.ProductStatus = true
+			} else {
+				produtoChanged.ProductStatus = false
+			}
+
+			produto, err := productService.UpdateProduct(produtoChanged)
+
+			if err != nil {
+				fmt.Println("Não consegui retornar, motivo é:", err)
+				return
+			}
+			fmt.Println(produto.ProductName, "Alterado com sucesso!")
+
+		}
+	case 5:
+		{
+
+			fmt.Println("Digite o ID do produto para inativar")
+			_, err := fmt.Scan(&opcao)
+
+			if err != nil {
+				fmt.Println("Opção invalida!")
+			}
+
+			err = productService.DeactivateProduct(opcao)
+
+			if err != nil {
+				fmt.Println("Não consegui inativar, motivo:", err)
+			}
+
+			fmt.Print("Produto inativado com sucesso!")
+
+		}
+	default:
+		fmt.Println("Opcao invalida")
+	}
+	*/
+
 	// Inicia o servidor com HTTPS na porta 8443
-	err = server.RunTLS(":8443", "./server.crt", "./server.key")
+	// O Gin vai ler os arquivos que criamos no passo anterior
+	err := server.RunTLS(":8443", "./server.crt", "./server.key")
 
 	if err != nil {
 		panic(err) // Se der erro ao subir (ex: senha errada), o programa avisa e para

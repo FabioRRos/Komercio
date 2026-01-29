@@ -36,7 +36,8 @@ func (r *salesRepository) CreateNewSale(ctx context.Context, sale *entity.Sales)
 
 // ################################################# Início da transação
 func (r *salesRepository) BeginTransaction(ctx context.Context) (pgx.Tx, error) {
-	return r.datastore.Pool.Begin(ctx)
+
+	return r.datastore.Conn.Begin(ctx)
 }
 
 // ################################################# Criação da venda dentro da transação

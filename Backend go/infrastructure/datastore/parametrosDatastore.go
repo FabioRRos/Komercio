@@ -3,29 +3,43 @@ package datastore
 import (
 	"context"
 	"fmt"
+	"log"
 
 	"github.com/fabioros/Komercio/domain/entity"
 	"github.com/jackc/pgx/v5"
-	"github.com/jackc/pgx/v5/pgxpool"
 )
 
 type ParametrosDatastore struct {
-	Pool *pgxpool.Pool
+	Conn *pgx.Conn
 }
 
-func NewParametrosDatastore(Pool *pgxpool.Pool) *ParametrosDatastore {
+func NewParametrosDatastore() *ParametrosDatastore {
+	connStr := "postgresql://postgres:postgres@localhost:5432/komercio?sslmode=disable"
+	conn, err := pgx.Connect(context.Background(), connStr)
 
-	return &ParametrosDatastore{Pool: Pool}
+	if err != nil {
+		log.Fatal("Erro na conexão: %v", err)
+	}
 
+	return &ParametrosDatastore{Conn: conn}
+
+}
+
+func (d *ParametrosDatastore) Close() {
+	if d.Conn != nil {
+		d.Conn.Close(context.TODO())
+	}
 }
 
 func (d *ParametrosDatastore) GetParametros() ([]*entity.Parametros, error) {
 	query := "SELECT * FROM parametros order by id_parametro  asc;"
 
-	rows, err := d.Pool.Query(context.Background(), query)
+	rows, err := d.Conn.Query(context.Background(), query)
 	if err != nil {
 		return nil, fmt.Errorf("erro ao consultar parâmetros: %w", err)
 	}
+
+	defer rows.Close()
 
 	var parametros []*entity.Parametros
 
@@ -52,7 +66,7 @@ func (d *ParametrosDatastore) PostParametros(ParametroLista *entity.Parametros) 
 
 	var p entity.Parametros
 
-	err := d.Pool.QueryRow(context.Background(), query,
+	err := d.Conn.QueryRow(context.Background(), query,
 		ParametroLista.Parametro_Id,
 		ParametroLista.Parametro_status,
 	).Scan(

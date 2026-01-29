@@ -3,20 +3,32 @@ package datastore
 import (
 	"context"
 	"fmt"
+	"log"
 
-	"github.com/fabioros/Komercio/domain/dto"
 	"github.com/fabioros/Komercio/domain/entity"
-
 	"github.com/jackc/pgx/v5"
-	"github.com/jackc/pgx/v5/pgxpool"
 )
 
 type ReportDatastore struct {
-	Pool *pgxpool.Pool
+	Conn *pgx.Conn
 }
 
-func NewConReportDataStore(pool *pgxpool.Pool) *ReportDatastore {
-	return &ReportDatastore{Pool: pool}
+func NewConReportDataStore() *ReportDatastore {
+	connStr := "postgresql://postgres:postgres@localhost:5432/komercio?sslmode=disable"
+	conn, err := pgx.Connect(context.Background(), connStr)
+
+	if err != nil {
+
+		log.Fatalf("Erro na conexão: %v", err)
+
+	}
+	return &ReportDatastore{Conn: conn}
+}
+
+func (d *ReportDatastore) Close() {
+	if d.Conn != nil {
+		d.Conn.Close(context.TODO())
+	}
 }
 
 //Querie melhorada
@@ -42,7 +54,7 @@ LEFT JOIN employees AS e ON e.employeeid = s.seller_id
 ORDER BY s.sale_id DESC;
 `
 
-	rows, err := d.Pool.Query(context.Background(), query)
+	rows, err := d.Conn.Query(context.Background(), query)
 
 	if err != nil {
 		return nil, fmt.Errorf("Erro ao consultar o relatório")
@@ -97,7 +109,7 @@ func (d *ReportDatastore) SelectSalesReportbyId(id int) (*entity.Salereport, err
 	WHERE s.sale_id = $1
 	ORDER BY s.sale_id DESC`
 
-	row := d.Pool.QueryRow(context.Background(), query, id)
+	row := d.Conn.QueryRow(context.Background(), query, id)
 
 	var r entity.Salereport
 
@@ -123,128 +135,4 @@ func (d *ReportDatastore) SelectSalesReportbyId(id int) (*entity.Salereport, err
 	}
 
 	return &r, nil
-}
-
-// ETAPA 1 - PEGAR A LISTA DE VENDAS
-func (d *ReportDatastore) SelectSales(ctx context.Context) ([]*entity.Sales, error) {
-
-	query := `select * from sales`
-	rows, err := d.Pool.Query(ctx, query)
-	if err != nil {
-		return nil, fmt.Errorf("Erro ao consultar as vendas")
-	}
-	var lista []*entity.Sales
-	for rows.Next() {
-		var p entity.Sales
-		err := rows.Scan(
-			&p.SalesId,
-			&p.CustomerId,
-			&p.TotalAmount,
-			&p.DiscountAmount,
-			&p.FinalAmount,
-			&p.SalesDate,
-			&p.SalesHour,
-			&p.PaymentMethod,
-			&p.SellerId,
-			&p.SaleNotes,
-		)
-		if err != nil {
-			return nil, fmt.Errorf("erro ao ler linha de vendas: %w", err)
-		}
-		lista = append(lista, &p)
-	}
-
-	return lista, nil
-}
-
-// ETAPA 2 - PEGAR A LISTA DE ITENS DA VENDA
-
-func (d *ReportDatastore) SelectItensSale(ctx context.Context, idVenda int) ([]*entity.SalesItens, error) {
-	query := `select * from sale_items si where si.sale_id  = $1`
-
-	rows, err := d.Pool.Query(ctx, query, idVenda)
-
-	if err != nil {
-		return nil, fmt.Errorf("Erro ao consultar os itens")
-	}
-	var lista []*entity.SalesItens
-	for rows.Next() {
-		var p entity.SalesItens
-		err := rows.Scan(
-			&p.SaleItemId,
-			&p.SaleId,
-			&p.ProductId,
-			&p.ProductName,
-			&p.Barcode,
-			&p.UnitPrice,
-			&p.Quantity,
-			&p.Total,
-		)
-		if err != nil {
-			return nil, fmt.Errorf("erro ao ler linha dos itens da vendas: %w", err)
-		}
-		lista = append(lista, &p)
-	}
-	return lista, nil
-}
-
-///Etapa 3 - valores de compra dos produtos
-
-func (d *ReportDatastore) SelectPrecoItensVenda(ctx context.Context, idVenda int) ([]*entity.DifValue, error) {
-	query := `select * from valores_compra_venda bp where bp.sale_id = $1`
-
-	rows, err := d.Pool.Query(ctx, query, idVenda)
-
-	if err != nil {
-		return nil, fmt.Errorf("Erro ao consultar os itens")
-	}
-	var lista []*entity.DifValue
-	for rows.Next() {
-		var p entity.DifValue
-		err := rows.Scan(
-			&p.Id_Valores,
-			&p.Sale_id,
-			&p.PrecoVenda,
-			&p.PrecoCompra,
-			&p.ProdictId,
-		)
-		if err != nil {
-			return nil, fmt.Errorf("erro ao ler linha preco de compra dos itens da venda: %w", err)
-		}
-		lista = append(lista, &p)
-	}
-	return lista, nil
-}
-
-///Etapa 4 - Nome do vendedor
-
-func (d *ReportDatastore) SelectActiveEmployeeNames(ctx context.Context) ([]*dto.EmployeeSimple, error) {
-	query := `
-		SELECT
-			EmployeeID,
-			EmployeeFullName
-		FROM employees
-		WHERE EmployeeStatus = true
-	`
-
-	rows, err := d.Pool.Query(ctx, query)
-	if err != nil {
-		return nil, fmt.Errorf("erro ao consultar funcionários ativos: %w", err)
-	}
-	defer rows.Close()
-
-	var lista []*dto.EmployeeSimple
-
-	for rows.Next() {
-		var e dto.EmployeeSimple
-		if err := rows.Scan(
-			&e.ID,
-			&e.Name,
-		); err != nil {
-			return nil, fmt.Errorf("erro ao ler funcionário: %w", err)
-		}
-		lista = append(lista, &e)
-	}
-
-	return lista, nil
 }

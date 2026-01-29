@@ -3,24 +3,39 @@ package datastore
 import (
 	"context"
 	"fmt"
+	"log"
 
 	"github.com/fabioros/Komercio/domain/entity"
 	"github.com/jackc/pgx/v5"
-	"github.com/jackc/pgx/v5/pgxpool"
 )
 
 // Esse cara fará gerenciamento das conexões e as operações relacionadas aos produtos
 
 type CustomerDatastore struct {
-	Pool *pgxpool.Pool
+	Conn *pgx.Conn
 }
 
 //Será o cara repsonsavel por criar uma nova instância de productDataStore e conectar ao banco
 
-func NewCustomerDataStore(pool *pgxpool.Pool) *CustomerDatastore {
+func NewCustomerDataStore() *CustomerDatastore {
+	connStr := "postgresql://postgres:postgres@localhost:5432/komercio?sslmode=disable"
 
-	return &CustomerDatastore{
-		Pool: pool,
+	conn, err := pgx.Connect(context.Background(), connStr)
+
+	if err != nil {
+
+		log.Fatalf("Erro na conexão: %v", err)
+
+	}
+
+	return &CustomerDatastore{Conn: conn}
+}
+
+// Close encerrará a conexão com o banco de dados
+
+func (d *CustomerDatastore) Close() {
+	if d.Conn != nil {
+		d.Conn.Close(context.TODO())
 	}
 }
 
@@ -46,7 +61,7 @@ func (d *CustomerDatastore) CreateCustomer(customer *entity.Customer) error {
 		) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14)
 	`
 
-	_, err := d.Pool.Exec(
+	_, err := d.Conn.Exec(
 		context.Background(),
 		query,
 		customer.CustomerFirstName,
@@ -77,10 +92,11 @@ func (d *CustomerDatastore) SelectAllCustomers() ([]*entity.Customer, error) {
 		SELECT * FROM Customers
 	`
 
-	rows, err := d.Pool.Query(context.Background(), query)
+	rows, err := d.Conn.Query(context.Background(), query)
 	if err != nil {
 		return nil, fmt.Errorf("erro ao consultar todos os clientes: %w", err)
 	}
+	defer rows.Close()
 
 	var customers []*entity.Customer
 
@@ -136,7 +152,7 @@ func (d *CustomerDatastore) SelectCustomerById(id int) (*entity.Customer, error)
 
 	var c entity.Customer
 
-	err := d.Pool.QueryRow(context.Background(), query, id).Scan(
+	err := d.Conn.QueryRow(context.Background(), query, id).Scan(
 		&c.CustomerID,
 		&c.CustomerFirstName,
 		&c.CustomerLastName,
@@ -204,7 +220,7 @@ func (d *CustomerDatastore) UpdateCustomer(customer *entity.Customer) (*entity.C
 
 	var c entity.Customer
 
-	err := d.Pool.QueryRow(context.Background(), query,
+	err := d.Conn.QueryRow(context.Background(), query,
 		customer.CustomerID,
 		customer.CustomerFirstName,
 		customer.CustomerLastName,
@@ -255,7 +271,7 @@ func (d *CustomerDatastore) DeactivateCustomer(id int) error {
 		WHERE CustomerID = $1
 	`
 
-	_, err := d.Pool.Exec(context.Background(), query, id)
+	_, err := d.Conn.Exec(context.Background(), query, id)
 	if err != nil {
 		return fmt.Errorf("erro ao desativar cliente com id %d: %w", id, err)
 	}
@@ -286,10 +302,11 @@ func (d *CustomerDatastore) SelectCustomerByName(name string) ([]*entity.Custome
 		WHERE CustomerFirstName ILIKE $1
 	`
 
-	rows, err := d.Pool.Query(context.Background(), query, "%"+name+"%")
+	rows, err := d.Conn.Query(context.Background(), query, "%"+name+"%")
 	if err != nil {
 		return nil, fmt.Errorf("erro ao consultar clientes: %w", err)
 	}
+	defer rows.Close()
 
 	var customers []*entity.Customer
 
@@ -334,7 +351,7 @@ func (d *CustomerDatastore) ValidateDocument(doc string) (*entity.Customer, erro
 	`
 	var c entity.Customer
 
-	err := d.Pool.QueryRow(context.Background(), query, doc).Scan(
+	err := d.Conn.QueryRow(context.Background(), query, doc).Scan(
 		&c.CustomerID,
 		&c.CustomerFirstName,
 		&c.CustomerLastName,

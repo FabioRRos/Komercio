@@ -3,20 +3,36 @@ package datastore
 import (
 	"context"
 	"fmt"
+	"log"
 	"strconv"
 
 	"github.com/fabioros/Komercio/domain/entity"
 	"github.com/jackc/pgx/v5"
-	"github.com/jackc/pgx/v5/pgxpool"
 )
 
 type SalesDatastore struct {
-	Pool *pgxpool.Pool
+	Conn *pgx.Conn
 }
 
 // ################################################# Construtor
-func NewSalesDataStore(pool *pgxpool.Pool) *SalesDatastore {
-	return &SalesDatastore{Pool: pool}
+func NewSalesDataStore() *SalesDatastore {
+	connStr := "postgresql://postgres:postgres@localhost:5432/komercio?sslmode=disable"
+	conn, err := pgx.Connect(context.Background(), connStr)
+
+	if err != nil {
+
+		log.Fatalf("Erro na conexão: %v", err)
+
+	}
+
+	return &SalesDatastore{Conn: conn}
+}
+
+// ################################################# Fechar conexão
+func (d *SalesDatastore) Close() {
+	if d.Conn != nil {
+		d.Conn.Close(context.TODO())
+	}
 }
 
 // ################################################# Criar venda (sem transação)
@@ -38,7 +54,7 @@ func (d *SalesDatastore) NewSale(sales *entity.Sales) (int, error) {
 	`
 
 	var saleID int
-	err := d.Pool.QueryRow(
+	err := d.Conn.QueryRow(
 		context.Background(),
 		query,
 		sales.CustomerId,
@@ -101,7 +117,7 @@ func (d *SalesDatastore) NewSaleTx(ctx context.Context, tx pgx.Tx, sales *entity
 // ################################################# DELETAR VENDA EM CASCATA
 
 func (d *SalesDatastore) DeleteSaleCascade(ctx context.Context, saleID int) (err error) {
-	tx, err := d.Pool.Begin(ctx)
+	tx, err := d.Conn.Begin(ctx)
 	if err != nil {
 		return err
 	}

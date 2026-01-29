@@ -23,7 +23,6 @@ func NewFullSaleService(
 	transation CustomertransactionService,
 	caixaService CaixaService,
 	formaPagamento FormaPagamentoService,
-	serv PrecoCompraService,
 ) FullSaleService {
 	return &fullSaleService{
 		salesService:        salesService,
@@ -33,7 +32,6 @@ func NewFullSaleService(
 		transation:          transation,
 		caixaService:        caixaService,
 		formaPagamento:      formaPagamento,
-		serv:                serv,
 	}
 }
 
@@ -48,7 +46,6 @@ type fullSaleService struct {
 	transation          CustomertransactionService
 	caixaService        CaixaService
 	formaPagamento      FormaPagamentoService
-	serv                PrecoCompraService
 }
 
 func (s *fullSaleService) CreateFullSale(ctx context.Context, salesAggregate *entity.SaleAggregate) (int, error) {
@@ -172,35 +169,5 @@ func (s *fullSaleService) CreateFullSale(ctx context.Context, salesAggregate *en
 		return 0, fmt.Errorf("erro ao confirmar transação: %w", err)
 	}
 
-	type difValue struct {
-		Sale_id     int
-		PrecoVenda  float32
-		PrecoCompra float32
-	}
-
-	var prod []*entity.DifValue
-
-	// aaqui vou baixar a lista dos produtos.
-	for _, item := range salesAggregate.Items {
-		prodTemp := &entity.DifValue{
-			Sale_id:    saleID,         //id da venda
-			PrecoVenda: item.Total,     // total recuperado no pacote atual
-			ProdictId:  item.ProductId, // o id do produto
-		}
-
-		prodTemp.PrecoCompra, err = s.serv.BaixarProdutosListaDePrecos(
-			ctx,
-			item.Barcode,
-			item.Quantity,
-		)
-		if err != nil {
-			return saleID, err
-		}
-
-		prod = append(prod, prodTemp) // valor recebido da baixaProdutos.
-	}
-
-	err = s.serv.CreateValorCompraEVenda(ctx, prod)
-
-	return saleID, err
+	return saleID, nil
 }

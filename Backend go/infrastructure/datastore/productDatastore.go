@@ -4,6 +4,7 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"log"
 
 	"github.com/fabioros/Komercio/domain/entity"
 	"github.com/jackc/pgx/v5"
@@ -14,13 +15,23 @@ type ProductDatastore struct {
 	Pool *pgxpool.Pool
 }
 
+func NewPostgresPool() *pgxpool.Pool {
+	connStr := "postgresql://postgres:postgres@localhost:5432/komercio?sslmode=disable"
+
+	pool, err := pgxpool.New(context.Background(), connStr)
+	if err != nil {
+		log.Fatalf("Erro ao criar pool: %v", err)
+	}
+
+	return pool
+}
+
 func NewProductDataStore(pool *pgxpool.Pool) *ProductDatastore {
 	return &ProductDatastore{
 		Pool: pool,
 	}
 }
 
-// ok
 func (d *ProductDatastore) CreateProduct(product *entity.Product) error {
 	query := `
 		INSERT INTO products 
@@ -77,7 +88,6 @@ func (d *ProductDatastore) CreateProductDescarte(productDescarte *entity.Producr
 	return nil
 }
 
-// ok
 func (d *ProductDatastore) SelectAllProducts() ([]*entity.Product, error) {
 	query := `
 		SELECT id, productname, productprice, productcodbar,
@@ -89,6 +99,7 @@ func (d *ProductDatastore) SelectAllProducts() ([]*entity.Product, error) {
 	if err != nil {
 		return nil, fmt.Errorf("erro ao consultar produtos: %w", err)
 	}
+	defer rows.Close()
 
 	var products []*entity.Product
 
@@ -113,7 +124,6 @@ func (d *ProductDatastore) SelectAllProducts() ([]*entity.Product, error) {
 	return products, nil
 }
 
-// ok
 func (d *ProductDatastore) SelectProductById(id int) (*entity.Product, error) {
 	query := `
 		SELECT id, productname, productprice, productcodbar,
@@ -145,7 +155,6 @@ func (d *ProductDatastore) SelectProductById(id int) (*entity.Product, error) {
 	return &p, nil
 }
 
-// ok
 func (d *ProductDatastore) SelectProductByCodBar(productCodBar string) (*entity.Product, error) {
 	query := `
 		SELECT id, productname, productprice, productcodbar,
@@ -177,7 +186,6 @@ func (d *ProductDatastore) SelectProductByCodBar(productCodBar string) (*entity.
 	return &p, nil
 }
 
-// ok
 func (d *ProductDatastore) UpdateProduct(product *entity.Product) (*entity.Product, error) {
 	query := `
 		UPDATE products SET
@@ -225,7 +233,6 @@ func (d *ProductDatastore) UpdateProduct(product *entity.Product) (*entity.Produ
 	return &p, nil
 }
 
-// ok
 func (d *ProductDatastore) DeactivateProduct(id int) error {
 	query := `
 		UPDATE products
@@ -261,7 +268,6 @@ func (d *ProductDatastore) UpdateProductOutputStock(productcodbar string) error 
 	return nil
 }
 
-// ok
 func (d *ProductDatastore) UpdateProductOutputStockTX(
 	ctx context.Context,
 	tx pgx.Tx,
@@ -295,6 +301,7 @@ func (d *ProductDatastore) GetCodbarBySaleId(saleId int) ([]*ProductCodBarQuanti
 	if err != nil {
 		return nil, fmt.Errorf("erro ao consultar codbars: %w", err)
 	}
+	defer rows.Close()
 	var codbars []*ProductCodBarQuantity
 
 	for rows.Next() {
@@ -325,6 +332,7 @@ func (d *ProductDatastore) SelectProductSettings() ([]*entity.ProductNotificatio
 	if err != nil {
 		return nil, fmt.Errorf("erro ao consultar notificações: %w", err)
 	}
+	defer rows.Close()
 
 	var products []*entity.ProductNotification
 

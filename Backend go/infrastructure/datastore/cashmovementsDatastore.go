@@ -3,24 +3,45 @@ package datastore
 import (
 	"context"
 	"fmt"
+	"log"
 
 	"github.com/fabioros/Komercio/domain/entity"
 	"github.com/jackc/pgx/v5"
-	"github.com/jackc/pgx/v5/pgxpool"
 )
 
-// Aqui eu crio o ponteiro de pgxpool que gerencia as conexões com o banco de dados
+// Aqui eu crio o ponteiro de pgx.Conn
 type CashmovementsDatastore struct {
-	Pool *pgxpool.Pool
+	Conn *pgx.Conn
 }
 
 // Aqui vou abrir a conexão. Eu crio a variavel com a string de conexão
 // Depois eu abro com o Connect e passo o context.Background() + string de conexão)
 // Por fim, eu trato o erro e se tudo der certo, retorno o ponteiro de datastore
 // context é quem gerencia timeout e cancelamentos no GO.
-func NewCashmovementsDatastore(pool *pgxpool.Pool) *CashmovementsDatastore {
+func NewCashmovementsDatastore() *CashmovementsDatastore {
+	connStr := "postgresql://postgres:postgres@localhost:5432/komercio?sslmode=disable"
 
-	return &CashmovementsDatastore{Pool: pool}
+	conn, err := pgx.Connect(context.Background(), connStr)
+
+	if err != nil {
+
+		log.Fatalf("Erro na conexão: %v", err)
+
+	}
+
+	return &CashmovementsDatastore{Conn: conn}
+}
+
+// Aqui eu crio a função para fechar.
+// se o DATASTORE estiver com alguma coisa que é diferente de nulo, eu chamo o .CLOSE
+// POREEEEM o .Close pede um retorno do contexto (pode ser um timeout, algo assim)
+// como eu não quero retornar, o TODO é como um
+// "Sei que você espera aguma coisa para retornar mas como não tenho nada, toma esse TODO ai
+// só pra não dizer que eu não retornei nada"
+func (d *CashmovementsDatastore) Close() {
+	if d.Conn != nil {
+		d.Conn.Close(context.TODO())
+	}
 }
 
 // Aqui crio uma função que recebe o datastore para abrir a conexão
@@ -45,7 +66,7 @@ func (d *CashmovementsDatastore) CreateNewCashmovement(ctx context.Context, cash
 		RETURNING movement_id
 	`
 
-	err := d.Pool.QueryRow(ctx, query,
+	err := d.Conn.QueryRow(ctx, query,
 		cashmovements.SalesId,
 		cashmovements.Cashmovementstype,
 		cashmovements.Cashmovementsdescription,
@@ -110,13 +131,13 @@ func (d *CashmovementsDatastore) CreateNewCashmovementTx(ctx context.Context, tx
 func (d *CashmovementsDatastore) SelectallCashmovements(ctx context.Context) ([]*entity.Cashmovements, error) {
 
 	query := `SELECT * FROM cash_movements where DATE(movement_datetime ) = current_date `
-	//query := `SELECT * FROM cash_movements`
 
-	rows, err := d.Pool.Query(ctx, query)
+	rows, err := d.Conn.Query(ctx, query)
 
 	if err != nil {
 		return nil, fmt.Errorf("Erro ao buscar as movimentações do caixa: %w", err)
 	}
+	defer rows.Close()
 
 	var Cashmovements []*entity.Cashmovements
 

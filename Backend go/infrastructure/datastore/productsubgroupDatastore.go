@@ -3,18 +3,33 @@ package datastore
 import (
 	"context"
 	"fmt"
+	"log"
 
 	"github.com/fabioros/Komercio/domain/entity"
-	"github.com/jackc/pgx/v5/pgxpool"
+	"github.com/jackc/pgx/v5"
 )
 
 type ProductSubgroupDatastore struct {
-	Pool *pgxpool.Pool
+	Conn *pgx.Conn
 }
 
-func NewProductSubgroupDatastore(pool *pgxpool.Pool) *ProductSubgroupDatastore {
+func NewProductSubgroupDatastore() *ProductSubgroupDatastore {
+	connStr := "postgresql://postgres:postgres@localhost:5432/komercio?sslmode=disable"
+	conn, err := pgx.Connect(context.Background(), connStr)
 
-	return &ProductSubgroupDatastore{Pool: pool}
+	if err != nil {
+
+		log.Fatalf("Erro na conexão: %v", err)
+
+	}
+
+	return &ProductSubgroupDatastore{Conn: conn}
+}
+
+func (d *ProductSubgroupDatastore) Close() {
+	if d.Conn != nil {
+		d.Conn.Close(context.TODO())
+	}
 }
 
 // CREATE (PUT)
@@ -22,7 +37,7 @@ func (d *ProductSubgroupDatastore) CreateProducGroup(ProductSubgroup *entity.Pro
 	query := `INSERT INTO product_subgroup
 	(subgroup_name,product_group_id) Values ($1,$2)`
 
-	_, err := d.Pool.Exec(context.Background(), query, ProductSubgroup.ProducSubGroup_name, ProductSubgroup.Product_group_id)
+	_, err := d.Conn.Exec(context.Background(), query, ProductSubgroup.ProducSubGroup_name, ProductSubgroup.Product_group_id)
 
 	if err != nil {
 		return fmt.Errorf("Erro ao inserir subgrupo de produtos: %w", err)
@@ -36,11 +51,13 @@ func (d *ProductSubgroupDatastore) SelectAllProductSubgroup() ([]*entity.Product
 
 	query := `Select * from product_subgroup`
 
-	rows, err := d.Pool.Query(context.Background(), query)
+	rows, err := d.Conn.Query(context.Background(), query)
 
 	if err != nil {
 		return nil, fmt.Errorf("erro ao consultar o subgrupo de produtos %w", err)
 	}
+
+	defer rows.Close()
 
 	var ProductSubgroup []*entity.ProductSubGroup
 

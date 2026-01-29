@@ -133,8 +133,7 @@ func (c *ProductController) UpdateProduct(ctx *gin.Context) {
 }
 
 type StockUpdateRequest struct {
-	ProductStock int     `json:"product_stock"`
-	Compra       float32 `json:"product_compra"`
+	ProductStock int `json:"product_stock"`
 }
 
 // put /updateStock/:productcodbar
@@ -149,7 +148,7 @@ func (c *ProductController) UpdateProductInputStock(ctx *gin.Context) {
 	idParam := ctx.Param("productcodbar")
 	productcodbar := idParam
 
-	updated, err := c.service.UpdateProductInputStock(ctx, productcodbar, productStock.ProductStock, productStock.Compra)
+	updated, err := c.service.UpdateProductInputStock(ctx, productcodbar, productStock.ProductStock)
 	if err != nil {
 		ctx.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 	}
