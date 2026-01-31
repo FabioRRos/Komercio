@@ -1,0 +1,152 @@
+﻿@model Komercio.Models.ViewModels.RelatorioLucratividadeViewModel
+
+@{
+    ViewData["Title"] = "Movimentações Financeiras";
+}
+
+<div class="container-fluid mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h2 class="h4 mb-0 text-dark fw-bold">
+                <i class="bi bi-cash-stack me-2 text-success"></i>Análise de Lucratividade
+            </h2>
+            <p class="text-muted small mb-0">
+                @Model.ItensFiltradosExpandida.Select(x => x.SaleId).Distinct().Count() vendas no período
+            </p>
+        </div>
+        <a asp-action="Index" asp-controller="Home" class="btn btn-outline-secondary shadow-sm px-3">
+            <i class="bi bi-arrow-left-circle me-2"></i>Voltar ao Dashboard
+        </a>
+    </div>
+
+    <div class="card bg-light mb-4 shadow-sm border-0">
+        <div class="card-body">
+            <form asp-action="Financeiro" method="get">
+                <div class="row align-items-end">
+                    <div class="col-md-3">
+                        <label class="form-label fw-bold text-secondary small text-uppercase">Data Inicial</label>
+                        <input asp-for="DataInicial" type="date" class="form-control shadow-none" />
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label fw-bold text-secondary small text-uppercase">Data Final</label>
+                        <input asp-for="DataFinal" type="date" class="form-control shadow-none" />
+                    </div>
+                    <div class="col-md-4">
+                        <button type="submit" class="btn btn-primary px-4 shadow-sm">
+                            <i class="bi bi-search me-1"></i> FILTRAR
+                        </button>
+                        <a asp-action="Financeiro" class="btn btn-outline-secondary px-4 ms-2">
+                            <i class="bi bi-eraser me-1"></i> LIMPAR
+                        </a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="row mb-4">
+        <div class="col-md-3">
+            <div class="card bg-dark text-white shadow-sm border-0 h-100">
+                <div class="card-body text-center">
+                    <h6 class="card-title text-uppercase small opacity-75">Faturamento Bruto</h6>
+                    <h3 class="fw-bold mb-0">@Model.FaturamentoTotal.ToString("C2")</h3>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card bg-secondary text-white shadow-sm border-0 h-100">
+                <div class="card-body text-center">
+                    <h6 class="card-title text-uppercase small opacity-75">Custo Total (CPV)</h6>
+                    <h3 class="fw-bold mb-0">@Model.CustoTotal.ToString("C2")</h3>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card bg-success text-white shadow-sm border-0 h-100">
+                <div class="card-body text-center">
+                    <h6 class="card-title text-uppercase small opacity-75">Lucro Líquido</h6>
+                    <h3 class="fw-bold mb-0">@Model.LucroTotal.ToString("C2")</h3>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            @{
+                var margemColor =
+                Model.PercentualMargem < 0 ? "bg-danger text-white" :
+                Model.PercentualMargem < 15 ? "bg-warning text-dark" :
+                "bg-info text-white";
+            }
+            <div class="card @margemColor shadow-sm border-0 h-100">
+                <div class="card-body text-center">
+                    <h6 class="card-title text-uppercase small opacity-75">Margem Global</h6>
+                    <h3 class="fw-bold mb-0">@Model.PercentualMargem.ToString("N2")%</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card shadow-sm border-0">
+        <div class="card-body p-0">
+            <div class="table-responsive">
+                <table class="table table-striped table-hover mb-0 align-middle">
+                    <thead class="table-dark">
+                        <tr>
+                            <th class="ps-3" style="width: 100px;">VENDA</th>
+                            <th>PRODUTO</th>
+                            <th class="text-center">QTD</th>
+                            <th>VALOR UNIT.</th>
+                            <th>CUSTO UNIT.</th>
+                            <th>MARGEM (R$)</th>
+                            <th class="pe-3">VENDEDOR</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model.ItensFiltradosExpandida != null && Model.ItensFiltradosExpandida.Any())
+                        {
+                            foreach (var item in Model.ItensFiltradosExpandida)
+                            {
+                                decimal custoUnitario = 0;
+                                if (item.Quantity > 0)
+                                    custoUnitario = item.TotalPurchaseProduct;
+
+                                decimal lucro = item.Margin; // usa a margem já calculada
+                                string classeLucro = lucro >= 0 ? "text-success" : "text-danger";
+
+                                <tr>
+                                    <td class="ps-3">
+                                        <span class="badge bg-light text-dark border shadow-sm">
+                                            #@item.SaleId
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <div class="fw-bold">@item.ProductName</div>
+                                        <div class="text-muted small">
+                                            @item.SaleDate.ToString("dd/MM/yyyy") @item.SaleTime.Substring(0, 5)
+                                        </div>
+                                    </td>
+                                    <td class="text-center">@item.Quantity</td>
+                                    <td>@item.TotalSaleProduct.ToString("C2")</td>
+                                    <td class="text-muted small">@custoUnitario.ToString("C2")</td>
+                                    <td class="fw-bold @classeLucro">@lucro.ToString("C2")</td>
+                                    <td class="small pe-3 text-muted">@item.SellerName</td>
+                                </tr>
+                            }
+                        }
+                        else
+                        {
+                            <tr>
+                                <td colspan="7" class="text-center py-5 text-muted">
+                                    <i class="bi bi-search fs-1 d-block mb-2 opacity-50"></i>
+                                    Nenhum dado encontrado para o período selecionado.
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

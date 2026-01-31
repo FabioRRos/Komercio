@@ -1,0 +1,447 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{44D56DD6-A48F-48C7-9DB4-CD3BA6950EF2}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>Komercio</RootNamespace>
+    <AssemblyName>Komercio</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>komercio.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>
+    </StartupObject>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="MaterialSkin, Version=2.3.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\MaterialSkin.2.2.3.0\lib\net461\MaterialSkin.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>packages\Newtonsoft.Json.13.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Configuration.ConfigurationManager, Version=9.0.0.10, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>packages\System.Configuration.ConfigurationManager.9.0.10\lib\net462\System.Configuration.ConfigurationManager.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Core" />
+    <Reference Include="System.Design" />
+    <Reference Include="System.DirectoryServices" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ApplicationLayer\DumpApp.cs" />
+    <Compile Include="ApplicationLayer\EmployeeServiceApp.cs" />
+    <Compile Include="ApplicationLayer\ParametrosApp.cs" />
+    <Compile Include="ApplicationLayer\ProdutoApp.cs" />
+    <Compile Include="ApplicationLayer\SalesApp.cs" />
+    <Compile Include="Form1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form1.Designer.cs">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\BuscaCepDTO.cs" />
+    <Compile Include="Models\CaixaDTO.cs" />
+    <Compile Include="Models\CashmovementsDTO.cs" />
+    <Compile Include="Models\CupomDTO.cs" />
+    <Compile Include="Models\CustomerDTO.cs" />
+    <Compile Include="Models\CustomerTransactionsDTO.cs" />
+    <Compile Include="Models\DescarteProdutoDTO.cs" />
+    <Compile Include="Models\EmployeeDto.cs" />
+    <Compile Include="Models\formaPagamentoDTO.cs" />
+    <Compile Include="Models\ParametroDTO.cs" />
+    <Compile Include="Models\ProductDescriptionDTO.cs" />
+    <Compile Include="Models\ProductDTO.cs" />
+    <Compile Include="Models\ProductgroupDTO.cs" />
+    <Compile Include="Models\ProductNotificationSettingsDTO.cs" />
+    <Compile Include="Models\ProductSubgroupDTO.cs" />
+    <Compile Include="Models\RawPrinterHelper.cs" />
+    <Compile Include="Models\SaleAggregateDTO.cs" />
+    <Compile Include="Models\SaleReportDTO.cs" />
+    <Compile Include="Models\SalesDTO.cs" />
+    <Compile Include="Models\SalesItensDTO.cs" />
+    <Compile Include="Models\ValoresFechamentoDTO.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Services\BuscaCEPService.cs" />
+    <Compile Include="Services\CaixaService.cs" />
+    <Compile Include="Services\CashmovementsService.cs" />
+    <Compile Include="Services\CupomService.cs" />
+    <Compile Include="Services\CustomerService.cs" />
+    <Compile Include="Services\CustomerTransactionService.cs" />
+    <Compile Include="Services\DoccumentValidationService.cs" />
+    <Compile Include="Services\EmployeeService.cs" />
+    <Compile Include="Services\FormaPagamentoService.cs" />
+    <Compile Include="Services\ParametrosService.cs" />
+    <Compile Include="Services\ProductDescriptionService.cs" />
+    <Compile Include="Services\ProductGroupService.cs" />
+    <Compile Include="Services\ProductService.cs" />
+    <Compile Include="Services\ProductSubgroupService.cs" />
+    <Compile Include="Services\RepotService.cs" />
+    <Compile Include="Services\SaleFinalizerService.cs" />
+    <Compile Include="ApplicationLayer\Managers\SaleManager.cs" />
+    <Compile Include="UI\Forms\Caixa\fmAberturaCaixa.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Forms\Caixa\fmAberturaCaixa.Designer.cs">
+      <DependentUpon>fmAberturaCaixa.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Forms\Caixa\frmSangria.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Forms\Caixa\frmSangria.Designer.cs">
+      <DependentUpon>frmSangria.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Forms\Customer\fmChangeCustomer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Forms\Customer\fmChangeCustomer.Designer.cs">
+      <DependentUpon>fmChangeCustomer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Forms\Customer\fmCreateCustomer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Forms\Customer\fmCreateCustomer.Designer.cs">
+      <DependentUpon>fmCreateCustomer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Forms\Dump\fmSalesDump.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Forms\Dump\fmSalesDump.Designer.cs">
+      <DependentUpon>fmSalesDump.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Forms\Dump\frmDetalheVendas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Forms\Dump\frmDetalheVendas.Designer.cs">
+      <DependentUpon>frmDetalheVendas.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Forms\Employee\CreateEmployee.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Forms\Employee\CreateEmployee.Designer.cs">
+      <DependentUpon>CreateEmployee.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Forms\Employee\fmChangePasswordEmployeer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Forms\Employee\fmChangePasswordEmployeer.Designer.cs">
+      <DependentUpon>fmChangePasswordEmployeer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Forms\Caixa\frmFechamentoCaixa.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Forms\Caixa\frmFechamentoCaixa.Designer.cs">
+      <DependentUpon>frmFechamentoCaixa.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Forms\Employee\frmLogin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Forms\Employee\frmLogin.Designer.cs">
+      <DependentUpon>frmLogin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Forms\Product\fmCreateGroupAndSubgroup.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Forms\Product\fmCreateGroupAndSubgroup.Designer.cs">
+      <DependentUpon>fmCreateGroupAndSubgroup.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Forms\Product\Produto\fmAlterarProduto.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Forms\Product\Produto\fmAlterarProduto.Designer.cs">
+      <DependentUpon>fmAlterarProduto.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Forms\Product\Produto\fmCreateProduct.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Forms\Product\Produto\fmCreateProduct.Designer.cs">
+      <DependentUpon>fmCreateProduct.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Forms\Product\Produto\fmImputProduct.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Forms\Product\Produto\fmImputProduct.Designer.cs">
+      <DependentUpon>fmImputProduct.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Forms\Product\Produto\fmNewProductLote.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Forms\Product\Produto\fmNewProductLote.Designer.cs">
+      <DependentUpon>fmNewProductLote.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Forms\Product\fmProductSettings.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Forms\Product\fmProductSettings.Designer.cs">
+      <DependentUpon>fmProductSettings.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Forms\Product\Produto\frmEntradEstoqueEmLote.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Forms\Product\Produto\frmEntradEstoqueEmLote.Designer.cs">
+      <DependentUpon>frmEntradEstoqueEmLote.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Forms\Product\Subgrupo\fmrCadastroSubGrupoProduto.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Forms\Product\Subgrupo\fmrCadastroSubGrupoProduto.Designer.cs">
+      <DependentUpon>fmrCadastroSubGrupoProduto.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Forms\Product\Grupo\frmCadastroGrupo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Forms\Product\Grupo\frmCadastroGrupo.Designer.cs">
+      <DependentUpon>frmCadastroGrupo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Forms\Product\frmDescarte.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Forms\Product\frmDescarte.Designer.cs">
+      <DependentUpon>frmDescarte.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Forms\Product\frmProductVisualize.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Forms\Product\frmProductVisualize.Designer.cs">
+      <DependentUpon>frmProductVisualize.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Forms\Sales\fmSalePaymant.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Forms\Sales\fmSalePaymant.Designer.cs">
+      <DependentUpon>fmSalePaymant.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Forms\Sales\fmSalesProduct.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Forms\Sales\fmSalesProduct.Designer.cs">
+      <DependentUpon>fmSalesProduct.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Forms\Sales\frmMultiplosPagamentos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Forms\Sales\frmMultiplosPagamentos.Designer.cs">
+      <DependentUpon>frmMultiplosPagamentos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Forms\settings\frmParametros.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Forms\settings\frmParametros.Designer.cs">
+      <DependentUpon>frmParametros.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Forms\Transactions\fmCustomerTransactions.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Forms\Transactions\fmCustomerTransactions.Designer.cs">
+      <DependentUpon>fmCustomerTransactions.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Form1.resx">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Forms\Caixa\fmAberturaCaixa.resx">
+      <DependentUpon>fmAberturaCaixa.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Forms\Caixa\frmSangria.resx">
+      <DependentUpon>frmSangria.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Forms\Customer\fmChangeCustomer.resx">
+      <DependentUpon>fmChangeCustomer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Forms\Customer\fmCreateCustomer.resx">
+      <DependentUpon>fmCreateCustomer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Forms\Dump\fmSalesDump.resx">
+      <DependentUpon>fmSalesDump.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Forms\Dump\frmDetalheVendas.resx">
+      <DependentUpon>frmDetalheVendas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Forms\Employee\CreateEmployee.resx">
+      <DependentUpon>CreateEmployee.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Forms\Employee\fmChangePasswordEmployeer.resx">
+      <DependentUpon>fmChangePasswordEmployeer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Forms\Caixa\frmFechamentoCaixa.resx">
+      <DependentUpon>frmFechamentoCaixa.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Forms\Employee\frmLogin.resx">
+      <DependentUpon>frmLogin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Forms\Product\fmCreateGroupAndSubgroup.resx">
+      <DependentUpon>fmCreateGroupAndSubgroup.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Forms\Product\Produto\fmAlterarProduto.resx">
+      <DependentUpon>fmAlterarProduto.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Forms\Product\Produto\fmCreateProduct.resx">
+      <DependentUpon>fmCreateProduct.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Forms\Product\Produto\fmImputProduct.resx">
+      <DependentUpon>fmImputProduct.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Forms\Product\Produto\fmNewProductLote.resx">
+      <DependentUpon>fmNewProductLote.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Forms\Product\fmProductSettings.resx">
+      <DependentUpon>fmProductSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Forms\Product\Produto\frmEntradEstoqueEmLote.resx">
+      <DependentUpon>frmEntradEstoqueEmLote.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Forms\Product\Subgrupo\fmrCadastroSubGrupoProduto.resx">
+      <DependentUpon>fmrCadastroSubGrupoProduto.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Forms\Product\Grupo\frmCadastroGrupo.resx">
+      <DependentUpon>frmCadastroGrupo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Forms\Product\frmDescarte.resx">
+      <DependentUpon>frmDescarte.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Forms\Product\frmProductVisualize.resx">
+      <DependentUpon>frmProductVisualize.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Forms\Sales\fmSalePaymant.resx">
+      <DependentUpon>fmSalePaymant.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Forms\Sales\fmSalesProduct.resx">
+      <DependentUpon>fmSalesProduct.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Forms\Sales\frmMultiplosPagamentos.resx">
+      <DependentUpon>frmMultiplosPagamentos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Forms\settings\frmParametros.resx">
+      <DependentUpon>frmParametros.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Forms\Transactions\fmCustomerTransactions.resx">
+      <DependentUpon>fmCustomerTransactions.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="global.json" />
+    <None Include="packages.config" />
+    <None Include="packages\MaterialSkin.2.2.3.1\.signature.p7s" />
+    <None Include="packages\MaterialSkin.2.2.3.1\MaterialSkin.2.2.3.1.nupkg" />
+    <None Include="packages\MaterialSkin.2.2.3.1\README.md" />
+    <None Include="packages\Newtonsoft.Json.13.0.4\.signature.p7s" />
+    <None Include="packages\Newtonsoft.Json.13.0.4\LICENSE.md" />
+    <None Include="packages\Newtonsoft.Json.13.0.4\Newtonsoft.Json.13.0.4.nupkg" />
+    <None Include="packages\Newtonsoft.Json.13.0.4\README.md" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="komercio.ico" />
+    <Content Include="packages\MaterialSkin.2.2.3.1\lib\net45\MaterialSkin.dll" />
+    <Content Include="packages\MaterialSkin.2.2.3.1\lib\net461\MaterialSkin.dll" />
+    <Content Include="packages\MaterialSkin.2.2.3.1\lib\net48\MaterialSkin.dll" />
+    <Content Include="packages\MaterialSkin.2.2.3.1\lib\net5.0-windows7.0\MaterialSkin.dll" />
+    <Content Include="packages\MaterialSkin.2.2.3.1\nugetIcon.png" />
+    <Content Include="packages\Newtonsoft.Json.13.0.4\lib\net20\Newtonsoft.Json.dll" />
+    <Content Include="packages\Newtonsoft.Json.13.0.4\lib\net20\Newtonsoft.Json.xml" />
+    <Content Include="packages\Newtonsoft.Json.13.0.4\lib\net35\Newtonsoft.Json.dll" />
+    <Content Include="packages\Newtonsoft.Json.13.0.4\lib\net35\Newtonsoft.Json.xml" />
+    <Content Include="packages\Newtonsoft.Json.13.0.4\lib\net40\Newtonsoft.Json.dll" />
+    <Content Include="packages\Newtonsoft.Json.13.0.4\lib\net40\Newtonsoft.Json.xml" />
+    <Content Include="packages\Newtonsoft.Json.13.0.4\lib\net45\Newtonsoft.Json.dll" />
+    <Content Include="packages\Newtonsoft.Json.13.0.4\lib\net45\Newtonsoft.Json.xml" />
+    <Content Include="packages\Newtonsoft.Json.13.0.4\lib\net6.0\Newtonsoft.Json.dll" />
+    <Content Include="packages\Newtonsoft.Json.13.0.4\lib\net6.0\Newtonsoft.Json.xml" />
+    <Content Include="packages\Newtonsoft.Json.13.0.4\lib\netstandard1.0\Newtonsoft.Json.dll" />
+    <Content Include="packages\Newtonsoft.Json.13.0.4\lib\netstandard1.0\Newtonsoft.Json.xml" />
+    <Content Include="packages\Newtonsoft.Json.13.0.4\lib\netstandard1.3\Newtonsoft.Json.dll" />
+    <Content Include="packages\Newtonsoft.Json.13.0.4\lib\netstandard1.3\Newtonsoft.Json.xml" />
+    <Content Include="packages\Newtonsoft.Json.13.0.4\lib\netstandard2.0\Newtonsoft.Json.dll" />
+    <Content Include="packages\Newtonsoft.Json.13.0.4\lib\netstandard2.0\Newtonsoft.Json.xml" />
+    <Content Include="packages\Newtonsoft.Json.13.0.4\packageIcon.png" />
+    <None Include="Properties\Resources\png-clipart-binoculars-binoculars-logo-monochrome-removebg-preview.png" />
+    <None Include="Properties\Resources\png-clipart-binoculars-binoculars-logo-monochrome.png" />
+    <None Include="Properties\Resources\icone-de-l-argent-symbole-png-rose.png" />
+    <None Include="Properties\Resources\Carrinho.png" />
+    <None Include="Properties\Resources\komercio.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.8">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.8 %28x86 e x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

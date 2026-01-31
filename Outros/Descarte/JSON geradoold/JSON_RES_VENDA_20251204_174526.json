@@ -1,0 +1,31 @@
+﻿{
+  "sale": {
+    "customer_id": 2,
+    "total_amount": 32.9,
+    "discount_amount": 0.0,
+    "final_amount": 32.9,
+    "sale_date": "2025-12-04T17:45:23.0424436-03:00",
+    "sale_time": "17:45:23",
+    "payment_method": "PIX",
+    "seller_id": 3,
+    "sale_notes": ""
+  },
+  "items": [
+    {
+      "product_id": 13,
+      "product_name": "Capa Acrílico Fumê Samsung A54",
+      "barcode": "789000013",
+      "unit_price": 32.9,
+      "quantity": 1,
+      "total": 32.9
+    }
+  ],
+  "cash_movement": {
+    "movement_type": "Entrada",
+    "description": null,
+    "amount": 32.9,
+    "payment_method": "PIX",
+    "movement_datetime": "2025-12-04T17:45:24.9086989-03:00",
+    "seller_id": 3
+  }
+}

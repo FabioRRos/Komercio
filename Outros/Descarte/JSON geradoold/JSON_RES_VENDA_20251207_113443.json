@@ -1,0 +1,31 @@
+﻿{
+  "sale": {
+    "customer_id": 2,
+    "total_amount": 29.9,
+    "discount_amount": 0.0,
+    "final_amount": 29.9,
+    "sale_date": "2025-12-07T11:34:41.0213973-03:00",
+    "sale_time": "11:34:41",
+    "payment_method": "Débito",
+    "seller_id": 3,
+    "sale_notes": "Primeira venda do dia"
+  },
+  "items": [
+    {
+      "product_id": 11,
+      "product_name": "Capa Silicone Anti Impacto + Transparente Samsung A32",
+      "barcode": "789000011",
+      "unit_price": 29.9,
+      "quantity": 1,
+      "total": 29.9
+    }
+  ],
+  "cash_movement": {
+    "movement_type": "Entrada",
+    "description": null,
+    "amount": 29.9,
+    "payment_method": "Débito",
+    "movement_datetime": "2025-12-07T11:34:42.1655053-03:00",
+    "seller_id": 3
+  }
+}

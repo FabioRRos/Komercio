@@ -1,0 +1,31 @@
+﻿{
+  "sale": {
+    "customer_id": 0,
+    "total_amount": 39.9,
+    "discount_amount": 0.0,
+    "final_amount": 39.9,
+    "sale_date": "2025-11-13T08:27:05.7150774-03:00",
+    "sale_time": "08:27:05",
+    "payment_method": "Dinheiro",
+    "seller_id": 2,
+    "sale_notes": ""
+  },
+  "items": [
+    {
+      "product_id": 34,
+      "product_name": "Cabo HDMI 2.0 2m",
+      "barcode": "789000034",
+      "unit_price": 39.9,
+      "quantity": 1,
+      "total": 39.9
+    }
+  ],
+  "cash_movement": {
+    "movement_type": "Entrada",
+    "description": null,
+    "amount": 39.9,
+    "payment_method": "Dinheiro",
+    "movement_datetime": "2025-11-13T08:27:07.144754-03:00",
+    "seller_id": 2
+  }
+}

@@ -1,0 +1,31 @@
+﻿{
+  "sale": {
+    "customer_id": 0,
+    "total_amount": 32.9,
+    "discount_amount": 0.0,
+    "final_amount": 32.9,
+    "sale_date": "2025-11-16T12:23:50.462909-03:00",
+    "sale_time": "12:23:50",
+    "payment_method": "Dinheiro",
+    "seller_id": 1,
+    "sale_notes": ""
+  },
+  "items": [
+    {
+      "product_id": 12,
+      "product_name": "Capa Acrílico Transparente iPhone 14",
+      "barcode": "789000012",
+      "unit_price": 32.9,
+      "quantity": 1,
+      "total": 32.9
+    }
+  ],
+  "cash_movement": {
+    "movement_type": "Entrada",
+    "description": null,
+    "amount": 32.9,
+    "payment_method": "Dinheiro",
+    "movement_datetime": "2025-11-16T12:23:51.7567447-03:00",
+    "seller_id": 1
+  }
+}

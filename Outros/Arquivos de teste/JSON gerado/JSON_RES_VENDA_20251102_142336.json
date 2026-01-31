@@ -1,0 +1,87 @@
+﻿{
+  "sale": {
+    "customer_id": 2,
+    "total_amount": 549.300049,
+    "discount_amount": 40.0,
+    "final_amount": 509.300049,
+    "sale_date": "2025-11-02T14:23:34.7815852-03:00",
+    "sale_time": "14:23:34",
+    "payment_method": "Dinheiro",
+    "seller_id": 2,
+    "sale_notes": "Teste de venda real."
+  },
+  "items": [
+    {
+      "product_id": 9,
+      "product_name": "Capa Silicone Vermelha Xiaomi Note 12",
+      "barcode": "789000009",
+      "unit_price": 24.9,
+      "quantity": 1,
+      "total": 24.9
+    },
+    {
+      "product_id": 43,
+      "product_name": "Pipa Grande Colorida",
+      "barcode": "789000043",
+      "unit_price": 14.9,
+      "quantity": 1,
+      "total": 14.9
+    },
+    {
+      "product_id": 28,
+      "product_name": "Suporte Veicular Magnético",
+      "barcode": "789000028",
+      "unit_price": 34.9,
+      "quantity": 1,
+      "total": 34.9
+    },
+    {
+      "product_id": 2,
+      "product_name": "Pelicula Vidro Fosca Samsung A32",
+      "barcode": "789000002",
+      "unit_price": 17.9,
+      "quantity": 10,
+      "total": 179.0
+    },
+    {
+      "product_id": 31,
+      "product_name": "TV Box X96 Mini 4K",
+      "barcode": "789000031",
+      "unit_price": 249.9,
+      "quantity": 1,
+      "total": 249.9
+    },
+    {
+      "product_id": 1,
+      "product_name": "Pelicula Vidro Brilhante iPhone 11",
+      "barcode": "789000001",
+      "unit_price": 19.9,
+      "quantity": 1,
+      "total": 19.9
+    },
+    {
+      "product_id": 39,
+      "product_name": "Mini Bola Antiestresse",
+      "barcode": "789000039",
+      "unit_price": 7.9,
+      "quantity": 1,
+      "total": 7.9
+    },
+    {
+      "product_id": 2,
+      "product_name": "Pelicula Vidro Fosca Samsung A32",
+      "barcode": "789000002",
+      "unit_price": 17.9,
+      "quantity": 1,
+      "total": 17.9
+    }
+  ],
+  "cash_movement": {
+    "movement_type": "Entrada",
+    "description": null,
+    "amount": 509.300049,
+    "payment_method": "Dinheiro",
+    "movement_datetime": "2025-11-02T14:23:36.8241063-03:00",
+    "seller_id": 2
+  }
+}

@@ -1,0 +1,24 @@
+﻿        *** KOMERCIO ***
+          CUPOM NÃO FISCAL
+--------------------------------------
+VENDA Nº: 27
+CLIENTE: Fabio Ricardo Ros
+CPF: 41915422817
+VENDEDOR: Maria Susana Candida de Jesus
+PAGAMENTO: Dinheiro
+DATA: 02/11/2025 02/11/2025 00:00:00
+--------------------------------------
+QTD  DESCRIÇÃO                VALOR
+--------------------------------------
+1   Anel de Suporte Dourad R$ 19,90
+34  Anel de Suporte Dourad R$ 676,60
+18  Boneca Mini Fashion    R$ 538,20
+--------------------------------------
+TOTAL BRUTO:   R$ 1.234,70
+DESCONTO:       R$ 150,00
+TOTAL FINAL:   R$ 1.084,70
+--------------------------------------
+OBS: Aprovado pela barbara
+--------------------------------------
+    OBRIGADO PELA PREFERÊNCIA!
+         VOLTE SEMPRE :)

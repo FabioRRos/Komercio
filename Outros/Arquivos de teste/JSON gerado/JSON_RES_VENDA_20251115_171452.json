@@ -1,0 +1,31 @@
+﻿{
+  "sale": {
+    "customer_id": 0,
+    "total_amount": 39.9,
+    "discount_amount": 0.0,
+    "final_amount": 39.9,
+    "sale_date": "2025-11-15T17:14:49.0909477-03:00",
+    "sale_time": "17:14:49",
+    "payment_method": "Dinheiro",
+    "seller_id": 1,
+    "sale_notes": ""
+  },
+  "items": [
+    {
+      "product_id": 27,
+      "product_name": "Cabo Lightning iPhone Original Style",
+      "barcode": "789000027",
+      "unit_price": 39.9,
+      "quantity": 1,
+      "total": 39.9
+    }
+  ],
+  "cash_movement": {
+    "movement_type": "Entrada",
+    "description": null,
+    "amount": 39.9,
+    "payment_method": "Dinheiro",
+    "movement_datetime": "2025-11-15T17:14:52.0920311-03:00",
+    "seller_id": 1
+  }
+}

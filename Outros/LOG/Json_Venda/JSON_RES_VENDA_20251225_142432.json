@@ -1,0 +1,37 @@
+﻿{
+  "sale": {
+    "customer_id": 0,
+    "total_amount": 49.9,
+    "discount_amount": 9.9,
+    "final_amount": 40.0,
+    "sale_date": "2025-12-25T14:24:27.8055905-03:00",
+    "sale_time": "14:24:27",
+    "payment_method": "Dinheiro",
+    "seller_id": 3,
+    "sale_notes": ""
+  },
+  "items": [
+    {
+      "product_id": 15,
+      "product_name": "Capa Couro Preto iPhone 13",
+      "barcode": "789000015",
+      "unit_price": 49.9,
+      "quantity": 1,
+      "total": 49.9
+    }
+  ],
+  "cash_movement": {
+    "movement_type": "Entrada",
+    "description": null,
+    "amount": 40.0,
+    "payment_method": "Dinheiro",
+    "movement_datetime": "2025-12-25T14:24:29.0985903-03:00",
+    "seller_id": 3
+  },
+  "forma_pagamento": [
+    {
+      "forma_de_pagamento": "Dinheiro",
+      "valor_pago": 40.0
+    }
+  ]
+}

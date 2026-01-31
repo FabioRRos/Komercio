@@ -1,0 +1,37 @@
+﻿{
+  "sale": {
+    "customer_id": 0,
+    "total_amount": 15.9,
+    "discount_amount": 0.0,
+    "final_amount": 15.9,
+    "sale_date": "2025-12-25T15:13:51.5622239-03:00",
+    "sale_time": "15:13:51",
+    "payment_method": "Dinheiro",
+    "seller_id": 1,
+    "sale_notes": ""
+  },
+  "items": [
+    {
+      "product_id": 3,
+      "product_name": "Pelicula Gel Brilhante Motorola G60",
+      "barcode": "789000003",
+      "unit_price": 15.9,
+      "quantity": 1,
+      "total": 15.9
+    }
+  ],
+  "cash_movement": {
+    "movement_type": "Entrada",
+    "description": null,
+    "amount": 15.9,
+    "payment_method": "Dinheiro",
+    "movement_datetime": "2025-12-25T15:13:52.6176535-03:00",
+    "seller_id": 1
+  },
+  "forma_pagamento": [
+    {
+      "forma_de_pagamento": "Dinheiro",
+      "valor_pago": 15.9
+    }
+  ]
+}

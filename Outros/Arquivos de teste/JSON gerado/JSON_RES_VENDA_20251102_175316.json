@@ -1,0 +1,47 @@
+﻿{
+  "sale": {
+    "customer_id": 2,
+    "total_amount": 1766.9,
+    "discount_amount": 300.0,
+    "final_amount": 1466.9,
+    "sale_date": "2025-11-02T17:53:15.0656786-03:00",
+    "sale_time": "17:53:15",
+    "payment_method": "Dinheiro",
+    "seller_id": 2,
+    "sale_notes": "Desconto aprovado"
+  },
+  "items": [
+    {
+      "product_id": 24,
+      "product_name": "Cabo P2 Macho-Macho 1,5m",
+      "barcode": "789000024",
+      "unit_price": 19.9,
+      "quantity": 1,
+      "total": 19.9
+    },
+    {
+      "product_id": 17,
+      "product_name": "Capa Couro Carteira + Vermelho iPhone 11",
+      "barcode": "789000017",
+      "unit_price": 54.9,
+      "quantity": 10,
+      "total": 549.0
+    },
+    {
+      "product_id": 20,
+      "product_name": "Fone de Ouvido Bluetooth JBL Style",
+      "barcode": "789000020",
+      "unit_price": 59.9,
+      "quantity": 20,
+      "total": 1198.0
+    }
+  ],
+  "cash_movement": {
+    "movement_type": "Entrada",
+    "description": null,
+    "amount": 1466.9,
+    "payment_method": "Dinheiro",
+    "movement_datetime": "2025-11-02T17:53:16.3836408-03:00",
+    "seller_id": 2
+  }
+}

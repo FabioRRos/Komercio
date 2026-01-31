@@ -1,0 +1,31 @@
+﻿{
+  "sale": {
+    "customer_id": 0,
+    "total_amount": 129.9,
+    "discount_amount": 0.0,
+    "final_amount": 129.9,
+    "sale_date": "2025-12-11T19:13:42.7446707-03:00",
+    "sale_time": "19:13:42",
+    "payment_method": "Débito",
+    "seller_id": 3,
+    "sale_notes": ""
+  },
+  "items": [
+    {
+      "product_id": 19,
+      "product_name": "Caixa Bluetooth RGB Speaker",
+      "barcode": "789000019",
+      "unit_price": 129.9,
+      "quantity": 1,
+      "total": 129.9
+    }
+  ],
+  "cash_movement": {
+    "movement_type": "Entrada",
+    "description": null,
+    "amount": 129.9,
+    "payment_method": "Débito",
+    "movement_datetime": "2025-12-11T19:13:43.7881805-03:00",
+    "seller_id": 3
+  }
+}

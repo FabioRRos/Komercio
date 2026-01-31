@@ -1,0 +1,31 @@
+﻿{
+  "sale": {
+    "customer_id": 0,
+    "total_amount": 34.9,
+    "discount_amount": 0.0,
+    "final_amount": 34.9,
+    "sale_date": "2025-11-13T18:07:15.7574491-03:00",
+    "sale_time": "18:07:15",
+    "payment_method": "PIX",
+    "seller_id": 1,
+    "sale_notes": ""
+  },
+  "items": [
+    {
+      "product_id": 14,
+      "product_name": "Capa Acrílico Colorida Motorola Edge 30",
+      "barcode": "789000014",
+      "unit_price": 34.9,
+      "quantity": 1,
+      "total": 34.9
+    }
+  ],
+  "cash_movement": {
+    "movement_type": "Entrada",
+    "description": null,
+    "amount": 34.9,
+    "payment_method": "PIX",
+    "movement_datetime": "2025-11-13T18:07:16.5281019-03:00",
+    "seller_id": 1
+  }
+}

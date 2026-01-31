@@ -1,0 +1,55 @@
+﻿{
+  "sale": {
+    "customer_id": 2,
+    "total_amount": 94.6000061,
+    "discount_amount": 0.0,
+    "final_amount": 94.6000061,
+    "sale_date": "2025-12-09T19:58:16.292362-03:00",
+    "sale_time": "19:58:16",
+    "payment_method": "Dinheiro",
+    "seller_id": 3,
+    "sale_notes": ""
+  },
+  "items": [
+    {
+      "product_id": 13,
+      "product_name": "Capa Acrílico Fumê Samsung A54",
+      "barcode": "789000013",
+      "unit_price": 32.9,
+      "quantity": 1,
+      "total": 32.9
+    },
+    {
+      "product_id": 23,
+      "product_name": "Microfone Lapela P2",
+      "barcode": "789000023",
+      "unit_price": 29.9,
+      "quantity": 1,
+      "total": 29.9
+    },
+    {
+      "product_id": 3,
+      "product_name": "Pelicula Gel Brilhante Motorola G60",
+      "barcode": "789000003",
+      "unit_price": 15.9,
+      "quantity": 1,
+      "total": 15.9
+    },
+    {
+      "product_id": 3,
+      "product_name": "Pelicula Gel Brilhante Motorola G60",
+      "barcode": "789000003",
+      "unit_price": 15.9,
+      "quantity": 1,
+      "total": 15.9
+    }
+  ],
+  "cash_movement": {
+    "movement_type": "Entrada",
+    "description": null,
+    "amount": 94.6000061,
+    "payment_method": "Dinheiro",
+    "movement_datetime": "2025-12-09T19:58:17.8064313-03:00",
+    "seller_id": 3
+  }
+}

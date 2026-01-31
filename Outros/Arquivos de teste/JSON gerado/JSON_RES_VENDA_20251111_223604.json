@@ -1,0 +1,39 @@
+﻿{
+  "sale": {
+    "customer_id": 2,
+    "total_amount": 99.9,
+    "discount_amount": 0.0,
+    "final_amount": 99.9,
+    "sale_date": "2025-11-11T22:36:03.6211107-03:00",
+    "sale_time": "22:36:03",
+    "payment_method": "Dinheiro",
+    "seller_id": 3,
+    "sale_notes": ""
+  },
+  "items": [
+    {
+      "product_id": 47,
+      "product_name": "caneca bonita",
+      "barcode": "775242581",
+      "unit_price": 50.0,
+      "quantity": 1,
+      "total": 50.0
+    },
+    {
+      "product_id": 25,
+      "product_name": "Carregador Turbo 20W Universal",
+      "barcode": "789000025",
+      "unit_price": 49.9,
+      "quantity": 1,
+      "total": 49.9
+    }
+  ],
+  "cash_movement": {
+    "movement_type": "Entrada",
+    "description": null,
+    "amount": 99.9,
+    "payment_method": "Dinheiro",
+    "movement_datetime": "2025-11-11T22:36:04.8424294-03:00",
+    "seller_id": 3
+  }
+}

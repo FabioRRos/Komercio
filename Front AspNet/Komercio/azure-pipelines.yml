@@ -1,0 +1,81 @@
+trigger:
+  branches:
+    include:
+      - main
+  paths:
+    include:
+      - Fronend_ AspNet/**
+
+pool:
+  vmImage: ubuntu-latest
+
+variables:
+  DOTNET_VERSION: '10.0.x'
+  PUBLISH_DIR: 'publish'
+  DEPLOY_PATH: '/home/azureuser/komercio/front'
+
+stages:
+- stage: Build
+  displayName: 'Build Front MVC'
+  jobs:
+  - job: BuildJob
+    displayName: 'Build e Publish'
+    steps:
+    - task: UseDotNet@2
+      displayName: 'Instalar .NET 10'
+      inputs:
+        packageType: sdk
+        version: '$(DOTNET_VERSION)'
+        includePreviewVersions: true
+
+    - script: |
+        dotnet restore
+        dotnet publish -c Release -o $(PUBLISH_DIR)
+      workingDirectory: 'Fronend_ AspNet/Komercio'
+      displayName: 'Publish MVC'
+
+    - task: PublishPipelineArtifact@1
+      displayName: 'Publicar artifact'
+      inputs:
+        targetPath: 'Fronend_ AspNet/Komercio/$(PUBLISH_DIR)'
+        artifact: 'front'
+
+- stage: Deploy
+  displayName: 'Deploy Front'
+  dependsOn: Build
+  jobs:
+  - job: DeployJob
+    displayName: 'Deploy na VM'
+    steps:
+    - task: DownloadPipelineArtifact@2
+      displayName: 'Download artifact'
+      inputs:
+        artifactName: 'front'
+        targetPath: '$(Pipeline.Workspace)/front'
+
+    - task: SSH@0
+      displayName: 'Parar front'
+      inputs:
+        sshEndpoint: 'Komercio-API-VM'
+        runOptions: inline
+        inline: |
+          sudo systemctl stop komercio-front || true
+
+    - task: CopyFilesOverSSH@0
+      displayName: 'Copiar front para VM'
+      inputs:
+        sshEndpoint: 'Komercio-API-VM'
+        sourceFolder: '$(Pipeline.Workspace)/front'
+        contents: '**'
+        targetFolder: '$(DEPLOY_PATH)'
+        cleanTargetFolder: true
+
+    - task: SSH@0
+      displayName: 'Subir front'
+      inputs:
+        sshEndpoint: 'Komercio-API-VM'
+        runOptions: inline
+        inline: |
+          sudo systemctl start komercio-front
+          sleep 2
+          systemctl status komercio-front --no-pager
