@@ -47,6 +47,17 @@ builder.Services.AddHttpClient<Komercio.Services.IItensVendaService, Komercio.Se
     ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; }
 });
 
+builder.Services.AddHttpClient<IListaDeCompraService, ListaDeCompraService>(client =>
+{
+    // A URL base aponta para o seu Backend em Go
+    client.BaseAddress = url;
+})
+.ConfigurePrimaryHttpMessageHandler(() => new HttpClientHandler
+{
+    // Mantém a compatibilidade com certificados autoassinados do ambiente Go
+    ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; }
+});
+
 
 
 

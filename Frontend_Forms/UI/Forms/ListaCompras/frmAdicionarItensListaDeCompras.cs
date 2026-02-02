@@ -27,6 +27,10 @@ namespace Komercio.UI.Forms.ListaCompras
         ///lista de produtos para o microforms
         private List<ProductDTO> _listaDeProdutos;
 
+        //id da lista selecionada
+
+        int idListaSelecionada = 0;
+
 
         public frmAdicionarItensListaDeCompras(ListaComprasApp listaComprasApp)
         {
@@ -71,6 +75,11 @@ namespace Komercio.UI.Forms.ListaCompras
         {
             itemListaCompraList = await _listaComprasApp.BuscarItensListaDeComprasById(id);
 
+
+            if (itemListaCompraList.Dados.Count >0)
+            {
+                mtbRemover.Enabled = true;
+            }
             
             LoadGrid();
         }
@@ -94,7 +103,6 @@ namespace Komercio.UI.Forms.ListaCompras
             dgProdutos.BackgroundColor = Color.White;
             dgProdutos.BorderStyle = BorderStyle.None;
             dgProdutos.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            dgProdutos.Columns["idProduct"].AutoSizeMode = (DataGridViewAutoSizeColumnMode)DataGridViewAutoSizeColumnsMode.AllCells;
             dgProdutos.Columns["productName"].AutoSizeMode = (DataGridViewAutoSizeColumnMode)DataGridViewAutoSizeColumnsMode.AllCells;
         }
 
@@ -191,6 +199,8 @@ namespace Komercio.UI.Forms.ListaCompras
 
             int id = int.Parse(texto[0]);
 
+            idListaSelecionada = id;
+
             return id;
         }
 
@@ -236,10 +246,16 @@ namespace Komercio.UI.Forms.ListaCompras
         private void btnAddLista_Click(object sender, EventArgs e)
         {
             var item = PegaCamposEAdiciona();
+
+            if (item == null)
+            {
+                return;
+            }
             itemListaCompraList.Dados.Add(item);
             LoadGrid();
             mbtSalvar.Enabled = true;
             mtbRemover.Enabled = true;
+            mtbCodBar.Text = string.Empty;
 
 
 
@@ -290,6 +306,7 @@ namespace Komercio.UI.Forms.ListaCompras
             }
 
             dgProdutos.DataSource = filtrada;
+            
         }
 
         private void dgProdutos_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
@@ -307,14 +324,21 @@ namespace Komercio.UI.Forms.ListaCompras
             mtbObs.Enabled = true;
         }
 
-        private void mbtSalvar_Click(object sender, EventArgs e)
+
+        private async void mbtSalvar_Click(object sender, EventArgs e)
         {
+            var retorno = await _listaComprasApp.SalvarAlteracaoNaListaDeCompraApp(itemListaCompraList.Dados, idListaSelecionada);
 
-
-
-
-
+            if (retorno == true)
+            {
+                MessageBox.Show("Lista atualizada com sucesso!","sucesso",MessageBoxButtons.OK,MessageBoxIcon.None);
             ReloadForm();
+                return;
+            }
+
+            MessageBox.Show("Erro ao atualizar a lista!", "Ops", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            return;
+
         }
         private void ReloadForm()
         {
@@ -370,5 +394,7 @@ namespace Komercio.UI.Forms.ListaCompras
                 return;
             }
         }
+
+
     }
 }

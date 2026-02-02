@@ -19,6 +19,8 @@ namespace Komercio.UI.Forms.Product
     public partial class fmImputProduct : Form
     {
         private readonly ProdutoApp _produtoApp;
+
+        private  List<ProductDTO> _productDTO;
         public fmImputProduct( ProdutoApp produtoApp)
         {
             InitializeComponent();
@@ -40,6 +42,7 @@ namespace Komercio.UI.Forms.Product
                 mbtSave.Enabled = false;
                 mtbStock.Enabled = false;
                 mtbStock.Text = "1";
+                mtbCodBar.Text = string.Empty;
                 mtbprecoentrada.Enabled = false;
             }
         }
@@ -87,6 +90,9 @@ namespace Komercio.UI.Forms.Product
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.MinimizeBox = true;
+
+            LoadProductForSearch();
+
         }
         //entrada manual
         private async void mbtSave_Click(object sender, EventArgs e)
@@ -165,6 +171,79 @@ namespace Komercio.UI.Forms.Product
         private void fmImputProduct_FormClosed(object sender, FormClosedEventArgs e)
         {
 
+        }
+
+
+
+
+        private async void LoadProductForSearch()
+        {
+            (_productDTO,_) = await _produtoApp.BuscaListaDeProdutoEGrupo();
+            LoadGridProduct();
+        }
+
+        private void mtbBuscarProduto_TextChanged(object sender, EventArgs e)
+        {
+            FiltrarProdutoPorNome(mtbBuscarProduto.Text);
+        }
+        private void FiltrarProdutoPorNome(string texto)
+        {
+
+            if (string.IsNullOrWhiteSpace(texto))
+            {
+                dgProdutos.DataSource = _productDTO;
+                return;
+            }
+
+            List<ProductDTO> filtrada = new List<ProductDTO>();
+
+            foreach (ProductDTO p in _productDTO)
+            {
+                if (p.productName
+                    .IndexOf(texto, StringComparison.CurrentCultureIgnoreCase) >= 0)
+                {
+                    filtrada.Add(p);
+                }
+            }
+
+            dgProdutos.DataSource = filtrada;
+        }
+
+        private void dgProdutos_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            var protudoSelecionado = new ProductDTO();
+            if (e.RowIndex < 0) return;
+
+            var produtoSelecionado =
+                (ProductDTO)dgProdutos.Rows[e.RowIndex].DataBoundItem;
+
+            msOptionsInput.Checked = false;
+            mtbCodBar.Text = produtoSelecionado.productCodbar;
+            mepProduto.Collapse = true;
+            mtbCodBar.Hint = "Código de barras";
+        }
+
+        private void LoadGridProduct()
+        {
+            dgProdutos.DataSource = string.Empty;
+            dgProdutos.DataSource = _productDTO;
+
+            dgProdutos.Columns["idProduct"].Visible = false;
+            dgProdutos.Columns["productName"].HeaderText = "Produto";
+            dgProdutos.Columns["productPrice"].Visible = false;
+            dgProdutos.Columns["productCodbar"].Visible = false;
+            dgProdutos.Columns["productGroup"].Visible = false;
+            dgProdutos.Columns["productSubgroup"].Visible = false;
+            dgProdutos.Columns["productStock"].Visible = false;
+            dgProdutos.Columns["productStatus"].Visible = false;
+            dgProdutos.Columns["ProductPrchasePrice"].Visible = false;
+
+            dgProdutos.RowHeadersVisible = false;
+            dgProdutos.BackgroundColor = Color.White;
+            dgProdutos.BorderStyle = BorderStyle.None;
+            dgProdutos.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgProdutos.Columns["idProduct"].AutoSizeMode = (DataGridViewAutoSizeColumnMode)DataGridViewAutoSizeColumnsMode.AllCells;
+            dgProdutos.Columns["productName"].AutoSizeMode = (DataGridViewAutoSizeColumnMode)DataGridViewAutoSizeColumnsMode.AllCells;
         }
     }
 }

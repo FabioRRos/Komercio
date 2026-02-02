@@ -1,0 +1,193 @@
+﻿@model Komercio.ViewModels.ListaCompraViewModel
+
+@{
+    ViewData["Title"] = "Lista de Compras";
+}
+
+<style>
+    .nav-pills .nav-link {
+        border: 1px solid #dee2e6;
+        margin-right: 5px;
+        color: #495057;
+    }
+
+        .nav-pills .nav-link.active {
+            background-color: #0d6efd;
+            color: white;
+            border-color: #0d6efd;
+        }
+
+    .item-card {
+        background: white;
+        border-radius: 10px;
+        padding: 15px;
+        margin-bottom: 10px;
+        display: flex;
+        align-items: center;
+        border: 1px solid #eee;
+        border-left: 5px solid #0d6efd;
+    }
+
+    .item-info {
+        flex-grow: 1;
+        margin-left: 15px;
+    }
+
+    .item-qty {
+        background: #f8f9fa;
+        padding: 4px 10px;
+        border-radius: 5px;
+        font-weight: bold;
+        border: 1px solid #ddd;
+    }
+
+    @@media print {
+        .d-print-none, .navbar, footer, .nav-pills {
+            display: none !important;
+        }
+
+        .container {
+            max-width: 100% !important;
+            margin: 0 !important;
+            padding: 0 !important;
+        }
+
+        .item-card {
+            border: 1px solid #000 !important;
+            break-inside: avoid;
+            margin-bottom: 10px !important;
+        }
+
+        body {
+            background: white !important;
+        }
+    }
+</style>
+
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-4 d-print-none">
+        <h2 class="fw-bold"><i class="bi bi-list-check"></i> Compras Doninho acessórios</h2>
+        <button type="button" onclick="window.print();" class="btn btn-dark">
+            <i class="bi bi-printer"></i> Imprimir
+        </button>
+    </div>
+
+    <div class="d-none d-print-block mb-4 text-center">
+        <h2>Doninho Acessórios</h2>
+        <h4>Lista de Compras - @Model.NomeListaSelecionada</h4>
+
+        <hr />
+    </div>
+
+    <ul class="nav nav-pills mb-4 d-print-none" role="tablist">
+        @foreach (var lista in Model.ListasParaAbas)
+        {
+            <li class="nav-item">
+                <a class="nav-link @(Model.IdListaAtiva == lista.IdListaCompra ? "active" : "")"
+                   href="@Url.Action("Index", "Compras", new { id = lista.IdListaCompra })">
+                    @lista.NomeDaLista
+                </a>
+            </li>
+        }
+    </ul>
+
+    <div class="lista-corpo">
+        @* Renderização dos itens *@
+        @if (Model.ItensParaGrid != null && Model.ItensParaGrid.Any())
+        {
+            foreach (var item in Model.ItensParaGrid)
+            {
+                <div class="item-card shadow-sm">
+                    <div class="form-check d-print-none">
+                        <input class="form-check-input" type="checkbox" style="width: 20px; height: 20px;">
+                    </div>
+                    <div class="item-info">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <span class="h5 mb-0 fw-bold">@item.DescricaoProduto</span>
+                            <span class="item-qty">Qtd: @item.Quantidade</span>
+                        </div>
+                        @if (!string.IsNullOrEmpty(item.Obs))
+                        {
+                            <small class="text-muted d-block mt-1"><i class="bi bi-info-circle"></i> @item.Obs</small>
+                        }
+                    </div>
+                </div>
+            }
+        }
+        else
+        {
+            <div class="alert alert-info text-center">Nenhum item carregado nesta lista.</div>
+        }
+
+        @* SEÇÃO DE STATUS: Agora fora do IF de itens para permitir cancelar listas vazias *@
+        @if (Model.IdListaAtiva > 0)
+        {
+            <div class="card mt-4 shadow-sm border-primary d-print-none">
+                <div class="card-body">
+                    <h5 class="card-title fw-bold text-primary">Finalizar Lista</h5>
+                    <div class="d-flex align-items-center gap-4 mt-3">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="statusVenda" id="vendaSim" value="true"
+                                   @(Model.StatusLista == true ? "checked" : "") onchange="atualizarInterface(true)">
+                            <label class="form-check-label text-success fw-bold" for="vendaSim">Compra Realizada</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="statusVenda" id="vendaNao" value="false"
+                                   @(Model.StatusLista == false ? "checked" : "") onchange="atualizarInterface(false)">
+                            <label class="form-check-label text-danger fw-bold" for="vendaNao">Cancelar lista</label>
+                        </div>
+                        <div class="ms-auto">
+                            <button id="btnSalvar" class="btn btn-primary btn-lg" @(Model.PodeSalvar ? "" : "disabled") onclick="salvarStatus()">
+                                Salvar Alterações
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        // Sincronização do status inicial vindo do Model
+        let statusOriginal = @(Model.StatusLista == null ? "null" : Model.StatusLista.ToString().ToLower());
+
+        function atualizarInterface(novoStatus) {
+            const btn = document.getElementById('btnSalvar');
+            // O botão só habilita se a opção selecionada for diferente da original
+            btn.disabled = (novoStatus === statusOriginal);
+        }
+
+        async function salvarStatus() {
+            const radio = document.querySelector('input[name="statusVenda"]:checked');
+            if (!radio) return;
+
+            const statusSelecionado = radio.value;
+            const idLista = @Model.IdListaAtiva;
+            const btn = document.getElementById('btnSalvar');
+
+            btn.disabled = true;
+
+            try {
+                const response = await fetch(`/Compras/AtualizarStatus?id=${idLista}&status=${statusSelecionado}`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' }
+                });
+
+                if (response.ok) {
+                    alert('Sucesso!');
+                    // Redireciona para a Index limpa para evitar erros de parâmetro na URL
+                    window.location.href = "/Compras";
+                } else {
+                    console.error("Erro na resposta:", response.status);
+                    alert("Erro ao salvar no servidor. Status: " + response.status);
+                    btn.disabled = false;
+                }
+            } catch (error) {
+                console.error("Erro na requisição:", error);
+                btn.disabled = false;
+            }
+        }
+    </script>
+}

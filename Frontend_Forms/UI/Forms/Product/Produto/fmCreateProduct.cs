@@ -106,6 +106,7 @@ namespace Komercio.UI.Forms.Product
 
             //Joga para a entidade se resolver com a validação.
 
+            if (mtbPrecoCompra.Text == "") mtbPrecoCompra.Text = "0";
 
             ProductDTO product = new ProductDTO();
             try

@@ -28,8 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmAdicionarItensListaDeCompras));
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.gblistaCompras = new System.Windows.Forms.GroupBox();
+            this.btnCancelar = new MaterialSkin.Controls.MaterialButton();
+            this.mtbRemover = new MaterialSkin.Controls.MaterialButton();
             this.mbtSalvar = new MaterialSkin.Controls.MaterialButton();
             this.dgProdutos = new System.Windows.Forms.DataGridView();
             this.mtbBuscarProduto = new MaterialSkin.Controls.MaterialTextBox2();
@@ -43,8 +46,6 @@
             this.mcbListaCompra = new MaterialSkin.Controls.MaterialComboBox();
             this.mtbNovaLista = new MaterialSkin.Controls.MaterialButton();
             this.dgvItens = new System.Windows.Forms.DataGridView();
-            this.mtbRemover = new MaterialSkin.Controls.MaterialButton();
-            this.btnCancelar = new MaterialSkin.Controls.MaterialButton();
             this.tableLayoutPanel1.SuspendLayout();
             this.gblistaCompras.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgProdutos)).BeginInit();
@@ -89,6 +90,49 @@
             this.gblistaCompras.TabIndex = 0;
             this.gblistaCompras.TabStop = false;
             this.gblistaCompras.Enter += new System.EventHandler(this.gblistaCompras_Enter);
+            // 
+            // btnCancelar
+            // 
+            this.btnCancelar.AutoSize = false;
+            this.btnCancelar.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnCancelar.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.btnCancelar.Depth = 0;
+            this.btnCancelar.HighEmphasis = true;
+            this.btnCancelar.Icon = null;
+            this.btnCancelar.Location = new System.Drawing.Point(524, 170);
+            this.btnCancelar.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnCancelar.MouseState = MaterialSkin.MouseState.HOVER;
+            this.btnCancelar.Name = "btnCancelar";
+            this.btnCancelar.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.btnCancelar.Size = new System.Drawing.Size(140, 40);
+            this.btnCancelar.TabIndex = 14;
+            this.btnCancelar.Text = "Cancelar";
+            this.btnCancelar.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+            this.btnCancelar.UseAccentColor = false;
+            this.btnCancelar.UseVisualStyleBackColor = true;
+            this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
+            // 
+            // mtbRemover
+            // 
+            this.mtbRemover.AutoSize = false;
+            this.mtbRemover.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.mtbRemover.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.mtbRemover.Depth = 0;
+            this.mtbRemover.Enabled = false;
+            this.mtbRemover.HighEmphasis = true;
+            this.mtbRemover.Icon = null;
+            this.mtbRemover.Location = new System.Drawing.Point(289, 170);
+            this.mtbRemover.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.mtbRemover.MouseState = MaterialSkin.MouseState.HOVER;
+            this.mtbRemover.Name = "mtbRemover";
+            this.mtbRemover.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.mtbRemover.Size = new System.Drawing.Size(135, 40);
+            this.mtbRemover.TabIndex = 13;
+            this.mtbRemover.Text = "Remover item";
+            this.mtbRemover.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+            this.mtbRemover.UseAccentColor = false;
+            this.mtbRemover.UseVisualStyleBackColor = true;
+            this.mtbRemover.Click += new System.EventHandler(this.mtbRemover_Click);
             // 
             // mbtSalvar
             // 
@@ -403,58 +447,16 @@
             this.dgvItens.Size = new System.Drawing.Size(947, 316);
             this.dgvItens.TabIndex = 1;
             // 
-            // mtbRemover
-            // 
-            this.mtbRemover.AutoSize = false;
-            this.mtbRemover.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.mtbRemover.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
-            this.mtbRemover.Depth = 0;
-            this.mtbRemover.Enabled = false;
-            this.mtbRemover.HighEmphasis = true;
-            this.mtbRemover.Icon = null;
-            this.mtbRemover.Location = new System.Drawing.Point(289, 170);
-            this.mtbRemover.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.mtbRemover.MouseState = MaterialSkin.MouseState.HOVER;
-            this.mtbRemover.Name = "mtbRemover";
-            this.mtbRemover.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.mtbRemover.Size = new System.Drawing.Size(135, 40);
-            this.mtbRemover.TabIndex = 13;
-            this.mtbRemover.Text = "Remover item";
-            this.mtbRemover.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
-            this.mtbRemover.UseAccentColor = false;
-            this.mtbRemover.UseVisualStyleBackColor = true;
-            this.mtbRemover.Click += new System.EventHandler(this.mtbRemover_Click);
-            // 
-            // btnCancelar
-            // 
-            this.btnCancelar.AutoSize = false;
-            this.btnCancelar.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnCancelar.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
-            this.btnCancelar.Depth = 0;
-            this.btnCancelar.HighEmphasis = true;
-            this.btnCancelar.Icon = null;
-            this.btnCancelar.Location = new System.Drawing.Point(524, 170);
-            this.btnCancelar.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.btnCancelar.MouseState = MaterialSkin.MouseState.HOVER;
-            this.btnCancelar.Name = "btnCancelar";
-            this.btnCancelar.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.btnCancelar.Size = new System.Drawing.Size(140, 40);
-            this.btnCancelar.TabIndex = 14;
-            this.btnCancelar.Text = "Cancelar";
-            this.btnCancelar.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
-            this.btnCancelar.UseAccentColor = false;
-            this.btnCancelar.UseVisualStyleBackColor = true;
-            this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
-            // 
             // frmAdicionarItensListaDeCompras
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(953, 552);
             this.Controls.Add(this.tableLayoutPanel1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmAdicionarItensListaDeCompras";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "frmAdicionarItensListaDeCompras";
+            this.Text = "Lista de compras";
             this.Load += new System.EventHandler(this.frmAdicionarItensListaDeCompras_Load);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.gblistaCompras.ResumeLayout(false);

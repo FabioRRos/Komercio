@@ -41,6 +41,11 @@
             this.Produto = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.mtbprecoentrada = new MaterialSkin.Controls.MaterialTextBox2();
+            this.mepProduto = new MaterialSkin.Controls.MaterialExpansionPanel();
+            this.mtbBuscarProduto = new MaterialSkin.Controls.MaterialTextBox2();
+            this.dgProdutos = new System.Windows.Forms.DataGridView();
+            this.mepProduto.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgProdutos)).BeginInit();
             this.SuspendLayout();
             // 
             // mtbCodBar
@@ -54,7 +59,7 @@
             this.mtbCodBar.HideSelection = true;
             this.mtbCodBar.Hint = "Código de barras";
             this.mtbCodBar.LeadingIcon = null;
-            this.mtbCodBar.Location = new System.Drawing.Point(23, 40);
+            this.mtbCodBar.Location = new System.Drawing.Point(16, 102);
             this.mtbCodBar.MaxLength = 32767;
             this.mtbCodBar.MouseState = MaterialSkin.MouseState.OUT;
             this.mtbCodBar.Name = "mtbCodBar";
@@ -86,7 +91,7 @@
             this.mtbStock.HideSelection = true;
             this.mtbStock.Hint = "Quantidade";
             this.mtbStock.LeadingIcon = null;
-            this.mtbStock.Location = new System.Drawing.Point(23, 113);
+            this.mtbStock.Location = new System.Drawing.Point(16, 175);
             this.mtbStock.MaxLength = 32767;
             this.mtbStock.MouseState = MaterialSkin.MouseState.OUT;
             this.mtbStock.Name = "mtbStock";
@@ -112,7 +117,7 @@
             this.materialLabel1.Depth = 0;
             this.materialLabel1.Font = new System.Drawing.Font("Roboto Medium", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
             this.materialLabel1.FontType = MaterialSkin.MaterialSkinManager.fontType.Subtitle2;
-            this.materialLabel1.Location = new System.Drawing.Point(20, 180);
+            this.materialLabel1.Location = new System.Drawing.Point(13, 242);
             this.materialLabel1.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel1.Name = "materialLabel1";
             this.materialLabel1.Size = new System.Drawing.Size(49, 17);
@@ -125,7 +130,7 @@
             this.materialLabel2.Depth = 0;
             this.materialLabel2.Font = new System.Drawing.Font("Roboto Medium", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
             this.materialLabel2.FontType = MaterialSkin.MaterialSkinManager.fontType.Subtitle2;
-            this.materialLabel2.Location = new System.Drawing.Point(198, 180);
+            this.materialLabel2.Location = new System.Drawing.Point(191, 242);
             this.materialLabel2.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel2.Name = "materialLabel2";
             this.materialLabel2.Size = new System.Drawing.Size(75, 17);
@@ -138,7 +143,7 @@
             this.msOptionsInput.Checked = true;
             this.msOptionsInput.CheckState = System.Windows.Forms.CheckState.Checked;
             this.msOptionsInput.Depth = 0;
-            this.msOptionsInput.Location = new System.Drawing.Point(109, 171);
+            this.msOptionsInput.Location = new System.Drawing.Point(102, 233);
             this.msOptionsInput.Margin = new System.Windows.Forms.Padding(0);
             this.msOptionsInput.MouseLocation = new System.Drawing.Point(-1, -1);
             this.msOptionsInput.MouseState = MaterialSkin.MouseState.HOVER;
@@ -158,7 +163,7 @@
             this.mbtSave.Enabled = false;
             this.mbtSave.HighEmphasis = true;
             this.mbtSave.Icon = null;
-            this.mbtSave.Location = new System.Drawing.Point(23, 273);
+            this.mbtSave.Location = new System.Drawing.Point(16, 335);
             this.mbtSave.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.mbtSave.MouseState = MaterialSkin.MouseState.HOVER;
             this.mbtSave.Name = "mbtSave";
@@ -177,7 +182,7 @@
             this.materialLabel5.Depth = 0;
             this.materialLabel5.Font = new System.Drawing.Font("Roboto Medium", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
             this.materialLabel5.FontType = MaterialSkin.MaterialSkinManager.fontType.Subtitle2;
-            this.materialLabel5.Location = new System.Drawing.Point(420, 9);
+            this.materialLabel5.Location = new System.Drawing.Point(413, 8);
             this.materialLabel5.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel5.Name = "materialLabel5";
             this.materialLabel5.Size = new System.Drawing.Size(58, 17);
@@ -196,13 +201,13 @@
             this.mlvInput.Depth = 0;
             this.mlvInput.FullRowSelect = true;
             this.mlvInput.HideSelection = false;
-            this.mlvInput.Location = new System.Drawing.Point(308, 38);
+            this.mlvInput.Location = new System.Drawing.Point(301, 28);
             this.mlvInput.MinimumSize = new System.Drawing.Size(200, 100);
             this.mlvInput.MouseLocation = new System.Drawing.Point(-1, -1);
             this.mlvInput.MouseState = MaterialSkin.MouseState.OUT;
             this.mlvInput.Name = "mlvInput";
             this.mlvInput.OwnerDraw = true;
-            this.mlvInput.Size = new System.Drawing.Size(298, 263);
+            this.mlvInput.Size = new System.Drawing.Size(298, 335);
             this.mlvInput.TabIndex = 13;
             this.mlvInput.UseCompatibleStateImageBehavior = false;
             this.mlvInput.View = System.Windows.Forms.View.Details;
@@ -232,7 +237,7 @@
             this.mtbprecoentrada.HideSelection = true;
             this.mtbprecoentrada.Hint = "Preço entrada";
             this.mtbprecoentrada.LeadingIcon = null;
-            this.mtbprecoentrada.Location = new System.Drawing.Point(23, 200);
+            this.mtbprecoentrada.Location = new System.Drawing.Point(16, 262);
             this.mtbprecoentrada.MaxLength = 32767;
             this.mtbprecoentrada.MouseState = MaterialSkin.MouseState.OUT;
             this.mtbprecoentrada.Name = "mtbprecoentrada";
@@ -254,11 +259,74 @@
             this.mtbprecoentrada.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.mtbprecoentrada_KeyPress);
             this.mtbprecoentrada.TextChanged += new System.EventHandler(this.mtbprecoentrada_TextChanged);
             // 
+            // mepProduto
+            // 
+            this.mepProduto.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.mepProduto.CancelButtonText = "";
+            this.mepProduto.Collapse = true;
+            this.mepProduto.Controls.Add(this.dgProdutos);
+            this.mepProduto.Controls.Add(this.mtbBuscarProduto);
+            this.mepProduto.Depth = 0;
+            this.mepProduto.Description = "";
+            this.mepProduto.ExpandHeight = 282;
+            this.mepProduto.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.mepProduto.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.mepProduto.Location = new System.Drawing.Point(16, 31);
+            this.mepProduto.Margin = new System.Windows.Forms.Padding(16, 1, 16, 0);
+            this.mepProduto.MouseState = MaterialSkin.MouseState.HOVER;
+            this.mepProduto.Name = "mepProduto";
+            this.mepProduto.Padding = new System.Windows.Forms.Padding(24, 64, 24, 16);
+            this.mepProduto.ShowValidationButtons = false;
+            this.mepProduto.Size = new System.Drawing.Size(250, 48);
+            this.mepProduto.TabIndex = 15;
+            this.mepProduto.Title = "Buscar Produto";
+            this.mepProduto.ValidationButtonText = "";
+            // 
+            // mtbBuscarProduto
+            // 
+            this.mtbBuscarProduto.AnimateReadOnly = false;
+            this.mtbBuscarProduto.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.mtbBuscarProduto.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
+            this.mtbBuscarProduto.Depth = 0;
+            this.mtbBuscarProduto.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.mtbBuscarProduto.HideSelection = true;
+            this.mtbBuscarProduto.Hint = "Digite o nome do produto";
+            this.mtbBuscarProduto.LeadingIcon = null;
+            this.mtbBuscarProduto.Location = new System.Drawing.Point(12, 48);
+            this.mtbBuscarProduto.MaxLength = 32767;
+            this.mtbBuscarProduto.MouseState = MaterialSkin.MouseState.OUT;
+            this.mtbBuscarProduto.Name = "mtbBuscarProduto";
+            this.mtbBuscarProduto.PasswordChar = '\0';
+            this.mtbBuscarProduto.PrefixSuffixText = null;
+            this.mtbBuscarProduto.ReadOnly = false;
+            this.mtbBuscarProduto.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.mtbBuscarProduto.SelectedText = "";
+            this.mtbBuscarProduto.SelectionLength = 0;
+            this.mtbBuscarProduto.SelectionStart = 0;
+            this.mtbBuscarProduto.ShortcutsEnabled = true;
+            this.mtbBuscarProduto.Size = new System.Drawing.Size(226, 48);
+            this.mtbBuscarProduto.TabIndex = 2;
+            this.mtbBuscarProduto.TabStop = false;
+            this.mtbBuscarProduto.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.mtbBuscarProduto.TrailingIcon = null;
+            this.mtbBuscarProduto.UseSystemPasswordChar = false;
+            this.mtbBuscarProduto.TextChanged += new System.EventHandler(this.mtbBuscarProduto_TextChanged);
+            // 
+            // dgProdutos
+            // 
+            this.dgProdutos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgProdutos.Location = new System.Drawing.Point(12, 102);
+            this.dgProdutos.Name = "dgProdutos";
+            this.dgProdutos.Size = new System.Drawing.Size(226, 171);
+            this.dgProdutos.TabIndex = 3;
+            this.dgProdutos.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgProdutos_CellDoubleClick);
+            // 
             // fmImputProduct
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(613, 313);
+            this.ClientSize = new System.Drawing.Size(613, 374);
+            this.Controls.Add(this.mepProduto);
             this.Controls.Add(this.mtbprecoentrada);
             this.Controls.Add(this.mlvInput);
             this.Controls.Add(this.materialLabel5);
@@ -274,6 +342,9 @@
             this.Text = "Entrada estoque";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.fmImputProduct_FormClosed);
             this.Load += new System.EventHandler(this.fmImputProduct_Load);
+            this.mepProduto.ResumeLayout(false);
+            this.mepProduto.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgProdutos)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -293,5 +364,8 @@
         private System.Windows.Forms.ColumnHeader Produto;
         private System.Windows.Forms.ColumnHeader columnHeader1;
         private MaterialSkin.Controls.MaterialTextBox2 mtbprecoentrada;
+        private MaterialSkin.Controls.MaterialExpansionPanel mepProduto;
+        private System.Windows.Forms.DataGridView dgProdutos;
+        private MaterialSkin.Controls.MaterialTextBox2 mtbBuscarProduto;
     }
 }

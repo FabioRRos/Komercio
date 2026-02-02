@@ -271,7 +271,7 @@
             this.mtbPrecoCompra.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.mtbPrecoCompra.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
             this.mtbPrecoCompra.Depth = 0;
-            this.mtbPrecoCompra.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.mtbPrecoCompra.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.mtbPrecoCompra.HelperText = "Se não souber, deixe vazio.";
             this.mtbPrecoCompra.HideSelection = true;
             this.mtbPrecoCompra.Hint = "Preço de compra";
