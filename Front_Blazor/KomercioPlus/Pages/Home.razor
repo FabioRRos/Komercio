@@ -1,0 +1,253 @@
+﻿@page "/"
+@using KomercioPlus.Model.DTO
+@using KomercioPlus.Model.Entity
+@using KomercioPlus.Service
+
+@inject IMovimentacaoCaixaService _movimentacaoCaixaService
+
+<div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center mb-4 gap-3">
+    <h1 class="titulo">Movimentação Financeira </h1>
+    <h3 class="titulo" mb-0 text gray-800> Caixa do dia @DiaAtual.ToString("dd/MM/yyyy")</h3>
+</div>
+
+<div class="card card-dashboard mb-4">
+     <div class="card-body p-4">
+         <div class="row text-center">
+
+             <div class="col-md-6 border-end">
+                 <h3 class="h3 mb-0 text-gray-800">Valor em vendas</h3>
+                 <small class="text-muted d-block mb-1">(Todas as formas de pagamento)</small>
+                 <h3 class="fw-bold text-dark">@TotalVendido.ToString("C2")</h3>
+                 
+             </div>
+         </div>
+     </div>
+ </div>
+
+<div class="container">
+    <!-- QUADRANTE 1 - TABELA -->
+    <div class="box">
+
+
+        <div class="card-header bg-white py-3 d-flex justify-content-between align-items-center">
+            <h5 class="titulo">Histórico de Movimentações</h5>
+        </div>
+        <table class="table table-sm">
+            <thead class="bg-light">
+                <tr>
+                    <th class="ps-4">Hora</th>
+                    <th>Tipo</th>
+                    <th>Descrição</th>
+                    <th>Forma Pagto</th>
+                    <th class="text-end pe-4">Valor</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (listaVendas != null && listaVendas.Count > 0)
+                {
+                    @foreach (var item in listaVendas)
+                    {
+                        bool isEntrada = item.TipoMovimento.ToLower() == "entrada";
+                        string badgeClass = isEntrada ? "bg-success" : "bg-danger";
+                        string textClass = isEntrada ? "text-success" : "text-danger";
+                        string sinal = isEntrada ? "+" : "-";
+
+                        <tr>
+                            <td class="text-muted">
+                                @item.DataHoraMovimento.ToString("HH:mm")
+                            </td>
+
+                            <td>
+                                <span class="badge @badgeClass bg-opacity-25 @textClass px-2 rounded-pill">
+                                    @item.TipoMovimento
+                                </span>
+                            </td>
+
+                            <td>
+                                @if (string.IsNullOrEmpty(item.Descricao))
+                                {
+                                    <span class="text-muted fst-italic">
+                                        Sem descrição
+                                    </span>
+                                }
+                                else
+                                {
+                                    @item.Descricao
+                                }
+
+                                @if (item.IdVenda > 0)
+                                {
+                                    <small class="text-muted ms-1">
+                                        (Venda #@item.IdVenda)
+                                    </small>
+                                }
+                            </td>
+
+                            <td>@item.FormaPagamento</td>
+
+                            <td class="text-end fw-bold @textClass">
+                                @sinal @item.Valor.ToString("C2")
+                            </td>
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <tr>
+                        <td colspan="5" class="text-center text-muted py-4">
+                            Nenhuma movimentação registrada hoje.
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+    <!-- QUADRANTE 2 -->
+    <div class="box">
+        <div class="card-header bg-white py-3">
+            <h6 class="mb-0 fw-bold">Resumo por Forma de Pagamento</h6>
+        </div>
+        <div class="card-body">
+            <ul class="list-group list-group-flush">
+
+                <li
+                    class="list-group-item d-flex justify-content-between align-items-center py-1 border-0 border-bottom">
+                    <div class="d-flex align-items-center">
+                        <div class="rounded-circle bg-light p-1 me-2 text-primary">
+                            <i class="bi bi-cash fs-5"></i>
+                        </div>
+                        <span>Dinheiro</span>
+                    </div>
+                    <span class="fw-bold">@Dinheiro.ToString("C2")</span>
+                </li>
+
+                <li
+                    class="list-group-item d-flex justify-content-between align-items-center py-1 border-0 border-bottom">
+                    <div class="d-flex align-items-center">
+                        <div class="rounded-circle bg-light p-1 me-2 text-primary">
+                            <i class="bi bi-credit-card fs-5"></i>
+                        </div>
+                        <span>Débito</span>
+                    </div>
+                    <span class="fw-bold">@Debito.ToString("C2")</span>
+                </li>
+
+                <li
+                    class="list-group-item d-flex justify-content-between align-items-center py-1 border-0 border-bottom">
+                    <div class="d-flex align-items-center">
+                        <div class="rounded-circle bg-light p-1 me-2 text-primary">
+                            <i class="bi bi-credit-card-2-front fs-5"></i>
+                        </div>
+                        <span>Crédito</span>
+                    </div>
+                    <span class="fw-bold">@Credito.ToString("C2")</span>
+                </li>
+
+                <li
+                    class="list-group-item d-flex justify-content-between align-items-center py-1 border-0 border-bottom">
+                    <div class="d-flex align-items-center">
+                        <div class="rounded-circle bg-light p-1 me-2 text-primary">
+                            <i class="bi bi-ui-checks-grid fs-5"></i>
+                        </div>
+                        <span>Pix</span>
+                    </div>
+                    <span class="fw-bold">@Pix.ToString("C2")</span>
+                </li>
+
+                <li class="list-group-item d-flex justify-content-between align-items-center py-1 border-0">
+                    <div class="d-flex align-items-center">
+                        <div class="rounded-circle bg-light p-1 me-2 text-primary">
+                            <i class="bi bi-wallet2 fs-5"></i>
+                        </div>
+                        <span>Conta</span>
+                    </div>
+                    <span class="fw-bold">@Conta.ToString("C2")</span>
+                </li>
+
+            </ul>
+        </div>
+
+
+    </div>
+
+    <!-- QUADRANTE 3 
+    <div class="box">
+        <h5 class="titulo">Área 3</h5>
+    </div>
+
+     QUADRANTE 4 
+    <div class="box">
+        <h5 class="titulo">Área 4</h5>
+    </div> -->
+
+</div>
+
+@code {
+
+    public List<MovimentacaoCaixa>? listaVendas { get; set; } = new();
+    public Decimal Dinheiro { get; set; } = 0;
+    public Decimal Debito { get; set; } = 0;
+    public Decimal Credito { get; set; } = 0;
+    public Decimal Pix { get; set; } = 0;
+    public Decimal Conta { get; set; } = 0;
+    public Decimal TotalVendido {get;set;}
+    public DateTime DiaAtual { get; set; }
+
+
+    protected override async Task OnInitializedAsync()
+    {
+        await BaixarListaDeVendas();
+    }
+
+    protected async Task BaixarListaDeVendas()
+    {
+        ServiceResponse<HomereportDTO>? serviceResponseItens = await _movimentacaoCaixaService.SomaValoresHome();
+        
+        
+        if (serviceResponseItens != null &&
+        serviceResponseItens.Dados != null)
+        {
+            foreach (var item in serviceResponseItens.Dados.MovimentacaoCaixa)
+            {
+                if (item.DataHoraMovimento == DateTime.Today)
+                {
+                    listaVendas?.Add(item);
+                }
+
+            }
+        }
+        else
+        {
+            listaVendas = new List<MovimentacaoCaixa>();
+        }
+        
+        
+        
+        
+        if (serviceResponseItens != null &&
+        serviceResponseItens.Dados != null)
+        {
+
+ foreach (var item in serviceResponseItens.Dados.MovimentacaoCaixa)
+            {
+                if (item.DataHoraMovimento.Date == DateTime.Today)
+                {
+                    listaVendas?.Add(item);
+                }
+
+            }
+
+
+            Dinheiro = serviceResponseItens.Dados.Dinheiro;
+            Debito = serviceResponseItens.Dados.Debito;
+            Credito = serviceResponseItens.Dados.Credito;
+            Pix = serviceResponseItens.Dados.Pix;
+            Conta = serviceResponseItens.Dados.Conta;
+        }
+
+        DiaAtual = DateTime.Today;
+        TotalVendido = serviceResponseItens.Dados.TotalVendido;
+
+    }
+}

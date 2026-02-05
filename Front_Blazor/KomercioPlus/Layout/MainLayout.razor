@@ -1,0 +1,72 @@
+﻿@using System.Security.AccessControl
+@using KomercioPlus.Model.Entity
+@using KomercioPlus.Service
+@inject ICaixaService _caixaService 
+
+@inherits LayoutComponentBase
+
+<div class="page">
+    <div class="sidebar">
+        <NavMenu />
+    </div>
+
+    <main>
+        <div class="top-row px-4">
+            <div class="d-flex flex-wrap align-items-center gap-3">
+
+                <div class="d-flex align-items-center border rounded px-3 py-2 bg-white shadow-sm">
+                    <span class="me-2 fw-bold text-secondary">Status caixa:</span>
+
+                    @if (RetornoStatusCaixa)
+                    {
+                        <span class="badge bg-success bg-opacity-10 text-success border border-success px-2 py-1 rounded-pill">
+                            <i class="bi bi-check-circle-fill me-1"></i> ABERTO
+                        </span>
+                    }
+                    else
+                    {
+                        <span class="badge bg-danger bg-opacity-10 text-danger border border-danger px-2 py-1 rounded-pill">
+                            <i class="bi bi-lock-fill me-1"></i> FECHADO
+                        </span>
+                    }
+                    
+                </div>
+
+            </div>
+        </div>
+
+        <article class="content px-4">
+            @Body
+        </article>
+    </main>
+</div>
+
+@code {
+    // 1. Propriedade para controlar a exibição no HTML
+    public bool RetornoStatusCaixa { get; set; } = false;
+    private string? MensagemErro;
+
+    // 2. Método que roda AUTOMATICAMENTE quando o layout nasce
+    protected override async Task OnInitializedAsync()
+    {
+        await CarregarStatus();
+    }
+
+    private async Task CarregarStatus()
+    {
+        try
+        {
+            // NUNCA use 'new CaixaService()'. Use a instância injetada (_caixaService)
+            var response = await _caixaService.StatusCaixa();
+
+            // Pega o status (true/false) que veio dentro do seu objeto ServiceResponse
+            RetornoStatusCaixa = response.Status; 
+            MensagemErro = response.Mensagem;   
+        }
+        catch (Exception)
+        {
+            // Se der erro fatal, assume fechado
+            RetornoStatusCaixa = false;
+        }
+    }
+}
