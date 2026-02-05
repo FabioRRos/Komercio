@@ -106,7 +106,17 @@ namespace Komercio.UI.Forms.Product
 
             //Joga para a entidade se resolver com a validação.
 
-            if (mtbPrecoCompra.Text == "") mtbPrecoCompra.Text = "0";
+           // if (mtbPrecoCompra.Text == "") mtbPrecoCompra.Text = "0";
+            float precoCompra = 0;
+
+            try
+            {
+                precoCompra = float.Parse(mtbPrecoCompra.Text);
+            }
+            catch
+            {
+                precoCompra = 0;
+            }
 
             ProductDTO product = new ProductDTO();
             try
@@ -117,7 +127,7 @@ namespace Komercio.UI.Forms.Product
                     mcbGroup.Text,
                     mcbSubGroup.Text,
                     mtbProductStock.Text,
-                    mtbPrecoCompra.Text
+                    precoCompra
                     );
             }
             catch (Exception ex)

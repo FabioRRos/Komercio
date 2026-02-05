@@ -71,6 +71,24 @@ namespace Komercio.ApplicationLayer
             return serviceResponse;
         }
 
+        public async Task<bool> SalvarAlteracaoNaListaDeCompraApp(List<ItemListaCompraDTO> lista,int id)
+        {
+
+            foreach (var item in lista)
+            {
+                if (item.IdLista != id)
+                    { item.IdLista = id; }
+            }
+
+
+
+
+            var serviceResponse = await _itensListaCompraService.SalvarAlteracaoNaListaDeCompra(lista);
+
+            return serviceResponse.Sucesso;
+
+        }
+
 
 
         // CHAMA PRODUTOS

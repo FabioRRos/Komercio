@@ -17,7 +17,7 @@ namespace Komercio.Models
         [JsonProperty("dataCriacaoLista")]
         public DateTimeOffset DataCriacaoLista { get; set; }
         [JsonProperty("statusLista")]
-        public bool StatusLista { get; set; }
+        public bool? StatusLista { get; set; }
 
 
 

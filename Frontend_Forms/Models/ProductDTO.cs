@@ -41,7 +41,7 @@ namespace Komercio.Models
         public float ProductPrchasePrice { get; set; }
 
         //VALIDA PRODUTO (pode ser usado sempre).
-        public ProductDTO ValidaProduto(string name, string preco, string codBarras, string grupo, string subGrupo, string stock, string precocompra )
+        public ProductDTO ValidaProduto(string name, string preco, string codBarras, string grupo, string subGrupo, string stock, float precocompra )
         {
             var product = new ProductDTO();
             if (name == "")
@@ -70,15 +70,15 @@ namespace Komercio.Models
             try
             {
                 // verifica se o valor do produto é valido (maior ou igual a zero).
-                product.ProductPrchasePrice = float.Parse(precocompra.Replace("R$", ""));
+               
                 if (product.productPrice < 0)
                 {
-                    throw new ArgumentException("Preço compra inválido!");
+                    throw new ArgumentException("Preço de compra inválido!");
                 }
             }
             catch
             {
-                throw new ArgumentException("Preço compra inválido!", "Atenção");
+                throw new ArgumentException("Preço de compra inválido!", "Atenção");
 
             }
 

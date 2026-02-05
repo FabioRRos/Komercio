@@ -212,7 +212,7 @@ namespace Komercio.UI.Forms.Product.Produto
                     mcbGroup.Text,
                     mcbSubGroup.Text,
                     mtbProductStock.Text,
-                    string.Empty // <= ARRUMAR ESSE AQUI
+                    product.productPrice // <= ARRUMAR ESSE AQUI
                     );
 
                 productReturnet.idProduct = product.idProduct;
