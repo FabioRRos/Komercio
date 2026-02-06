@@ -20,6 +20,8 @@ builder.Services.AddScoped(sp => new HttpClient
 
 builder.Services.AddScoped<ICaixaService, CaixaService>();
 builder.Services.AddScoped<IMovimentacaoCaixaService, MovimentacaoCaixaService>();
+builder.Services.AddScoped<IListaDeCompraService, ListaDeCompraService>();
+
 
 
 

@@ -132,20 +132,27 @@ main[b-ytlzuuoz6o] {
         padding-bottom: 1rem;
     }
 
-    .nav-item[b-ylhiupiy27]  a {
+.nav-item[b-ylhiupiy27]  a {
+    /* ADICIONADO: Força o fundo azul e letra branca por padrão */
+    background-color: #3f51b5; 
+    color: #ffffff;
+    
+    /* Mantém o resto igual */
     margin: 6px 10px;
     padding-left: 12px;
     border-radius: 8px;
-
-    }
+    transition: background-color 0.2s; /* Suaviza o hover */
+}
 
 .nav-item[b-ylhiupiy27]  a.active {
     background-color: #3f51b5;
     color: #ffffff;
+    border: 1px solid rgba(255,255,255,0.2); /* Opcional: destaque sutil no ativo */
 }
 
 .nav-item[b-ylhiupiy27]  a:hover {
-    background-color: #3f51b575;
+    /* Clareia levemente ou escurece para indicar interatividade */
+    background-color: #303f9f; /* Um tom levemente mais escuro de azul */
     color: #ffffff;
 }
 
@@ -163,6 +170,123 @@ main[b-ytlzuuoz6o] {
         /* Allow sidebar to scroll for tall menus */
         height: calc(100vh - 3.5rem);
         overflow-y: auto;
+    }
+}
+/* /Pages/Estoque/ListaCompra.razor.rz.scp.css */
+.abas-lista .nav-pills .nav-link[b-xl1910n7lo] {
+    border: 1px solid #dee2e6;
+    margin-right: 6px;
+    color: #495057;
+    border-radius: 8px;
+    transition: all 0.2s ease-in-out;
+}
+
+.abas-lista .nav-pills .nav-link:hover[b-xl1910n7lo] {
+    background-color: #3f51b515;
+    color: #3f51b5;
+    border-color: #3f51b5;
+}
+
+.abas-lista .nav-pills .nav-link.active[b-xl1910n7lo] {
+    background-color: #3f51b5;
+    color: white;
+    border-color: #3f51b5;
+    box-shadow: 0 2px 8px #3f51b540;
+}
+
+
+.item-card[b-xl1910n7lo] {
+    background: white;
+    border-radius: 10px;
+
+    /*DEIXA O CARD FINO */
+    padding: 5px 10px;
+
+    /* ALINHA TUDO NO CENTRO VERTICALMENTE */
+    display: flex;
+    align-items: center;
+
+    /* Estilos visuais */
+    margin-bottom: 8px;
+    border: 1px solid #e9ecef;
+    border-left: 5px solid #3f51b5;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+
+    /* Garante altura mínima uniforme */
+    min-height: 45px;
+}
+
+.item-card:hover[b-xl1910n7lo] {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(63, 81, 181, 0.2);
+}
+
+.item-info[b-xl1910n7lo] {
+    flex-grow: 1;
+    margin-left: 15px;
+}
+
+.item-qty[b-xl1910n7lo] {
+    background: #f8f9fa;
+    padding: 4px 12px;
+    border-radius: 6px;
+    font-weight: 600;
+    border: 1px solid #dee2e6;
+    font-size: 0.9rem;
+}
+
+
+
+.card-finalizar[b-xl1910n7lo] {
+    border-radius: 10px;
+    border: 1px solid #3f51b530;
+    box-shadow: 0 2px 8px #3f51b520;
+}
+
+.card-finalizar .card-title[b-xl1910n7lo] {
+    color: #3f51b5;
+}
+
+.btn-tema[b-xl1910n7lo] {
+
+    background-color: #303f9f46;
+    border: 1px solid #303f9f46;
+    color: white;
+}
+
+
+.btn-tema:hover[b-xl1910n7lo],
+.btn-tema.active[b-xl1910n7lo] {
+    background-color: #3f51b5;
+    border: 1px solid #3f51b5;
+    color: white;
+}
+
+@media print {
+
+    .d-print-none[b-xl1910n7lo],
+    .navbar[b-xl1910n7lo],
+    footer[b-xl1910n7lo],
+    .abas-lista[b-xl1910n7lo] {
+        display: none !important;
+    }
+
+    .container[b-xl1910n7lo] {
+        max-width: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+
+    .item-card[b-xl1910n7lo] {
+        border: 1px solid #000 !important;
+        border-left: 4px solid #000 !important;
+        break-inside: avoid;
+        margin-bottom: 10px !important;
+        box-shadow: none !important;
+    }
+
+    body[b-xl1910n7lo] {
+        background: white !important;
     }
 }
 /* /Pages/Home.razor.rz.scp.css */

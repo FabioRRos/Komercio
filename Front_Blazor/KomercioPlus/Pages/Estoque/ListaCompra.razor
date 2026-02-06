@@ -1,0 +1,136 @@
+@page "/ListaCompras"
+@using KomercioPlus.Model.Entity
+@using KomercioPlus.Service
+
+@inject IListaDeCompraService _ilistaDeCompraService
+
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-4 d-print-none">
+        <h2 class="fw-bold">
+            <i class="bi bi-list-check"></i> Lista de compras Doninho acessórios
+        </h2>
+        <button type="button" onclick="window.print();" class="btn btn-dark">
+            <i class="bi bi-printer"></i> Imprimir
+        </button>
+    </div>
+
+    @* Cabeçalho de Impressão *@
+    <div class="d-none d-print-block mb-4 text-center">
+        <h2>Doninho Acessórios</h2>
+        <h4>Lista de Compras - @NomeListaSelecionada</h4>
+        <hr />
+    </div>
+
+    @* Abas de Navegação (Listas) *@
+    <ul class="nav nav-pills mb-4 d-print-none" role="tablist">
+        @if (listaDeCompra != null && listaDeCompra.Any())
+        {
+            @foreach (var lista in listaDeCompra)
+            {
+                <li class="nav-item">
+                    <button class="btn btn-tema me-2 @(IdListaSelecionada == lista.IdListaCompra ? "active" : "")"
+                            @onclick="() => SelecionarLista(lista)">
+                        @lista.NomeDaLista
+                    </button>
+                </li>
+            }
+        }
+    </ul>
+
+    <div class="lista-corpo">
+        @* Renderização dos Itens *@
+        @if (itensListaDeCompra != null && itensListaDeCompra.Any())
+        {
+            @foreach (var item in itensListaDeCompra)
+            {
+                <div class="item-card shadow-sm">
+                    
+                    @* 1. Checkbox *@
+                    <div class="form-check d-print-none ps-4 m-0">
+                        <input class="form-check-input" type="checkbox" style="width: 18px; height: 18px;">
+                    </div>
+
+                    @* 2. Texto (Nome + Obs na mesma linha) *@
+                    <div class="d-flex align-items-center flex-grow-1 px-3 overflow-hidden">
+                        
+                        @* Nome do Produto (Sem quebra de linha) *@
+                        <span class="fw-bold text-nowrap">@item.DescricaoProduto</span>
+
+                        @* Obs logo à frente *@
+                        @if (!string.IsNullOrEmpty(item.Obs))
+                        {
+                            <span class="text-muted ms-2 text-truncate small">
+                                <i class="bi bi-info-circle" style="font-size: 0.8rem;"></i> @item.Obs
+                            </span>
+                        }
+                    </div>
+
+                    @* 3. Quantidade (Centralizada e com largura fixa) *@
+                    <div class="pe-2">
+                        <span class="badge bg-light text-dark border d-flex align-items-center justify-content-center" 
+                              style="min-width: 70px; height: 26px;">
+                            Qtd: @item.Quantidade
+                        </span>
+                    </div>
+
+                </div>
+            }
+        }
+        else if (IdListaSelecionada > 0)
+        {
+            <div class="alert alert-info text-center">Nenhum item encontrado nesta lista.</div>
+        }
+    </div>
+</div>
+
+@code {
+    public List<ListaDeCompras> listaDeCompra { get; set; } = new();
+    public List<ItensListaCompra> itensListaDeCompra { get; set; } = new();
+    
+    public string? NomeListaSelecionada { get; set; }
+    public int IdListaSelecionada { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        await CarregarListaDeCompras();
+    }
+
+    public async Task CarregarListaDeCompras()
+    {
+        var serviceResponse = await _ilistaDeCompraService.ListaDeCompraAtiva();
+
+        if (!serviceResponse.Status || serviceResponse.Dados == null)
+        {
+            listaDeCompra = new List<ListaDeCompras>();
+            return;
+        }
+
+        listaDeCompra = serviceResponse.Dados;
+
+        if (listaDeCompra.Any())
+        {
+            await SelecionarLista(listaDeCompra.First());
+        }
+    }
+
+    private async Task SelecionarLista(ListaDeCompras lista)
+    {
+        NomeListaSelecionada = lista.NomeDaLista;
+        IdListaSelecionada = lista.IdListaCompra; // Importante atualizar o ID
+
+        await CarregarItensListaDeCompras(); // Busca os itens no banco
+    }
+
+    private async Task CarregarItensListaDeCompras()
+    {
+        itensListaDeCompra = new List<ItensListaCompra>();
+
+        // Busca baseada no ID selecionado
+        var serviceResponse = await _ilistaDeCompraService.ItensListaDeItensVenda(IdListaSelecionada);
+
+        if (serviceResponse.Status && serviceResponse.Dados != null)
+        {
+            itensListaDeCompra = serviceResponse.Dados;
+        }
+    }
+}
