@@ -12,6 +12,7 @@ type CaixaService interface {
 	CaixaChangeTX(ctx context.Context, tx pgx.Tx, caixa *entity.Caixa) error
 	CaixaChange(ctx context.Context, caixa *entity.Caixa) error
 	GetCaixa(ctx context.Context) ([]*entity.Caixa, error)
+	StatusCaixa(ctx context.Context) (*bool, error)
 }
 
 func NewCaixaService(
@@ -65,4 +66,8 @@ func (s *caixaService) CaixaChange(ctx context.Context, caixa *entity.Caixa) err
 func (s *caixaService) GetCaixa(ctx context.Context) ([]*entity.Caixa, error) {
 
 	return s.repo.GetCaixa(ctx)
+}
+
+func (s *caixaService) StatusCaixa(ctx context.Context) (*bool, error) {
+	return s.repo.StatusCaixa(ctx)
 }

@@ -29,7 +29,7 @@ func (r *precoCompraRepository) EntradaEstoqueCompraTX(ctx context.Context, prod
 }
 
 func (r *precoCompraRepository) SelecEstoqueByCodbar(ctx context.Context, codigobarras string) (*entity.PrecoCompra, error) {
-	return r.datastore.SelecEstoqueByCodbar(ctx, codigobarras)
+	return r.datastore.SelecEstoqueByCodbar(ctx, codigobarras) // << esse cara
 }
 
 func (r *precoCompraRepository) UpdateEstoqueCompra(ctx context.Context, produto entity.PrecoCompra) error {

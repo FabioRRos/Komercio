@@ -119,3 +119,28 @@ func (d *CaixaDatastore) GetCaixa(ctx context.Context) ([]*entity.Caixa, error) 
 	}
 	return caixaReturn, nil
 }
+
+func (d *CaixaDatastore) StatusCaixa(ctx context.Context) (*bool, error) {
+	query := `SELECT (change_origin = 'Abertura') as is_abertura
+FROM caixa
+WHERE change_origin IN ('Abertura', 'Fechamento')
+ORDER BY id_transiction DESC
+LIMIT 1;`
+	var status *bool
+
+	row, err := d.Pool.Query(ctx, query)
+
+	if err != nil {
+		return status, fmt.Errorf("Não consegui trazer o status do caixa.")
+	}
+
+	for row.Next() {
+		err = row.Scan(
+			&status,
+		)
+		if err != nil {
+			return status, err
+		}
+	}
+	return status, nil
+}

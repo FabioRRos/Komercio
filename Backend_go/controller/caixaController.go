@@ -44,3 +44,13 @@ func (c *CaixaController) GetCaixa(ctx *gin.Context) {
 
 	ctx.JSON(http.StatusOK, caixa)
 }
+
+func (c *CaixaController) GetStatusCaixa(ctx *gin.Context) {
+	status, err := c.service.StatusCaixa(ctx)
+
+	if err != nil {
+		ctx.JSON(http.StatusBadRequest, "Não consegui bustar o status")
+		return
+	}
+	ctx.JSON(200, status)
+}

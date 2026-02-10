@@ -9,4 +9,6 @@ func ReportProductRoutes(server *gin.Engine, reportController *controller.Report
 	server.GET("/Report/Sales", reportController.SelectSaleReport)
 	server.GET("/Report/Sales/:id", reportController.SelectSaleReportById)
 	server.GET("/Report/Margem", reportController.RelatorioLucros)
+	server.GET("/Report/Home", reportController.GetForHome)
+
 }

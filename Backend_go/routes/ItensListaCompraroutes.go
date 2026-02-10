@@ -9,7 +9,10 @@ func ItensListaCompraRoutes(server *gin.Engine, itensListaCompra *controller.Ite
 	employeeRoutes := server.Group("/itenslista")
 	{
 		employeeRoutes.GET("id/:id", itensListaCompra.ListarOsItensById)
-		employeeRoutes.POST("", itensListaCompra.CriarItensListaDeCompra)
-		employeeRoutes.PUT("", itensListaCompra.AlterarListaDeCompra)
+		employeeRoutes.POST("", itensListaCompra.TratamentoListaCompra)
+
+		//employeeRoutes.POST("", itensListaCompra.CriarItensListaDeCompra)
+		//employeeRoutes.PUT("", itensListaCompra.AlterarListaDeCompra)
+
 	}
 }

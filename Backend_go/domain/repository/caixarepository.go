@@ -12,6 +12,7 @@ type CaixaRepository interface {
 	CaixaChange(ctx context.Context, caixa *entity.Caixa) error
 	CaixaChangeTX(ctx context.Context, tx pgx.Tx, caixa *entity.Caixa) error
 	GetCaixa(ctx context.Context) ([]*entity.Caixa, error)
+	StatusCaixa(ctx context.Context) (*bool, error)
 }
 
 type caixaRepository struct {
@@ -34,4 +35,7 @@ func (r *caixaRepository) CaixaChange(ctx context.Context, caixa *entity.Caixa) 
 
 func (r *caixaRepository) GetCaixa(ctx context.Context) ([]*entity.Caixa, error) {
 	return r.datastore.GetCaixa(ctx)
+}
+func (r *caixaRepository) StatusCaixa(ctx context.Context) (*bool, error) {
+	return r.datastore.StatusCaixa(ctx)
 }

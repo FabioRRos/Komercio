@@ -6,6 +6,7 @@ import (
 	"github.com/jackc/pgx/v5"
 
 	"github.com/fabioros/Komercio/domain/entity"
+	"github.com/fabioros/Komercio/infrastructure/clients"
 	"github.com/fabioros/Komercio/infrastructure/datastore"
 )
 
@@ -27,16 +28,20 @@ type ProductRepository interface {
 
 type productRepository struct {
 	datastore *datastore.ProductDatastore
+	clients   *clients.ProdutosClient
 }
 
-func NewProductRepository(ds *datastore.ProductDatastore) ProductRepository {
+func NewProductRepository(ds *datastore.ProductDatastore,
+	cl *clients.ProdutosClient) ProductRepository {
 	return &productRepository{
 		datastore: ds,
+		clients:   cl,
 	}
 }
 
 func (r *productRepository) Create(ctx context.Context, product *entity.Product) error {
-	return r.datastore.CreateProduct(product)
+	//return r.datastore.CreateProduct(product)
+	return r.clients.Create(ctx, product)
 }
 
 func (r *productRepository) CreateProductDescarte(ctx context.Context, productDescarte *entity.ProducrtDescarte) error {
@@ -44,11 +49,13 @@ func (r *productRepository) CreateProductDescarte(ctx context.Context, productDe
 }
 
 func (r *productRepository) SelectAllProducts(ctx context.Context) ([]*entity.Product, error) {
-	return r.datastore.SelectAllProducts()
+	//return r.datastore.SelectAllProducts()
+	return r.clients.SelectAllProducts(ctx)
 }
 
 func (r *productRepository) SelectProductById(ctx context.Context, id int) (*entity.Product, error) {
-	return r.datastore.SelectProductById(id)
+	//return r.datastore.SelectProductById(id)
+	return r.clients.SelectProductById(ctx, id)
 }
 
 func (r *productRepository) SelectProductByCodBar(ctx context.Context, productcodbar string) (*entity.Product, error) {

@@ -18,6 +18,7 @@ type ReportService interface {
 	SelectPrecoItensVenda(ctx context.Context, idVenda int) ([]*entity.DifValue, error)
 	SelectActiveEmployeeNames(ctx context.Context) ([]*dto.EmployeeSimple, error)
 	ReportSaleCoust(ctx context.Context) (*[]dto.JsonVenda, error)
+	Homepage(ctx context.Context) (*JsonHomereport, error)
 }
 
 type reportService struct {
@@ -28,7 +29,74 @@ func NewSaleReportService(repo repository.ReportRepository) ReportService {
 	return &reportService{repo: repo}
 }
 
+type JsonHomereport struct {
+	Dinheiro          float64                 `json:"Dinheiro"`
+	Debito            float64                 `json:"Debito"`
+	Credito           float64                 `json:"Credito"`
+	Pix               float64                 `json:"Pix"`
+	Conta             float64                 `json:"Conta"`
+	TotalVendido      float64                 `json:"TotalVendido"`
+	ValorAtualEmCaixa float64                 `json:"TotalCaixa"`
+	MovimentacaoCaixa []*entity.Cashmovements `json: "MovimentacaoCaixa"`
+	Sales             []*entity.Salereport    `json:"Sales"`
+}
+
+func (s *reportService) Homepage(ctx context.Context) (*JsonHomereport, error) {
+
+	var home JsonHomereport
+
+	retorno, err := s.repo.SelectSaleReport(ctx)
+
+	if err != nil {
+		return nil, err
+	}
+	//Começa por aqui. Pego só o que for do dia.
+	today := time.Now().Format("2006-01-02")
+	for _, k := range retorno {
+
+		if k.SaleDate.Format("2006-01-02") == today {
+			home.Sales = append(home.Sales, k)
+
+			precoItem, err := s.repo.BuscaFormapamanteoEPrecoBySaleId(ctx, k.SaleId)
+			if err != nil {
+				return nil, err
+			}
+			for _, i := range precoItem {
+				switch i.FormaPagamento {
+				case "Dinheiro":
+					home.Dinheiro += i.ValorPago
+				case "debito", "Débito":
+					home.Debito += i.ValorPago
+				case "credito", "Crédito":
+					home.Credito += i.ValorPago
+				case "Pix":
+					home.Pix += i.ValorPago
+				case "Conta":
+					home.Conta += i.ValorPago
+				}
+
+				home.TotalVendido += i.ValorPago
+			}
+
+		}
+	}
+
+	home.MovimentacaoCaixa, err = s.repo.BuscarSangria(ctx)
+	for _, j := range home.MovimentacaoCaixa {
+		switch j.Cashmovementstype {
+		case "entrada", "Entrada":
+			j.Cashmovementstype = "Entrada"
+		case "retirada", "Retirada":
+			j.Cashmovementstype = "Retirada"
+		}
+
+	}
+
+	return &home, nil
+}
+
 func (s *reportService) SelectSaleReport(ctx context.Context) ([]*entity.Salereport, error) {
+
 	salereport, err := s.repo.SelectSaleReport(ctx)
 	if err != nil {
 		return nil, err

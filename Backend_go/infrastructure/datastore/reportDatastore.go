@@ -248,3 +248,74 @@ func (d *ReportDatastore) SelectActiveEmployeeNames(ctx context.Context) ([]*dto
 
 	return lista, nil
 }
+
+type FormaPagamentoEValor struct {
+	FormaPagamento string
+	ValorPago      float64
+}
+
+func (d *ReportDatastore) BuscaFormapamanteoEPrecoBySaleId(ctx context.Context, idVenda int) ([]*FormaPagamentoEValor, error) {
+	query := `select forma_de_pagamento, valor_pago
+from forma_pagamento
+where  sale_id = (
+select movement_id 
+from cash_movements
+where sale_id = $1
+);`
+
+	rows, err := d.Pool.Query(ctx, query, idVenda)
+
+	if err != nil {
+		return nil, fmt.Errorf("Erro ao consultar os itens")
+	}
+	var lista []*FormaPagamentoEValor
+	for rows.Next() {
+		var p FormaPagamentoEValor
+		err := rows.Scan(
+			&p.FormaPagamento,
+			&p.ValorPago,
+		)
+		if err != nil {
+			return nil, fmt.Errorf("erro ao ler linha preco de compra dos itens da venda: %w", err)
+		}
+		lista = append(lista, &p)
+	}
+	return lista, nil
+}
+
+// Sangria
+
+func (d *ReportDatastore) BuscarSangria(ctx context.Context) ([]*entity.Cashmovements, error) {
+	query := `SELECT *
+FROM cash_movements
+WHERE movement_datetime >= CURRENT_DATE order by movement_datetime desc`
+
+	rows, err := d.Pool.Query(ctx, query)
+
+	if err != nil {
+		return nil, fmt.Errorf("Erro ao buscar as movimentações do caixa: %w", err)
+	}
+
+	var Cashmovements []*entity.Cashmovements
+
+	for rows.Next() {
+		var cm entity.Cashmovements
+		err := rows.Scan(
+			&cm.Cashmovementsid,
+			&cm.SalesId,
+			&cm.Cashmovementstype,
+			&cm.Cashmovementsdescription,
+			&cm.Cashmovementsamount,
+			&cm.Cashmovementspaymentmethod,
+			&cm.Cashmovementsdatetime,
+			&cm.SellerId,
+		)
+
+		if err != nil {
+			return nil, fmt.Errorf("erro ao ler linha da movimentação: %w", err)
+		}
+		Cashmovements = append(Cashmovements, &cm)
+	}
+
+	return Cashmovements, nil
+}

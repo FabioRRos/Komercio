@@ -8,4 +8,5 @@ import (
 func CaixaRoute(server *gin.Engine, caixaController *controller.CaixaController) {
 	server.POST("/Caixa", caixaController.CaixaChange)
 	server.GET("/Caixa", caixaController.GetCaixa)
+	server.GET("/Caixa/status", caixaController.GetStatusCaixa)
 }

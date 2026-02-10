@@ -15,6 +15,8 @@ type ReportRepository interface {
 	SelectItensSale(ctx context.Context, idVenda int) ([]*entity.SalesItens, error)
 	SelectPrecoItensVenda(ctx context.Context, idVenda int) ([]*entity.DifValue, error)
 	SelectActiveEmployeeNames(ctx context.Context) ([]*dto.EmployeeSimple, error)
+	BuscaFormapamanteoEPrecoBySaleId(ctx context.Context, idVenda int) ([]*datastore.FormaPagamentoEValor, error)
+	BuscarSangria(ctx context.Context) ([]*entity.Cashmovements, error)
 }
 
 type reportRepository struct {
@@ -48,4 +50,11 @@ func (r *reportRepository) SelectPrecoItensVenda(ctx context.Context, idVenda in
 
 func (r *reportRepository) SelectActiveEmployeeNames(ctx context.Context) ([]*dto.EmployeeSimple, error) {
 	return r.datastore.SelectActiveEmployeeNames(ctx)
+}
+
+func (r *reportRepository) BuscaFormapamanteoEPrecoBySaleId(ctx context.Context, idVenda int) ([]*datastore.FormaPagamentoEValor, error) {
+	return r.datastore.BuscaFormapamanteoEPrecoBySaleId(ctx, idVenda)
+}
+func (r *reportRepository) BuscarSangria(ctx context.Context) ([]*entity.Cashmovements, error) {
+	return r.datastore.BuscarSangria(ctx)
 }

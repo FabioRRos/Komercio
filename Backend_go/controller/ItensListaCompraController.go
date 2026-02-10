@@ -74,3 +74,21 @@ func (c *ItensListaCompraController) AlterarListaDeCompra(ctx *gin.Context) {
 
 	ctx.JSON(http.StatusOK, listas)
 }
+
+func (c *ItensListaCompraController) TratamentoListaCompra(ctx *gin.Context) {
+	var lista []dto.ItensListaCompraDTO
+
+	if err := ctx.ShouldBindJSON(&lista); err != nil {
+		ctx.JSON(http.StatusBadRequest, gin.H{"error": "Parâmetros inválidos"})
+		return
+	}
+
+	listas, err := c.service.TratamentoListaCompra(ctx.Request.Context(), lista)
+
+	if err != nil {
+		ctx.JSON(http.StatusInternalServerError, lista)
+		return
+	}
+
+	ctx.JSON(http.StatusOK, listas)
+}

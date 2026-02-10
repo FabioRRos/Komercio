@@ -76,3 +76,16 @@ func (c *ReportController) RelatorioLucros(ctx *gin.Context) {
 // 	ctx.JSON(200, salereportMargem)
 
 // }
+
+// GET
+func (c *ReportController) GetForHome(ctx *gin.Context) {
+
+	saleReport, err := c.report.Homepage(ctx)
+
+	if err != nil {
+		ctx.JSON(500, gin.H{"error": err.Error()})
+		return
+	}
+
+	ctx.JSON(200, saleReport)
+}
