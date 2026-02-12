@@ -4,6 +4,7 @@ import (
 	"net/http"
 	"strconv"
 
+	"github.com/fabioros/Komercio/domain/dto"
 	"github.com/fabioros/Komercio/domain/entity"
 	service "github.com/fabioros/Komercio/service"
 
@@ -139,6 +140,7 @@ type StockUpdateRequest struct {
 
 // put /updateStock/:productcodbar
 func (c *ProductController) UpdateProductInputStock(ctx *gin.Context) {
+
 	var productStock StockUpdateRequest
 
 	if err := ctx.ShouldBindJSON(&productStock); err != nil {
@@ -149,12 +151,18 @@ func (c *ProductController) UpdateProductInputStock(ctx *gin.Context) {
 	idParam := ctx.Param("productcodbar")
 	productcodbar := idParam
 
-	updated, err := c.service.UpdateProductInputStock(ctx, productcodbar, productStock.ProductStock, productStock.Compra)
+	var produto dto.RegistrarEntradaDto
+	produto.CodigoBarras = productcodbar
+	produto.Quantidade = productStock.ProductStock
+	produto.PrecoCusto = productStock.Compra
+	produto.NumeroNota = "NA"
+
+	prod, err := c.service.UpdateProductInputStock(ctx, &produto)
 	if err != nil {
 		ctx.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 	}
 
-	ctx.JSON(http.StatusOK, updated)
+	ctx.JSON(http.StatusOK, prod)
 
 }
 

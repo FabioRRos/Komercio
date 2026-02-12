@@ -6,6 +6,7 @@ import (
 	"strconv"
 	"time"
 
+	"github.com/fabioros/Komercio/domain/dto"
 	"github.com/fabioros/Komercio/domain/entity"
 )
 
@@ -111,23 +112,23 @@ func (s *fullSaleService) CreateFullSale(ctx context.Context, salesAggregate *en
 		return 0, fmt.Errorf("erro ao registrar movimentação de caixa: %w", err)
 	}
 
-	// baixa o estoque dos produtos vendidos
+	// baixa o estoque dos produtos vendidos <<<<< MOVI PRO SERVIÇO
 
-	for _, item := range salesAggregate.Items {
+	/*for _, item := range salesAggregate.Items { //<- esse está dando erro
 		codebar := item.Barcode
 		quantity := item.Quantity
 
 		if err := s.product.UpdateProductOutputStockTX(ctx, tx, codebar, quantity); err != nil {
 			return 0, fmt.Errorf("erro ao baixar estoque dos produtos vendidos: %w", err)
 		}
-	}
+	}*/
 
 	// aqui eu deixei o IF de lado e vou utilizar o Swithch para tratar as formas de pagamento
 	// Basicamente eu vou rodar a lista de forma de pagamento para adiciona-las onde elas devem ser adicionadas.
 
 	for _, forma := range salesAggregate.FormaPpagamento {
 		switch forma.Forma_de_pagamento {
-		case "Conta":
+		case "Conta": // <- isso se mantem
 			{
 				newTransation := entity.CustomerTransaction{
 					Sale_id:           saleID,
@@ -178,26 +179,32 @@ func (s *fullSaleService) CreateFullSale(ctx context.Context, salesAggregate *en
 		PrecoCompra float32
 	}
 
-	var prod []*entity.DifValue
+	var prod []*dto.RealizarVendaDto
 
 	// aaqui vou baixar a lista dos produtos.
-	for _, item := range salesAggregate.Items {
-		prodTemp := &entity.DifValue{
-			Sale_id:    saleID,         //id da venda
-			PrecoVenda: item.Total,     // total recuperado no pacote atual
-			ProdictId:  item.ProductId, // o id do produto
-		}
+	for _, item := range salesAggregate.Items { // <== ESSE AQUI QUE EU TENHO QUE MUDAR.
+		/*	prodTemp := &entity.DifValue{
+				Sale_id:    saleID,         //id da venda
+				PrecoVenda: item.Total,     // total recuperado no pacote atual
+				ProdictId:  item.ProductId, // o id do produto
+			}
 
-		prodTemp.PrecoCompra, err = s.serv.BaixarProdutosListaDePrecos(
-			ctx,
-			item.Barcode,
-			item.Quantity,
-		)
-		if err != nil {
-			return saleID, err
-		}
+			prodTemp.PrecoCompra, err = s.serv.BaixarProdutosListaDePrecos(
+				ctx,
+				item.Barcode,
+				item.Quantity,
+			)
+			if err != nil {
+				return saleID, err
+			}
+		*/
 
-		prod = append(prod, prodTemp) // valor recebido da baixaProdutos.
+		prodtemporario := &dto.RealizarVendaDto{
+			ProdutoId:  item.ProductId,
+			Quantidade: item.Quantity,
+			IdVenda:    strconv.Itoa(item.SaleId),
+		}
+		prod = append(prod, prodtemporario) // valor recebido da baixaProdutos.
 	}
 
 	err = s.serv.CreateValorCompraEVenda(ctx, prod)

@@ -5,6 +5,7 @@ import (
 	"errors"
 	"fmt"
 
+	"github.com/fabioros/Komercio/domain/dto"
 	"github.com/fabioros/Komercio/domain/entity"
 	"github.com/fabioros/Komercio/domain/repository"
 	"github.com/jackc/pgx/v5"
@@ -18,7 +19,7 @@ type ProductService interface {
 	SelectProductByCodBar(ctx context.Context, productcodbar string) (*entity.Product, error)
 	UpdateProduct(ctx context.Context, product *entity.Product) (*entity.Product, error)
 	DeactivateProduct(ctx context.Context, id int) error
-	UpdateProductInputStock(ctx context.Context, productcodbar string, productStock int, precocompra float32) (*entity.Product, error)
+	UpdateProductInputStock(ctx context.Context, produto *dto.RegistrarEntradaDto) (*entity.Product, error)
 	UpdateProductOutputStockTX(ctx context.Context, tx pgx.Tx, productcodbar string, productStock int) error
 	SelectProductSettings(ctx context.Context) ([]*entity.ProductNotification, error)
 	UpdateProductNotification(ctx context.Context, productList []*entity.ProductNotification) error
@@ -176,24 +177,33 @@ func (s *productService) UpdateProduct(ctx context.Context, product *entity.Prod
 	return updated, nil
 }
 
-func (s *productService) UpdateProductInputStock(ctx context.Context, productcodbar string, productStock int, precocompra float32) (*entity.Product, error) {
-	update, err := s.repo.UpdateProductInputStock(ctx, productcodbar, productStock)
+// PRECISO MUDAR DE CODIGO DE BARRAS PARA ID? OU ALTERAR NO BACK DE ID PRA CODIGO DE BARRAS?
+func (s *productService) UpdateProductInputStock(ctx context.Context, produto *dto.RegistrarEntradaDto) (*entity.Product, error) {
+
+	if produto.CodigoBarras == "" {
+		return nil, fmt.Errorf("Código de barras é obrigatório")
+	}
+
+	err := s.repo.UpdateProductInputStock(ctx, produto)
+
+	prodReturned, err := s.repo.SelectProductByCodBar(ctx, produto.CodigoBarras)
+	/*update, err := s.repo.UpdateProductInputStock(ctx, produto.CodigoBarras, int(produto.PrecoCusto))
 	if err != nil {
-		return nil, err
+		return err
 	}
 
 	updatePrecoProduct := update
 
-	updatePrecoProduct.ProductStock = productStock
+	updatePrecoProduct.ProductStock = produto.Quantidade
 
-	if precocompra < 0 {
-		precocompra = 0
+	if produto.PrecoCusto < 0 {
+		produto.PrecoCusto = 0
 	}
-	updatePrecoProduct.ProductPrchasePrice = precocompra
+	updatePrecoProduct.ProductPrchasePrice = produto.PrecoCusto
 
-	err = s.serv.EntradaEstoqueCompraTX(ctx, updatePrecoProduct)
+	err = s.serv.EntradaEstoqueCompraTX(ctx, updatePrecoProduct)*/
 
-	return update, err
+	return prodReturned, err
 }
 
 func (s *productService) DeactivateProduct(ctx context.Context, id int) error {
@@ -246,12 +256,12 @@ func (s *productService) GetCodbarBySaleId(ctx context.Context, saleId int) erro
 	if saleId <= 0 {
 		return errors.New("ID da venda inválido")
 	}
-	listaCode, _ := s.repo.GetCodbarBySaleId(ctx, saleId)
+	//listaCode, _ := s.repo.GetCodbarBySaleId(ctx, saleId)
 
-	for _, k := range listaCode {
+	//for _, k := range listaCode {
 
-		s.UpdateProductInputStock(ctx, k.CodBar, k.Quantity, 0) //<- ARRUMAR AQUI DEPOIS FÁBIO!
+	//	s.UpdateProductInputStock(ctx, k.CodBar, k.Quantity, 0) //<- ARRUMAR AQUI DEPOIS FÁBIO!
 
-	}
+	//}
 	return nil
 }

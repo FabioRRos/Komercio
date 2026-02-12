@@ -5,8 +5,10 @@ import (
 	"errors"
 	"fmt"
 
+	"github.com/fabioros/Komercio/domain/dto"
 	"github.com/fabioros/Komercio/domain/entity"
 	"github.com/fabioros/Komercio/domain/repository"
+	"github.com/fabioros/Komercio/infrastructure/clients"
 )
 
 type PrecoCompraService interface {
@@ -14,15 +16,19 @@ type PrecoCompraService interface {
 	SelecEstoqueByCodbar(ctx context.Context, codigobarras string) (*entity.PrecoCompra, error)
 	UpdateEstoqueCompra(ctx context.Context, produto entity.PrecoCompra) error
 	BaixarProdutosListaDePrecos(ctx context.Context, codBarras string, quantidade int) (float32, error)
-	CreateValorCompraEVenda(ctx context.Context, valores []*entity.DifValue) error
+	CreateValorCompraEVenda(ctx context.Context, valores []*dto.RealizarVendaDto) error
 }
 
 type precoCompraService struct {
-	repo repository.PrecoCompraRepository
+	repo    repository.PrecoCompraRepository
+	clients clients.ProdutosClient
 }
 
-func NewPrecoCompraService(repo repository.PrecoCompraRepository) PrecoCompraService {
-	return &precoCompraService{repo: repo}
+func NewPrecoCompraService(repo repository.PrecoCompraRepository, clients clients.ProdutosClient) PrecoCompraService {
+	return &precoCompraService{
+		repo:    repo,
+		clients: clients,
+	}
 }
 func (s *precoCompraService) EntradaEstoqueCompraTX(ctx context.Context, produtoEntrada *entity.Product) error {
 
@@ -67,7 +73,7 @@ func (s *precoCompraService) BaixarProdutosListaDePrecos(
 	var valorTotalRetorno float32 = 0
 
 	for restante > 0 {
-
+		//Aqui eu busco a quantidade em estoque do
 		produto, err := s.SelecEstoqueByCodbar(ctx, codBarras)
 		if err != nil {
 			return 0, fmt.Errorf("estoque insuficiente ou erro ao buscar produto: %w", err)
@@ -114,7 +120,7 @@ func (s *precoCompraService) BaixarProdutosListaDePrecos(
 	return valorTotalRetorno, nil
 }
 
-func (s *precoCompraService) CreateValorCompraEVenda(ctx context.Context, valor []*entity.DifValue) error {
+func (s *precoCompraService) CreateValorCompraEVenda(ctx context.Context, valor []*dto.RealizarVendaDto) error {
 
 	for _, k := range valor {
 

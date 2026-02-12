@@ -5,6 +5,7 @@ import (
 
 	"github.com/jackc/pgx/v5"
 
+	"github.com/fabioros/Komercio/domain/dto"
 	"github.com/fabioros/Komercio/domain/entity"
 	"github.com/fabioros/Komercio/infrastructure/clients"
 	"github.com/fabioros/Komercio/infrastructure/datastore"
@@ -17,7 +18,7 @@ type ProductRepository interface {
 	SelectProductById(ctx context.Context, id int) (*entity.Product, error)
 	UpdateProduct(ctx context.Context, product *entity.Product) (*entity.Product, error)
 	DeactivateProduct(ctx context.Context, id int) error
-	UpdateProductInputStock(ctx context.Context, productcodbar string, productStock int) (*entity.Product, error)
+	UpdateProductInputStock(ctx context.Context, produto *dto.RegistrarEntradaDto) error
 	UpdateProductOutputStock(ctx context.Context, productcodebar string) error
 	UpdateProductOutputStockTX(ctx context.Context, tx pgx.Tx, productcodbar string, productStock int) error
 	SelectProductByCodBar(ctx context.Context, productcodbar string) (*entity.Product, error)
@@ -59,15 +60,17 @@ func (r *productRepository) SelectProductById(ctx context.Context, id int) (*ent
 }
 
 func (r *productRepository) SelectProductByCodBar(ctx context.Context, productcodbar string) (*entity.Product, error) {
-	return r.datastore.SelectProductByCodBar(productcodbar)
+	//return r.datastore.SelectProductByCodBar(productcodbar)
+	return r.clients.SelectProductByCodBar(ctx, productcodbar)
 }
 
 func (r *productRepository) UpdateProduct(ctx context.Context, product *entity.Product) (*entity.Product, error) {
 	return r.datastore.UpdateProduct(product)
 }
 
-func (r *productRepository) UpdateProductInputStock(ctx context.Context, productcodbar string, productStock int) (*entity.Product, error) {
-	return r.datastore.UpdateProductInputStock(productcodbar, productStock)
+func (r *productRepository) UpdateProductInputStock(ctx context.Context, prod *dto.RegistrarEntradaDto) error {
+	//return r.datastore.UpdateProductInputStock(productcodbar, productStock)
+	return r.clients.RegistrarEntradaAsync(ctx, prod)
 }
 
 func (r *productRepository) DeactivateProduct(ctx context.Context, id int) error {
