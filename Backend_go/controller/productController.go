@@ -135,7 +135,7 @@ func (c *ProductController) UpdateProduct(ctx *gin.Context) {
 
 type StockUpdateRequest struct {
 	ProductStock int     `json:"product_stock"`
-	Compra       float32 `json:"product_compra"`
+	Compra       float64 `json:"product_compra"`
 }
 
 // put /updateStock/:productcodbar
@@ -154,7 +154,13 @@ func (c *ProductController) UpdateProductInputStock(ctx *gin.Context) {
 	var produto dto.RegistrarEntradaDto
 	produto.CodigoBarras = productcodbar
 	produto.Quantidade = productStock.ProductStock
-	produto.PrecoCusto = productStock.Compra
+	if float32(productStock.Compra) <= 0 {
+		produto.PrecoCusto = 0
+	} else {
+
+		produto.PrecoCusto = float32(productStock.Compra)
+	}
+
 	produto.NumeroNota = "NA"
 
 	prod, err := c.service.UpdateProductInputStock(ctx, &produto)

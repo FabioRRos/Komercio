@@ -66,7 +66,19 @@ func (s *productService) CreateProduct(ctx context.Context, product *entity.Prod
 		return fmt.Errorf("%w - Create", err)
 	}
 
-	err = s.serv.EntradaEstoqueCompraTX(ctx, product)
+	var entradaEstoqueProduto dto.RegistrarEntradaDto
+
+	entradaEstoqueProduto.CodigoBarras = product.ProductCodBar
+	if product.ProductPrchasePrice <= 0 {
+		entradaEstoqueProduto.PrecoCusto = product.ProductPrice
+	} else {
+
+		entradaEstoqueProduto.PrecoCusto = product.ProductPrchasePrice
+	}
+	entradaEstoqueProduto.Quantidade = product.ProductStock
+	entradaEstoqueProduto.NumeroNota = "NA"
+
+	err = s.repo.UpdateProductInputStock(ctx, &entradaEstoqueProduto)
 
 	return err
 }
@@ -183,10 +195,18 @@ func (s *productService) UpdateProductInputStock(ctx context.Context, produto *d
 	if produto.CodigoBarras == "" {
 		return nil, fmt.Errorf("Código de barras é obrigatório")
 	}
-
-	err := s.repo.UpdateProductInputStock(ctx, produto)
-
 	prodReturned, err := s.repo.SelectProductByCodBar(ctx, produto.CodigoBarras)
+
+	if produto.PrecoCusto <= 0 {
+		produto.PrecoCusto = prodReturned.ProductPrice
+	}
+
+	err = s.repo.UpdateProductInputStock(ctx, produto)
+
+	if err != nil {
+		return nil, fmt.Errorf("DEU ERRO%w", err)
+	}
+
 	/*update, err := s.repo.UpdateProductInputStock(ctx, produto.CodigoBarras, int(produto.PrecoCusto))
 	if err != nil {
 		return err

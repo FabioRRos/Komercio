@@ -65,7 +65,8 @@ func (r *productRepository) SelectProductByCodBar(ctx context.Context, productco
 }
 
 func (r *productRepository) UpdateProduct(ctx context.Context, product *entity.Product) (*entity.Product, error) {
-	return r.datastore.UpdateProduct(product)
+	//	return r.datastore.UpdateProduct(product)
+	return r.clients.UpdateProduct(ctx, product)
 }
 
 func (r *productRepository) UpdateProductInputStock(ctx context.Context, prod *dto.RegistrarEntradaDto) error {

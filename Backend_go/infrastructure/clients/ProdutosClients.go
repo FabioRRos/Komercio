@@ -232,8 +232,11 @@ func (c *ProdutosClient) EntradaProdutosVenda(ctx context.Context, prod *dto.Rea
 }
 
 func (c *ProdutosClient) RegistrarEntradaAsync(ctx context.Context, produto *dto.RegistrarEntradaDto) error {
+
+	//return fmt.Errorf("Aqui.")
+
 	baseURL := strings.TrimRight(c.baseURL, "/")
-	url := fmt.Sprintf("%s/api/estoque/entrada", baseURL)
+	url := fmt.Sprintf("%s/api/Estoque/entrada", baseURL)
 
 	jsonData, err := json.Marshal(produto)
 	if err != nil {
@@ -266,6 +269,53 @@ func (c *ProdutosClient) RegistrarEntradaAsync(ctx context.Context, produto *dto
 		return fmt.Errorf("erro interno no servidor C#")
 	default:
 		return fmt.Errorf("erro inesperado: codigo %d", resp.StatusCode)
+	}
+
+}
+
+func (c *ProdutosClient) UpdateProduct(ctx context.Context, produto *entity.Product) (*entity.Product, error) {
+
+	baseURL := strings.TrimRight(c.baseURL, "/")
+	url := fmt.Sprintf("%s/api/Produtos/%d", baseURL, produto.Id)
+
+	jsonData, err := json.Marshal(produto)
+	if err != nil {
+		return nil, fmt.Errorf("erro ao serializar produto: %w", err)
+	}
+
+	req, err := http.NewRequestWithContext(ctx, http.MethodPut, url, bytes.NewBuffer(jsonData))
+	if err != nil {
+		return nil, fmt.Errorf("erro ao criar request: %w", err)
+	}
+
+	req.Header.Set("Content-Type", "application/json")
+
+	resp, err := c.httpClient.Do(req)
+	if err != nil {
+		return nil, fmt.Errorf("falha na comunicacao: %w", err)
+	}
+	defer resp.Body.Close()
+
+	switch resp.StatusCode {
+	case http.StatusOK: // 200
+
+		var produtosReturn entity.Product
+		if err := json.NewDecoder(resp.Body).Decode(&produtosReturn); err != nil {
+			return nil, fmt.Errorf("JSON inválido recebido do C#: %w", err)
+		}
+		return &produtosReturn, nil
+
+	case http.StatusNotFound: // 404
+		return nil, fmt.Errorf("nenhum produto encontrado (404)")
+
+	case http.StatusUnauthorized, http.StatusForbidden: // 401 ou 403
+		return nil, fmt.Errorf("acesso negado à API de Estoque (401/403)")
+
+	case http.StatusInternalServerError: // 500
+		return nil, fmt.Errorf("a API C# travou (erro interno no servidor)")
+
+	default: // Qualquer outro erro (400, 502, 503, etc)
+		return nil, fmt.Errorf("erro inesperado da API C#: código %d", resp.StatusCode)
 	}
 
 }
